@@ -1,0 +1,8 @@
+# System Files
+.DS_*
+*.log
+
+# Node / React
+node_modules
+.next
+.idea
