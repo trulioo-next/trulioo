@@ -5,7 +5,7 @@ import './NavBar.scss'
 
 const links = [
   { href: '/about', as: '/about', label: 'About' },
-  { href: '/shop', as:'/shop', label: 'Shop' }
+  { href: '/contact', as:'/contact', label: 'Contact' }
 ].map(link => {
   link.key = `nav-link-${link.as}-${link.label}`
   return link

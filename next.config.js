@@ -1,17 +1,55 @@
 /**
-* Set and export Next configurations with next offline first (workbox/webpack)
-**/
+ * Set and export Next configurations with PWA optimizations (workbox/webpack)
+ **/
 
-require('dotenv').config()
-const withOffline = require('next-offline')
-const withSass = require("@zeit/next-sass");
- 
-const nextConfig = {
-  distDir: './build',
-  generateSw: true,
-  devSwSrc: './static/service-worker.js',
-  workboxOpts: {},
-  poweredByHeader: false,
+const dotEnvResult = require("dotenv").config()
+const webpack = require("webpack");
+const withSass = require("@zeit/next-sass")
+const withCss = require("@zeit/next-css")
+
+if (process.env.NODE_ENV === 'development') {
+    process.traceDeprecation = true
 }
 
-module.exports = withOffline(withSass(nextConfig))
+const nextConfig = {
+    poweredByHeader: false,
+    // target: 'serverless',
+    webpack: (config, {buildId, dev, isServer}) => {
+
+        config.node = {fs: 'empty', net: 'empty', tls: 'empty'}
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: [
+                {
+                    loader: "@svgr/webpack",
+                    options: {
+                        svgoConfig: {
+                            plugins: {
+                                removeViewBox: false
+                            }
+                        },
+                        titleProp: true
+                    }
+                }
+            ]
+        });
+
+        // Here goes env that are available in the client side
+        config.plugins.push(
+            new webpack.EnvironmentPlugin([
+                'VERSION',
+                'ROOT_URL'
+            ]));
+
+        return config
+    },
+
+    
+
+    env: {
+        ...dotEnvResult
+    }
+};
+
+module.exports = withCss(withSass(nextConfig));
