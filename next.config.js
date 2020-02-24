@@ -1,14 +1,17 @@
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+/**
+* Set and export Next configurations with next offline first (workbox/webpack)
+**/
 
-/*eslint-disable no-unused-vars */
-module.exports = (phase, { defaultConfig }) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return {
-      /* development only config options here */
-    };
-  }
+require('dotenv').config()
+const withOffline = require('next-offline')
+const withSass = require("@zeit/next-sass");
+ 
+const nextConfig = {
+  distDir: './build',
+  generateSw: true,
+  devSwSrc: './static/service-worker.js',
+  workboxOpts: {},
+  poweredByHeader: false,
+}
 
-  return {
-    /* config options for all phases except development here */
-  };
-};
+module.exports = withOffline(withSass(nextConfig))

@@ -1,0 +1,50 @@
+// Product Quantity 
+//
+.product__quantity {
+	position: relative;
+	width: 100%;
+	margin: 20px 0px;
+	text-align: center;
+
+	.quantity__Wrapper {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		max-width: 120px;
+		text-align: center;
+    	margin: auto;
+	
+		div {
+			position: relative;
+			width: 30%;
+			text-align: center;
+			margin: auto;
+
+			span {
+				position: relative;
+				display: inline-block;
+				width: 20px;
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+.lighter {
+	opacity: 0.5;
+}
+
+.off {
+	display: none;
+}
+
+
+//
+.paypal__link {
+	img {
+		width: 100%;
+	}
+}

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  dev:
+    build:
+      context: .
+    image: ourafront
+    volumes:
+      - nodemodules:/usr/src/node_modules
+      - .:/usr/src
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    working_dir: /usr/src/
+    command: yarn dev
+    ports:
+      - 8000:8000
+
+volumes:
+  nodemodules:
+    external: true

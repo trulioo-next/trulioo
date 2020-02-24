@@ -1,0 +1,22 @@
+
+
+
+// 
+// Colors 
+//
+$primary: #eee;
+$yellow:  #eeb744;
+$green: #46b941;
+$applePay: #464646;
+
+
+
+//
+// Mixins 
+//
+@mixin transitionAll($speed) {
+    -webkit-transition: -webkit-transform $speed ease-in-out;
+    -moz-transition: -moz-transform $speed ease-in-out;
+    -o-transition: -o-transform $speed ease-in-out;
+    transition: all $speed ease-in-out;
+}
