@@ -34,17 +34,7 @@ App.prepare().then(() => {
   // TODO: Set rate-limiting
 
   server.use(helmet())
-
-  // TODO: Set CSP directives
-  // server.use(helmet.contentSecurityPolicy({
-  //   directives: {
-  //     defaultSrc: ["'self'"],
-  //   }
-  // }))
-
-  // server.use(bodyParser.urlencoded({ extended: false }))
-  // server.use(express.json());
-
+ 
   server.set('trust proxy', true);
   server.set('strict routing', true);
 
