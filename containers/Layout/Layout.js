@@ -21,9 +21,9 @@ class Layout extends React.Component {
     return (
       <main className="layout">
         <Header
-          title="Oura Ring"
-          description="Oura Ring: the most accurate sleep and activity tracker"
-          canonical="https://ouraring.com"
+          title="7 Eleven"
+          description="Page MetaData here"
+          canonical="http://7-eleven.ca"
         />
         <NavBar />
 
