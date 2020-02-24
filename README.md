@@ -65,4 +65,5 @@ We use pull request based release process in this project. This means that when 
 The releases are handled with [CircleCI](https://circleci.com/gh/jouzen) and triggered automatically with merges to `develop` and `master`. The CircleCI configuration can be found from [.circleci/config.yml](.circleci/config.yml).
 
 ## Environments
-- TBA
+### NOW Testing Env. 
+- https://7-11-n21wjd3vq.now.sh/
