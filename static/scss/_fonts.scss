@@ -1,0 +1,33 @@
+/**
+ * Fonts
+ *
+ * @font-face rules for custom fonts.
+ */
+
+@font-face {
+  font-family: "LabGrotesque";
+  src: url("/static/fonts/LabGrotesque-Regular.otf");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "LabGrotesque";
+  src: url("/static/fonts/LabGrotesque-Bold.otf");
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "LabGrotesque";
+  src: url("/static/fonts/Grotesque-Medium.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "LabGrotesque";
+  src: url("/static/fonts/LabGrotesque-Black.otf");
+  font-style: normal;
+  font-weight: 900;
+}

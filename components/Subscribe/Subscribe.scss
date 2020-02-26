@@ -1,0 +1,109 @@
+@import "~@/static/scss/variables";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/grid";
+
+.subscribe {
+  $block: &;
+
+  @include make-row();
+
+  &__label {
+    display: block;
+    margin-bottom: 2px;
+    line-height: 9px;
+    font-size: 7.8px;
+
+    @include media-breakpoint-up(lg) {
+      line-height: 18px;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    &--checkbox {
+      position: relative;
+      padding-left: 19px;
+
+      @include media-breakpoint-up(lg) {
+        line-height: 19px;
+        font-size: 12px;
+        padding-right: 20%;
+        padding-left: 21px;
+      }
+
+      #{$block}__checkbox {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        @include media-breakpoint-up(lg) {
+          top: 2px;
+        }
+      }
+    }
+  }
+
+  &__field {
+    @include make-col-ready();
+    margin-bottom: 9px;
+  }
+
+  &__input {
+    width: 100%;
+    appearance: none;
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 5px 7px;
+    background-color: $white;
+    line-height: 9px;
+    font-size: 7.8px;
+
+    @include media-breakpoint-up(lg) {
+      border-radius: 23px;
+      padding: 10px 89px 10px 23px;
+      line-height: 24px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    &::placeholder {
+      color: $gray;
+    }
+  }
+
+  &__checkbox {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 6px;
+
+    @include media-breakpoint-up(lg) {
+      margin-right: 9px;
+    }
+  }
+
+  &__footer {
+    @include make-col-ready();
+
+    @include media-breakpoint-down(md) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .button {
+    display: block;
+
+    + .social {
+      @include media-breakpoint-down(md) {
+        margin-left: 18px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-top: 34px;
+      }
+    }
+  }
+}

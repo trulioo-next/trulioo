@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Header from '../../components/Header/Header'
-import NavBar from '../../components/NavBar/NavBar'
-import Footer from '../../components/Footer/Footer'
-import Loader from '../../components/Loader/Loader'
+import Header from '@/components/Header/Header'
+import NavBar from '@/components/NavBar/NavBar'
+import Footer from '@/components/Footer/Footer'
+import Loader from '@/components/Loader/Loader'
 
-import { selectIsLoading, selectIsLoaded } from '../../stores/app/selectors'
+import { selectIsLoading, selectIsLoaded } from '@/stores/app/selectors'
 import './Layout.scss';
 
 
@@ -19,7 +19,7 @@ class Layout extends React.Component {
     const { isLoading } = this.props
 
     return (
-      <main className="layout">
+      <div className="layout">
         <Header
           title="Oura Ring"
           description="Oura Ring: the most accurate sleep and activity tracker"
@@ -27,12 +27,13 @@ class Layout extends React.Component {
         />
         <NavBar />
 
-        <div className="conteiner">
+        <main className="site-main">
           {isLoading && <Loader />}
           {this.props.children}
-        </div>
+        </main>
+
         <Footer />
-      </main>
+      </div>
     )
   }
 }
