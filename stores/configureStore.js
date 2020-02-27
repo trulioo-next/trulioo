@@ -3,50 +3,49 @@
 **/
 
 import { createStore, applyMiddleware, compose } from 'redux'
-import { fromJS } from 'immutable'
 import createSagaMiddleware, { END } from 'redux-saga'
 
-import createReducer from './reducers'
+import stateStorage from '../utils/stateStorage'
+import createRootReducer from './reducers'
 import rootSagas from './rootSagas'
 
 
-const sagaMiddleware = createSagaMiddleware({
-  // logger: (leval, ...args) => {},
-  // onError: () => {}
-})
+// import getConfig from "next/config";
+// const { publicRuntimeConfig } = getConfig();
 
-export default function configureStore(initialState = {}, options) {
-
-  // Create the store with middlewares
-  // 1. sagaMiddleware: Makes redux-sagas work
-  const middlewares = [sagaMiddleware]
-
-  const enhancers = [applyMiddleware(...middlewares)]
-
+const composeWithReduxDevtools = (compose) => {
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
-  /* eslint-disable no-underscore-dangle, indent */
-  const composeEnhancers =
-    process.env.NODE_ENV !== 'production' &&
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-      : compose
-  /* eslint-enable */
+  return  process.env.NODE_ENV !== 'production' &&
+      typeof window === 'object' &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+        : compose
+}
+
+
+export default function configureStore(initialState, options) {
+
+  const sagaMiddleware = createSagaMiddleware({})
+
+  // Configure the list of middlewares to be applied to store
+  const middlewares = [ sagaMiddleware ]
+  const enhancers = [ applyMiddleware(...middlewares) ]
+
+  const composeEnhancers = composeWithReduxDevtools(compose)
+
+  // retrive local state as initialState
+  if(!options.isServer) {
+    initialState.app.stateVersion = options.VERSION//publicRuntimeConfig.VERSION
+    const localState = stateStorage.loadState()
+    initialState = localState && localState.app.stateVersion === options.VERSION ? localState : initialState
+  }
 
   const store = createStore(
-    createReducer(),
-    fromJS(initialState),
+    createRootReducer(),
+    initialState,
     composeEnhancers(...enhancers),
   )
 
-  sagaMiddleware.run(rootSagas)
-  // store.runSagaTask = () => {
-  //   store.sagaTask = sagaMiddleware.run(rootSagas)
-  // }
-  // //
-  // store.runSagaTask()
-
-  // Extensions
   store.runSaga = () => {
     if (store.saga) return
     store.saga = sagaMiddleware.run(rootSagas)
@@ -74,16 +73,23 @@ export default function configureStore(initialState = {}, options) {
     }
   }
 
-  // Make reducers hot reloadable, see http://mxs.is/googmo
-  /* istanbul ignore next */
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.injectedReducers))
+  if(!options.isServer) {
+    store.subscribe(() => {
+      stateStorage.saveState(store.getState())
     })
+
+    // Make reducers hot reloadable
+    if (module.hot) {
+      module.hot.accept('./reducers', () => {
+        store.replaceReducer(createRootReducer(store.injectedReducers))
+      })
+    }
   }
 
   // Initial run
   store.runSaga()
 
+  // sagaMiddleware.run(rootSagas)
+  // store.runSaga = sagaMiddleware.run
   return store
 }

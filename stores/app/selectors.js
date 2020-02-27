@@ -5,27 +5,46 @@
 
 // Direct selector to the app state domain
 export const selectIsLoading = (state) => {
-  return state.get('root').getIn(['app','isLoading'])
+  return false
 }
 
 export const selectIsLoaded = (state) => {
-  return state.get('root').getIn(['app','isLoaded'])
+  return false
 }
 
 export const selectError = (state) => {
-  return state.get('root').getIn(['app','error'])
+  return false
 }
 
 /**
  * Other specific selectors
  */
-
  export const selectIsAuthenticated = (state) => {
    return false
  }
 
  export const selectErrorSource = (state) => {
-   return state.get('root').getIn(['app','errorSource'])
+   return false
+ }
+
+ export const selectHeaderData = (state) => {
+   return state.app.globalData['header-menu']
+ }
+
+ export const selectFooterData = (state) => {
+    let footerData = [
+      { footer1:state.app.globalData['footer-1-menu'] },
+      { footer2:state.app.globalData['footer-2-menu'] },
+      { footer3:state.app.globalData['footer-3-menu'] },
+      { footer4:state.app.globalData['footer-4-menu'] },
+      { footer5:state.app.globalData['footer-5-menu'] },
+      { footer6:state.app.globalData['footer-6-menu'] },
+      { footer7:state.app.globalData['footer-7-menu'] },
+      { footer8:state.app.globalData['footer-8-menu'] },
+      { footerUpper:state.app.globalData['footer-upper-menu'] }
+    ]
+    
+   return footerData
  }
 
 
@@ -35,4 +54,6 @@ export default {
   selectError,
   selectErrorSource,
   selectIsAuthenticated,
+  selectHeaderData,
+  selectFooterData
 }

@@ -1,5 +1,8 @@
 const fetch = require('../../utils/fetch')
 
+
+const ENDPOINT_URL = process.env.ENDPOINT_URL
+
 export default async (req, res) => {
   try {
     const response = await fetch('http://seven-eleven-wp.local/wp-json/global-settings/global',

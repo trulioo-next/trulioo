@@ -7,6 +7,7 @@ export default function DataService(state) {
 
    	async function getGlobalData() {
 		let data = await API.post('/api/wp-data', {});
+
 		return data;
 	}
 

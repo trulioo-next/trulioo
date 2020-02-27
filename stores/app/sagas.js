@@ -23,6 +23,7 @@ function* startup(payload) {
     const dataService = DataService(state)
 
     const response = yield call(dataService.getGlobalData, true)
+    // console.log('RESONSE ', response)
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
   } catch(err) {
