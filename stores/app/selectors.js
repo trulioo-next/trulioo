@@ -5,15 +5,15 @@
 
 // Direct selector to the app state domain
 export const selectIsLoading = (state) => {
-  return false
+  return state.app.isLoading
 }
 
 export const selectIsLoaded = (state) => {
-  return false
+  return state.app.isLoading
 }
 
 export const selectError = (state) => {
-  return false
+  return state.app.error
 }
 
 /**
@@ -24,7 +24,7 @@ export const selectError = (state) => {
  }
 
  export const selectErrorSource = (state) => {
-   return false
+  return state.app.errorSource
  }
 
  export const selectHeaderData = (state) => {

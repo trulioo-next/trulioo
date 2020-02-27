@@ -56,7 +56,7 @@ App.prepare().then(() => {
    server.get('/page/:slug', (req, res) => {
       const actualPage = '/page';
       const queryParams = { slug: req.params.slug, apiRoute: 'page' };
-      app.render(req, res, actualPage, queryParams);
+      return handle(req, res, actualPage, queryParams);
     });
 
    server.get('/post/:slug', (req, res) => {
