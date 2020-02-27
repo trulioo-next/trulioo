@@ -4,23 +4,23 @@ import Link from "next/link";
 import Logo from "@/static/images/7-eleven.svg";
 import CondensedLogo from "@/static/images/7-eleven-condensed.svg";
 
+import CaretIcon from "@/static/images/caret-down.svg";
 import LocationIcon from "@/static/images/location.svg";
 import AccountIcon from "@/static/images/account.svg";
 import SearchIcon from "@/static/images/search.svg";
 
 import "./NavBar.scss";
+import SubNav from "./SubNav";
+import linkData from './placeholder-links.json'; // replace with real data later
 
-const links = [
-  { href: "/about", as: "/about", label: "About" },
-  { href: "/contact", as: "/contact", label: "Contact" }
-].map(link => {
+const links = linkData.map(link => {
   link.key = `nav-link-${link.as}-${link.label}`;
   return link;
 });
 
 /**
  *
- * TODO: Child/sub links dropdown
+ * TODO: Get desktop subnav to open/close
  * TODO: Search toggle dropdown
  * TODO: Mobile navigation
  *
@@ -44,11 +44,13 @@ const NavBar = () => (
     </Link>
 
     <ul className="site-header__menu site-header__menu--primary">
-      {links.map(({ key, href, as, label }) => (
-        <li key={key} className="site-header__item">
+      {links.map(({ key, href, as, label, subnav }) => (
+        <li key={key} className={ subnav ? 'site-header__item site-header__item--has-children' : 'site-header__item'}>
           <Link href={href} as={as}>
-            <a>{label}</a>
+            <a className="site-header__link">{label}</a>
           </Link>
+          { subnav && (<button className="site-header__indicator"><CaretIcon /></button>)}
+          { subnav && <SubNav items={subnav} /> }
         </li>
       ))}
     </ul>

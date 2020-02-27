@@ -13,7 +13,7 @@ import "./Subscribe.scss";
 const Subscribe = props => (
   <form id="subscribe" className="subscribe">
     <div className="subscribe__field">
-      <label for="subscribe-email" className="subscribe__label">
+      <label htmlFor="subscribe-email" className="subscribe__label">
         Enter your e-mail address
       </label>
       <input
@@ -25,7 +25,7 @@ const Subscribe = props => (
     </div>
     <div className="subscribe__field">
       <label
-        for="subscribe-consent"
+        htmlFor="subscribe-consent"
         className="subscribe__label subscribe__label--checkbox"
       >
         <input

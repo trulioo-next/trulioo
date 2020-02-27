@@ -10,10 +10,6 @@
 
 @import "~bootstrap/scss/reboot";
 
-* {
-	box-sizing: border-box;
-}
-
 html,
 body,
 #__next {
@@ -22,7 +18,7 @@ body,
 }
 
 body {
-	font-family: 'LabGrotesque', sans-serif;
+	font-family: $font-family-base;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
