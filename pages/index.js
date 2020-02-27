@@ -1,7 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux';
-
-import StartupActions from '../stores/startup/actions'
 import { selectIsAuthenticated } from '../stores/app/selectors'
 
 import CheckConnection from '../components/CheckConnection/CheckConnection'
@@ -13,7 +11,7 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    if(!this.props.isLoaded) this.props.startup(this.props.isAuthenticated)
+     
   }
 
   render() {
@@ -25,11 +23,9 @@ class Index extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: selectIsAuthenticated(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  startup: (isAuthenticated) => dispatch(StartupActions.startup(isAuthenticated)),
 })
 
 export default connect(

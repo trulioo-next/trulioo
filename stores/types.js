@@ -1,12 +1,13 @@
 
 // App Startup action types
-export const APP_STARTUP = 'app/index/STARTUP'
-export const APP_SUCCESS = 'app/index/SUCCESS'
-export const APP_STARTLOADING = 'app/start/STARTLOADING'
-export const APP_STOPLOADING = 'app/stop/STOPLOADING'
-export const APP_STARTUP_ERROR = 'app/startup/error'
+export const APP_STARTUP_REQUEST = 'app/index/APP_STARTUP_REQUEST'
+export const APP_STARTUP_LOADED = 'app/index/LOADED'
+export const APP_STARTUP_ERROR = 'app/startup/APP_STARTUP_ERROR'
 
-// Product action types
-export const PRODUCTS_LIST_ALL = 'products/list/PRODUCTS_LIST_ALL'
-export const PRODUCTS_LIST_ERROR = 'products/error/PRODUCTS_LIST_ERROR'
-export const PRODUCTS_LIST_START = 'products/list/PRODUCTS_LIST_START'
+export const APP_STARTLOADING = 'app/loader/STARTLOADING'
+export const APP_STOPLOADING = 'app/loader/STOPLOADING'
+
+// Global Data 
+export const GLOBAL_DATA_LOADED = 'global/data/GLOBAL_DATA_LOADED'
+
+ 

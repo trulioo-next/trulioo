@@ -1,30 +1,27 @@
 'use strict';
-import Fetch from './fetch'
+// import fetch from './fetch'
+require('isomorphic-fetch')
 
-// TODO : 
-// ADD THESE TO ENV VARIABLES 
-//
-const APPORIGIN = 'development'
-const API_HOST = 'localhost'
-const API_PORT = '8000'
+// import getConfig from "next/config";
+// const { publicRuntimeConfig } = getConfig();
 
-// TODO: API Services health check
+async function parseJSON(response) {
+  if (response.status >= 400 || (response.status === 204 || response.status === 205)) return response
+  return await response.json()
+}
 
 export default (function() {
 
-  const ORIGIN = `https://${APPORIGIN}`
-  // const API_URI = `https://${API_HOST}:${API_PORT}`
-  const API_URI = ''
+  const API_URL = process.env.ROOT_URL;
 
-  function setOptions(method = 'GET', options) {
+  function setOptions(method = 'GET', options = {}) {
     // console.log(options);
     const headers = options.headers || {}
     return {
       ...options,
       method,
       headers: {
-        "Origin": ORIGIN,
-        "Content-Type": "application/json; charset=utf-8",
+        // "Origin": APP_ORIGIN,
         ...headers
       },
     }
@@ -32,26 +29,34 @@ export default (function() {
 
   return {
     post: function(path, data, options = {}) {
-      const url = `${API_URI}${path}`
-      return Fetch(url, setOptions('POST', {
+      const url = `${API_URL}${path}`
+      return fetch(url, setOptions('POST', {
         ...options,
         body: JSON.stringify(data),
-      }))
+      })).then(parseJSON).catch((e) => {
+        return e;
+      })
     },
     get: function(path, options) {
-      const url = `${API_URI}${path}`
-     return Fetch(url, setOptions('GET', options))
+      const url = `${API_URL}${path}`
+      return fetch(url, setOptions('GET', options)).then(parseJSON).catch((e) => {
+        return e;
+      })
     },
     put: function(path, data, options = {}) {
-      const url = `${API_URI}${path}`
-      return Fetch(url, setOptions('PUT', {
+      const url = `${API_URL}${path}`
+      return fetch(url, setOptions('PUT', {
         ...options,
         body: JSON.stringify(data),
-      }))
+      })).then(parseJSON).catch((e) => {
+        return e;
+      })
     },
     delete: function(path, options) {
-      const url = `${API_URI}${path}`
-      return Fetch(url, setOptions('DELETE', options))
+      const url = `${API_URL}${path}`
+      return fetch(url, setOptions('DELETE', options)).then(parseJSON).catch((e) => {
+        return e;
+      })
     }
   }
 

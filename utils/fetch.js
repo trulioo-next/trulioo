@@ -1,7 +1,7 @@
 'use strict'
+require('isomorphic-fetch')
 
-import ErrorHandler from './errorHandler'
-
+const ErrorHandler = require('./errorHandler')
 
 /*
 * Parses the JSON returned by a network request
@@ -29,14 +29,8 @@ async function checkStatus(response) {
 /*
 * Requests a URL, returning a promise
 */
-export default function(url, options) {
+module.exports = function(url, options) {
   return fetch(url, {
-    mode: 'cors',//'no-cors', // 'cors', //'*same-origin'
-    // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    // credentials: "same-origin", // include, *same-origin, omit
-    // redirect: "follow", // manual, *follow, error
-    // referrer: "no-referrer", // no-referrer, *client
-    // body: JSON.stringify(data), // body data type must match "Content-Type" header
     ...options
   })
   .then(checkStatus)

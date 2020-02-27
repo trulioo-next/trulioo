@@ -4,7 +4,7 @@
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware, { END } from 'redux-saga'
 
 import createReducer from './reducers'
 import rootSagas from './rootSagas'
@@ -15,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware({
   // onError: () => {}
 })
 
-export default function configureStore(initialState = {}) {
+export default function configureStore(initialState = {}, options) {
 
   // Create the store with middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
@@ -47,9 +47,32 @@ export default function configureStore(initialState = {}) {
   // store.runSagaTask()
 
   // Extensions
-  store.runSaga = sagaMiddleware.run
-  store.injectedReducers = {} // Reducer registry
-  store.injectedSagas = {} // Saga registry
+  store.runSaga = () => {
+    if (store.saga) return
+    store.saga = sagaMiddleware.run(rootSagas)
+  };
+
+  store.stopSaga = async () => {
+    if (!store.saga) return
+    store.dispatch(END)
+    await store.saga.done
+    store.saga = null
+  }
+
+  store.execSagaTask = async (action) => {
+    if (options.isServer) {
+      // run saga
+      store.runSaga()
+      // dispatch saga tasks
+      // tasks(store.dispatch)
+      store.dispatch(action)
+      // Stop all running sagas to this point and wait for the tasks to be done
+      await store.stopSaga()
+    } else {
+      // Re-run on client side
+      store.runSaga()
+    }
+  }
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
@@ -58,6 +81,9 @@ export default function configureStore(initialState = {}) {
       store.replaceReducer(createReducer(store.injectedReducers))
     })
   }
+
+  // Initial run
+  store.runSaga()
 
   return store
 }

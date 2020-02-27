@@ -1,7 +1,7 @@
 'use strict'
 
 
-// TODO: Implement message domian
+// TODO: Implement message domain
 
 const MESSAGES = {
   ERROR:{
@@ -9,9 +9,9 @@ const MESSAGES = {
   }
 }
 
-// TODO: Implement error handler with admin notification system with log
+// TODO: Implement error handler loggin to file
 
-export default {
+module.exports = {
   network: (error) => {
     if(error.message.includes('request failed')) throw new Error(MESSAGES.ERROR.API)
     throw error

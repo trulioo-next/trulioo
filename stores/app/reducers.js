@@ -2,47 +2,44 @@
 * Apppliction reducer
 * We use immutableJS to ensure immutability on the application state level.
 */
+ 
+import { INITIAL_STATE } from './initialState'
 
-import { fromJS } from 'immutable'
-import InitialState from './initialState' // Register your reducers here.
 import {
-  APP_SUCCESS,
+  APP_STARTUP_LOADED,
+  APP_STARTUP_ERROR,
   APP_STARTLOADING,
   APP_STOPLOADING,
-  APP_STARTUP_ERROR,
-  PRODUCTS_LIST_ERROR,
+  GLOBAL_DATA_LOADED
 } from '../types'
 
 
-export default (state = InitialState, action) => {
+export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-    case APP_SUCCESS:
-      return state
-        .set('isLoading', false)
-        .set('isLoaded', true)
-        .set('error', null)
-
-    case APP_STARTLOADING:
-      return state
-        .set('isLoading', true)
+    case APP_STARTUP_LOADED:
+      return { ...state,
+        isLoading: false,
+        isLoaded: true,
+        error: null,
+      }
 
     case APP_STOPLOADING:
-      return state
-        .set('isLoading', false)
+      return { ...state, isLoading: false }
 
     case APP_STARTUP_ERROR:
-      return state
-        .set('errorSource', 'Startup')
-        .set('error', action.payload)
-        .set('isLoading', false)
+      return { ...state,
+        error: action.payload,
+        errorSource: APP_STARTUP_ERROR,
+        isLoading: false
+      }
 
-    case PRODUCTS_LIST_ERROR:
-      return state
-        .set('errorSource', 'Products list')
-        .set('error', action.payload)
-        .set('isLoading', false)
+    case GLOBAL_DATA_LOADED:
+      return { ...state,
+        globalData: action.payload
+      }
+
 
     default:
       return state

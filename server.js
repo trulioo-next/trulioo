@@ -51,21 +51,33 @@ App.prepare().then(() => {
   server.get('/', (req, res) => {
     cacher(req, res, '/');
   });
-  
-  server.get('/shop/discount/:slug', (req, res) => {
-    const mergedQuery = Object.assign({}, req.query, req.params);
-    return App.render(req, res, '/shop', mergedQuery);
-  });
+   
 
-  server.get('/discount/:slug', (req, res) => {
-    const mergedQuery = Object.assign({}, req.query, req.params);
-    return App.render(req, res, '/shop', mergedQuery);
-  });
+   server.get('/page/:slug', (req, res) => {
+      const actualPage = '/page';
+      const queryParams = { slug: req.params.slug, apiRoute: 'page' };
+      app.render(req, res, actualPage, queryParams);
+    });
 
-  server.get('/partners/:ref', (req, res) => {
-    const mergedQuery = Object.assign({}, req.query, req.params);
-    return App.render(req, res, '/', mergedQuery);
-  });
+   server.get('/post/:slug', (req, res) => {
+      const actualPage = '/post';
+      const queryParams = { slug: req.params.slug, apiRoute: 'page' };
+      app.render(req, res, actualPage, queryParams);
+    });
+
+    server.get('/category/:slug', (req, res) => {
+      const actualPage = '/category';
+      const queryParams = { slug: req.params.slug };
+      app.render(req, res, actualPage, queryParams);
+    });
+
+    server.get('/_preview/:id/:rev/:type/:status/:wpnonce', (req, res) => {
+      const actualPage = '/preview';
+      const { id, rev, type, status, wpnonce } = req.params;
+      const queryParams = { id, rev, type, status, wpnonce };
+      app.render(req, res, actualPage, queryParams);
+    });
+
 
   server.get('*', (req, res) => {
     if (req.url.includes('/sw')) {
