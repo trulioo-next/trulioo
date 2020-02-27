@@ -1,17 +1,28 @@
 
 import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Error from "next/error";
- 
+
+import {
+    reqPageDataAction
+} from "../../stores/page/actions";
+
+import { pageDataSelector } from "../../stores/page/selectors";
 
 
 const Page = (props) => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />
   }
-
-   
+ 
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(reqPageDataAction({ payload: props.query.slug }));
+    }, []);
+  
+    const pageData = useSelector(state => pageDataSelector(state));
+    console.log('CLIENT SIDE PAGE DATA ', pageData )
 
   return (<>
     Page Data Here
@@ -20,21 +31,7 @@ const Page = (props) => {
 };
 
 Page.getInitialProps = async ({ query, res }) => {
-
-  // const postData = await getBlogPost(query.slug);
-
-  // const posts = await getBlogPosts();
-
-  // if ( (!postData || !posts) && res) {
-  //   res.statusCode = 404;
-  //   return { errorCode: 404 }
-  // }
-
-  // const { post, nextPost, previousPost } = postData;
-  console.log('QUERY : ', query )
-
-  return {}
-
+  return { query }
 };
 
 

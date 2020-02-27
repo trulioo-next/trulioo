@@ -6,13 +6,13 @@ import API from '../utils/api'
 export default function DataService(state) {
 
    	async function getGlobalData() {
-		let data = await API.post('/api/wp-data', {});
-
+		let data = await API.post('/api/wp-global-data', {});
 		return data;
 	}
 
-	function getPageData(data) {
-	 return {data:'single data'}
+	async function getPageData(payload) {
+	 let data = await API.post('/api/wp-page-data', payload);
+	return data;
 	}
 
 	function getPostData(data) {
@@ -21,6 +21,7 @@ export default function DataService(state) {
 
    return {
     getGlobalData,
+    getPageData
   }
 
 }

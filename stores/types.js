@@ -10,4 +10,10 @@ export const APP_STOPLOADING = 'app/loader/STOPLOADING'
 // Global Data 
 export const GLOBAL_DATA_LOADED = 'global/data/GLOBAL_DATA_LOADED'
 
+
+// Page Level Events 
+export const PAGE_LOAD_REQUEST = 'page/load/PAGE_LOAD_REQUEST'
+export const PAGE_LOADED = 'page/load/PAGE_LOAD_REQUEST'
+export const PAGE_LOAD_ERROR = 'page/load/PAGE_LOAD_ERROR'
+
  
