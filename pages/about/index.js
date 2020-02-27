@@ -10,7 +10,7 @@ class AboutPage extends React.Component {
 
     return (
       <Layout>
-        <Header title="About - 7-22" />
+        <Header title="About - 7 - Eleven Canada" />
         <div className='hero'>
           <h1 className='title'>Welcome to 7-11</h1>
           <p className='description'>

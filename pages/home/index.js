@@ -11,7 +11,7 @@ class HomePage extends React.Component {
     return (
       <Layout>
 
-      <Header title="Default Boilerplate" />
+      <Header title="Home - 7 - Eleven Canada" />
 
         <div className='hero'>
          
