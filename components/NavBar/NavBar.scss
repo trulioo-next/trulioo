@@ -1,6 +1,6 @@
 /**
- * Shopistry PWA 
-*/
+ * Navbar
+ */
 
 @import "~@/static/scss/variables";
 
@@ -113,12 +113,12 @@
     font-size: 14px;
     text-transform: uppercase;
     color: $gray;
-    
+
     @include media-breakpoint-up(lg) {
       margin-right: 16px;
       margin-left: 16px;
     }
-    
+
     &--nested {
       @include make-col-ready();
       font-size: 18px;
@@ -152,6 +152,10 @@
   &__link {
     display: inline-block;
 
+    &:hover,
+    &:focus {
+    }
+
     &-icon {
       display: inline-block;
       height: 20px;
@@ -171,16 +175,30 @@
     }
   }
 
+  &__dropdown-toggle {
+    background: none;
+    border: 0;
+    text-transform: inherit;
+    font: inherit;
+    color: inherit;
+    padding: 0;
+
+    &:hover,
+    &:focus {
+      color: $link-hover-color;
+      text-decoration: underline;
+    }
+  }
+
   &__subnav {
     background-color: $white;
     position: absolute;
     top: 100%;
-    display: none;
 
     &:not(#{$block}__subnav--has-grandchildren) {
       &:before,
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         bottom: 0;
@@ -197,10 +215,6 @@
       }
     }
 
-    &--is-open {
-      display: block;
-    }
-    
     &--has-grandchildren {
       left: 0;
       right: 0;
@@ -218,7 +232,6 @@
           max-width: 100%;
         }
       }
-
     }
 
     &-heading {
@@ -233,6 +246,7 @@
     position: relative;
     display: block;
     padding: 32px 0;
+    justify-content: center;
 
     &:before {
       right: 100%;
@@ -243,7 +257,6 @@
       left: 100%;
       width: 100vw;
     }
-
   }
 }
 

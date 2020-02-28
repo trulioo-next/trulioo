@@ -4,11 +4,9 @@ import Link from "next/link";
 import Subscribe from "@/components/Subscribe/Subscribe";
 
 import "./Footer.scss";
+import linkData from "./placeholder-links.json";
 
-const links = [
-  { href: "/about", as: "/about", label: "About" },
-  { href: "/contact", as: "/contact", label: "Contact" }
-].map(link => {
+const links = linkData.map(link => {
   link.key = `nav-link-${link.as}-${link.label}`;
   return link;
 });

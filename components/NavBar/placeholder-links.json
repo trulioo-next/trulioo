@@ -1,160 +1,119 @@
 [
   {
-    "href":"/7rewards",
-    "as":"/7rewards",
-    "label":"7Rewards",
-    "subnav":[
+    "href": "/7rewards",
+    "as": "/7rewards",
+    "label": "7Rewards",
+    "subnav": [
       {
-        "href":"/7rewards/login",
-        "as":"/7rewards/login",
-        "label":"Login/Signup"
+        "href": "/7rewards/login",
+        "as": "/7rewards/login",
+        "label": "Login/Signup"
       },
       {
-        "href":"/7rewards/promos",
-        "as":"/7rewards/promos",
-        "label":"Promos"
+        "href": "/7rewards/promos",
+        "as": "/7rewards/promos",
+        "label": "Promos"
       },
       {
-        "href":"/7rewards/about",
-        "as":"/7rewards/about",
-        "label":"About 7Rewards"
+        "href": "/7rewards/about",
+        "as": "/7rewards/about",
+        "label": "About 7Rewards"
       }
     ]
   },
   {
-    "href":"/menu",
-    "as":"/menu",
-    "label":"Menu",
-    "subnav":[
+    "href": "/menu",
+    "as": "/menu",
+    "label": "Menu",
+    "subnav": [
       {
-        "href":"/menu/meals-snacks",
-        "as":"/menu/meals-snacks",
-        "label":"Meals & Snacks",
-        "subnav":[
+        "href": "/menu/meals-snacks",
+        "as": "/menu/meals-snacks",
+        "label": "Meals & Snacks",
+        "subnav": [
           {
-            "href":"/menu/meals-snacks/pizza",
-            "as":"/menu/meals-snacks/pizza",
-            "label":"Pizza"
+            "href": "/menu/meals-snacks/pizza",
+            "as": "/menu/meals-snacks/pizza",
+            "label": "Pizza"
           },
           {
-            "href":"/menu/meals-snacks/hot-foods",
-            "as":"/menu/meals-snacks/hot-foods",
-            "label":"Hot Foods"
+            "href": "/menu/meals-snacks/hot-foods",
+            "as": "/menu/meals-snacks/hot-foods",
+            "label": "Hot Foods"
           },
           {
-            "href":"/menu/meals-snacks/crispy-classic-chicken",
-            "as":"/menu/meals-snacks/crispy-classic-chicken",
-            "label":"Crispy Classic Chicken"
+            "href": "/menu/meals-snacks/crispy-classic-chicken",
+            "as": "/menu/meals-snacks/crispy-classic-chicken",
+            "label": "Crispy Classic Chicken"
           },
           {
-            "href":"/menu/meals-snacks/healthy-choices",
-            "as":"/menu/meals-snacks/healthy-choices",
-            "label":"Healthy Choices"
+            "href": "/menu/meals-snacks/bakery",
+            "as": "/menu/meals-snacks/bakery",
+            "label": "Bakery"
           },
           {
-            "href":"/menu/meals-snacks/bakery",
-            "as":"/menu/meals-snacks/bakery",
-            "label":"Bakery"
-          },
-          {
-            "href":"/menu/meals-snacks/deli",
-            "as":"/menu/meals-snacks/deli",
-            "label":"Deli"
-          },
-          {
-            "href":"/menu/meals-snacks/snacks",
-            "as":"/menu/meals-snacks/snacks",
-            "label":"Snacks"
+            "href": "/menu/meals-snacks/snacks",
+            "as": "/menu/meals-snacks/snacks",
+            "label": "Snacks"
           }
         ]
       },
       {
-        "href":"/menu/drinks",
-        "as":"/menu/drinks",
-        "label":"Drinks",
+        "href": "/menu/drinks",
+        "as": "/menu/drinks",
+        "label": "Drinks",
         "subnav": [
           {
-            "href":"/menu/drinks/coffee-latte",
-            "as":"/menu/drinks/coffee-latte",
-            "label":"Coffee & Latte"
+            "href": "/menu/drinks/coffee-latte",
+            "as": "/menu/drinks/coffee-latte",
+            "label": "Coffee & Latte"
           },
           {
-            "href":"/menu/drinks/cold-pressed-juice",
-            "as":"/menu/drinks/cold-pressed-juice",
-            "label":"Cold Pressed Juice"
+            "href": "/menu/drinks/bottled-canned",
+            "as": "/menu/drinks/bottled-canned",
+            "label": "Bottled & Canned"
           },
           {
-            "href":"/menu/drinks/energy-shots-drinks",
-            "as":"/menu/drinks/energy-shots-drinks",
-            "label":"Energy Shots & Drinks"
-          },
-          {
-            "href":"/menu/drinks/bottled-canned",
-            "as":"/menu/drinks/bottled-canned",
-            "label":"Bottled & Canned"
-          },
-          {
-            "href":"/menu/drinks/slurpee-gulps",
-            "as":"/menu/drinks/slurpee-gulps",
-            "label":"Slurpee® & Gulps®"
+            "href": "/menu/drinks/gulps",
+            "as": "/menu/drinks/gulps",
+            "label": "Gulps®"
           }
-        ] 
+        ]
       },
       {
-        "href":"/menu/nutritionals",
-        "as":"/menu/nutritionals",
-        "label":"Nutritionals"
+        "href": "/menu/specialty",
+        "as": "/menu/specialty",
+        "label": "Specialty",
+        "subnav": [
+          {
+            "href": "/menu/specialty/taste-of-asia",
+            "as": "/menu/specialty/taste-of-asia",
+            "label": "A Taste of Asia"
+          },
+          {
+            "href": "/menu/specialty/healthy-to-go",
+            "as": "/menu/specialty/healthy-to-go",
+            "label": "Healthy To Go"
+          }
+        ]
       },
       {
-        "href":"/menu/gift-cards",
-        "as":"/menu/gift-cards",
-        "label":"Gift Cards"
+        "href": "/menu/nutritionals",
+        "as": "/menu/nutritionals",
+        "label": "Nutritionals"
       }
     ]
   },
   {
-    "href":"/delivery",
-    "as":"/delivery",
-    "label":"Delivery",
+    "href": "/slurpee",
+    "as": "/slurpee",
+    "label": "Slurpee",
     "subnav": false
   },
   {
-    "href":"/shop",
-    "as":"/shop",
-    "label":"Shop",
+    "href": "/delivery",
+    "as": "/delivery",
+    "label": "Delivery",
     "subnav": false
-  },
-  {
-    "href":"/slurpee",
-    "as":"/slurpee",
-    "label":"Slurpee",
-    "subnav": false
-  },
-  {
-    "href":"/our-brand",
-    "as":"/our-brand",
-    "label":"Our Brand",
-    "subnav":[
-      {
-        "href":"/our-brand/our-story",
-        "as":"/our-brand/our-story",
-        "label":"Our Story"
-      },
-      {
-        "href":"/our-brand/careers",
-        "as":"/our-brand/careers",
-        "label":"Careers"
-      },
-      {
-        "href":"/our-brand/responsibility",
-        "as":"/our-brand/responsibility",
-        "label":"Responsibility"
-      },
-      {
-        "href":"/our-brand/newsroom",
-        "as":"/our-brand/newsroom",
-        "label":"Newsroom"
-      }
-    ]
   }
 ]
