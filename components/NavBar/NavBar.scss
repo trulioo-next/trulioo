@@ -2,13 +2,13 @@
  * Navbar
  */
 
-@import "~@/static/scss/variables";
+@import '~@/static/scss/variables';
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
-.site-header {
+.SiteHeader {
   $block: &;
 
   position: sticky;
@@ -19,7 +19,7 @@
   padding: 10px 16px;
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
   justify-content: space-between;
   z-index: 100;
@@ -35,7 +35,7 @@
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -43,12 +43,6 @@
     height: 1px;
     background-color: $light-green;
     transition: height 300ms ease-in-out;
-  }
-
-  &__menu-toggle {
-    @include media-breakpoint-up(lg) {
-      display: none;
-    }
   }
 
   &__logo {
@@ -77,31 +71,22 @@
 
   &__menu {
     display: flex;
-    flex: 1 1 0;
     margin: 0;
     padding: 0;
 
-    &--primary {
+    &.-desktop {
+      flex: 1 1 0;
+
       @include media-breakpoint-down(md) {
         display: none;
       }
     }
 
-    &--utility {
+    &.-mobile {
       flex: 0 0 auto;
 
-      #{$block}__link {
-        @include media-breakpoint-down(md) {
-          &-text {
-            display: none;
-          }
-        }
-      }
-
-      #{$block}__item--search {
-        @include media-breakpoint-down(md) {
-          display: none;
-        }
+      @include media-breakpoint-up(lg) {
+        display: none;
       }
     }
   }
@@ -113,13 +98,19 @@
     font-size: 14px;
     text-transform: uppercase;
     color: $gray;
+    z-index: 1;
 
     @include media-breakpoint-up(lg) {
       margin-right: 16px;
       margin-left: 16px;
     }
 
-    &--nested {
+    &:not(.-nested) {
+      display: flex;
+      align-items: center;
+    }
+
+    &.-nested {
       @include make-col-ready();
       font-size: 18px;
       text-transform: none;
@@ -127,6 +118,17 @@
       margin-bottom: 24px;
       margin-left: 0;
       padding-bottom: 0;
+
+      &.col,
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &.-search {
+      @include media-breakpoint-down(md) {
+        display: none;
+      }
     }
   }
 
@@ -149,33 +151,7 @@
     }
   }
 
-  &__link {
-    display: inline-block;
-
-    &:hover,
-    &:focus {
-    }
-
-    &-icon {
-      display: inline-block;
-      height: 20px;
-
-      @include media-breakpoint-up(lg) {
-        height: 34px;
-      }
-
-      svg {
-        height: 100%;
-      }
-    }
-
-    &-text {
-      display: inline-block;
-      margin-left: 16px;
-    }
-  }
-
-  &__dropdown-toggle {
+  &__toggle {
     background: none;
     border: 0;
     text-transform: inherit;
@@ -195,10 +171,10 @@
     position: absolute;
     top: 100%;
 
-    &:not(#{$block}__subnav--has-grandchildren) {
+    &:not(.-has-grandchildren) {
       &:before,
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         bottom: 0;
@@ -215,30 +191,21 @@
       }
     }
 
-    &--has-grandchildren {
+    &.-has-grandchildren {
       left: 0;
       right: 0;
 
-      #{$block}__submenu:not(#{$block}__submenu--nested) {
+      #{$block}__submenu:not(.-nested) {
         @include make-row();
         padding: 32px 144px;
       }
-
-      #{$block}__item--nested {
-        @include make-col(2);
-
-        #{$block}__item--nested {
-          flex: initial;
-          max-width: 100%;
-        }
-      }
     }
+  }
 
-    &-heading {
-      font-weight: 900;
-      line-height: 31px;
-      font-size: 25px;
-    }
+  &__subnavHeading {
+    font-weight: 900;
+    line-height: 31px;
+    font-size: 25px;
   }
 
   &__submenu {
@@ -260,29 +227,6 @@
   }
 }
 
-.menu-toggle {
-  display: inline-flex;
-  padding: 0;
-  width: 28px;
-  height: 20px;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-  border: 0;
-  background: none;
-
-  @include media-breakpoint-up(lg) {
-    display: none;
-  }
-
-  > div {
-    border-radius: 4px;
-    max-height: 4px;
-    flex: auto;
-    background-color: $gray;
-  }
-}
-
 .search-toggle {
   border: 0;
   padding: 0;
@@ -292,5 +236,257 @@
   &:hover,
   &:focus {
     color: $link-hover-color;
+  }
+}
+
+.Toolbar {
+  display: flex;
+  flex: 0 0 auto;
+  margin: 0;
+  overflow-y: auto;
+
+  &__item {
+    display: block;
+  }
+
+  &__icon {
+    display: inline-block;
+    height: 20px;
+
+    @include media-breakpoint-up(lg) {
+      height: 34px;
+    }
+
+    svg {
+      height: 100%;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    margin-left: 16px;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+}
+
+.OffCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $white;
+  z-index: 105;
+  line-height: 11px;
+  font-size: 9px;
+
+  &__toggle {
+    border: 0;
+    background: none;
+    padding: 0;
+
+    &.-menu {
+      display: inline-flex;
+      width: 28px;
+      height: 20px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: space-between;
+
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+
+      > div {
+        border-radius: 4px;
+        max-height: 4px;
+        flex: auto;
+        background-color: $gray;
+      }
+    }
+
+    &.-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px 16px;
+      display: block;
+      width: 45px;
+      height: 33px;
+      z-index: 5;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 16px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: $gray;
+        transform-origin: 50% 50%;
+      }
+
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &::after {
+        transform: translate(-50%, -50%) rotate(135deg);
+      }
+    }
+  }
+
+  &__rewards {
+    padding: 10px 46px 10px 16px;
+    min-height: 48px;
+  }
+
+  &__rewardsHeading {
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 900;
+    color: $dark-green;
+    margin-bottom: 2px;
+  }
+
+  &__rewardsNav {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__rewardsNavItem {
+    display: block;
+    margin-right: 0.25em;
+
+    &:not(:first-child) {
+      &::before {
+        content: '| ';
+      }
+    }
+  }
+
+  &__nav {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border-top: solid 1px $light-gray;
+  }
+
+  &__item {
+    position: relative;
+    display: block;
+    border-bottom: solid 1px $light-gray;
+  }
+
+  &__link {
+    display: block;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  &__subnavToggle {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    height: 32px;
+    border: 0;
+    padding: 16px;
+    background: none;
+    font-size: 0;
+    color: $gray;
+    align-items: center;
+
+    svg {
+      height: 10px;
+    }
+  }
+
+  &__collapse {
+    padding: 0 16px 8px;
+
+    &.show {
+      + .OffCanvas__subnavToggle {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__subnav {
+    display: block;
+    padding: 0;
+    margin-left: 1em;
+    line-height: 13px;
+    font-size: 11px;
+
+    &.-nested {
+      margin-left: 0;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__subnavItem {
+    display: block;
+
+    a {
+      display: block;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+  }
+
+  &__subnavHeading {
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+
+  &__search {
+    padding: 24px 16px;
+  }
+}
+
+.Search {
+  &__inputGroup {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    border: solid 1px #c7c7c7;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 16px;
+    display: flex;
+    height: 34px;
+    margin: 0;
+    color: $blue;
+    align-items: center;
+
+    svg {
+      height: 20px;
+    }
+  }
+
+  &__input {
+    border: 0;
+    height: 34px;
+    padding: 11px 26px 9px 48px;
+    line-height: 1;
+    font-size: 12px;
+    color: $black;
+
+    &::placeholder {
+      color: $blue;
+    }
   }
 }

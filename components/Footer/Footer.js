@@ -1,82 +1,70 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import Subscribe from "@/components/Subscribe/Subscribe";
+import Subscribe from '@/components/Subscribe/Subscribe';
 
-import "./Footer.scss";
-import linkData from "./placeholder-links.json";
+import './Footer.scss';
+import linkData from './placeholder-links.json';
 
 const links = linkData.map(link => {
   link.key = `nav-link-${link.as}-${link.label}`;
   return link;
 });
 
+const NavList = props => {
+  let navIndex = props.i;
+  return (
+    <ul className="SiteFooter__links">
+      {props.items.map(({ href, as, label }, index) => (
+        <li
+          key={`footer-nav-${navIndex}-item-${index}`}
+          className="SiteFooter__item"
+        >
+          <Link href={href} as={as}>
+            <a className="SiteFooter__link">{label}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 const Footer = () => (
-  <footer className="site-footer">
-    <div className="site-footer__primary">
-      <div className="site-footer__wrapper">
-        <div className="site-footer__col site-footer__col--form">
-          <h2 className="site-footer__heading">Online Community</h2>
-          <Subscribe />
-        </div>
-        <div className="site-footer__col">
-          <h2 className="site-footer__heading">7Rewards</h2>
-          <ul className="site-footer__links">
-            {links.map(({ key, href, as, label }) => (
-              <li key={key} className="site-footer__item">
-                <Link href={href} as={as}>
-                  <a className="site-footer__link">{label}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="site-footer__col">
-          <h2 className="site-footer__heading">Find a Store</h2>
-          <ul className="site-footer__links">
-            {links.map(({ key, href, as, label }) => (
-              <li key={key} className="site-footer__item">
-                <Link href={href} as={as}>
-                  <a className="site-footer__link">{label}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="site-footer__col">
-          <h2 className="site-footer__heading">Services</h2>
-          <ul className="site-footer__links">
-            {links.map(({ key, href, as, label }) => (
-              <li key={key} className="site-footer__item">
-                <Link href={href} as={as}>
-                  <a className="site-footer__link">{label}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="site-footer__col">
-          <h2 className="site-footer__heading">Our Brand</h2>
-          <ul className="site-footer__links">
-            {links.map(({ key, href, as, label }) => (
-              <li key={key} className="site-footer__item">
-                <Link href={href} as={as}>
-                  <a className="site-footer__link">{label}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
+  <footer className="SiteFooter">
+    <div className="SiteFooter__section -primary">
+      <div className="container">
+        <div className="row justify-content-between">
+          <div className="col col-12 col-lg-4 order-lg-last">
+            <h2 className="SiteFooter__heading">Online Community</h2>
+            <Subscribe />
+          </div>
+          <div className="col col-lg-7">
+            <div className="row">
+              {links.map(({ href, as, label, subnav }, i) => (
+                <div key={`footer-item-${i}`} className="col">
+                  <h2 className="SiteFooter__heading">{label}</h2>
+                  {subnav && <NavList items={subnav} i={i} />}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div className="site-footer__secondary">
-      <div className="site-footer__wrapper">
-        <span className="site-footer__copyright">
-          Copyright 7-Eleven Canada Inc. 2020 All rights reserved
-        </span>
-        <a className="site-footer__sitemap" href="#">
-          sitemap
-        </a>
+    <div className="SiteFooter__section -secondary">
+      <div className="container">
+        <div className="row justify-content-between">
+          <div className="col col-auto">
+            <span className="SiteFooter__copyright">
+              Copyright 7-Eleven Canada Inc. 2020 All rights reserved
+            </span>
+          </div>
+          <div className="col col-auto">
+            <Link href="/sitemap" as="/sitemap">
+              <a className="SiteFooter__link">sitemap</a>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   </footer>

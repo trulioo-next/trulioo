@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Button from "@/components/Button/Button";
-import Social from "@/components/Social/Social";
+import Button from '@/components/Button/Button';
+import Social from '@/components/Social/Social';
 
-import "./Subscribe.scss";
+import './Subscribe.scss';
 
 /**
  * TODO: Set dynamic IDs so component can be shared between homepage and footer.
@@ -11,32 +11,31 @@ import "./Subscribe.scss";
  */
 
 const Subscribe = props => (
-  <form id="subscribe" className="subscribe">
-    <div className="subscribe__field">
-      <label htmlFor="subscribe-email" className="subscribe__label">
+  <form id="subscribe" className="Subscribe">
+    <div className="col col-12">
+      <label htmlFor="subscribe-email" className="Subscribe__label">
         Enter your e-mail address
       </label>
+    </div>
+    <div className="Subscribe__field">
       <input
         id="subscribe-email"
-        className="subscribe__input"
+        className="Subscribe__input"
         type="email"
         placeholder="example@email.com"
       />
     </div>
-    <div className="subscribe__field">
-      <label
-        htmlFor="subscribe-consent"
-        className="subscribe__label subscribe__label--checkbox"
-      >
+    <div className="Subscribe__field">
+      <label htmlFor="subscribe-consent" className="Subscribe__label -checkbox">
         <input
           id="subscribe-consent"
           type="checkbox"
-          className="subscribe__checkbox"
+          className="Subscribe__checkbox"
         />
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
       </label>
     </div>
-    <div className="subscribe__footer">
+    <div className="Subscribe__footer">
       <Button type="submit">Sign Me Up</Button>
       <Social />
     </div>

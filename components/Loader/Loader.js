@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import css from "./Loader.scss";
+import css from './Loader.scss';
 
 const Loader = () => (
   <div className="loader__bg">

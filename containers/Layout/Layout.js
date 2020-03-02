@@ -1,25 +1,24 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
-import Header from '@/components/Header/Header'
-import NavBar from '@/components/NavBar/NavBar'
-import Footer from '@/components/Footer/Footer'
-import Loader from '@/components/Loader/Loader'
+import Header from '@/components/Header/Header';
+import NavBar from '@/components/NavBar/NavBar';
+import Footer from '@/components/Footer/Footer';
+import Loader from '@/components/Loader/Loader';
 
-import { selectIsLoading, selectIsLoaded } from '@/stores/app/selectors'
+import { selectIsLoading, selectIsLoaded } from '@/stores/app/selectors';
 import './Layout.scss';
-
 
 class Layout extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    const { isLoading } = this.props
+    const { isLoading } = this.props;
 
     return (
-      <div className="layout">
+      <div className="Layout">
         <Header
           title="7 Eleven"
           description="Page MetaData here"
@@ -27,23 +26,20 @@ class Layout extends React.Component {
         />
         <NavBar />
 
-        <main className="site-main">
+        <main className="SiteMain">
           {isLoading && <Loader />}
           {this.props.children}
         </main>
 
         <Footer />
       </div>
-    )
+    );
   }
 }
 
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isLoading: selectIsLoading(state),
-  isLoaded: selectIsLoaded(state)
-})
+  isLoaded: selectIsLoaded(state),
+});
 
-export default connect(
-  mapStateToProps,
-)(Layout)
+export default connect(mapStateToProps)(Layout);

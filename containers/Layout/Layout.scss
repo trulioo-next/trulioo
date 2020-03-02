@@ -1,20 +1,16 @@
 // Main Site Layout
 //
 
-@import "~@/static/scss/variables";
-@import "~@/static/scss/fonts";
+@import '~@/static/scss/variables';
+@import '~@/static/scss/fonts';
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-
-@import "~bootstrap/scss/reboot";
+@import '~bootstrap/scss/bootstrap';
 
 html,
 body,
 #__next {
-	height: 100%;
-	width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -25,17 +21,21 @@ body {
 }
 
 img {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
-.layout {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
+.Layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 1450px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
 }
 
-.site-main {
-	flex: 1 1 auto;
+.SiteMain {
+  flex: 1 1 auto;
 }
