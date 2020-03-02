@@ -194,6 +194,7 @@
     &.-has-grandchildren {
       left: 0;
       right: 0;
+      overflow: hidden;
 
       #{$block}__submenu:not(.-nested) {
         @include make-row();
@@ -223,6 +224,12 @@
     &:after {
       left: 100%;
       width: 100vw;
+    }
+
+    .Button {
+      background-color: $white;
+      color: $black;
+      border: solid 1px $black;
     }
   }
 }
@@ -453,6 +460,17 @@
 }
 
 .Search {
+  &__collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: $white;
+    box-shadow: 0 4px 8px 0 rgba($dark-gray, 0.25);
+    padding: 16px 16px 20px;
+    overflow: hidden;
+  }
+
   &__inputGroup {
     position: relative;
     display: flex;
@@ -461,6 +479,12 @@
     border: solid 1px #c7c7c7;
     border-radius: 16px;
     overflow: hidden;
+
+    @include media-breakpoint-up(lg) {
+      border-radius: 0;
+      border: 0;
+      box-shadow: 0 3px 6px 0 rgba($dark-gray, 0.25);
+    }
   }
 
   &__icon {
@@ -485,8 +509,21 @@
     font-size: 12px;
     color: $black;
 
+    @include media-breakpoint-up(lg) {
+      height: auto;
+      padding: 16px 42px;
+      line-height: 24px;
+      font-weight: 500;
+      font-size: 20px;
+      width: 100%;
+    }
+
     &::placeholder {
       color: $blue;
+
+      @include media-breakpoint-up(lg) {
+        color: $dark-gray;
+      }
     }
   }
 }

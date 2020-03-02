@@ -7,12 +7,6 @@ import DesktopNav from './components/DesktopNav';
 import OffCanvasNav from './components/OffCanvasNav';
 import Toolbar from './components/Toolbar';
 
-/**
- *
- * TODO: Search toggle dropdown
- *
- */
-
 const NavBar = () => (
   <nav className="SiteHeader">
     <Branding />

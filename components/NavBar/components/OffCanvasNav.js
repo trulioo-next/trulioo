@@ -8,8 +8,8 @@ import ChevronIcon from '@/static/images/caret-down.svg';
 
 import linkData from '../placeholder-links.json'; // replace with real data later
 
-const RewardsArea = () => (
-  <div className="OffCanvas__rewards">
+const RewardsArea = props => (
+  <motion.div className="OffCanvas__rewards" variants={props.variants}>
     <h2 className="OffCanvas__rewardsHeading">Welcome back, Jane Smith.</h2>
     <div className="OffCanvas__rewardsInfo">
       <p>Earn 7Rewards points for every purchase.</p>
@@ -26,7 +26,7 @@ const RewardsArea = () => (
         </Link>
       </li>
     </ul>
-  </div>
+  </motion.div>
 );
 
 const NavToggle = props => (
@@ -140,12 +140,33 @@ const OffCanvasNav = props => {
       x: 0,
       transition: {
         x: { stiffness: 1000, velocity: -100 },
+        staggerChildren: 0.07,
+        delayChildren: 0.1,
       },
     },
     closed: {
       x: '-100%',
       transition: {
         x: { stiffness: 1000 },
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const sectionVariant = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 1000, velocity: -100 },
+      },
+    },
+    closed: {
+      y: 10,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 },
       },
     },
   };
@@ -162,30 +183,34 @@ const OffCanvasNav = props => {
           className="OffCanvas__toggle -close"
           onClick={() => toggleOpen()}
         ></button>
-        <RewardsArea />
-        <Accordion as="ul" className="OffCanvas__nav">
-          {linkData.map((item, i) => (
-            <NavItem item={item} key={`offcanvas-item-${i}`} i={i} />
-          ))}
-        </Accordion>
-        <form className="OffCanvas__search">
-          <div className="Search__inputGroup">
-            <label htmlFor="offcanvas-search" className="Search__icon">
-              <SearchIcon />
-            </label>
+        <RewardsArea variants={sectionVariant} />
+        <motion.div variants={sectionVariant}>
+          <Accordion as="ul" className="OffCanvas__nav">
+            {linkData.map((item, i) => (
+              <NavItem item={item} key={`offcanvas-item-${i}`} i={i} />
+            ))}
+          </Accordion>
+        </motion.div>
+        <motion.div variants={sectionVariant}>
+          <form className="OffCanvas__search">
+            <div className="Search__inputGroup">
+              <label htmlFor="offcanvas-search" className="Search__icon">
+                <SearchIcon />
+              </label>
+              <input
+                id="offcanvas-search"
+                type="text"
+                className="Search__input"
+                placeholder="Search Site"
+              />
+            </div>
             <input
-              id="offcanvas-search"
-              type="text"
-              className="Search__input"
-              placeholder="Search Site"
+              type="submit"
+              className="Search__submit sr-only"
+              value="Search"
             />
-          </div>
-          <input
-            type="submit"
-            className="Search__submit sr-only"
-            value="Search"
-          />
-        </form>
+          </form>
+        </motion.div>
       </motion.div>
     </motion.div>
   );

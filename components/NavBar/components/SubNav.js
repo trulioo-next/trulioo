@@ -2,9 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-/**
- * TODO: Add View Full Menu button on Menu nav.
- */
+import Button from '@/components/Button/Button';
 
 const listVariants = {
   open: {
@@ -125,6 +123,16 @@ const SubNav = props => {
             </motion.li>
           );
         })}
+        {props.parent.label === 'Menu' && (
+          <motion.li
+            variants={itemVariants}
+            className="SiteHeader__item -nested col col-12 text-center"
+          >
+            <Button href="/menu" as="/menu">
+              View Full Menu
+            </Button>
+          </motion.li>
+        )}
       </motion.ul>
     </motion.div>
   );

@@ -45,7 +45,7 @@ const TopLevelLink = props => {
             <CaretIcon />
           </motion.span>
         </motion.button>
-        <SubNav i={props.i} items={item.subnav} />
+        <SubNav i={props.i} items={item.subnav} parent={item} />
       </motion.li>
     );
   }
