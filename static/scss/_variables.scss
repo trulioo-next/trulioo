@@ -1,22 +1,78 @@
+/**
+ * Variables
+ */
 
+/**
+ * Bootstrap Settings
+ *
+ * Refer to https://github.com/twbs/bootstrap/blob/master/scss/_variables.scss
+ * for full list of variables to override.
+ *
+ */
 
+// Colors
+$light-green: #a0ca2e;
+$dark-green: #1b8065;
+$orange: #ef8113;
+$red: #8d1f27;
+$blue: #2894d4;
+$white: #fff;
+$light-gray: #f0f1f2;
+$gray: #7e7e7e;
+$dark-gray: #2f2f2f;
+$black: #000;
 
-// 
-// Colors 
-//
-$primary: #eee;
-$yellow:  #eeb744;
-$green: #46b941;
-$applePay: #464646;
+$colors: (
+  "blue": $blue,
+  "red": $red,
+  "orange": $orange,
+  "light-green": $light-green,
+  "dark-green": $dark-green,
+  "light-gray": $light-gray,
+  "gray": $gray,
+  "dark-gray": $dark-gray,
+  "white": $white,
+  "black": $black
+);
 
+$primary: $light-green;
+$secondary: $orange;
+$success: $dark-green;
+$info: $blue;
+$warning: $orange;
+$danger: $red;
+$light: $light-gray;
+$dark: $dark-gray;
 
+// Body
+$body-bg: $light-gray;
+$body-color: $black;
 
-//
-// Mixins 
-//
-@mixin transitionAll($speed) {
-    -webkit-transition: -webkit-transform $speed ease-in-out;
-    -moz-transition: -moz-transform $speed ease-in-out;
-    -o-transition: -o-transform $speed ease-in-out;
-    transition: all $speed ease-in-out;
-}
+// Type
+$font-family-sans-serif: "Lab Grotesque", sans-serif;
+$font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-base: $font-family-sans-serif;
+
+// Grid
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1316px
+);
+
+$grid-gutter-width: 10px;
+
+// Links
+$link-color: inherit;
+$link-hover-color: $light-green;

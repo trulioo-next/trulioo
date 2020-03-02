@@ -1,0 +1,26 @@
+@import '~@/static/scss/variables';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.Button {
+  display: inline-block;
+  appearance: none;
+  border-radius: 2px;
+  border: 0;
+  background-color: $black;
+  padding: 3px 16px;
+  line-height: 9px;
+  font-size: 7.8px;
+  font-weight: 500;
+  color: $white;
+  text-transform: uppercase;
+
+  @include media-breakpoint-up(lg) {
+    border-radius: 8px;
+    padding: 20px 36px;
+    line-height: 24px;
+    font-size: 20px;
+  }
+}

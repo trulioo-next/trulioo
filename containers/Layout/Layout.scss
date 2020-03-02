@@ -1,30 +1,41 @@
 // Main Site Layout
 //
 
-* {
-	box-sizing: border-box;
-}
+@import '~@/static/scss/variables';
+@import '~@/static/scss/fonts';
+
+@import '~bootstrap/scss/bootstrap';
 
 html,
 body,
 #__next {
-	height: 100%;
-	width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-	  "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-	  "Helvetica Neue", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-family: $font-family-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
-.layout {
-	display: "flex";
-	flexDirection: "column";
-	height: "100%";
-	width: "100%";
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 1450px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.SiteMain {
+  flex: 1 1 auto;
 }

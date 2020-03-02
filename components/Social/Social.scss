@@ -1,0 +1,21 @@
+.Social {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+
+  &__item {
+    display: block;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  &__link {
+    display: inline-block;
+    height: 11px;
+
+    svg {
+      height: 100%;
+    }
+  }
+}
