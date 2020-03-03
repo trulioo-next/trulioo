@@ -11,7 +11,6 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-     
   }
 
   render() {
@@ -20,7 +19,6 @@ class Index extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => ({
 })
