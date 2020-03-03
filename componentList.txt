@@ -1,0 +1,138 @@
+
+
+## Dynamic Components | These are based on new components Module 
+# 
+  
+1. Slider Block
+	- Image
+	- Title 
+	- Subtitle 
+	- Call to action button 
+		- Title 
+		- Url 
+		- Target
+
+
+2. Hero Block 
+    - Image 
+    - Title 
+    - Content
+    - Call to action button 
+		- Title 
+		- Url 
+		- Target
+
+3. Call To Action Block
+   - Image 
+   - Image Position (left,right)
+   - Title
+   - Content
+   - Call to action button 
+		- Title 
+		- Url 
+		- Target
+   - Background colour
+
+4. FAQ Block
+   - Title 
+   - Subtitle 
+   - Repeater Field 
+     - Title 
+     - Content   
+
+5. Get Dilivery Address Block
+   - Title 
+   - Content
+   - Form will be added in the template 
+
+6. Post Grid Block
+   - Select post type
+   - Select column count (2,3,4,5,6)
+     - Block title 
+     - Block Excerpt 
+     - Block url 
+     - block caleries (if applicable)
+
+7. Video Post Grid Block 
+   - Image Thumbnail 
+   - Video Path
+   - Title 
+
+8. Category Grid Block
+   - Image 
+   - Title 
+   - Slug 
+
+9. Full Image Call To Action Block
+   - Image 
+   - Title 
+   - Excerpt 
+   - Call to action button 
+		- Title 
+		- Url 
+		- Target
+   - Content Position 
+
+10. Product Slider Block
+   - Select Product Types 
+     - Image 
+     - Title 
+     - Bonus Points 
+     - Expires 
+
+11. Wysiwyg Block 
+   - Title 
+   - Content (Wysiwyg Editor)    
+   - Call to action button 
+		- Title 
+		- Url 
+		- Target           
+
+12. Video Block 
+   - Title
+   - Video Thumbnail 
+   - Video Path 
+
+13. Three Column Grid Block
+   - Columns Repeater 
+     - Image 
+     - Title 
+     - Subtitle 
+     - Background colour
+     - Call to action button 
+		- Title 
+		- Url 
+		- Target 
+
+14. Title Block 
+   - Title 
+   - Subtitle 
+
+15. Subscribe Block
+  - Image 
+  - Content
+  - Title 
+  - Form is automated
+
+16. Whats New Block 
+  - Select from custom post type 
+    - Image 
+    - Date
+    - Title
+    - Likes ??
+
+17. Code Editor Block 
+  - Wysiwyg Editor | Full features 
+    - This exports anything in the content area 
+       - Markup, styles, images 
+
+18. Short Code Block 
+   - Wysiwyg Editor 
+   - Enter Short Code to render serverside
+
+19. Reusable Component Block 
+   - Select from pre-built Reusable Custom Post Type Components 
+   - These can be grouped components 
+
+
+

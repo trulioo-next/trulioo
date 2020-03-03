@@ -1,0 +1,27 @@
+/**
+ * Fonts
+ *
+ * @font-face rules for custom fonts.
+ */
+
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  src: url('/static/fonts/LabGrotesque-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  src: url('/static/fonts/LabGrotesque-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  src: url('/static/fonts/LabGrotesque-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}

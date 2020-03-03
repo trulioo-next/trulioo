@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
+import SectionMaker from "../../components/SectionMaker";
+
 import Error from "next/error";
 
 import {

@@ -2,54 +2,48 @@
  * Set and export Next configurations with PWA optimizations (workbox/webpack)
  **/
 
-const dotEnvResult = require("dotenv").config()
+const dotEnvResult = require("dotenv").config();
 const webpack = require("webpack");
-const withSass = require("@zeit/next-sass")
-const withCss = require("@zeit/next-css")
+const withSass = require("@zeit/next-sass");
+const withCss = require("@zeit/next-css");
+const path = require("path");
 
-if (process.env.NODE_ENV === 'development') {
-    process.traceDeprecation = true
+if (process.env.NODE_ENV === "development") {
+  process.traceDeprecation = true;
 }
 
 const nextConfig = {
-    poweredByHeader: false,
-    // target: 'serverless',
-    webpack: (config, {buildId, dev, isServer}) => {
+  poweredByHeader: false,
+  // target: 'serverless',
+  webpack: (config, { buildId, dev, isServer }) => {
+    config.node = { fs: "empty", net: "empty", tls: "empty" };
 
-        config.node = {fs: 'empty', net: 'empty', tls: 'empty'}
+    config.resolve.alias["@"] = path.resolve(__dirname);
 
-        config.module.rules.push({
-            test: /\.svg$/,
-            use: [
-                {
-                    loader: "@svgr/webpack",
-                    options: {
-                        svgoConfig: {
-                            plugins: {
-                                removeViewBox: false
-                            }
-                        },
-                        titleProp: true
-                    }
-                }
-            ]
-        });
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            svgoConfig: {
+              plugins: [{ removeViewBox: false }]
+            },
+            titleProp: true
+          }
+        }
+      ]
+    });
 
-        // Here goes env that are available in the client side
-        config.plugins.push(
-            new webpack.EnvironmentPlugin([
-                'VERSION',
-                'ROOT_URL'
-            ]));
+    // Here goes env that are available in the client side
+    config.plugins.push(new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL"]));
 
-        return config
-    },
+    return config;
+  },
 
-    
-
-    env: {
-        ...dotEnvResult
-    }
+  env: {
+    ...dotEnvResult
+  }
 };
 
 module.exports = withCss(withSass(nextConfig));
