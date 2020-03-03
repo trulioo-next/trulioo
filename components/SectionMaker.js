@@ -11,10 +11,10 @@ const SectionMaker = ({type, params}) => {
       return <SectionHero {...params} />;
 
     case "SectionSlider":
-      return <SectionSlider {...params} />;  
+      return <SectionSlider {...params} />;
 
     case "SectionCallToAction":
-      return <SectionCallToAction {...params} />;     
+      return <SectionCallToAction {...params} />;   
 
   }
 };
