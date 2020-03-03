@@ -7,7 +7,7 @@ import Header from '../../components/Header/Header'
 import { connect } from 'react-redux'
 import { inspect } from 'util'
 
-import './ContactPage.scss';
+// import './ContactPage.scss';
 
 class ContactPage extends React.Component {
 
