@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Header from '@/components/Header/Header';
-import NavBar from '@/components/NavBar/NavBar';
-import Footer from '@/components/Footer/Footer';
-import Loader from '@/components/Loader/Loader';
+import Header from '@/components/Header';
+import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
+import Loader from '@/components/Loader';
 
 import { selectIsLoading, selectIsLoaded } from '@/stores/app/selectors';
 import './Layout.scss';
