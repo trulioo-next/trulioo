@@ -18,13 +18,14 @@
     - Title 
     - Content
     - Call to action button 
-		- Title 
-		- Url 
-		- Target
+  		- Title 
+  		- Url 
+  		- Target
 
 3. Call To Action Block
    - Image 
    - Image Position (left,right)
+   - Content position : Radio (top,left,center)
    - Title
    - Content
    - Call to action button 
@@ -40,7 +41,7 @@
      - Title 
      - Content   
 
-5. Get Dilivery Address Block
+5. Get Delivery Address Block
    - Title 
    - Content
    - Form will be added in the template 
@@ -56,6 +57,7 @@
 7. Video Post Grid Block 
    - Image Thumbnail 
    - Video Path
+   - or image 
    - Title 
 
 8. Category Grid Block
@@ -79,6 +81,16 @@
      - Title 
      - Bonus Points 
      - Expires 
+
+
+10a). Product Slider 7 Rewards 
+    - API Call to 7 wards  
+     - Image 
+     - Title 
+     - Bonus Points 
+     - Expires 
+
+
 
 11. Wysiwyg Block 
    - Title 
@@ -114,7 +126,7 @@
   - Title 
   - Form is automated
 
-16. Whats New Block 
+16. Whats New Block (might not build)
   - Select from custom post type 
     - Image 
     - Date

@@ -1,8 +1,8 @@
 import React from "react";
 
-import SectionHero from "./SectionHero";
-import SectionSlider from "./SectionSlider";
-import SectionCallToAction from './SectionCallToAction';
+import SectionHero from "./SectionComponents/SectionHero";
+import SectionSlider from "./SectionComponents/SectionSlider";
+import SectionCallToAction from './SectionComponents/SectionCallToAction';
 
 const SectionMaker = ({type, params}) => {
   switch (type) {
