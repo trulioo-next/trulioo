@@ -36,14 +36,14 @@ const NestedSubNav = props => {
 
   return (
     <motion.ul variants={listVariants} className="SiteHeader__submenu -nested">
-      {props.items.map(({ href, as, label }, index) => (
+      {props.items.map(({ name, url }, index) => (
         <motion.li
           variants={itemVariants}
           key={`subnav-${parentIndex}-nested-${nestedIndex}-item-${index}`}
           className="SiteHeader__item -nested"
         >
-          <Link href={href} as={as}>
-            <a>{label}</a>
+          <Link href={url} as={url}>
+            <a>{name}</a>
           </Link>
         </motion.li>
       ))}
@@ -55,6 +55,7 @@ const SubNav = props => {
   const items = props.items;
   let subnavIndex = props.i;
   let hasThirdLevel = false;
+ 
 
   const subMenuAnimate = {
     open: {
@@ -81,7 +82,7 @@ const SubNav = props => {
     l = items.length;
 
   for (i = 0; i < l; i += 1) {
-    if (items[i].subnav) {
+    if (items[i].children.length > 0) {
       hasThirdLevel = true;
       break;
     }
@@ -97,7 +98,7 @@ const SubNav = props => {
       }
     >
       <motion.ul variants={listVariants} className="SiteHeader__submenu">
-        {items.map(({ href, as, label, subnav }, index) => {
+        {items.map(({ name, url, children }, index) => {
           return (
             <motion.li
               variants={itemVariants}
@@ -108,14 +109,14 @@ const SubNav = props => {
                   : 'SiteHeader__item -nested'
               }
             >
-              <Link href={href} as={as}>
+              <Link href={url} as={url}>
                 <a className={hasThirdLevel ? 'SiteHeader__subnavHeading' : ''}>
-                  {label}
+                  {name}
                 </a>
               </Link>
-              {subnav && (
+              {children.length > 0 && (
                 <NestedSubNav
-                  items={subnav}
+                  items={children}
                   i={index}
                   parentIndex={subnavIndex}
                 />
@@ -123,7 +124,7 @@ const SubNav = props => {
             </motion.li>
           );
         })}
-        {props.parent.label === 'Menu' && (
+        {props.parent.name === 'Menu' && (
           <motion.li
             variants={itemVariants}
             className="SiteHeader__item -nested col col-12 text-center"

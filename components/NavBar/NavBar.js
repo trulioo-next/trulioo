@@ -7,11 +7,11 @@ import DesktopNav from './components/DesktopNav';
 import OffCanvasNav from './components/OffCanvasNav';
 import Toolbar from './components/Toolbar';
 
-const NavBar = () => (
+const NavBar = (data) => (
   <nav className="SiteHeader">
     <Branding />
 
-    <DesktopNav />
+    <DesktopNav data={data} />
     <OffCanvasNav />
 
     <Toolbar />
