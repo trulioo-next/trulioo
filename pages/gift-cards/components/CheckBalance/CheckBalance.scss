@@ -1,0 +1,16 @@
+@import '~@/static/scss/variables';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.CheckBalance {
+  &__section {
+    @include media-breakpoint-up(lg) {
+      .section-wrapper {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  }
+}

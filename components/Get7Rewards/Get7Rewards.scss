@@ -1,0 +1,47 @@
+@import '~@/static/scss/variables';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.Get7Rewards {
+  &__section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    display: flex;
+    background-position: 37.5% center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    min-height: 160vw/375 * 100;
+
+    @include media-breakpoint-up(lg) {
+      background-position: left top;
+      min-height: 0;
+      height: 620vw/1440 * 100;
+      max-height: 620px;
+      line-height: 28px;
+    }
+  }
+
+  &__heading {
+    font-size: 16px;
+    margin-bottom: 12px;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+  }
+
+  &__subheading {
+    font-size: 11px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 18px;
+      margin-bottom: 36px;
+    }
+  }
+}
