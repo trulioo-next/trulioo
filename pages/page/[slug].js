@@ -19,14 +19,14 @@ const Page = (props) => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />
   }
- 
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(reqPageDataAction({ payload: props.query.slug }));
     }, []);
   
-    const pageData = useSelector(state => pageDataSelector(state));
-
+   const pageData = useSelector(state => pageDataSelector(state));
+ 
    return ( 
         <Layout>
         <Header title="" />

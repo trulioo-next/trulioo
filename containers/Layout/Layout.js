@@ -21,8 +21,8 @@ class Layout extends React.Component {
   }
 
   componentDidMount() {
-    console.log('HEADER DATA :: ', this.props.headerData);
-    console.log('FOOTER DATA :: ', this.props.footerData);
+    // console.log('HEADER DATA :: ', this.props.headerData);
+    // console.log('FOOTER DATA :: ', this.props.footerData);
   }
 
   render() {
