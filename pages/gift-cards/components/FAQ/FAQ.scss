@@ -1,0 +1,26 @@
+@import '~@/static/scss/variables';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.FAQ {
+  &__section {
+    background-color: #2894D4;
+    color: white;
+    padding-left: 0;
+    padding-right: 0;
+
+    @include media-breakpoint-down(md) {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+
+    .container {
+      @include media-breakpoint-down(md) {
+        padding-left: 36px;
+        padding-right: 36px;
+      }
+    }
+  }
+}

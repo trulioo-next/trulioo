@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Button from '@/components/Button/Button';
-import Social from '@/components/Social/Social';
+import Button from '@/components/Button';
+import Social from '@/components/Social';
 
 import './Subscribe.scss';
 

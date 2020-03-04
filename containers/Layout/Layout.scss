@@ -6,18 +6,32 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+@import '~@/static/scss/type';
+
+@import '~@/static/scss/custom/modal';
+@import '~@/static/scss/custom/accordion';
+
 html,
 body,
 #__next {
   height: 100%;
   width: 100%;
+  overflow: auto;
+}
+
+html,
+body {
+  font-size: 0.75rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+  }
 }
 
 body {
   font-family: $font-family-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
 }
 
 img {
@@ -28,8 +42,9 @@ img {
 .Layout {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
   width: 100%;
+  min-height: 100vh;
   max-width: 1450px;
   margin-left: auto;
   margin-right: auto;

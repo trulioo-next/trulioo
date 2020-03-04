@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import Link from 'next/link';
 
@@ -8,15 +9,19 @@ const Button = props => {
     if (props.as) {
       return (
         <Link as={props.as} href={props.href}>
-          <a className="Button">{props.children}</a>
+          <a className={classNames(props.className, 'Button')}>
+            {props.children}
+          </a>
         </Link>
       );
     }
 
-    return <a {...props} className="Button" />;
+    return <a {...props} className={classNames(props.className, 'Button')} />;
   }
 
-  return <button {...props} className="Button" />;
+  return (
+    <button {...props} className={classNames(props.className, 'Button')} />
+  );
 };
 
 export default Button;
