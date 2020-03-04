@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
  
 
-const SectionSlider = () => {
+const SectionSlider = (props) => {
+
+	// console.log('SECTION SLIDER  PROPS :: ', props )
 
     return <div>Slider Component</div>;
 };

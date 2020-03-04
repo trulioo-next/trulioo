@@ -6,9 +6,14 @@ export default async (req, res) => { // http://seven-eleven-wp.local/wp-json
   try {
     
     const body = JSON.parse(req.body)
-    // console.log('REQ BODY ', body.payload )
+    console.log('REQ BODY ', body  )
+    let id = 283;
+
+    if(body.payload) {
+      id = parseFloat(body.payload)
+    }
     // TODO: Normalise page ID : 
-    const response = await fetch(ENDPOINT_URL+'/api/v1/page/'+283,
+    const response = await fetch(ENDPOINT_URL+'/api/v1/page/'+id,
      {
        method: 'GET',
        headers: {

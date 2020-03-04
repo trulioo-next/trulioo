@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from "../../components/SectionMaker";
+import Layout from '../../containers/Layout/Layout'
+import Header from '../../components/Header/Header'
 
 import Error from "next/error";
 
@@ -24,11 +26,18 @@ const Page = (props) => {
     }, []);
   
     const pageData = useSelector(state => pageDataSelector(state));
-    console.log('CLIENT SIDE PAGE DATA ', pageData )
 
-  return (<>
-    Page Data Here
-    </>
+   return ( 
+        <Layout>
+        <Header title="" />
+        { pageData.acf_data &&
+          pageData.acf_data.components.map((section, sectionKey) =>
+            <SectionMaker type={section.acf_fc_layout} params={section} key={sectionKey} />
+          )
+        }
+      </Layout>
+
+
   );
 };
 

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
  
 
-const SectionHero = () => {
+const SectionHero = (props) => {
+
+	// console.log('SECTION HERO PROPS :: ', props )
 
     const [loaded, setLoaded] = useState(false);
 

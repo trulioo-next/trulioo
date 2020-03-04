@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
  
 
-const SectionCallToAction = () => {
+const SectionCallToAction = (props) => {
 
-    return <div>Slider Component</div>;
+	// console.log('CALL TO ACTION PROPS :: ', props )
+
+    return <div>Call To action Component</div>;
 };
 
 SectionCallToAction.defaultProps = {};

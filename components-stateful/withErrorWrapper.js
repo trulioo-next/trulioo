@@ -6,7 +6,6 @@ const withError = Component => {
 
   class ErrorComponent extends React.Component {
 
-
     static async getInitialProps(ctx) {
       const props = await Component.getInitialProps(ctx);
       const { statusCode } = ctx.res || {};

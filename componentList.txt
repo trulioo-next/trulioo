@@ -112,9 +112,9 @@
      - Subtitle 
      - Background colour
      - Call to action button 
-		- Title 
-		- Url 
-		- Target 
+  		- Title 
+  		- Url 
+  		- Target 
 
 14. Title Block 
    - Title 
