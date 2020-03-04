@@ -56,15 +56,28 @@ const TopLevelLink = props => {
 };
 
 const PrimaryNav = (data) => {
-
   let LINKS = data.data.data;
+
   
+   let LINKS = false
+   if(data && data.data && data.data.data) {
+      LINKS = data.data.data;
+   }
+   // console.log('DATA ', data )
+   // 
+
   return (
+    <>
+    { LINKS && 
     <ul className="SiteHeader__menu -desktop">
       {LINKS.map((link, i) => (
         <TopLevelLink key={`nav-item-${i}`} i={i} item={link} />
       ))}
     </ul>
+    }
+     
+    </>
+
   );
 };
 
