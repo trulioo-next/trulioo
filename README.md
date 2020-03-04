@@ -36,7 +36,6 @@ cp sample.env .env
 3. Run `yarn install` to install all dependencies.
 4. Run `yarn dev` to start the develoment server.
 
-
 ## Git workflow
 
 This project tries to follow the following git workflow pattern:
