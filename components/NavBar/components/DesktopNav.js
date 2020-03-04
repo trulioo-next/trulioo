@@ -56,9 +56,7 @@ const TopLevelLink = props => {
 };
 
 const PrimaryNav = (data) => {
-  let LINKS = data.data.data;
-
-  
+   
    let LINKS = false
    if(data && data.data && data.data.data) {
       LINKS = data.data.data;
