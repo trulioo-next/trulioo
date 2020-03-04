@@ -7,10 +7,6 @@ import SubNav from './SubNav';
 import CaretIcon from '@/static/images/caret-down.svg';
 import linkData from '../placeholder-links.json'; // replace with real data later
 
-const links = linkData.map(link => {
-  link.key = `nav-link-${link.label}`;
-  return link;
-});
 
 const TopLevelLink = props => {
   let item = props.item;
@@ -61,8 +57,7 @@ const TopLevelLink = props => {
 
 const PrimaryNav = (data) => {
 
-  
-   let LINKS = data.data.data;
+  let LINKS = data.data.data;
   
   return (
     <ul className="SiteHeader__menu -desktop">
