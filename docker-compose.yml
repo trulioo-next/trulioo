@@ -4,7 +4,7 @@ services:
   dev:
     build:
       context: .
-    image: ourafront
+    image: sevenEleven
     volumes:
       - nodemodules:/usr/src/node_modules
       - .:/usr/src

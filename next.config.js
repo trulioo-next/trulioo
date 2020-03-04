@@ -3,13 +3,14 @@
  **/
 
 const dotEnvResult = require("dotenv").config();
+const Dotenv = require('dotenv-webpack')
 const webpack = require("webpack");
 const withSass = require("@zeit/next-sass");
 const withCss = require("@zeit/next-css");
 const path = require("path");
 
 if (process.env.NODE_ENV === "development") {
-  process.traceDeprecation = true;
+   process.traceDeprecation = true;
 }
 
 const nextConfig = {
@@ -35,8 +36,14 @@ const nextConfig = {
       ]
     });
 
+    // Read the .env file
+    config.plugins.push(new Dotenv({
+        path: path.join(__dirname, 'sample.env'),
+        systemvars: true
+    }))
+
     // Here goes env that are available in the client side
-    config.plugins.push(new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL"]));
+    config.plugins.push(new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL", "ENDPOINT_URL"]));
 
     return config;
   },

@@ -16,6 +16,7 @@
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
     "dotenv": "8.1.0",
+    "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
     "framer-motion": "^1.8.4",
     "helmet": "^3.21.2",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@storybook/react": "^5.2.3",
     "@svgr/webpack": "^5.2.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
@@ -47,8 +49,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
-    "prettier": "1.19.1",
-    "@storybook/react": "^5.2.3"
+    "prettier": "1.19.1"
   },
   "browserslist": [
     "defaults"
