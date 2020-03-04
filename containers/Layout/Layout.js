@@ -35,7 +35,7 @@ class Layout extends React.Component {
           description="Page MetaData here"
           canonical="http://7-eleven.ca"
         />
-        <NavBar />
+        <NavBar data={this.props.headerData} />
 
         <main className="SiteMain">
           {isLoading && <Loader />}

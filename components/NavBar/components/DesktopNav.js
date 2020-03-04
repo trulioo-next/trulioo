@@ -27,7 +27,7 @@ const TopLevelLink = props => {
     },
   };
 
-  if (item.subnav) {
+  if (item.children.length > 0 ) {
     return (
       <motion.li
         initial={false}
@@ -37,7 +37,7 @@ const TopLevelLink = props => {
         onHoverEnd={() => toggleOpen()}
       >
         <motion.button className="SiteHeader__toggle -dropdown">
-          {item.label}
+          {item.name}
           <motion.span
             className="SiteHeader__indicator"
             variants={indicatorVariants}
@@ -45,24 +45,28 @@ const TopLevelLink = props => {
             <CaretIcon />
           </motion.span>
         </motion.button>
-        <SubNav i={props.i} items={item.subnav} parent={item} />
+        <SubNav i={props.i} items={item.children} parent={item} />
       </motion.li>
     );
   }
 
   return (
     <li className="SiteHeader__item">
-      <Link href={item.href} as={item.as}>
-        <a className="SiteHeader__link">{item.label}</a>
+      <Link href={item.url} as={item.url}>
+        <a className="SiteHeader__link">{item.name}</a>
       </Link>
     </li>
   );
 };
 
-const PrimaryNav = () => {
+const PrimaryNav = (data) => {
+
+  
+   let LINKS = data.data.data;
+  
   return (
     <ul className="SiteHeader__menu -desktop">
-      {links.map((link, i) => (
+      {LINKS.map((link, i) => (
         <TopLevelLink key={`nav-item-${i}`} i={i} item={link} />
       ))}
     </ul>
