@@ -66,7 +66,7 @@ const PrimaryNav = (data) => {
    if(data && data.data && data.data.data) {
       LINKS = data.data.data;
    }
-   console.log('DATA ', data )
+   // console.log('DATA ', data )
   return (
     <>
     { LINKS && 

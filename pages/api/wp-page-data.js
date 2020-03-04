@@ -20,7 +20,8 @@ export default async (req, res) => { // http://seven-eleven-wp.local/wp-json
          'Content-Type': 'application/json'
        }
      })
-   
+
+     
      res.json(response)
      return
   } catch(error) {

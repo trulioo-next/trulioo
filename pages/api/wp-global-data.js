@@ -1,9 +1,11 @@
 const fetch = require('../../utils/fetch')
 
-const ENDPOINT_URL = 'https://dev3.7eleven.ca/wp-json'; // process.env.ENDPOINT_URL
+const ENDPOINT_URL =  'https://dev3.7eleven.ca/wp-json';  // process.env.ENDPOINT_URL
+ 
 
 export default async (req, res) => {
   try {
+ 
     const response = await fetch(ENDPOINT_URL+'/global-settings/global',
      {
        method: 'GET',
@@ -12,6 +14,7 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
+ 
      res.json(response)
      return
   } catch(error) {
