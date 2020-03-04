@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import Subscribe from '@/components/Subscribe/Subscribe';
+import Subscribe from '@/components/Subscribe';
 
 import './Footer.scss';
 import linkData from './placeholder-links.json';
