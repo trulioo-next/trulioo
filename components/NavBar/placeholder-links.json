@@ -1,119 +1,112 @@
 [
   {
-    "href": "/7rewards",
-    "as": "/7rewards",
-    "label": "7Rewards",
-    "subnav": [
+    "url": "/7rewards",
+    "name": "7Rewards",
+    "children": [
       {
-        "href": "/7rewards/login",
-        "as": "/7rewards/login",
-        "label": "Login/Signup"
+        "url": "/7rewards/login",
+        "name": "Login/Signup",
+        "children": []
       },
       {
-        "href": "/7rewards/promos",
-        "as": "/7rewards/promos",
-        "label": "Promos"
+        "url": "/7rewards/promos",
+        "name": "Promos",
+        "children": []
       },
       {
-        "href": "/7rewards/about",
-        "as": "/7rewards/about",
-        "label": "About 7Rewards"
+        "url": "/7rewards/about",
+        "name": "About 7Rewards",
+        "children": []
       }
     ]
   },
   {
-    "href": "/menu",
-    "as": "/menu",
-    "label": "Menu",
-    "subnav": [
+    "url": "/menu",
+    "name": "Menu",
+    "children": [
       {
-        "href": "/menu/meals-snacks",
-        "as": "/menu/meals-snacks",
-        "label": "Meals & Snacks",
-        "subnav": [
+        "url": "/menu/meals-snacks",
+        "name": "Meals & Snacks",
+        "children": [
           {
-            "href": "/menu/meals-snacks/pizza",
-            "as": "/menu/meals-snacks/pizza",
-            "label": "Pizza"
+            "url": "/menu/meals-snacks/pizza",
+            "name": "Pizza",
+            "children": []
           },
           {
-            "href": "/menu/meals-snacks/hot-foods",
-            "as": "/menu/meals-snacks/hot-foods",
-            "label": "Hot Foods"
+            "url": "/menu/meals-snacks/hot-foods",
+            "name": "Hot Foods",
+            "children": []
           },
           {
-            "href": "/menu/meals-snacks/crispy-classic-chicken",
-            "as": "/menu/meals-snacks/crispy-classic-chicken",
-            "label": "Crispy Classic Chicken"
+            "url": "/menu/meals-snacks/crispy-classic-chicken",
+            "name": "Crispy Classic Chicken",
+            "children": []
           },
           {
-            "href": "/menu/meals-snacks/bakery",
-            "as": "/menu/meals-snacks/bakery",
-            "label": "Bakery"
+            "url": "/menu/meals-snacks/bakery",
+            "name": "Bakery",
+            "children": []
           },
           {
-            "href": "/menu/meals-snacks/snacks",
-            "as": "/menu/meals-snacks/snacks",
-            "label": "Snacks"
+            "url": "/menu/meals-snacks/snacks",
+            "name": "Snacks",
+            "children": []
           }
         ]
       },
       {
-        "href": "/menu/drinks",
-        "as": "/menu/drinks",
-        "label": "Drinks",
-        "subnav": [
+        "url": "/menu/drinks",
+        "name": "Drinks",
+        "children": [
           {
-            "href": "/menu/drinks/coffee-latte",
-            "as": "/menu/drinks/coffee-latte",
-            "label": "Coffee & Latte"
+            "url": "/menu/drinks/coffee-latte",
+            "name": "Coffee & Latte",
+            "children": []
           },
           {
-            "href": "/menu/drinks/bottled-canned",
-            "as": "/menu/drinks/bottled-canned",
-            "label": "Bottled & Canned"
+            "url": "/menu/drinks/bottled-canned",
+            "name": "Bottled & Canned",
+            "children": []
           },
           {
-            "href": "/menu/drinks/gulps",
-            "as": "/menu/drinks/gulps",
-            "label": "Gulps®"
+            "url": "/menu/drinks/gulps",
+            "name": "Gulps®",
+            "children": []
           }
         ]
       },
       {
-        "href": "/menu/specialty",
-        "as": "/menu/specialty",
-        "label": "Specialty",
-        "subnav": [
+        "url": "/menu/specialty",
+        "name": "Specialty",
+        "children": [
           {
-            "href": "/menu/specialty/taste-of-asia",
-            "as": "/menu/specialty/taste-of-asia",
-            "label": "A Taste of Asia"
+            "url": "/menu/specialty/taste-of-asia",
+            "name": "A Taste of Asia",
+            "children": []
           },
           {
-            "href": "/menu/specialty/healthy-to-go",
-            "as": "/menu/specialty/healthy-to-go",
-            "label": "Healthy To Go"
+            "url": "/menu/specialty/healthy-to-go",
+            "name": "Healthy To Go",
+            "children": []
           }
         ]
       },
       {
-        "href": "/menu/nutritionals",
-        "as": "/menu/nutritionals",
-        "label": "Nutritionals"
+        "url": "/menu/nutritionals",
+        "name": "Nutritionals",
+        "children": []
       }
     ]
   },
   {
-    "href": "/slurpee",
-    "as": "/slurpee",
-    "label": "Slurpee",
-    "subnav": false
+    "url": "/slurpee",
+    "name": "Slurpee",
+    "children": []
   },
   {
-    "href": "/delivery",
-    "as": "/delivery",
-    "label": "Delivery",
-    "subnav": false
+    "url": "/delivery",
+    "name": "Delivery",
+    "children": []
   }
 ]
