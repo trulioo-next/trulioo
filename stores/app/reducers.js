@@ -39,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state,
         globalData: action.payload
       }
-
+ 
 
     default:
       return state

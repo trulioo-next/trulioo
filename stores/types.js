@@ -16,4 +16,10 @@ export const PAGE_LOAD_REQUEST = 'page/load/PAGE_LOAD_REQUEST'
 export const PAGE_LOADED = 'page/load/PAGE_LOAD_REQUEST'
 export const PAGE_LOAD_ERROR = 'page/load/PAGE_LOAD_ERROR'
 
+
+// Page Level Events  nutritional
+export const NUTRITIONAL_LOAD_REQUEST = 'nutritional/load/NUTRITIONAL_LOAD_REQUEST '
+export const NUTRITIONAL_LOADED = 'nutritional/load/NUTRITIONAL_LOADED'
+export const NUTRITIONAL_ERROR = 'nutritional/load/NUTRITIONAL_ERROR'
+
  

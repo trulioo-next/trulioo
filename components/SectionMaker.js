@@ -30,7 +30,7 @@ const SectionMaker = ({type, params}) => {
       return <SectionFaq {...params} />; 
 
     case "section_get_delivery_address_block":
-      return <SectionGetDeliveryAddress {...params} />; 
+      return <SectionGetDeliveryAddress {...params} />;
 
     case "section_full_image_call_to_action_block":
       return <SectionFullImageCallToAction {...params} />; 
