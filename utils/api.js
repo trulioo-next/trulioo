@@ -12,10 +12,10 @@ async function parseJSON(response) {
 
 export default (function() {
 
-  const API_URL = 'https://7-11.rob24.now.sh'; //process.env.ROOT_URL;
-    
+  const API_URL = process.env.ROOT_URL;
 
-   console.log('API _ URL ::>> ', API_URL ) 
+  // 'https://7-11.rob24.now.sh'; 
+    
   function setOptions(method = 'GET', options = {}) {
     // console.log(options);
     const headers = options.headers || {}

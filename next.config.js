@@ -35,13 +35,7 @@ const nextConfig = {
         }
       ]
     });
-
-    // Read the .env file
-    config.plugins.push(new Dotenv({
-        path: path.join(__dirname, 'sample.env'),
-        systemvars: true
-    }))
-
+ 
     // Here goes env that are available in the client side
     config.plugins.push(new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL", "ENDPOINT_URL"]));
 
@@ -49,7 +43,7 @@ const nextConfig = {
   },
 
   env: {
-    ...dotEnvResult
+    ROOT_URL:"https://7-11.rob24.now.sh"
   }
 };
 
