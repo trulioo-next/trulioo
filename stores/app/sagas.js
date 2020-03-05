@@ -14,8 +14,7 @@ function* startup(payload) {
 
    
   try {
-    
-
+   
     // yield call(getGeolocation, payload.ip)
 
     const state = yield select((state) => state)
@@ -23,7 +22,7 @@ function* startup(payload) {
     const dataService = DataService(state)
 
     const response = yield call(dataService.getGlobalData, true)
-    console.log('RESONSE SAGA DATA  ', response)
+    // console.log('RESONSE SAGA DATA  ', response)
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
   } catch(err) {
