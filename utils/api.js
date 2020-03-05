@@ -12,8 +12,10 @@ async function parseJSON(response) {
 
 export default (function() {
 
-  const API_URL = 'https://dev3.7eleven.ca/wp-json'; //process.env.ROOT_URL;
+  const API_URL = 'https://dev3.7eleven.ca'; //process.env.ROOT_URL;
+    
 
+   console.log('API _ URL ::>> ', API_URL ) 
   function setOptions(method = 'GET', options = {}) {
     // console.log(options);
     const headers = options.headers || {}
