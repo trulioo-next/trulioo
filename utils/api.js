@@ -13,8 +13,6 @@ async function parseJSON(response) {
 export default (function() {
 
   const API_URL = process.env.ROOT_URL;
-
-  // 'https://7-11.rob24.now.sh'; 
     
   function setOptions(method = 'GET', options = {}) {
     // console.log(options);

@@ -41,9 +41,9 @@ const nextConfig = {
 
     return config;
   },
-
+ 
   env: {
-    ROOT_URL:"https://7-11.rob24.now.sh"
+    ...dotEnvResult
   }
 };
 
