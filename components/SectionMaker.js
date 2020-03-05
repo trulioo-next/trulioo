@@ -51,7 +51,10 @@ const SectionMaker = ({type, params}) => {
       return <SectionCodeEditor {...params} />; 
 
     case "reusable_component_block":
-      return <ReusableComponent {...params} />;                      
+      return <ReusableComponent {...params} />;
+
+    default :
+      return ""                      
 
   }
 };
