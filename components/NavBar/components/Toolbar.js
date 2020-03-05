@@ -1,10 +1,47 @@
 import React from 'react';
 import Link from 'next/link';
-import { motion, useCycle } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-import LocationIcon from '@/static/images/location.svg';
-import AccountIcon from '@/static/images/account.svg';
 import SearchIcon from '@/static/images/search.svg';
+
+const ToolbarItem = ({ url, children }) => (
+  <li className="SiteHeader__item">
+    <Link href={url}>
+      <a className="SiteHeader__link">{children}</a>
+    </Link>
+  </li>
+);
+
+const ToolbarIcon = ({ children }) => (
+  <span className="Toolbar__icon">{children}</span>
+);
+
+const ToolbarLabel = ({ children }) => (
+  <span className="Toolbar__label">{children}</span>
+);
+
+const ToolbarSearch = ({ i, expanded, setExpanded }) => {
+  const isOpen = i === expanded;
+
+  return (
+    <motion.li
+      className="SiteHeader__item -search"
+      initial={false}
+      animate={isOpen ? 'open' : 'closed'}
+    >
+      <button
+        role="tab"
+        className="SiteHeader__toggle -search"
+        onClick={() => setExpanded(isOpen ? false : i)}
+      >
+        <ToolbarIcon>
+          <SearchIcon />
+        </ToolbarIcon>
+      </button>
+      <SearchCollapse />
+    </motion.li>
+  );
+};
 
 const SearchCollapse = () => {
   const collapseVariants = {
@@ -40,49 +77,11 @@ const SearchCollapse = () => {
   );
 };
 
-const Toolbar = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
+const Toolbar = ({ children }) => <ul className="Toolbar">{children}</ul>;
 
-  return (
-    <ul className="Toolbar">
-      <li className="SiteHeader__item">
-        <Link href="/store-locator" as="/store-locator">
-          <a className="SiteHeader__link">
-            <span className="Toolbar__icon">
-              <LocationIcon />
-            </span>
-            <span className="Toolbar__label">Find A Store</span>
-          </a>
-        </Link>
-      </li>
-      <li className="SiteHeader__item">
-        <Link href="/7rewards" as="/7rewards">
-          <a className="SiteHeader__link">
-            <span className="Toolbar__icon">
-              <AccountIcon />
-            </span>
-            <span className="Toolbar__label">Account</span>
-          </a>
-        </Link>
-      </li>
-      <motion.li
-        className="SiteHeader__item -search"
-        initial={false}
-        animate={isOpen ? 'open' : 'closed'}
-      >
-        <button
-          role="tab"
-          className="SiteHeader__toggle -search"
-          onClick={() => toggleOpen()}
-        >
-          <span className="Toolbar__icon">
-            <SearchIcon />
-          </span>
-        </button>
-        <SearchCollapse />
-      </motion.li>
-    </ul>
-  );
-};
+Toolbar.Item = ToolbarItem;
+Toolbar.Icon = ToolbarIcon;
+Toolbar.Label = ToolbarLabel;
+Toolbar.Search = ToolbarSearch;
 
 export default Toolbar;

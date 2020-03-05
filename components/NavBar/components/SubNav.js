@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -30,32 +31,66 @@ const itemVariants = {
   },
 };
 
-const NestedSubNav = props => {
-  let nestedIndex = props.i;
-  let parentIndex = props.parentIndex;
+const SubNavMenu = props => {
+  const isNested = props.nested;
+  const parent = props.parent;
+  const hasThirdLevel = props.hasThirdLevel;
+  const subnavIndex = props.i;
+  const parentIndex = isNested ? props.parentIndex : false;
+  const keyPrefix = isNested
+    ? `subnav-${parentIndex}-nested-${subnavIndex}`
+    : `subnav-${subnavIndex}`;
 
   return (
-    <motion.ul variants={listVariants} className="SiteHeader__submenu -nested">
-      {props.items.map(({ name, url }, index) => (
+    <motion.ul
+      variants={listVariants}
+      className={classNames('SiteHeader__submenu', { '-nested': isNested })}
+    >
+      {props.items.map(({ name, url, children }, index) => (
         <motion.li
           variants={itemVariants}
-          key={`subnav-${parentIndex}-nested-${nestedIndex}-item-${index}`}
-          className="SiteHeader__item -nested"
+          key={`${keyPrefix}-item-${index}`}
+          className={classNames('SiteHeader__item', '-nested', {
+            col: hasThirdLevel && !isNested,
+          })}
         >
-          <Link href={url} as={url}>
-            <a>{name}</a>
-          </Link>
+          {hasThirdLevel ? (
+            <span className="SiteHeader__subnavHeading">{name}</span>
+          ) : (
+            <Link href={url} as={url}>
+              <a>{name}</a>
+            </Link>
+          )}
+          {children.length > 0 && (
+            <SubNavMenu
+              items={children}
+              i={index}
+              parentIndex={subnavIndex}
+              nested
+            />
+          )}
         </motion.li>
       ))}
+
+      {parent && parent.name === 'Menu' && (
+        <motion.li
+          variants={itemVariants}
+          className="SiteHeader__item -nested col col-12 text-center"
+        >
+          <Button href="/menu" as="/menu">
+            View Full Menu
+          </Button>
+        </motion.li>
+      )}
     </motion.ul>
   );
 };
 
 const SubNav = props => {
   const items = props.items;
-  let subnavIndex = props.i;
+  const parent = props.parent;
+  const subnavIndex = props.i;
   let hasThirdLevel = false;
- 
 
   const subMenuAnimate = {
     open: {
@@ -91,50 +126,16 @@ const SubNav = props => {
   return (
     <motion.div
       variants={subMenuAnimate}
-      className={
-        hasThirdLevel
-          ? 'SiteHeader__subnav -has-grandchildren'
-          : 'SiteHeader__subnav'
-      }
+      className={classNames('SiteHeader__subnav', {
+        '-has-grandchildren': hasThirdLevel,
+      })}
     >
-      <motion.ul variants={listVariants} className="SiteHeader__submenu">
-        {items.map(({ name, url, children }, index) => {
-          return (
-            <motion.li
-              variants={itemVariants}
-              key={`subnav-${subnavIndex}-item-${index}`}
-              className={
-                hasThirdLevel
-                  ? 'SiteHeader__item -nested col'
-                  : 'SiteHeader__item -nested'
-              }
-            >
-              <Link href={url} as={url}>
-                <a className={hasThirdLevel ? 'SiteHeader__subnavHeading' : ''}>
-                  {name}
-                </a>
-              </Link>
-              {children.length > 0 && (
-                <NestedSubNav
-                  items={children}
-                  i={index}
-                  parentIndex={subnavIndex}
-                />
-              )}
-            </motion.li>
-          );
-        })}
-        {props.parent.name === 'Menu' && (
-          <motion.li
-            variants={itemVariants}
-            className="SiteHeader__item -nested col col-12 text-center"
-          >
-            <Button href="/menu" as="/menu">
-              View Full Menu
-            </Button>
-          </motion.li>
-        )}
-      </motion.ul>
+      <SubNavMenu
+        items={items}
+        parent={parent}
+        i={subnavIndex}
+        hasThirdLevel={hasThirdLevel}
+      />
     </motion.div>
   );
 };
