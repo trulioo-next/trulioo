@@ -130,6 +130,12 @@
         display: none;
       }
     }
+
+    &.-hovered {
+      #{$block}__indicator {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &__indicator {
@@ -414,16 +420,14 @@
     svg {
       height: 10px;
     }
+
+    &.-toggled {
+      transform: rotate(180deg);
+    }
   }
 
   &__collapse {
     padding: 0 16px 8px;
-
-    &.show {
-      + .OffCanvas__subnavToggle {
-        transform: rotate(180deg);
-      }
-    }
   }
 
   &__subnav {
@@ -450,6 +454,7 @@
   }
 
   &__subnavHeading {
+    display: block;
     font-weight: 900;
     margin-bottom: 4px;
   }

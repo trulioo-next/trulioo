@@ -1,4 +1,5 @@
-import React from 'react';
+import classNames from 'classnames';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, useCycle } from 'framer-motion';
 import Accordion from 'react-bootstrap/Accordion';
@@ -6,7 +7,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import SearchIcon from '@/static/images/search.svg';
 import ChevronIcon from '@/static/images/caret-down.svg';
 
-import linkData from '../placeholder-links.json'; // replace with real data later
+// import linkData from '../placeholder-links.json';
 
 const RewardsArea = props => (
   <motion.div className="OffCanvas__rewards" variants={props.variants}>
@@ -37,21 +38,39 @@ const NavToggle = props => (
   </button>
 );
 
-const NestedSubNav = props => {
-  let items = props.items;
-  let subnavIndex = props.i;
-  let parentIndex = props.parentIndex;
+const SubNavMenu = props => {
+  const isNested = props.nested;
+  const hasThirdLevel = props.hasThirdLevel;
+  const subnavIndex = props.i;
+  const parentIndex = isNested ? props.parentIndex : false;
+  const keyPrefix = isNested
+    ? `offcanvas-subnav-${parentIndex}-nested-${subnavIndex}`
+    : `offcanvas-subnav-${subnavIndex}`;
 
   return (
-    <ul className="OffCanvas__subnav -nested">
-      {items.map(({ href, as, label }, index) => (
+    <ul className={classNames('OffCanvas__subnav', { '-nested': isNested })}>
+      {props.items.map(({ name, url, children }, index) => (
         <li
-          key={`offcanvas-nav-${parentIndex}-subnav-${subnavIndex}-item-${index}`}
-          className="OffCanvas__subnavItem"
+          key={`${keyPrefix}-item-${index}`}
+          className={classNames('OffCanvas__subnavItem', '-nested', {
+            col: hasThirdLevel && !isNested,
+          })}
         >
-          <Link href={href} as={as}>
-            <a>{label}</a>
-          </Link>
+          {hasThirdLevel ? (
+            <span className="OffCanvas__subnavHeading">{name}</span>
+          ) : (
+            <Link href={url} as={url}>
+              <a>{name}</a>
+            </Link>
+          )}
+          {children.length > 0 && (
+            <SubNavMenu
+              items={children}
+              i={index}
+              parentIndex={subnavIndex}
+              nested
+            />
+          )}
         </li>
       ))}
     </ul>
@@ -62,14 +81,15 @@ const NavItem = props => {
   let item = props.item;
   let itemIndex = props.i;
 
-  if (item.subnav) {
-    let items = item.subnav;
+  if (item.children.length > 0) {
+    const [opened, setOpened] = useState(false);
+    let items = item.children;
     let hasThirdLevel = false;
     var i,
       l = items.length;
 
     for (i = 0; i < l; i += 1) {
-      if (items[i].subnav) {
+      if (items[i].children.length > 0) {
         hasThirdLevel = true;
         break;
       }
@@ -78,46 +98,31 @@ const NavItem = props => {
     return (
       <>
         <li className="OffCanvas__item">
-          <Link href={item.href} as={item.as}>
-            <a className="OffCanvas__link">{item.label}</a>
+          <Link href={item.url} as={item.url}>
+            <a className="OffCanvas__link">{item.name}</a>
           </Link>
-          <Accordion.Collapse
-            eventKey={`offcanvas-nav-${itemIndex}`}
-            className="OffCanvas__collapse"
-          >
-            <ul className="OffCanvas__subnav">
-              {item.subnav.map(({ href, as, label, subnav }, index) => (
-                <li
-                  key={`offcanvas-nav-${itemIndex}-subnav-item-${index}`}
-                  className="OffCanvas__subnavItem"
-                >
-                  <Link href={href} as={as}>
-                    <a
-                      className={
-                        hasThirdLevel ? 'OffCanvas__subnavHeading' : ''
-                      }
-                    >
-                      {label}
-                    </a>
-                  </Link>
-                  {subnav && (
-                    <NestedSubNav
-                      items={subnav}
-                      i={index}
-                      parentIndex={itemIndex}
-                    />
-                  )}
-                </li>
-              ))}
-            </ul>
-          </Accordion.Collapse>
           <Accordion.Toggle
             as="button"
             eventKey={`offcanvas-nav-${itemIndex}`}
-            className="OffCanvas__subnavToggle"
+            className={classNames('OffCanvas__subnavToggle', {
+              '-toggled': opened,
+            })}
           >
             <ChevronIcon />
           </Accordion.Toggle>
+          <Accordion.Collapse
+            eventKey={`offcanvas-nav-${itemIndex}`}
+            className="OffCanvas__collapse"
+            onEnter={() => setOpened(true)}
+            onExit={() => setOpened(false)}
+          >
+            <SubNavMenu
+              i={itemIndex}
+              items={item.children}
+              parent={item}
+              hasThirdLevel={hasThirdLevel}
+            />
+          </Accordion.Collapse>
         </li>
       </>
     );
@@ -125,15 +130,16 @@ const NavItem = props => {
 
   return (
     <li className="OffCanvas__item">
-      <Link href={item.href} as={item.as}>
-        <a className="OffCanvas__link">{item.label}</a>
+      <Link href={item.url} as={item.url}>
+        <a className="OffCanvas__link">{item.name}</a>
       </Link>
     </li>
   );
 };
 
-const OffCanvasNav = props => {
+const OffCanvasNav = data => {
   const [isOpen, toggleOpen] = useCycle(false, true);
+  let LINKS = data.data.data;
 
   const sidebar = {
     open: {
@@ -186,7 +192,7 @@ const OffCanvasNav = props => {
         <RewardsArea variants={sectionVariant} />
         <motion.div variants={sectionVariant}>
           <Accordion as="ul" className="OffCanvas__nav">
-            {linkData.map((item, i) => (
+            {LINKS.map((item, i) => (
               <NavItem item={item} key={`offcanvas-item-${i}`} i={i} />
             ))}
           </Accordion>
