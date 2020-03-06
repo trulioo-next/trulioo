@@ -14,7 +14,7 @@
 			} else {
 			// nutritionals.push(state.nutritionals.menuItems[i].acf)
 
-				nutritionals.push(defaultBlankFields(state.nutritionals.menuItems[i].title))
+				nutritionals.push(defaultFields(state.nutritionals.menuItems[i].title,false))
 			}
 		} 
 	}
@@ -30,13 +30,19 @@
 		if(state.nutritionals.menuItems) {
 			for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
 				if( state.nutritionals.menuItems[i].terms ) {
-					if(state.nutritionals.menuItems[i].terms[0].slug === taxName ) {
+					//if(state.nutritionals.menuItems[i].terms[0].slug === taxName ) {
 						if(state.nutritionals.menuItems[i].acf) {
-							nutritionals.push(state.nutritionals.menuItems[i].acf)
+							nutritionals.push(defaultFields(
+								state.nutritionals.menuItems[i].title,
+								state.nutritionals.menuItems[i].terms[0].slug,
+								state.nutritionals.menuItems[i].acf))
 						} else {
-							nutritionals.push(defaultBlankFields(state.nutritionals.menuItems[i].title))
+							nutritionals.push(defaultFields(
+								state.nutritionals.menuItems[i].title,
+								state.nutritionals.menuItems[i].terms[0].slug,
+								false))
 						}
-					}
+					// }
 				}
 				
 			}
@@ -46,29 +52,30 @@
 	}
  }
 
- function defaultBlankFields(title) {
-
- 	let empty = {
+ function defaultFields(title,term,obj) {
+  
+ 	let payload = {
 		flavour: title,
-		additional_information: "0",
-		serving_size: "0",
-		calories: "0",
-		total_fat: "0",
-		trans_fat: "0",
-		cholesterol: "0",
-		sodium: "0",
-		carbohydrates: "0",
-		dietary_fibre: "0",
-		sugars: "0",
-		protein: "0",
-		vitamin_a: "0",
-		vitamin_c: "0",
-		calcium: "0",
-		iron: "0"
+		additional_information: obj.additional_information || '0',
+		serving_size: obj.serving_size || '0',
+		calories: obj.calories || '0',
+		total_fat: obj.total_fat || '0',
+		trans_fat: obj.trans_fat || '0',
+		cholesterol: obj.cholesterol || '0',
+		sodium: obj.sodium || '0',
+		carbohydrates: obj.carbohydrates || '0',
+		dietary_fibre: obj.dietary_fibre || '0',
+		sugars: obj.sugars || '0',
+		protein: obj.protein || '0',
+		vitamin_a: obj.vitamin_a || '0',
+		vitamin_c: obj.vitamin_c || '0',
+		calcium: obj.calcium || '0',
+		iron: obj.iron || '0',
+		term: term || false
 	}
-	return empty;
+	return payload;
  }
-
+ 
  
 export default {
   nutritionalsSelector,

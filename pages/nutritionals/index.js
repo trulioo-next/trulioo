@@ -154,35 +154,40 @@ const Page = (props) => {
     }
   ]
    
-    
-    let [taxonomySelected, setTaxonomySelected] = useState('crispy-classic-chicken');
-    let products = useSelector(nutritionalByTaxonomySelector('crispy-classic-chicken'));
-    let [productsSelected, setproductsSelected] = useState(products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(reqNutritionalsAction({}));
+  }, []);
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(reqNutritionalsAction({}));
-    }, []);
+
+  let [taxonomySelected, setTaxonomySelected] = useState('crispy-classic-chicken');
+  let products = useSelector(nutritionalByTaxonomySelector());
+  let productsSelected = filterProducts('crispy-classic-chicken')
+  let [filterSelected, setfilterSelected] = useState(productsSelected);
+ 
+ function filterProducts(taxonomy) {
   
+   let filtered = [];
+   if(products) {
+     for(var i = 0; i < products.length; i++ ) {
+        if(products[i].term === taxonomy) {
+            filtered.push(products[i])
+        }
+     }
+   }
+    return filtered;
+ }   
    
-  
-  // console.log('nutritionals', products)
-
   function switchCategory(e) {
-   
-    setTaxonomySelected(e.target.value)
-    // products = useSelector(nutritionalByTaxonomySelector(taxonomySelected));
-    
-     console.log('taxonomySelected ::  ', taxonomySelected )
-     console.log('products ::  ', productsSelected )
+     productsSelected = filterProducts(e.target.value)
+     setfilterSelected(productsSelected)
   }
    
    return ( 
       <Layout>
         <Header title="Nutritionals" />
         <Hero src="/static/images/placeholders/Nutritionals.png">
-
-           
+ 
         </Hero>
 
         <select css={css`margin-top:50px; margin-bottom:50px;`} id="cars" onChange={(e) => switchCategory(e)}>
@@ -196,7 +201,7 @@ const Page = (props) => {
           <option value="slurpee">Slurpee</option>
         </select>
         <Table
-        data={products}
+        data={filterSelected}
         columns={columns}
         />
      
