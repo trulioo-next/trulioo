@@ -13,8 +13,7 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
-
-     
+ 
      res.json(response)
      return
   } catch(error) {

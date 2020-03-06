@@ -25,16 +25,12 @@
 
   export const nutritionalByTaxonomySelector = (taxName) => {
   	return (state) => {
-		let nutritionals = [];
-
-		// console.log('state.nutritionals.menuItems', state.nutritionals.menuItems )
+		let nutritionals = []; 
 		
 		if(state.nutritionals.menuItems) {
 			for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
 				if( state.nutritionals.menuItems[i].terms ) {
-					// console.log('TERM ::>>> ', state.nutritionals.menuItems[i].terms[0].slug )
 					if(state.nutritionals.menuItems[i].terms[0].slug === taxName ) {
-						
 						if(state.nutritionals.menuItems[i].acf) {
 							nutritionals.push(state.nutritionals.menuItems[i].acf)
 						} else {

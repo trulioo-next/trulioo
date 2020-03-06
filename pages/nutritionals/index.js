@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
 import Layout from '../../containers/Layout/Layout'
@@ -153,7 +153,11 @@ const Page = (props) => {
       accessor: 'iron'
     }
   ]
-  
+   
+    
+    let [taxonomySelected, setTaxonomySelected] = useState('crispy-classic-chicken');
+    let products = useSelector(nutritionalByTaxonomySelector('crispy-classic-chicken'));
+    let [productsSelected, setproductsSelected] = useState(products);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -161,15 +165,36 @@ const Page = (props) => {
     }, []);
   
    
-  const products = useSelector(nutritionalByTaxonomySelector('crispy-classic-chicken'));
+  
   // console.log('nutritionals', products)
+
+  function switchCategory(e) {
+   
+    setTaxonomySelected(e.target.value)
+    // products = useSelector(nutritionalByTaxonomySelector(taxonomySelected));
+    
+     console.log('taxonomySelected ::  ', taxonomySelected )
+     console.log('products ::  ', productsSelected )
+  }
    
    return ( 
       <Layout>
         <Header title="Nutritionals" />
         <Hero src="/static/images/placeholders/Nutritionals.png">
+
            
         </Hero>
+
+        <select css={css`margin-top:50px; margin-bottom:50px;`} id="cars" onChange={(e) => switchCategory(e)}>
+          <option value="crispy-classic-chicken">Crispy Classic Chicken</option>
+          <option value="fountain">Fountain</option>
+          <option value="fresh-bakery">Fresh Bakery</option>
+          <option value="grill">Grill</option>
+          <option value="hot-beverages">Hot Beverages</option>
+          <option value="hot-food">Hot Food</option>
+          <option value="iced-coffee">Iced Coffee</option>
+          <option value="slurpee">Slurpee</option>
+        </select>
         <Table
         data={products}
         columns={columns}
