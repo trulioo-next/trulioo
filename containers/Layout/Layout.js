@@ -28,6 +28,8 @@ class Layout extends React.Component {
   render() {
     const { isLoading } = this.props;
 
+    // console.log('IS LOADING ', isLoading )
+
     return (
       <div className="Layout">
         <Header

@@ -7,16 +7,17 @@
  
  export const nutritionalsSelector = (state) => {
 	let nutritionals = [];
-	 
-	 for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
-		if(state.nutritionals.menuItems[i].acf) {
-			nutritionals.push(state.nutritionals.menuItems[i].acf)
-		} else {
+	if(state.nutritionals.menuItems) {
+		for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
+			if(state.nutritionals.menuItems[i].acf) {
+				nutritionals.push(state.nutritionals.menuItems[i].acf)
+			} else {
 			// nutritionals.push(state.nutritionals.menuItems[i].acf)
-			 
-			nutritionals.push(defaultBlankFields(state.nutritionals.menuItems[i].title))
-		}
-	 } 
+
+				nutritionals.push(defaultBlankFields(state.nutritionals.menuItems[i].title))
+			}
+		} 
+	}
 
    return nutritionals
  }
@@ -45,8 +46,6 @@
 			}
 		}	
 	 
-		  
-
    		return nutritionals
 	}
  }

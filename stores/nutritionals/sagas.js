@@ -4,7 +4,8 @@ import NutritionalService from '../../services/nutritionalService';
 import {
   NUTRITIONAL_LOAD_REQUEST,
   NUTRITIONAL_LOADED,
-  NUTRITIONAL_ERROR
+  NUTRITIONAL_ERROR,
+  APP_STARTLOADING
 } from '../types'
 
 function* startup(payload) {
@@ -33,7 +34,9 @@ function* startupFlow() {
 
     const action = yield take([
       NUTRITIONAL_LOAD_REQUEST
-   ])
+    ])
+
+    yield put({ type: APP_STARTLOADING })
 
     if (action.type === NUTRITIONAL_LOAD_REQUEST) {
       yield call(startup, action.payload)

@@ -13,10 +13,9 @@ class MyApp extends App {
 
     	if(ctx.isServer) {
           await ctx.store.execSagaTask(appActions.reqStartupAction({ isAuthenticated: false,  query: ctx.query }));
-          console.log(' CTX SERVER ')
+            
         }
-
-
+ 
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
 
         if (pageProps.meta) {

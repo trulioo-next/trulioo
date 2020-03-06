@@ -153,10 +153,7 @@ const Page = (props) => {
       accessor: 'iron'
     }
   ]
- 
-  if (props.errorCode) {
-    return <Error statusCode={props.errorCode} />
-  }
+  
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -165,17 +162,13 @@ const Page = (props) => {
   
    
   const products = useSelector(nutritionalByTaxonomySelector('crispy-classic-chicken'));
-
-  console.log('nutritionals', products)
+  // console.log('nutritionals', products)
    
    return ( 
       <Layout>
         <Header title="Nutritionals" />
         <Hero src="/static/images/placeholders/Nutritionals.png">
-          <Hero.Title title="" />
-          <Hero.Caption>
-            
-          </Hero.Caption>
+           
         </Hero>
         <Table
         data={products}
