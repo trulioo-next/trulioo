@@ -4,9 +4,7 @@ const ENDPOINT_URL = process.env.ENDPOINT_URL
 
 export default async (req, res) => {  
   try {
-    
-    
-    // TODO: Normalise page ID : 
+  
     const response = await fetch(ENDPOINT_URL+'/api/v1/nutritionals',
      {
        method: 'GET',

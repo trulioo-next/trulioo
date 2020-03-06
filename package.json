@@ -10,6 +10,7 @@
     "storybook": "start-storybook -s ."
   },
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "@storybook/react": "^5.3.14",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
