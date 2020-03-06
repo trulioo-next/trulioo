@@ -8,6 +8,7 @@ import Header from '../../components/Header/Header'
 import { useTable, useBlockLayout, useResizeColumns } from 'react-table'
 
 import {css, jsx} from "@emotion/core";
+import Hero from '@/components/Hero';
 
 import Error from "next/error";
 
@@ -15,7 +16,7 @@ import {
     reqNutritionalsAction
 } from "../../stores/nutritionals/actions";
 
-import { nutritionalsSelector } from "../../stores/nutritionals/selectors";
+import { nutritionalsSelector, nutritionalByTaxonomySelector } from "../../stores/nutritionals/selectors";
 
 
 function Table({ columns, data }) {
@@ -45,7 +46,10 @@ function Table({ columns, data }) {
   )
 
   return (
-    <div {...getTableProps()} className="table" >
+    <div css={css`
+        color: green;
+      `}>
+    <div {...getTableProps()} className="table"  >
       <div>
         {headerGroups.map(headerGroup => (
           <div {...headerGroup.getHeaderGroupProps()} className="tr">
@@ -79,6 +83,7 @@ function Table({ columns, data }) {
           )
         })}
       </div>
+    </div>
     </div>
   )
 }
@@ -158,19 +163,25 @@ const Page = (props) => {
         dispatch(reqNutritionalsAction({}));
     }, []);
   
-  const nutritionals = useSelector(state => nutritionalsSelector(state));
-  console.log('nutritionals', nutritionals)
+   
+  const products = useSelector(nutritionalByTaxonomySelector('crispy-classic-chicken'));
+
+  console.log('nutritionals', products)
    
    return ( 
       <Layout>
         <Header title="Nutritionals" />
-        <div css={css`margin-top:50px; position:relative; display:block;`}>
-        </div>
+        <Hero src="/static/images/placeholders/Nutritionals.png">
+          <Hero.Title title="" />
+          <Hero.Caption>
+            
+          </Hero.Caption>
+        </Hero>
         <Table
-        data={nutritionals}
+        data={products}
         columns={columns}
-      />
-      
+        />
+     
       </Layout>
   );
 };

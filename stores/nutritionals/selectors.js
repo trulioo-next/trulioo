@@ -38,7 +38,33 @@
    return nutritionals
  }
 
+
+  export const nutritionalByTaxonomySelector = (taxName) => {
+  	return (state) => {
+		let nutritionals = [];
+
+		// console.log('state.nutritionals.menuItems', state.nutritionals.menuItems )
+		
+		if(state.nutritionals.menuItems) {
+			for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
+				if( state.nutritionals.menuItems[i].terms ) {
+					// console.log('TERM ::>>> ', state.nutritionals.menuItems[i].terms[0].slug )
+					if(state.nutritionals.menuItems[i].terms[0].slug === taxName ) {
+						nutritionals.push(state.nutritionals.menuItems[i].acf)
+					}
+				}
+				
+			}
+		}	
+	 
+		  
+
+   		return nutritionals
+	}
+ }
+
  
 export default {
-  nutritionalsSelector
+  nutritionalsSelector,
+  nutritionalByTaxonomySelector
 }
