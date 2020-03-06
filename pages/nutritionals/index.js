@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Layout from '../../containers/Layout/Layout'
 import Header from '../../components/Header/Header'
-import COLUMNS from "./columns";
+// import COLUMNS from "./columns";
 import { useTable, useBlockLayout, useResizeColumns } from 'react-table'
 import {css, jsx} from "@emotion/core";
 import Hero from '@/components/Hero';
@@ -86,6 +86,70 @@ function Table({ columns, data }) {
     </div>
   )
 }
+
+
+const COLUMNS = [
+    {
+      Header: 'Flavour',
+      accessor: 'flavour'
+    }, 
+    {
+      Header: 'Serving Size',
+      accessor: 'serving_size'
+    }, 
+    {
+      Header: 'Calories',
+      accessor: 'calories'
+    }, 
+    {
+      Header: 'Total Fat',
+      accessor: 'total_fat'
+    }, 
+    {
+      Header: 'Trans Fat',
+      accessor: 'trans_fat'
+    }, 
+    {
+      Header: 'Cholesterol',
+      accessor: 'cholesterol'
+    }, 
+    {
+      Header: 'Sodium',
+      accessor: 'sodium'
+    }, 
+    {
+      Header: 'Carbohydrates',
+      accessor: 'carbohydrates'
+    }, 
+    {
+      Header: 'Dietary Fibre',
+      accessor: 'dietary_fibre'
+    }, 
+    {
+      Header: 'Sugars',
+      accessor: 'sugars'
+    }, 
+    {
+      Header: 'Protein',
+      accessor: 'protein'
+    }, 
+    {
+      Header: 'Vitamin A',
+      accessor: 'vitamin_a'
+    }, 
+    {
+      Header: 'Vitamin C',
+      accessor: 'vitamin_c'
+    }, 
+    {
+      Header: 'Calcium',
+      accessor: 'calcium'
+    }, 
+    {
+      Header: 'Iron',
+      accessor: 'iron'
+    }
+  ];
 
 
 const Page = (props) => {
