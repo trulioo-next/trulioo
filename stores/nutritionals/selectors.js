@@ -30,19 +30,31 @@
 		if(state.nutritionals.menuItems) {
 			for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
 				if( state.nutritionals.menuItems[i].terms ) {
-					//if(state.nutritionals.menuItems[i].terms[0].slug === taxName ) {
-						if(state.nutritionals.menuItems[i].acf) {
-							nutritionals.push(defaultFields(
-								state.nutritionals.menuItems[i].title,
-								state.nutritionals.menuItems[i].terms[0].slug,
-								state.nutritionals.menuItems[i].acf))
-						} else {
-							nutritionals.push(defaultFields(
-								state.nutritionals.menuItems[i].title,
-								state.nutritionals.menuItems[i].terms[0].slug,
-								false))
-						}
-					// }
+					 
+					let title = false;
+					if(state.nutritionals.menuItems[i] && state.nutritionals.menuItems[i].acf ) {
+						 
+					     title = state.nutritionals.menuItems[i].acf.flavour
+						 if(!title) {
+							title = state.nutritionals.menuItems[i].title
+						 }
+						  
+					} else {
+						title = state.nutritionals.menuItems[i].title
+					}
+					 
+					if(state.nutritionals.menuItems[i].acf) {
+						nutritionals.push(defaultFields(
+							title,
+							state.nutritionals.menuItems[i].terms[0].slug,
+							state.nutritionals.menuItems[i].acf))
+					} else {
+						nutritionals.push(defaultFields(
+							title,
+							state.nutritionals.menuItems[i].terms[0].slug,
+							false))
+					}
+ 
 				}
 				
 			}
