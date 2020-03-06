@@ -47,8 +47,7 @@ const nextConfig = {
   // ENDPOINT_URL:"https://dev3.7eleven.ca/wp-json"
 
   env: {
-    ROOT_URL:"https://7-11.rob24.now.sh",
-    ENDPOINT_URL:"https://dev3.7eleven.ca/wp-json"
+    ...dotEnvResult
   }
 };
 
