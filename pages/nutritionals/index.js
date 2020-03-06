@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Layout from '../../containers/Layout/Layout'
 import Header from '../../components/Header/Header'
-
+import COLUMNS from "./columns";
 import { useTable, useBlockLayout, useResizeColumns } from 'react-table'
-
 import {css, jsx} from "@emotion/core";
 import Hero from '@/components/Hero';
 
 import Error from "next/error";
+
+import './Nutrutionals.scss';
 
 import {
     reqNutritionalsAction
@@ -24,7 +25,7 @@ function Table({ columns, data }) {
     () => ({
       minWidth: 30,
       width: 150,
-      maxWidth: 400,
+      maxWidth: 450,
     }),
     []
   )
@@ -46,9 +47,7 @@ function Table({ columns, data }) {
   )
 
   return (
-    <div css={css`
-        color: green;
-      `}>
+    <div>
     <div {...getTableProps()} className="table"  >
       <div>
         {headerGroups.map(headerGroup => (
@@ -91,68 +90,7 @@ function Table({ columns, data }) {
 
 const Page = (props) => {
   
-  const columns = [
-    {
-      Header: 'Flavour',
-      accessor: 'flavour'
-    }, 
-    {
-      Header: 'Serving Size',
-      accessor: 'serving_size'
-    }, 
-    {
-      Header: 'Calories',
-      accessor: 'calories'
-    }, 
-    {
-      Header: 'Total Fat',
-      accessor: 'total_fat'
-    }, 
-    {
-      Header: 'Trans Fat',
-      accessor: 'trans_fat'
-    }, 
-    {
-      Header: 'Cholesterol',
-      accessor: 'cholesterol'
-    }, 
-    {
-      Header: 'Sodium',
-      accessor: 'sodium'
-    }, 
-    {
-      Header: 'Carbohydrates',
-      accessor: 'carbohydrates'
-    }, 
-    {
-      Header: 'Dietary Fibre',
-      accessor: 'dietary_fibre'
-    }, 
-    {
-      Header: 'Sugars',
-      accessor: 'sugars'
-    }, 
-    {
-      Header: 'Protein',
-      accessor: 'protein'
-    }, 
-    {
-      Header: 'Vitamin A',
-      accessor: 'vitamin_a'
-    }, 
-    {
-      Header: 'Vitamin C',
-      accessor: 'vitamin_c'
-    }, 
-    {
-      Header: 'Calcium',
-      accessor: 'calcium'
-    }, 
-    {
-      Header: 'Iron',
-      accessor: 'iron'
-    }
-  ]
+  const columns = COLUMNS;
    
   const dispatch = useDispatch();
   useEffect(() => {
@@ -189,17 +127,23 @@ const Page = (props) => {
         <Hero src="/static/images/placeholders/Nutritionals.png">
  
         </Hero>
-
-        <select css={css`margin-top:50px; margin-bottom:50px;`} id="cars" onChange={(e) => switchCategory(e)}>
-          <option value="crispy-classic-chicken">Crispy Classic Chicken</option>
-          <option value="fountain">Fountain</option>
-          <option value="fresh-bakery">Fresh Bakery</option>
-          <option value="grill">Grill</option>
-          <option value="hot-beverages">Hot Beverages</option>
-          <option value="hot-food">Hot Food</option>
-          <option value="iced-coffee">Iced Coffee</option>
-          <option value="slurpee">Slurpee</option>
-        </select>
+        
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 margins">
+                <select className="select" css={css`margin-top:50px; margin-bottom:50px; position:relative; display: block;`} id="cars" onChange={(e) => switchCategory(e)}>
+                  <option value="crispy-classic-chicken">Crispy Classic Chicken</option>
+                  <option value="fountain">Fountain</option>
+                  <option value="fresh-bakery">Fresh Bakery</option>
+                  <option value="grill">Grill</option>
+                  <option value="hot-beverages">Hot Beverages</option>
+                  <option value="hot-food">Hot Food</option>
+                  <option value="iced-coffee">Iced Coffee</option>
+                  <option value="slurpee">Slurpee</option>
+                </select>
+              </div>
+            </div>
+          </div>
         <Table
         data={filterSelected}
         columns={columns}

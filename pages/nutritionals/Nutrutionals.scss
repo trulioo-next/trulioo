@@ -1,0 +1,19 @@
+@import '~@/static/scss/variables';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+// 
+.margins {
+  margin-top: 50px;
+  margin-bottom: 50px;
+} 
+
+.th {
+  font-weight: bold;
+}
+
+.td {
+  padding: 10px 10px 10px 0px;
+}
