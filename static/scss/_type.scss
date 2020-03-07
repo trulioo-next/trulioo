@@ -1,47 +1,49 @@
-@import '~rfs/scss';
-
 h1, .h1 {
-  @include font-size(64px);
+  font-size: 2.4rem;
 
-  @include media-breakpoint-down(sm) {
-    font-size: 24px;
+  @include media-breakpoint-up(lg) {
+    font-size: 7.0rem;
   }
 }
 
 h2, .h2 {
-  @include font-size(36px);
+  font-size: 1.6rem;
 
-  @include media-breakpoint-down(sm) {
-    font-size: 16px; 
+  @include media-breakpoint-up(lg) {
+    font-size: 4.0rem;
   }
 }
 
 h3, .h3 {
-  @include media-breakpoint-down(sm) {
-    font-size: 14px; 
+  font-size: 1.6rem;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 3.0rem;
   }
 }
 
 h4, .h4 {
-  @include media-breakpoint-down(sm) {
-    font-size: 14px; 
+  font-size: 1.4rem;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 2.5rem;
   }
 }
 
 h5, .h5 {
-  @include media-breakpoint-down(sm) {
-    font-size: 14px; 
+  font-size: inherit;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 2.0rem;
   }
 }
 
 h6, .h6 {
-  @include media-breakpoint-down(sm) {
-    font-size: 11px; 
-  }
+  font-size: inherit;
 }
 
 h1, h2, h3, h4, h5, h6 {
   small {
-    font-size: 11px;
+    font-size: 1.5rem;
   }
 }

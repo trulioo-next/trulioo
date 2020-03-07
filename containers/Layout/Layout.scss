@@ -19,19 +19,22 @@ body,
   overflow: auto;
 }
 
-html,
-body {
-  font-size: 0.75rem;
+html {
+  font-size: 62.5%; // use 10px simplification for rem units.
 
-  @include media-breakpoint-up(md) {
-    font-size: 1rem;
-  }
+  // @include media-breakpoint-up(lg) {
+  //   font-size: 56.25%;
+  // }
 }
 
 body {
   font-family: $font-family-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 1.5rem;
+  }
 }
 
 img {
@@ -45,7 +48,7 @@ img {
   height: auto;
   width: 100%;
   min-height: 100vh;
-  max-width: 1450px;
+  max-width: 145.0rem;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;

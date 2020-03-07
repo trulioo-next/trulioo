@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import Button from '@/components/Button';
@@ -11,7 +12,10 @@ import './Subscribe.scss';
  */
 
 const Subscribe = props => (
-  <form id="subscribe" className="Subscribe">
+  <form
+    id={`${props.prefix}-subscribe`}
+    className={classNames('Subscribe', `${props.prefix}__subscribe`)}
+  >
     <div className="col col-12">
       <label htmlFor="subscribe-email" className="Subscribe__label">
         Enter your e-mail address
@@ -36,8 +40,10 @@ const Subscribe = props => (
       </label>
     </div>
     <div className="Subscribe__footer">
-      <Button type="submit">Sign Me Up</Button>
-      <Social />
+      <Button className="Subscribe__submit" type="submit">
+        Sign Me Up
+      </Button>
+      {props.social && <Social />}
     </div>
   </form>
 );

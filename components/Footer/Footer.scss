@@ -1,39 +1,35 @@
-@import '~@/static/scss/variables';
-
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import '~@/static/scss/component-includes';
 
 .SiteFooter {
   $block: &;
 
-  line-height: 9px;
-  font-size: 7.8px;
+  line-height: 0.9rem;
+  font-size: 0.78rem;
 
   @include media-breakpoint-up(lg) {
     font-weight: 500;
-    line-height: 18px;
-    font-size: 15px;
+    line-height: 1.8rem;
+    font-size: 1.5rem;
   }
 
   &__section {
     &.-primary {
       background-color: $dark-gray;
       color: $white;
-      padding: 16px 31px 70px;
+      padding: 1.6rem 3.1rem 7rem;
 
       @include media-breakpoint-up(lg) {
-        padding: 104px 74px 94px 60px;
+        padding: 10.4rem 7.4rem 9.4rem 6rem;
       }
     }
 
     &.-secondary {
       background-color: $black;
-      padding: 8px 16px;
+      padding: 0.8rem 1.6rem;
       color: $white;
 
       @include media-breakpoint-up(lg) {
-        padding: 20px 74px 16px 60px;
+        padding: 1.8rem 7.4rem 1.8rem 6rem;
       }
 
       #{$block}__wrapper {
@@ -43,14 +39,14 @@
   }
 
   &__heading {
-    line-height: 12px;
-    font-size: 10px;
+    line-height: 1.2rem;
+    font-size: 1rem;
     font-weight: 900;
 
     @include media-breakpoint-up(lg) {
-      line-height: 31px;
-      font-size: 25px;
-      margin-bottom: 20px;
+      line-height: 3rem;
+      font-size: 2.5rem;
+      margin-bottom: 1.8rem;
     }
   }
 
@@ -62,10 +58,10 @@
 
   &__item {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
 
     @include media-breakpoint-up(lg) {
-      margin-bottom: 16px;
+      margin-bottom: 1.6rem;
     }
   }
 
@@ -80,15 +76,15 @@
     color: $black;
 
     @include media-breakpoint-up(lg) {
-      line-height: 15px;
+      line-height: 1.5rem;
       font-weight: 900;
-      font-size: 13px;
-      padding-top: 12px;
-      padding-bottom: 12px;
+      font-size: 1.3rem;
+      padding-top: 1.2rem;
+      padding-bottom: 1.2rem;
     }
   }
 
   .Subscribe {
-    margin-bottom: 22px;
+    margin-bottom: 2.2rem;
   }
 }

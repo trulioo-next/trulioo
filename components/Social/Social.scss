@@ -1,3 +1,5 @@
+@import '~@/static/scss/component-includes';
+
 .Social {
   display: flex;
   padding: 0;
@@ -6,13 +8,21 @@
 
   &__item {
     display: block;
-    padding-left: 6px;
-    padding-right: 6px;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &__link {
     display: inline-block;
-    height: 11px;
+    height: 1.1rem;
 
     svg {
       height: 100%;

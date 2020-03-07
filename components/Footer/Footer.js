@@ -36,7 +36,7 @@ const Footer = () => (
         <div className="row justify-content-between">
           <div className="col col-12 col-lg-4 order-lg-last">
             <h2 className="SiteFooter__heading">Online Community</h2>
-            <Subscribe />
+            <Subscribe social />
           </div>
           <div className="col col-lg-7">
             <div className="row">
