@@ -90,6 +90,8 @@ function Table({ columns, data }) {
 const Page = (props) => {
   
   const columns = COLUMNS;
+
+
    
   const dispatch = useDispatch();
   useEffect(() => {
@@ -101,6 +103,8 @@ const Page = (props) => {
   let products = useSelector(nutritionalByTaxonomySelector());
   let productsSelected = filterProducts('crispy-classic-chicken')
   let [filterSelected, setfilterSelected] = useState(productsSelected);
+
+
  
  function filterProducts(taxonomy) {
   
