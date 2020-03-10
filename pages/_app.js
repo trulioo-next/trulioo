@@ -4,7 +4,6 @@ import withRedux from 'next-redux-wrapper'
 import configureStore from '../stores/configureStore'
 import appActions from '../stores/app/actions'
 import withError from '../components-stateful/withErrorWrapper'
- 
 
 const withReduxDebugMode = false // process.env.NODE_ENV === 'development' || false;
 class MyApp extends App {
@@ -34,9 +33,21 @@ class MyApp extends App {
     }
 
     componentDidUpdate() {
+
+
     }
 
     componentDidMount() {
+
+        // Pass user auth to anywhere in the app 
+        //
+        let isUserAuth = this.props.store.getState()
+        if( isUserAuth && isUserAuth.user ) {
+            // check if users token expires 
+            // If it does, clear the auth session 
+            //
+            // console.log('IS USER AUTH  ', isUserAuth.user.auth )
+        }
     }
 
 

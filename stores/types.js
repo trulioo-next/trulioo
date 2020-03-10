@@ -13,13 +13,19 @@ export const GLOBAL_DATA_LOADED = 'global/data/GLOBAL_DATA_LOADED'
 
 // Page Level Events 
 export const PAGE_LOAD_REQUEST = 'page/load/PAGE_LOAD_REQUEST'
-export const PAGE_LOADED = 'page/load/PAGE_LOAD_REQUEST'
-export const PAGE_LOAD_ERROR = 'page/load/PAGE_LOAD_ERROR'
+export const PAGE_LOADED = 'page/loaded/PAGE_LOAD_REQUEST'
+export const PAGE_LOAD_ERROR = 'page/error/PAGE_LOAD_ERROR'
 
 
 // Page Level Events  nutritional
-export const NUTRITIONAL_LOAD_REQUEST = 'nutritional/load/NUTRITIONAL_LOAD_REQUEST '
-export const NUTRITIONAL_LOADED = 'nutritional/load/NUTRITIONAL_LOADED'
-export const NUTRITIONAL_ERROR = 'nutritional/load/NUTRITIONAL_ERROR'
+export const NUTRITIONAL_LOAD_REQUEST = 'nutritional/load/NUTRITIONAL_LOAD_REQUEST'
+export const NUTRITIONAL_LOADED = 'nutritional/loaded/NUTRITIONAL_LOADED'
+export const NUTRITIONAL_ERROR = 'nutritional/error/NUTRITIONAL_ERROR'
 
- 
+// 7 rewards Events 
+export const SEVEN_REWARDS_AUTH_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_AUTH_REQUEST'
+export const SEVEN_REWARDS_AUTH_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_AUTH_LOADED'
+export const SEVEN_REWARDS_AUTH_ERROR = 'seven_rewards/error/NUTRITIONAL_ERROR'
+
+export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'
+export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CHECK_LOADED'

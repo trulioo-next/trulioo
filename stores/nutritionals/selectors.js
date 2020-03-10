@@ -66,7 +66,6 @@
 
  function defaultFields(title,term,obj) {
  	let additionalInformation = obj.additional_information ? obj.additional_information : ''
-  
  	let payload = {
 		flavour: title + " " + additionalInformation,
 		additional_information: obj.additional_information || '0',

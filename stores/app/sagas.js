@@ -1,7 +1,7 @@
 import { take, call, put, all, select } from 'redux-saga/effects'
 
 import DataService from '../../services/dataService'
-
+ 
 import {
   APP_STARTUP_REQUEST,
   APP_STARTLOADING,
@@ -12,18 +12,12 @@ import {
 
 function* startup(payload) {
 
-   
   try {
-   
-    // yield call(getGeolocation, payload.ip)
+ 
     const state = yield select((state) => state)
-
     const dataService = DataService(state)
-
     const response = yield call(dataService.getGlobalData, true)
-    // console.log('RESONSE SAGA DATA  ', response)
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
-  
 
   } catch(err) {
 

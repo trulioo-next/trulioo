@@ -1,0 +1,33 @@
+
+
+.login__screen__page {
+	position: relative;
+	padding: 150px 0px;
+
+	.form__wrapper {
+		position: relative;
+		max-width: 500px;
+		margin: auto;
+		font-family: arial;
+			
+		label {
+			display: none;
+		}	
+
+		input {
+			position: relative;
+			padding: 12px;
+			font-size: 16px;
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		button {
+			position: relative;
+			border-radius: 3px;
+			padding: 12px;
+			background-color: #000;
+			color: #fff;
+		}
+	}
+}
