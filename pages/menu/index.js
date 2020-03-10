@@ -9,6 +9,10 @@ import menuSelectors from '../../stores/nutritionals/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import './Menu.scss';
 
 class Menu extends React.Component {
@@ -29,15 +33,41 @@ class Menu extends React.Component {
       // load the data 
       this.props.getTheData()
 
+
+
   }
   componentDidUpdate() {
       
        // get the data 
-      console.log('THE DATA ', this.props.data )
+      // console.log('THE DATA ', this.props.data )
 
+  }
+
+  buildColumnRows() {
+    
+    let data = this.props.data;
+    if( data ) {
+      let counter = 0;
+      let containers = data.map((item) => {
+         counter++;
+         let image = item.image ? item.image.url : 'https://via.placeholder.com/150'; 
+         return <Col className="no--margins" xs={12} md={3} key={'tax-'+counter}>
+           <div className="block--padding">
+             <div className="item__title">{item.name}</div>
+             <div className="background--image"><img src={image} /></div>
+           </div>
+         </Col>
+       
+      });
+    
+     return containers;
+    } 
+ 
   }
  
   render() {
+
+    let rows = this.buildColumnRows();
 
     return (
       <Layout>
@@ -45,7 +75,12 @@ class Menu extends React.Component {
         <Hero src="/static/images/placeholders/Nutritionals.png">
         </Hero>
         <div className="menu__page">
-          <h2>Menu Page Items</h2>
+          
+          <Row>
+            { rows }
+          </Row>
+          
+        
         </div>
      </Layout>
     )
