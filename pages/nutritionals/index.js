@@ -98,13 +98,10 @@ const Page = (props) => {
       dispatch(reqNutritionalsAction({}));
   }, []);
 
-
   let [taxonomySelected, setTaxonomySelected] = useState('crispy-classic-chicken');
   let products = useSelector(nutritionalByTaxonomySelector());
   let productsSelected = filterProducts('crispy-classic-chicken')
   let [filterSelected, setfilterSelected] = useState(productsSelected);
-
-
  
  function filterProducts(taxonomy) {
   

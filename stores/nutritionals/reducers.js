@@ -16,7 +16,8 @@ export default (state = INITIAL_STATE, action) => {
 
      case NUTRITIONAL_LOADED:
       return { ...state,
-        menuItems: action.payload
+        menuItems: action.payload.items,
+        taxonomies: action.payload.taxonomies
       }   
 
     default:

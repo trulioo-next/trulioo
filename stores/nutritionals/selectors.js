@@ -12,15 +12,22 @@
 			if(state.nutritionals.menuItems[i].acf) {
 				nutritionals.push(state.nutritionals.menuItems[i].acf)
 			} else {
-			// nutritionals.push(state.nutritionals.menuItems[i].acf)
-
-				nutritionals.push(defaultFields(state.nutritionals.menuItems[i].title,false))
+			 
+				nutritionals.push(defaultFields(
+					state.nutritionals.menuItems[i].title,
+					false,
+					state.nutritionals.menuItems[i].acf))
 			}
 		} 
 	}
 
    return nutritionals
  }
+
+
+  export const taxonomiesSelector = (state) => {
+   return state.nutritionals.taxonomies
+ }	
 
 
   export const nutritionalByTaxonomySelector = (taxName) => {
@@ -91,5 +98,6 @@
  
 export default {
   nutritionalsSelector,
-  nutritionalByTaxonomySelector
+  nutritionalByTaxonomySelector,
+  taxonomiesSelector
 }

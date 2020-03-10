@@ -17,7 +17,6 @@ function* startup(payload) {
     const nutritionalResponse = yield call(nutritionalService.getNutritionalData, true)
     yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalResponse })
 
-
   } catch(err) {
 
     const errors = err.payload || err
