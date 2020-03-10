@@ -8,7 +8,7 @@ const SectionSlider = props => {
   var settings = props.settings;
 
   return (
-    <section className="Section">
+    <section>
       <ImageSlider {...settings}>
         {props.slides.map(({ image, title, text }, slideIndex) => (
           <ImageSlider.Item

@@ -55,9 +55,8 @@
 
     @include media-breakpoint-up(lg) {
       max-width: 20rem;
-      margin-right: 5.5rem;
-      padding-top: 2.8rem;
-      padding-bottom: 3.4rem;
+      margin-top: 2.8rem;
+      margin-bottom: 3.4rem;
     }
 
     svg {
@@ -91,28 +90,35 @@
     margin-left: 1.6rem;
     display: block;
     font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-transform: uppercase;
     color: $gray;
     z-index: 1;
 
-    @include media-breakpoint-up(lg) {
-      margin-right: 1.6rem;
-    }
 
     &:not(.-nested) {
       display: flex;
       align-items: center;
+
+      @include media-breakpoint-up(lg) {
+        margin-right: 1.6rem;
+
+        &:first-child {
+          margin-left: 5.5rem;
+        }
+      }
     }
 
     &.-nested {
       @include make-col-ready();
-      font-size: 2rem;
+      font-weight: 400;
+      font-size: 1.8rem;
       text-transform: none;
       margin-right: 0;
       margin-bottom: 2.6rem;
       margin-left: 0;
       padding-bottom: 0;
+      color: $black;
 
       &.col,
       &:last-child {
@@ -126,9 +132,15 @@
       }
     }
 
-    &.-hovered {
-      #{$block}__indicator {
-        transform: rotate(180deg);
+    &.-has-children {
+      &.-active {
+        #{$block}__toggle {
+          color: $link-hover-color;
+        }
+
+        #{$block}__indicator {
+          transform: rotate(180deg);
+        }
       }
     }
   }
@@ -152,6 +164,12 @@
     }
   }
 
+  &__link {
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+  }
+
   &__toggle {
     background: none;
     border: 0;
@@ -160,10 +178,8 @@
     color: inherit;
     padding: 0;
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       color: $link-hover-color;
-      text-decoration: underline;
     }
   }
 
@@ -207,7 +223,7 @@
   &__subnavHeading {
     font-weight: 900;
     line-height: 3rem;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
   }
 
   &__submenu {
@@ -227,23 +243,11 @@
       width: 100vw;
     }
 
-    .Button {
-      background-color: $white;
-      color: $black;
-      border: solid 1px $black;
+    &.-nested {
+      #{$block}__item {
+        margin-bottom: 1.8rem;
+      }
     }
-  }
-}
-
-.search-toggle {
-  border: 0;
-  padding: 0;
-  background: none;
-  color: $gray;
-
-  &:hover,
-  &:focus {
-    color: $link-hover-color;
   }
 }
 
@@ -251,6 +255,7 @@
   display: flex;
   flex: 0 0 auto;
   margin: 0;
+  padding: 0;
   overflow-y: auto;
 
   &__item {
@@ -272,7 +277,7 @@
 
   &__label {
     display: inline-block;
-    margin-left: 1.5rem;
+    margin-left: 1.2rem;
 
     @include media-breakpoint-down(md) {
       display: none;

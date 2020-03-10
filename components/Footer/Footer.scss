@@ -9,7 +9,7 @@
   @include media-breakpoint-up(lg) {
     font-weight: 500;
     line-height: 1.8rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   &__section {
@@ -45,7 +45,7 @@
 
     @include media-breakpoint-up(lg) {
       line-height: 3rem;
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       margin-bottom: 1.8rem;
     }
   }
@@ -61,7 +61,7 @@
     margin-bottom: 0.5rem;
 
     @include media-breakpoint-up(lg) {
-      margin-bottom: 1.6rem;
+      margin-bottom: 0.9rem;
     }
   }
 
@@ -75,12 +75,9 @@
     background-color: $white;
     color: $black;
 
-    @include media-breakpoint-up(lg) {
-      line-height: 1.5rem;
-      font-weight: 900;
-      font-size: 1.3rem;
-      padding-top: 1.2rem;
-      padding-bottom: 1.2rem;
+    &:hover, &:focus {
+      background-color: $link-hover-color;
+      color: $white;
     }
   }
 

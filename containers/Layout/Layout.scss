@@ -31,6 +31,7 @@ body {
   font-family: $font-family-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.020em;
 
   @include media-breakpoint-up(lg) {
     font-size: 1.5rem;
@@ -56,4 +57,25 @@ img {
 
 .SiteMain {
   flex: 1 1 auto;
+}
+
+.Section {
+  position: relative;
+  margin-bottom: 1.0rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 4.0rem;
+  }
+
+  &__container {
+    padding: 3.6rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 4.8rem;
+      padding-bottom: 4.8rem;
+    }
+  }
 }

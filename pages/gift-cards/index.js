@@ -7,8 +7,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import Layout from '@/containers/Layout';
 import Header from '@/components/Header';
 
-import './GiftCards.scss';
-
 import Hero from '@/components/Hero';
 import CheckBalanceSection from './components/CheckBalance';
 import FAQSection from './components/FAQ';
