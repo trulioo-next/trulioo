@@ -36,11 +36,10 @@ class Menu extends React.Component {
 
 
   }
-  componentDidUpdate() {
-      
-       // get the data 
-      // console.log('THE DATA ', this.props.data )
+  componentDidUpdate() { }
 
+  goToTaxonomy( taxonomy ) {
+    console.log('taxonomy selected ', taxonomy )
   }
 
   buildColumnRows() {
@@ -54,15 +53,14 @@ class Menu extends React.Component {
          return <Col className="no--margins" xs={12} md={3} key={'tax-'+counter}>
            <div className="block--padding">
              <div className="item__title">{item.name}</div>
-             <div className="background--image"><img src={image} /></div>
+             <div className="background--image"><img onClick={ this.goToTaxonomy(item.slug) } src={image} /></div>
            </div>
          </Col>
        
       });
     
      return containers;
-    } 
- 
+    }
   }
  
   render() {
@@ -79,8 +77,7 @@ class Menu extends React.Component {
           <Row>
             { rows }
           </Row>
-          
-        
+         
         </div>
      </Layout>
     )
