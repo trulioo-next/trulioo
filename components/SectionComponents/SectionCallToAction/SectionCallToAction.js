@@ -114,7 +114,6 @@ const SectionCallToAction = ({
 
   let rowClasses = classNames(
     'row',
-    'w-100',
     'align-items-center',
     `justify-content-${mobileAlignment}`,
     desktopAlignment,
@@ -122,34 +121,38 @@ const SectionCallToAction = ({
 
   let bgImage = params['background_image'];
 
+  let mobileBg = bgImage.mobile;
+  let desktopBg = bgImage.desktop;
+
   return (
     <section
-      className={classNames('Section', className)}
+      className={classNames('Section', className, {
+        '-bg-img': bgImage ? true : false,
+      })}
       style={{
-        color: params['text_colour'],
-        backgroundColor: params['background_colour'],
+        color: params['text_color'],
+        backgroundColor: params['background_color'],
       }}
     >
-      {bgImage && (
+      {mobileBg && (
         <img
-          className="Section__bgImage"
-          src={bgImage.url}
-          width={bgImage.width}
-          height={bgImage.height}
-          alt={bgImage.alt}
+          className="Section__bgImage -mobile"
+          src={mobileBg.url}
+          width={mobileBg.width}
+          height={mobileBg.height}
+          alt={mobileBg.alt}
         />
       )}
-      <div
-        className={classNames(
-          'container',
-          'Section__container',
-          'd-flex',
-          'align-items-stretch',
-          {
-            '-overlay': bgImage ? true : false,
-          },
-        )}
-      >
+      {desktopBg && (
+        <img
+          className="Section__bgImage -desktop"
+          src={desktopBg.url}
+          width={desktopBg.width}
+          height={desktopBg.height}
+          alt={desktopBg.alt}
+        />
+      )}
+      <div className={classNames('container', 'Section__container')}>
         <div className={rowClasses}>
           {hasMedia && <SectionMedia media={media} />}
           <SectionBody data={content}>{children}</SectionBody>

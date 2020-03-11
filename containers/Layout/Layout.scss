@@ -8,6 +8,7 @@
 
 @import '~@/static/scss/type';
 
+@import '~@/static/scss/custom/grid';
 @import '~@/static/scss/custom/modal';
 @import '~@/static/scss/custom/accordion';
 
@@ -60,6 +61,7 @@ img {
 }
 
 .Section {
+  display: flex;
   position: relative;
   margin-bottom: 1.0rem;
   background-size: cover;
@@ -71,11 +73,44 @@ img {
   }
 
   &__container {
+    display: flex;
     padding: 3.6rem;
 
     @include media-breakpoint-up(lg) {
       padding-top: 4.8rem;
       padding-bottom: 4.8rem;
+    }
+  }
+
+  &.-bg-img {
+    @include media-breakpoint-up(lg) {
+      min-height: 450vw/1440 * 100;
+    }
+  }
+
+  &__bgImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    object-fit: cover;
+    height: 100%;
+
+    &.-mobile {
+      @include media-breakpoint-up(lg) {
+        &:not(:only-of-type) {
+          display: none;
+        }
+      }
+    }
+
+    &.-desktop {
+      @include media-breakpoint-down(md) {
+        &:not(:only-of-type) {
+          display: none;
+        }
+      }
     }
   }
 }

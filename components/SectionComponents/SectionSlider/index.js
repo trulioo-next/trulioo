@@ -10,12 +10,12 @@ const SectionSlider = props => {
   return (
     <section>
       <ImageSlider {...settings}>
-        {props.slides.map(({ image, title, text }, slideIndex) => (
+        {props.slides.map(({ image, title, content }, slideIndex) => (
           <ImageSlider.Item
             key={slideIndex}
             image={image}
             title={title}
-            text={text}
+            text={content}
           />
         ))}
       </ImageSlider>

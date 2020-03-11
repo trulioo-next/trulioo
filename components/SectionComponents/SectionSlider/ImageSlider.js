@@ -54,6 +54,7 @@ ImageSlider.Item = SliderItem;
 ImageSlider.propTypes = {
   arrows: PropTypes.bool,
   className: PropTypes.string,
+  children: PropTypes.node,
 };
 ImageSlider.defaultProps = {
   arrows: false,

@@ -17,21 +17,6 @@
     }
   }
 
-  &__bgImage {
-    width: 100%;
-    height: auto;
-
-    @include media-breakpoint-down(md) {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      object-fit: cover;
-      height: 100%;
-    }
-  }
-
   &__media {
     margin-bottom: 1.0rem;
 
@@ -75,6 +60,11 @@
       &:not(.Button) {
         text-transform: uppercase;
         margin-left: 1.2rem;
+
+        &:hover, &:focus {
+          color: currentColor;
+          text-decoration: underline;
+        }
 
         @include media-breakpoint-up(lg) {
           margin-left: 4.0rem;
