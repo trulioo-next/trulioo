@@ -13,7 +13,8 @@
   color: $white;
   text-transform: uppercase;
   text-align: center;
-  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out,
+    border-color 200ms ease-in-out;
 
   @include media-breakpoint-up(lg) {
     border-radius: 0.8rem;
@@ -29,7 +30,8 @@
     background-color: transparent;
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $link-hover-color;
     color: $white;
     text-decoration: none;

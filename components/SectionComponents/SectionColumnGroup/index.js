@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react';
 
-/**
- * TODO: Build component.
- */
+import ColumnGroup from '@/components/ColumnGroup';
 
 const SectionColumnGroup = props => {
-  console.log('SectionColumnGroup  PROPS :: ', props);
+  // console.log('SectionColumnGroup  PROPS :: ', props);
 
-  return <div>Section Column Group</div>;
+  return (
+    <section className="Section">
+      <div className="container-fluid">
+        <ColumnGroup>
+          {props.blocks.map((item, i) => {
+            return (
+              <ColumnGroup.Item
+                item={item}
+                i={i}
+                key={`column-group-item-${i}`}
+              />
+            );
+          })}
+        </ColumnGroup>
+      </div>
+    </section>
+  );
 };
 
 SectionColumnGroup.defaultProps = {};

@@ -95,7 +95,6 @@
     color: $gray;
     z-index: 1;
 
-
     &:not(.-nested) {
       display: flex;
       align-items: center;
@@ -165,7 +164,8 @@
   }
 
   &__link {
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: none;
     }
   }
@@ -178,7 +178,8 @@
     color: inherit;
     padding: 0;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: $link-hover-color;
     }
   }

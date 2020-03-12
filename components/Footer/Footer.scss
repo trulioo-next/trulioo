@@ -75,7 +75,8 @@
     background-color: $white;
     color: $black;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: $link-hover-color;
       color: $white;
     }

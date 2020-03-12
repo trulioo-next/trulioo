@@ -18,7 +18,7 @@
   }
 
   &__media {
-    margin-bottom: 1.0rem;
+    margin-bottom: 1rem;
 
     img {
       width: 100%;
@@ -30,15 +30,15 @@
     margin-bottom: 0.8rem;
 
     @include media-breakpoint-up(lg) {
-      font-size: 2.0rem;
+      font-size: 2rem;
       margin-bottom: 1.6rem;
     }
   }
 
   &__title {
     @include media-breakpoint-up(lg) {
-      font-size: 4.0rem;
-      margin-bottom: 2.0rem;
+      font-size: 4rem;
+      margin-bottom: 2rem;
     }
   }
 
@@ -61,13 +61,14 @@
         text-transform: uppercase;
         margin-left: 1.2rem;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           color: currentColor;
           text-decoration: underline;
         }
 
         @include media-breakpoint-up(lg) {
-          margin-left: 4.0rem;
+          margin-left: 4rem;
         }
       }
     }
