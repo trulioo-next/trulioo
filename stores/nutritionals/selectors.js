@@ -28,7 +28,7 @@
  export const lastFourSelector = (slug) => {
  	return (state) => {
 		let nutritionals = [];
-		console.log('NUTRU', state.nutritionals, slug  )
+		console.log('NUTRITIONALS ::>>> SELECTOR ', state.nutritionals  )
 		// if(state.nutritionals.menuItems) {
 		// 	let counter = 0;
 		// 	for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {

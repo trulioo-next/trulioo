@@ -59,6 +59,7 @@ App.prepare().then(() => {
     return handle(req, res, actualPage, queryParams);
   });
 
+
   server.get('/_preview/:id/:rev/:type/:status/:wpnonce', (req, res) => {
     const actualPage = '/preview';
     const { id, rev, type, status, wpnonce } = req.params;
@@ -73,7 +74,7 @@ App.prepare().then(() => {
   server.get('/menu/:slug/:slug', (req, res) => {
     App.render(req, res, '/menu/Category/Product', { slug: req.params.slug });
   });
-  
+ 
   server.get('*', (req, res) => {
     if (req.url.includes('/sw')) {
       const filePath = join(__dirname, 'static', 'workbox', 'sw.js');

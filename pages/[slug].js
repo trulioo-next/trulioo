@@ -19,7 +19,6 @@ const Page = (props) => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />
   }
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(reqPageDataAction({ payload: props.query.slug }));
