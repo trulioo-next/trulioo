@@ -8,11 +8,10 @@ import userSelectors from '../../stores/user/selectors'
 import menuSelectors from '../../stores/nutritionals/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Link from "next/link";
 import './Menu.scss';
 
 class Menu extends React.Component {
@@ -23,25 +22,16 @@ class Menu extends React.Component {
       isLoading:false
     }
   }
-
+  
   static async getInitialProps({ isServer, store }) {
     return {}
   }
 
   componentDidMount() { 
-
-      // load the data 
-      this.props.getTheData()
-
-
-
+    this.props.getTheData()
   }
   componentDidUpdate() { }
-
-  goToTaxonomy( taxonomy ) {
-    console.log('taxonomy selected ', taxonomy )
-  }
-
+  
   buildColumnRows() {
     
     let data = this.props.data;
@@ -51,10 +41,12 @@ class Menu extends React.Component {
          counter++;
          let image = item.image ? item.image.url : 'https://via.placeholder.com/150'; 
          return <Col className="no--margins" xs={12} md={3} key={'tax-'+counter}>
+         <Link href={'/menu/'+item.slug}>
            <div className="block--padding">
              <div className="item__title">{item.name}</div>
-             <div className="background--image"><img onClick={ this.goToTaxonomy(item.slug) } src={image} /></div>
+             <div className="background--image"><img src={image} /></div>
            </div>
+           </Link>
          </Col>
        
       });
@@ -62,7 +54,7 @@ class Menu extends React.Component {
      return containers;
     }
   }
- 
+  //
   render() {
 
     let rows = this.buildColumnRows();

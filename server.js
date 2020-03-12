@@ -51,34 +51,29 @@ App.prepare().then(() => {
   server.get('/', (req, res) => {
     cacher(req, res, '/');
   });
-   
-
-   server.get('/page/:slug', (req, res) => {
-      const actualPage = '/page';
-      const queryParams = { slug: req.params.slug, apiRoute: 'page' };
-      return handle(req, res, actualPage, queryParams);
-    });
-
-   server.get('/post/:slug', (req, res) => {
-      const actualPage = '/post';
-      const queryParams = { slug: req.params.slug, apiRoute: 'page' };
-      app.render(req, res, actualPage, queryParams);
-    });
-
-    server.get('/category/:slug', (req, res) => {
-      const actualPage = '/category';
-      const queryParams = { slug: req.params.slug };
-      app.render(req, res, actualPage, queryParams);
-    });
-
-    server.get('/_preview/:id/:rev/:type/:status/:wpnonce', (req, res) => {
-      const actualPage = '/preview';
-      const { id, rev, type, status, wpnonce } = req.params;
-      const queryParams = { id, rev, type, status, wpnonce };
-      app.render(req, res, actualPage, queryParams);
-    });
 
 
+  server.get('/page/:slug', (req, res) => {
+    const actualPage = '/page';
+    const queryParams = { slug: req.params.slug, apiRoute: 'page' };
+    return handle(req, res, actualPage, queryParams);
+  });
+
+  server.get('/_preview/:id/:rev/:type/:status/:wpnonce', (req, res) => {
+    const actualPage = '/preview';
+    const { id, rev, type, status, wpnonce } = req.params;
+    const queryParams = { id, rev, type, status, wpnonce };
+    App.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/menu/:slug', (req, res) => {
+    App.render(req, res, '/menu/Category', { slug: req.params.slug });
+  });
+
+  server.get('/menu/:slug/:slug', (req, res) => {
+    App.render(req, res, '/menu/Category/Product', { slug: req.params.slug });
+  });
+  
   server.get('*', (req, res) => {
     if (req.url.includes('/sw')) {
       const filePath = join(__dirname, 'static', 'workbox', 'sw.js');

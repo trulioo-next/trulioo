@@ -24,8 +24,27 @@
    return nutritionals
  }
 
+ //
+ export const lastFourSelector = (slug) => {
+ 	return (state) => {
+		let nutritionals = [];
+		console.log('NUTRU', state.nutritionals, slug  )
+		// if(state.nutritionals.menuItems) {
+		// 	let counter = 0;
+		// 	for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
+		// 		 counter++;
+		// 		 if(counter < 4) {
+		// 				nutritionals.push(state.nutritionals.menuItems)
+		// 		 }
+		// 	} 
+		// }
 
-  export const taxonomiesSelector = (state) => {
+	   return state.nutritionals
+	}
+ }
+
+
+ export const taxonomiesSelector = (state) => {
    return state.nutritionals.taxonomies
  }	
 
@@ -99,5 +118,6 @@
 export default {
   nutritionalsSelector,
   nutritionalByTaxonomySelector,
-  taxonomiesSelector
+  taxonomiesSelector,
+  lastFourSelector
 }
