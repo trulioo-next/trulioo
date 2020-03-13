@@ -17,6 +17,7 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
     'SiteHeader__item',
     {
       '-has-children': item.children.length > 0,
+      '-active': isOpen,
     },
     className,
   );
@@ -32,11 +33,7 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
       >
         <button className="SiteHeader__toggle -dropdown">
           {item.name}
-          <span
-            className={classNames('SiteHeader__indicator', {
-              '-toggled': isOpen,
-            })}
-          >
+          <span className="SiteHeader__indicator">
             <CaretIcon />
           </span>
         </button>

@@ -1,33 +1,50 @@
-@import '~@/static/scss/variables';
-
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import '~@/static/scss/component-includes';
 
 .Button {
   display: inline-block;
   appearance: none;
-  border-radius: 2px;
+  border-radius: 0.3rem;
   border: 0;
   background-color: $black;
-  padding: 3px 16px;
-  line-height: 9px;
-  font-size: 7.8px;
+  padding: 0.5em 2em 0.4em;
+  line-height: 1.125;
+  font-size: 0.78rem;
   font-weight: 500;
   color: $white;
   text-transform: uppercase;
   text-align: center;
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out,
+    border-color 200ms ease-in-out;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.2rem;
+  }
 
   @include media-breakpoint-up(lg) {
-    border-radius: 8px;
-    padding: 20px 36px;
-    line-height: 24px;
-    font-size: 20px;
+    border-radius: 0.8rem;
+    padding: 1.6rem 3.6rem;
+    line-height: 2.4rem;
+    font-size: 1.5rem;
+  }
+
+  &.-outlined {
+    border-width: 1px;
+    border-style: solid;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $link-hover-color;
+    color: $white;
+    text-decoration: none;
+    border-color: $link-hover-color;
   }
 
   p + & {
     @include media-breakpoint-up(lg) {
-      margin-top: 1rem;
+      margin-top: 1.6rem;
     }
   }
 }

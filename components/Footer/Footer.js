@@ -35,14 +35,14 @@ const Footer = () => (
       <div className="container">
         <div className="row justify-content-between">
           <div className="col col-12 col-lg-4 order-lg-last">
-            <h2 className="SiteFooter__heading">Online Community</h2>
-            <Subscribe />
+            <h2 className="SiteFooter__heading h4">Online Community</h2>
+            <Subscribe prefix="SiteFooter" social />
           </div>
           <div className="col col-lg-7">
             <div className="row">
               {links.map(({ href, as, label, subnav }, i) => (
                 <div key={`footer-item-${i}`} className="col">
-                  <h2 className="SiteFooter__heading">{label}</h2>
+                  <h2 className="SiteFooter__heading h4">{label}</h2>
                   {subnav && <NavList items={subnav} i={i} />}
                 </div>
               ))}

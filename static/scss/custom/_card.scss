@@ -1,0 +1,21 @@
+.Card {
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Override Bootstrap defaults.
+.card {
+  &-body,
+  &-footer {
+    @include media-breakpoint-up(lg) {
+      padding: 1.6rem 3.5rem;
+    }
+  }
+
+  &-footer {
+    border-top: solid 1px $text-muted;
+    background: none;
+  }
+}

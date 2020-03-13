@@ -29,7 +29,9 @@ const Form = () => (
       </div>
     </div>
     <div id="check-balance-result" className="form-group">
-      <p>Your balance is <strong>$</strong></p>
+      <p>
+        Your balance is <strong>$</strong>
+      </p>
     </div>
   </form>
 );

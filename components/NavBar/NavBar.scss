@@ -2,11 +2,7 @@
  * Navbar
  */
 
-@import '~@/static/scss/variables';
-
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import '~@/static/scss/component-includes';
 
 .SiteHeader {
   $block: &;
@@ -16,7 +12,7 @@
   left: 0;
   right: 0;
   background-color: $white;
-  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   display: flex;
   width: 100%;
   align-items: stretch;
@@ -25,11 +21,11 @@
   z-index: 100;
 
   @include media-breakpoint-up(lg) {
-    padding: 0 42px 0 63px;
+    padding: 0 4.2rem 0 6.3rem;
 
     &:hover {
       &:after {
-        height: 12px;
+        height: 1.2rem;
       }
     }
   }
@@ -40,14 +36,14 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 0.1rem;
     background-color: $light-green;
     transition: height 300ms ease-in-out;
   }
 
   &__logo {
     display: inline-block;
-    max-width: 130px;
+    max-width: 13rem;
     flex: 0 0 auto;
 
     @include media-breakpoint-down(md) {
@@ -58,10 +54,9 @@
     }
 
     @include media-breakpoint-up(lg) {
-      max-width: 200px;
-      margin-right: 38px;
-      padding-top: 26px;
-      padding-bottom: 34px;
+      max-width: 20rem;
+      margin-top: 2.8rem;
+      margin-bottom: 3.4rem;
     }
 
     svg {
@@ -92,32 +87,37 @@
   }
 
   &__item {
-    margin-left: 16px;
+    margin-left: 1.6rem;
     display: block;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1.4rem;
     text-transform: uppercase;
     color: $gray;
     z-index: 1;
 
-    @include media-breakpoint-up(lg) {
-      margin-right: 16px;
-      margin-left: 16px;
-    }
-
     &:not(.-nested) {
       display: flex;
       align-items: center;
+
+      @include media-breakpoint-up(lg) {
+        margin-right: 1.6rem;
+
+        &:first-child {
+          margin-left: 5.5rem;
+        }
+      }
     }
 
     &.-nested {
       @include make-col-ready();
-      font-size: 18px;
+      font-weight: 400;
+      font-size: 1.8rem;
       text-transform: none;
       margin-right: 0;
-      margin-bottom: 24px;
+      margin-bottom: 2.6rem;
       margin-left: 0;
       padding-bottom: 0;
+      color: $black;
 
       &.col,
       &:last-child {
@@ -131,17 +131,23 @@
       }
     }
 
-    &.-hovered {
-      #{$block}__indicator {
-        transform: rotate(180deg);
+    &.-has-children {
+      &.-active {
+        #{$block}__toggle {
+          color: $link-hover-color;
+        }
+
+        #{$block}__indicator {
+          transform: rotate(180deg);
+        }
       }
     }
   }
 
   &__indicator {
-    margin-top: -2px;
-    margin-left: 8px;
-    height: 10px;
+    margin-top: -0.2rem;
+    margin-left: 0.8rem;
+    height: 1rem;
     padding: 0;
     display: inline-block;
     vertical-align: middle;
@@ -157,6 +163,13 @@
     }
   }
 
+  &__link {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
   &__toggle {
     background: none;
     border: 0;
@@ -168,7 +181,6 @@
     &:hover,
     &:focus {
       color: $link-hover-color;
-      text-decoration: underline;
     }
   }
 
@@ -204,22 +216,22 @@
 
       #{$block}__submenu:not(.-nested) {
         @include make-row();
-        padding: 32px 144px;
+        padding: 4rem 14.4rem;
       }
     }
   }
 
   &__subnavHeading {
     font-weight: 900;
-    line-height: 31px;
-    font-size: 25px;
+    line-height: 3rem;
+    font-size: 2.3rem;
   }
 
   &__submenu {
     @include make-row();
     position: relative;
     display: block;
-    padding: 32px 0;
+    padding: 3.2rem 0;
     justify-content: center;
 
     &:before {
@@ -232,23 +244,11 @@
       width: 100vw;
     }
 
-    .Button {
-      background-color: $white;
-      color: $black;
-      border: solid 1px $black;
+    &.-nested {
+      #{$block}__item {
+        margin-bottom: 1.8rem;
+      }
     }
-  }
-}
-
-.search-toggle {
-  border: 0;
-  padding: 0;
-  background: none;
-  color: $gray;
-
-  &:hover,
-  &:focus {
-    color: $link-hover-color;
   }
 }
 
@@ -256,6 +256,7 @@
   display: flex;
   flex: 0 0 auto;
   margin: 0;
+  padding: 0;
   overflow-y: auto;
 
   &__item {
@@ -264,10 +265,10 @@
 
   &__icon {
     display: inline-block;
-    height: 20px;
+    height: 2rem;
 
     @include media-breakpoint-up(lg) {
-      height: 34px;
+      height: 3.4rem;
     }
 
     svg {
@@ -277,9 +278,9 @@
 
   &__label {
     display: inline-block;
-    margin-left: 16px;
+    margin-left: 1.2rem;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       display: none;
     }
   }
@@ -292,8 +293,8 @@
   bottom: 0;
   background-color: $white;
   z-index: 105;
-  line-height: 11px;
-  font-size: 9px;
+  line-height: 1.2rem;
+  font-size: 1rem;
 
   &__toggle {
     border: 0;
@@ -302,8 +303,8 @@
 
     &.-menu {
       display: inline-flex;
-      width: 28px;
-      height: 20px;
+      width: 2.8rem;
+      height: 2rem;
       flex-direction: column;
       align-items: stretch;
       justify-content: space-between;
@@ -313,8 +314,8 @@
       }
 
       > div {
-        border-radius: 4px;
-        max-height: 4px;
+        border-radius: 0.4rem;
+        max-height: 0.4rem;
         flex: auto;
         background-color: $gray;
       }
@@ -324,10 +325,10 @@
       position: absolute;
       top: 0;
       right: 0;
-      padding: 10px 16px;
+      padding: 1rem 1.6rem;
       display: block;
-      width: 45px;
-      height: 33px;
+      width: 4.5rem;
+      height: 3.3rem;
       z-index: 5;
 
       &::before,
@@ -336,9 +337,9 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 16px;
-        height: 2px;
-        border-radius: 1px;
+        width: 1.6rem;
+        height: 0.2rem;
+        border-radius: 0.1rem;
         background-color: $gray;
         transform-origin: 50% 50%;
       }
@@ -354,16 +355,16 @@
   }
 
   &__rewards {
-    padding: 10px 46px 10px 16px;
-    min-height: 48px;
+    padding: 1rem 4.6rem 1rem 1.6rem;
+    min-height: 4.8rem;
   }
 
   &__rewardsHeading {
-    line-height: 16px;
-    font-size: 14px;
+    line-height: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: $dark-green;
-    margin-bottom: 2px;
+    margin-bottom: 0.2rem;
   }
 
   &__rewardsNav {
@@ -398,8 +399,8 @@
 
   &__link {
     display: block;
-    padding: 9px 16px;
-    font-size: 14px;
+    padding: 0.9rem 1.6rem;
+    font-size: 1.4rem;
     font-weight: 900;
     line-height: 1;
   }
@@ -409,16 +410,16 @@
     display: flex;
     top: 0;
     right: 0;
-    height: 32px;
+    height: 3.2rem;
     border: 0;
-    padding: 16px;
+    padding: 1.6rem;
     background: none;
     font-size: 0;
     color: $gray;
     align-items: center;
 
     svg {
-      height: 10px;
+      height: 1rem;
     }
 
     &.-toggled {
@@ -427,19 +428,19 @@
   }
 
   &__collapse {
-    padding: 0 16px 8px;
+    padding: 0 1.6rem 0.8rem;
   }
 
   &__subnav {
     display: block;
     padding: 0;
     margin-left: 1em;
-    line-height: 13px;
-    font-size: 11px;
+    line-height: 1.3rem;
+    font-size: 1.1rem;
 
     &.-nested {
       margin-left: 0;
-      margin-bottom: 16px;
+      margin-bottom: 1.6rem;
     }
   }
 
@@ -448,19 +449,19 @@
 
     a {
       display: block;
-      padding-top: 2px;
-      padding-bottom: 2px;
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
     }
   }
 
   &__subnavHeading {
     display: block;
     font-weight: 900;
-    margin-bottom: 4px;
+    margin-bottom: 0.4rem;
   }
 
   &__search {
-    padding: 24px 16px;
+    padding: 2.4rem 1.6rem;
   }
 }
 
@@ -471,8 +472,8 @@
     left: 0;
     right: 0;
     background-color: $white;
-    box-shadow: 0 4px 8px 0 rgba($dark-gray, 0.25);
-    padding: 16px 16px 20px;
+    box-shadow: 0 0.4rem 0.8rem 0 rgba($dark-gray, 0.25);
+    padding: 1.6rem 1.6rem 2rem;
     overflow: hidden;
   }
 
@@ -482,44 +483,44 @@
     flex-wrap: wrap;
     align-items: stretch;
     border: solid 1px #c7c7c7;
-    border-radius: 16px;
+    border-radius: 1.6rem;
     overflow: hidden;
 
     @include media-breakpoint-up(lg) {
       border-radius: 0;
       border: 0;
-      box-shadow: 0 3px 6px 0 rgba($dark-gray, 0.25);
+      box-shadow: 0 0.3rem 0.6rem 0 rgba($dark-gray, 0.25);
     }
   }
 
   &__icon {
     position: absolute;
-    left: 16px;
+    left: 1.6rem;
     display: flex;
-    height: 34px;
+    height: 3.4rem;
     margin: 0;
     color: $blue;
     align-items: center;
 
     svg {
-      height: 20px;
+      height: 2rem;
     }
   }
 
   &__input {
     border: 0;
-    height: 34px;
-    padding: 11px 26px 9px 48px;
+    height: 3.4rem;
+    padding: 1.1rem 2.6rem 0.9rem 4.8rem;
     line-height: 1;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: $black;
 
     @include media-breakpoint-up(lg) {
       height: auto;
-      padding: 16px 42px;
-      line-height: 24px;
+      padding: 1.6rem 4.2rem;
+      line-height: 2.4rem;
       font-weight: 500;
-      font-size: 20px;
+      font-size: 2rem;
       width: 100%;
     }
 

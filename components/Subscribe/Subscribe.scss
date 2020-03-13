@@ -1,37 +1,38 @@
-@import '~@/static/scss/variables';
-
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-
-@import '~bootstrap/scss/grid';
+@import '~@/static/scss/component-includes';
 
 .Subscribe {
   $block: &;
 
   @include make-row();
 
+  @include media-breakpoint-up(lg) {
+    margin-left: -1.8rem;
+    margin-right: -1.8rem;
+  }
+
   &__label {
     display: block;
-    margin-bottom: 2px;
-    line-height: 9px;
-    font-size: 7.8px;
+    margin-bottom: 0.2rem;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 1.2rem;
+    }
 
     @include media-breakpoint-up(lg) {
-      line-height: 18px;
-      font-size: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 2.1rem;
     }
 
     &.-checkbox {
       position: relative;
-      padding-left: 19px;
+      padding-left: 1.9rem;
+
+      @include media-breakpoint-up(md) {
+        font-size: 0.9em;
+      }
 
       @include media-breakpoint-up(lg) {
-        line-height: 19px;
-        font-size: 12px;
         padding-right: 20%;
-        padding-left: 21px;
+        padding-left: 2.1rem;
       }
 
       #{$block}__checkbox {
@@ -40,7 +41,7 @@
         left: 0;
 
         @include media-breakpoint-up(lg) {
-          top: 2px;
+          top: 0.2rem;
         }
       }
     }
@@ -48,24 +49,35 @@
 
   &__field {
     @include make-col-ready();
-    margin-bottom: 9px;
+    margin-bottom: 0.9rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-left: 1.8rem;
+      padding-right: 1.8rem;
+    }
   }
 
   &__input {
     width: 100%;
     appearance: none;
     border: 0;
-    border-radius: 8px;
-    padding: 7px 5px 4px;
+    border-radius: 0.8rem;
+    padding: 0.7rem 0.5rem 0.4rem;
     background-color: $white;
-    line-height: 9px;
-    font-size: 7.8px;
+    line-height: 0.9rem;
+    font-size: 0.78rem;
+
+    @include media-breakpoint-up(md) {
+      border-radius: 1.6rem;
+      padding: 1rem 4.5rem 0.8rem 1.2rem;
+      font-size: 1.4rem;
+    }
 
     @include media-breakpoint-up(lg) {
-      border-radius: 23px;
-      padding: 10px 89px 10px 23px;
-      line-height: 24px;
-      font-size: 20px;
+      border-radius: 2.3rem;
+      padding: 1.4rem 8.9rem 1.6rem 2.3rem;
+      line-height: 2.4rem;
+      font-size: 2rem;
       font-weight: 500;
     }
 
@@ -77,10 +89,10 @@
   &__checkbox {
     display: inline-block;
     vertical-align: top;
-    margin-right: 6px;
+    margin-right: 0.6rem;
 
     @include media-breakpoint-up(lg) {
-      margin-right: 9px;
+      margin-right: 0.9rem;
     }
   }
 
@@ -91,18 +103,31 @@
       display: flex;
       align-items: center;
     }
+
+    @include media-breakpoint-up(lg) {
+      padding-left: 1.8rem;
+      padding-right: 1.8rem;
+    }
   }
 
-  .Button {
+  &__submit {
     display: block;
+
+    @include media-breakpoint-up(lg) {
+      line-height: 1.5rem;
+      font-weight: 900;
+      font-size: 1.3rem;
+      padding-top: 1.2rem;
+      padding-bottom: 1.2rem;
+    }
 
     + .Social {
       @include media-breakpoint-down(md) {
-        margin-left: 18px;
+        margin-left: 1.8rem;
       }
 
       @include media-breakpoint-up(lg) {
-        margin-top: 34px;
+        margin-top: 3.4rem;
       }
     }
   }
