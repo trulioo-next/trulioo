@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import YouTubePlayer from 'react-player/lib/players/YouTube';
 import getVideoID from 'get-video-id';
-import Modal from 'react-bootstrap/modal';
+import Modal from 'react-bootstrap/Modal';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 
 import PlayIcon from '@/static/images/play.svg';
