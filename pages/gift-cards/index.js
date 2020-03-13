@@ -1,13 +1,8 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-import Modal from 'react-bootstrap/Modal';
-import Accordion from 'react-bootstrap/Accordion';
-
 import Layout from '@/containers/Layout';
 import Header from '@/components/Header';
-
-import './GiftCards.scss';
 
 import Hero from '@/components/Hero';
 import CheckBalanceSection from './components/CheckBalance';

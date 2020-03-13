@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -31,7 +32,9 @@ const ToolbarSearch = ({ i, expanded, setExpanded }) => {
     >
       <button
         role="tab"
-        className="SiteHeader__toggle -search"
+        className={classNames('SiteHeader__toggle', '-search', {
+          '-toggled': isOpen,
+        })}
         onClick={() => setExpanded(isOpen ? false : i)}
       >
         <ToolbarIcon>

@@ -1,11 +1,28 @@
-import React, { useEffect, useState } from "react";
- 
+import React, { useEffect, useState } from 'react';
 
-const SectionSlider = (props) => {
+import ImageSlider from '@/components/ImageSlider';
 
-	// console.log('SECTION SLIDER  PROPS :: ', props )
+import './SectionSlider.scss';
 
-    return <div>Slider Component</div>;
+const SectionSlider = props => {
+  // console.log('SECTION SLIDER  PROPS :: ', props);
+
+  var settings = props.settings;
+
+  return (
+    <section className="Section -slider">
+      <ImageSlider {...settings}>
+        {props.slides.map(({ image, title, content }, slideIndex) => (
+          <ImageSlider.Item
+            key={slideIndex}
+            image={image}
+            title={title}
+            text={content}
+          />
+        ))}
+      </ImageSlider>
+    </section>
+  );
 };
 
 SectionSlider.defaultProps = {};

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
- 
+import React, { useEffect, useState } from 'react';
 
-const SectionCallToAction = (props) => {
+import Section from './SectionCallToAction';
 
-	// console.log('CALL TO ACTION PROPS :: ', props )
+const SectionCallToAction = props => {
+  // console.log('CALL TO ACTION PROPS :: ', props);
 
-    return <div>Call To action Component</div>;
+  return (
+    <Section params={props.settings} media={props.media} content={props.body} />
+  );
 };
 
 SectionCallToAction.defaultProps = {};
