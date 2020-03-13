@@ -68,7 +68,7 @@ const ColumnGroupItem = React.forwardRef(({ item, i, ...props }, ref) => {
       <div className="ColumnGroup__media">{columnMedia}</div>
       <Body className="ColumnGroup__body">
         <div className="ColumnGroup__content">
-          <h2 className="ColumnGroup__title">{title}</h2>
+          <h2 className="h3 ColumnGroup__title">{title}</h2>
           <div className="ColumnGroup__excerpt">{excerpt}</div>
         </div>
         <div className="ColumnGroup__actions">

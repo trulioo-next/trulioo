@@ -280,7 +280,7 @@
     display: inline-block;
     margin-left: 1.2rem;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       display: none;
     }
   }

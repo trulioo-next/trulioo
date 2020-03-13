@@ -6,8 +6,6 @@
 }
 
 .row {
-  width: 100%;
-
   @include media-breakpoint-up(lg) {
     margin-left: -1.8rem;
     margin-right: -1.8rem;

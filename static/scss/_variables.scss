@@ -80,6 +80,10 @@ $container-max-widths: (
 
 $grid-gutter-width:           1.0rem;
 
+// Components
+
+$box-shadow: 0px 3px 6px #00000029;
+
 // Typography
 
 $font-family-sans-serif:      "Lab Grotesque", sans-serif;
@@ -128,3 +132,16 @@ $lead-font-weight:            500;
 $small-font-size:             1.2rem;
 
 $text-muted:                  #C0C0C0;
+
+// Card
+
+$card-spacer-y: 0.6rem;
+$card-spacer-x: 0.9rem;
+$card-border-width: 0;
+$card-border-radius: 0.7rem;
+
+// Modal
+
+$modal-inner-padding: 4rem;
+$modal-content-border-radius: 0;
+$modal-backdrop-opacity: 0;

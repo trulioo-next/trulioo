@@ -28,14 +28,14 @@ const SectionMedia = ({ media }) => {
       break;
   }
 
-  return <div className="col col-12 col-lg-5 Section__media">{mediaItem}</div>;
+  return <div className="col col-12 col-md-5 Section__media">{mediaItem}</div>;
 };
 
 const SectionCTA = ({ data, i }) => {
   const params = {
     href: data.url,
-    as: data.url,
-    target: data.target ? data.target : '_self',
+    as: data.target ? null : data.url,
+    target: data.target ? data.target : null,
   };
 
   if (i === 0) {
@@ -43,6 +43,14 @@ const SectionCTA = ({ data, i }) => {
       <Button className="Section__cta" {...params}>
         {data.title}
       </Button>
+    );
+  }
+
+  if (data.target) {
+    return (
+      <a className="Section__cta" {...params}>
+        {data.title} &rsaquo;
+      </a>
     );
   }
 
@@ -64,10 +72,11 @@ const SectionBody = props => {
     'Section__body',
     'col',
     `col-${mobileColumnSize}`,
+    { 'col-md-6': hasMedia },
     `col-lg-${desktopColumnSize}`,
     { 'offset-lg-1': hasMedia },
-    `text-${data['text_alignment'].mobile}`,
-    `text-lg-${data['text_alignment'].desktop}`,
+    `text-${data.text_alignment.mobile}`,
+    `text-lg-${data.text_alignment.desktop}`,
   );
 
   return (
@@ -102,24 +111,25 @@ const SectionCallToAction = ({
   className,
   children,
 }) => {
-  hasMedia = params['add_media_column'];
+  hasMedia = params.add_media_column;
 
   let mobileAlignment = 'center';
-  let desktopAlignment = null;
+  let desktopAlignment = 'center';
 
   if (!hasMedia) {
     mobileAlignment = content.position.mobile;
-    desktopAlignment = `justify-content-lg-${content.position.desktop}`;
+    desktopAlignment = content.position.desktop;
   }
 
   let rowClasses = classNames(
     'row',
     'align-items-center',
     `justify-content-${mobileAlignment}`,
-    desktopAlignment,
+    { 'justify-content-md-between': hasMedia },
+    `justify-content-lg-${desktopAlignment}`,
   );
 
-  let bgImage = params['background_image'];
+  let bgImage = params.background_image;
 
   let mobileBg = bgImage.mobile;
   let desktopBg = bgImage.desktop;
@@ -130,8 +140,8 @@ const SectionCallToAction = ({
         '-bg-img': bgImage ? true : false,
       })}
       style={{
-        color: params['text_color'],
-        backgroundColor: params['background_color'],
+        color: params.text_color,
+        backgroundColor: params.background_color,
       }}
     >
       {mobileBg && (

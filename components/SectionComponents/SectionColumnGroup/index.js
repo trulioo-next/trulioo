@@ -7,7 +7,7 @@ const SectionColumnGroup = props => {
 
   return (
     <section className="Section">
-      <div className="container-fluid">
+      <div className="container-fluid px-0">
         <ColumnGroup>
           {props.blocks.map((item, i) => {
             return (

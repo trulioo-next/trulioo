@@ -50,6 +50,8 @@
   }
 
   &__actions {
+    margin-top: 1em;
+
     @include media-breakpoint-up(lg) {
       margin-top: 5.5rem;
     }

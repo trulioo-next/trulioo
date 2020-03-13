@@ -3,13 +3,8 @@
 .SiteFooter {
   $block: &;
 
-  line-height: 0.9rem;
-  font-size: 0.78rem;
-
   @include media-breakpoint-up(lg) {
     font-weight: 500;
-    line-height: 1.8rem;
-    font-size: 1.3rem;
   }
 
   &__section {
@@ -38,22 +33,14 @@
     }
   }
 
-  &__heading {
-    line-height: 1.2rem;
-    font-size: 1rem;
-    font-weight: 900;
-
-    @include media-breakpoint-up(lg) {
-      line-height: 3rem;
-      font-size: 2.3rem;
-      margin-bottom: 1.8rem;
-    }
-  }
-
   &__links {
     display: block;
     margin: 0;
     padding: 0;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 2.4rem;
+    }
   }
 
   &__item {

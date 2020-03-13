@@ -4,22 +4,22 @@ import PropTypes from 'prop-types';
 
 import Slider from 'react-slick';
 
-import './Slider.scss';
+import './ImageSlider.scss';
 
 const SliderItem = ({ image, title, text }) => (
-  <figure className="Slider__item">
+  <figure className="ImageSlider__item">
     <img
-      className="Slider__image"
+      className="ImageSlider__image"
       src={image.url}
       width={image.width}
       height={image.height}
       alt={image.alt}
     />
     {(title || text) && (
-      <figcaption className="Slider__caption">
-        <h2 className="Slider__heading">{title}</h2>
+      <figcaption className="ImageSlider__caption">
+        <h2 className="ImageSlider__heading">{title}</h2>
         <div
-          className="Slider__text"
+          className="ImageSlider__text"
           dangerouslySetInnerHTML={{ __html: text }}
         ></div>
       </figcaption>
@@ -34,7 +34,7 @@ const ImageSlider = props => {
     speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
-    className: classNames('Slider', '-banner', props.className),
+    className: classNames('ImageSlider', props.className),
     cssEase: 'ease',
     arrows: props.arrows,
     responsive: [

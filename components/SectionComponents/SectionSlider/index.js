@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import ImageSlider from './ImageSlider';
+import ImageSlider from '@/components/ImageSlider';
+
+import './SectionSlider.scss';
 
 const SectionSlider = props => {
   // console.log('SECTION SLIDER  PROPS :: ', props);
@@ -8,7 +10,7 @@ const SectionSlider = props => {
   var settings = props.settings;
 
   return (
-    <section>
+    <section className="Section -slider">
       <ImageSlider {...settings}>
         {props.slides.map(({ image, title, content }, slideIndex) => (
           <ImageSlider.Item
