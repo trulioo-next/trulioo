@@ -7,17 +7,31 @@
     display: block;
     width: 100%;
     height: auto;
-    max-height: auto;
+
+    @include media-breakpoint-down(md) {
+      min-height: 160vw/375 * 100;
+      object-fit: cover;
+    }
   }
 
   &__container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     display: flex;
     align-items: center;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    &.-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
 
     .row {
       flex: 1 1 0;

@@ -4,13 +4,19 @@
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 
-.CheckBalance {
+.FAQ {
   &__section {
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+
     @include media-breakpoint-up(lg) {
-      .section-wrapper {
-        padding-left: 24px;
-        padding-right: 24px;
-      }
+      padding-top: 4.8rem;
+      padding-bottom: 4.8rem;
+    }
+
+    .container {
+      padding-left: 2.4rem;
+      padding-right: 2.4rem;
     }
   }
 }

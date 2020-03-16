@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from "react";
- 
+import React, { useEffect, useState } from 'react';
 
-const SectionHero = (props) => {
+import Hero from '@/components/Hero';
 
-	// Data in props  
- 
-    return <div>Hero markup here</div>;
+const SectionHero = props => {
+  // console.log('SectionHero  PROPS :: ', props);
+
+  return (
+    <Hero src={props.image.url} bgColor={props.background_color}>
+      <Hero.Title
+        title={props.title}
+        color={props.title_color}
+        as={props.sectionIndex === 0 ? 'h1' : 'h2'}
+      />
+      <Hero.Caption color={props.text_color}>{props.content}</Hero.Caption>
+    </Hero>
+  );
 };
 
 SectionHero.defaultProps = {};
