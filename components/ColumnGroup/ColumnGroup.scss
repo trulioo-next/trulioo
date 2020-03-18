@@ -58,7 +58,7 @@
   &__body {
     display: flex;
     flex-direction: column;
-    flex: 1 1 0;
+    flex: 1 1;
     justify-content: stretch;
     padding: 0.5rem 1rem;
 
@@ -68,7 +68,7 @@
   }
 
   &__content {
-    flex: 1 1 0;
+    flex: 1 1;
 
     @include media-breakpoint-down(md) {
       display: flex;
