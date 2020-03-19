@@ -6,6 +6,8 @@ import Slider from 'react-slick';
 
 import './ImageSlider.scss';
 
+// TODO: Implement hyperlink on slider item.
+
 const SliderItem = ({ image, title, text }) => (
   <figure className="ImageSlider__item">
     <img

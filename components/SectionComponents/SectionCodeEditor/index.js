@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
- 
+import React, { useEffect, useState } from 'react';
 
-const SectionCodeEditor = (props) => {
+const SectionCodeEditor = props => {
+  // console.log('SectionCodeEditor  PROPS :: ', props )
 
-	// console.log('SectionCodeEditor  PROPS :: ', props )
-
-    return <div>Section Code Editor</div>;
+  return (
+    <section
+      className="Section"
+      dangerouslySetInnerHTML={{ __html: props.wysiwyg }}
+    ></section>
+  );
 };
 
 SectionCodeEditor.defaultProps = {};

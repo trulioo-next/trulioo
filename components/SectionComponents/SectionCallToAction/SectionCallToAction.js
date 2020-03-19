@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import Button from '@/components/Button';
+import Video from '@/components/Video';
 
 import './SectionCallToAction.scss';
 
@@ -11,6 +12,7 @@ let hasMedia = false;
 const SectionMedia = ({ media }) => {
   let mediaItem;
   let type = media.type;
+  let colSize;
 
   switch (type) {
     case 'image':
@@ -22,13 +24,25 @@ const SectionMedia = ({ media }) => {
           alt={media.image.alt}
         />
       );
+      colSize = 5;
       break;
     case 'video':
-      // TODO: Video markup.
+      mediaItem = (
+        <Video
+          poster={media.image.url}
+          video={media.video}
+          className="Section__video"
+        />
+      );
+      colSize = 6;
       break;
   }
 
-  return <div className="col col-12 col-md-5 Section__media">{mediaItem}</div>;
+  return (
+    <div className={`col col-12 col-md-${colSize} Section__media`}>
+      {mediaItem}
+    </div>
+  );
 };
 
 const SectionCTA = ({ data, i }) => {
@@ -74,7 +88,6 @@ const SectionBody = props => {
     `col-${mobileColumnSize}`,
     { 'col-md-6': hasMedia },
     `col-lg-${desktopColumnSize}`,
-    { 'offset-lg-1': hasMedia },
     `text-${data.text_alignment.mobile}`,
     `text-lg-${data.text_alignment.desktop}`,
   );
@@ -114,7 +127,7 @@ const SectionCallToAction = ({
   hasMedia = params.add_media_column;
 
   let mobileAlignment = 'center';
-  let desktopAlignment = 'center';
+  let desktopAlignment = 'around';
 
   if (!hasMedia) {
     mobileAlignment = content.position.mobile;
@@ -151,6 +164,10 @@ const SectionCallToAction = ({
           width={mobileBg.width}
           height={mobileBg.height}
           alt={mobileBg.alt}
+          style={{
+            objectFit: params.background_size,
+            objectPosition: params.background_position,
+          }}
         />
       )}
       {desktopBg && (
@@ -160,6 +177,10 @@ const SectionCallToAction = ({
           width={desktopBg.width}
           height={desktopBg.height}
           alt={desktopBg.alt}
+          style={{
+            objectFit: params.background_size,
+            objectPosition: params.background_position,
+          }}
         />
       )}
       <div className={classNames('container', 'Section__container')}>

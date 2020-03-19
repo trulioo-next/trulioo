@@ -12,40 +12,42 @@ import SectionWysiwyg from './SectionComponents/SectionWysiwyg';
 import SectionCodeEditor from './SectionComponents/SectionCodeEditor';
 import ReusableComponent from './SectionComponents/ReusableComponent';
 
-const SectionMaker = ({ type, params }) => {
+const SectionMaker = ({ type, params, sectionIndex }) => {
   switch (type) {
     case 'section_hero_block':
-      return <SectionHero {...params} />;
+      return <SectionHero sectionIndex={sectionIndex} {...params} />;
 
     case 'section_slider_block':
-      return <SectionSlider {...params} />;
+      return <SectionSlider sectionIndex={sectionIndex} {...params} />;
 
     case 'section_call_to_action_block':
-      return <SectionCallToAction {...params} />;
+      return <SectionCallToAction sectionIndex={sectionIndex} {...params} />;
 
     case 'section_column_group_block':
-      return <SectionColumnGroup {...params} />;
+      return <SectionColumnGroup sectionIndex={sectionIndex} {...params} />;
 
     case 'section_faq_block':
-      return <SectionFaq {...params} />;
+      return <SectionFaq sectionIndex={sectionIndex} {...params} />;
 
     case 'section_get_delivery_address_block':
-      return <SectionGetDeliveryAddress {...params} />;
+      return (
+        <SectionGetDeliveryAddress sectionIndex={sectionIndex} {...params} />
+      );
 
     case 'section_7rewards_block':
-      return <Section7Rewards {...params} />;
+      return <Section7Rewards sectionIndex={sectionIndex} {...params} />;
 
     case 'section_newsletter_block':
-      return <SectionNewsletter {...params} />;
+      return <SectionNewsletter sectionIndex={sectionIndex} {...params} />;
 
     case 'section_wysiwyg_block':
-      return <SectionWysiwyg {...params} />;
+      return <SectionWysiwyg sectionIndex={sectionIndex} {...params} />;
 
     case 'section_code_editor_block':
-      return <SectionCodeEditor {...params} />;
+      return <SectionCodeEditor sectionIndex={sectionIndex} {...params} />;
 
     case 'reusable_component_block':
-      return <ReusableComponent {...params} />;
+      return <ReusableComponent sectionIndex={sectionIndex} {...params} />;
 
     default:
       return '';
