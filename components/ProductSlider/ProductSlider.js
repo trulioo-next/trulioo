@@ -20,12 +20,21 @@ const ProductSlider = props => {
     arrows: true,
     responsive: [
       {
-        breakpoint: 992,
+        breakpoint: 769,
         settings: {
           arrows: false,
           dots: true,
           slidesToShow: 3,
           slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 577,
+        settings: {
+          arrows: false,
+          dots: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],

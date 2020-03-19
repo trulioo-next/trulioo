@@ -5,12 +5,15 @@ import PropTypes from 'prop-types';
 import './Hero.scss';
 
 const Title = React.forwardRef(
-  ({ as: Component = 'h1', title, className, color, ...props }, ref) => {
+  (
+    { as: Component = 'h1', title, className, color, shadow, ...props },
+    ref,
+  ) => {
     return (
       <Component
         ref={ref}
         {...props}
-        className={classNames(className, 'Hero__title')}
+        className={classNames(className, 'Hero__title', { '-shadow': shadow })}
         style={{ color: color }}
       >
         {title}
@@ -26,17 +29,31 @@ Title.propTypes = {
   color: PropTypes.string,
 };
 
-const Caption = ({ className, children }) => (
-  <div className={classNames(className, 'Hero__caption')}>{children}</div>
+const Caption = ({ className, color, children }) => (
+  <div
+    className={classNames(className, 'Hero__caption')}
+    style={{ color: color }}
+    dangerouslySetInnerHTML={{ __html: children }}
+  ></div>
 );
 
-const Hero = ({ src, className, children }) => (
+Caption.propTypes = {
+  className: PropTypes.string,
+  color: PropTypes.string,
+  children: PropTypes.node,
+};
+
+const Hero = ({ src, bgColor, className, children }) => (
   <section
     className={classNames(className, 'Hero')}
-    style={{ backgroundImage: `url('${src}')` }}
+    style={{ backgroundColor: bgColor }}
   >
-    <img className="Hero__image" src={src} />
-    <div className="container Hero__container">
+    {src && <img className="Hero__image" src={src} />}
+    <div
+      className={classNames('container', 'Hero__container', {
+        '-overlay': src,
+      })}
+    >
       <div className="row">
         <div className="col text-center">{children}</div>
       </div>
@@ -46,6 +63,9 @@ const Hero = ({ src, className, children }) => (
 
 Hero.propTypes = {
   src: PropTypes.string,
+  bgColor: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.node,
 };
 Hero.Title = Title;
 Hero.Caption = Caption;

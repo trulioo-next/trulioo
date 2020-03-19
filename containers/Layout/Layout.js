@@ -17,7 +17,7 @@ import './Layout.scss';
 
 class Layout extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   componentDidMount() {

@@ -1,4 +1,5 @@
-h1, .h1 {
+h1,
+.h1 {
   font-size: 2.4rem;
 
   @include media-breakpoint-only(md) {
@@ -6,11 +7,12 @@ h1, .h1 {
   }
 
   @include media-breakpoint-up(lg) {
-    font-size: 7.0rem;
+    font-size: 7rem;
   }
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: 1.6rem;
 
   @include media-breakpoint-only(md) {
@@ -18,11 +20,12 @@ h2, .h2 {
   }
 
   @include media-breakpoint-up(lg) {
-    font-size: 4.0rem;
+    font-size: 4rem;
   }
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: 1.6rem;
 
   @include media-breakpoint-down(md) {
@@ -35,12 +38,13 @@ h3, .h3 {
   }
 
   @include media-breakpoint-up(lg) {
-    font-size: 3.0rem;
+    font-size: 3rem;
     margin-bottom: 2.4rem;
   }
 }
 
-h4, .h4 {
+h4,
+.h4 {
   font-size: 1.4rem;
 
   @include media-breakpoint-down(md) {
@@ -57,7 +61,8 @@ h4, .h4 {
   }
 }
 
-h5, .h5 {
+h5,
+.h5 {
   font-size: inherit;
 
   @include media-breakpoint-down(md) {
@@ -69,11 +74,12 @@ h5, .h5 {
   }
 
   @include media-breakpoint-up(lg) {
-    font-size: 2.0rem;
+    font-size: 2rem;
   }
 }
 
-h6, .h6 {
+h6,
+.h6 {
   font-size: inherit;
   font-weight: 500;
 
@@ -82,9 +88,15 @@ h6, .h6 {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   small {
-    font-size: 1.5rem;
+    display: block;
+    font-size: 1.3rem;
   }
 }
 

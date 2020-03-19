@@ -6,15 +6,13 @@
 
   &__playTrigger {
     position: relative;
-    display: flex;
     appearance: none;
     background: none;
     border: 0;
     padding: 0;
     width: 100%;
-    height: percentage(480/720);
-    align-items: center;
-    justify-content: center;
+    height: 0;
+    padding-top: percentage(480/720);
 
     &:hover,
     &:focus {
@@ -34,9 +32,13 @@
   }
 
   &__playIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 25%;
     height: auto;
     z-index: 5;
+    transform: translate(-50%, -50%);
     opacity: 0.75;
     transition: opacity 400ms ease-in-out;
   }
