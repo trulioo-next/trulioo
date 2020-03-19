@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
 import ImageSlider from '@/components/ImageSlider';
@@ -11,7 +12,14 @@ const SectionSlider = props => {
 
   return (
     <section className="Section -slider">
-      <ImageSlider {...settings}>
+      <ImageSlider
+        className={classNames({
+          '-hasCaption': props.slides.some(slide => {
+            return slide.title || slide.content;
+          }),
+        })}
+        {...settings}
+      >
         {props.slides.map(({ image, title, content }, slideIndex) => (
           <ImageSlider.Item
             key={slideIndex}

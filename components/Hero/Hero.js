@@ -5,12 +5,15 @@ import PropTypes from 'prop-types';
 import './Hero.scss';
 
 const Title = React.forwardRef(
-  ({ as: Component = 'h1', title, className, color, ...props }, ref) => {
+  (
+    { as: Component = 'h1', title, className, color, shadow, ...props },
+    ref,
+  ) => {
     return (
       <Component
         ref={ref}
         {...props}
-        className={classNames(className, 'Hero__title')}
+        className={classNames(className, 'Hero__title', { '-shadow': shadow })}
         style={{ color: color }}
       >
         {title}

@@ -34,7 +34,7 @@ body {
   font-family: $font-family-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.020em;
+  letter-spacing: 0.02em;
 
   @include media-breakpoint-up(md) {
     font-size: 1.2rem;
@@ -56,7 +56,7 @@ img {
   height: auto;
   width: 100%;
   min-height: 100vh;
-  max-width: 145.0rem;
+  max-width: 145rem;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
@@ -69,7 +69,7 @@ img {
 .Section {
   display: flex;
   position: relative;
-  margin-bottom: 1.0rem;
+  margin-bottom: 1rem;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -88,9 +88,11 @@ img {
     padding: 2.4rem;
     width: 100%;
     flex: 1 1;
+    // flex-direction: column;
+    flex-wrap: wrap;
 
     > .row {
-      flex: 1 1;
+      flex: 1 1 100%;
     }
 
     @include media-breakpoint-up(md) {

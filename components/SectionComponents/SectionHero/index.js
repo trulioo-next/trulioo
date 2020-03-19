@@ -11,6 +11,7 @@ const SectionHero = props => {
         title={props.title}
         color={props.title_color}
         as={props.sectionIndex === 0 ? 'h1' : 'h2'}
+        shadow={props.title_shadow}
       />
       <Hero.Caption color={props.text_color}>{props.content}</Hero.Caption>
     </Hero>
