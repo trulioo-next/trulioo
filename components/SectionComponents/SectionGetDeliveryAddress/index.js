@@ -39,7 +39,8 @@ async function getLocations(url) {
     var locations = result.response.locations,
       deliveryOptions = [],
       uberEatsOption,
-      foodoraOption;
+      foodoraOption,
+      geo = result.response.geo;
 
     for (var i = 0; i < locations.length; i++) {
       if (locations[i].customFields['169457']) {
@@ -75,7 +76,7 @@ async function getLocations(url) {
       }
     }
 
-    return deliveryOptions;
+    return { geo: geo, filtered: deliveryOptions };
   } else {
     throw new Error(response.status);
   }
@@ -87,6 +88,13 @@ const DeliveryAvailable = props => {
       <div className="row">
         <div className="col col-12 col-md-5 text-center text-md-left Section__body">
           <h3 className="Section__title">{props.title}</h3>
+          {props.computedAddress && (
+            <p className="Delivery__computedAddress">
+              <strong>Computed Address:</strong>
+              <br />
+              {props.computedAddress}
+            </p>
+          )}
           <div
             className="Section__content"
             dangerouslySetInnerHTML={{ __html: props.content }}
@@ -136,6 +144,7 @@ class SectionGetDeliveryAddress extends Component {
       error: null,
       isLoaded: false,
       deliveryOptions: [],
+      computedAddress: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -145,19 +154,21 @@ class SectionGetDeliveryAddress extends Component {
   }
 
   async handleSubmit(event) {
-    let url = buildDeliveryQuery(escape(this.input.current.value));
+    let url = buildDeliveryQuery(this.input.current.value);
     event.preventDefault();
 
     this.setState({
       isLoaded: false,
       deliveryOptions: [],
+      computedAddress: null,
     });
 
     await getLocations(url).then(
       result => {
         this.setState({
           isLoaded: true,
-          deliveryOptions: result,
+          deliveryOptions: result.filtered,
+          computedAddress: `${result.geo.address}, ${result.geo.locality}, ${result.geo.region}`,
         });
       },
       error => {
@@ -176,6 +187,7 @@ class SectionGetDeliveryAddress extends Component {
     this.setState({
       isLoaded: false,
       deliveryOptions: [],
+      computedAddress: null,
     });
 
     const success = position => {
@@ -186,7 +198,7 @@ class SectionGetDeliveryAddress extends Component {
         result => {
           this.setState({
             isLoaded: true,
-            deliveryOptions: result,
+            deliveryOptions: result.filtered,
           });
         },
         error => {
@@ -277,7 +289,10 @@ class SectionGetDeliveryAddress extends Component {
           {isLoaded && (
             <DeliveryResult>
               {deliveryOptions.length > 0 ? (
-                <DeliveryAvailable {...this.props.delivery_available}>
+                <DeliveryAvailable
+                  computedAddress={this.state.computedAddress}
+                  {...this.props.delivery_available}
+                >
                   {deliveryOptions.map((option, i) => {
                     return (
                       <DeliveryOption
