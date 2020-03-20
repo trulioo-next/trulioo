@@ -1,93 +1,90 @@
-import React from "react";
-import { connect } from 'react-redux'
-import Layout from '../../containers/Layout/Layout'
-import Header from '../../components/Header/Header'
+import React from 'react';
+import { connect } from 'react-redux';
+import Layout from '@/containers/Layout';
+import Header from '@/components/Header';
 import Button from '@/components/Button';
-import appActions from '../../stores/nutritionals/actions'
-import userSelectors from '../../stores/user/selectors'
-import menuSelectors from '../../stores/nutritionals/selectors'
+import appActions from '@/stores/nutritionals/actions';
+import userSelectors from '@/stores/user/selectors';
+import menuSelectors from '@/stores/nutritionals/selectors';
 import Hero from '@/components/Hero';
-import {css, jsx} from "@emotion/core";  
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Link from "next/link";
+import Link from 'next/link';
 import './Menu.scss';
 
 class Menu extends React.Component {
   constructor(props) {
-    super(props)
-     
+    super(props);
+
     this.state = {
-      isLoading:false
-    }
-  }
-  
-  static async getInitialProps({ isServer, store }) {
-    return {}
+      isLoading: false,
+    };
   }
 
-  componentDidMount() { 
-    this.props.getTheData()
+  static async getInitialProps({ isServer, store }) {
+    return {};
   }
-  componentDidUpdate() { }
-  
+
+  componentDidMount() {
+    this.props.getTheData();
+  }
+  componentDidUpdate() {}
+
   buildColumnRows() {
-    
     let data = this.props.data;
-    if( data ) {
+    if (data) {
       let counter = 0;
-      let containers = data.map((item) => {
-         counter++;
-         let image = item.image ? item.image.url : 'https://via.placeholder.com/150'; 
-         return <Col className="no--margins" xs={12} md={3} key={'tax-'+counter}>
-         <Link href={'/menu/'+item.slug}>
-           <div className="block--padding">
-             <div className="item__title">{item.name}</div>
-             <div className="background--image"><img src={image} /></div>
-           </div>
-           </Link>
-         </Col>
-       
+      let containers = data.map(item => {
+        counter++;
+        let image = item.image
+          ? item.image.url
+          : 'https://via.placeholder.com/150';
+        return (
+          <div className="Menu__gridItem" key={'tax-' + counter}>
+            <Link href={'/menu/' + item.slug}>
+              <a>
+                <figure className="Menu__category">
+                  <div className="Menu__categoryImage">
+                    <img src={image} aria-describedby />
+                  </div>
+                  <figcaption className="Menu__categoryLabel">
+                    {item.name}
+                  </figcaption>
+                </figure>
+              </a>
+            </Link>
+          </div>
+        );
       });
-    
-     return containers;
+
+      return containers;
     }
   }
   //
   render() {
-
     let rows = this.buildColumnRows();
 
     return (
       <Layout>
         <Header title="Nutritionals" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
+        <Hero src="/static/images/placeholders/Snacks_Banner.jpg">
+          <Hero.Title title="Menu" color="#FFF" shadow />
         </Hero>
-        <div className="menu__page">
-          
-          <Row>
-            { rows }
-          </Row>
-         
+        <div className="Menu__page">
+          <div className="Menu__grid">{rows}</div>
         </div>
-     </Layout>
-    )
+      </Layout>
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: userSelectors.userDataSelector(state),
-  data: menuSelectors.taxonomiesSelector(state)
-})
+  data: menuSelectors.taxonomiesSelector(state),
+});
 
-const mapDispatchToProps = (dispatch) => ({
-  getTheData: (payload) => dispatch(appActions.reqNutritionalsAction(payload)),
-})
+const mapDispatchToProps = dispatch => ({
+  getTheData: payload => dispatch(appActions.reqNutritionalsAction(payload)),
+});
 
-const Menu_ = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Menu)
- 
+const Menu_ = connect(mapStateToProps, mapDispatchToProps)(Menu);
+
 export default Menu_;
