@@ -43,7 +43,11 @@
     font-style: normal;
 
     &.-shadow {
-      text-shadow: 0px 3px 6px #6E6E6E4D;
+      text-shadow: 0px 3px 6px #6e6e6e4d;
+    }
+
+    @include media-breakpoint-only(md) {
+      font-size: 4.8rem;
     }
 
     @include media-breakpoint-up(lg) {

@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Layout from '@/containers/Layout';
-import Header from '@/components/Header';
-import Button from '@/components/Button';
+import Link from 'next/link';
+
 import appActions from '@/stores/nutritionals/actions';
 import userSelectors from '@/stores/user/selectors';
 import menuSelectors from '@/stores/nutritionals/selectors';
+
+import Layout from '@/containers/Layout';
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Link from 'next/link';
+
 import './Menu.scss';
 
 class Menu extends React.Component {

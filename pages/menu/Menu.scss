@@ -1,20 +1,16 @@
-@import '~@/static/scss/variables';
-
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import '~@/static/scss/component-includes';
 
 .Menu {
-  &__page {
-    position: relative;
-  }
-
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.1rem;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-only(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(4, 1fr);
     }
   }
