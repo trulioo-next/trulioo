@@ -1,0 +1,24 @@
+@import '~@/static/scss/component-includes';
+
+.Card.-product {
+  $block: '.Card';
+
+  #{$block}__image {
+    width: 80%;
+    padding-top: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  #{$block}__linkedFooter {
+    .ProductSlider & {
+      @include media-breakpoint-up(md) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import '~@/static/scss/component-includes';
+
+.ColumnSpread {
+  display: grid;
+  grid-gap: 1.5rem;
+
+  &.-spread-2 {
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 2rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-gap: 3.6rem;
+    }
+  }
+
+  &.-spread-3 {
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 2rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-gap: 3.6rem 8rem;
+    }
+  }
+}
