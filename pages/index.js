@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import SectionMaker from '../components/SectionMaker';
-import Layout from '../containers/Layout/Layout';
-import Header from '../components/Header/Header';
+import SectionMaker from '@/components/SectionMaker';
+import Layout from '@/containers/Layout';
+import Header from '@/components/Header';
 
 import Error from 'next/error';
 
