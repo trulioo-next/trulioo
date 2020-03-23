@@ -14,13 +14,6 @@ import Hero from '@/components/Hero';
 import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
 
-// Placeholder sections
-import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import SectionCallToAction from '@/components/SectionComponents/SectionCallToAction/SectionCallToAction';
-import SectionGetDeliveryAddress from '@/components/SectionComponents/SectionGetDeliveryAddress';
-
 import './Category.scss';
 
 class Category extends React.Component {
@@ -45,7 +38,7 @@ class Category extends React.Component {
   render() {
     return (
       <Layout>
-        <Header title="Nutritionals | Category" />
+        <Header title="Menu | Category" />
         <section className="Section">
           <Hero src="/static/images/placeholders/Pizza_Hero.jpg">
             <Hero.Title title="Category" color="#FFF" shadow />

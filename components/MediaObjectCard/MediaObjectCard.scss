@@ -31,15 +31,6 @@
     }
   }
 
-  #{$block}__linkedFooter {
-    &:hover,
-    &:focus {
-      color: $text-muted;
-      text-decoration: none;
-      transition: color 200ms ease;
-    }
-  }
-
   &.-stacked {
     #{$block}__image {
       @include media-breakpoint-up(lg) {
@@ -54,10 +45,12 @@
       background-image: url('/static/images/pizza-bg.jpg');
       background-repeat: no-repeat;
       padding-top: 115/146 * 100%;
+      width: 100%;
 
       @include media-breakpoint-up(md) {
         padding-top: calc(100% - 2rem);
         margin-top: 5%;
+        width: calc(100% - 2rem);
         margin-left: 1rem;
         margin-right: 1rem;
       }

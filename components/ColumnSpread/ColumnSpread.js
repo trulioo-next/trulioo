@@ -1,10 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
 
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
-
 import './ColumnSpread.scss';
 
 const ColumnSpread = props => {

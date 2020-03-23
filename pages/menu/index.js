@@ -66,7 +66,7 @@ class Menu extends React.Component {
 
     return (
       <Layout>
-        <Header title="Nutritionals" />
+        <Header title="Menu" />
         <Hero src="/static/images/placeholders/Snacks_Banner.jpg">
           <Hero.Title title="Menu" color="#FFF" shadow />
         </Hero>

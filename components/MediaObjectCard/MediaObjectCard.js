@@ -12,7 +12,6 @@ const MediaCard = props => {
   let cardClasses = classNames(
     'Card',
     '-mediaObject',
-    { '-product': props.product },
     { '-pizza': props.pizza },
     { '-stacked': props.stacked },
   );
@@ -44,10 +43,8 @@ const MediaCard = props => {
         <Link href={props.product.href}>
           <a className="Card__linkedFooter">
             <Card.Footer className="Card__footer d-flex justify-content-between">
-              <span className="Card__footerLeft">View product details</span>
-              <span className="Card__footerRight">
-                {props.product.calories} cal
-              </span>
+              <span>View product details</span>
+              <span>{props.product.calories} cal</span>
             </Card.Footer>
           </a>
         </Link>
