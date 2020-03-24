@@ -1,161 +1,223 @@
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import Error from 'next/error';
 import { useSelector, useDispatch } from 'react-redux';
+import classNames from 'classnames';
+import camelcase from 'camelcase';
 
-import Layout from '../../containers/Layout/Layout'
-import Header from '../../components/Header/Header'
-import COLUMNS from "../../data/columns";
-import { useTable, useBlockLayout, useResizeColumns } from 'react-table'
-import {css, jsx} from "@emotion/core";
+import Layout from '@/containers/Layout';
+import Header from '@/components/Header';
+import COLUMNS from '@/data/columns';
+import { useTable, useFlexLayout, useResizeColumns } from 'react-table';
+
 import Hero from '@/components/Hero';
+import SearchIcon from '@/static/images/search.svg';
+import ChevronIcon from '@/static/images/caret-down.svg';
 
-import Error from "next/error";
+import Container from 'react-bootstrap/Container';
+import Accordion from 'react-bootstrap/Accordion';
 
-import './Nutrutionals.scss';
+import './Nutritionals.scss';
+
+import { reqNutritionalsAction } from '../../stores/nutritionals/actions';
 
 import {
-    reqNutritionalsAction
-} from "../../stores/nutritionals/actions";
+  nutritionalsSelector,
+  nutritionalByTaxonomySelector,
+} from '../../stores/nutritionals/selectors';
 
-import { nutritionalsSelector, nutritionalByTaxonomySelector } from "../../stores/nutritionals/selectors";
-
+/**
+ * TODO: Fix category switching.
+ * ! Error: Rendered more hooks than during the previous render.
+ */
 
 function Table({ columns, data }) {
-  const defaultColumn = React.useMemo(
-    () => ({
-      minWidth: 30,
-      width: 150,
-      maxWidth: 450,
-    }),
-    []
-  )
-
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = useTable(
-    {
-      columns,
-      data,
-      defaultColumn,
-    },
-    useBlockLayout,
-    useResizeColumns
-  )
+  } = useTable({
+    columns,
+    data,
+  });
 
   return (
-    <div>
-    <div {...getTableProps()} className="table"  >
-      <div>
-        {headerGroups.map(headerGroup => (
-          <div {...headerGroup.getHeaderGroupProps()} className="tr">
-            {headerGroup.headers.map(column => (
-              <div {...column.getHeaderProps()} className="th">
-                {column.render('Header')}
-                
-                <div
-                  {...column.getResizerProps()}
-                  className={`resizer ${column.isResizing ? 'isResizing' : ''}`}
-                />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-            <div {...row.getRowProps()} className="tr">
-              {row.cells.map(cell => {
-                return (
-                  <div {...cell.getCellProps()} className="td">
-                    {cell.render('Cell')}
+    <Container fluid className="px-0">
+      <div {...getTableProps()} className="Nutritionals__table">
+        <div className="thead">
+          {headerGroups.map((headerGroup, i) => {
+            return (
+              <div
+                {...headerGroup.getHeaderGroupProps()}
+                className="tr"
+                key={`header-group-${i}`}
+              >
+                {headerGroup.headers.map(column => (
+                  <div
+                    {...column.getHeaderProps()}
+                    className={`th -${camelcase(column.Header)}`}
+                    key={column.id}
+                  >
+                    {column.render('Header')}
                   </div>
-                )
-              })}
-            </div>
-          )
-        })}
+                ))}
+              </div>
+            );
+          })}
+        </div>
+
+        <Accordion {...getTableBodyProps()} className="Accordion">
+          {rows.map((row, i) => {
+            prepareRow(row);
+            const [opened, setOpened] = useState(false);
+            return (
+              <div
+                className={classNames('Accordion__item', { '-opened': opened })}
+                key={row.id}
+              >
+                <Accordion.Toggle
+                  className="Accordion__header d-md-none"
+                  eventKey={row.id}
+                >
+                  <span className="Accordion__heading">
+                    {row.cells[0].value}
+                  </span>
+                  <ChevronIcon className="Accordion__toggle" />
+                </Accordion.Toggle>
+                <Accordion.Collapse
+                  eventKey={row.id}
+                  className="Accordion__collapse d-md-block"
+                  onEntered={() => setOpened(true)}
+                  onExited={() => setOpened(false)}
+                >
+                  <div {...row.getRowProps()} className="tr">
+                    {row.cells.map((cell, i) => {
+                      console.log(cell);
+                      return (
+                        <div
+                          {...cell.getCellProps()}
+                          className={`td -${camelcase(cell.column.Header)}`}
+                          key={`cell-${i}`}
+                        >
+                          <span className="Nutritionals__cellLabel">
+                            {cell.column.Header}
+                          </span>
+                          <span className="Nutritionals__cellValue">
+                            {cell.render('Cell')}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Accordion.Collapse>
+              </div>
+            );
+          })}
+        </Accordion>
       </div>
-    </div>
-    </div>
-  )
+    </Container>
+  );
 }
 
-const Page = (props) => {
-  
+const Page = props => {
   const columns = COLUMNS;
 
-
-   
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(reqNutritionalsAction({}));
+    dispatch(reqNutritionalsAction({}));
   }, []);
 
-  let [taxonomySelected, setTaxonomySelected] = useState('crispy-classic-chicken');
+  let [taxonomySelected, setTaxonomySelected] = useState(
+    'crispy-classic-chicken',
+  );
   let products = useSelector(nutritionalByTaxonomySelector());
-  let productsSelected = filterProducts('crispy-classic-chicken')
+  let productsSelected = filterProducts('crispy-classic-chicken');
   let [filterSelected, setfilterSelected] = useState(productsSelected);
- 
- function filterProducts(taxonomy) {
-  
-   let filtered = [];
-   if(products) {
-     for(var i = 0; i < products.length; i++ ) {
-        if(products[i].term === taxonomy) {
-            filtered.push(products[i])
+
+  function filterProducts(taxonomy) {
+    let filtered = [];
+    if (products) {
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].term === taxonomy) {
+          filtered.push(products[i]);
         }
-     }
-   }
+      }
+    }
     return filtered;
- }   
-   
-  function switchCategory(e) {
-     productsSelected = filterProducts(e.target.value)
-     setfilterSelected(productsSelected)
   }
-   
-   return ( 
-      <Layout>
-        <Header title="Nutritionals" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
- 
-        </Hero>
-        
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 margins">
-                <select className="select" css={css`margin-top:50px; margin-bottom:50px; position:relative; display: block;`} id="cars" onChange={(e) => switchCategory(e)}>
-                  <option value="crispy-classic-chicken">Crispy Classic Chicken</option>
-                  <option value="fountain">Fountain</option>
-                  <option value="fresh-bakery">Fresh Bakery</option>
-                  <option value="grill">Grill</option>
-                  <option value="hot-beverages">Hot Beverages</option>
-                  <option value="hot-food">Hot Food</option>
-                  <option value="iced-coffee">Iced Coffee</option>
-                  <option value="slurpee">Slurpee</option>
-                </select>
+
+  function switchCategory(e) {
+    productsSelected = filterProducts(e.target.value);
+    setfilterSelected(productsSelected);
+  }
+
+  return (
+    <Layout>
+      <Header title="Nutritionals" />
+      <Hero src="/static/images/placeholders/Snacks_Banner.jpg">
+        <Hero.Title title="Nutritionals" color="#FFF" shadow />
+      </Hero>
+
+      <div className="Nutritionals__page">
+        <Container fluid className="px-0">
+          <form
+            id="nutritionals-search-form"
+            className="Nutritionals__searchForm"
+          >
+            <label
+              htmlFor="nutritionals-category"
+              className="Nutritionals__searchLabel"
+            >
+              Choose a category
+            </label>
+            <div className="Nutritionals__searchField">
+              <select
+                className="Nutritionals__searchInput -select"
+                id="nutritionals-category"
+                onChange={e => switchCategory(e)}
+              >
+                <option value="crispy-classic-chicken">
+                  Crispy Classic Chicken
+                </option>
+                <option value="fountain">Fountain</option>
+                <option value="fresh-bakery">Fresh Bakery</option>
+                <option value="grill">Grill</option>
+                <option value="hot-beverages">Hot Beverages</option>
+                <option value="hot-food">Hot Food</option>
+                <option value="iced-coffee">Iced Coffee</option>
+                <option value="slurpee">Slurpee</option>
+              </select>
+            </div>
+            <label
+              htmlFor="nutritionals-text-search"
+              className="Nutritionals__searchLabel"
+            >
+              <span className="d-none d-md-block">Or </span>
+              <span className="d-md-none">Search for an item on our menu</span>
+            </label>
+            <div className="Nutritionals__searchField">
+              <div className="Nutritionals__inputGroup">
+                <input
+                  className="Nutritionals__searchInput"
+                  type="text"
+                  placeholder="Search for an item on our menu"
+                />
+                <button type="submit" className="Nutritionals__searchSubmit">
+                  <SearchIcon />
+                </button>
               </div>
             </div>
-          </div>
-        <Table
-        data={filterSelected}
-        columns={columns}
-        />
-     
-      </Layout>
+          </form>
+        </Container>
+        <Table data={filterSelected} columns={columns} />
+      </div>
+    </Layout>
   );
 };
 
 Page.getInitialProps = async ({ query, res }) => {
-  return { query }
+  return { query };
 };
-
 
 export default Page;

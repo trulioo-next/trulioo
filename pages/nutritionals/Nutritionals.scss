@@ -1,0 +1,268 @@
+@import '~@/static/scss/component-includes';
+
+.Nutritionals {
+  $block: &;
+
+  &__page {
+
+  }
+
+  &__searchForm {
+    padding: 1.5rem;
+    font-size: 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+      align-items: center;
+      margin-left: -1.9rem;
+      margin-right: -1.9rem;
+      margin-bottom: 2.5rem;
+      padding: 3rem 2.4rem 2.5rem;
+      font-size: inherit;
+      justify-content: space-between;
+    }
+  }
+
+  &__searchField {
+    flex: 1 1;
+    margin-left: 1.9rem;
+    margin-right: 1.9rem;
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 1.8rem;
+    }
+  }
+
+  &__searchLabel {
+    margin: 0 1.9rem;
+    flex: 0 0 auto;
+    font-weight: 500;
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0.9rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+    }
+  }
+
+
+  &__inputGroup {
+    position: relative;
+  }
+
+  &__searchInput {
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    border: 0;
+    border-radius: 1.8rem;
+    font-weight: 500;
+
+
+    @include media-breakpoint-down(sm) {
+      &::placeholder {
+        color: white;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 2rem;
+      line-height: 2.4rem;
+    }
+
+    &.-select {
+      appearance: none;
+      padding-left: 1.6rem;
+      padding-right: 4.2rem;
+      background-image: svg-load('caret-down.svg', fill = #000);
+      background-repeat: no-repeat;
+      background-position: calc(100% - 1.6rem) 50%;
+      background-size: auto 2rem;
+    }
+  }
+
+  &__searchSubmit {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    background: none;
+    position: absolute;
+    top: 50%;
+    right: 1.6rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: translateY(-50%);
+  }
+
+  &__table {
+    font-size: 1rem;
+
+    @include media-breakpoint-only(md) {
+      font-size: 1.3rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 2rem;
+    }
+
+    .thead {
+      padding-top: 6em;
+
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    .tr {
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 2.2rem;
+
+      @include media-breakpoint-only(md) {
+        padding: 1.6rem;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding: 2.4rem 2.8rem;
+      }
+    }
+
+    .th {
+      white-space: nowrap;
+
+      &:not(.-flavour) {
+        padding-left: 1.6rem;
+        transform: rotate(-90deg);
+      }
+    }
+
+    .th,
+    .td {
+      @include media-breakpoint-up(md) {
+        flex: 1 0 5%;
+        max-width: 5%;
+
+        &.-flavour {
+          flex: 1 1 30%;
+          max-width: 30%;
+        }
+      }
+    }
+
+    .td {
+      font-weight: 500;
+      @include media-breakpoint-down(sm) {
+        display: flex;
+        flex: 1 1 50%;
+        padding: 0.25rem 1.8rem;
+
+        &:nth-child(even) {
+          padding-left: 3.6rem;
+        }
+
+        &:nth-child(odd) {
+          padding-right: 3.6rem;
+        }
+
+        &::before {
+          content: attr(data-label);
+        }
+
+        &.-flavour {
+          display: none;
+        }
+
+        &.-servingSize,
+        &.-calories {
+          flex-direction: column;
+          text-align: center;
+          background-color: $dark-gray;
+          color: $white;
+          padding-top: 0.8rem;
+          padding-bottom: 1.2rem;
+          margin-bottom: 2.2rem;
+
+          #{$block}__cellLabel {
+            order: 2;
+          }
+
+          #{$block}__cellValue {
+            font-size: 2.5rem;
+            font-weight: 900;
+          }
+        }
+
+        &.-servingSize {
+          #{$block}__cellValue {
+            color: $blue;
+          }
+        }
+
+        &.-calories {
+          #{$block}__cellValue {
+            color: $light-green;
+          }
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        text-align: center;
+
+        &.-flavour {
+          text-align: left;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .Accordion {
+      &__header {
+        appearance: none;
+        border: solid 1px $text-muted;
+        border-left: 0;
+        border-right: 0;
+        margin: 0;
+        padding: 1.6rem 3.2rem 1.2rem;
+        background-color: $white;
+      }
+
+      &__heading {
+        font-weight: 500;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        text-align: left;
+      }
+
+      &__item {
+        background-color: transparent;
+
+        @include media-breakpoint-up(md) {
+          &:nth-child(odd) {
+            .tr {
+              background-color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__cellLabel,
+  &__cellValue {
+    display: block;
+  }
+
+  &__cellLabel {
+    flex: 1 1 70%;
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+  }
+
+  &__cellValue {
+    flex: 1 1 30%;
+    font-weight: 900;
+  }
+}
