@@ -12,6 +12,7 @@ import { useTable } from 'react-table';
 import Hero from '@/components/Hero';
 import SearchIcon from '@/static/images/search.svg';
 import ChevronIcon from '@/static/images/caret-down.svg';
+import CloseIcon from '@/static/images/close.svg';
 
 import Container from 'react-bootstrap/Container';
 import Accordion from 'react-bootstrap/Accordion';
@@ -114,6 +115,56 @@ function Table({ columns, data }) {
   );
 }
 
+const Disclaimer = props => {
+  const [opened, setOpened] = useState(false);
+
+  return (
+    <Accordion
+      className={classNames('Nutritionals__disclaimer', { '-opened': opened })}
+    >
+      <Accordion.Toggle
+        className="Nutritionals__disclaimerHeader d-md-none text-center"
+        eventKey="disclaimer"
+      >
+        Disclaimer
+        <CloseIcon className="Nutritionals__closeIndicator" />
+      </Accordion.Toggle>
+      <Accordion.Collapse
+        className="Nutritionals__disclaimerContent d-md-block"
+        eventKey="disclaimer"
+        onEntered={() => setOpened(true)}
+        onExited={() => setOpened(false)}
+      >
+        <>
+          <p>
+            The information in this guide is effective as of February 7, 2019
+            and is based on our standard product formulations, variations may
+            occur. Nutrition information was obtained through analysis by
+            7-Eleven and information provided by our suppliers.
+          </p>
+          <p>
+            Daily Calorie and Sodium Requirements: Healthy adults should aim for
+            1,500 to 2,300 milligrams of sodium per day. Children and seniors
+            need less. Healthy adults should aim for 2,000 to 2,400 calories per
+            day. Individual needs vary depending on age, activity level and
+            gender. (Source: Health Canada) The Informed Dining program is a
+            voluntary nutrition information program developed by the Province of
+            British Columbia. For more information, please visit
+            www.InformedDining.ca. The nutrition information provided has been
+            supplied by the restaurant itself. Such nutrition information has
+            not been independently researched, written or verified by the
+            Government of British Columbia. The Government of British Columbia
+            assumes no responsibility or liability arising from any errors or
+            omission of information, or from the use of any information
+            contained within the nutrition information supplied by the
+            restaurant.
+          </p>
+        </>
+      </Accordion.Collapse>
+    </Accordion>
+  );
+};
+
 const Page = props => {
   const columns = COLUMNS;
 
@@ -154,57 +205,64 @@ const Page = props => {
       </Hero>
 
       <div className="Nutritionals__page">
-        <Container fluid className="px-0">
-          <form
-            id="nutritionals-search-form"
-            className="Nutritionals__searchForm"
-          >
-            <label
-              htmlFor="nutritionals-category"
-              className="Nutritionals__searchLabel"
+        <section className="Section mb-0">
+          <Container fluid className="px-0">
+            <form
+              id="nutritionals-search-form"
+              className="Nutritionals__searchForm"
             >
-              Choose a category
-            </label>
-            <div className="Nutritionals__searchField">
-              <select
-                className="Nutritionals__searchInput -select"
-                id="nutritionals-category"
-                onChange={e => switchCategory(e)}
+              <label
+                htmlFor="nutritionals-category"
+                className="Nutritionals__searchLabel"
               >
-                <option value="crispy-classic-chicken">
-                  Crispy Classic Chicken
-                </option>
-                <option value="fountain">Fountain</option>
-                <option value="fresh-bakery">Fresh Bakery</option>
-                <option value="grill">Grill</option>
-                <option value="hot-beverages">Hot Beverages</option>
-                <option value="hot-food">Hot Food</option>
-                <option value="iced-coffee">Iced Coffee</option>
-                <option value="slurpee">Slurpee</option>
-              </select>
-            </div>
-            <label
-              htmlFor="nutritionals-text-search"
-              className="Nutritionals__searchLabel"
-            >
-              <span className="d-none d-md-block">Or </span>
-              <span className="d-md-none">Search for an item on our menu</span>
-            </label>
-            <div className="Nutritionals__searchField">
-              <div className="Nutritionals__inputGroup">
-                <input
-                  className="Nutritionals__searchInput"
-                  type="text"
-                  placeholder="Search for an item on our menu"
-                />
-                <button type="submit" className="Nutritionals__searchSubmit">
-                  <SearchIcon />
-                </button>
+                Choose a category
+              </label>
+              <div className="Nutritionals__searchField">
+                <select
+                  className="Nutritionals__searchInput -select"
+                  id="nutritionals-category"
+                  onChange={e => switchCategory(e)}
+                >
+                  <option value="crispy-classic-chicken">
+                    Crispy Classic Chicken
+                  </option>
+                  <option value="fountain">Fountain</option>
+                  <option value="fresh-bakery">Fresh Bakery</option>
+                  <option value="grill">Grill</option>
+                  <option value="hot-beverages">Hot Beverages</option>
+                  <option value="hot-food">Hot Food</option>
+                  <option value="iced-coffee">Iced Coffee</option>
+                  <option value="slurpee">Slurpee</option>
+                </select>
               </div>
-            </div>
-          </form>
-        </Container>
-        <Table data={filterSelected} columns={columns} />
+              <label
+                htmlFor="nutritionals-text-search"
+                className="Nutritionals__searchLabel"
+              >
+                <span className="d-none d-md-block">Or </span>
+                <span className="d-md-none">
+                  Search for an item on our menu
+                </span>
+              </label>
+              <div className="Nutritionals__searchField">
+                <div className="Nutritionals__inputGroup">
+                  <input
+                    className="Nutritionals__searchInput"
+                    type="text"
+                    placeholder="Search for an item on our menu"
+                  />
+                  <button type="submit" className="Nutritionals__searchSubmit">
+                    <SearchIcon />
+                  </button>
+                </div>
+              </div>
+            </form>
+          </Container>
+          <Table data={filterSelected} columns={columns} />
+          <Container fluid className="px-0">
+            <Disclaimer />
+          </Container>
+        </section>
       </div>
     </Layout>
   );
