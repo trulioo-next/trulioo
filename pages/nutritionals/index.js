@@ -7,7 +7,7 @@ import camelcase from 'camelcase';
 import Layout from '@/containers/Layout';
 import Header from '@/components/Header';
 import COLUMNS from '@/data/columns';
-import { useTable, useFlexLayout, useResizeColumns } from 'react-table';
+import { useTable } from 'react-table';
 
 import Hero from '@/components/Hero';
 import SearchIcon from '@/static/images/search.svg';
@@ -18,17 +18,53 @@ import Accordion from 'react-bootstrap/Accordion';
 
 import './Nutritionals.scss';
 
-import { reqNutritionalsAction } from '../../stores/nutritionals/actions';
+import { reqNutritionalsAction } from '@/stores/nutritionals/actions';
 
 import {
   nutritionalsSelector,
   nutritionalByTaxonomySelector,
-} from '../../stores/nutritionals/selectors';
+} from '@/stores/nutritionals/selectors';
 
-/**
- * TODO: Fix category switching.
- * ! Error: Rendered more hooks than during the previous render.
- */
+function TableRow({ row }) {
+  const [opened, setOpened] = useState(false);
+
+  return (
+    <div className={classNames('Accordion__item', { '-opened': opened })}>
+      <Accordion.Toggle
+        className="Accordion__header d-md-none"
+        eventKey={row.id}
+      >
+        <span className="Accordion__heading">{row.cells[0].value}</span>
+        <ChevronIcon className="Accordion__toggle" />
+      </Accordion.Toggle>
+      <Accordion.Collapse
+        eventKey={row.id}
+        className="Accordion__collapse d-md-block"
+        onEntered={() => setOpened(true)}
+        onExited={() => setOpened(false)}
+      >
+        <div {...row.getRowProps()} className="tr">
+          {row.cells.map((cell, i) => {
+            return (
+              <div
+                {...cell.getCellProps()}
+                className={`td -${camelcase(cell.column.Header)}`}
+                key={`row-${row.id}-${cell.column.id}`}
+              >
+                <span className="Nutritionals__cellLabel">
+                  {cell.column.Header}
+                </span>
+                <span className="Nutritionals__cellValue">
+                  {cell.render('Cell')}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </Accordion.Collapse>
+    </div>
+  );
+}
 
 function Table({ columns, data }) {
   const {
@@ -70,49 +106,7 @@ function Table({ columns, data }) {
         <Accordion {...getTableBodyProps()} className="Accordion">
           {rows.map((row, i) => {
             prepareRow(row);
-            const [opened, setOpened] = useState(false);
-            return (
-              <div
-                className={classNames('Accordion__item', { '-opened': opened })}
-                key={row.id}
-              >
-                <Accordion.Toggle
-                  className="Accordion__header d-md-none"
-                  eventKey={row.id}
-                >
-                  <span className="Accordion__heading">
-                    {row.cells[0].value}
-                  </span>
-                  <ChevronIcon className="Accordion__toggle" />
-                </Accordion.Toggle>
-                <Accordion.Collapse
-                  eventKey={row.id}
-                  className="Accordion__collapse d-md-block"
-                  onEntered={() => setOpened(true)}
-                  onExited={() => setOpened(false)}
-                >
-                  <div {...row.getRowProps()} className="tr">
-                    {row.cells.map((cell, i) => {
-                      console.log(cell);
-                      return (
-                        <div
-                          {...cell.getCellProps()}
-                          className={`td -${camelcase(cell.column.Header)}`}
-                          key={`cell-${i}`}
-                        >
-                          <span className="Nutritionals__cellLabel">
-                            {cell.column.Header}
-                          </span>
-                          <span className="Nutritionals__cellValue">
-                            {cell.render('Cell')}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </Accordion.Collapse>
-              </div>
-            );
+            return <TableRow row={row} key={row.id} />;
           })}
         </Accordion>
       </div>
