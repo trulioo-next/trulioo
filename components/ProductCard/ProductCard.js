@@ -8,7 +8,7 @@ import './ProductCard.scss';
 
 const ProductCard = ({ item }) => {
   let props = item;
-  console.log(props);
+  // console.log(props);
 
   let cardClasses = classNames('Card', '-product');
 
