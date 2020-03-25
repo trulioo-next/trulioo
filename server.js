@@ -68,11 +68,11 @@ App.prepare().then(() => {
   });
 
   server.get('/menu/:slug', (req, res) => {
-    App.render(req, res, '/menu/Category', { slug: req.params.slug });
+    App.render(req, res, '/menu/category', { slug: req.params.slug });
   });
 
-  server.get('/menu/:slug/:slug', (req, res) => {
-    App.render(req, res, '/menu/Category/Product', { slug: req.params.slug });
+  server.get('/menu/:category/:slug', (req, res) => {
+    App.render(req, res, '/menu/category/product', { category:req.params.category, slug: req.params.slug });
   });
  
   server.get('*', (req, res) => {
