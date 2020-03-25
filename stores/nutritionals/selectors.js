@@ -29,19 +29,30 @@
  	return (state) => {
 		let nutritionals = [];
 		console.log('NUTRITIONALS ::>>> SELECTOR ', state.nutritionals  )
-		// if(state.nutritionals.menuItems) {
-		// 	let counter = 0;
-		// 	for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
-		// 		 counter++;
-		// 		 if(counter < 4) {
-		// 				nutritionals.push(state.nutritionals.menuItems)
-		// 		 }
-		// 	} 
-		// }
-
+		 
 	   return state.nutritionals
 	}
  }
+
+
+ export const nutritionalsDataSelector = (state, category, slug) => {
+	 
+	let menuItems = state.nutritionals.menuItems;
+	let data = [];
+    if(menuItems) {
+    	for(var i =0; i < menuItems.length; i++ ) {
+    		if(menuItems[i].terms && menuItems[i].terms[0] ) {
+	    		if(menuItems[i].terms[0].slug === category && menuItems[i].slug === slug ) {
+					data = menuItems[i];
+				}
+    		}
+		}
+    }		
+	
+	return data;
+	 
+}
+
 
 
  export const taxonomiesSelector = (state) => {
@@ -114,12 +125,14 @@
 	return payload;
  }
 
- 
+
+
  
  
 export default {
   nutritionalsSelector,
   nutritionalByTaxonomySelector,
   taxonomiesSelector,
-  lastFourSelector 
+  lastFourSelector,
+  nutritionalsDataSelector
 }

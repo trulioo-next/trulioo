@@ -11,7 +11,8 @@ import Accordion from 'react-bootstrap/Accordion';
 import ProductSlider from '@/components/ProductSlider';
 import ProductCard from '@/components/ProductCard';
 import SectionMaker from '@/components/SectionMaker';
-
+import { nutritionalsDataSelector } from '@/stores/nutritionals/selectors';
+  
 import ChevronIcon from '@/static/images/caret-down.svg';
 
 import Container from 'react-bootstrap/Container';
@@ -22,23 +23,23 @@ import './Product.scss';
 
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
-
+  let nutritionals = props.data.nutritionals
   let nutritionalInfo = {
-    'Serving Size': '120g',
-    'Total Fat': '11g',
-    'Trans Fat': '0g',
-    Sodium: '740mg',
-    'Dietary Fibre': '2g',
-    Protein: '16g',
-    'Vitamin C (DV)': '6%',
-    'Iron (DV)': '25%',
-    'Calories (kcal)': '370',
-    'Saturated Fat': '5g',
-    Cholestrol: '20mg',
-    Carbohydrates: '48g',
-    Sugars: '3g',
-    'Vitamin A (DV)': '6%',
-    'Calcium (DV)': '20%',
+    'Serving Size': nutritionals.serving_size,
+    'Total Fat': nutritionals.total_fat,
+    'Trans Fat': nutritionals.trans_fat,
+    Sodium: nutritionals.sodium,
+    'Dietary Fibre': nutritionals.dietary_fibre,
+    Protein: nutritionals.protein,
+    'Vitamin C (DV)': nutritionals.vitamin_c,
+    'Iron (DV)': nutritionals.iron,
+    'Calories (kcal)': nutritionals.calories,
+    'Saturated Fat': 'nan',
+    Cholestrol: nutritionals.cholesterol,
+    Carbohydrates: nutritionals.carbohydrates,
+    Sugars: nutritionals.sugars,
+    'Vitamin A (DV)': nutritionals.vitamin_a,
+    'Calcium (DV)': nutritionals.calcium,
   };
 
   return (
@@ -133,7 +134,13 @@ const Product = props => {
   //
   // Product Slug
   //
-  console.log('Product SLUG :: >> ', props.query.slug);
+
+
+  let { category, slug } = props.query
+  
+  
+  const nutritionals = useSelector(state => nutritionalsDataSelector(state,category, slug));
+  
 
   let relatedData = [
     {
@@ -192,7 +199,7 @@ const Product = props => {
       <Header title="" />
       <div className="Product__page">
         <ProductHeader />
-        <Nutritionals />
+        <Nutritionals data={nutritionals} />
         <section className="Section -related">
           <Container>
             <Row>
