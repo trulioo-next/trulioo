@@ -113,11 +113,13 @@
 	}
 	return payload;
  }
+
+ 
  
  
 export default {
   nutritionalsSelector,
   nutritionalByTaxonomySelector,
   taxonomiesSelector,
-  lastFourSelector
+  lastFourSelector 
 }

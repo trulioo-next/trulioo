@@ -7,9 +7,7 @@ import Button from '@/components/Button';
 import appActions from '@/stores/nutritionals/actions';
 import userSelectors from '@/stores/user/selectors';
 import menuSelectors from '@/stores/nutritionals/selectors';
-// import { lastFourSelector } from "../../../stores/nutritionals/selectors";
-
-//  const pageData = useSelector(state => lastFourSelector(props.query.slug));
+import SectionMaker from '../../../components/SectionMaker';
 import Hero from '@/components/Hero';
 import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
@@ -23,19 +21,39 @@ class Category extends React.Component {
     this.state = {
       isLoading: false,
     };
+ 
   }
 
-  static async getInitialProps({ isServer, store }) {
-    return {};
+  static async getInitialProps({ isServer, store, res, req}) {
+    let slug = res.req.params.slug ? res.req.params.slug : false
+    let { nutritionals } = store.getState()
+    let taxonomyData = [];
+    if(nutritionals && nutritionals.taxonomies) {
+      for(var i = 0; i < nutritionals.taxonomies.length; i++ ) {
+        if(nutritionals.taxonomies[i].slug === slug) {
+          taxonomyData = nutritionals.taxonomies[i]
+        }
+      }
+    }
+   
+    return { slug, taxonomyData };
   }
 
   componentDidMount() {
     this.props.getTheData();
+   
+     
   }
   componentDidUpdate() {}
 
   //
   render() {
+
+    let { data, slug, taxonomyData } = this.props
+
+    console.log(' taxonomy component data ::>> ', taxonomyData )
+
+
     return (
       <Layout>
         <Header title="Menu | Category" />
@@ -168,6 +186,18 @@ class Category extends React.Component {
             </MediaObjectCard>
           </ColumnSpread>
         </div>
+
+        { taxonomyData.components &&
+          taxonomyData.components.map((section, sectionKey) => (
+          <SectionMaker
+            type={section.acf_fc_layout}
+            params={section}
+            key={sectionKey}
+            sectionIndex={sectionKey}
+          />
+        ))
+        }
+
       </Layout>
     );
   }
@@ -175,7 +205,7 @@ class Category extends React.Component {
 
 const mapStateToProps = state => ({
   user: userSelectors.userDataSelector(state),
-  data: menuSelectors.taxonomiesSelector(state),
+  data: menuSelectors.taxonomiesSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({

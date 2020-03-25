@@ -2,15 +2,12 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-
 import Toolbar from './Toolbar';
 import SubNav from './SubNav';
-
 import LocationIcon from '@/static/images/location.svg';
 import AccountIcon from '@/static/images/account.svg';
 import CaretIcon from '@/static/images/caret-down.svg';
-// import linkData from '../placeholder-links.json'; // replace with real data later
-
+ 
 const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   const isOpen = i === expanded;
   let itemClassnames = classNames(
@@ -44,9 +41,16 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
 
   return (
     <li className={itemClassnames}>
+     { item.name != "Slurpee®" &&  
       <Link href={item.url} as={item.url}>
         <a className="SiteHeader__link">{item.name}</a>
       </Link>
+      }
+      { item.name === "Slurpee®" &&  
+       
+        <a href={item.url} as={item.url} className="SiteHeader__link">{item.name}</a>
+       
+      }
     </li>
   );
 };
@@ -63,12 +67,12 @@ const PrimaryNav = data => {
 
   return (
     <>
-      {LINKS && (
+      { LINKS && (
         <>
           <ul className="SiteHeader__menu -desktop">
-            {LINKS.map((link, i) => {
+            { LINKS.map((link, i) => {
               searchIndex += 1;
-
+              
               return (
                 <NavItem
                   key={`nav-item-${i}`}
