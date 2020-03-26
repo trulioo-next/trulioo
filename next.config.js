@@ -38,6 +38,7 @@ const nextConfig = {
  
     // Here goes env that are available in the client side
     config.plugins.push(new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL", "ENDPOINT_URL"]));
+
     return config;
   },
   

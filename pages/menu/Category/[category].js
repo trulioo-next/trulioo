@@ -30,7 +30,7 @@ class Category extends React.Component {
 
     
     let { nutritionals } = store.getState()
-    console.log('SLUG nutritionals ', nutritionals.taxonomies  )
+    console.log('CATEGORY  nutritionals ', nutritionals.taxonomies  )
 
     let taxonomyData = [];
     if(nutritionals && nutritionals.taxonomies) {
