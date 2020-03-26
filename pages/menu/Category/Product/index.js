@@ -44,9 +44,15 @@ const Nutritionals = props => {
     'Calcium (DV)': nutritionals.calcium,
   };
 
-  let ingredients = [...Array(48).keys()];
-  console.log(ingredients);
+  let ingredients = [];
+  if(props.data.ingredients) {
+    let ing = props.data.ingredients;
+    for(var i = 0; i < ing.length; i++) {
+      ingredients.push(ing[i].ingredient)
+    }
 
+  }
+   
   return (
     <section className="Section">
       <Container className="Section__container">
