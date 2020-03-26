@@ -11,6 +11,7 @@ import SectionMaker from '../../../components/SectionMaker';
 import Hero from '@/components/Hero';
 import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
+import SectionPostGrid from '@/components/SectionComponents/SectionPostGrid';
 
 import './Category.scss';
 
@@ -35,14 +36,12 @@ class Category extends React.Component {
         }
       }
     }
-   
     return { slug, taxonomyData };
   }
 
   componentDidMount() {
     this.props.getTheData();
    
-     
   }
   componentDidUpdate() {}
 
@@ -53,8 +52,7 @@ class Category extends React.Component {
     let headerTitle = "Menu | " + taxonomyData.name 
     let pageTitle = taxonomyData.name
 
-    console.log(' taxonomy component data ::>> ', taxonomyData )
-
+    // console.log(' taxonomy component data ::>> ', taxonomyData )
 
     return (
       <Layout>
@@ -65,6 +63,20 @@ class Category extends React.Component {
           </Hero>
         </section>
         <div className="Menu__page">
+
+        { taxonomyData.components &&
+          taxonomyData.components.map((section, sectionKey) => (
+          <SectionMaker
+            type={section.acf_fc_layout}
+            params={section}
+            category={slug}
+            key={sectionKey}
+            sectionIndex={sectionKey}
+          />
+        ))
+        }
+
+
           <ColumnSpread spread="3">
             <MediaObjectCard
               title="New York Deli Meat Lover's"
@@ -188,18 +200,7 @@ class Category extends React.Component {
             </MediaObjectCard>
           </ColumnSpread>
         </div>
-
-        { taxonomyData.components &&
-          taxonomyData.components.map((section, sectionKey) => (
-          <SectionMaker
-            type={section.acf_fc_layout}
-            params={section}
-            key={sectionKey}
-            sectionIndex={sectionKey}
-          />
-        ))
-        }
-
+ 
       </Layout>
     );
   }

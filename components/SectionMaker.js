@@ -11,8 +11,9 @@ import SectionNewsletter from './SectionComponents/SectionNewsletter';
 import SectionWysiwyg from './SectionComponents/SectionWysiwyg';
 import SectionCodeEditor from './SectionComponents/SectionCodeEditor';
 import ReusableComponent from './SectionComponents/ReusableComponent';
+import SectionPostGrid from './SectionComponents/SectionPostGrid';
 
-const SectionMaker = ({ type, params, sectionIndex }) => {
+const SectionMaker = ({ type, params, sectionIndex, category }) => {
   switch (type) {
     case 'section_hero_block':
       return <SectionHero sectionIndex={sectionIndex} {...params} />;
@@ -48,6 +49,9 @@ const SectionMaker = ({ type, params, sectionIndex }) => {
 
     case 'reusable_component_block':
       return <ReusableComponent sectionIndex={sectionIndex} {...params} />;
+
+    case 'section_post_grid':
+      return <SectionPostGrid sectionIndex={sectionIndex} {...params} category={category} />;  
 
     default:
       return '';
