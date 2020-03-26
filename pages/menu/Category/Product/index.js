@@ -44,6 +44,9 @@ const Nutritionals = props => {
     'Calcium (DV)': nutritionals.calcium,
   };
 
+  let ingredients = [...Array(48).keys()];
+  console.log(ingredients);
+
   return (
     <section className="Section">
       <Container className="Section__container">
@@ -68,13 +71,13 @@ const Nutritionals = props => {
                 {Object.entries(nutritionalInfo).map(([key, value], i) => (
                   <div
                     key={`nutritional-item-${i}`}
-                    className="Nutritional__item"
+                    className="Product__nutritionalsItem"
                   >
                     <dt>{key}</dt>
                     <dd>{value}</dd>
                   </div>
                 ))}
-                <div className="Nutritional__item -dailyValue">
+                <div className="Product__nutritionalsItem -dailyValue">
                   <dt className="sr-only">% DV</dt>
                   <dd>
                     % DV = % Daily Value. Learn how to use % Daily Value at
@@ -82,6 +85,32 @@ const Nutritionals = props => {
                   </dd>
                 </div>
               </dl>
+            </Accordion.Collapse>
+          </div>
+          <div className={classNames('Accordion__item', { '-opened': opened })}>
+            <Accordion.Toggle
+              eventKey="ingredients"
+              className="Accordion__header"
+            >
+              <span className="Accordion__heading">Ingredients</span>
+              <ChevronIcon className="Accordion__toggle" />
+            </Accordion.Toggle>
+            <Accordion.Collapse
+              eventKey="ingredients"
+              className="Accordion__collapse"
+              onEntered={() => setOpened(true)}
+              onExited={() => setOpened(false)}
+            >
+              <ul className="Product__ingredients">
+                {ingredients.map((item, i) => (
+                  <li
+                    className="Product__ingredientsItem"
+                    key={`ingredient-${i}`}
+                  >
+                    Ingredient {item}
+                  </li>
+                ))}
+              </ul>
             </Accordion.Collapse>
           </div>
         </Accordion>

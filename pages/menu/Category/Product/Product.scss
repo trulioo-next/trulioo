@@ -32,7 +32,7 @@
   }
 
   &__details {
-    background-color: #DEDEDE;
+    background-color: #dedede;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,12 +71,13 @@
       font-size: 1.5rem;
     }
 
-    .Nutritional__item {
+    &Item {
       display: flex;
       break-inside: avoid;
       border-bottom: dotted 1px $gray;
 
-      dt, dd {
+      dt,
+      dd {
         flex: 1 1;
       }
 
@@ -90,6 +91,30 @@
       }
     }
   }
+
+  &__ingredients {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem 1.2rem;
+    color: $gray;
+    break-inside: avoid;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-gap: 2rem 5rem;
+    }
+    &Item {
+      display: flex;
+      list-style: none;
+      border-bottom: dotted 1px $gray;
+      align-items: flex-end;
+    }
+  }
 }
 
 .Accordion.-product {
@@ -99,6 +124,26 @@
   border: solid 1px $black;
   border-radius: 0.9rem;
   overflow: hidden;
+
+  #{$block}__item {
+    &:last-child {
+      #{$block}__header {
+        margin-bottom: -0.2rem;
+
+        @include media-breakpoint-up(lg) {
+          margin-bottom: -0.1rem;
+        }
+      }
+
+      #{$block}__collapse {
+        margin-top: 0.2rem;
+
+        @include media-breakpoint-up(lg) {
+          margin-top: 0.1rem;
+        }
+      }
+    }
+  }
 
   #{$block}__header {
     display: flex;
@@ -117,14 +162,6 @@
     &:focus {
       outline: none;
     }
-
-    &:last-of-type {
-      margin-bottom: -0.2rem;
-
-      @include media-breakpoint-up(lg) {
-        margin-bottom: -0.1rem;
-      }
-    }
   }
 
   #{$block}__heading {
@@ -141,16 +178,8 @@
     padding: 1.5rem 0.8rem;
     background-color: $white;
 
-    &:last-child {
-      margin-top: 0.2rem;
-
-      @include media-breakpoint-up(md) {
-        padding: 2.8rem 7.5%;
-      }
-
-      @include media-breakpoint-up(lg) {
-        margin-top: 0.1rem;
-      }
+    @include media-breakpoint-up(md) {
+      padding: 2.8rem 7.5%;
     }
   }
 }
