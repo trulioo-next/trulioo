@@ -69,6 +69,10 @@
 
     .slick-dots {
       text-align: left;
+
+      @include media-breakpoint-up(lg) {
+        text-align: center;
+      }
     }
 
     #{$block}__item {
