@@ -24,6 +24,8 @@ import './Product.scss';
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
   let nutritionals = props.data.nutritionals
+
+  // TODO: Add this to the selector  
   let nutritionalInfo = {
     'Serving Size': nutritionals.serving_size,
     'Total Fat': nutritionals.total_fat,
@@ -89,28 +91,27 @@ const Nutritionals = props => {
 };
 
 const ProductHeader = props => {
-  let productDetails = [
-    'Locally made in Surrey, BC',
-    'Baked to order (whole)',
-    'Hand panned and edged',
-    'Hot from even (slices)',
-    'Canadian Ingredients',
-  ];
+  let productDetails = [ ];
+
+  if(props.data.checkmark_section) {
+    let checkmarks = props.data.checkmark_section;
+    for(var i = 0; i < checkmarks.length; i++ ) {
+       productDetails.push(checkmarks[i].point)
+    }
+  }
+
+  let image = props.data.photos ? props.data.photos[0].url : "/static/images/placeholders/Product_HeaderImage.jpg"
 
   return (
     <header className="Section Product__header">
       <div className="Product__image">
-        <img src="/static/images/placeholders/Product_HeaderImage.jpg" />
+        <img src={ image } />
       </div>
       <div className="Product__description text-center">
-        <h1 className="Product__title">Pepperoni Pizza</h1>
+        <h1 className="Product__title">{ props.data.title }</h1>
         <div className="Product__content">
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor
+           { props.data.description }
           </p>
         </div>
       </div>
@@ -131,75 +132,21 @@ const Product = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
-  //
-  // Product Slug
-  //
-
 
   let { category, slug } = props.query
-  
-  
-  const nutritionals = useSelector(state => nutritionalsDataSelector(state,category, slug));
-  
-
-  let relatedData = [
-    {
-      title: 'Extreme Meat',
-      featured_image: '/static/images/placeholders/Related_ExtremeMeat.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/extreme-meat',
-      calories: 20,
-    },
-    {
-      title: 'Triple Cheese Pizza',
-      featured_image: '/static/images/placeholders/Related_Cheese.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/triple-cheese',
-      calories: 20,
-    },
-    {
-      title: 'Pepperoni',
-      featured_image: '/static/images/placeholders/Related_Pepperoni.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/pepperoni',
-      calories: 20,
-    },
-    {
-      title: 'Another Pizza',
-      featured_image: '/static/images/placeholders/Related_ExtremeMeat.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/another',
-      calories: 20,
-    },
-    {
-      title: 'Triple Cheese Pizza',
-      featured_image: '/static/images/placeholders/Related_Cheese.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/triple-cheese',
-      calories: 20,
-    },
-    {
-      title: 'Extreme Meat',
-      featured_image: '/static/images/placeholders/Related_ExtremeMeat.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/extreme-meat',
-      calories: 20,
-    },
-    {
-      title: 'Pepperoni',
-      featured_image: '/static/images/placeholders/Related_Pepperoni.png',
-      excerpt: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed',
-      href: '/menu/pizza/pepperoni',
-      calories: 20,
-    },
-  ];
+  const categoryData = useSelector(state => nutritionalsDataSelector(state,category, slug));
+  let { related } = categoryData;
+  let relatedData = [];
+  if(related) {
+    relatedData = related;
+  }
 
   return (
     <Layout>
       <Header title="" />
       <div className="Product__page">
-        <ProductHeader />
-        <Nutritionals data={nutritionals} />
+        <ProductHeader data={categoryData} />
+        <Nutritionals data={categoryData} />
         <section className="Section -related">
           <Container>
             <Row>

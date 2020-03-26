@@ -51,14 +51,14 @@ class Category extends React.Component {
     let { data, slug, taxonomyData } = this.props
     let headerTitle = "Menu | " + taxonomyData.name 
     let pageTitle = taxonomyData.name
-
+    let headerImage = taxonomyData.banner_image ? taxonomyData.banner_image.url : "/static/images/placeholders/Pizza_Hero.jpg";
     // console.log(' taxonomy component data ::>> ', taxonomyData )
 
     return (
       <Layout>
         <Header title={headerTitle} />
         <section className="Section">
-          <Hero src="/static/images/placeholders/Pizza_Hero.jpg">
+          <Hero src={ headerImage }>
             <Hero.Title title={pageTitle} color="#FFF" shadow />
           </Hero>
         </section>
