@@ -171,6 +171,7 @@ const Product = props => {
 
   let { category, slug } = props.query
   const categoryData = useSelector(state => nutritionalsDataSelector(state,category, slug));
+  console.log(' categoryData :: ',  props.query )
   let { related } = categoryData;
   let relatedData = [];
   if(related) {
@@ -181,8 +182,8 @@ const Product = props => {
     <Layout>
       <Header title="" />
       <div className="Product__page">
-        <ProductHeader data={categoryData} />
-        <Nutritionals data={categoryData} />
+        {/*<ProductHeader data={categoryData} />
+        <Nutritionals data={categoryData} />*/}
         <section className="Section -related">
           <Container>
             <Row>

@@ -79,7 +79,7 @@ App.prepare().then(() => {
     // const actualPage = '/menu/category/[slug].js';
     // const queryParams = { slug: req.params.slug,category:req.params.category , apiRoute: '/menu/category/product' };
     // return handle(req, res, actualPage, queryParams);
-    App.render(req, res, '/menu/Category/Product/[slug].js', { category:req.params.category, slug: req.params.slug });
+    App.render(req, res, '/menu/Category/Product', { category:req.params.category, slug: req.params.slug });
   });
  
   server.get('*', (req, res) => {
