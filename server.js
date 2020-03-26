@@ -67,12 +67,19 @@ App.prepare().then(() => {
     App.render(req, res, actualPage, queryParams);
   });
 
-  server.get('/menu/:slug', (req, res) => {
-    App.render(req, res, '/menu/category', { slug: req.params.slug });
+  server.get('/menu/:category', (req, res) => {
+    
+    // const queryParams = { slug: req.params.slug, apiRoute: 'menu' };
+    // return handle(req, res, '/menu/Category/Category', queryParams);
+    // return handle(req, res, '/menu/category', { slug: req.params.slug });
+    App.render(req, res, '/menu/Category/Category', { slug: req.params.slug } );
   });
 
   server.get('/menu/:category/:slug', (req, res) => {
-    App.render(req, res, '/menu/category/product', { category:req.params.category, slug: req.params.slug });
+    // const actualPage = '/menu/category/[slug].js';
+    // const queryParams = { slug: req.params.slug,category:req.params.category , apiRoute: '/menu/category/product' };
+    // return handle(req, res, actualPage, queryParams);
+    App.render(req, res, '/menu/Category/Product/Product', { category:req.params.category, slug: req.params.slug });
   });
  
   server.get('*', (req, res) => {

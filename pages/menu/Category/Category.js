@@ -26,17 +26,21 @@ class Category extends React.Component {
   }
 
   static async getInitialProps({ isServer, store, res, req}) {
-    let slug = res.req.params.slug ? res.req.params.slug : false
+    let category = res.req.params.category ? res.req.params.category : false
+
+    
     let { nutritionals } = store.getState()
+    console.log('SLUG nutritionals ', nutritionals.taxonomies  )
+
     let taxonomyData = [];
     if(nutritionals && nutritionals.taxonomies) {
       for(var i = 0; i < nutritionals.taxonomies.length; i++ ) {
-        if(nutritionals.taxonomies[i].slug === slug) {
+        if(nutritionals.taxonomies[i].slug === category) {
           taxonomyData = nutritionals.taxonomies[i]
         }
       }
     }
-    return { slug, taxonomyData };
+    return { category, taxonomyData };
   }
 
   componentDidMount() {
@@ -48,7 +52,7 @@ class Category extends React.Component {
   //
   render() {
 
-    let { data, slug, taxonomyData } = this.props
+    let { data, category, taxonomyData } = this.props
     let headerTitle = "Menu | " + taxonomyData.name 
     let pageTitle = taxonomyData.name
     let headerImage = taxonomyData.banner_image ? taxonomyData.banner_image.url : "/static/images/placeholders/Pizza_Hero.jpg";
@@ -69,7 +73,7 @@ class Category extends React.Component {
           <SectionMaker
             type={section.acf_fc_layout}
             params={section}
-            category={slug}
+            category={category}
             key={sectionKey}
             sectionIndex={sectionKey}
           />
