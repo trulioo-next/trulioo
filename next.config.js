@@ -6,7 +6,10 @@ const dotEnvResult = require("dotenv").config();
 const Dotenv = require('dotenv-webpack')
 const webpack = require("webpack");
 const withSass = require("@zeit/next-sass");
-const withCss = require("@zeit/next-css");
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+
+
+// const withCss = require("@zeit/next-css");
 const path = require("path");
 
 if (process.env.NODE_ENV === "development") {
@@ -37,7 +40,13 @@ const nextConfig = {
     });
  
     // Here goes env that are available in the client side
-    config.plugins.push(new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL", "ENDPOINT_URL"]));
+    config.plugins.push(
+      new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL", "ENDPOINT_URL"]),
+      new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+      })
+      );
+
     return config;
   },
   
@@ -51,4 +60,4 @@ const nextConfig = {
   }
 };
 
-module.exports = withCss(withSass(nextConfig));
+module.exports =  withSass(nextConfig);

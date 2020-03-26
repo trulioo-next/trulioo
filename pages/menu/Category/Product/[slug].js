@@ -24,24 +24,25 @@ import './Product.scss';
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
   let nutritionals = props.data.nutritionals
+  console.log('props.data', props.data )
 
   // TODO: Add this to the selector  
   let nutritionalInfo = {
-    'Serving Size': nutritionals.serving_size,
-    'Total Fat': nutritionals.total_fat,
-    'Trans Fat': nutritionals.trans_fat,
-    Sodium: nutritionals.sodium,
-    'Dietary Fibre': nutritionals.dietary_fibre,
-    Protein: nutritionals.protein,
-    'Vitamin C (DV)': nutritionals.vitamin_c,
-    'Iron (DV)': nutritionals.iron,
-    'Calories (kcal)': nutritionals.calories,
-    'Saturated Fat': 'nan',
-    Cholestrol: nutritionals.cholesterol,
-    Carbohydrates: nutritionals.carbohydrates,
-    Sugars: nutritionals.sugars,
-    'Vitamin A (DV)': nutritionals.vitamin_a,
-    'Calcium (DV)': nutritionals.calcium,
+    'Serving Size': nutritionals.serving_size || '',
+    'Total Fat': nutritionals.total_fat || '',
+    'Trans Fat': nutritionals.trans_fat || '',
+    Sodium: nutritionals.sodium || '',
+    'Dietary Fibre': nutritionals.dietary_fibre || '',
+    Protein: nutritionals.protein || '',
+    'Vitamin C (DV)': nutritionals.vitamin_c || '',
+    'Iron (DV)': nutritionals.iron || '',
+    'Calories (kcal)': nutritionals.calories || '',
+    'Saturated Fat': 'nan' || '',
+    Cholestrol: nutritionals.cholesterol || '',
+    Carbohydrates: nutritionals.carbohydrates || '',
+    Sugars: nutritionals.sugars || '',
+    'Vitamin A (DV)': nutritionals.vitamin_a || '',
+    'Calcium (DV)': nutritionals.calcium || '',
   };
 
   let ingredients = [];
@@ -168,8 +169,11 @@ const Product = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  let { category, slug } = props.query
-  const categoryData = useSelector(state => nutritionalsDataSelector(state,category, slug));
+  let { category, slug, handle } = props.query
+  const categoryData = useSelector(state => nutritionalsDataSelector(state,category,handle));
+  
+  // console.log(' categoryData :: ',  categoryData  )
+  
   let { related } = categoryData;
   let relatedData = [];
   if(related) {
@@ -204,7 +208,7 @@ const Product = props => {
 };
 //
 Product.getInitialProps = async ({ query, res }) => {
-  return { query };
+  return { query  };
 };
 //
 export default Product;
