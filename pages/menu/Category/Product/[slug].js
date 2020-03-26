@@ -169,9 +169,11 @@ const Product = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  let { category, slug } = props.query
-  const categoryData = useSelector(state => nutritionalsDataSelector(state,category, slug));
-  console.log(' categoryData :: ',  props.query )
+  let { category, slug, handle } = props.query
+  const categoryData = useSelector(state => nutritionalsDataSelector(state,category,handle));
+  
+  // console.log(' categoryData :: ',  categoryData  )
+  
   let { related } = categoryData;
   let relatedData = [];
   if(related) {
@@ -182,8 +184,8 @@ const Product = props => {
     <Layout>
       <Header title="" />
       <div className="Product__page">
-        {/*<ProductHeader data={categoryData} />
-        <Nutritionals data={categoryData} />*/}
+        <ProductHeader data={categoryData} />
+        <Nutritionals data={categoryData} />
         <section className="Section -related">
           <Container>
             <Row>
@@ -206,7 +208,7 @@ const Product = props => {
 };
 //
 Product.getInitialProps = async ({ query, res }) => {
-  return { query };
+  return { query  };
 };
 //
 export default Product;
