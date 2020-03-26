@@ -12,7 +12,7 @@ import ProductSlider from '@/components/ProductSlider';
 import ProductCard from '@/components/ProductCard';
 import SectionMaker from '@/components/SectionMaker';
 import { nutritionalsDataSelector } from '@/stores/nutritionals/selectors';
-  
+
 import ChevronIcon from '@/static/images/caret-down.svg';
 
 import Container from 'react-bootstrap/Container';
@@ -23,37 +23,33 @@ import './Product.scss';
 
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
-  let nutritionals = props.data.nutritionals
-  console.log('props.data', props.data )
+  let nutritionals = props.data.nutritionals;
+  console.log('props.data', props.data);
 
-  // TODO: Add this to the selector  
+  // TODO: Add this to the selector
   let nutritionalInfo = {
     'Serving Size': nutritionals.serving_size || '',
     'Total Fat': nutritionals.total_fat || '',
     'Trans Fat': nutritionals.trans_fat || '',
-    Sodium: nutritionals.sodium || '',
+    'Sodium': nutritionals.sodium || '',
     'Dietary Fibre': nutritionals.dietary_fibre || '',
-    Protein: nutritionals.protein || '',
+    'Protein': nutritionals.protein || '',
     'Vitamin C (DV)': nutritionals.vitamin_c || '',
     'Iron (DV)': nutritionals.iron || '',
     'Calories (kcal)': nutritionals.calories || '',
-    'Saturated Fat': 'nan' || '',
-    Cholestrol: nutritionals.cholesterol || '',
-    Carbohydrates: nutritionals.carbohydrates || '',
-    Sugars: nutritionals.sugars || '',
+    'Cholestrol': nutritionals.cholesterol || '',
+    'Carbohydrates': nutritionals.carbohydrates || '',
+    'Sugars': nutritionals.sugars || '',
     'Vitamin A (DV)': nutritionals.vitamin_a || '',
     'Calcium (DV)': nutritionals.calcium || '',
   };
 
   let ingredients = [];
-  if(props.data.ingredients) {
-    let ing = props.data.ingredients;
-    for(var i = 0; i < ing.length; i++) {
-      ingredients.push(ing[i].ingredient)
-    }
 
+  if (props.data.acf && props.data.acf.ingredients) {
+    ingredients = props.data.acf.ingredients;
   }
-   
+
   return (
     <section className="Section">
       <Container className="Section__container">
@@ -94,32 +90,36 @@ const Nutritionals = props => {
               </dl>
             </Accordion.Collapse>
           </div>
-          <div className={classNames('Accordion__item', { '-opened': opened })}>
-            <Accordion.Toggle
-              eventKey="ingredients"
-              className="Accordion__header"
+          {ingredients.length > 0 && (
+            <div
+              className={classNames('Accordion__item', { '-opened': opened })}
             >
-              <span className="Accordion__heading">Ingredients</span>
-              <ChevronIcon className="Accordion__toggle" />
-            </Accordion.Toggle>
-            <Accordion.Collapse
-              eventKey="ingredients"
-              className="Accordion__collapse"
-              onEntered={() => setOpened(true)}
-              onExited={() => setOpened(false)}
-            >
-              <ul className="Product__ingredients">
-                {ingredients.map((item, i) => (
-                  <li
-                    className="Product__ingredientsItem"
-                    key={`ingredient-${i}`}
-                  >
-                    Ingredient {item}
-                  </li>
-                ))}
-              </ul>
-            </Accordion.Collapse>
-          </div>
+              <Accordion.Toggle
+                eventKey="ingredients"
+                className="Accordion__header"
+              >
+                <span className="Accordion__heading">Ingredients</span>
+                <ChevronIcon className="Accordion__toggle" />
+              </Accordion.Toggle>
+              <Accordion.Collapse
+                eventKey="ingredients"
+                className="Accordion__collapse"
+                onEntered={() => setOpened(true)}
+                onExited={() => setOpened(false)}
+              >
+                <ul className="Product__ingredients">
+                  {ingredients.map(({ ingredient }, i) => (
+                    <li
+                      className="Product__ingredientsItem"
+                      key={`ingredient-${i}`}
+                    >
+                      {ingredient}
+                    </li>
+                  ))}
+                </ul>
+              </Accordion.Collapse>
+            </div>
+          )}
         </Accordion>
       </Container>
     </section>
@@ -127,39 +127,44 @@ const Nutritionals = props => {
 };
 
 const ProductHeader = props => {
-  let productDetails = [ ];
+  let productDetails = [];
 
-  if(props.data.checkmark_section) {
-    let checkmarks = props.data.checkmark_section;
-    for(var i = 0; i < checkmarks.length; i++ ) {
-       productDetails.push(checkmarks[i].point)
-    }
+  if (props.data.acf && props.data.acf.checkmark_section) {
+    productDetails = props.data.acf.checkmark_section;
   }
 
-  let image = props.data.photos ? props.data.photos[0].url : "/static/images/placeholders/Product_HeaderImage.jpg"
+  let image = props.data.photos
+    ? props.data.photos[0].url
+    : '/static/images/placeholders/Product_HeaderImage.jpg';
 
   return (
-    <header className="Section Product__header">
+    <header
+      className={classNames('Section', 'Product__header', {
+        '-hasDetails': productDetails.length > 0,
+      })}
+    >
       <div className="Product__image">
-        <img src={ image } />
+        <img src={image} />
       </div>
       <div className="Product__description text-center">
-        <h1 className="Product__title">{ props.data.title }</h1>
-        <div className="Product__content">
-          <p>
-           { props.data.description }
-          </p>
+        <h1 className="Product__title">{props.data.title}</h1>
+        {props.data.description && (
+          <div className="Product__content">
+            <p>{props.data.description}</p>
+          </div>
+        )}
+      </div>
+      {productDetails.length > 0 && (
+        <div className="Product__details">
+          <ul className="Product__detailList">
+            {productDetails.map(({ point }, i) => (
+              <li key={`product-detail-${i}`} className="Product__detail">
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-      <div className="Product__details">
-        <ul className="Product__detailList">
-          {productDetails.map((detail, i) => (
-            <li key={`product-detail-${i}`} className="Product__detail">
-              {detail}
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
     </header>
   );
 };
@@ -169,14 +174,16 @@ const Product = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  let { category, slug, handle } = props.query
-  const categoryData = useSelector(state => nutritionalsDataSelector(state,category,handle));
-  
+  let { category, slug, handle } = props.query;
+  const categoryData = useSelector(state =>
+    nutritionalsDataSelector(state, category, handle),
+  );
+
   // console.log(' categoryData :: ',  categoryData  )
-  
+
   let { related } = categoryData;
   let relatedData = [];
-  if(related) {
+  if (related) {
     relatedData = related;
   }
 
@@ -208,7 +215,7 @@ const Product = props => {
 };
 //
 Product.getInitialProps = async ({ query, res }) => {
-  return { query  };
+  return { query };
 };
 //
 export default Product;

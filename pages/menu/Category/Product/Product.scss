@@ -28,9 +28,11 @@
 
   &__description {
     display: flex;
+    flex-direction: column;
     background-color: $white;
     padding: 2.8rem 1.8rem;
     align-items: center;
+    justify-content: center;
 
     @include media-breakpoint-up(lg) {
       padding: 6.4rem 3.85rem 3.3rem;

@@ -16,7 +16,8 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "quote-props": ["error", "consistent-as-needed"],
   },
   parserOptions: {
     ecmaFeatures: {
