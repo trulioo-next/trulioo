@@ -12,6 +12,7 @@ import SectionWysiwyg from './SectionComponents/SectionWysiwyg';
 import SectionCodeEditor from './SectionComponents/SectionCodeEditor';
 import ReusableComponent from './SectionComponents/ReusableComponent';
 import SectionPostGrid from './SectionComponents/SectionPostGrid';
+import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
 
 const SectionMaker = ({ type, params, sectionIndex, category }) => {
   switch (type) {
@@ -51,7 +52,10 @@ const SectionMaker = ({ type, params, sectionIndex, category }) => {
       return <ReusableComponent sectionIndex={sectionIndex} {...params} />;
 
     case 'section_post_grid':
-      return <SectionPostGrid sectionIndex={sectionIndex} {...params} category={category} />;  
+      return <SectionPostGrid sectionIndex={sectionIndex} {...params} category={category} />;
+
+    case 'section_taste_of_asia':
+      return <SectionTasteOfAsia sectionIndex={sectionIndex} {...params} />;    
 
     default:
       return '';

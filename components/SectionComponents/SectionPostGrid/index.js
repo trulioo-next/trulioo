@@ -7,6 +7,7 @@ const SectionPostGrid = (props) => {
 	let { posts, category } = props
 	let count = posts.length;
 
+
     return <ColumnSpread spread={count}>
             
 	{ posts &&
