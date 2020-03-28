@@ -3,6 +3,18 @@
 .Delivery {
   $block: &;
 
+  &__form {
+    margin-top: 1.9rem;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 4.4rem;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
   &__field {
     display: flex;
     align-items: stretch;
@@ -10,6 +22,10 @@
 
     @include media-breakpoint-up(lg) {
       margin-top: 4.4rem;
+    }
+
+    &:first-child {
+      margin-top: 0;
     }
   }
 

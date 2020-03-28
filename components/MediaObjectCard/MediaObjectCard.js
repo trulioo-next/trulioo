@@ -16,16 +16,21 @@ const MediaCard = props => {
     { '-stacked': props.stacked },
   );
 
-  let bodyClasses = classNames('Card__body', 'text-left', {
-    'text-md-center': props.stacked,
-  });
+  let bodyClasses = classNames(
+    'Card__body',
+    'text-left',
+    {
+      'text-md-center': props.stacked,
+    },
+    props.className,
+  );
 
   return (
     <Card className={cardClasses}>
       <Card.Body className={bodyClasses}>
         <Row>
           <Col className="col" xs="5" md={props.stacked ? 12 : 5}>
-            <div className="Card__image">
+            <div className="Card__image -square -contain">
               <img src={props.image} />
             </div>
           </Col>

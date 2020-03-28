@@ -1,4 +1,9 @@
 .container {
+  @include media-breakpoint-only(md) {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
   @include media-breakpoint-up(lg) {
     padding-left: 1.8rem;
     padding-right: 1.8rem;
@@ -6,6 +11,11 @@
 }
 
 .row {
+  @include media-breakpoint-only(md) {
+    margin-left: -1.2rem;
+    margin-right: -1.2rem;
+  }
+
   @include media-breakpoint-up(lg) {
     margin-left: -1.8rem;
     margin-right: -1.8rem;
@@ -13,6 +23,11 @@
 }
 
 .col {
+  @include media-breakpoint-only(md) {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
   @include media-breakpoint-up(lg) {
     padding-left: 1.8rem;
     padding-right: 1.8rem;
