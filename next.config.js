@@ -2,62 +2,61 @@
  * Set and export Next configurations with PWA optimizations (workbox/webpack)
  **/
 
-const dotEnvResult = require("dotenv").config();
-const Dotenv = require('dotenv-webpack')
-const webpack = require("webpack");
-const withSass = require("@zeit/next-sass");
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
-
+const dotEnvResult = require('dotenv').config();
+const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
+const withSass = require('@zeit/next-sass');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 // const withCss = require("@zeit/next-css");
-const path = require("path");
+const path = require('path');
 
-if (process.env.NODE_ENV === "development") {
-   process.traceDeprecation = true;
+if (process.env.NODE_ENV === 'development') {
+  process.traceDeprecation = true;
 }
 
 const nextConfig = {
   poweredByHeader: false,
   // target: 'serverless',
   webpack: (config, { buildId, dev, isServer }) => {
-    config.node = { fs: "empty", net: "empty", tls: "empty" };
+    config.node = { fs: 'empty', net: 'empty', tls: 'empty' };
 
-    config.resolve.alias["@"] = path.resolve(__dirname);
+    config.resolve.alias['@'] = path.resolve(__dirname);
 
     config.module.rules.push({
       test: /\.svg$/,
       use: [
         {
-          loader: "@svgr/webpack",
+          loader: '@svgr/webpack',
           options: {
             svgoConfig: {
-              plugins: [{ removeViewBox: false }]
+              plugins: [{ removeViewBox: false }],
             },
-            titleProp: true
-          }
-        }
-      ]
+            titleProp: true,
+          },
+        },
+      ],
     });
- 
+
     // Here goes env that are available in the client side
     config.plugins.push(
-      new webpack.EnvironmentPlugin(["VERSION", "ROOT_URL", "ENDPOINT_URL"]),
+      new webpack.EnvironmentPlugin(['VERSION', 'ROOT_URL', 'ENDPOINT_URL']),
       new FilterWarningsPlugin({
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
-      })
-      );
+      }),
+    );
 
     return config;
   },
-  
-  // BEFORE DEPLOY, ADD THESE 
-  // ROOT_URL:"https://7-11.rob24.now.sh",
-  // ENDPOINT_URL:"https://dev3.7eleven.ca/wp-json"
+
+  // BEFORE DEPLOY, ADD THESE
   //  ...dotEnvResult
 
   env: {
-    ...dotEnvResult
-  }
+    ROOT_URL: 'https://7-11.rob24.now.sh',
+    ENDPOINT_URL: 'https://dev3.7eleven.ca/wp-json',
+    // ...dotEnvResult
+  },
 };
 
-module.exports =  withSass(nextConfig);
+module.exports = withSass(nextConfig);
