@@ -1,0 +1,150 @@
+/**
+ * Shopistry PWA 
+*/
+.site__logo {
+  position: relative;
+  margin: auto;
+  max-width: 180px;
+  text-align: center;
+  top: -10px; }
+  .site__logo img {
+    max-width: 100%; }
+
+nav {
+  width: 100%;
+  height: 60px;
+  color: #FFF;
+  background: #eee;
+  position: fixed;
+  top: 0px;
+  font-size: 20px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+  padding: 16px 16px 0 16px;
+  will-change: transform;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  z-index: 10; }
+  nav li {
+    list-style: none;
+    margin-right: 30px; }
+    nav li a {
+      text-decoration: none;
+      color: #333; }
+  nav .float__items {
+    position: absolute;
+    right: 0px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between; }
+
+.header__menu {
+  position: absolute;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  display: none; }
+  @media (max-width: 980px) {
+    .header__menu {
+      display: block; } }
+  .header__menu div {
+    width: 24px;
+    height: 3px;
+    background-color: #eeb744;
+    margin: 5px 0;
+    border-radius: 8px; }
+
+footer {
+  display: block;
+  background-color: #eee;
+  color: white;
+  width: 100%;
+  height: 100px;
+  padding: 40px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px; }
+  footer ul {
+    position: relative;
+    margin: 0px;
+    padding: 0px; }
+    footer ul li {
+      position: relative;
+      display: inline-block;
+      margin-right: 20px;
+      list-style: none; }
+
+.loader__bg {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.5); }
+
+.page__loader {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  text-align: center;
+  z-index: 99; }
+  .page__loader .lds-ring {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px; }
+  .page__loader .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #000;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #000 transparent transparent transparent; }
+  .page__loader .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s; }
+  .page__loader .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s; }
+  .page__loader .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s; }
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+* {
+  box-sizing: border-box; }
+
+html,
+body,
+#__next {
+  height: 100%;
+  width: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.layout {
+  display: "flex";
+  flexDirection: "column";
+  height: "100%";
+  width: "100%"; }
+
+
+/*# sourceMappingURL=styles.chunk.css.map*/

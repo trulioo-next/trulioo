@@ -7,7 +7,7 @@ import MediaObjectCard from '@/components/MediaObjectCard';
 
 const SectionTasteOfAsia = (props) => {
    
-    const [ lang, setLang ] = useState('hindi_content'); 
+    const [ lang, setLang ] = useState('english_content'); 
 
     let { products } = props;
 
