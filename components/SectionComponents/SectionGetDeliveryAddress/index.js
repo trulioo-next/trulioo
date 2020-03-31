@@ -87,7 +87,7 @@ const DeliveryAvailable = props => {
     <div className="container-fluid Delivery__section">
       <div className="row">
         <div className="col col-12 col-md-5 text-center text-md-left Section__body">
-          <h3 className="Section__title">{props.title}</h3>
+          {props.title && <h3 className="Section__title">{props.title}</h3>}
           {props.computedAddress && (
             <p className="Delivery__computedAddress">
               <strong>Computed Address:</strong>
