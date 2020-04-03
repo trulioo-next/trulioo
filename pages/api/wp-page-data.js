@@ -21,6 +21,8 @@ export default async (req, res) => {
        }
      })
 
+    console.log('GET PAGE DATA ', body )
+
      
      res.json(response)
      return

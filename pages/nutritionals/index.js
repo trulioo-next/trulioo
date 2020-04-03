@@ -165,8 +165,13 @@ const Disclaimer = props => {
   );
 };
 
-const Page = props => {
+
+function Page({ nutritionals }) {
+// const Page = props => {
   const columns = COLUMNS;
+
+
+  console.log('PROPS TO LOAD ---> >>>>  ', nutritionals )
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -268,8 +273,18 @@ const Page = props => {
   );
 };
 
+// Page Static Props 
+// 
+Page.getStaticProps = async ({ query, res }) => {
+  return {
+     nutritionals:'getStaticProps '
+  }
+}
+
+// Page Initial Props 
+//
 Page.getInitialProps = async ({ query, res }) => {
-  return { query };
+  return { query, nutritionals:'getInitialProps ' };
 };
 
 export default Page;
