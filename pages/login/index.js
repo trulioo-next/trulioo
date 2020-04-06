@@ -33,7 +33,7 @@ class UserAuth extends React.Component {
   componentDidMount() {
 
     let isUserAuth = this.props.user.auth
-    if( isUserAuth ) {
+    if( !isUserAuth.error ) {
       console.log('USER AUTH  ', isUserAuth )
       this.setState({loggedIn:true})
     }
@@ -84,11 +84,17 @@ class UserAuth extends React.Component {
                 <label>Password</label>
                 <input value={this.state.password} type="password" name="password" onChange={(e) => this.onValueChange(e,'pass')} placeholder="password"/>
               </div>
+               {this.props.user.auth.error &&  
+                <div className="form__wrapper" css={css`position: relative; display:block; margin-top:30px; text-align:center; width: 100%;`}>
+                <h5>{ this.props.user.auth.error.payload.error_description }</h5></div>
+              }
               <Button
                 id="submit"
                 onClick={ (e) => this.submitForm(e) } >
                 Login
               </Button>
+
+             
             </form>
           </div>
           }
