@@ -9,12 +9,12 @@ export const reqUserAuthAction = (payload) => ({
 })
 
 
-export const reqUserREgisterAction = (payload) => ({
+export const reqUserRegisterAction = (payload) => ({
   type: SEVEN_REWARDS_REGISTER_REQUEST,
   payload: payload
 })
 
 export default {
   reqUserAuthAction,
-  reqUserREgisterAction
+  reqUserRegisterAction
 }

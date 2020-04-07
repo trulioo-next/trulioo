@@ -18,8 +18,8 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
-	async function registerUser() {
-		let data = await API.post('/api/seven-rewards/user-register', {});
+	async function registerUser(payload) {
+		let data = await API.post('/api/seven-rewards/user-register', {body:payload});
 		return data;
 	}
 

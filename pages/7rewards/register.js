@@ -70,13 +70,13 @@ class Register extends React.Component {
       password:this.state.password,
       email:this.state.email,
       bMonth:this.state.bMonth,
-      bDay:this.state.bbDay,
+      bDay:this.state.bDay,
       bYear:this.state.bYear
     }
 
-    console.log('REGISTER USER ', payload )
+    // console.log('REGISTER USER ', payload )
     // this.setState({loggedIn:true})
-    // this.props.userAuthRequest(payload)
+    this.props.userRegisterRequest(payload)
   }
  
   render() {
@@ -84,14 +84,22 @@ class Register extends React.Component {
     return (
       <Layout>
 
-        <Header title="Nutritionals" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
+        <Header title="7 Rewards Register"/>
+        <Hero src="/static/images/placeholders/Homepage_Banner.jpg">
         </Hero>
         <Container className="Section__container">
         <div className="register__screen__page">
           {!this.state.loggedIn &&  
           <div className="form__wrapper">
             <h2>Register:</h2>
+
+            <Row>
+              <Col className="text-center">
+                <img className="facebook__btn" src="/static/images/placeholders/facebook-btn.png" />
+                <p className="bottom--margin--20">OR</p>
+              </Col>
+            </Row>
+
             <form>
               <Row>
                 <Col className="text-center">
@@ -213,7 +221,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
+  userRegisterRequest: (payload) => dispatch(appActions.reqUserRegisterAction(payload)),
 })
 
 const UserAuth_ = connect(
