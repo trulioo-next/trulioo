@@ -7,7 +7,8 @@ import { INITIAL_STATE } from './initialState'
 
 import {
   SEVEN_REWARDS_AUTH_LOADED,
-  SEVEN_REWARDS_CHECK_LOADED
+  SEVEN_REWARDS_CHECK_LOADED,
+  SEVEN_REWARDS_REGISTER_LOADED
 } from '../types'
 
 
@@ -23,6 +24,11 @@ export default (state = INITIAL_STATE, action) => {
       case SEVEN_REWARDS_CHECK_LOADED:
       return { ...state,
         auth: action.payload
+      }  
+
+      case SEVEN_REWARDS_REGISTER_LOADED:
+      return { ...state,
+        registered: action.payload
       }   
 
     default:

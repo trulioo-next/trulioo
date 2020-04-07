@@ -1,5 +1,6 @@
 import {
   SEVEN_REWARDS_AUTH_REQUEST,
+  SEVEN_REWARDS_REGISTER_REQUEST,
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -7,6 +8,13 @@ export const reqUserAuthAction = (payload) => ({
   payload: payload
 })
 
+
+export const reqUserREgisterAction = (payload) => ({
+  type: SEVEN_REWARDS_REGISTER_REQUEST,
+  payload: payload
+})
+
 export default {
-  reqUserAuthAction
+  reqUserAuthAction,
+  reqUserREgisterAction
 }

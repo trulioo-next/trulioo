@@ -1,5 +1,6 @@
 import { take, call, put, all, select } from 'redux-saga/effects'
 import UserClientService from '../../services/userClientService';
+import SevenRewardsService from '../../services/server/sevenRewardsService';
 
 import {
   SEVEN_REWARDS_AUTH_REQUEST,
@@ -7,7 +8,10 @@ import {
   SEVEN_REWARDS_AUTH_ERROR,
   APP_STARTLOADING,
   SEVEN_REWARDS_CHECK_REQUEST,
-  SEVEN_REWARDS_CHECK_LOADED
+  SEVEN_REWARDS_CHECK_LOADED,
+  SEVEN_REWARDS_REGISTER_REQUEST,
+  SEVEN_REWARDS_REGISTER_LOADED,
+  SEVEN_REWARDS_REGISTER_ERROR
 } from '../types'
 
 function* startup(payload) {
@@ -26,7 +30,7 @@ function* startup(payload) {
   }
 }
 
-
+//
 function* checkUserAuth(payload) {
    
   try {
@@ -43,6 +47,23 @@ function* checkUserAuth(payload) {
   }
 }
 
+//
+function* registerUser(payload) {
+   
+  try {
+    
+    
+    const registerClientResponse = yield call(SevenRewardsService.checkUserAuth)
+    console.log('HELLO IS USER AUTH ', registerClientResponse)
+    yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse})
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
 /*
 * Startup flow to allow concurrent actions to be dispatched
 */
@@ -51,7 +72,8 @@ function* startupFlow() {
 
     const action = yield take([
       SEVEN_REWARDS_AUTH_REQUEST,
-      SEVEN_REWARDS_CHECK_REQUEST
+      SEVEN_REWARDS_CHECK_REQUEST,
+      SEVEN_REWARDS_REGISTER_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -62,6 +84,10 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_CHECK_REQUEST) {
       yield call(checkUserAuth, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_REGISTER_REQUEST) {
+      yield call(registerUser, action.payload)
     }
  
     yield action

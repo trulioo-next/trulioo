@@ -8,7 +8,7 @@ import appSelectors from '../../stores/user/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
 
-import './LoginScreen.scss';
+import '../login/LoginScreen.scss';
 
 class UserAuth extends React.Component {
   constructor(props) {

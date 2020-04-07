@@ -1,0 +1,48 @@
+
+
+.register__screen__page {
+	position: relative;
+	padding: 20px 0px;
+
+	.form__wrapper {
+		position: relative;
+		max-width: 500px;
+		margin: auto;
+		font-family: arial;
+			
+		label {
+			display: none;
+
+			&.show {
+				display: block;
+				position: absolute;
+				left: 50px;
+				top: 0px;
+
+			}
+		}
+
+		.bottom--margin--20 {
+			margin-bottom: 20px;
+		}	
+		.bottom--margin--80 {
+			margin-bottom: 80px;
+		}	
+
+		input {
+			position: relative;
+			padding: 12px;
+			font-size: 16px;
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		button {
+			position: relative;
+			border-radius: 3px;
+			padding: 12px;
+			background-color: #000;
+			color: #fff;
+		}
+	}
+}
