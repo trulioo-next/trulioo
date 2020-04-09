@@ -10,10 +10,11 @@ import {css, jsx} from "@emotion/core";
 
 import '../login/LoginScreen.scss';
 
-class SevenRewards extends React.Component {
+class Faq extends React.Component {
   constructor(props) {
     super(props)
- 
+
+   
     this.state = {
       valid:false,
       isLoading:false,
@@ -35,17 +36,15 @@ class SevenRewards extends React.Component {
   }
   componentDidUpdate() { }
   
-    
+  //
+  
   render() {
 
     return (
       <Layout>
-        <Header title="Nutritionals" />
+        <Header title="FAQ" />
         <Hero src="/static/images/placeholders/Nutritionals.png">
         </Hero>
-        <div className="login__screen__page">
-          <h1>7Rewards</h1>
-        </div>
      </Layout>
     )
   }
@@ -59,9 +58,9 @@ const mapDispatchToProps = (dispatch) => ({
   userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
 })
 
-const SevenRewards_ = connect(
+const Faq_ = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SevenRewards)
+)(Faq)
  
-export default SevenRewards_;
+export default Faq_;

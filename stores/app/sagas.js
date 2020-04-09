@@ -17,6 +17,9 @@ function* startup(payload) {
     const state = yield select((state) => state)
     const dataService = DataService(state)
     const response = yield call(dataService.getGlobalData, true)
+
+
+   //  console.log('GLOBAL DATA ', response )
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
   } catch(err) {

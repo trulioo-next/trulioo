@@ -59,6 +59,12 @@ App.prepare().then(() => {
     return handle(req, res, actualPage, queryParams);
   });
 
+  server.get('/7rewards/:slug', (req, res) => {
+    const actualPage = '/7rewards';
+    const queryParams = { slug: req.params.slug, apiRoute: '7rewards' };
+    return handle(req, res, actualPage, queryParams);
+  });
+
 
   server.get('/_preview/:id/:rev/:type/:status/:wpnonce', (req, res) => {
     const actualPage = '/preview';
