@@ -11,19 +11,15 @@ import {
   SEVEN_REWARDS_CHECK_LOADED,
   SEVEN_REWARDS_REGISTER_REQUEST,
   SEVEN_REWARDS_REGISTER_LOADED,
-  SEVEN_REWARDS_REGISTER_ERROR
+  SEVEN_REWARDS_REGISTER_ERROR,
+  SEVEN_REWARDS_LOGOUT_REQUEST,
+  SEVEN_REWARDS_LOGOUT
 } from '../types'
 
 function* startup(payload) {
-
-  console.log('USER AUTH PAYLOAD SAGA ', payload )
    
   try {
     
-    // const state = yield select((state) => state)
-    // const userClientService = UserClientService(state);
-    // const userClientResponse = yield call(userClientService.getUserAuth, payload)
-
 
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
@@ -80,6 +76,21 @@ function* registerUser(payload) {
   }
 }
 
+//
+// Log User Out
+function* logoutUser() {
+ 
+  try {
+    
+    yield put({ type: SEVEN_REWARDS_LOGOUT })
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
 /*
 * Startup flow to allow concurrent actions to be dispatched
 */
@@ -89,7 +100,8 @@ function* startupFlow() {
     const action = yield take([
       SEVEN_REWARDS_AUTH_REQUEST,
       SEVEN_REWARDS_CHECK_REQUEST,
-      SEVEN_REWARDS_REGISTER_REQUEST
+      SEVEN_REWARDS_REGISTER_REQUEST,
+      SEVEN_REWARDS_LOGOUT_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -104,6 +116,10 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_REGISTER_REQUEST) {
       yield call(registerUser, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_LOGOUT_REQUEST) {
+      yield call(logoutUser)
     }
  
     yield action

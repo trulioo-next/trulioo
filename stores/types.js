@@ -29,6 +29,8 @@ export const SEVEN_REWARDS_AUTH_ERROR = 'seven_rewards/error/NUTRITIONAL_ERROR'
 
 export const SEVEN_REWARDS_REGISTER_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_REGISTER_REQUEST'
 export const SEVEN_REWARDS_REGISTER_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_REGISTER_LOADED'
+export const SEVEN_REWARDS_LOGOUT_REQUEST = 'seven_rewards/logout/SEVEN_REWARDS_LOGOUT_REQUEST'
+export const SEVEN_REWARDS_LOGOUT = 'seven_rewards/logout/SEVEN_REWARDS_LOGOUT'
 export const SEVEN_REWARDS_REGISTER_ERROR = 'seven_rewards/error/SEVEN_REWARDS_REGISTER_ERROR'
 
 export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'

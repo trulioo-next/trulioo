@@ -33,26 +33,26 @@ export default async (req, res) => {
 
     };
 
-    console.log('REGITERS TOKEN ', registerHeaders )
+    // console.log('REGITERS TOKEN ', registerHeaders )
    
     let payload = {
         "email": body.body.email,
         "email_secondary": body.body.email,
-        "password": 'Cre@tive123',
+        "password": body.body.password,
         "first_name": body.body.firstName,
         "last_name":body.body.lastName,
         "birthdate": "1978-05-28", // year-month-day
-        "postal_code": "90210",
+        "postal_code": body.body.postal,
         "country": "CA",  
-        "mobile_phone": "5124998811",  
+        "mobile_phone": body.body.phone,  
         "accepts_us_terms":false,
         "accepts_ca_terms":true,
         "accepts_ca_communications":true,
-        "link_card": "1773927800088888888" // 19 digit number
+        "link_card": body.body.cardNumber // 19 digit number
     }
 
     //
-    console.log('PAYLOAD BODY EMAIL ',  payload )
+    // console.log('PAYLOAD BODY EMAIL ',  payload )
 
     // // Get an Access Token
     // //
@@ -67,14 +67,14 @@ export default async (req, res) => {
     //
     console.log('REGITERS TOKEN ', userRegister )
       
-    // let user = {
-    //   isAuth: true,
-    //   token: userToken.access_token,
-    //   expire:userToken.expires_in
-    // }
+    let userAuthToken = {
+      isAuth: true,
+      token: userToken.access_token,
+      expire:userToken.expires_in
+    }
 
  
-     res.json({user:'some test data here '})
+     res.json({user:userRegister, registered:true, auth:userAuthToken})
      return
   } catch(error) {
     console.log('ERROR ', error )

@@ -5,5 +5,6 @@
  */
 export const INITIAL_STATE = {
   auth:false,
-  registered:false
+  registered:false,
+  user:false
 };

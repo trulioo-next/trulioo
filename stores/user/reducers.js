@@ -8,7 +8,8 @@ import { INITIAL_STATE } from './initialState'
 import {
   SEVEN_REWARDS_AUTH_LOADED,
   SEVEN_REWARDS_CHECK_LOADED,
-  SEVEN_REWARDS_REGISTER_LOADED
+  SEVEN_REWARDS_REGISTER_LOADED,
+  SEVEN_REWARDS_LOGOUT
 } from '../types'
 
 
@@ -28,8 +29,16 @@ export default (state = INITIAL_STATE, action) => {
 
       case SEVEN_REWARDS_REGISTER_LOADED:
       return { ...state,
-        registered: action.payload
-      }   
+        auth:action.payload.auth,
+        user: action.payload.user,
+        registered: action.payload.registered
+      } 
+
+      case SEVEN_REWARDS_LOGOUT:
+      return { ...state,
+        auth: false,
+        registered:false
+      }  
 
     default:
       return state

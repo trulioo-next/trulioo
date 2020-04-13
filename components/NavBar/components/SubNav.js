@@ -57,7 +57,7 @@ const SubNavMenu = props => {
           {hasThirdLevel ? (
             <span className="SiteHeader__subnavHeading">{name}</span>
           ) : (
-            <Link href={url} as={url}>
+            <Link href={url}>
               <a>{name}</a>
             </Link>
           )}

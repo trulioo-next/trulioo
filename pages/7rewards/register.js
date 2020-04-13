@@ -33,6 +33,9 @@ class Register extends React.Component {
       bMonth:'',
       bDay:'',
       bYear:'',
+      cardNumber:'',
+      phone:'',
+      postal:'',
       valid:false,
       isLoading:false,
       loggedIn:false
@@ -71,10 +74,13 @@ class Register extends React.Component {
       email:this.state.email,
       bMonth:this.state.bMonth,
       bDay:this.state.bDay,
-      bYear:this.state.bYear
+      bYear:this.state.bYear,
+      phone:this.state.phone,
+      postal:this.state.postal,
+      cardNumber: this.state.cardNumber
     }
 
-    // console.log('REGISTER USER ', payload )
+    console.log('REGISTER USER ', payload )
     // this.setState({loggedIn:true})
     this.props.userRegisterRequest(payload)
   }
@@ -164,11 +170,21 @@ class Register extends React.Component {
               <Row>
                 <Col className="text-center">
                   <div className="input__group">
-                    <label>Phone</label>
-                    <input id="phone" value={this.state.phone} onChange={(e) => this.onValueChange(e,'phone')} name="phone" placeholder="Phone"/>
+                    <label>Mobile Number *</label>
+                    <input id="phone" value={this.state.phone} onChange={(e) => this.onValueChange(e,'phone')} name="phone" placeholder="Mobile Number"/>
                   </div>
                 </Col>
               </Row>   
+
+              <Row>
+                <Col className="text-center">
+                  <div className="input__group">
+                    <label>Postal Code *</label>
+                    <input id="postal" value={this.state.postal} onChange={(e) => this.onValueChange(e,'postal')} name="postal" placeholder="Postal Code *"/>
+                  </div>
+                </Col>
+              </Row> 
+
               <Row>
                 <Col className="text-center">
                   <div className="input__group">
@@ -200,10 +216,7 @@ class Register extends React.Component {
                 Register
               </Button>
 
-              { this.props.user.auth.error &&  
-                <div className="form__wrapper" css={css`position: relative; display:block; margin-top:30px; text-align:center; width: 100%;`}>
-                <h5>{ this.props.user.auth.error.payload.error_description }</h5></div>
-              }
+              
               
             </form>
           </div>

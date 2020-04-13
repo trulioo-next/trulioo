@@ -1,5 +1,5 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api-stage.7-eleven.com"
+const REWARDS_API_URL = "https://api-test.7-eleven.com";
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
  
@@ -19,8 +19,8 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
+       "client_id": 'JpU08oDTxHLMhwVbxXKwaUK7CPn7k3WXLJ6AAw67',
+        "client_secret": '81sVmbvZAinbpOxLtNd2eqcict21wVmtxfYlTzUIf863h5Ny43P4EfRRoJPc7UFD6H8ONZaL4cnemAMnv9de4WbqWx2Pkxf0UhzYnWzKsYaKZuRjQLcOYXpp6VEGwqsm',
         "grant_type": "password",
         "username": body.body.userName,
         "password": body.body.password
@@ -47,7 +47,7 @@ export default async (req, res) => {
 
 
      // //
-    const shortProfile = await fetch(REWARDS_API_URL+'/v4/users/me/',
+    const fullProfile = await fetch(REWARDS_API_URL+'/v4/users/me/?profile=full',
      {
        method: 'GET',
        headers: authHeaders
@@ -55,7 +55,7 @@ export default async (req, res) => {
     
 
     //
-    console.log('USEr SHORT PROFILE  ', shortProfile )
+    console.log('USEr SHORT PROFILE  ', fullProfile )
 
 
 

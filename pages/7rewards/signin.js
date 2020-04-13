@@ -7,6 +7,7 @@ import appActions from '../../stores/user/actions'
 import appSelectors from '../../stores/user/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
+import Link from 'next/link';
 
 import '../login/LoginScreen.scss';
 
@@ -94,6 +95,7 @@ class UserAuth extends React.Component {
                 <h5>{ this.props.user.auth.error.payload.error_description }</h5></div>
               }
             </form>
+ 
           </div>
           }
           {this.state.loggedIn &&  
