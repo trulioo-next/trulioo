@@ -34,6 +34,8 @@ export default async (req, res) => {
     };
 
     // console.log('REGITERS TOKEN ', registerHeaders )
+
+    let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
    
     let payload = {
         "email": body.body.email,
@@ -41,7 +43,7 @@ export default async (req, res) => {
         "password": body.body.password,
         "first_name": body.body.firstName,
         "last_name":body.body.lastName,
-        "birthdate": "1978-05-28", // year-month-day
+        "birthdate": birthdate, // year-month-day
         "postal_code": body.body.postal,
         "country": "CA",  
         "mobile_phone": body.body.phone,  
@@ -52,7 +54,7 @@ export default async (req, res) => {
     }
 
     //
-    // console.log('PAYLOAD BODY EMAIL ',  payload )
+    console.log('PAYLOAD BODY EMAIL ',  payload )
 
     // // Get an Access Token
     // //

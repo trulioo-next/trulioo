@@ -6,7 +6,7 @@
 
 	.form__wrapper {
 		position: relative;
-		max-width: 500px;
+		max-width: 1000px;
 		margin: auto;
 		font-family: arial;
 			
@@ -29,7 +29,7 @@
 			margin-bottom: 80px;
 		}	
 
-		input {
+		input, select {
 			position: relative;
 			padding: 12px;
 			font-size: 16px;
