@@ -77,11 +77,11 @@ class UserAuth extends React.Component {
             <form>
               <div className="input__group">
                 <label>User Name</label>
-                <input id="user_name" value={this.state.userName} onChange={(e) => this.onValueChange(e,'user')} name="user_name" placeholder="user name"/>
+                <input id="user_name" value={this.state.userName} onChange={(e) => this.onValueChange(e,'user')} name="user_name" placeholder="Email"/>
               </div>
               <div className="input__group">
                 <label>Password</label>
-                <input value={this.state.password} type="password" name="password" onChange={(e) => this.onValueChange(e,'pass')} placeholder="password"/>
+                <input value={this.state.password} type="password" name="password" onChange={(e) => this.onValueChange(e,'pass')} placeholder="Password"/>
               </div>
               <Button
                 id="submit"

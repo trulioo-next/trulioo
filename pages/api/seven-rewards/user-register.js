@@ -18,7 +18,9 @@ export default async (req, res) => {
        body: JSON.stringify({
         "client_id": 'JpU08oDTxHLMhwVbxXKwaUK7CPn7k3WXLJ6AAw67',
         "client_secret": '81sVmbvZAinbpOxLtNd2eqcict21wVmtxfYlTzUIf863h5Ny43P4EfRRoJPc7UFD6H8ONZaL4cnemAMnv9de4WbqWx2Pkxf0UhzYnWzKsYaKZuRjQLcOYXpp6VEGwqsm',
-        "grant_type": "client_credentials"
+        "grant_type": "client_credentials",
+        "username": body.body.email,
+        "password": body.body.password
       }) 
      });
     
@@ -36,7 +38,7 @@ export default async (req, res) => {
     let payload = {
         "email": body.body.email,
         "email_secondary": body.body.email,
-        "password": body.body.password,
+        "password": 'Cre@tive123',
         "first_name": body.body.firstName,
         "last_name":body.body.lastName,
         "birthdate": "1978-05-28", // year-month-day
@@ -49,15 +51,6 @@ export default async (req, res) => {
         "link_card": "1773927800088888888" // 19 digit number
     }
 
-    // let payload = {
-    //     'email': body.body.email,
-    //     'password': body.body.password,
-    //     'mobile_number': "5124998811",
-    //     'country':'CA',
-    //     'accepts_ca_terms':true,
-    //     'accepts_ca_communications':true
-    // }
-    
     //
     console.log('PAYLOAD BODY EMAIL ',  payload )
 
@@ -65,7 +58,7 @@ export default async (req, res) => {
     // //
     const userRegister = await fetch(REWARDS_API_URL+'/v4/users',
      {
-       method: 'PATCH',
+       method: 'POST',
        headers: registerHeaders,
        body: JSON.stringify(payload)
      });

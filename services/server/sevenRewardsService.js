@@ -5,8 +5,8 @@ import API from '../../utils/api'
 
 export default function SevenRewardsService(state) {
 
-   	async function userAuth() {
-		let data = await API.post('/api/seven-rewards/user-auth', {});
+   	async function userAuth(payload) {
+		let data = await API.post('/api/seven-rewards/user-auth', {body:payload} );
 		return data;
 	}
 	async function userAuthFb() {

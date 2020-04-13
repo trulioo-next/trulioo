@@ -15,13 +15,24 @@ import {
 } from '../types'
 
 function* startup(payload) {
+
+  console.log('USER AUTH PAYLOAD SAGA ', payload )
    
   try {
     
+    // const state = yield select((state) => state)
+    // const userClientService = UserClientService(state);
+    // const userClientResponse = yield call(userClientService.getUserAuth, payload)
+
+
     const state = yield select((state) => state)
-    const userClientService = UserClientService(state);
-    const userClientResponse = yield call(userClientService.getUserAuth, payload)
-    yield put({ type: SEVEN_REWARDS_AUTH_LOADED, payload:userClientResponse})
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const loginClientResponse = yield call(sevenRewardsService.userAuth, payload)
+
+    console.log('LOGIN USER PAYLOAD REWARDS SAGA !!   ', loginClientResponse )
+
+    yield put({ type: SEVEN_REWARDS_AUTH_LOADED, payload:loginClientResponse})
 
   } catch(err) {
 
