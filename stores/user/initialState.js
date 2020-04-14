@@ -6,5 +6,9 @@
 export const INITIAL_STATE = {
   auth:false,
   registered:false,
-  user:false
+  user:false,
+  rewards:false,
+  coupons:false,
+  deals:false,
+  promotions:false
 };

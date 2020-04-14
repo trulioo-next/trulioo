@@ -7,7 +7,7 @@ import appActions from '../../stores/user/actions'
 import appSelectors from '../../stores/user/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
-
+import * as Yup from 'yup';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';

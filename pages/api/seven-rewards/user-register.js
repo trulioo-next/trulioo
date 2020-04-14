@@ -34,9 +34,7 @@ export default async (req, res) => {
     };
 
     // console.log('REGITERS TOKEN ', registerHeaders )
-
     let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
-   
     let payload = {
         "email": body.body.email,
         "email_secondary": body.body.email,
@@ -45,7 +43,7 @@ export default async (req, res) => {
         "last_name":body.body.lastName,
         "birthdate": birthdate, // year-month-day
         "postal_code": body.body.postal,
-        "country": "CA",  
+        "country": "CA",
         "mobile_phone": body.body.phone,  
         "accepts_us_terms":false,
         "accepts_ca_terms":true,

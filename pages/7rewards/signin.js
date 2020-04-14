@@ -8,6 +8,8 @@ import appSelectors from '../../stores/user/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
 import Link from 'next/link';
+import routerPush from "../../helpers/routerPush";
+import * as Yup from 'yup';
 
 import '../login/LoginScreen.scss';
 
@@ -35,11 +37,20 @@ class UserAuth extends React.Component {
 
     let isUserAuth = this.props.user.auth
     if( !isUserAuth.error && isUserAuth ) {
-      this.setState({loggedIn:true})
+      // this.setState({loggedIn:true})
+      routerPush("/7rewards");
     }
 
   }
-  componentDidUpdate() { }
+  componentDidUpdate() { 
+    
+    let isUserAuth = this.props.user.auth
+    if( !isUserAuth.error && isUserAuth && !this.state.loggedIn ) {
+      this.setState({loggedIn:true})
+      routerPush("/7rewards");
+    }
+
+  }
   
   //
   onValueChange(e,type) {
@@ -60,7 +71,7 @@ class UserAuth extends React.Component {
       userName: this.state.userName,
       password:this.state.password
     }
-    this.setState({loggedIn:true})
+    // this.setState({loggedIn:true})
     this.props.userAuthRequest(payload)
   }
  
@@ -68,8 +79,8 @@ class UserAuth extends React.Component {
 
     return (
       <Layout>
-        <Header title="Nutritionals" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
+        <Header title="Sign In" />
+        <Hero src="/static/images/placeholders/Pizza_Hero.jpg">
         </Hero>
         <div className="login__screen__page">
           {!this.state.loggedIn &&  
