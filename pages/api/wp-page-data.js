@@ -20,10 +20,7 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
-
-    console.log('GET PAGE DATA ', body )
-
-     
+ 
      res.json(response)
      return
   } catch(error) {
