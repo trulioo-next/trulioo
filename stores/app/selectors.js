@@ -3,6 +3,8 @@
  * in sagas or components to avoid duplicating that logic.
  */
 
+const headerData = require('../../data/global.json')
+
 // Direct selector to the app state domain
 export const selectIsLoading = (state) => {
   return state.app.isLoading
@@ -28,7 +30,9 @@ export const selectError = (state) => {
  }
 
  export const selectHeaderData = (state) => {
-   return state.app.globalData['header-menu']
+   console.log('HEADER MENU ', headerData['header-menu'])
+   return headerData['header-menu'];
+   // state.app.globalData['header-menu']
  }
 
  export const selectFooterData = (state) => {
