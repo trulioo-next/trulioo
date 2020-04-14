@@ -49,12 +49,11 @@ let rewardData = [
 ];
 
 const Section7Rewards = props => {
-  console.log('Section7Rewards  PROPS :: ', props);
+  // console.log('Section7Rewards  PROPS :: ', props);
   let sectionClasses = classNames('Section');
 
-
   const USER = useSelector( state =>  userDataSelector(state) );
-  console.log('USER ', USER )
+  // console.log('USER ', USER )
   let comTitle = props.title_logged_out;
   let subHeading = props.subheading_logged_out
   if(USER.auth) {
@@ -88,7 +87,7 @@ const Section7Rewards = props => {
         <div className="row justify-content-center">
           <div className="col col-12 col-lg-8 text-center">
             <p>
-              <Button href="/login" as="login">
+              <Button href="/7rewards/signin">
                 Sign Up
               </Button>
             </p>
@@ -96,7 +95,7 @@ const Section7Rewards = props => {
             <p>
               Already have an account?
               <br />
-              <Link href="login">
+              <Link href="/7rewards/signin">
                 <a className="SevenRewards__link">
                   <strong>Log In &rsaquo;</strong>
                 </a>
