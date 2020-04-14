@@ -43,7 +43,12 @@ export default (state = INITIAL_STATE, action) => {
       case SEVEN_REWARDS_LOGOUT:
       return { ...state,
         auth: false,
-        registered:false
+        user: false,
+        rewards:false,
+        coupons:false,
+        deals:false,
+        promotions:false,
+        registered: true
       }  
 
     default:

@@ -43,7 +43,7 @@ class Faq extends React.Component {
     return (
       <Layout>
         <Header title="FAQ" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
+        <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
         </Hero>
      </Layout>
     )

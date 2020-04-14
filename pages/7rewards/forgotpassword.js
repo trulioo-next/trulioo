@@ -63,8 +63,8 @@ class ResetPassword extends React.Component {
 
     return (
       <Layout>
-        <Header title="Nutritionals" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
+        <Header title="Forgot Password" />
+        <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
         </Hero>
         <div className="login__screen__page">
           { !this.state.loggedIn &&  

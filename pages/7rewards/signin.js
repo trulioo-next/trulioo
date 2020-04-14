@@ -82,11 +82,14 @@ class UserAuth extends React.Component {
         <Header title="Sign In" />
         <Hero src="/static/images/placeholders/Pizza_Hero.jpg">
         </Hero>
+         
         <div className="login__screen__page">
           {!this.state.loggedIn &&  
-          <div className="form__wrapper" css={css`margin-top:150px;`}>
-            <h2>Login:</h2>
+          <div className="form__wrapper" css={css`margin-top:100px;`}>
+            <p className="header__title" css={css`margin-top:0px; margin-bottom:50px;`} >EARN points for every $1 you spend. REDEEM points for FREE food & drink. Enjoy bonus offers and get rewards even faster. And every 7th cup still FREE!</p>
+            <h3>Sign In</h3>
             <form>
+              <p>If you’re an existing member, please sign in using your 7Rewards email address and password.</p>
               <div className="input__group">
                 <label>User Name</label>
                 <input id="user_name" value={this.state.userName} onChange={(e) => this.onValueChange(e,'user')} name="user_name" placeholder="Email"/>

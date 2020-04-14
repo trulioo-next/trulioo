@@ -40,8 +40,8 @@ class SevenRewards extends React.Component {
 
     return (
       <Layout>
-        <Header title="Nutritionals" />
-        <Hero src="/static/images/placeholders/Nutritionals.png">
+        <Header title="7 Rewards" />
+        <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
         </Hero>
         <div className="login__screen__page">
           <h1>7Rewards</h1>
