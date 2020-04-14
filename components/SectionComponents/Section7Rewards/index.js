@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import Button from '@/components/Button';
 import ProductSlider from '@/components/ProductSlider';
+import {useSelector, useDispatch} from 'react-redux';
+import { userDataSelector } from "../../../stores/user/selectors";
 
 import RewardsCard from '@/components/RewardsCard';
 
@@ -47,28 +49,41 @@ let rewardData = [
 ];
 
 const Section7Rewards = props => {
-  // console.log('Section7Rewards  PROPS :: ', props);
+  console.log('Section7Rewards  PROPS :: ', props);
   let sectionClasses = classNames('Section');
 
+
+  const USER = useSelector( state =>  userDataSelector(state) );
+  console.log('USER ', USER )
+  let comTitle = props.title_logged_out;
+  let subHeading = props.subheading_logged_out
+  if(USER.auth) {
+      comTitle = props.title_logged_in
+      subHeading = props.subheading_logged_in
+  }
+
   return (
+
     <section className={sectionClasses}>
       <div className="container Section__container">
         <div className="row justify-content-center">
           <div className="col col-12 col-lg-8 text-center">
-            {props.title && <h2 className="Section__title">{props.title}</h2>}
-            {props.subheading && <p>{props.subheading}</p>}
+            {comTitle && <h2 className="Section__title">{comTitle}</h2>}
+            {subHeading && <p>{subHeading}</p>}
           </div>
         </div>
       </div>
-      <div className="container-fluid px-0">
-        <ProductSlider>
-          {rewardData.map((item, i) => (
-            <ProductSlider.Item key={`product-slider-item-${i}`}>
-              <RewardsCard item={item} />
-            </ProductSlider.Item>
-          ))}
-        </ProductSlider>
-      </div>
+      { USER.auth && 
+        <div className="container-fluid px-0">
+          <ProductSlider>
+            {rewardData.map((item, i) => (
+              <ProductSlider.Item key={`product-slider-item-${i}`}>
+                <RewardsCard item={item} />
+              </ProductSlider.Item>
+            ))}
+          </ProductSlider>
+        </div>
+      }
       <div className="container Section__container">
         <div className="row justify-content-center">
           <div className="col col-12 col-lg-8 text-center">
@@ -94,6 +109,10 @@ const Section7Rewards = props => {
   );
 };
 
-Section7Rewards.defaultProps = {};
+// Section7Rewards.defaultProps = {};
+Section7Rewards.getInitialProps = async ({ req,query }) => {
+    const details = await fetchPageDetails("product");
+    return { details, query }
+};
 
 export default Section7Rewards;
