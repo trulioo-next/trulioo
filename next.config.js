@@ -15,8 +15,12 @@ if (process.env.NODE_ENV === 'development') {
   process.traceDeprecation = true;
 }
 
+
+// exportTrailingSlash: true,
 const nextConfig = {
   poweredByHeader: false,
+  exportTrailingSlash: true,
+
   // target: 'serverless',
   webpack: (config, { buildId, dev, isServer }) => {
     config.node = { fs: 'empty', net: 'empty', tls: 'empty' };
