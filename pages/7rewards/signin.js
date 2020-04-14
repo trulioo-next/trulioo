@@ -35,7 +35,7 @@ class UserAuth extends React.Component {
 
   componentDidMount() {
 
-    let isUserAuth = this.props.user.auth
+    let isUserAuth = this.props.user ? this.props.user.auth : false
     if( !isUserAuth.error && isUserAuth ) {
       // this.setState({loggedIn:true})
       routerPush("/7rewards");
@@ -44,7 +44,7 @@ class UserAuth extends React.Component {
   }
   componentDidUpdate() { 
     
-    let isUserAuth = this.props.user.auth
+    let isUserAuth = this.props.user ? this.props.user.auth : false
     if( !isUserAuth.error && isUserAuth && !this.state.loggedIn ) {
       this.setState({loggedIn:true})
       routerPush("/7rewards");
