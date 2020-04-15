@@ -1,4 +1,5 @@
 import API from '../utils/api'
+const homeData = require('../data/home.json')
  
 "use strict";
  
@@ -11,8 +12,12 @@ export default function DataService(state) {
 	}
 
 	async function getPageData(payload) {
-	 let data = await API.post('/api/wp-page-data', payload);
-	return data;
+	 
+
+	 
+    
+   	console.log('RESONSE ', homeData)
+	return homeData;
 	}
 
 	function getPostData(data) {
