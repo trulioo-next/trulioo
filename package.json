@@ -1,12 +1,12 @@
 {
   "name": "IdealRebel",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "private": true,
   "scripts": {
     "dev": "next -p 8000",
     "build": "next build",
     "now-build": "next build",
-    "start": "NODE_ENV=production next -p 8000",
+    "start": "NODE_ENV=production next start",
     "storybook": "start-storybook -s ."
   },
   "dependencies": {
