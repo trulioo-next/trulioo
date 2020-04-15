@@ -28,7 +28,7 @@ class Category extends React.Component {
     let category = res.req.params.category ? res.req.params.category : false;
 
     let { nutritionals } = store.getState();
-    // console.log('CATEGORY  nutritionals ', nutritionals.taxonomies);
+    console.log(' INDEX INITIAL PROPS  ', nutritionals.taxonomies);
 
     let taxonomyData = [];
     if (nutritionals && nutritionals.taxonomies) {
