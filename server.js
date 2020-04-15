@@ -78,12 +78,12 @@ App.prepare().then(() => {
     // const queryParams = { slug: req.params.slug, apiRoute: 'menu' };
     // return handle(req, res, '/menu/Category/Category', queryParams);
     // return handle(req, res, '/menu/category', { slug: req.params.slug });
-    App.render(req, res, '/menu/Category/[category].js', { slug: req.params.slug } );
+    App.render(req, res, '/menu/category/[category].js', { slug: req.params.slug } );
   });
 
   server.get('/menu/:category/:slug', (req, res) => {
     const handle =  req.params.slug;
-    App.render(req, res, '/menu/Category/Product/[slug].js', { category:req.params.category, slug: req.params.slug, handle });
+    App.render(req, res, '/menu/category/product/[slug].js', { category:req.params.category, slug: req.params.slug, handle });
   });
  
   server.get('*', (req, res) => {
