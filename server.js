@@ -33,6 +33,9 @@ App.prepare().then(() => {
 
   // TODO: Set rate-limiting
 
+
+  console.log('CUSTOM SERVER STARTED ')
+
   server.use(helmet())
  
   server.set('trust proxy', true);
@@ -73,12 +76,12 @@ App.prepare().then(() => {
     App.render(req, res, actualPage, queryParams);
   });
 
-  server.get('/menu/:category', (req, res) => {
+  server.get('/menu/:slug', (req, res) => {
     
     // const queryParams = { slug: req.params.slug, apiRoute: 'menu' };
     // return handle(req, res, '/menu/Category/Category', queryParams);
     // return handle(req, res, '/menu/category', { slug: req.params.slug });
-    App.render(req, res, '/menu/category/[category].js', { slug: req.params.slug } );
+    App.render(req, res, '/menu/category/[slug].js', { slug: req.params.slug } );
   });
 
   server.get('/menu/:category/:slug', (req, res) => {

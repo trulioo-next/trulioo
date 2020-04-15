@@ -196,9 +196,13 @@ const Product = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  let { category, slug, handle } = props.query;
+  let { category, product } = props.query;
+
+  // console.log('QUERY ', props.query )
+
+
   const categoryData = useSelector(state =>
-    nutritionalsDataSelector(state, category, handle),
+    nutritionalsDataSelector(state, category, product),
   );
 
   // console.log(' categoryData :: ',  categoryData  )

@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import appActions from '@/stores/nutritionals/actions';
 import userSelectors from '@/stores/user/selectors';
 import menuSelectors from '@/stores/nutritionals/selectors';
-import SectionMaker from '../../../components/SectionMaker';
+import SectionMaker from '@/components/SectionMaker';
 import Hero from '@/components/Hero';
 import Container from 'react-bootstrap/Container';
 import ColumnSpread from '@/components/ColumnSpread';
@@ -21,14 +21,18 @@ class Category extends React.Component {
 
     this.state = {
       isLoading: false,
+      taxonomyData:[],
+      dataLoaded:false
     };
   }
 
-  static async getInitialProps({ isServer, store, res, req }) {
-    let category = res.req.params.category ? res.req.params.category : false;
+  static async getInitialProps({ isServer, store, res, req, query }) {
+   console.log('query :: ', query )
+   
+    let category = query.category ? query.category : false;
 
     let { nutritionals } = store.getState();
-    console.log(' INDEX INITIAL PROPS  ', nutritionals.taxonomies);
+    console.log('CATEGORY  nutritionals ', store.getState());
 
     let taxonomyData = [];
     if (nutritionals && nutritionals.taxonomies) {
@@ -38,23 +42,37 @@ class Category extends React.Component {
         }
       }
     }
-    return { category, taxonomyData };
+    return { category, taxonomyData, query };
   }
 
   componentDidMount() {
     this.props.getTheData();
   }
-  componentDidUpdate() {}
+  componentDidUpdate() {
+
+    if(this.props.data && this.props.data.length > 0 && !this.state.dataLoaded) {
+        let nutritionals = this.props.data
+        let selected = {}
+        for(var i = 0; i < nutritionals.length; i++ ) {
+          if(nutritionals[i].slug === this.props.query.category ) {
+            selected = nutritionals[i]
+          }
+        }
+        // console.log('YO, SELECTED QUERY  ', this.props.query )
+        this.setState({taxonomyData:selected,dataLoaded:true})
+    }
+  }
 
   //
   render() {
-    let { data, category, taxonomyData } = this.props;
+    let { data, category } = this.props;
+    let { taxonomyData } = this.state;
     let headerTitle = 'Menu | ' + taxonomyData.name;
-    let pageTitle = taxonomyData.name;
+    let pageTitle = taxonomyData && taxonomyData.name ? taxonomyData.name : 'loading...';
     let headerImage = taxonomyData.banner_image
       ? taxonomyData.banner_image.url
       : '/static/images/placeholders/Pizza_Hero.jpg';
-    // console.log(' taxonomy component data ::>> ', taxonomyData )
+    console.log(' taxonomy component data ::>> ', taxonomyData )
 
     return (
       <Layout>
