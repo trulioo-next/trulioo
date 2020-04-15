@@ -1,12 +1,14 @@
 import { take, call, put, all, select } from 'redux-saga/effects'
 
 import DataService from '../../services/dataService'
+const nutritionalData = require('../../data/nutritionals.json')
  
 import {
   APP_STARTUP_REQUEST,
   APP_STARTLOADING,
   APP_STARTUP_ERROR,
-  GLOBAL_DATA_LOADED
+  GLOBAL_DATA_LOADED,
+  NUTRITIONAL_LOADED
 } from '../types'
 
 
@@ -17,6 +19,9 @@ function* startup(payload) {
     const state = yield select((state) => state)
     const dataService = DataService(state)
     const response = yield call(dataService.getGlobalData, true)
+
+    // Load default Nutri Data 
+    yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalData })
 
 
    //  console.log('GLOBAL DATA ', response )
