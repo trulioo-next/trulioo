@@ -30,7 +30,6 @@ export const selectError = (state) => {
  }
 
  export const selectHeaderData = (state) => {
-   console.log('HEADER MENU ', headerData['header-menu'])
    return headerData['header-menu'];
    // state.app.globalData['header-menu']
  }
