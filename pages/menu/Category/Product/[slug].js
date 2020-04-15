@@ -25,24 +25,46 @@ const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
   let nutritionals = props.data.nutritionals;
   console.log('props.data', props.data);
+    
+
+
+  let nutritionalInfo = {
+      'Serving Size': '',
+      'Total Fat': '',
+      'Trans Fat':'',
+      'Sodium': '',
+      'Dietary Fibre': '',
+      'Protein': '',
+      'Vitamin C (DV)': '',
+      'Iron (DV)': '',
+      'Calories (kcal)': '',
+      'Cholestrol': '',
+      'Carbohydrates': '',
+      'Sugars': '',
+      'Vitamin A (DV)': '',
+      'Calcium (DV)': '',
+    };  
+
 
   // TODO: Add this to the selector
-  let nutritionalInfo = {
-    'Serving Size': nutritionals.serving_size || '',
-    'Total Fat': nutritionals.total_fat || '',
-    'Trans Fat': nutritionals.trans_fat || '',
-    'Sodium': nutritionals.sodium || '',
-    'Dietary Fibre': nutritionals.dietary_fibre || '',
-    'Protein': nutritionals.protein || '',
-    'Vitamin C (DV)': nutritionals.vitamin_c || '',
-    'Iron (DV)': nutritionals.iron || '',
-    'Calories (kcal)': nutritionals.calories || '',
-    'Cholestrol': nutritionals.cholesterol || '',
-    'Carbohydrates': nutritionals.carbohydrates || '',
-    'Sugars': nutritionals.sugars || '',
-    'Vitamin A (DV)': nutritionals.vitamin_a || '',
-    'Calcium (DV)': nutritionals.calcium || '',
-  };
+  if(nutritionals) {
+    nutritionalInfo = {
+      'Serving Size': nutritionals.serving_size || '',
+      'Total Fat': nutritionals.total_fat || '',
+      'Trans Fat': nutritionals.trans_fat || '',
+      'Sodium': nutritionals.sodium || '',
+      'Dietary Fibre': nutritionals.dietary_fibre || '',
+      'Protein': nutritionals.protein || '',
+      'Vitamin C (DV)': nutritionals.vitamin_c || '',
+      'Iron (DV)': nutritionals.iron || '',
+      'Calories (kcal)': nutritionals.calories || '',
+      'Cholestrol': nutritionals.cholesterol || '',
+      'Carbohydrates': nutritionals.carbohydrates || '',
+      'Sugars': nutritionals.sugars || '',
+      'Vitamin A (DV)': nutritionals.vitamin_a || '',
+      'Calcium (DV)': nutritionals.calcium || '',
+    };
+  }
 
   let ingredients = [];
 
