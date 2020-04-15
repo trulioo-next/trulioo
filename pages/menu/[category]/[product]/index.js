@@ -25,9 +25,7 @@ const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
   let nutritionals = props.data.nutritionals;
   console.log('props.data', props.data);
-    
-
-
+     
   let nutritionalInfo = {
       'Serving Size': '',
       'Total Fat': '',
@@ -44,8 +42,7 @@ const Nutritionals = props => {
       'Vitamin A (DV)': '',
       'Calcium (DV)': '',
     };  
-
-
+ 
   // TODO: Add this to the selector
   if(nutritionals) {
     nutritionalInfo = {

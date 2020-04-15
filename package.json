@@ -6,7 +6,7 @@
     "dev": "next -p 8000",
     "build": "next build",
     "now-build": "next build",
-    "start": "NODE_ENV=production next start",
+    "start": "NODE_ENV=production next -p 8000",
     "storybook": "start-storybook -s ."
   },
   "dependencies": {
