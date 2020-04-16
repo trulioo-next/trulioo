@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Layout from '@/containers/Layout';
 import Header from '@/components/Header';
-import appActions from '@/stores/nutritionals/actions';
+// import appActions from '@/stores/nutritionals/actions';
 import userSelectors from '@/stores/user/selectors';
-import menuSelectors from '@/stores/nutritionals/selectors';
+// import menuSelectors from '@/stores/nutritionals/selectors';
 import SectionMaker from '@/components/SectionMaker';
 import Hero from '@/components/Hero';
 import Container from 'react-bootstrap/Container';
@@ -13,69 +13,48 @@ import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
 import SectionPostGrid from '@/components/SectionComponents/SectionPostGrid';
 
+
+import { reqNutritionalsAction } from '@/stores/nutritionals/actions';
+import { taxonomiesSelector } from '@/stores/nutritionals/selectors';
+ 
+
 import './Category.scss';
 
-class Category extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      isLoading: false,
-      taxonomyData:[],
-      dataLoaded:false
-    };
-  }
 
-  static async getInitialProps({ isServer, store, res, req, query }) {
-   console.log('query :: ', query )
+const Category = props => {
    
-    let category = query.category ? query.category : false;
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(reqNutritionalsAction({ isAuthenticated: false,  query: false }));
+  // }, []);
 
-    let { nutritionals } = store.getState();
-    console.log('CATEGORY  nutritionals ', store.getState());
+  const close = false;
+  const taxonomyData = useSelector(state => taxonomiesSelector(state));
 
-    let taxonomyData = [];
-    if (nutritionals && nutritionals.taxonomies) {
-      for (var i = 0; i < nutritionals.taxonomies.length; i++) {
-        if (nutritionals.taxonomies[i].slug === category) {
-          taxonomyData = nutritionals.taxonomies[i];
-        }
+
+  
+  let category = props.query.category
+  
+  let selected = [];
+  if(taxonomyData) {
+    for(var i = 0; i < taxonomyData.length; i++ ) {
+      if(taxonomyData[i].slug === category ) {
+        selected = taxonomyData[i]
       }
     }
-    return { category, taxonomyData, query };
   }
 
-  componentDidMount() {
-    this.props.getTheData();
-  }
-  componentDidUpdate() {
+  let headerTitle = 'Menu | ' + selected.name;
+  let pageTitle = selected && selected.name ? selected.name : 'loading...';
+  let headerImage = selected.banner_image
+  ? selected.banner_image.url
+  : '/static/images/placeholders/Pizza_Hero.jpg';
+   
+  console.log('taxonomyData ', selected )
 
-    if(this.props.data && this.props.data.length > 0 && !this.state.dataLoaded) {
-        let nutritionals = this.props.data
-        let selected = {}
-        for(var i = 0; i < nutritionals.length; i++ ) {
-          if(nutritionals[i].slug === this.props.query.category ) {
-            selected = nutritionals[i]
-          }
-        }
-        // console.log('YO, SELECTED QUERY  ', this.props.query )
-        this.setState({taxonomyData:selected,dataLoaded:true})
-    }
-  }
-
-  //
-  render() {
-    let { data, category } = this.props;
-    let { taxonomyData } = this.state;
-    let headerTitle = 'Menu | ' + taxonomyData.name;
-    let pageTitle = taxonomyData && taxonomyData.name ? taxonomyData.name : 'loading...';
-    let headerImage = taxonomyData.banner_image
-      ? taxonomyData.banner_image.url
-      : '/static/images/placeholders/Pizza_Hero.jpg';
-    console.log(' taxonomy component data ::>> ', taxonomyData )
-
-    return (
-      <Layout>
+  return (
+     <Layout>
         <Header title={headerTitle} />
         <section className="Section">
           <Hero src={headerImage}>
@@ -83,8 +62,8 @@ class Category extends React.Component {
           </Hero>
         </section>
         <div className="Menu__page">
-          {taxonomyData.components &&
-            taxonomyData.components.map((section, sectionKey) => (
+          {selected.components &&
+            selected.components.map((section, sectionKey) => (
               <SectionMaker
                 type={section.acf_fc_layout}
                 params={section}
@@ -93,160 +72,20 @@ class Category extends React.Component {
                 sectionIndex={sectionKey}
               />
             ))}
-
-          <section className="Section">
-            <Container fluid className="px-0">
-              <ColumnSpread spread="3">
-                <MediaObjectCard
-                  title="New York Deli Meat Lover's"
-                  image="/static/images/placeholders/NewYorkDeliMeatLovers.png"
-                  product={{ href: '/menu/pizza/meat-lovers', calories: 20 }}
-                  stacked
-                  pizza
-                >
-                  Loaded with hand-pinched sausage, diced pepperoni and ham, our
-                  New York Deli Meat Lover’s Pizza also satisfies with fire
-                  roasted red onions and sweet and savoury sauce for an
-                  authentic Italian style taste.
-                </MediaObjectCard>
-                <MediaObjectCard
-                  title="Classic Pepperoni"
-                  image="/static/images/placeholders/pepperoni.png"
-                  product={{ href: '/menu/pizza/pepperoni', calories: 20 }}
-                  stacked
-                  pizza
-                >
-                  With classic sourdough for a crispy crust, a blend of 100%
-                  Canadian milk-made Mozzarella and Provolone topped with
-                  Montreal slow-cured pepperoni, it’s no wonder we call it a
-                  classic.
-                </MediaObjectCard>
-                <MediaObjectCard
-                  title="Cheese"
-                  image="/static/images/placeholders/cheese.png"
-                  product={{ href: '/menu/pizza/cheese', calories: 20 }}
-                  stacked
-                  pizza
-                >
-                  Our hand-panned dough with authentic sourdough flavour and
-                  aroma is loaded with Mozzarella and Provolone made in Canada
-                  with 100% Canadian milk for a satisfying and delicious Italian
-                  inspired bite.
-                </MediaObjectCard>
-              </ColumnSpread>
-            </Container>
-          </section>
-          <section className="Section">
-            <Container fluid className="px-0">
-              <ColumnSpread spread="2">
-                <MediaObjectCard
-                  title="7-Eleven Coffee"
-                  image="/static/images/placeholders/Coffee.jpg"
-                  product={{
-                    href: '/menu/coffee-lattes/7-eleven-coffee',
-                    calories: 20,
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                  nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo
-                </MediaObjectCard>
-                <MediaObjectCard
-                  title="7-Eleven Coffee"
-                  image="/static/images/placeholders/Coffee.jpg"
-                  product={{
-                    href: '/menu/coffee-lattes/7-eleven-coffee',
-                    calories: 20,
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                  nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo
-                </MediaObjectCard>
-                <MediaObjectCard
-                  title="7-Eleven Coffee"
-                  image="/static/images/placeholders/Coffee.jpg"
-                  product={{
-                    href: '/menu/coffee-lattes/7-eleven-coffee',
-                    calories: 20,
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                  nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo
-                </MediaObjectCard>
-              </ColumnSpread>
-            </Container>
-          </section>
-          <section className="Section">
-            <Container fluid className="px-0">
-              <ColumnSpread spread="3">
-                <MediaObjectCard
-                  title="100% Canadian Wheat Crust"
-                  image="/static/images/placeholders/ColumnSpread2_Block1.jpg"
-                  stacked
-                >
-                  <p>
-                    Our hand-stretched crust is Canadian-crafted using authentic
-                    Italian sourdough for a light &amp; crispy texture.
-                  </p>
-                </MediaObjectCard>
-                <MediaObjectCard
-                  title="Dry-cured Montréal Pepperoni"
-                  image="/static/images/placeholders/ColumnSpread2_Block2.jpg"
-                  stacked
-                >
-                  <p>
-                    Traditionally slow-cured in Montréal, our mouth-watering
-                    pepperoni bursts with smokey, spicy flavours.
-                  </p>
-                </MediaObjectCard>
-                <MediaObjectCard
-                  title="100% Canadian Mozzarella, Parmesan &amp; Provolone Cheese"
-                  image="/static/images/placeholders/ColumnSpread2_Block3.jpg"
-                  stacked
-                >
-                  <p>
-                    Made with all-Canadian dairy from Ontario and BC farms, our
-                    gooey cheese is all flavour.
-                  </p>
-                </MediaObjectCard>
-              </ColumnSpread>
-            </Container>
-          </section>
+ 
         </div>
       </Layout>
-    );
-  }
-}
+  );
+};
 
-const mapStateToProps = state => ({
-  user: userSelectors.userDataSelector(state),
-  data: menuSelectors.taxonomiesSelector(state),
-});
+Category.getInitialProps = async ({ query, res, children }) => {
+  return { query };
+};
 
-const mapDispatchToProps = dispatch => ({
-  getTheData: payload => dispatch(appActions.reqNutritionalsAction(payload)),
-});
+export default Category;
 
-const Category_ = connect(mapStateToProps, mapDispatchToProps)(Category);
 
-export default Category_;
+
+
+
+

@@ -30,10 +30,10 @@ export const selectError = (state) => {
  }
 
  export const selectHeaderData = (state) => {
-   if( !state.app.globalData ) {
-      let staticData = headerData['header-menu']
-      return  staticData;
-   }
+   // if( !state.app.globalData ) {
+   //    let staticData = headerData['header-menu']
+   //    return  staticData;
+   // }
 
    return state.app.globalData['header-menu']
  }

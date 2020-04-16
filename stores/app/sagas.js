@@ -2,6 +2,8 @@ import { take, call, put, all, select } from 'redux-saga/effects'
 
 import DataService from '../../services/dataService'
 const nutritionalData = require('../../data/nutritionals.json')
+
+import NutritionalService from '../../services/nutritionalService';
  
 import {
   APP_STARTUP_REQUEST,
@@ -25,7 +27,9 @@ function* startup(payload) {
 
     // Load default Nutri Data 
     // console.log('STARTUP NUTRITIONAL_LOADED SAGA  ', nutritionalData )
-    yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalData })
+    const nutritionalService = NutritionalService(state);
+    const nutritionalResponse = yield call(nutritionalService.getNutritionalData, true)
+    yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalResponse })
 
  
   } catch(err) {

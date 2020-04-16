@@ -172,10 +172,10 @@ function Page({ nutritionals }) {
 
   // console.log('PROPS TO LOAD ---> >>>>  ', nutritionals )
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(reqNutritionalsAction({}));
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(reqNutritionalsAction({}));
+  // }, []);
 
   let [taxonomySelected, setTaxonomySelected] = useState(
     'crispy-classic-chicken',

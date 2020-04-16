@@ -48,6 +48,8 @@ const SubNavMenu = props => {
     : `offcanvas-subnav-${subnavIndex}`;
 
   return (
+    <>
+    { props.items && 
     <ul className={classNames('OffCanvas__subnav', { '-nested': isNested })}>
       {props.items.map(({ name, url, children }, index) => (
         <li
@@ -74,6 +76,8 @@ const SubNavMenu = props => {
         </li>
       ))}
     </ul>
+    }
+    </>
   );
 };
 

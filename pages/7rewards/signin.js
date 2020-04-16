@@ -29,11 +29,13 @@ class UserAuth extends React.Component {
     }
   }
 
-  static async getInitialProps({ isServer, store }) {
-    return {}
+  static async getInitialProps({  query  }) {
+    return { query }
   }
 
   componentDidMount() {
+    
+    console.log('user ', this.props.user )
 
     let isUserAuth = this.props.user ? this.props.user.auth : false
     if( !isUserAuth.error && isUserAuth ) {
@@ -104,10 +106,7 @@ class UserAuth extends React.Component {
                 Login
               </Button>
 
-              {this.props.user.auth.error &&  
-                <div className="form__wrapper" css={css`position: relative; display:block; margin-top:30px; text-align:center; width: 100%;`}>
-                <h5>{ this.props.user.auth.error.payload.error_description }</h5></div>
-              }
+               
             </form>
  
           </div>
@@ -129,6 +128,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
 })
+
 
 const UserAuth_ = connect(
   mapStateToProps,

@@ -20,8 +20,6 @@ import {
 
 import './Layout.scss';
 
-
-
 const Layout = props => {
    
   const dispatch = useDispatch();

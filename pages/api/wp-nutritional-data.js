@@ -13,6 +13,8 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
+
+     // console.log('nutritionals :: >> ', JSON.stringify(response) )
  
      res.json(response)
      return
