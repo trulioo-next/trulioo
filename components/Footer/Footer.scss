@@ -2,6 +2,7 @@
 
 .SiteFooter {
   $block: &;
+  text-align: center;
 
   @include media-breakpoint-up(lg) {
     font-weight: 500;
