@@ -77,7 +77,7 @@ const SubNavMenu = props => {
           variants={itemVariants}
           className="SiteHeader__item -nested col col-12 text-center"
         >
-          <Button outlined href="/menu" as="/menu">
+          <Button outlined href="/menu">
             View Full Menu
           </Button>
         </motion.li>

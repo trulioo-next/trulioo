@@ -13,9 +13,9 @@ const Button = ({ as, href, className, children, outlined, ...props }) => {
   );
 
   if (href) {
-    if (as) {
+    if (!as) {
       return (
-        <Link as={as} href={href}>
+        <Link href={href}>
           <a className={ButtonClasses}>{children}</a>
         </Link>
       );

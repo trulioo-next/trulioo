@@ -35,7 +35,7 @@ class UserAuth extends React.Component {
 
   componentDidMount() {
     
-    console.log('user ', this.props.user )
+    // console.log('user ', this.props.user )
 
     let isUserAuth = this.props.user ? this.props.user.auth : false
     if( !isUserAuth.error && isUserAuth ) {

@@ -1,6 +1,6 @@
 const fetch = require('../../utils/fetch')
 const data = require('../../data/global.json')
-
+const fs = require('fs');
 const ENDPOINT_URL = process.env.ENDPOINT_URL
  
 export default async (req, res) => {
@@ -16,6 +16,14 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
+
+     fs.writeFile('./data/global.json', JSON.stringify(response), function(err) {
+          if (err) {
+            throw 'Data could not be written';
+          }
+          console.log('GLOBAL DATA UPDATED  ')
+          // res.send({message:'Blog posts have been written'});
+        });
 
      // console.log('GLOBAL DATA ', response )
  

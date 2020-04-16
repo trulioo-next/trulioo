@@ -51,7 +51,7 @@ const Category = props => {
   ? selected.banner_image.url
   : '/static/images/placeholders/Pizza_Hero.jpg';
    
-  console.log('taxonomyData ', selected )
+  // console.log('taxonomyData ', selected )
 
   return (
      <Layout>

@@ -4,6 +4,8 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 import { reqPageDataAction } from '../../stores/page/actions';
 import { reqStartupAction } from '../../stores/app/actions';
 
+const STATICDATA = require('../../data/global.json')
+
 import Error from 'next/error';
 
 import Header from '@/components/Header';
@@ -22,14 +24,16 @@ import './Layout.scss';
 
 const Layout = props => {
    
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
+  // }, []);
   const close = false;
-  const headerData = useSelector(state => selectHeaderData(state));
+  let headerData = useSelector(state => selectHeaderData(state));
   const isLoading = useSelector(state => selectIsLoading(state));
-  
+  if(!headerData) {
+    headerData = STATICDATA['header-menu']
+  }
   // console.log('HEADER DATA ', headerData )
 
   return (
