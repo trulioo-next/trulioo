@@ -9,5 +9,5 @@ export const INITIAL_STATE = {
   isLoaded: false,
   error: null,
   errorSource: null,
-  globalData:[]
+  globalData:false
 };

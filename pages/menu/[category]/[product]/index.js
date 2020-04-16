@@ -13,6 +13,8 @@ import ProductCard from '@/components/ProductCard';
 import SectionMaker from '@/components/SectionMaker';
 import { nutritionalsDataSelector } from '@/stores/nutritionals/selectors';
 
+import { reqNutritionalsAction } from '@/stores/nutritionals/actions';
+
 import ChevronIcon from '@/static/images/caret-down.svg';
 
 import Container from 'react-bootstrap/Container';
@@ -24,8 +26,7 @@ import './Product.scss';
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
   let nutritionals = props.data.nutritionals;
-  console.log('props.data', props.data);
-     
+    
   let nutritionalInfo = {
       'Serving Size': '',
       'Total Fat': '',
@@ -196,6 +197,11 @@ const Product = props => {
   let { category, product } = props.query;
 
   // console.log('QUERY ', props.query )
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reqNutritionalsAction({}));
+  }, []);  
+
 
 
   const categoryData = useSelector(state =>
@@ -238,6 +244,7 @@ const Product = props => {
 };
 //
 Product.getInitialProps = async ({ query, res }) => {
+ 
   return { query };
 };
 //

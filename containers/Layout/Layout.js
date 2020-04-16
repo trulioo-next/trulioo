@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 
+import { reqPageDataAction } from '../../stores/page/actions';
+import { reqStartupAction } from '../../stores/app/actions';
+
+import Error from 'next/error';
+
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
@@ -15,46 +20,43 @@ import {
 
 import './Layout.scss';
 
-class Layout extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
-  componentDidMount() {
-    // console.log('HEADER DATA :: ', this.props.headerData);
-    // console.log('FOOTER DATA :: ', this.props.footerData);
-  }
 
-  render() {
-    const { isLoading } = this.props;
- 
-    return (
-      <div className="Layout">
-        <Header
-          title="7 Eleven"
-          description="Page MetaData here"
-          canonical="http://7-eleven.ca"
-        />
-        { this.props.headerData &&
-          <NavBar data={this.props.headerData} />
-        }
+const Layout = props => {
+   
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
+  }, []);
+  const close = false;
+  const headerData = useSelector(state => selectHeaderData(state));
+  const isLoading = useSelector(state => selectIsLoading(state));
+  
+  // console.log('HEADER DATA ', headerData )
 
-        <main className="SiteMain">
-          {isLoading && <Loader />}
-          {this.props.children}
-        </main>
+  return (
+    <div className="Layout">
+         <Header
+           title="7 Eleven"
+            description="Page MetaData here"
+            canonical="http://7-eleven.ca"
+         />
+         { headerData &&
+            <NavBar data={headerData} />
+          }
 
-        <Footer />
+         <main className="SiteMain">
+           {isLoading && <Loader />}
+           {props.children}
+         </main>
+
+         <Footer />
       </div>
-    );
-  }
-}
+  );
+};
 
-const mapStateToProps = state => ({
-  isLoading: selectIsLoading(state),
-  isLoaded: selectIsLoaded(state),
-  headerData: selectHeaderData(state),
-  footerData: selectFooterData(state),
-});
+Layout.getInitialProps = async ({ query, res, children }) => {
+  return { query, children };
+};
 
-export default connect(mapStateToProps)(Layout);
+export default Layout;

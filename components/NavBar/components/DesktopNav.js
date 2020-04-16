@@ -60,13 +60,11 @@ const PrimaryNav = data => {
   var searchIndex = 0;
 
   let LINKS = false;
-
+  
   if (data && data.data && data.data.data) {
     LINKS = data.data.data;
   }
-
-
-
+ 
   return (
     <>
       { LINKS && (

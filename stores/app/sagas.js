@@ -20,13 +20,14 @@ function* startup(payload) {
     const dataService = DataService(state)
     const response = yield call(dataService.getGlobalData, true)
 
-    // Load default Nutri Data 
-    yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalData })
-
-
-   //  console.log('GLOBAL DATA ', response )
+    // console.log('STARTUP GLOBAL DATA SAGA  ', response )
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
+    // Load default Nutri Data 
+    // console.log('STARTUP NUTRITIONAL_LOADED SAGA  ', nutritionalData )
+    yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalData })
+
+ 
   } catch(err) {
 
     const errors = err.payload || err

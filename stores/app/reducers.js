@@ -15,6 +15,8 @@ import {
 
 
 export default (state = INITIAL_STATE, action) => {
+   
+  // console.log('REDUCER DATA ',  action );
 
   switch (action.type) {
 

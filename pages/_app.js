@@ -10,33 +10,26 @@ const withReduxDebugMode = false // process.env.NODE_ENV === 'development' || fa
 class MyApp extends App {
 
     // static async getInitialProps({ ctx, Component }) {
-
+ 
     // 	if(ctx.isServer) {
     //       await ctx.store.execSagaTask(appActions.reqStartupAction({ isAuthenticated: false,  query: ctx.query }));
     //       await ctx.store.execSagaTask(nutritionalsActions.reqNutritionalsAction({ isAuthenticated: false,  query: ctx.query }));
     //     }
  
     //     const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
-
-    //     if (pageProps.meta) {
-    //         Component.meta = pageProps.meta;
-    //     }
-
+ 
     //     return { pageProps }
  
     // }
+ 
 
     constructor(props) {
     	super(props);
     }
 
-    componentWillUnmount() {
-    }
+    componentWillUnmount() { }
 
-    componentDidUpdate() {
-
-
-    }
+    componentDidUpdate() { }
 
     componentDidMount() {
 
@@ -49,6 +42,7 @@ class MyApp extends App {
             //
             // console.log('IS USER AUTH  ', isUserAuth.user.auth )
         }
+ 
     }
 
 

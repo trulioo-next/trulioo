@@ -5,7 +5,7 @@ const ENDPOINT_URL = process.env.ENDPOINT_URL
  
 export default async (req, res) => {
 
- // console.log('GLOBAL DATA ENDPOINT ')
+  // console.log('GLOBAL DATA ENDPOINT ')
   try {
  
     const response = await fetch(ENDPOINT_URL+'/global-settings/global',

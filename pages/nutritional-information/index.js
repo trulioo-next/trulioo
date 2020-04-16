@@ -170,8 +170,7 @@ function Page({ nutritionals }) {
 // const Page = props => {
   const columns = COLUMNS;
 
-
-  console.log('PROPS TO LOAD ---> >>>>  ', nutritionals )
+  // console.log('PROPS TO LOAD ---> >>>>  ', nutritionals )
 
   const dispatch = useDispatch();
   useEffect(() => {

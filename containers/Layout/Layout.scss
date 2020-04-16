@@ -50,6 +50,12 @@ img {
   height: auto;
 }
 
+
+a:not([href]) {
+    color: #fff;
+    text-decoration: none;
+}
+
 .Layout {
   display: flex;
   flex-direction: column;
