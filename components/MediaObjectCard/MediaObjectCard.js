@@ -31,14 +31,22 @@ const MediaCard = props => {
         <Row>
           <Col className="col" xs="5" md={props.stacked ? 12 : 5}>
             <div className="Card__image -square -contain">
-              <img src={props.image} />
+             <Link href={props.product.href}>
+               <a>
+                <img src={props.image} />
+              </a>
+              </Link>
             </div>
           </Col>
           <Col className="col" xs="7" md={props.stacked ? 12 : 7}>
             <h2
               className={classNames(props.stacked ? 'h4' : 'h3', 'Card__title')}
             >
+             <Link href={props.product.href}>
+               <a>
               {props.title}
+               </a>
+              </Link>
             </h2>
             {props.children}
           </Col>

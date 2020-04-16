@@ -20,6 +20,10 @@ import {
   selectFooterData,
 } from '../../stores/app/selectors';
 
+import {
+  userDataSelector
+} from '../../stores/user/selectors';
+
 import './Layout.scss';
 
 const Layout = props => {
@@ -31,7 +35,12 @@ const Layout = props => {
   
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
+  let userData = useSelector(state => userDataSelector(state));
   const isLoading = useSelector(state => selectIsLoading(state));
+
+  // console.log('USER DATA ', userData )
+
+
   if(!headerData) {
     headerData = STATICDATA['header-menu']
   }
@@ -45,7 +54,7 @@ const Layout = props => {
             canonical="http://7-eleven.ca"
          />
          { headerData &&
-            <NavBar data={headerData} />
+            <NavBar data={headerData} user={userData} />
           }
 
          <main className="SiteMain">

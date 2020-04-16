@@ -9,7 +9,7 @@ const NavBar = data => (
   <nav className="SiteHeader">
     <Branding />
     <OffCanvasNav data={data} />
-    <DesktopNav data={data} />
+    <DesktopNav data={data}  />
   </nav>
 );
 export default NavBar;
