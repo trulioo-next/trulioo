@@ -69,6 +69,7 @@ const Category = props => {
                 params={section}
                 category={category}
                 key={sectionKey}
+                defaultImage={selected.image.url}
                 sectionIndex={sectionKey}
               />
             ))}

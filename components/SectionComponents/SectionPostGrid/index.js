@@ -4,8 +4,13 @@ import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
 
 const SectionPostGrid = props => {
-  let { posts, category } = props;
+  let { posts, category, defaultImage } = props;
   let count = posts.length;
+  if(count > 4 ) {
+    count = 4;
+  }
+
+  console.log('POSTS ', defaultImage )
 
   return (
     <section className="Section">
@@ -19,7 +24,7 @@ const SectionPostGrid = props => {
                 image={
                   post.photos
                     ? post.photos[0].url
-                    : '/static/images/placeholders/NewYorkDeliMeatLovers.png'
+                    : defaultImage
                 }
                 product={{
                   href: '/menu/' + category + '/' + post.slug,
