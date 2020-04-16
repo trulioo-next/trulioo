@@ -24,10 +24,11 @@ import './Layout.scss';
 
 const Layout = props => {
    
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
-  // }, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
+  }, []);
+  
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
   const isLoading = useSelector(state => selectIsLoading(state));
