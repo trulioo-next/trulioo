@@ -1,11 +1,15 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { motion, useCycle } from 'framer-motion';
 import Accordion from 'react-bootstrap/Accordion';
 
 import SearchIcon from '@/static/images/search.svg';
 import ChevronIcon from '@/static/images/caret-down.svg';
+import { userDataSelector } from '@/stores/user/selectors';
+
+
 
 // import linkData from '../placeholder-links.json';
 
@@ -46,6 +50,8 @@ const SubNavMenu = props => {
   const keyPrefix = isNested
     ? `offcanvas-subnav-${parentIndex}-nested-${subnavIndex}`
     : `offcanvas-subnav-${subnavIndex}`;
+
+  const userData = useSelector(state => userDataSelector(state));
 
   return (
     <>

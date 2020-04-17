@@ -3,6 +3,10 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import ChevronIcon from '@/static/images/caret-down.svg';
+import { userDataSelector } from '@/stores/user/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+
 import Button from '@/components/Button';
 
 const listVariants = {
@@ -41,12 +45,39 @@ const SubNavMenu = props => {
     ? `subnav-${parentIndex}-nested-${subnavIndex}`
     : `subnav-${subnavIndex}`;
 
+
+  const userData = useSelector(state => userDataSelector(state));
+  const authenticated = userData && userData.auth ? userData.auth : false;
+
+  function isVisible(target) {
+    let bool = true;
+    if( authenticated && target === "auth--hidden" ) {
+       bool = false;
+    }
+    if( !authenticated && target === "auth--required" ) {
+       bool = false;
+    }
+    return bool;
+  }
+
+  //
+  function buildLink(url,name,className) {
+   if(isVisible(className) ) {
+      return (
+        <Link href={url}>
+          <a>{name}</a>
+        </Link>
+      ) 
+    }
+  }
+  
+
   return (
     <motion.ul
       variants={listVariants}
       className={classNames('SiteHeader__submenu', { '-nested': isNested })}
     >
-      {props.items.map(({ name, url, children }, index) => (
+      {props.items.map(({ name, url, children, className }, index) => (
         <motion.li
           variants={itemVariants}
           key={`${keyPrefix}-item-${index}`}
@@ -57,9 +88,7 @@ const SubNavMenu = props => {
           {hasThirdLevel ? (
             <span className="SiteHeader__subnavHeading">{name}</span>
           ) : (
-            <Link href={url}>
-              <a>{name}</a>
-            </Link>
+            buildLink(url,name,className) 
           )}
           {children.length > 0 && (
             <SubNavMenu
