@@ -1,33 +1,35 @@
-
-
 .login__screen__page {
-	position: relative;
-	padding: 90px 0px;
+  position: relative;
+  padding: 90px 0px;
 
-	.form__wrapper {
-		position: relative;
-		max-width: 500px;
-		margin: auto;
-		font-family: arial;
-			
-		label {
-			display: none;
-		}	
+  .form__wrapper {
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+    font-family: arial;
 
-		input {
-			position: relative;
-			padding: 12px;
-			font-size: 16px;
-			width: 100%;
-			margin-bottom: 10px;
-		}
+    label {
+      display: none;
+    }
 
-		button {
-			position: relative;
-			border-radius: 3px;
-			padding: 12px;
-			background-color: #000;
-			color: #fff;
-		}
-	}
+    input {
+      position: relative;
+      padding: 12px;
+      font-size: 16px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      position: relative;
+      border-radius: 3px;
+      padding: 12px;
+      background-color: #9bcd38;
+      color: #fff;
+
+      &:hover {
+        background-color: #8cc024;
+      }
+    }
+  }
 }
