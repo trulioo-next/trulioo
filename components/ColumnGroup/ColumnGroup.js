@@ -77,7 +77,7 @@ const ColumnGroupItem = React.forwardRef(({ item, i, ...props }, ref) => {
               href={ctaData.url}
               as={ctaData.url}
               target={ctaData.target}
-              className="ColumnGroup__button"
+              className=""
             >
               {ctaData.title}
             </Button>
