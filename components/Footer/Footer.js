@@ -1,16 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-
+import { useSelector } from 'react-redux';
 import Social from '@/components/Social';
 
 import './Footer.scss';
 import linkData from './placeholder-links.json';
+
+import {
+  selectFooterData,
+} from '@/stores/app/selectors';
+
 
 const links = linkData.map(link => {
   link.key = `nav-link-${link.as}-${link.label}`;
   return link;
 });
 
+ 
 const NavList = props => {
   let navIndex = props.i;
   return (
@@ -29,14 +35,48 @@ const NavList = props => {
   );
 };
 
-const Footer = () => (
+const Footer = () => {
+
+  let footerData = useSelector(state => selectFooterData(state));
+
+  let LINKS = [];
+  if(footerData) {
+    let footers = ['footer1','footer2','footer3','footer4','footer5','footer6','footer7','footer8','footerUpper']
+
+    for(var i = 0; i < footerData.length; i++ ) {
+      if( i < 4 && footerData[i][footers[i]] ) {
+        // console.log('FOOTER BLOCK ', footerData[i][footers[i]] )
+        let children = [];
+        if(footerData[i][footers[i]][0].children.length > 0) {
+          let pp = footerData[i][footers[i]][0].children;
+          for(var ii = 0; ii < pp.length; ii++ ) {
+            children.push({
+              "href": pp[ii].url,
+              "as": pp[ii].url,
+              "label":pp[ii].name
+            })
+          }
+        }
+        LINKS.push({
+          "href": footerData[i][footers[i]][0].url,
+          "label": footerData[i][footers[i]][0].name,
+          "subnav":children
+        })
+      }
+    }
+
+  }
+
+ // console.log('FOOTER DATA ', footerData )
+
+ return (
   <footer className="SiteFooter">
     <div className="SiteFooter__section -primary">
       <div className="container">
         <div className="row justify-content-between">
           <div className="col">
             <div className="row">
-              {links.map(({ href, as, label, subnav }, i) => (
+              {LINKS.map(({ href, as, label, subnav }, i) => (
                 <div key={`footer-item-${i}`} className="col">
                   <h2 className="SiteFooter__heading h4">{label}</h2>
                   {subnav && <NavList items={subnav} i={i} />}
@@ -68,7 +108,7 @@ const Footer = () => (
         </div>
       </div>
     </div>
-  </footer>
-);
+  </footer> );
+}
 
 export default Footer;
