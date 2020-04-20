@@ -25,7 +25,8 @@ export default (state = INITIAL_STATE, action) => {
         coupons:action.payload.coupons,
         deals:action.payload.deals,
         promotions:action.payload.promotions,
-        registered: true
+        registered: true,
+        error:action.payload.error
       }  
 
       case SEVEN_REWARDS_CHECK_LOADED:
@@ -48,7 +49,8 @@ export default (state = INITIAL_STATE, action) => {
         coupons:false,
         deals:false,
         promotions:false,
-        registered: true
+        registered: false,
+        error:false
       }  
 
     default:

@@ -19,14 +19,13 @@ import {
 function* startup(payload) {
    
   try {
-    
-
+     
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
    
     const loginClientResponse = yield call(sevenRewardsService.userAuth, payload)
 
-    console.log('LOGIN USER PAYLOAD REWARDS SAGA !!   ', loginClientResponse )
+    // console.log('LOGIN USER PAYLOAD REWARDS SAGA !!   ', loginClientResponse )
 
     yield put({ type: SEVEN_REWARDS_AUTH_LOADED, payload:loginClientResponse})
 
@@ -44,7 +43,7 @@ function* checkUserAuth(payload) {
     
     const userClientService = UserClientService(state);
     const userClientResponse = yield call(userClientService.checkUserAuth)
-    console.log('HELLO IS USER AUTH ', userClientResponse)
+    // console.log('HELLO IS USER AUTH ', userClientResponse)
     yield put({ type: SEVEN_REWARDS_CHECK_LOADED, payload:userClientResponse})
 
   } catch(err) {

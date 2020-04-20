@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
+    "@sentry/browser": "^5.15.4",
+    "@sentry/node": "^5.15.4",
     "@storybook/react": "^5.3.14",
     "@zeit/next-sass": "^1.0.1",
     "autoprefixer": "^9.7.4",
@@ -63,6 +65,9 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
     "prettier": "1.19.1"
+  },
+  "engines": {
+    "node": ">= 12.x.x"
   },
   "browserslist": [
     "defaults"

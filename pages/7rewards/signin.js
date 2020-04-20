@@ -37,17 +37,21 @@ class UserAuth extends React.Component {
     // console.log('user ', this.props.user )
 
     let isUserAuth = this.props.user ? this.props.user.auth : false;
-    if (!isUserAuth.error && isUserAuth) {
+    if (!this.props.user.error && isUserAuth) {
       // this.setState({loggedIn:true})
       routerPush('/7rewards');
     }
   }
   componentDidUpdate () {
-    let isUserAuth = this.props.user ? this.props.user.auth : false;
-    if (!isUserAuth.error && isUserAuth && !this.state.loggedIn) {
-      this.setState({ loggedIn: true });
+      
+   let isUserAuth = this.props.user ? this.props.user.auth : false;
+    if (!this.props.user.error && isUserAuth) {
+      // this.setState({loggedIn:true})
       routerPush('/7rewards');
     }
+
+
+    
   }
 
   //
@@ -74,6 +78,10 @@ class UserAuth extends React.Component {
   }
 
   render () {
+
+    let error = this.props.user && this.props.user.error ? this.props.user.error : false;
+
+
     return (
       <Layout>
         <Header title='Sign In' />
@@ -124,9 +132,17 @@ class UserAuth extends React.Component {
                     placeholder='Password'
                   />
                 </div>
+
+                { error &&  
+                  <div className="form__wrapper" css={css`position: relative; display:block; margin-top:30px; text-align:center; width: 100%;`}>
+                  <h5>{ this.props.user.error.payload.error_description }</h5></div>
+                }
+               
                 <Button id='submit' onClick={e => this.submitForm(e)}>
                   Login
                 </Button>
+                
+ 
               </form>
             </div>
           )}

@@ -10,5 +10,6 @@ export const INITIAL_STATE = {
   rewards:false,
   coupons:false,
   deals:false,
-  promotions:false
+  promotions:false,
+  error:false
 };
