@@ -45,11 +45,12 @@ const Category = props => {
 
   let headerTitle = 'Menu | ' + selected.name;
   let pageTitle = selected && selected.name ? selected.name : 'loading...';
+  let defaultImage = selected && selected.image && selected.image.url ? selected.image.url : '/static/images/placeholders/Pizza_Hero.jpg';
   let headerImage = selected.banner_image
   ? selected.banner_image.url
-  : selected.image.url;
+  : defaultImage
    
-  console.log('taxonomyData ', selected.image )
+  console.log('taxonomyData ', selected )
 
   return (
      <Layout>
