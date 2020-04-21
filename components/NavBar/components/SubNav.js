@@ -78,6 +78,10 @@ const SubNavMenu = props => {
         hrefPath =  "/7rewards";
       }
 
+      if(url === '/') {
+        hrefPath =  "/";
+      }
+
       if(!isRewardsLink && !isMenuLink) {
           hrefPath = "/[slug]";
       }
