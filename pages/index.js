@@ -22,12 +22,13 @@ const Home = props => {
   }, []);
 
   const pageData = useSelector(state => pageDataSelector(state));
+  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
 
   return (
     <Layout>
       <Header title="" />
-      {pageData.acf_data &&
-        pageData.acf_data.components.map((section, sectionKey) => {
+      {data &&
+        data.map((section, sectionKey) => {
           return (
             <SectionMaker
               type={section.acf_fc_layout}
