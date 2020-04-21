@@ -68,10 +68,10 @@ class UserAuth extends React.Component {
 
       window.fbAsyncInit = () => {
         FB.init({
-          appId: '488809974636564', 
+          appId: '219346039373151', 
           autoLogAppEvents: true,
           xfbml: true,
-          version: 'v3.0'
+          version: 'v6.0'
         });
 
         FB.Event.subscribe('auth.statusChange', response => {
