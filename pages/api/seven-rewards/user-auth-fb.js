@@ -6,8 +6,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET
 export default async (req, res) => {  
   try {
 
-    let date = new Date();
-    date.setMinutes ( date.getMinutes() + 5 );
+     
     const body = JSON.parse(req.body)
     const headers = { "Content-Type": "application/json" };
 
@@ -20,10 +19,10 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-       "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
+       "client_id": '6gMB2gr2UT8rnUUeQ3uO8Ny4DFveMMe8PhjTd6Mt',
+        "client_secret": 'oSLvmQEdqzN3dW4fcFewo7XQqMNT8ncuO8nP703GL03WlOPh3zq3dezHYaPATXK4zvTqrzBQFjYzmqs8YwuOTJHlXXnBAquQ9O3YcsPv1WZf7I8NkVQBjkUuoHWqwK0G',
         "provider": "facebook", 
-        'access_token':body
+        'access_token':req.body
       }) 
      });
       
@@ -36,7 +35,7 @@ export default async (req, res) => {
 
     console.log('FULL USER DATA   :: ', userToken )   
  
-     res.json(body)
+     res.json(userToken)
      return
   } catch(error) {
     res.json({error: error })
