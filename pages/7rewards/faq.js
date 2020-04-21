@@ -1,66 +1,49 @@
-import React from "react";
-import { connect } from 'react-redux'
-import Layout from '../../containers/Layout/Layout'
-import Header from '../../components/Header/Header'
-import Button from '@/components/Button';
-import appActions from '../../stores/user/actions'
-import appSelectors from '../../stores/user/selectors'
-import Hero from '@/components/Hero';
-import {css, jsx} from "@emotion/core";  
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import '../login/LoginScreen.scss';
+import SectionMaker from '@/components/SectionMaker';
+import Layout from '@/containers/Layout';
+import Header from '@/components/Header';
 
-class Faq extends React.Component {
-  constructor(props) {
-    super(props)
+import Error from 'next/error';
 
-   
-    this.state = {
-      valid:false,
-      isLoading:false,
-      loggedIn:false
-    }
+import { reqPageDataAction } from '@/stores/page/actions';
+
+import { pageDataSelector } from '@/stores/page/selectors';
+
+const Faq = props => {
+  if (props.errorCode) {
+    return <Error statusCode={props.errorCode} />;
   }
 
-  static async getInitialProps({ isServer, store }) {
-    return {}
-  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reqPageDataAction({ payload: 'faq' }));
+  }, []);
 
-  componentDidMount() {
+  const pageData = useSelector(state => pageDataSelector(state));
 
-    let isUserAuth = this.props.user.auth
-    if( !isUserAuth.error && isUserAuth ) {
-      this.setState({loggedIn:true})
-    }
+  return (
+    <Layout>
+      <Header title="" />
+      {pageData.acf_data &&
+        pageData.acf_data.components.map((section, sectionKey) => {
+          return (
+            <SectionMaker
+              type={section.acf_fc_layout}
+              params={section}
+              key={sectionKey}
+              sectionIndex={sectionKey}
+            />
+          );
+        })}
+    </Layout>
+  );
+};
 
-  }
-  componentDidUpdate() { }
-  
-  //
-  
-  render() {
+Faq.getInitialProps = async ({ query, res }) => {
+  return { query };
+};
 
-    return (
-      <Layout>
-        <Header title="FAQ" />
-        <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
-        </Hero>
-     </Layout>
-    )
-  }
-}
+export default Faq;
 
-const mapStateToProps = (state) => ({
-  user: appSelectors.userDataSelector(state),
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
-})
-
-const Faq_ = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Faq)
- 
-export default Faq_;
