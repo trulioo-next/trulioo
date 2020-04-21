@@ -23,7 +23,7 @@ export default async (req, res) => {
        "client_id": CLIENT_ID,
         "client_secret": CLIENT_SECRET,
         "provider": "facebook", 
-        'access_token':body.access_token
+        'access_token':body
       }) 
      });
       
@@ -36,7 +36,7 @@ export default async (req, res) => {
 
     console.log('FULL USER DATA   :: ', userToken )   
  
-     res.json(userToken)
+     res.json(body)
      return
   } catch(error) {
     res.json({error: error })
