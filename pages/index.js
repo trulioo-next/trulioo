@@ -22,27 +22,28 @@ const Home = props => {
   }, []);
 
   const pageData = useSelector(state => pageDataSelector(state));
-  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
+  let data = pageData && !pageData.isLoading ? false : pageData.acf_data.components;
     
  
-   console.log('HOME PAGE LOADED RELOADED  ', pageData )
+  console.log('HOME PAGE LOADED RELOADED  ', pageData )
 
-  // {data &&
-  //       data.map((section, sectionKey) => {
-  //         return (
-  //           <SectionMaker
-  //             type={section.acf_fc_layout}
-  //             params={section}
-  //             key={sectionKey}
-  //             sectionIndex={sectionKey}
-  //           />
-  //         );
-  //       })}
-
+ 
   return (
      
     <Layout>
       <Header title="" />
+       {data &&
+        data.map((section, sectionKey) => {
+          return (
+            <SectionMaker
+              type={section.acf_fc_layout}
+              params={section}
+              key={sectionKey}
+              sectionIndex={sectionKey}
+            />
+          );
+        })}
+
       
     </Layout>
      
