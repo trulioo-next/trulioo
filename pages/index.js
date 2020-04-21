@@ -16,13 +16,13 @@ const Home = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(reqPageDataAction({ payload: 'home' }));
-  // }, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reqPageDataAction({ payload: 'home' }));
+  }, []);
 
-  // const pageData = useSelector(state => pageDataSelector(state));
-  // let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
+  const pageData = useSelector(state => pageDataSelector(state));
+  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
     
  
   // console.log('HOME PAGE LOADED RELOADED  ', pageData )
