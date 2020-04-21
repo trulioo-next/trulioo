@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Logo from '@/static/images/7-eleven.svg';
 
 const Branding = () => (
-  <Link href="/">
+  <Link href="/" as="/">
     <a className="SiteHeader__logo">
       <Logo />
     </a>

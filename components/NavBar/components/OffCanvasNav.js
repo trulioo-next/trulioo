@@ -67,7 +67,7 @@ const SubNavMenu = props => {
           {hasThirdLevel ? (
             <span className="OffCanvas__subnavHeading">{name}</span>
           ) : (
-            <Link href={url}>
+            <Link href="/[slug]" as={url} >
               <a>{name}</a>
             </Link>
           )}
@@ -108,7 +108,7 @@ const NavItem = props => {
     return (
       <>
         <li className="OffCanvas__item">
-          <Link href={item.url}>
+          <Link href="/[slug]" as={item.url}>
             <a className="OffCanvas__link">{item.name}</a>
           </Link>
           <Accordion.Toggle
@@ -140,7 +140,7 @@ const NavItem = props => {
 
   return (
     <li className="OffCanvas__item">
-      <Link href={item.url}>
+      <Link href="/[slug]" as={item.url}>
         <a className="OffCanvas__link">{item.name}</a>
       </Link>
     </li>
