@@ -50,8 +50,7 @@ const Category = props => {
   ? selected.banner_image.url
   : defaultImage
    
-  console.log('taxonomyData ', selected )
-
+  
   return (
      <Layout>
         <Header title={headerTitle} />

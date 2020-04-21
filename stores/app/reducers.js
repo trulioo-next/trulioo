@@ -28,7 +28,10 @@ export default (state = INITIAL_STATE, action) => {
       }
 
     case APP_STOPLOADING:
-      return { ...state, isLoading: false }
+      return { ...state, isLoading: false, isLoaded: true, }
+
+    case APP_STARTLOADING:
+      return { ...state, isLoading: true }  
 
     case APP_STARTUP_ERROR:
       return { ...state,

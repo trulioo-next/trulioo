@@ -87,7 +87,7 @@ const SubNavMenu = props => {
       }
       
       return (
-        <Link href={url} as={url}>
+        <Link href={url}>
           <a>{name}</a>
         </Link>
       ) 

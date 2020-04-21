@@ -28,21 +28,22 @@ import './Layout.scss';
 
 const Layout = props => {
    
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
+  // }, []);
   
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
   let userData = useSelector(state => userDataSelector(state));
   const isLoading = useSelector(state => selectIsLoading(state));
 
-  // console.log('USER DATA ', userData )
+  // console.log('IS LOADING  ', isLoading )
 
 
   if(!headerData) {
-    headerData = STATICDATA['header-menu']
+    headerData = STATICDATA['header-menu'];
+    // console.log('STATIC HEADER DATA ', headerData )
   }
   // console.log('HEADER DATA ', headerData )
 
@@ -68,7 +69,8 @@ const Layout = props => {
 };
 
 Layout.getInitialProps = async ({ query, res, children }) => {
-  return { query, children };
+  let defaultData = STATICDATA;
+  return { query, children, defaultData };
 };
 
 export default Layout;

@@ -7,7 +7,8 @@ import {
   APP_STARTUP_ERROR,
   PAGE_LOAD_REQUEST,
   PAGE_LOAD_ERROR,
-  PAGE_LOADED
+  PAGE_LOADED,
+  APP_STOPLOADING
 } from '../types'
 
 
@@ -51,7 +52,7 @@ function* startupFlow() {
       yield call(startup, action.payload)
     }
 
-
+    yield put({ type: APP_STOPLOADING })
  
     yield action
   }

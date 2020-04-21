@@ -17,15 +17,13 @@ export default (state = INITIAL_STATE, action) => {
 
     case PAGE_LOADED:
       return { ...state,
-        data: action.payload,
-        isLoading: false
+        data: action.payload
       }
 
     case PAGE_LOAD_ERROR:
       return { ...state,
         error: action.payload,
-        errorSource: APP_STARTUP_ERROR,
-        isLoading: false
+        errorSource: APP_STARTUP_ERROR
       }
 
     default:

@@ -9,6 +9,7 @@ import {
   APP_STARTUP_REQUEST,
   APP_STARTLOADING,
   APP_STARTUP_ERROR,
+  APP_STOPLOADING,
   GLOBAL_DATA_LOADED,
   NUTRITIONAL_LOADED
 } from '../types'
@@ -55,6 +56,9 @@ function* startupFlow() {
     if (action.type === APP_STARTUP_REQUEST) {
       yield call(startup, action.payload)
     }
+
+
+    yield put({ type: APP_STOPLOADING })
  
     yield action
   }

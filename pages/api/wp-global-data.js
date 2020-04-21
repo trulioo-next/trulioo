@@ -21,11 +21,11 @@ export default async (req, res) => {
           if (err) {
             throw 'Data could not be written';
           }
-          console.log('GLOBAL DATA UPDATED  ')
+          // console.log('GLOBAL DATA UPDATED  ')
           // res.send({message:'Blog posts have been written'});
         });
 
-     // console.log('GLOBAL DATA ', response )
+      // console.log('GLOBAL DATA ', response )
  
      res.json(response)
      return

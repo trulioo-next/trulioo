@@ -5,7 +5,8 @@ import {
   NUTRITIONAL_LOAD_REQUEST,
   NUTRITIONAL_LOADED,
   NUTRITIONAL_ERROR,
-  APP_STARTLOADING
+  APP_STARTLOADING,
+  APP_STOPLOADING
 } from '../types'
 
 function* startup(payload) {
@@ -40,6 +41,8 @@ function* startupFlow() {
     if (action.type === NUTRITIONAL_LOAD_REQUEST) {
       yield call(startup, action.payload)
     }
+
+    yield put({ type: APP_STOPLOADING })
  
     yield action
   }

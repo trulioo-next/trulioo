@@ -23,8 +23,12 @@ const Home = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
+    
+ 
+  console.log('HOME PAGE LOADED ', pageData )
 
   return (
+     
     <Layout>
       <Header title="" />
       {data &&
@@ -39,10 +43,11 @@ const Home = props => {
           );
         })}
     </Layout>
+     
   );
 };
 
-Home.getInitialProps = async ({ query, res }) => {
+Home.getInitialProps = async ({ query, res, isServer }) => {
   return { query };
 };
 

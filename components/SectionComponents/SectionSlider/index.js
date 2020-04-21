@@ -6,11 +6,11 @@ import ImageSlider from '@/components/ImageSlider';
 import './SectionSlider.scss';
 
 const SectionSlider = props => {
-  // console.log('SECTION SLIDER  PROPS :: ', props);
-
+   
   var settings = props.settings;
+  let dataLoaded = props.slides ? props.slides : false;
 
-  return (
+  return  dataLoaded ? (
     <section className="Section -slider">
       <ImageSlider
         className={classNames({
@@ -20,7 +20,7 @@ const SectionSlider = props => {
         })}
         {...settings}
       >
-        {props.slides.map(({ image, title, content, link }, slideIndex) => (
+        {props.slides && props.slides.map(({ image, title, content, link }, slideIndex) => (
           <ImageSlider.Item
             key={slideIndex}
             image={image}
@@ -31,7 +31,7 @@ const SectionSlider = props => {
         ))}
       </ImageSlider>
     </section>
-  );
+  ) : (<section></section>);
 };
 
 SectionSlider.defaultProps = {};
