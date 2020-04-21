@@ -49,7 +49,6 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
       { item.name === "Slurpee®" &&  
        
         <a href={item.url} className="SiteHeader__link">{item.name}</a>
-       
       }
     </li>
   );

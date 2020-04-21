@@ -21,12 +21,13 @@ const Page = props => {
   }, []);
 
   const pageData = useSelector(state => pageDataSelector(state));
+  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
 
   return (
     <Layout>
       <Header title="" />
-      {pageData.acf_data &&
-        pageData.acf_data.components.map((section, sectionKey) => (
+      { data &&
+        data.components.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}
             params={section}
