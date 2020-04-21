@@ -68,7 +68,7 @@ class UserAuth extends React.Component {
 
       window.fbAsyncInit = () => {
         FB.init({
-          appId: '603915923024451', 
+          appId: '488809974636564', 
           autoLogAppEvents: true,
           xfbml: true,
           version: 'v3.0'
@@ -82,8 +82,16 @@ class UserAuth extends React.Component {
           }
         });
       };
-     
+      
+  }
 
+  componentDidUpdate () {
+   let isUserAuth = this.props.user ? this.props.user.auth : false;
+    if (!this.props.user.error && isUserAuth) {
+      // this.setState({loggedIn:true})
+      routerPush('/7rewards');
+    }
+ 
   }
 
 
@@ -101,7 +109,7 @@ class UserAuth extends React.Component {
 
   statusChangeCallback(response) {
     if (response.status === 'connected') {
-      this.testAPI();
+      this.logUserIn();
     } else if (response.status === 'not_authorized') {
       console.log("[FacebookLoginButton] Person is logged into Facebook but not your app");
     } else {
@@ -109,28 +117,13 @@ class UserAuth extends React.Component {
     }
   }
 
-  testAPI() {
+  logUserIn() {
     FB.api('/me', function(response) {
       console.log('[FacebookLoginButton] Successful login for: ', response);
-    });
+     //  this.submitFacebookRequest(response);
+    }.bind(this));
   }
-
-
-
-
-
-  componentDidUpdate () {
-      
-   let isUserAuth = this.props.user ? this.props.user.auth : false;
-    if (!this.props.user.error && isUserAuth) {
-      // this.setState({loggedIn:true})
-      routerPush('/7rewards');
-    }
-
-
-    
-  }
-
+ 
   //
   onValueChange (e, type) {
     if (type === 'user') {
@@ -155,9 +148,9 @@ class UserAuth extends React.Component {
   }
 
   //
-  submitFacebookRequest(e) {
+  submitFacebookRequest(accessToken) {
 
-    this.props.userFacebookAuthRequest();
+    this.props.userFacebookAuthRequest(accessToken);
 
   }
 

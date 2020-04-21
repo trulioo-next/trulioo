@@ -12,26 +12,7 @@ export default async (req, res) => {
     const headers = { "Content-Type": "application/json" };
 
     console.log('FACEBOOK LOGIN CALL ')
-
-    
-    // Get an Access Token
-    //
-    // NOTE: CURRENTLY USING PRODUCTION KEYS 
-    const accessToken = await fetch(REWARDS_API_URL+'/auth/token',
-     {
-       method: 'POST',
-       headers: headers,
-       body: JSON.stringify({
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
-        "grant_type": "client_credentials"
-      }) 
-     });
-
-    
-    console.log(' accessToken   :: ', accessToken ) 
-
-
+ 
     // Get an Access Token
     //
     const userToken = await fetch(REWARDS_API_URL+'/auth/token/social',
@@ -42,20 +23,20 @@ export default async (req, res) => {
        "client_id": CLIENT_ID,
         "client_secret": CLIENT_SECRET,
         "provider": "facebook", 
-        'access_token':accessToken.access_token
+        'access_token':body.access_token
       }) 
      });
       
-    let user = {
-      userName:body.userName,
-      isAuth: true,
-      token: userToken.access_token,
-      expire:userToken.expires_in
-    }
+    // let user = {
+    //   userName:body.userName,
+    //   isAuth: true,
+    //   token: userToken.access_token,
+    //   expire:userToken.expires_in
+    // }
 
     console.log('FULL USER DATA   :: ', userToken )   
  
-     res.json(accessToken)
+     res.json(userToken)
      return
   } catch(error) {
     res.json({error: error })
