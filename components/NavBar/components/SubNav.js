@@ -87,7 +87,7 @@ const SubNavMenu = props => {
       }
       
       return (
-        <Link href={hrefPath} as={url}>
+        <Link href={url} as={url}>
           <a>{name}</a>
         </Link>
       ) 

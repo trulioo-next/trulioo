@@ -39,10 +39,10 @@ const Footer = () => {
 
   let footerData = useSelector(state => selectFooterData(state));
 
-  let LINKS = [];
+  let LINKS = false;
   if(footerData) {
     let footers = ['footer1','footer2','footer3','footer4','footer5','footer6','footer7','footer8','footerUpper']
-
+    LINKS = [];
     for(var i = 0; i < footerData.length; i++ ) {
       if( i < 4 && footerData[i][footers[i]] ) {
         // console.log('FOOTER BLOCK ', footerData[i][footers[i]] )
@@ -76,12 +76,16 @@ const Footer = () => {
         <div className="row justify-content-between">
           <div className="col">
             <div className="row">
-              {LINKS.map(({ href, as, label, subnav }, i) => (
+               
+              {  
+               LINKS && LINKS.map(({ href, as, label, subnav }, i) => (
                 <div key={`footer-item-${i}`} className="col">
                   <h2 className="SiteFooter__heading h4">{label}</h2>
                   {subnav && <NavList items={subnav} i={i} />}
                 </div>
-              ))}
+                ))
+               }
+            
             </div>
           </div>
         </div>
