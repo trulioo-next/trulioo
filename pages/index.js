@@ -25,7 +25,7 @@ const Home = props => {
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
     
  
-  console.log('HOME PAGE LOADED ', pageData )
+  console.log('HOME PAGE LOADED RELOADED  ', pageData )
 
   return (
      

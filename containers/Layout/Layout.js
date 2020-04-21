@@ -46,6 +46,7 @@ const Layout = props => {
     // console.log('STATIC HEADER DATA ', headerData )
   }
   // console.log('HEADER DATA ', headerData )
+  // <Footer /> 
 
   return (
     <div className="Layout">
@@ -63,7 +64,7 @@ const Layout = props => {
            {props.children}
          </main>
 
-         <Footer />
+         
       </div>
   );
 };
