@@ -16,32 +16,34 @@ const Home = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(reqPageDataAction({ payload: 'home' }));
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(reqPageDataAction({ payload: 'home' }));
+  // }, []);
 
-  const pageData = useSelector(state => pageDataSelector(state));
-  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
+  // const pageData = useSelector(state => pageDataSelector(state));
+  // let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
     
  
-  console.log('HOME PAGE LOADED RELOADED  ', pageData )
+  // console.log('HOME PAGE LOADED RELOADED  ', pageData )
+
+  // {data &&
+  //       data.map((section, sectionKey) => {
+  //         return (
+  //           <SectionMaker
+  //             type={section.acf_fc_layout}
+  //             params={section}
+  //             key={sectionKey}
+  //             sectionIndex={sectionKey}
+  //           />
+  //         );
+  //       })}
 
   return (
      
     <Layout>
       <Header title="" />
-      {data &&
-        data.map((section, sectionKey) => {
-          return (
-            <SectionMaker
-              type={section.acf_fc_layout}
-              params={section}
-              key={sectionKey}
-              sectionIndex={sectionKey}
-            />
-          );
-        })}
+      
     </Layout>
      
   );
