@@ -31,11 +31,9 @@ const Category = props => {
 
   const close = false;
   const taxonomyData = useSelector(state => taxonomiesSelector(state));
-
-
-  
+ 
   let category = props.query.category
-  
+
   let selected = [];
   if(taxonomyData) {
     for(var i = 0; i < taxonomyData.length; i++ ) {
@@ -49,9 +47,9 @@ const Category = props => {
   let pageTitle = selected && selected.name ? selected.name : 'loading...';
   let headerImage = selected.banner_image
   ? selected.banner_image.url
-  : '/static/images/placeholders/Pizza_Hero.jpg';
+  : selected.image.url;
    
-  // console.log('taxonomyData ', selected )
+  console.log('taxonomyData ', selected.image )
 
   return (
      <Layout>

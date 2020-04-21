@@ -66,7 +66,7 @@ const Nutritionals = props => {
 
   let ingredients = [];
 
-  if (props.data.acf && props.data.acf.ingredients) {
+  if (props.data && props.data.acf && props.data.acf.ingredients) {
     ingredients = props.data.acf.ingredients;
   }
 
@@ -149,10 +149,10 @@ const Nutritionals = props => {
 const ProductHeader = props => {
   let productDetails = [];
 
-  if (props.data.acf && props.data.acf.checkmark_section) {
+  if (props.data && props.data.acf && props.data.acf.checkmark_section) {
     productDetails = props.data.acf.checkmark_section;
   }
-
+ 
   let image = props.data.photos
     ? props.data.photos[0].url
     : '/static/images/placeholders/Product_HeaderImage.jpg';
