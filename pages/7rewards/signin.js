@@ -118,10 +118,10 @@ class UserAuth extends React.Component {
     }
   }
 
-  logUserIn(token) {
+  logUserIn(access_token) {
     FB.api('/me', function(response) {
-      console.log('[FacebookLoginButton] Successful login for: ', response, token );
-     //  this.submitFacebookRequest(response);
+      console.log('[FacebookLoginButton] Successful login for: ', response );
+      this.submitFacebookRequest(access_token);
     }.bind(this));
   }
  
@@ -149,9 +149,9 @@ class UserAuth extends React.Component {
   }
 
   //
-  submitFacebookRequest(accessToken) {
+  submitFacebookRequest(access_token) {
 
-    this.props.userFacebookAuthRequest(accessToken);
+    this.props.userFacebookAuthRequest(access_token);
 
   }
 
