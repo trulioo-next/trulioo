@@ -25,13 +25,15 @@ export const NUTRITIONAL_ERROR = 'nutritional/error/NUTRITIONAL_ERROR'
 // 7 rewards Events 
 export const SEVEN_REWARDS_AUTH_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_AUTH_REQUEST'
 export const SEVEN_REWARDS_AUTH_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_AUTH_LOADED'
-export const SEVEN_REWARDS_AUTH_ERROR = 'seven_rewards/error/NUTRITIONAL_ERROR'
+export const SEVEN_REWARDS_AUTH_ERROR = 'seven_rewards/error/SEVEN_REWARDS_AUTH_ERROR'
 
 export const SEVEN_REWARDS_REGISTER_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_REGISTER_REQUEST'
 export const SEVEN_REWARDS_REGISTER_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_REGISTER_LOADED'
 export const SEVEN_REWARDS_LOGOUT_REQUEST = 'seven_rewards/logout/SEVEN_REWARDS_LOGOUT_REQUEST'
 export const SEVEN_REWARDS_LOGOUT = 'seven_rewards/logout/SEVEN_REWARDS_LOGOUT'
 export const SEVEN_REWARDS_REGISTER_ERROR = 'seven_rewards/error/SEVEN_REWARDS_REGISTER_ERROR'
+export const SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST = 'seven_rewards/facebook/SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST'
+export const SEVEN_REWARDS_FACEBOOK_AUTH = 'seven_rewards/facebook/SEVEN_REWARDS_FACEBOOK_AUTH'
 
 export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'
 export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CHECK_LOADED'

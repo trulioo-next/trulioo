@@ -11,19 +11,38 @@ export default async (req, res) => {
     const body = JSON.parse(req.body)
     const headers = { "Content-Type": "application/json" };
 
+    console.log('FACEBOOK LOGIN CALL ')
+
+    
     // Get an Access Token
     //
-    const userToken = await fetch(REWARDS_API_URL+'/auth/token',
+    // NOTE: CURRENTLY USING PRODUCTION KEYS 
+    const accessToken = await fetch(REWARDS_API_URL+'/auth/token',
      {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
         "client_id": CLIENT_ID,
         "client_secret": CLIENT_SECRET,
-        "grant_type": "facebook", 
-         "username": body.userName,
-         "password": body.password,
-         'access_token':body.access_token
+        "grant_type": "client_credentials"
+      }) 
+     });
+
+    
+    console.log(' accessToken   :: ', accessToken ) 
+
+
+    // Get an Access Token
+    //
+    const userToken = await fetch(REWARDS_API_URL+'/auth/token/social',
+     {
+       method: 'POST',
+       headers: headers,
+       body: JSON.stringify({
+       "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "provider": "facebook", 
+        'access_token':accessToken.access_token
       }) 
      });
       
@@ -34,9 +53,9 @@ export default async (req, res) => {
       expire:userToken.expires_in
     }
 
-    console.log('FULL USER DATA   :: ', user )   
+    console.log('FULL USER DATA   :: ', userToken )   
  
-     res.json(user)
+     res.json(accessToken)
      return
   } catch(error) {
     res.json({error: error })

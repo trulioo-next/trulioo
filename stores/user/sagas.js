@@ -13,7 +13,9 @@ import {
   SEVEN_REWARDS_REGISTER_LOADED,
   SEVEN_REWARDS_REGISTER_ERROR,
   SEVEN_REWARDS_LOGOUT_REQUEST,
-  SEVEN_REWARDS_LOGOUT
+  SEVEN_REWARDS_LOGOUT,
+  SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
+  SEVEN_REWARDS_FACEBOOK_AUTH
 } from '../types'
 
 function* startup(payload) {
@@ -35,6 +37,30 @@ function* startup(payload) {
     yield put({ type:SEVEN_REWARDS_AUTH_ERROR, payload: errors})
   }
 }
+
+
+
+function* facebookUserAuth(payload) {
+   
+  try {
+     
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const loginClientResponse = yield call(sevenRewardsService.userAuthFb, payload)
+
+    console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse )
+
+    yield put({ type:SEVEN_REWARDS_FACEBOOK_AUTH, payload:loginClientResponse})
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_AUTH_ERROR, payload: errors})
+  }
+}
+
+
 
 //
 function* checkUserAuth(payload) {
@@ -100,7 +126,8 @@ function* startupFlow() {
       SEVEN_REWARDS_AUTH_REQUEST,
       SEVEN_REWARDS_CHECK_REQUEST,
       SEVEN_REWARDS_REGISTER_REQUEST,
-      SEVEN_REWARDS_LOGOUT_REQUEST
+      SEVEN_REWARDS_LOGOUT_REQUEST,
+      SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -119,6 +146,10 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_LOGOUT_REQUEST) {
       yield call(logoutUser)
+    }
+
+    if (action.type === SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST) {
+      yield call(facebookUserAuth, action.payload)
     }
  
     yield action

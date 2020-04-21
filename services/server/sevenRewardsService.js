@@ -23,8 +23,8 @@ export default function SevenRewardsService(state) {
 
 		return data;
 	}
-	async function userAuthFb() {
-		let data = await API.post('/api/seven-rewards/user-auth-fb', {});
+	async function userAuthFb(payload) {
+		let data = await API.post('/api/seven-rewards/user-auth-fb', {body:payload});
 		if(data.error) {
 			ErrorHandler({
 		        error: data.error.payload.error_description,

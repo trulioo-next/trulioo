@@ -2,6 +2,16 @@
   position: relative;
   padding: 90px 0px;
 
+
+  .facebook__btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+    margin: 0 auto 50px;
+  }
+
   .form__wrapper {
     position: relative;
     max-width: 500px;

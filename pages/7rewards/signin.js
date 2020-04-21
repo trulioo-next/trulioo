@@ -11,6 +11,12 @@ import Link from 'next/link';
 import routerPush from '../../helpers/routerPush';
 import * as Yup from 'yup';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+
+
 import '../login/LoginScreen.scss';
 
 class UserAuth extends React.Component {
@@ -41,7 +47,78 @@ class UserAuth extends React.Component {
       // this.setState({loggedIn:true})
       routerPush('/7rewards');
     }
+
+
+
+    // TODO: REMVOE THIS FORM HERE : 
+    // facebook signin  button render
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    
+
+       // PROD ID 603915923024451
+
+      window.fbAsyncInit = () => {
+        FB.init({
+          appId: '603915923024451', 
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: 'v3.0'
+        });
+
+        FB.Event.subscribe('auth.statusChange', response => {
+          if (response.authResponse) {
+            this.checkLoginState();
+          } else {
+            console.log('[FacebookLoginButton] User cancelled login or did not fully authorize.');
+          }
+        });
+      };
+     
+
   }
+
+
+  checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      this.statusChangeCallback(response);
+    }.bind(this));
+  }
+
+  login() {
+    FB.login(this.checkLoginState(), {
+      scope: 'email'
+    });
+  }
+
+  statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      this.testAPI();
+    } else if (response.status === 'not_authorized') {
+      console.log("[FacebookLoginButton] Person is logged into Facebook but not your app");
+    } else {
+      console.log("[FacebookLoginButton] Person is not logged into Facebook");
+    }
+  }
+
+  testAPI() {
+    FB.api('/me', function(response) {
+      console.log('[FacebookLoginButton] Successful login for: ', response);
+    });
+  }
+
+
+
+
+
   componentDidUpdate () {
       
    let isUserAuth = this.props.user ? this.props.user.auth : false;
@@ -75,6 +152,13 @@ class UserAuth extends React.Component {
     };
     // this.setState({loggedIn:true})
     this.props.userAuthRequest(payload);
+  }
+
+  //
+  submitFacebookRequest(e) {
+
+    this.props.userFacebookAuthRequest();
+
   }
 
   render () {
@@ -112,6 +196,15 @@ class UserAuth extends React.Component {
                   If you’re an existing member, please sign in using your
                   7Rewards email address and password.
                 </p>
+
+                 <Row>
+                  <Col className="text-center">
+                    <img className="facebook__btn" onClick={(e) => this.login(e) } src="/static/images/placeholders/facebook-btn.png" />
+                    <p className="bottom--margin--20">OR</p>
+                  </Col>
+                </Row>
+
+
                 <div className='input__group'>
                   <label>User Name</label>
                   <input
@@ -170,6 +263,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
+  userFacebookAuthRequest: payload => dispatch(appActions.reqUserFacebookAuthAction(payload)),
 });
 
 const UserAuth_ = connect(mapStateToProps, mapDispatchToProps)(UserAuth);

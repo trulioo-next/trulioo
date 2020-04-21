@@ -9,7 +9,8 @@ import {
   SEVEN_REWARDS_AUTH_LOADED,
   SEVEN_REWARDS_CHECK_LOADED,
   SEVEN_REWARDS_REGISTER_LOADED,
-  SEVEN_REWARDS_LOGOUT
+  SEVEN_REWARDS_LOGOUT,
+  SEVEN_REWARDS_FACEBOOK_AUTH
 } from '../types'
 
 
@@ -18,6 +19,19 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
      case SEVEN_REWARDS_AUTH_LOADED:
+      return { ...state,
+        auth: action.payload.auth,
+        user: action.payload.user,
+        rewards:action.payload.rewards,
+        coupons:action.payload.coupons,
+        deals:action.payload.deals,
+        promotions:action.payload.promotions,
+        registered: true,
+        error:action.payload.error
+      }  
+
+
+      case SEVEN_REWARDS_FACEBOOK_AUTH:
       return { ...state,
         auth: action.payload.auth,
         user: action.payload.user,
