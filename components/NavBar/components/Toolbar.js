@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 
 import SearchIcon from '@/static/images/search.svg';
 
-const ToolbarItem = ({ url, children }) => (
+const ToolbarItem = ({ url, target, children }) => (
   <li className="SiteHeader__item">
     <Link href={url}>
-      <a className="SiteHeader__link">{children}</a>
+      <a className="SiteHeader__link" target={target}>{children}</a>
     </Link>
   </li>
 );
