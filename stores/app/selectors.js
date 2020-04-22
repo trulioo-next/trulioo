@@ -41,12 +41,11 @@ export const selectError = (state) => {
  export const selectFooterData = (state) => {
 
     let data = state.app.globalData;
-    console.log('FOOTER SELECTOR ', state.app.globalData.code )
+    // console.log('FOOTER SELECTOR ', state.app.globalData.code )
     if( state.app.globalData.code ) {
       data = headerData
     }
-
-
+ 
     let footerData = [
       { footer1:data['footer-1-menu'] },
       { footer2:data['footer-2-menu'] },

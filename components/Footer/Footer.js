@@ -6,6 +6,9 @@ import Social from '@/components/Social';
 import './Footer.scss';
 import linkData from './placeholder-links.json';
 
+
+const STATICDATA = require('../../data/global.json')
+
 import {
   selectFooterData,
 } from '@/stores/app/selectors';
