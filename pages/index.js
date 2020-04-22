@@ -61,12 +61,14 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ query, res, isServer }) => {
-   let data = await API.post('/api/wp-page-data', { payload:'home'} );
+   let data = STATICDATA;
 
-   if(!data && data.errno ) {
+   // await API.post('/api/wp-page-data', { payload:'home'} );
 
-      data = STATICDATA;
-   }
+   // if(!data && data.errno ) {
+
+   //    data = STATICDATA;
+   // }
   return { query, data };
 };
 
