@@ -39,16 +39,20 @@ export const selectError = (state) => {
  }
 
  export const selectFooterData = (state) => {
+
+    let data = state.app.globalData;
+    console.log('FOOTER SELECTOR ', state.app.globalData.code )
+    if( state.app.globalData.code ) {
+      data = headerData
+    }
+
+
     let footerData = [
-      { footer1:state.app.globalData['footer-1-menu'] },
-      { footer2:state.app.globalData['footer-2-menu'] },
-      { footer3:state.app.globalData['footer-3-menu'] },
-      { footer4:state.app.globalData['footer-4-menu'] },
-      { footer5:state.app.globalData['footer-5-menu'] },
-      { footer6:state.app.globalData['footer-6-menu'] },
-      { footer7:state.app.globalData['footer-7-menu'] },
-      { footer8:state.app.globalData['footer-8-menu'] },
-      { footerUpper:state.app.globalData['footer-upper-menu'] }
+      { footer1:data['footer-1-menu'] },
+      { footer2:data['footer-2-menu'] },
+      { footer3:data['footer-3-menu'] },
+      { footer4:data['footer-4-menu'] }
+     
     ]
     
    return footerData
