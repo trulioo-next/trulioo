@@ -4,6 +4,7 @@ import withRedux from 'next-redux-wrapper'
 import configureStore from '../stores/configureStore'
 import appActions from '../stores/app/actions'
 import nutritionalsActions from '../stores/nutritionals/actions'
+import pageActions from '../stores/nutritionals/actions'
 import withError from '../components-stateful/withErrorWrapper'
 
 const withReduxDebugMode = false // process.env.NODE_ENV === 'development' || false;
@@ -14,6 +15,7 @@ class MyApp extends App {
     	if(ctx.isServer) {
           await ctx.store.execSagaTask(appActions.reqStartupAction({ isAuthenticated: false,  query: ctx.query }));
           await ctx.store.execSagaTask(nutritionalsActions.reqNutritionalsAction({ isAuthenticated: false,  query: ctx.query }));
+          // await ctx.store.execSagaTask(pageActions.getPageData({ payload: 'home' }));
         }
  
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};

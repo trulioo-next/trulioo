@@ -15,7 +15,8 @@ import {
   SEVEN_REWARDS_LOGOUT_REQUEST,
   SEVEN_REWARDS_LOGOUT,
   SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
-  SEVEN_REWARDS_FACEBOOK_AUTH
+  SEVEN_REWARDS_FACEBOOK_AUTH,
+  APP_STOPLOADING
 } from '../types'
 
 function* startup(payload) {
@@ -152,6 +153,9 @@ function* startupFlow() {
     if (action.type === SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST) {
       yield call(facebookUserAuth, action.payload)
     }
+
+
+    yield put({ type: APP_STOPLOADING })
  
     yield action
   }

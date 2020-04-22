@@ -26,12 +26,7 @@ function* startup(payload) {
     // console.log('STARTUP GLOBAL DATA SAGA  ', response )
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
-    // Load default Nutri Data 
-    // console.log('STARTUP NUTRITIONAL_LOADED SAGA  ', nutritionalData )
-    const nutritionalService = NutritionalService(state);
-    const nutritionalResponse = yield call(nutritionalService.getNutritionalData, true)
-    yield put({ type: NUTRITIONAL_LOADED, payload: nutritionalResponse })
-
+     
  
   } catch(err) {
 
@@ -51,14 +46,14 @@ function* startupFlow() {
       APP_STARTUP_REQUEST
    ])
 
-    // yield put({ type: APP_STARTLOADING })
+    yield put({ type: APP_STARTLOADING })
 
     if (action.type === APP_STARTUP_REQUEST) {
       yield call(startup, action.payload)
     }
 
 
-    // yield put({ type: APP_STOPLOADING })
+    yield put({ type: APP_STOPLOADING })
  
     yield action
   }

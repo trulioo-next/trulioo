@@ -46,12 +46,22 @@ const SectionMedia = ({ media }) => {
 };
 
 const SectionCTA = ({ data, i }) => {
+
+  if(!data) {
+    return(<></>)
+  }
+ 
+  let url = "/";
+  if(data && data.url ) {
+      url = data.url;
+  }
+
   const params = {
     href: data.url,
     as: data.target ? null : data.url,
     target: data.target ? data.target : null,
   };
-
+ 
   if (i === 0) {
     return (
       <Button className="Section__cta" {...params}>
@@ -67,7 +77,7 @@ const SectionCTA = ({ data, i }) => {
       </a>
     );
   }
-
+    
   return (
     <Link {...params}>
       <a className="Section__cta">{data.title} &rsaquo;</a>
@@ -129,6 +139,9 @@ const SectionCallToAction = ({
   let mobileAlignment = 'center';
   let desktopAlignment = 'around';
 
+
+ // console.log('SECTION CTA PROPS ', media )
+
   if (!hasMedia) {
     mobileAlignment = content.position.mobile;
     desktopAlignment = content.position.desktop;
@@ -143,7 +156,6 @@ const SectionCallToAction = ({
   );
 
   let bgImage = params.background_image;
-
   let mobileBg = bgImage.mobile;
   let desktopBg = bgImage.desktop;
 
