@@ -64,11 +64,12 @@ class UserAuth extends React.Component {
       }(document, 'script', 'facebook-jssdk'));
     
 
-       // PROD ID 603915923024451
+       // PROD ID 1018851968129793
+       // STAGING ID 219346039373151
 
       window.fbAsyncInit = () => {
         FB.init({
-          appId: '219346039373151', 
+          appId: '1018851968129793', 
           autoLogAppEvents: true,
           xfbml: true,
           version: 'v6.0'
