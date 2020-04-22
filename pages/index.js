@@ -30,15 +30,15 @@ const Home = props => {
 
   const isLoading = useSelector(state => selectIsLoading(state));
   const pageData = useSelector(state => pageDataSelector(state));
-  let waitToRender = false;
+  let waitToRender = true;
 
   if( pageData.acf_data.length === 0 ) {
       waitToRender = true;
   }
  
- // console.log(' PAGE DATA ::>>   ', pageData )
- // console.log('waitToRender ::>>  ', waitToRender  )
- // console.log('isLoading ::>>   ',  isLoading )
+ console.log(' PAGE DATA ::>>   ', pageData )
+ console.log('waitToRender ::>>  ', waitToRender  )
+ console.log('isLoading ::>>   ',  isLoading )
    
   return (
      
