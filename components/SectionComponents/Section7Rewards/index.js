@@ -13,18 +13,23 @@ let rewardData = [];
 const Section7Rewards = props => {
   // console.log('Section7Rewards  PROPS :: ', props);
   let sectionClasses = classNames('Section');
+
   const USER = useSelector( state =>  userDataSelector(state) );
   // console.log('USER DATA  ', USER )
+
+  const isAuth = USER && USER.auth ? true : false;
+
+
   let comTitle = props.title_logged_out;
   let subHeading = props.subheading_logged_out
-  if(USER.auth) {
+  if(USER && USER.auth) {
       comTitle = props.title_logged_in
       subHeading = props.subheading_logged_in
   }
   
   // TODO: Add this logic to the selector 
   //
-  if(USER.rewards && USER.rewards.rewards_catalog) {
+  if(USER && USER.rewards && USER.rewards.rewards_catalog) {
     let rewards = USER.rewards.rewards_catalog;
     rewardData = [];
     for(var i = 0; i < rewards.length; i++ ) {
@@ -39,7 +44,7 @@ const Section7Rewards = props => {
        )
     }
   }
-
+ 
   return (
 
     <section className={sectionClasses}>
@@ -51,10 +56,11 @@ const Section7Rewards = props => {
           </div>
         </div>
       </div>
-      { USER.auth && 
+
+      { isAuth && 
         <div className="container-fluid px-0">
           <ProductSlider>
-            {rewardData.map((item, i) => (
+            { rewardData.map((item, i) => (
               <ProductSlider.Item key={`product-slider-item-${i}`}>
                 <RewardsCard item={item} />
               </ProductSlider.Item>
@@ -62,6 +68,7 @@ const Section7Rewards = props => {
           </ProductSlider>
         </div>
       }
+      
       <div className="container Section__container">
         <div className="row justify-content-center">
           <div className="col col-12 col-lg-8 text-center">
@@ -89,8 +96,7 @@ const Section7Rewards = props => {
 
 // Section7Rewards.defaultProps = {};
 Section7Rewards.getInitialProps = async ({ req,query }) => {
-    const details = await fetchPageDetails("product");
-    return { details, query }
+    return {  query }
 };
 
 export default Section7Rewards;

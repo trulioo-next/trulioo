@@ -11,6 +11,8 @@ export default async (req, res) => {
     if(body.payload) {
       id = body.payload
     }
+
+    // console.log('BODY TAG ', body )
     // TODO: Normalise page ID : 
     const response = await fetch(ENDPOINT_URL+'/api/v1/page/'+id,
      {

@@ -10,7 +10,7 @@ const SectionPostGrid = props => {
     count = 4;
   }
 
-  console.log('POSTS ', defaultImage )
+  console.log('POSTS ', posts )
 
   return (
     <section className="Section">
