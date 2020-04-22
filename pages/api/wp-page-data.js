@@ -2,6 +2,8 @@ const fetch = require('../../utils/fetch')
 
 const ENDPOINT_URL = process.env.ENDPOINT_URL
 
+import STATICDATA from '../../data/home.json'
+
 export default async (req, res) => {  
   try {
     
@@ -26,7 +28,7 @@ export default async (req, res) => {
      res.json(response)
      return
   } catch(error) {
-     res.json({ error: error })
+     res.json(STATICDATA)
      // res.status(502).send({ error: error })
   }
 };

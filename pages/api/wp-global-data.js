@@ -2,6 +2,8 @@ const fetch = require('../../utils/fetch')
 const data = require('../../data/global.json')
 const fs = require('fs');
 const ENDPOINT_URL = process.env.ENDPOINT_URL
+
+import STATICDATA from '../../data/global.json'
  
 export default async (req, res) => {
 
@@ -31,7 +33,7 @@ export default async (req, res) => {
      return
   } catch(error) {
     // NOTE: Should provide an error resource here 
-    console.log('ERROR SEND LOCAL DATA ', data )
-    res.json(data)
+    console.log('ERROR SEND LOCAL DATA ', STATICDATA )
+    res.json(STATICDATA)
   }
 };
