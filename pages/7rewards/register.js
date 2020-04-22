@@ -52,9 +52,79 @@ class Register extends React.Component {
     if( !isUserAuth.error && isUserAuth ) {
       this.setState({loggedIn:true})
     }
+    
+    
+    // TODO: REMVOE THIS FORM HERE : 
+    // facebook signin  button render
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    
+
+       // PROD ID 1018851968129793
+       // STAGING ID 219346039373151
+
+      window.fbAsyncInit = () => {
+        FB.init({
+          appId: '1018851968129793', 
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: 'v6.0'
+        });
+
+        FB.Event.subscribe('auth.statusChange', response => {
+          if (response.authResponse) {
+            this.checkLoginState();
+          } else {
+            console.log('[FacebookLoginButton] User cancelled login or did not fully authorize.');
+          }
+        });
+      };
+
+
+
 
   }
   componentDidUpdate() { }
+
+
+  checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      this.statusChangeCallback(response);
+    }.bind(this));
+  }
+
+  login() {
+    FB.login(this.checkLoginState(), {
+      scope: 'email'
+    });
+  }
+
+  statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      // this.logUserIn(response.authResponse.accessToken);
+      this.submitFacebookRequest(response);
+
+    } else if (response.status === 'not_authorized') {
+      console.log("[FacebookLoginButton] Person is logged into Facebook but not your app");
+    } else {
+      console.log("[FacebookLoginButton] Person is not logged into Facebook");
+    }
+  }
+
+  logUserIn(access_token) {
+    FB.api('/me', function(response) {
+      console.log('[FacebookLoginButton] Successful login for: ', response );
+      
+    }.bind(this));
+  }
   
   // Update state value 
   //
@@ -85,6 +155,14 @@ class Register extends React.Component {
     // this.setState({loggedIn:true})
     this.props.userRegisterRequest(payload)
   }
+
+
+  submitFacebookRequest(data) {
+  
+    console.log('DATA ', data )
+   //  this.props.userFacebookRegisterRequest(access_token);
+
+  }
  
   render() {
 
@@ -102,7 +180,7 @@ class Register extends React.Component {
 
             <Row>
               <Col className="text-center">
-                <img className="facebook__btn" src="/static/images/placeholders/facebook-btn.png" />
+                <img className="facebook__btn" src="/static/images/placeholders/facebook-btn.png" onClick={(e) => this.login(e) } />
                 <p className="bottom--margin--20">OR</p>
               </Col>
             </Row>
@@ -252,6 +330,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   userRegisterRequest: (payload) => dispatch(appActions.reqUserRegisterAction(payload)),
+  userFacebookRegisterRequest: payload => dispatch(appActions.reqUserFacebookRegisterAction(payload)),
 })
 
 const UserAuth_ = connect(

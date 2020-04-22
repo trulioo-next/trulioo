@@ -227,7 +227,7 @@ function Page() {
           </Container>
           <Table data={filterSelected} columns={columns} />
           <Container fluid className="px-0">
-          {pageData.acf_data &&
+          { pageData.acf_data.components &&
         pageData.acf_data.components.map((section, sectionKey) => {
           return (
             <SectionMaker

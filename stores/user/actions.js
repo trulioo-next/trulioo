@@ -3,6 +3,7 @@ import {
   SEVEN_REWARDS_REGISTER_REQUEST,
   SEVEN_REWARDS_LOGOUT_REQUEST,
   SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
+  SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -25,9 +26,15 @@ export const reqUserRegisterAction = (payload) => ({
   payload: payload
 })
 
+export const reqUserFacebookRegisterAction = (payload) => ({
+  type: SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
+  payload: payload
+})
+
 export default {
   reqUserAuthAction,
   reqUserRegisterAction,
   reqUserLogoutAction,
-  reqUserFacebookAuthAction
+  reqUserFacebookAuthAction,
+  reqUserFacebookRegisterAction
 }

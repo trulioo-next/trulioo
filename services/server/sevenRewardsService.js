@@ -64,11 +64,27 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
+
+	async function registerFacebookUser(payload) {
+		let data = await API.post('/api/seven-rewards/user-register-fb', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'registerFacebookUser',
+		          message: 'Register Facebook User Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
    return {
     userAuth,
     userAuthFb,
     userAuthAnonymous,
-    registerUser
+    registerUser,
+    registerFacebookUser
    }
 
 }
