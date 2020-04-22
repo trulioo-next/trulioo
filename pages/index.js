@@ -37,24 +37,24 @@ const Home = props => {
  // console.log('waitToRender ::>>  ', waitToRender  )
  // console.log('isLoading ::>>   ',  isLoading )
 
-
+ // { props.data &&
+ //        props.data.acf_data.components.map((section, sectionKey) => {
+ //          return (
+ //            <SectionMaker
+ //              type={section.acf_fc_layout}
+ //              params={section}
+ //              key={sectionKey}
+ //              sectionIndex={sectionKey}
+ //            />
+ //          );
+ //        })}
 
    
   return (
      
     <Layout>
       <Header title="" />
-        { props.data &&
-        props.data.acf_data.components.map((section, sectionKey) => {
-          return (
-            <SectionMaker
-              type={section.acf_fc_layout}
-              params={section}
-              key={sectionKey}
-              sectionIndex={sectionKey}
-            />
-          );
-        })}
+       
 
       
     </Layout>
