@@ -32,29 +32,30 @@ const Home = props => {
   const isLoading = useSelector(state => selectIsLoading(state));
 
   console.log( 'HOME STORE DATA ', props.data )
+  console.log( 'IS LOADING  ', isLoading )
      
  // console.log(' PAGE DATA ::>>   ', props.data )
  // console.log('waitToRender ::>>  ', waitToRender  )
  // console.log('isLoading ::>>   ',  isLoading )
 
- // { props.data &&
- //        props.data.acf_data.components.map((section, sectionKey) => {
- //          return (
- //            <SectionMaker
- //              type={section.acf_fc_layout}
- //              params={section}
- //              key={sectionKey}
- //              sectionIndex={sectionKey}
- //            />
- //          );
- //        })}
+
 
    
   return (
      
     <Layout>
       <Header title="" />
-       
+        { props.data &&
+        props.data.acf_data.components.map((section, sectionKey) => {
+          return (
+            <SectionMaker
+              type={section.acf_fc_layout}
+              params={section}
+              key={sectionKey}
+              sectionIndex={sectionKey}
+            />
+          );
+        })}
 
       
     </Layout>
@@ -64,6 +65,14 @@ const Home = props => {
 
 Home.getInitialProps = async ({ query, res, isServer }) => {
    let data = await API.post('/api/wp-page-data', { payload:'home'} );
+
+   if(!data && data.errno ) {
+      data = {
+        page_date:[], 
+        acf_data:[], 
+        isLoading: false
+      }
+   }
   return { query, data };
 };
 

@@ -59,7 +59,7 @@ const nextConfig = {
   env: {
    ROOT_URL: 'https://dev4.7eleven.ca',
    ENDPOINT_URL: 'https://dev3.7eleven.ca/wp-json',
-   VERSION:'1.0.30', 
+   VERSION:'1.0.32', 
    // ...dotEnvResult,
   },
 };
