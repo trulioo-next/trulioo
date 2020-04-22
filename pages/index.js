@@ -30,8 +30,10 @@ const Home = props => {
  
 
   const isLoading = useSelector(state => selectIsLoading(state));
-    
-  // console.log(' PAGE DATA ::>>   ', props.data )
+
+  // console.log( 'DATA FORM STORE ', props.data )
+     
+ // console.log(' PAGE DATA ::>>   ', props.data )
  // console.log('waitToRender ::>>  ', waitToRender  )
  // console.log('isLoading ::>>   ',  isLoading )
 
