@@ -11,6 +11,12 @@ import { reqPageDataAction } from '../stores/page/actions';
 
 import { pageDataSelector } from '../stores/page/selectors';
 
+
+import {
+  selectIsLoading,
+} from '../stores/app/selectors';
+
+
 const Home = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
@@ -20,20 +26,26 @@ const Home = props => {
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: 'home' }));
   }, []);
+ 
 
+  const isLoading = useSelector(state => selectIsLoading(state));
   const pageData = useSelector(state => pageDataSelector(state));
-  let data = pageData && !pageData.isLoading ? false : pageData.acf_data.components;
-    
- 
-  console.log('HOME PAGE LOADED RELOADED  ', pageData )
+  let waitToRender = false;
 
+  if( pageData.acf_data.length === 0 ) {
+      waitToRender = true;
+  }
  
+ // console.log(' PAGE DATA ::>>   ', pageData )
+ // console.log('waitToRender ::>>  ', waitToRender  )
+ // console.log('isLoading ::>>   ',  isLoading )
+   
   return (
      
     <Layout>
       <Header title="" />
-       {data &&
-        data.map((section, sectionKey) => {
+       { !waitToRender &&
+        pageData.acf_data.components.map((section, sectionKey) => {
           return (
             <SectionMaker
               type={section.acf_fc_layout}

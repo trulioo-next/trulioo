@@ -22,11 +22,14 @@ function* startup(payload) {
     const state = yield select((state) => state)
 
     const dataService = DataService(state)
-    yield put({ type: PAGE_LOADED, payload: {data: [], isLoading: false} })
+    yield put({ type: PAGE_LOADED, payload: { page_data:[], acf_data:[], isLoading: true } })
 
     const response = yield call(dataService.getPageData, payload)
+
+    // console.log('DATA RESPONSE', response )
+      
     // console.log('RESONSE ', response)
-    yield put({ type: PAGE_LOADED, payload: response })
+    yield put({ type: PAGE_LOADED, payload: response  })
 
   } catch(err) {
 

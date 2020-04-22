@@ -42,7 +42,6 @@ export default (state = INITIAL_STATE, action) => {
 
     case GLOBAL_DATA_LOADED:
       return { ...state,
-        isLoading: false,
         isLoaded: true,
         globalData: action.payload
       }

@@ -19,18 +19,31 @@ const links = linkData.map(link => {
  
 const NavList = props => {
   let navIndex = props.i;
+   
+  let row = "";
+  if( props.items ) {
+   row = props.items.map((href, as, label,key) => {
+    let exnernalPath = href.href.split('://');
+      if (exnernalPath[0] === 'https' || exnernalPath[0] === 'http') {
+        return  <li
+            key={`footer-nav-${navIndex}-item-${href.href}`}
+            className="SiteFooter__item"
+          ><a className="SiteFooter__link">{href.label}</a> </li>;
+      }
+      return  <li
+            key={`footer-nav-${navIndex}-item-${href.href}`}
+            className="SiteFooter__item"
+          >
+            <Link href={href.href}>
+              <a className="SiteFooter__link">{href.label}</a>
+            </Link>
+          </li>;
+    });
+  }
+
   return (
     <ul className="SiteFooter__links">
-      {props.items.map(({ href, as, label }, index) => (
-        <li
-          key={`footer-nav-${navIndex}-item-${index}`}
-          className="SiteFooter__item"
-        >
-          <Link href={href} as={as}>
-            <a className="SiteFooter__link">{label}</a>
-          </Link>
-        </li>
-      ))}
+      { row }
     </ul>
   );
 };

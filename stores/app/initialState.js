@@ -5,7 +5,7 @@
  */
 export const INITIAL_STATE = {
   stateVersion: null,
-  isLoading: false,
+  isLoading: true,
   isLoaded: false,
   error: null,
   errorSource: null,

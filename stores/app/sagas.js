@@ -51,14 +51,14 @@ function* startupFlow() {
       APP_STARTUP_REQUEST
    ])
 
-    yield put({ type: APP_STARTLOADING })
+    // yield put({ type: APP_STARTLOADING })
 
     if (action.type === APP_STARTUP_REQUEST) {
       yield call(startup, action.payload)
     }
 
 
-    yield put({ type: APP_STOPLOADING })
+    // yield put({ type: APP_STOPLOADING })
  
     yield action
   }
