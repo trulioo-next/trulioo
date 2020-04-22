@@ -11,6 +11,7 @@ import { pageDataSelector } from '../stores/page/selectors';
 
 
 import API from '../utils/api'
+import STATICDATA from '../data/home.json'
 
 
 import {
@@ -30,17 +31,13 @@ const Home = props => {
  
 
   const isLoading = useSelector(state => selectIsLoading(state));
-
   console.log( 'HOME STORE DATA ', props.data )
-  console.log( 'IS LOADING  ', isLoading )
+  // console.log( 'IS LOADING  ', isLoading )
      
  // console.log(' PAGE DATA ::>>   ', props.data )
  // console.log('waitToRender ::>>  ', waitToRender  )
  // console.log('isLoading ::>>   ',  isLoading )
-
-
-
-   
+ 
   return (
      
     <Layout>
@@ -67,11 +64,8 @@ Home.getInitialProps = async ({ query, res, isServer }) => {
    let data = await API.post('/api/wp-page-data', { payload:'home'} );
 
    if(!data && data.errno ) {
-      data = {
-        page_date:[], 
-        acf_data:[], 
-        isLoading: false
-      }
+
+      data = STATICDATA;
    }
   return { query, data };
 };
