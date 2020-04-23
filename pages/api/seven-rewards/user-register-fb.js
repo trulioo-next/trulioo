@@ -17,8 +17,6 @@ export default async (req, res) => {
     // console.log('REGITERS TOKEN ', registerHeaders )
     // let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
     let payload = {
-        "client_id": '8spmO1OlYWRl2q33FSDSFm2gqQ6O2MgebQ4D8xwp',
-        "client_secret": 'C3BrydLGlg6evoRKuVcgLfN1DagmAm6tD5QNzet4uclBP3QLjcQ0kHbzWxOGfY5mHBCXb2Ce05XVpH5ZT5yVzLrueU7BhBQ0D5EHxfUzREDCl4lXQy9S1UsqWr60jv89',
         "access_token":body.body.token,
         "provider": "facebook",
         "first_name": body.body.response.first_name,
@@ -58,7 +56,8 @@ export default async (req, res) => {
      return
   } catch(error) {
     console.log('ERROR ', error )
-    res.json({error: error })
+    const body = JSON.parse(req.body)
+    res.json({error: error, body })
     // res.status(400).send({ error: error })
   }
 };
