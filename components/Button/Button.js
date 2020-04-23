@@ -13,16 +13,14 @@ const Button = ({ as, href, className, children, outlined, ...props }) => {
   );
 
   if (href) {
-    
     let exnernalPath = href.split('://');
     if (exnernalPath[0] === 'https' || exnernalPath[0] === 'http') {
       return (
         <a {...props} className={ButtonClasses}>
-        {children}
+          {children}
         </a>
       );
     }
-
     return (
       <Link href={href} as={ href }>
         <a className={ButtonClasses}>{children}</a>
