@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 import Button from '@/components/Button';
 import Video from '@/components/Video';
+import Modal from '@/components/Modal';
 
 import './SectionCallToAction.scss';
 
@@ -118,7 +119,7 @@ const SectionBody = props => {
       {data.ctas && (
         <div className="Section__actions">
           {data.ctas.map((data, i) => (
-            <SectionCTA data={data.item} i={i} key={`cta-${i}`} />
+            <SectionCTA data={data.item} modal={false} i={i} key={`cta-${i}`} />
           ))}
         </div>
       )}
