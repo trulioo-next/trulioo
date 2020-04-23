@@ -1,6 +1,6 @@
 {
   "name": "IdealRebel",
-  "version": "1.0.35",
+  "version": "1.0.37",
   "private": true,
   "scripts": {
     "dev": "next -p 8000",
