@@ -171,7 +171,7 @@ class MyAccount extends React.Component {
       token:access_token,
       response:response
     }
-    // this.props.userFacebookRegisterRequest(payload);
+    this.props.userFacebookRegisterRequest(payload);
 
   }
  

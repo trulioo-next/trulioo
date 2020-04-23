@@ -13,23 +13,21 @@ export default async (req, res) => {
 
     // EAAOeoZCWjmwEBAP6atZBLS3fTNteeQtPg1bPjaLulVnfkKP08T3ZA9vK7oRjTt49MexblNGWkTxPzUh3PAo25iFImHB3xfu0ozbUTTT1tiESlZC0Ig1q3y0zGUZBg87vT7Kqka9QFEFHT66OCahEZARu4OphMBDAJZAc103q3ZCzLzZBXcn8cN5tc7hmtHFunFnhHcKYetcPsAQZDZD
     
-
-     
+ 
     const registerHeaders = { 
       "Content-Type": "application/json"
     };
 
     // console.log('REGITERS TOKEN ', registerHeaders )
-    let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
+    // let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
     let payload = {
-        "access_token":"EAAOeoZCWjmwEBAP6atZBLS3fTNteeQtPg1bPjaLulVnfkKP08T3ZA9vK7oRjTt49MexblNGWkTxPzUh3PAo25iFImHB3xfu0ozbUTTT1tiESlZC0Ig1q3y0zGUZBg87vT7Kqka9QFEFHT66OCahEZARu4OphMBDAJZAc103q3ZCzLzZBXcn8cN5tc7hmtHFunFnhHcKYetcPsAQZDZD",
+        "access_token":body.body.token,
         "provider": "facebook",
-
-        "first_name": body.body.firstName,
-        "last_name": body.body.lastName,
-        "birthdate": birthdate,  
+        "first_name": 'Rob',
+        "last_name": 'Thiessen',
+        "birthdate": '1978-05-28',  
         "country": "CA",  
-        "mobile_number": body.body.phone,  
+        "mobile_number": '4166716261',  
         "accepts_us_terms":false,
         "accepts_ca_terms":true,
         "accepts_ca_communications":false  
@@ -53,8 +51,8 @@ export default async (req, res) => {
       
     let userAuthToken = {
       isAuth: true,
-      token: userToken.access_token,
-      expire:userToken.expires_in
+      token: '',
+      expire:''
     }
 
  
