@@ -103,7 +103,8 @@ class MyAccount extends React.Component {
 
   login() {
     FB.login(this.checkLoginState(), {
-      scope: 'public_profile,email'
+      scope: 'public_profile,email',
+      return_scopes: true
     });
   }
 
