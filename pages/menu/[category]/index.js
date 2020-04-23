@@ -43,6 +43,8 @@ const Category = props => {
     }
   }
 
+  // console.log('SELECTED ', selected );
+
   let headerTitle = 'Menu | ' + selected.name;
   let pageTitle = selected && selected.name ? selected.name : '';
   let defaultImage = selected && selected.image && selected.image.url ? selected.image.url : '/static/images/placeholders/Pizza_Hero.jpg';

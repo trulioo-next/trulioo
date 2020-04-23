@@ -59,7 +59,7 @@ function* facebookUserAuth(payload) {
   } catch(err) {
 
     const errors = err.payload || err
-    yield put({ type:SEVEN_REWARDS_AUTH_ERROR, payload: err})
+    yield put({ type:SEVEN_REWARDS_AUTH_ERROR, payload: errors})
   }
 }
 

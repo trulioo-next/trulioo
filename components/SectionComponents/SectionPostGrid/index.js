@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import {  useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
+
+
+import { nutritionalsDataSelector } from '@/stores/nutritionals/selectors';
+
 
 const SectionPostGrid = props => {
   let { posts, category, defaultImage } = props;
@@ -9,8 +14,23 @@ const SectionPostGrid = props => {
   if(count > 4 ) {
     count = 4;
   }
+  
 
-  console.log('POSTS ', posts )
+  let displayTitle = '';
+
+  // console.log('POSTS  props ', props )
+
+  function getDisplayTitle(category,slug,title) {
+    const displayTitle = useSelector(state => nutritionalsDataSelector(state, category,slug ));
+    let defaultTitle = title;
+    if(displayTitle.nutritionals) {
+      if(displayTitle.nutritionals.display_title) {
+          defaultTitle = displayTitle.nutritionals.display_title
+      }
+    }
+ 
+    return defaultTitle;
+  }
 
   return (
     <section className="Section">
@@ -20,7 +40,7 @@ const SectionPostGrid = props => {
             posts.map((post, sectionKey) => (
               <MediaObjectCard
                 key={sectionKey}
-                title={post.title}
+                title={getDisplayTitle(category,post.slug, post.title)}
                 image={
                   post.photos
                     ? post.photos[0].url
