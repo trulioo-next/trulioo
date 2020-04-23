@@ -1,0 +1,109 @@
+.rewards-wrapper {
+    background-color:#157f63;
+    max-width:760px;
+    margin:0 auto;
+    border-radius:6px;
+    padding:1rem;
+
+    & .nav {
+        justify-content: space-around;
+    }
+
+    & .nav-tabs {
+        border:none;
+        margin:5px 0 20px;
+    }
+
+    & .nav-tabs .nav-link {
+        border:none;
+        color:white;
+        position: relative;
+    }
+
+    & .nav-tabs .nav-link::after {
+        content:"";
+        width:85%;
+        height:4px;
+        background-color:white;
+        position: absolute;
+        left:0;
+        right:0;
+        margin:0 auto;
+        bottom:0;
+        transform:scaleX(0);
+        transition:all 0.3s;
+        transform-origin: center;
+    }
+
+    & .nav-tabs .nav-link.active::after {
+        transform:scaleX(1);
+    }
+
+    & .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        background-color:transparent;
+    }
+}
+
+
+
+.rewards-menu-tabs {
+    
+    border-radius:6px;    
+
+    & .nav-link {
+        padding:1.5rem 1rem 0; 
+    }
+
+    & .nav-tabs .nav-link::after {
+        content:"";
+        width:80%;
+        height:3px;
+        background-color:white;
+        position: absolute;
+        left:0;
+        right:0;
+        margin:0 auto;
+        bottom:0;
+        transform:scaleX(0);
+        transition:all 0.3s;
+        transform-origin: center;
+    }
+
+    & .tab-pane .container {
+        padding:0 2rem;
+    }
+
+    & .tab-pane .col {
+        padding:5px 3px;
+    }
+
+    & .tab-pane .col div {
+        background-color:white;
+        border-radius:4px;
+        padding:5px;
+    }
+
+    &.tab1 {
+        background-color: #eb711b;
+    }
+
+    &.tab2 {
+        background-color: transparent;
+    }
+
+    &.tab3 {
+        background-color: #e92a28;
+    }
+
+    &.tab4 {
+        background-color: #187db7;
+    }
+
+    &.tab5 {
+        background-color: #8a2f7c;
+    }
+
+    &.tab6 {
+        background-color: #504988;
+    }
+}
