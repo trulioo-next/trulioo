@@ -208,7 +208,8 @@ const Product = props => {
     nutritionalsDataSelector(state, category, product),
   );
 
-  // console.log(' categoryData :: ',  categoryData  )
+  console.log(' categoryData :: ',  categoryData  )
+  console.log(' product :: ',  product  )
 
   let { related } = categoryData;
   let relatedData = [];
