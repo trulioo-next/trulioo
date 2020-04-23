@@ -172,7 +172,7 @@ class MyAccount extends React.Component {
       response:response
     }
  
-    // this.props.userFacebookRegisterRequest(payload);
+    this.props.userFacebookRegisterRequest(payload);
 
   }
  

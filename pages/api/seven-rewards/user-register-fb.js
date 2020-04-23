@@ -9,11 +9,7 @@ export default async (req, res) => {
   try {
 
     const body = JSON.parse(req.body)
-    
-
-    // EAAOeoZCWjmwEBAP6atZBLS3fTNteeQtPg1bPjaLulVnfkKP08T3ZA9vK7oRjTt49MexblNGWkTxPzUh3PAo25iFImHB3xfu0ozbUTTT1tiESlZC0Ig1q3y0zGUZBg87vT7Kqka9QFEFHT66OCahEZARu4OphMBDAJZAc103q3ZCzLzZBXcn8cN5tc7hmtHFunFnhHcKYetcPsAQZDZD
-    
- 
+     
     const registerHeaders = { 
       "Content-Type": "application/json"
     };
@@ -23,8 +19,8 @@ export default async (req, res) => {
     let payload = {
         "access_token":body.body.token,
         "provider": "facebook",
-        "first_name": 'Rob',
-        "last_name": 'Thiessen',
+        "first_name": body.body.response.first_name,
+        "last_name": body.body.response.last_name,
         "birthdate": '1978-05-28',  
         "country": "CA",  
         "mobile_number": '4166716261',  
