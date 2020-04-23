@@ -113,8 +113,8 @@ class MyAccount extends React.Component {
     if (response.status === 'connected') {
 
       console.log('TOKEN  , ', response.authResponse.accessToken )
-      // this.logUserIn(response.authResponse.accessToken);
-      this.submitFacebookRequest(response.authResponse.accessToken,response);
+      this.logUserIn(response.authResponse.accessToken);
+      // this.submitFacebookRequest(response.authResponse.accessToken,response);
       
 
     } else if (response.status === 'not_authorized') {
