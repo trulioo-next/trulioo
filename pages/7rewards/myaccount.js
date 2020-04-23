@@ -126,7 +126,7 @@ class MyAccount extends React.Component {
   }
 
   logUserIn(access_token) {
-    FB.api('/me', function(response) {
+    FB.api('/me', {fields: 'first_name,last_name,email,birthday'}, function(response) {
       console.log('[FacebookLoginButton] Successful login for: ', response );
       this.submitFacebookRequest(access_token,response);
     }.bind(this));
@@ -163,21 +163,15 @@ class MyAccount extends React.Component {
   }
 
 
-  submitFacebookRequest(access_token,res) {
+  submitFacebookRequest(access_token,response) {
   
-    // console.log('access_token ', access_token )
-    // console.log('response ', response )
+    console.log('access_token ', access_token )
+    console.log('rresponse ', response )
     let payload = {
       token:access_token,
-      response:res
+      response:response
     }
-
-    FB.api('/me', {fields: 'first_name,last_name,email,birthday'}, function(response) {
-          console.log('ME RESPONSE  ', response )
-
-    }.bind(this));  
-
-
+ 
     // this.props.userFacebookRegisterRequest(payload);
 
   }
