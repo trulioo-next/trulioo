@@ -103,7 +103,7 @@ class MyAccount extends React.Component {
 
   login() {
     FB.login(this.checkLoginState(), {
-      scope: 'email'
+      scope: 'public_profile'
     });
   }
 
@@ -166,7 +166,11 @@ class MyAccount extends React.Component {
   
     console.log('access_token ', access_token )
     console.log('response ', response )
-   //  this.props.userFacebookRegisterRequest(access_token);
+    let payload = {
+      token:access_token,
+      response:response
+    }
+    // this.props.userFacebookRegisterRequest(payload);
 
   }
  
