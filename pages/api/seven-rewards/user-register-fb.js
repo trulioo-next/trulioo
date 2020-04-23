@@ -16,8 +16,8 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-        "client_id": '8spmO1OlYWRl2q33FSDSFm2gqQ6O2MgebQ4D8xwp',
-        "client_secret": 'C3BrydLGlg6evoRKuVcgLfN1DagmAm6tD5QNzet4uclBP3QLjcQ0kHbzWxOGfY5mHBCXb2Ce05XVpH5ZT5yVzLrueU7BhBQ0D5EHxfUzREDCl4lXQy9S1UsqWr60jv89',
+        "client_id": '6gMB2gr2UT8rnUUeQ3uO8Ny4DFveMMe8PhjTd6Mt',
+        "client_secret": 'oSLvmQEdqzN3dW4fcFewo7XQqMNT8ncuO8nP703GL03WlOPh3zq3dezHYaPATXK4zvTqrzBQFjYzmqs8YwuOTJHlXXnBAquQ9O3YcsPv1WZf7I8NkVQBjkUuoHWqwK0G',
         "grant_type": "client_credentials"
         
       }) 
