@@ -9,9 +9,29 @@ export default async (req, res) => {
   try {
 
     const body = JSON.parse(req.body)
-     
-    const registerHeaders = { 
-      "Content-Type": "application/json"
+     const headers = { "Content-Type": "application/json" };
+    
+     const userToken = await fetch(REWARDS_API_URL+'/auth/token',
+     {
+       method: 'POST',
+       headers: headers,
+       body: JSON.stringify({
+        "client_id": '8spmO1OlYWRl2q33FSDSFm2gqQ6O2MgebQ4D8xwp',
+        "client_secret": 'C3BrydLGlg6evoRKuVcgLfN1DagmAm6tD5QNzet4uclBP3QLjcQ0kHbzWxOGfY5mHBCXb2Ce05XVpH5ZT5yVzLrueU7BhBQ0D5EHxfUzREDCl4lXQy9S1UsqWr60jv89',
+        "grant_type": "client_credentials"
+        
+      }) 
+     });
+
+
+     if(!userToken || userToken.error) {
+       res.json({error:userToken.error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false  })
+    }
+ 
+     const authHeaders = { 
+      "Content-Type": "application/json",
+      "Authorization":`Bearer ${userToken.access_token}`,
+      "X-SEI-TZ": '-04:00'
     };
 
     // console.log('REGITERS TOKEN ', registerHeaders )
@@ -23,21 +43,19 @@ export default async (req, res) => {
         "last_name": body.body.response.last_name,
         "birthdate": '1978-05-28',  
         "country": "CA",  
-        "mobile_number": '4166716261',  
+        "mobile_number": '1111111111',  
         "accepts_us_terms":false,
         "accepts_ca_terms":true,
         "accepts_ca_communications":false  
     }
 
-    //
-    console.log('PAYLOAD BODY EMAIL ',  payload )
-
+    
     // // Get an Access Token
     // //
     const userRegister = await fetch(REWARDS_API_URL+'/v4/users',
      {
        method: 'POST',
-       headers: registerHeaders,
+       headers: authHeaders,
        body: JSON.stringify(payload)
      });
     
@@ -57,7 +75,7 @@ export default async (req, res) => {
   } catch(error) {
     console.log('ERROR ', error )
     const body = JSON.parse(req.body)
-     
+
     res.json({error: error, body:body })
     // res.status(400).send({ error: error })
   }
