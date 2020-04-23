@@ -103,14 +103,18 @@ class MyAccount extends React.Component {
 
   login() {
     FB.login(this.checkLoginState(), {
-      scope: 'email,user_birthday',
-      return_scopes: true
+      scope: 'email'
     });
   }
 
   statusChangeCallback(response) {
+
+    console.log('FACEBOOK RESPONSE , ', response )
     if (response.status === 'connected') {
-      this.logUserIn(response.authResponse.accessToken);
+
+      console.log('TOKEN  , ', response.authResponse.accessToken )
+      // this.logUserIn(response.authResponse.accessToken);
+      this.submitFacebookRequest(response.authResponse.accessToken,response);
       
 
     } else if (response.status === 'not_authorized') {
