@@ -57,7 +57,8 @@ export default async (req, res) => {
   } catch(error) {
     console.log('ERROR ', error )
     const body = JSON.parse(req.body)
-    res.json({error: error, body })
+     
+    res.json({error: error, body:body })
     // res.status(400).send({ error: error })
   }
 };
