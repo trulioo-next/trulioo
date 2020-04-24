@@ -8,7 +8,7 @@ import appSelectors from '../../stores/user/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
 import * as Yup from 'yup';
-
+import routerPush from '../../helpers/routerPush';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -48,9 +48,9 @@ class MyAccount extends React.Component {
 
   componentDidMount() {
 
-    let isUserAuth = this.props.user.auth
-    if( !isUserAuth.error && isUserAuth ) {
-      this.setState({loggedIn:true})
+    let isUserAuth = this.props.user ? this.props.user.auth : false;
+    if (!this.props.user.error && isUserAuth) {
+      routerPush('/account');
     }
     
     
@@ -92,7 +92,16 @@ class MyAccount extends React.Component {
 
 
   }
-  componentDidUpdate() { }
+  componentDidUpdate() { 
+
+     // Check if user authenticated 
+     //
+    let isUserAuth = this.props.user ? this.props.user.auth : false;
+    if (!this.props.user.error && isUserAuth) {
+       
+      routerPush('/account');
+    }
+  }
 
 
   checkLoginState() {

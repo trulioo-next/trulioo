@@ -3,7 +3,6 @@ const REWARDS_API_URL = "https://api-test.7-eleven.com";
 // https://api-test.7-eleven.com 
 // https://api-stage.7-eleven.com
 
-
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
  
@@ -18,8 +17,8 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-        "client_id": '6gMB2gr2UT8rnUUeQ3uO8Ny4DFveMMe8PhjTd6Mt',
-        "client_secret": 'oSLvmQEdqzN3dW4fcFewo7XQqMNT8ncuO8nP703GL03WlOPh3zq3dezHYaPATXK4zvTqrzBQFjYzmqs8YwuOTJHlXXnBAquQ9O3YcsPv1WZf7I8NkVQBjkUuoHWqwK0G',
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
         "grant_type": "client_credentials"
         
       }) 
