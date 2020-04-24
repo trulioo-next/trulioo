@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Toolbar from './Toolbar';
@@ -7,6 +8,9 @@ import SubNav from './SubNav';
 import LocationIcon from '@/static/images/location.svg';
 import AccountIcon from '@/static/images/account.svg';
 import CaretIcon from '@/static/images/caret-down.svg';
+
+import { userDataSelector } from '@/stores/user/selectors';
+
 
 const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   const isOpen = i === expanded;
@@ -64,6 +68,10 @@ const PrimaryNav = data => {
     LINKS = data.data.data;
   }
 
+  const userData = useSelector(state => userDataSelector(state));
+  console.log('USER DATA ', userData )
+  let userAccount = userData && userData.auth.isAuth ? `${userData.user.rewards_points} PTS` : 'Account';
+
   return (
     <>
       {LINKS && (
@@ -94,7 +102,7 @@ const PrimaryNav = data => {
               <Toolbar.Icon>
                 <AccountIcon />
               </Toolbar.Icon>
-              <Toolbar.Label>Account</Toolbar.Label>
+              <Toolbar.Label>{ userAccount }</Toolbar.Label>
             </Toolbar.Item>
             <Toolbar.Search
               i={searchIndex}
