@@ -43,7 +43,7 @@ const Category = props => {
     }
   }
 
-  // console.log('SELECTED ', selected );
+  console.log('SELECTED ', selected );
 
   let headerTitle = 'Menu | ' + selected.name;
   let pageTitle = selected && selected.name ? selected.name : '';
