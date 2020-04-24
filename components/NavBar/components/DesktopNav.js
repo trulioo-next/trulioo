@@ -61,15 +61,11 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
 const PrimaryNav = data => {
   const [expanded, setExpanded] = useState(false);
   var searchIndex = 0;
-
   let LINKS = false;
-
   if (data && data.data && data.data.data) {
     LINKS = data.data.data;
   }
-
   const userData = useSelector(state => userDataSelector(state));
-  console.log('USER DATA ', userData )
   let userAccount = userData && userData.auth.isAuth ? `${userData.user.rewards_points} PTS` : 'Account';
 
   return (
