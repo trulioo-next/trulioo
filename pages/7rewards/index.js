@@ -5,7 +5,6 @@ import Header from '../../components/Header/Header'
 import Button from '@/components/Button';
 import appActions from '../../stores/user/actions'
 import appSelectors from '../../stores/user/selectors'
-import Hero from '@/components/Hero';
 import { css, jsx } from "@emotion/core";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -16,7 +15,8 @@ import Tab from 'react-bootstrap/Tab'
 import '../login/LoginScreen.scss';
 import './SevenRewards.scss';
 
-import { ListItemReward, ListItemCoupon, ListItemOffer } from '../../components/7rewards'
+import { ListItemReward, ListItemCoupon, ListItemOffer } from '../../components/7rewards/blocks/items'
+import { RewardsGraph } from '../../components/7rewards'
 
 class SevenRewards extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class SevenRewards extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
-      key: 'home',
+      key: 'rewards',
       rewardsKey: 'tab1'
     }
   }
@@ -51,8 +51,6 @@ class SevenRewards extends React.Component {
     return (
       <Layout>
         <Header title="7 Rewards" />
-        {/* <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
-        </Hero> */}
         <Container className="container mt-5 mb-5">
           <Row>
             <Col className="rewards-wrapper">
@@ -61,7 +59,7 @@ class SevenRewards extends React.Component {
                 activeKey={this.state.key}
                 onSelect={key => this.setState({ key })}
               >
-                <Tab eventKey="home" title="Rewards Menu" className={`rewards-menu-tabs ${this.state.rewardsKey}`}>
+                <Tab eventKey="rewards" title="Rewards Menu" className={`rewards-menu-tabs ${this.state.rewardsKey}`}>
                   <Tabs
                     id="rewards-menu-tabs"
                     activeKey={this.state.rewardsKey}
@@ -148,7 +146,7 @@ class SevenRewards extends React.Component {
                     </Tab>
                   </Tabs>
                 </Tab>
-                <Tab eventKey="profile" title="Bonus Offers">
+                <Tab eventKey="bonus-offers" title="Bonus Offers">
                   <Container>
                     <Row>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
@@ -166,7 +164,7 @@ class SevenRewards extends React.Component {
                     </Row>
                   </Container>
                 </Tab>
-                <Tab eventKey="contact" title="Coupons">
+                <Tab eventKey="coupons" title="Coupons">
                   <Container>
                     <Row>
                       <Col className="col d-flex justify-content-center mb-3">
@@ -189,7 +187,7 @@ class SevenRewards extends React.Component {
                     </Row>
                   </Container>
                 </Tab>
-                <Tab className="my-rewards-tab" eventKey="my-rewards" title="My Rewards">
+                <Tab eventKey="my-rewards" className="my-rewards-tab" title="My Rewards">
                   <Container className="pb-2">
                     <Row>
                       <Col className="col d-flex justify-content-start align-items-center" lg="6" md="6" sm="12" xs="12">
@@ -233,10 +231,10 @@ class SevenRewards extends React.Component {
                     </Row>
                     <Row className="coupons-row">
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>1</div>
+                        <ListItemCoupon />
                       </Col>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>2</div>
+                        <ListItemCoupon />
                       </Col>
                     </Row>
                   </Container>
