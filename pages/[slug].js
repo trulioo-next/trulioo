@@ -34,7 +34,7 @@ const Page = props => {
       return false;
     }
 
-    const attempt = (function(a) { return function(a) { attemptScrollToAnchor(a); }})(anchor);
+    const attempt = (function(a) { return function() { attemptScrollToAnchor(a); }})(anchor);
     setTimeout(attempt, 100);
   }
 
