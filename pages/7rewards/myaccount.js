@@ -41,7 +41,7 @@ class MyAccount extends React.Component {
       valid:false,
       isLoading:false,
       loggedIn:false,
-      modalVisible:true,
+      modalVisible:false,
       facebookPayload:false
     }
   }
