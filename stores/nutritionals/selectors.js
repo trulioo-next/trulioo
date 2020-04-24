@@ -42,7 +42,10 @@
     if(menuItems) {
     	for(var i =0; i < menuItems.length; i++ ) {
     		if(menuItems[i].terms && menuItems[i].terms[0] ) {
-	    		if(menuItems[i].terms[0].slug === category && menuItems[i].slug === slug ) {
+
+	    		if(  menuItems[i].slug === slug ) {
+
+	    			console.log('FOUND DATA  ', menuItems[i] )
 					data = menuItems[i];
 				}
     		}
