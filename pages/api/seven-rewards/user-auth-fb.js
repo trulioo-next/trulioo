@@ -47,7 +47,7 @@ export default async (req, res) => {
  
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:body  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:req.body  })
     // res.status(400).send({ error: error })
   }
 };
