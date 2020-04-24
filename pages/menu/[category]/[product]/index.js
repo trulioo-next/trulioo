@@ -196,7 +196,7 @@ const Product = props => {
 
   let { category, product } = props.query;
 
-  console.log('QUERY ', props.query )
+  // console.log('QUERY ', props.query )
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqNutritionalsAction({}));
@@ -208,8 +208,8 @@ const Product = props => {
     nutritionalsDataSelector(state, category, product),
   );
 
-  console.log(' categoryData :: ',  categoryData  )
-  console.log(' product :: ',  product  )
+  // console.log(' categoryData :: ',  categoryData  )
+  // console.log(' product :: ',  product  )
 
   let { related } = categoryData;
   let relatedData = [];
