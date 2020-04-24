@@ -16,6 +16,8 @@ import Tab from 'react-bootstrap/Tab'
 import '../login/LoginScreen.scss';
 import './SevenRewards.scss';
 
+import { ListItemReward, ListItemCoupon, ListItemOffer } from '../../components/7rewards'
+
 class SevenRewards extends React.Component {
   constructor(props) {
     super(props)
@@ -68,16 +70,18 @@ class SevenRewards extends React.Component {
                       <Container>
                         <Row>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>1</div>
+                            <div>
+                              <ListItemReward />
+                            </div>
                           </Col>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>2</div>
+                            <ListItemReward />
                           </Col>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>3</div>
+                            <ListItemReward />
                           </Col>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>4</div>
+                            <ListItemReward />
                           </Col>
                         </Row>
                       </Container>
@@ -86,10 +90,10 @@ class SevenRewards extends React.Component {
                       <Container>
                         <Row>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>1</div>
+                            <ListItemReward />
                           </Col>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>2</div>
+                            <ListItemReward />
                           </Col>
                         </Row>
                       </Container>
@@ -98,39 +102,66 @@ class SevenRewards extends React.Component {
                       <Container>
                         <Row>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>1</div>
+                            <ListItemReward />
                           </Col>
                           <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>2</div>
+                            <ListItemReward />
                           </Col>
                         </Row>
                       </Container>
                     </Tab>
                     <Tab eventKey="tab4" title="2750 Points">
-                      Content for 2750 points here
-				            </Tab>
+                      <Container>
+                        <Row>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemReward />
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemReward />
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Tab>
                     <Tab eventKey="tab5" title="4000 Points">
-                      Content for 4000 points here
-				            </Tab>
+                      <Container>
+                        <Row>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemReward />
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemReward />
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Tab>
                     <Tab eventKey="tab6" title="6000 Points">
-                      Content for 6000 points here
-				            </Tab>
+                      <Container>
+                        <Row>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemReward />
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemReward />
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Tab>
                   </Tabs>
                 </Tab>
                 <Tab eventKey="profile" title="Bonus Offers">
                   <Container>
                     <Row>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>1</div>
+                        <ListItemOffer />
                       </Col>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>2</div>
+                        <ListItemOffer />
                       </Col>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>3</div>
+                        <ListItemOffer />
                       </Col>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>4</div>
+                        <ListItemOffer />
                       </Col>
                     </Row>
                   </Container>
@@ -150,10 +181,10 @@ class SevenRewards extends React.Component {
                     </Row>
                     <Row>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>1</div>
+                        <ListItemCoupon />
                       </Col>
                       <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <div>2</div>
+                        <ListItemCoupon />
                       </Col>
                     </Row>
                   </Container>

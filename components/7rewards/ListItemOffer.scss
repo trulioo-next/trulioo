@@ -1,0 +1,56 @@
+.list-item {
+
+    &.offer-item .item-card {
+        display: flex;
+        align-items: center;   
+        flex-direction: row;  
+
+        & > .item-image {
+            margin:0 1rem 0 0;
+        }
+    }
+
+    &.offer-item .item-card .item-content {
+        display: flex;
+        flex-direction: column;  
+        align-self: baseline;
+
+        & > .item-value {
+            margin-top: 7px;
+            max-height: 24px;
+            font-family: 'Lab Grotesque';
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.2em;
+            text-transform: uppercase;
+            color: #311847;
+            overflow: hidden;
+            margin:5px 0 5px;
+        }
+
+        & > .item-description {
+            color: #565656;
+            height: 72px;
+            line-height: 18px;
+            overflow: hidden;
+            font-size:14px;
+        }
+
+        & > .item-expiry {
+            position: absolute;
+            bottom: 10px;
+            font-size:14px;
+        }
+    }
+
+    &.offer-item .item-card .item-image  {
+        margin: 0 1rem 0 0;
+        flex-shrink: 0;
+
+        & > img {
+            align-self: center;
+        }
+    }
+
+
+}
