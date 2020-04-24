@@ -23,9 +23,9 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-       "client_id": CLIENT_ID,
-       "client_secret": CLIENT_SECRET,
-       "provider": "facebook", 
+       "client_id": CLIENT_ID_ANNO,
+       "client_secret": CLIENT_SECRET_ANNO,
+       "provider": "facebook",
        'access_token':body.body
       }) 
      });
