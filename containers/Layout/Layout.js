@@ -10,6 +10,7 @@ import Error from 'next/error';
 
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
+import CookiesBanner from '@/components/CookiesBanner';
 import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 
@@ -48,23 +49,25 @@ const Layout = props => {
   // console.log('HEADER DATA ', headerData )
 
   return (
-    <div className="Layout">
-         <Header
-           title="7 Eleven"
-            description="Page MetaData here"
-            canonical="http://7-eleven.ca"
-         />
-         { headerData &&
-            <NavBar data={headerData} user={userData} />
-          }
+    <React.Fragment>
+      <div className="Layout">
+        <Header
+          title="7 Eleven"
+          description="Page MetaData here"
+          canonical="http://7-eleven.ca"
+        />
+        { headerData &&
+          <NavBar data={headerData} user={userData} />
+        }
 
-         <main className="SiteMain">
-           {isLoading && <Loader />}
-           {props.children}
-         </main>
-
-         <Footer />
+        <main className="SiteMain">
+          {isLoading && <Loader />}
+          {props.children}
+        </main>
+        <Footer />
       </div>
+      <CookiesBanner />
+    </React.Fragment>
   );
 };
 

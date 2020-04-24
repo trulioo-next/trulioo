@@ -18,9 +18,28 @@ const Page = props => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: props.query.slug }));
+
+    if(window.location.hash)
+    { scrollToAnchor(window.location.hash.replace('#', ''))
+    }
   }, []);
 
    
+  function scrollToAnchor(anchor)
+  { const attempt = (function(a) { attemptScrollToAnchor(a); })(anchor);
+    setTimeout(attempt, 100);
+  }
+
+  function attemptScrollToAnchor(anchor)
+  { const a = document.querySelector("a[name='" + anchor + "']");
+    if (a)
+    { a.scrollIntoView({behavior: "smooth", block: "start"});
+      return true;
+    }
+    scrollToAnchor(anchor);
+  }
+
+
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
 
