@@ -12,7 +12,7 @@ const REWARDS_API_URL = "https://api.7-eleven.com";
  
 export default function Rewards() {
 
-  async function getUserRewards(access_token) {
+  async function getUserRewards(access_token, expires_in) {
      //
     const authHeaders = { 
       "Content-Type": "application/json",
@@ -20,9 +20,14 @@ export default function Rewards() {
       "X-SEI-TZ": '-04:00'
 
     };
+ 
+    // console.log('USER ACCESS TOKNE ', access_token )
 
-
-    console.log('USER ACCESS TOKNE ', access_token )
+    let userAuth = {
+      isAuth: true,
+      token: access_token,
+      expire:expires_in
+    }
 
     // User Full Profile 
     // /v4/users/me/?profile=full
@@ -72,7 +77,7 @@ export default function Rewards() {
     // console.log('REWARDS ', rewards )
     // console.log('USER ACCESS TOKEN :: ', user )   
  
-     return {user:fullProfile, rewards, auth:user, coupons, deals, promotions, error:false  }
+     return {user:fullProfile, rewards, auth:userAuth, coupons, deals, promotions, error:false  }
   }
  
    return {

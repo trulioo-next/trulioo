@@ -12,6 +12,7 @@ import routerPush from '../../helpers/routerPush';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ModalWindow from '@/components/Modal';
 
 import './RegisterScreen.scss';
 
@@ -23,6 +24,7 @@ class MyAccount extends React.Component {
 
     this.submitForm = this.submitForm.bind(this)
     this.onValueChange = this.onValueChange.bind(this)
+    this.modalCallBack = this.modalCallBack.bind(this)
 
     this.state = {
       firstName:'',
@@ -38,7 +40,9 @@ class MyAccount extends React.Component {
       postal:'',
       valid:false,
       isLoading:false,
-      loggedIn:false
+      loggedIn:false,
+      modalVisible:true,
+      facebookPayload:false
     }
   }
 
@@ -180,8 +184,42 @@ class MyAccount extends React.Component {
       token:access_token,
       response:response
     }
- 
-    this.props.userFacebookRegisterRequest(payload);
+
+    this.setState({facebookPayload:payload, modalVisible:true })
+
+  }
+
+  modalCallBack() {
+      this.props.userFacebookRegisterRequest(this.state.facebookPayload);
+  }
+
+  facebookForm() {
+
+    return (
+      <form>
+      <p>  
+        To complete your registration for 7Rewards, review and agree to the Terms & Conditions. Once you have done so, check the box below. 
+      </p>
+        <Row>
+          <Col className="text-center">
+            <div className="input__group bottom--margin--20">
+             <input type="checkbox" id="terms" name="terms" value="I accept the Terms & Conditions." />
+             <label className="show">I accept the Terms & Conditions.</label>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="">
+            <div className="input__group bottom--margin--80">
+             <input type="checkbox" id="agree" name="agree" value="I agree to receive news, promotions, and information from 7-Eleven®. You can unsubscribe at any time. Please read our Privacy Policy or Contact Us." />
+             <label className="show">I agree to receive news, promotions, and information from 7-Eleven®. You can unsubscribe at any time. Please read our Privacy Policy or Contact Us.</label>
+            </div>
+          </Col>
+        </Row>   
+
+      </form>
+
+    )
 
   }
  
@@ -194,6 +232,8 @@ class MyAccount extends React.Component {
         <Hero src="/static/images/placeholders/Homepage_Banner.jpg">
         </Hero>
         <Container className="Section__container">
+
+        <ModalWindow content={ this.facebookForm() } visible={this.state.modalVisible} cb={this.modalCallBack}/>
         <div className="register__screen__page">
           {!this.state.loggedIn &&  
           <div className="form__wrapper">

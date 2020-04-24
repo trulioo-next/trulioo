@@ -1,5 +1,5 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api-test.7-eleven.com";
+const REWARDS_API_URL = "https://api.7-eleven.com";
 // https://api-test.7-eleven.com 
 // https://api-stage.7-eleven.com
 const CLIENT_ID = process.env.CLIENT_ID
@@ -67,23 +67,23 @@ export default async (req, res) => {
 
     // Once you create an account, we log you in 
     //
-    // const loginToken = await fetch(REWARDS_API_URL+'/auth/token',
-    //  {
-    //    method: 'POST',
-    //    headers: tokenHeaders,
-    //    body: JSON.stringify({
-    //     "client_id": CLIENT_ID,
-    //     "client_secret": CLIENT_SECRET,
-    //     "grant_type": "password",
-    //     "username": body.body.email,
-    //     "password": body.body.password
-    //   }) 
-    //  });
+    const loginToken = await fetch(REWARDS_API_URL+'/auth/token',
+     {
+       method: 'POST',
+       headers: tokenHeaders,
+       body: JSON.stringify({
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "grant_type": "password",
+        "username": body.body.email,
+        "password": body.body.password
+      }) 
+     });
     
-    // // Get a rewards list 
-    // const userRewards = Rewards();
-    // let rewards = await userRewards.getUserRewards(loginToken.access_token)
-    // //
+    // Get a rewards list 
+    const userRewards = Rewards();
+    let rewards = await userRewards.getUserRewards(loginToken.access_token, loginToken.expires_in)
+    //
     // console.log('REGITERS TOKEN ', rewards )
       
     let userAuthToken = {
@@ -92,7 +92,7 @@ export default async (req, res) => {
       expire:userToken.expires_in
     }
 
-    res.json({user:userRegister, rewards:false, auth:userAuthToken, coupons:false, deals:false, promotions:false, error:false  })  
+    res.json({user:userRegister, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false  })  
      
      return
   } catch(error) {
