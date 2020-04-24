@@ -50,7 +50,7 @@ class MyAccount extends React.Component {
 
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
-      routerPush('/account');
+      // routerPush('/account');
     }
     
     
@@ -99,7 +99,7 @@ class MyAccount extends React.Component {
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
        
-      routerPush('/account');
+     // routerPush('/account');
     }
   }
 
