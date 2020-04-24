@@ -184,6 +184,8 @@ class MyAccount extends React.Component {
       token:access_token,
       response:response
     }
+    
+    this.props.userFacebookRegisterRequest(payload);
 
     this.setState({facebookPayload:payload, modalVisible:true })
 
