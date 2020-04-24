@@ -18,7 +18,34 @@
         border:none;
         color:white;
         position: relative;
+        text-transform: uppercase;
+        font-weight: bold;
+        max-width: 100px;
+        text-align: center;
+        line-height: 1.2em;
+        display:flex;
+        align-items: center;
+
+        @media only screen and (min-width: 767px) and (max-width: 991px) {
+            max-width: 80px;
+          }
+
+        @media only screen and (max-width: 767px) {
+            max-width: 80px;
+        }
     }
+
+    & .tab-pane .col {
+        padding-left: .25rem;
+        padding-right: .25rem;
+        padding-bottom: .35rem;
+
+        & > div {
+            background-color:white;
+            border-radius:2px;
+            padding:5px;
+        }
+    } 
 
     & .nav-tabs .nav-link::after {
         content:"";
@@ -29,25 +56,112 @@
         left:0;
         right:0;
         margin:0 auto;
-        bottom:0;
+        bottom:0px;
         transform:scaleX(0);
         transition:all 0.3s;
         transform-origin: center;
     }
 
     & .nav-tabs .nav-link.active::after {
-        transform:scaleX(1);
+        transform:scaleX(.9);
     }
 
     & .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
         background-color:transparent;
     }
+
+    & .my-rewards-tab {
+        background-color: #42a84d;
+        border-radius: 6px;
+
+        & h3 {
+            text-transform: uppercase;
+            color:white;
+            margin:.8rem;
+            padding:1.2rem 1.2rem 0;
+        }
+
+        & p {
+            color:white;
+            line-height: 1.8em;
+        }
+
+        & .rewards-row {
+            background-color:#157f63;
+            border-radius: 2px;
+            padding:.7rem 1.3rem .3rem;
+            margin: 0 -1.2rem;
+            display: flex;
+            align-items:center;
+
+            @media screen and (max-width:991px) {
+                margin: 0 -.7rem;
+            }
+
+            @media screen and (max-width:845px) {
+                margin: 0;
+            }
+        }
+
+        & .wallet-row {
+            background-color:#fff;
+            border-radius: 2px;
+            padding:.7rem 1.3rem;
+            margin: .9rem -1.2rem;
+            min-height:200px;
+            color:#ccc;
+
+            @media screen and (max-width:991px) {
+                margin: 1rem 0 !important;
+            }           
+        }
+
+        & .coupons-row {
+            padding:0;
+            margin: 0 -1.4rem;
+
+            @media screen and (max-width:991px) {
+                margin: 0 -.9rem !important;
+            } 
+
+            @media screen and (max-width:845px) {
+                margin: 0 !important;
+            }
+        }
+
+        & .wallet-points {
+            background-color:transparent !important;
+            display: flex;
+
+            & .points-balance {
+                font-size:3.5rem;
+                color:white;
+                font-weight: bold;
+                margin-right:.5rem;
+                display:flex;
+                align-items: center;
+            }
+
+            & .points-text {
+                max-width:80px;
+                font-size:1.2rem;
+                color:white;
+                text-transform: uppercase;
+                word-wrap: break-word;
+                font-weight: bold;
+                line-height: 1;
+                display:flex;
+                align-items: center;
+            }
+        }
+    }
+
+    
 }
 
 
 
-.rewards-menu-tabs {
-    
+.rewards-menu-tabs {    
     border-radius:6px;    
 
     & .nav-link {
@@ -57,24 +171,40 @@
     & .nav-tabs .nav-link::after {
         content:"";
         width:80%;
-        height:3px;
+        height:4px;
         background-color:white;
         position: absolute;
         left:0;
         right:0;
         margin:0 auto;
-        bottom:0;
+        bottom:-3px;
         transform:scaleX(0);
         transition:all 0.3s;
         transform-origin: center;
     }
 
+    & .nav-tabs .nav-link.active::after {
+        transform:scaleX(.7);
+    }
+
     & .tab-pane .container {
         padding:0 2rem;
+
+        @media only screen and (max-width: 991px) {
+            padding:0 1em;
+        }
+    }
+
+    & .tab-pane .row {
+        padding-left: .25rem;
+        padding-right: .25rem;
+        padding-bottom: .35rem;
     }
 
     & .tab-pane .col {
-        padding:5px 3px;
+        padding-left: .25rem;
+        padding-right: .25rem;
+        padding-bottom: .4rem;
     }
 
     & .tab-pane .col div {
@@ -105,5 +235,50 @@
 
     &.tab6 {
         background-color: #504988;
+    }
+}
+
+.coupon-button {
+    background-color: #42a84d;
+    padding:1rem 1.3rem .6rem 1.3rem;
+    text-transform: uppercase;
+    color:white;
+    font-size:1.3rem;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 0;
+
+    &:hover {
+        text-decoration: none;
+        color:white;
+        background-color: #86cc8d;
+    }
+
+    &:focus {
+        color:white;
+        background-color:transparent;
+    }
+
+    &.dark {
+        background-color:#157f64;
+
+        &:hover {
+            background-color: #13a07c;
+        }
+    }
+}
+
+.add-items-button {
+    padding:0;
+    background-color:transparent;
+    text-decoration: underline;
+    font-style: italic;
+
+    &:hover {
+        background-color:transparent;
+    }
+
+    &:focus {
+        background-color:transparent;
     }
 }

@@ -51,9 +51,9 @@ class SevenRewards extends React.Component {
         <Header title="7 Rewards" />
         {/* <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
         </Hero> */}
-        <div className="container mt-5 mb-5">
-          <div className="row">
-            <div className="col rewards-wrapper">
+        <Container className="container mt-5 mb-5">
+          <Row>
+            <Col className="rewards-wrapper">
               <Tabs
                 id="rewards-tabs"
                 activeKey={this.state.key}
@@ -65,23 +65,47 @@ class SevenRewards extends React.Component {
                     activeKey={this.state.rewardsKey}
                     onSelect={rewardsKey => this.setState({ rewardsKey })}>
                     <Tab eventKey="tab1" title="1000 Points">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col col-lg-6">
+                      <Container>
+                        <Row>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
                             <div>1</div>
-                          </div>
-                          <div class="col col-lg-6">
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
                             <div>2</div>
-                          </div>
-                        </div>
-                      </div>
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <div>3</div>
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <div>4</div>
+                          </Col>
+                        </Row>
+                      </Container>
                     </Tab>
                     <Tab eventKey="tab2" title="1500 Points">
-                      Content for 1500 points here
-				            </Tab>
+                      <Container>
+                        <Row>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <div>1</div>
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <div>2</div>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Tab>
                     <Tab eventKey="tab3" title="2000 Points">
-                      Content for 2000 points here
-				            </Tab>
+                      <Container>
+                        <Row>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <div>1</div>
+                          </Col>
+                          <Col className="col" lg="6" md="6" sm="12" xs="12">
+                            <div>2</div>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Tab>
                     <Tab eventKey="tab4" title="2750 Points">
                       Content for 2750 points here
 				            </Tab>
@@ -94,19 +118,102 @@ class SevenRewards extends React.Component {
                   </Tabs>
                 </Tab>
                 <Tab eventKey="profile" title="Bonus Offers">
-                  Bonus Offers
-				        </Tab>
+                  <Container>
+                    <Row>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>1</div>
+                      </Col>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>2</div>
+                      </Col>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>3</div>
+                      </Col>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>4</div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Tab>
                 <Tab eventKey="contact" title="Coupons">
-                  Coupons
-				        </Tab>
-                <Tab eventKey="my-rewards" title="My Rewards">
-                  My Rewards
-				        </Tab>
+                  <Container>
+                    <Row>
+                      <Col className="col d-flex justify-content-center mb-3">
+                        <Button
+                          href="#"
+                          as="#"
+                          className="coupon-button"
+                        >
+                          Get coupons for your location
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>1</div>
+                      </Col>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>2</div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Tab>
+                <Tab className="my-rewards-tab" eventKey="my-rewards" title="My Rewards">
+                  <Container className="pb-2">
+                    <Row>
+                      <Col className="col d-flex justify-content-start align-items-center" lg="6" md="6" sm="12" xs="12">
+                        <h3>My Rewards</h3>
+                      </Col>
+                      <Col className="col d-flex justify-content-end" lg="6" md="6" sm="12" xs="12">
+                        <div className="wallet-points">
+                          <span className="points-balance">0</span>
+                          <span className="points-text">Points Remaining</span>
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row className="rewards-row">
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <p>0 Rewards Ready</p>
+                      </Col>
+                      <Col className="col d-flex justify-content-end" lg="6" md="6" sm="12" xs="12">
+                        <Button className="add-items-button" href="#">Add Items</Button>
+                      </Col>
+                    </Row>
+                    <Row className="wallet-row">
+                      <Col className="col d-flex align-items-center justify-content-center" lg="12">
+                        Your wallet is empty.
+                      </Col>
+                    </Row>
+                    <Row className="rewards-row">
+                      <Col className="col" lg="12">
+                        <p>Other Available Offers</p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="col d-flex justify-content-center mb-3 mt-3">
+                        <Button
+                          href="#"
+                          as="#"
+                          className="coupon-button dark"
+                        >
+                          Get coupons for your location
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Row className="coupons-row">
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>1</div>
+                      </Col>
+                      <Col className="col" lg="6" md="6" sm="12" xs="12">
+                        <div>2</div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Tab>
               </Tabs>
-            </div>
-          </div>
-        </div>
-
+            </Col>
+          </Row>
+        </Container>
       </Layout>
     )
   }
