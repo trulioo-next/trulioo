@@ -24,14 +24,24 @@ const Page = props => {
     }
   }, []);
 
+
+  let scrollAttempts = 0;
    
   function scrollToAnchor(anchor)
-  { const attempt = (function(a) { attemptScrollToAnchor(a); })(anchor);
+  {
+    if (scrollAttempts > 100)
+    { console.log("Anchor #" + anchor + " not found in page.");
+      return false;
+    }
+
+    const attempt = (function(a) { return function() { attemptScrollToAnchor(a); }})(anchor);
     setTimeout(attempt, 100);
   }
 
   function attemptScrollToAnchor(anchor)
-  { const a = document.querySelector("a[name='" + anchor + "']");
+  {
+    scrollAttempts++;
+    const a = document.querySelector("a[name='" + anchor + "']");
     if (a)
     { a.scrollIntoView({behavior: "smooth", block: "start"});
       return true;
