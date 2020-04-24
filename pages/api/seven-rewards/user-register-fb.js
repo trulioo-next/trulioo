@@ -2,6 +2,8 @@ const fetch = require('../../../utils/fetch')
 const REWARDS_API_URL = "https://api-test.7-eleven.com";
 // https://api-test.7-eleven.com 
 // https://api-stage.7-eleven.com
+
+
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
  
@@ -26,7 +28,7 @@ export default async (req, res) => {
 
      if(!userToken || userToken.error) {
        res.json({error:userToken.error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false  })
-    }
+     }
  
      const authHeaders = { 
       "Content-Type": "application/json",

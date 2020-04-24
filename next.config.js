@@ -44,7 +44,7 @@ const nextConfig = {
 
     // Here goes env that are available in the client side
     config.plugins.push(
-      new webpack.EnvironmentPlugin(['VERSION', 'ROOT_URL', 'ENDPOINT_URL']),
+      new webpack.EnvironmentPlugin(['VERSION', 'ROOT_URL', 'ENDPOINT_URL', 'CLIENT_ID', 'CLIENT_SECRET']),
       new FilterWarningsPlugin({
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
       }),
@@ -57,10 +57,10 @@ const nextConfig = {
   //  ...dotEnvResult
 
   env: {
-   ROOT_URL: 'https://dev4.7eleven.ca',
-   ENDPOINT_URL: 'https://dev3.7eleven.ca/wp-json',
-   VERSION:'1.0.41', 
-  // ...dotEnvResult,
+   // ROOT_URL: 'https://dev4.7eleven.ca',
+   // ENDPOINT_URL: 'https://dev3.7eleven.ca/wp-json',
+   // VERSION:'1.0.41', 
+   ...dotEnvResult,
   },
 };
 

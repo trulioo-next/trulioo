@@ -12,8 +12,7 @@ export default async (req, res) => {
 
     console.log('FACEBOOK LOGIN CALL ')
 
-    // EAAOeoZCWjmwEBAP6atZBLS3fTNteeQtPg1bPjaLulVnfkKP08T3ZA9vK7oRjTt49MexblNGWkTxPzUh3PAo25iFImHB3xfu0ozbUTTT1tiESlZC0Ig1q3y0zGUZBg87vT7Kqka9QFEFHT66OCahEZARu4OphMBDAJZAc103q3ZCzLzZBXcn8cN5tc7hmtHFunFnhHcKYetcPsAQZDZD
- 
+     
     // Get an Access Token
     //
     const userToken = await fetch(REWARDS_API_URL+'/auth/token/social',
@@ -21,8 +20,8 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-       "client_id": '8spmO1OlYWRl2q33FSDSFm2gqQ6O2MgebQ4D8xwp',
-        "client_secret": 'C3BrydLGlg6evoRKuVcgLfN1DagmAm6tD5QNzet4uclBP3QLjcQ0kHbzWxOGfY5mHBCXb2Ce05XVpH5ZT5yVzLrueU7BhBQ0D5EHxfUzREDCl4lXQy9S1UsqWr60jv89',
+       "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
         "provider": "facebook", 
         'access_token':req.body
       }) 
