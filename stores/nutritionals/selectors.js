@@ -44,8 +44,7 @@
     		if(menuItems[i].terms && menuItems[i].terms[0] ) {
 
 	    		if(  menuItems[i].slug === slug ) {
-
-	    			console.log('FOUND DATA  ', menuItems[i] )
+	    			// console.log('FOUND DATA  ', menuItems[i] )
 					data = menuItems[i];
 				}
     		}
