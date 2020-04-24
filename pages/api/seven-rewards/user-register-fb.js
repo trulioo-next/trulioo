@@ -5,6 +5,8 @@ const REWARDS_API_URL = "https://api-test.7-eleven.com";
 
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
+const CLIENT_ID_ANNO = process.env.CLIENT_ID_ANNO
+const CLIENT_SECRET_ANNO = process.env.CLIENT_SECRET_ANNO
  
 export default async (req, res) => {  
   try {
@@ -17,8 +19,8 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
+        "client_id": CLIENT_ID_ANNO,
+        "client_secret": CLIENT_SECRET_ANNO,
         "grant_type": "client_credentials"
         
       }) 

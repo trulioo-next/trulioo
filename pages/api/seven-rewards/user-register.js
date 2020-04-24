@@ -49,7 +49,7 @@ export default async (req, res) => {
         "mobile_phone": body.body.phone,  
         "accepts_us_terms":false,
         "accepts_ca_terms":true,
-        "accepts_ca_communications":true,
+        "accepts_ca_communications":false,
         "link_card": '1773927800088888888' // 19 digit number
     }
 
