@@ -26,7 +26,7 @@ export default async (req, res) => {
        "client_id": CLIENT_ID,
        "client_secret": CLIENT_SECRET,
        "provider": "facebook", 
-       'access_token':req.body
+       'access_token':body.body
       }) 
      });
       
@@ -47,7 +47,7 @@ export default async (req, res) => {
  
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:req.body  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:JSON.parse(req.body)  })
     // res.status(400).send({ error: error })
   }
 };
