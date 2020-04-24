@@ -136,14 +136,13 @@ function Page() {
   const pageData = useSelector(state => pageDataSelector(state));
   const taxonomies = useSelector(state => taxonomiesSelector(state));
 
-  // let defaultCategory = taxonomies ? taxonomies[2].slug : 'crispy-classic-chicken';
-  let defaultCategory = 'crispy-classic-chicken';
+  let defaultCategory = '';
 
   // console.log('PROPS TO LOAD ---> >>>>  ', taxonomies )
   let taxObjects = '';
   if(taxonomies) {
     taxObjects = taxonomies.map((item, key) =>
-      <option key={item.term_id} value={item.slug} selected={item.slug == defaultCategory}>{item.name}</option>
+      <option key={item.term_id} value={item.slug}>{item.name}</option>
     );
   }
 
@@ -160,6 +159,9 @@ function Page() {
   function filterProducts(taxonomy) {
     let filtered = [];
     if (products) {
+      if (taxonomy === '')
+      { return [...products];
+      }
       for (var i = 0; i < products.length; i++) {
         if (products[i].term === taxonomy) {
           filtered.push(products[i]);
@@ -200,7 +202,7 @@ function Page() {
   return (
     <Layout>
       <Header title="Nutritionals" />
-      <Hero src="/static/images/placeholders/Snacks_Banner.jpg">
+      <Hero src="/static/images/placeholders/Nutritional_Banner.jpg">
         <Hero.Title title="Nutritionals" color="#FFF" shadow />
       </Hero>
 
@@ -222,8 +224,10 @@ function Page() {
                 <select
                   className="Nutritionals__searchInput -select"
                   id="nutritionals-category"
+                  defaultValue={defaultCategory}
                   onChange={e => switchCategory(e)}
                 >
+                 <option value=''>Select category</option>
                  { taxObjects }
                 </select>
               </div>
