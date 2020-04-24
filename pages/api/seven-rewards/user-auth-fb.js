@@ -23,8 +23,8 @@ export default async (req, res) => {
        method: 'POST',
        headers: headers,
        body: JSON.stringify({
-       "client_id": CLIENT_ID_ANNO,
-       "client_secret": CLIENT_SECRET_ANNO,
+       "client_id": CLIENT_ID,
+       "client_secret": CLIENT_SECRET,
        "provider": "facebook", 
        'access_token':req.body
       }) 
@@ -47,7 +47,7 @@ export default async (req, res) => {
  
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:body  })
     // res.status(400).send({ error: error })
   }
 };
