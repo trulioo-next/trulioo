@@ -200,7 +200,7 @@ function Page() {
   return (
     <Layout>
       <Header title="Nutritionals" />
-      <Hero src="/static/images/placeholders/Snacks_Banner.jpg">
+      <Hero src="/static/images/placeholders/Nutritional_Banner.jpg">
         <Hero.Title title="Nutritionals" color="#FFF" shadow />
       </Hero>
 
