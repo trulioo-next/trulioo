@@ -22,6 +22,7 @@
     "dotenv": "8.1.0",
     "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
+    "formik": "^2.1.4",
     "framer-motion": "^1.8.4",
     "fs": "^0.0.1-security",
     "get-video-id": "^3.1.4",

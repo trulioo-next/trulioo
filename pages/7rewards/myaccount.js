@@ -13,6 +13,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalWindow from '@/components/Modal';
+import {useFormik} from 'formik';
 
 import './RegisterScreen.scss';
 
@@ -196,6 +197,22 @@ class MyAccount extends React.Component {
   }
 
   facebookForm() {
+    
+    
+    const phoneRegExp = /^\+?[0-9\-().\s]{10,15}$/gm
+
+
+    let schema = Yup.object().shape({
+      first_name: Yup.string().required("This field is required"),
+      last_name: Yup.string().required("This field is required"),
+      email: Yup.string().email().required("This field is required"),
+      phone: Yup.string().required("This field is required").matches(phoneRegExp, 'Phone number is not valid'),
+      postal: Yup.string().required("This field is required"),
+      password: Yup.string().required('Password is required'),
+      password_confirm: Yup.string()
+         .oneOf([Yup.ref('password'), null])
+         .required('Password confirm is required')
+    });
 
     return (
       <form>
@@ -218,9 +235,7 @@ class MyAccount extends React.Component {
             </div>
           </Col>
         </Row>   
-
       </form>
-
     )
 
   }
@@ -285,7 +300,7 @@ class MyAccount extends React.Component {
                 <Col className="text-center">
                   <div className="input__group">
                     <label>Confirm Password</label>
-                    <input id="password-confirm" type="password" value={this.state.confirmPassword} onChange={(e) => this.onValueChange(e,'confirmPassword')} name="password-confirm" placeholder="Confirm Password"/>
+                    <input id="password_confirm" type="password" value={this.state.confirmPassword} onChange={(e) => this.onValueChange(e,'confirmPassword')} name="password_confirm" placeholder="Confirm Password"/>
                   </div>
                 </Col>
               </Row>   
@@ -373,9 +388,7 @@ class MyAccount extends React.Component {
                 onClick={ (e) => this.submitForm(e) } >
                 Register
               </Button>
-
-              
-              
+ 
             </form>
           </div>
           }

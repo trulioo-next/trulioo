@@ -7,6 +7,9 @@ const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const CLIENT_ID_ANNO = process.env.CLIENT_ID_ANNO
 const CLIENT_SECRET_ANNO = process.env.CLIENT_SECRET_ANNO
+
+
+import Rewards from './user-rewards';
  
 export default async (req, res) => {  
   try {
@@ -61,22 +64,39 @@ export default async (req, res) => {
        headers: authHeaders,
        body: JSON.stringify(payload)
      });
-    
 
+
+
+    const loginToken = await fetch(REWARDS_API_URL+'/auth/token',
+     {
+        method: 'POST',
+       headers: headers,
+       body: JSON.stringify({
+       "client_id": CLIENT_ID_ANNO,
+       "client_secret": CLIENT_SECRET_ANNO,
+       "provider": "facebook",
+       'access_token':body.body.token
+      }) 
+     });
+    
+  
+    // Get a rewards list 
+    const userRewards = Rewards();
+    let rewards = await userRewards.getUserRewards(loginToken.access_token, loginToken.expires_in)
     //
-    console.log('REGITERS TOKEN ', userRegister )
+    // console.log('REGITERS TOKEN ', rewards )
       
     let userAuthToken = {
       isAuth: true,
-      token: '',
-      expire:''
+      token: userToken.access_token,
+      expire:userToken.expires_in
     }
 
+    res.json({user:userRegister, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false  })  
  
-     res.json({user:userRegister, registered:true, auth:userAuthToken})
      return
   } catch(error) {
-    console.log('ERROR ', error )
+    
     const body = JSON.parse(req.body)
     res.json({error:error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false,  body:body  })
     

@@ -23,6 +23,7 @@ const Home = props => {
    
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
+ 
 
   return (
     <Layout>
