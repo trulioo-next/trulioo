@@ -136,11 +136,14 @@ function Page() {
   const pageData = useSelector(state => pageDataSelector(state));
   const taxonomies = useSelector(state => taxonomiesSelector(state));
 
+  // let defaultCategory = taxonomies ? taxonomies[2].slug : 'crispy-classic-chicken';
+  let defaultCategory = 'crispy-classic-chicken';
+
   // console.log('PROPS TO LOAD ---> >>>>  ', taxonomies )
   let taxObjects = '';
   if(taxonomies) {
     taxObjects = taxonomies.map((item, key) =>
-      <option key={item.term_id} value={item.slug}>{item.name}</option>
+      <option key={item.term_id} value={item.slug} selected={item.slug == defaultCategory}>{item.name}</option>
     );
   }
 
@@ -149,11 +152,9 @@ function Page() {
   //   dispatch(reqNutritionalsAction({}));
   // }, []);
 
-  let [taxonomySelected, setTaxonomySelected] = useState(
-    'crispy-classic-chicken',
-  );
+  let [taxonomySelected, setTaxonomySelected] = useState( defaultCategory );
   let products = useSelector(nutritionalByTaxonomySelector());
-  let productsSelected = filterProducts('crispy-classic-chicken');
+  let productsSelected = filterProducts(defaultCategory);
   let [filterSelected, setfilterSelected] = useState(productsSelected);
 
   function filterProducts(taxonomy) {
@@ -173,6 +174,29 @@ function Page() {
     setfilterSelected(productsSelected);
   }
 
+  function searchProducts(searchTermParam) {
+    const searchTerm = searchTermParam.toLowerCase().trim();
+    let filtered = [];
+    if (products) {
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].flavour.toLowerCase().includes(searchTerm)) {
+          filtered.push(products[i]);
+        }
+      }
+    }
+    return filtered;
+  }
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    const searchFor = e.target.getElementsByTagName('input')[0].value.trim();
+    if (!searchFor)
+    { return false;
+    }
+    productsSelected = searchProducts(searchFor);
+    setfilterSelected(productsSelected);
+  }
+
   return (
     <Layout>
       <Header title="Nutritionals" />
@@ -186,6 +210,7 @@ function Page() {
             <form
               id="nutritionals-search-form"
               className="Nutritionals__searchForm"
+              onSubmit={e => handleSearchSubmit(e)}
             >
               <label
                 htmlFor="nutritionals-category"
