@@ -196,7 +196,7 @@ const Product = props => {
 
   let { category, product } = props.query;
 
-  // console.log('QUERY ', props.query )
+  console.log('QUERY ', props.query )
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqNutritionalsAction({}));
