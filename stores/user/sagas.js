@@ -17,6 +17,8 @@ import {
   SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
   SEVEN_REWARDS_FACEBOOK_AUTH,
   SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
+  SEVEN_REWARDS_CHECKCARD_REQUEST,
+  SEVEN_REWARDS_CHECKCARD,
   APP_STOPLOADING
 } from '../types'
 
@@ -107,9 +109,7 @@ function* registerUser(payload) {
 
 //
 function* registerFacebookUser(payload) {
-
-
-   
+ 
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
@@ -119,6 +119,28 @@ function* registerFacebookUser(payload) {
      console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
     
     yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse})
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
+// 
+
+//
+function* checkGiftcardBalance(payload) {
+ 
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const checkBalanceResponse = yield call(sevenRewardsService.checkCardBalance, payload)
+
+     console.log('REGISTER USER PAYLOAD REWARDS !!   ', checkBalanceResponse )
+    
+    yield put({ type: SEVEN_REWARDS_CHECKCARD, payload:checkBalanceResponse})
 
   } catch(err) {
 
@@ -154,7 +176,8 @@ function* startupFlow() {
       SEVEN_REWARDS_REGISTER_REQUEST,
       SEVEN_REWARDS_LOGOUT_REQUEST,
       SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
-      SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST
+      SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
+      SEVEN_REWARDS_CHECKCARD_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -181,6 +204,10 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST) {
       yield call(registerFacebookUser, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_CHECKCARD_REQUEST) {
+      yield call(checkGiftcardBalance, action.payload)
     }
 
 

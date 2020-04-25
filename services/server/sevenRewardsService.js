@@ -79,12 +79,28 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
+
+	async function checkCardBalance(payload) {
+		let data = await API.post('/api/seven-rewards/check-card-balance', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'checkCardBalance',
+		          message: 'Checking Card Balance Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
    return {
     userAuth,
     userAuthFb,
     userAuthAnonymous,
     registerUser,
-    registerFacebookUser
+    registerFacebookUser,
+    checkCardBalance
    }
 
 }

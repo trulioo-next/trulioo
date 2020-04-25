@@ -10,13 +10,20 @@ import {
   SEVEN_REWARDS_CHECK_LOADED,
   SEVEN_REWARDS_REGISTER_LOADED,
   SEVEN_REWARDS_LOGOUT,
-  SEVEN_REWARDS_FACEBOOK_AUTH
+  SEVEN_REWARDS_FACEBOOK_AUTH,
+  SEVEN_REWARDS_CHECKCARD
 } from '../types'
 
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
+
+
+    case SEVEN_REWARDS_CHECKCARD:
+      return { ...state,
+        cardBalance:action.payload
+      }
 
      case SEVEN_REWARDS_AUTH_LOADED:
       return { ...state,

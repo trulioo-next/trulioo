@@ -1,0 +1,78 @@
+@import '~@/static/scss/component-includes';
+
+.Section {
+  $block: &;
+
+  position: relative;
+
+  &__container {
+    &.-overlay {
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+
+  &__media {
+    margin-bottom: 1rem;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__eyebrow {
+    display: block;
+    margin-bottom: 0.8rem;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 2rem;
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  &__title {
+    @include media-breakpoint-up(lg) {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__subheading {
+    @include media-breakpoint-up(lg) {
+      font-size: 3.2rem;
+      margin-bottom: 3.6rem;
+    }
+  }
+
+  &__actions {
+    margin-top: 1em;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 5.5rem;
+    }
+
+    #{$block}__cta {
+      font-size: inherit;
+
+      &:not(.Button) {
+        text-transform: uppercase;
+        margin-left: 1.2rem;
+
+        &:hover,
+        &:focus {
+          color: currentColor;
+          text-decoration: underline;
+        }
+
+        @include media-breakpoint-up(lg) {
+          margin-left: 4rem;
+        }
+      }
+    }
+  }
+}

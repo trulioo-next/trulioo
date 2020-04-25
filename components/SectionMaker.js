@@ -13,6 +13,7 @@ import SectionCodeEditor from './SectionComponents/SectionCodeEditor';
 import ReusableComponent from './SectionComponents/ReusableComponent';
 import SectionPostGrid from './SectionComponents/SectionPostGrid';
 import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
+import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
 
 const SectionMaker = ({ type, params, sectionIndex, category, defaultImage }) => {
   switch (type) {
@@ -55,7 +56,10 @@ const SectionMaker = ({ type, params, sectionIndex, category, defaultImage }) =>
       return <SectionPostGrid sectionIndex={sectionIndex} {...params} category={category} defaultImage={defaultImage} />;
 
     case 'section_taste_of_asia':
-      return <SectionTasteOfAsia sectionIndex={sectionIndex} {...params} />;    
+      return <SectionTasteOfAsia sectionIndex={sectionIndex} {...params} />; 
+
+     case 'section_gift_card_balance':
+      return <SectionGiftCardBalance sectionIndex={sectionIndex} {...params} />;      
 
     default:
       return '';
