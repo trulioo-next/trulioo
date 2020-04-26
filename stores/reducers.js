@@ -8,6 +8,7 @@ import { combineReducers } from 'redux'
 import app from './app/reducers'
 import page from './page/reducers'
 import nutritionals from './nutritionals/reducers'
+import newsroom from './newsroom/reducers'
 import user from './user/reducers'
 import alert from './alert/reducers'
 
@@ -20,6 +21,7 @@ export default function createReducer() {
     app,
     page,
     nutritionals,
+    newsroom,
     user,
     alert
   })
