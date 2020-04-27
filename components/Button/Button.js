@@ -22,10 +22,9 @@ const Button = ({ as, href, className, children, outlined, ...props }) => {
       );
     }
     return (
-      <Link href={href} as={ href }>
+      <Link href={href}>
         <a className={ButtonClasses}>{children}</a>
       </Link>
-      
     );
   }
 
