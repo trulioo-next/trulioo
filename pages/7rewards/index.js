@@ -30,9 +30,10 @@ class SevenRewards extends React.Component {
       rewardsKey: 'tab1'
     }
   }
-
-  static async getInitialProps({ isServer, store }) {
-    return {}
+ 
+  static async getInitialProps ({ isServer, store }) {
+    let userData = store.getState()
+    return { userData };
   }
 
   componentDidMount() {
@@ -41,6 +42,9 @@ class SevenRewards extends React.Component {
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
     }
+
+
+    console.log('::: this.props.user :: ', this.props )
 
   }
   componentDidUpdate() { }
@@ -52,6 +56,17 @@ class SevenRewards extends React.Component {
       <Layout>
         <Header title="7 Rewards" />
         <Container className="container mt-5 mb-5">
+
+
+            { this.props.user &&
+             this.props.user.coupons.map((coupon, i) => {
+              return 
+                   <div key={`test--key--${i}`}>{coupon.description}</div>
+               
+            })
+          }
+
+
           <Row>
             <Col className="rewards-wrapper">
               <Tabs

@@ -35,12 +35,13 @@ class UserAuth extends React.Component {
     };
   }
 
-  static async getInitialProps ({ query }) {
-    return { query };
+  static async getInitialProps ({ query, store }) {
+    let userData = store.getState()
+    return { query, userData };
   }
 
   componentDidMount () {
-    // console.log('user ', this.props.user )
+   //  console.log('user STORE :: >>  ', this.props.store.getState() )
 
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {

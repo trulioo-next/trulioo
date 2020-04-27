@@ -15,6 +15,10 @@ const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
+
+
+  console.log('THIS STORE ', props.data )
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: 'gift-cards'}));
@@ -41,8 +45,9 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res }) => {
-  return { query };
+Page.getInitialProps = async ({ query, res, store  }) => {
+  let data = store;
+  return { query, data };
 };
 
 export default Page;
