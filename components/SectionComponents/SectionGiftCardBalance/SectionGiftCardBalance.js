@@ -103,13 +103,13 @@ const SectionBody = props => {
           dangerouslySetInnerHTML={{ __html: data.content }}
         ></div>
       )}
-      {data.ctas && (
+       
         <div className="Section__actions">
            <Button className="Section__cta" onClick={handleClick}>
-            {data.title}
+            Check Your Balance
           </Button>
         </div>
-      )}
+       
       {props.children}
     </div>
   );
