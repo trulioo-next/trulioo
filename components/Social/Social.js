@@ -11,27 +11,51 @@ import './Social.scss';
 const Social = () => (
   <ul className="Social">
     <li className="Social__item">
-      <a className="Social__link" href="https://youtube.com/" target="_blank">
+      <a
+        className="Social__link"
+        href="https://www.youtube.com/channel/UCLIHZgJhWZw1F7NdWq8yZmA"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <YouTubeIcon />
       </a>
     </li>
     <li className="Social__item">
-      <a className="Social__link" href="https://instagram.com/" target="_blank">
+      <a
+        className="Social__link"
+        href="https://www.instagram.com/7elevencanada/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <InstagramIcon />
       </a>
     </li>
     <li className="Social__item">
-      <a className="Social__link" href="https://twitter.com/" target="_blank">
+      <a
+        className="Social__link"
+        href="https://twitter.com/7ElevenCanada"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <TwitterIcon />
       </a>
     </li>
     <li className="Social__item">
-      <a className="Social__link" href="https://facebook.com/" target="_blank">
+      <a
+        className="Social__link"
+        href="https://www.facebook.com/7ElevenCanada"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <FacebookIcon />
       </a>
     </li>
     <li className="Social__item">
-      <a className="Social__link" href="https://linkedin.com/" target="_blank">
+      <a
+        className="Social__link"
+        href="https://www.linkedin.com/company/7-eleven-canada-inc./"
+        rel="noopener noreferrer"
+      >
         <LinkedInIcon />
       </a>
     </li>
