@@ -75,7 +75,7 @@ const PrimaryNav = data => {
           <ul className="SiteHeader__menu -desktop">
             {LINKS.map((link, i) => {
               searchIndex += 1;
-              //  console.log('PRIMARY NAV CHILDREN  ', link.children )
+              // console.log('PRIMARY NAV CHILDREN  ', link.children )
               return (
                 <NavItem
                   key={`nav-item-${i}`}

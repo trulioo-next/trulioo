@@ -138,7 +138,7 @@ function* checkGiftcardBalance(payload) {
    
     const checkBalanceResponse = yield call(sevenRewardsService.checkCardBalance, payload)
 
-     console.log('REGISTER USER PAYLOAD REWARDS !!   ', checkBalanceResponse )
+     console.log('CHECK CARD BALANCE !!   ', checkBalanceResponse )
     
     yield put({ type: SEVEN_REWARDS_CHECKCARD, payload:checkBalanceResponse})
 
