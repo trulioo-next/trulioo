@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import Layout from '../../containers/Layout/Layout'
 import Header from '../../components/Header/Header'
 import Button from '@/components/Button';
@@ -40,11 +40,11 @@ class SevenRewards extends React.Component {
     let isUserAuth = this.props.user.auth
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
+
     }
 
   }
   componentDidUpdate() { }
-
 
   render() {
 
@@ -178,12 +178,16 @@ class SevenRewards extends React.Component {
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemCoupon />
-                      </Col>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemCoupon />
-                      </Col>
+
+                      {this.props.user && this.props.user.coupons.map((coupon, i) => {
+
+                        return (
+                          <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemCoupon key={i} data={coupon} />
+                          </Col>
+                        )
+                      })}
+
                     </Row>
                   </Container>
                 </Tab>

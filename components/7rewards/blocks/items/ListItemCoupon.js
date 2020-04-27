@@ -1,24 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './ListItemCoupon.scss'
 
-const ListItemCoupon = () => {
+const ListItemCoupon = ({ data }) => {
+
+    console.log(data);
+
     return (
         <div>
-            <div class="list-item coupon-item"
+            <div className="list-item coupon-item"
                 data-coupon-id="1"
                 data-coupon-name="description"
-                data-coupon-expiry="expires"	>
-                <div class="item-card">
-                    <div class="item-image">
-                        <img src="https://place-hold.it/120x120/#ccc" />
+                data-coupon-expiry="expires">
+                <div className="item-card">
+                    <div className="item-image">
+
                     </div>
-                    <div class="item-content">
-                        <span class="item-description">$2 Combo Add-On DEAL: Buy any Food Item, add a Gulp® or 7-Select™ Glacial Spring Water 500mL WITH a bag of 7-Select™ Chips 60-75g for only $2</span>
-                        <span class="item-expiry">Expires 12/31/20</span>
+                    <div className="item-content">
+
+                        <span className="item-expiry">Expires 12/31/20</span>
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
 
