@@ -31,22 +31,23 @@ class SevenRewards extends React.Component {
     }
   }
 
-  static async getInitialProps({ isServer, store }) {
-    return {}
+  static async getInitialProps ({ isServer, store }) {
+    let userData = store.getState()
+    return { isServer, userData };
   }
 
   componentDidMount() {
-
     let isUserAuth = this.props.user.auth
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
-
     }
-
   }
   componentDidUpdate() { }
 
   render() {
+     
+    let coupons = this.props.user && this.props.user.auth ? this.props.user.coupons : this.props.userData.coupons;
+    // console.log('coupons  ::: >>  ', coupons )
 
     return (
       <Layout>
@@ -179,7 +180,7 @@ class SevenRewards extends React.Component {
                     </Row>
                     <Row>
 
-                      {this.props.user && this.props.user.coupons.map((coupon, i) => {
+                      {coupons && coupons.map((coupon, i) => {
 
                         return (
                           <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
@@ -259,6 +260,24 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
 })
+
+SevenRewards.defaultProps = {
+    description: false,
+    expiration_label: false,
+    expires: false,
+    expires_soon: false,
+    id: false,
+    image_large: false,
+    image_thumb: false,
+    is_limited_quantity: false,
+    is_location_specific: false,
+    legal_text: false,
+    participating_stores: false,
+    percentage_left: false,
+    quantity_is_low: false,
+    title: false,
+    type: false
+}
 
 const SevenRewards_ = connect(
   mapStateToProps,
