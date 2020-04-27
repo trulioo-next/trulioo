@@ -91,7 +91,11 @@ const ColumnGroupItem = React.forwardRef(({ item, i, ...props }, ref) => {
 ColumnGroupItem.displayName = ColumnGroupItem;
 
 const ColumnGroup = props => {
-  let columnGroupClasses = classNames('ColumnGroup', props.className);
+  let columnGroupClasses = classNames(
+    'ColumnGroup',
+    `-columns-${React.Children.count(props.children)}`,
+    props.className,
+  );
 
   return <div className={columnGroupClasses}>{props.children}</div>;
 };
