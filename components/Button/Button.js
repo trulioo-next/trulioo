@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import './Button.scss';
 
 const Button = ({ as, href, className, children, outlined, ...props }) => {
+
   let ButtonClasses = classNames(
     'Button',
     { '-outlined': outlined },
@@ -16,7 +17,7 @@ const Button = ({ as, href, className, children, outlined, ...props }) => {
     let exnernalPath = href.split('://');
     if (exnernalPath[0] === 'https' || exnernalPath[0] === 'http') {
       return (
-        <a {...props} className={ButtonClasses}>
+        <a href={href} {...props} className={ButtonClasses}>
           {children}
         </a>
       );

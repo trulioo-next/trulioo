@@ -46,15 +46,15 @@ const SectionMedia = ({ media }) => {
   );
 };
 
-const SectionCTA = ({ data: {item, ...options}, i }) => {
+const SectionCTA = ({ data: { item, ...options }, i }) => {
 
-  if(!item) {
-    return(<></>)
+  if (!item) {
+    return (<></>)
   }
- 
+
   let url = "/";
-  if(item && item.url ) {
-      url = item.url;
+  if (item && item.url) {
+    url = item.url;
   }
 
   const params = {
@@ -65,13 +65,13 @@ const SectionCTA = ({ data: {item, ...options}, i }) => {
 
 
   if (i === 0) {
-    const {style, styleClassName} = getCTAButtonStyle({...options});
-    const className = 'Section__cta' + (styleClassName ? ' '+styleClassName : '');
+    const { style, styleClassName } = getCTAButtonStyle({ ...options });
+    const className = 'Section__cta' + (styleClassName ? ' ' + styleClassName : '');
 
     return (
       <React.Fragment>
-        { style &&
-        <style>{style}</style>
+        {style &&
+          <style>{style}</style>
         }
         <Button className={className} {...params}>
           {item.title}
@@ -87,7 +87,7 @@ const SectionCTA = ({ data: {item, ...options}, i }) => {
       </a>
     );
   }
-    
+
   return (
     <Link {...params}>
       <a className="Section__cta">{item.title} &rsaquo;</a>
@@ -99,25 +99,25 @@ const getCTAButtonStyle = options => {
   const uid = "cta__" + Math.random().toString(36).substr(2, 9);
 
   let style = '';
-  if (options['text_colour'])
-  { style += 'color: ' + options['text_colour'] + ' !important;';
+  if (options['text_colour']) {
+    style += 'color: ' + options['text_colour'] + ' !important;';
   }
-  if (options['background_colour'])
-  { style += 'background-color: ' + options['background_colour'] + ' !important;';
+  if (options['background_colour']) {
+    style += 'background-color: ' + options['background_colour'] + ' !important;';
   }
-  if (style !== '')
-  { style = '.'+uid+' {' + style + '}';
+  if (style !== '') {
+    style = '.' + uid + ' {' + style + '}';
   }
 
   let hoverStyle = '';
-  if (options['hover_text_colour'])
-  { hoverStyle += 'color: ' + options['hover_text_colour'] + ' !important;';
+  if (options['hover_text_colour']) {
+    hoverStyle += 'color: ' + options['hover_text_colour'] + ' !important;';
   }
-  if (options['hover_background_colour'])
-  { hoverStyle += 'background-color: ' + options['hover_background_colour'] + ' !important;';
+  if (options['hover_background_colour']) {
+    hoverStyle += 'background-color: ' + options['hover_background_colour'] + ' !important;';
   }
-  if (hoverStyle !== '')
-  { hoverStyle = '.'+uid+':hover, .'+uid+':focus {' + hoverStyle + '}';
+  if (hoverStyle !== '') {
+    hoverStyle = '.' + uid + ':hover, .' + uid + ':focus {' + hoverStyle + '}';
   }
 
   return { style: style + hoverStyle, styleClassName: uid };
@@ -179,7 +179,7 @@ const SectionCallToAction = ({
   let desktopAlignment = 'around';
 
 
- // console.log('SECTION CTA PROPS ', media )
+  // console.log('SECTION CTA PROPS ', media )
 
   if (!hasMedia) {
     mobileAlignment = content.position.mobile;
