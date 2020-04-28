@@ -41,7 +41,6 @@ const Page = props => {
 };
 
 Page.getInitialProps = async ({ query, res }) => {
-  
   return { query };
 };
 
