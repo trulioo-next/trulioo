@@ -30,23 +30,39 @@ const MediaCard = props => {
       <Card.Body className={bodyClasses}>
         <Row>
           <Col className="col" xs="5" md={props.stacked ? 12 : 5}>
-            <div className="Card__image -square -contain">
-             <Link href={props.product.href}>
-               <a>
-                <img src={props.image} />
-              </a>
-              </Link>
+            <div
+              className={classNames('Card__image', {
+                '-square -contain': props.containImage,
+              })}
+            >
+              {props.product ? (
+                <Link href={props.product.href}>
+                  <a>
+                    <img
+                      className={classNames({ 'w-100': !props.containImage })}
+                      src={props.image}
+                    />
+                  </a>
+                </Link>
+              ) : (
+                <img
+                  className={classNames({ 'w-100': !props.containImage })}
+                  src={props.image}
+                />
+              )}
             </div>
           </Col>
           <Col className="col" xs="7" md={props.stacked ? 12 : 7}>
             <h2
               className={classNames(props.stacked ? 'h4' : 'h3', 'Card__title')}
             >
-             <Link href={props.product.href}>
-               <a>
-              {props.title}
-               </a>
-              </Link>
+              {props.product ? (
+                <Link href={props.product.href}>
+                  <a>{props.title}</a>
+                </Link>
+              ) : (
+                props.title
+              )}
             </h2>
             {props.children}
           </Col>
