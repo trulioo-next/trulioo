@@ -62,9 +62,7 @@ const SectionBody = props => {
   const handleClick = () => {
     ref.current.showModal();
   };
-
-  console.log('is error ', props.error )
-  
+ 
   const bodyClasses = classNames(
     props.className,
     'Section__body',
@@ -79,7 +77,7 @@ const SectionBody = props => {
   return (
     <div className={bodyClasses}>
 
-      <CheckBalanceModal visible={false} ref={ref}  content={props.modalContent} error={props.error} balance={props.balance} />
+      <CheckBalanceModal visible={false} ref={ref}  content={props.modalContent} error={props.error} balance={props.balance} card={props.card}/>
  
       {data.eyebrow && <span className="Section__eyebrow">{data.eyebrow}</span>}
       {data.title && <h2 className="Section__title">{data.title}</h2>}
@@ -120,10 +118,7 @@ const SectionGiftCardBalance = ({
   const userData = useSelector(state => userDataSelector(state));
   let cardBalance = userData && userData.cardBalance && userData.cardBalance.balance ? userData.cardBalance.balance : 0;
   let error =  userData && userData.cardBalance && userData.cardBalance.status === "error" ? userData.cardBalance.message : false;
-  // let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
-  
-  console.log('error  ', error )
-
+    
   if (!hasMedia) {
     mobileAlignment = content.position.mobile;
     desktopAlignment = content.position.desktop;
@@ -180,7 +175,7 @@ const SectionGiftCardBalance = ({
       <div className={classNames('container', 'Section__container')}>
         <div className={rowClasses}>
           {hasMedia && <SectionMedia media={media} />}
-          <SectionBody data={content} modalContent={modalData} error={error} balance={cardBalance}>{children}</SectionBody>
+          <SectionBody data={content} modalContent={modalData} error={error} balance={cardBalance} card={userData.cardBalance}>{children}</SectionBody>
         </div>
       </div>
     </section>

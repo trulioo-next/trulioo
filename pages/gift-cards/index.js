@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout/Layout';
 import Header from '@/components/Header/Header';
-
 import Error from 'next/error';
-
 import { reqPageDataAction } from '@/stores/page/actions';
-
 import { pageDataSelector } from '@/stores/page/selectors';
 
 const Page = props => {

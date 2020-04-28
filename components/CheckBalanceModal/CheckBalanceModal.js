@@ -12,7 +12,14 @@ const CheckBalanceModal = forwardRef((props, ref) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(props.visible);
     const [cardNumber, setCardNumber] = useState('');
+    const [loaded, setLoaded] = useState(false);
     const user = useSelector(state => userDataSelector(state));
+    let balance = props.balance && props.balance > 0 ? props.balance : false;
+ 
+    if(props.card && props.card.card_number && !loaded) {
+        setCardNumber(props.card.card_number);
+        setLoaded(true)
+    }
  
     const showModal = () => {
       setShow(true);
@@ -53,9 +60,9 @@ const CheckBalanceModal = forwardRef((props, ref) => {
                     <h2>{props.content.modal_title}</h2>
                     <p>{props.content.modal_subtitle}</p>
                       
-                      { props.balance && 
+                      { balance && 
                         <div>
-                          <h4> Card Balance: ${ props.balance } </h4>
+                          <h4> Card Balance: ${ balance } </h4>
                           <p>Try another Card.</p>
                         </div>
                       }
