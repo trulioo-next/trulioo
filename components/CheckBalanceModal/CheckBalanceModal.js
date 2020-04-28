@@ -53,7 +53,7 @@ const CheckBalanceModal = forwardRef((props, ref) => {
     return (
         <div>
              
-            <Modal show={show} onHide={ () => handleClose() } centered size="lg">
+            <Modal show={show} onHide={ () => handleClose() } centered size="lg" className="modal__container">
                 <Modal.Header closeButton />
                 <Modal.Body className="center--text">
                   

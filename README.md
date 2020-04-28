@@ -66,3 +66,14 @@ The releases are handled with [CircleCI](https://circleci.com/gh/jouzen) and tri
 ## Environments
 ### NOW Testing Env. 
 - https://7-11-n21wjd3vq.now.sh/
+
+### DEV 4 Deployment : 
+- ssh root@65.151.136.46 -p 2202
+- p: 5Le96Wkn7KYnSZsTrN
+- cd /var/www/sites/dev4.7eleven.ca/httpdocs
+- git fetch 
+- git checkout origin/develop
+- rm -rf .next
+- yarb build
+- pm2 restart IdealRebel
+ 

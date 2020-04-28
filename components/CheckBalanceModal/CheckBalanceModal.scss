@@ -1,27 +1,30 @@
 
+.modal__container {
 
-.field__error {
-  position: relative;
-  margin: 20px 0px;
-  color: red;
-  display: block;
-}
-
-
-input {
-  border-radius: 12px;
-  width: 100%;
-  padding: 12px 8px;
-  font-size: 18px;
-}
+  .field__error {
+    position: relative;
+    margin: 20px 0px;
+    color: red;
+    display: block;
+  }
 
 
-.column__row {
-  position: relative;
-  margin: 20px 0px;
-}
+  input {
+    border-radius: 12px;
+    width: 100%;
+    padding: 12px 8px;
+    font-size: 18px;
+  }
 
 
-.center--text {
-  text-align: center;
+  .column__row {
+    position: relative;
+    margin: 20px 0px;
+  }
+
+
+  .center--text {
+    text-align: center;
+  }
+
 }
