@@ -46,45 +46,83 @@ const SectionMedia = ({ media }) => {
   );
 };
 
-const SectionCTA = ({ data, i }) => {
+const SectionCTA = ({ data: {item, ...options}, i }) => {
 
-  if(!data) {
+  if(!item) {
     return(<></>)
   }
  
   let url = "/";
-  if(data && data.url ) {
-      url = data.url;
+  if(item && item.url ) {
+      url = item.url;
   }
 
   const params = {
-    href: data.url,
-    as: data.target ? null : data.url,
-    target: data.target ? data.target : null,
+    href: item.url,
+    as: item.target ? null : item.url,
+    target: item.target ? item.target : null,
   };
- 
+
+
   if (i === 0) {
+    const {style, styleClassName} = getCTAButtonStyle({...options});
+    const className = 'Section__cta' + (styleClassName ? ' '+styleClassName : '');
+
     return (
-      <Button className="Section__cta" {...params}>
-        {data.title}
-      </Button>
+      <React.Fragment>
+        { style &&
+        <style>{style}</style>
+        }
+        <Button className={className} {...params}>
+          {item.title}
+        </Button>
+      </React.Fragment>
     );
   }
 
-  if (data.target) {
+  if (item.target) {
     return (
       <a className="Section__cta" {...params}>
-        {data.title} &rsaquo;
+        {item.title} &rsaquo;
       </a>
     );
   }
     
   return (
     <Link {...params}>
-      <a className="Section__cta">{data.title} &rsaquo;</a>
+      <a className="Section__cta">{item.title} &rsaquo;</a>
     </Link>
   );
 };
+
+const getCTAButtonStyle = options => {
+  const uid = "cta__" + Math.random().toString(36).substr(2, 9);
+
+  let style = '';
+  if (options['text_colour'])
+  { style += 'color: ' + options['text_colour'] + ' !important;';
+  }
+  if (options['background_colour'])
+  { style += 'background-color: ' + options['background_colour'] + ' !important;';
+  }
+  if (style !== '')
+  { style = '.'+uid+' {' + style + '}';
+  }
+
+  let hoverStyle = '';
+  if (options['hover_text_colour'])
+  { hoverStyle += 'color: ' + options['hover_text_colour'] + ' !important;';
+  }
+  if (options['hover_background_colour'])
+  { hoverStyle += 'background-color: ' + options['hover_background_colour'] + ' !important;';
+  }
+  if (hoverStyle !== '')
+  { hoverStyle = '.'+uid+':hover, .'+uid+':focus {' + hoverStyle + '}';
+  }
+
+  return { style: style + hoverStyle, styleClassName: uid };
+}
+
 
 const SectionBody = props => {
   const data = props.data;
@@ -119,7 +157,7 @@ const SectionBody = props => {
       {data.ctas && (
         <div className="Section__actions">
           {data.ctas.map((data, i) => (
-            <SectionCTA data={data.item} modal={false} i={i} key={`cta-${i}`} />
+            <SectionCTA data={data} modal={false} i={i} key={`cta-${i}`} />
           ))}
         </div>
       )}
