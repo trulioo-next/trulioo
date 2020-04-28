@@ -18,17 +18,17 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
+    
+      // fs.writeFile('./data/global.json', JSON.stringify(response), function(err) {
+      //   if (err) {
+      //     throw 'Data could not be written';
+      //   }
+      //   // console.log('GLOBAL DATA UPDATED  ')
+      //   // res.send({message:'Blog posts have been written'});
+      // });
 
-     fs.writeFile('./data/global.json', JSON.stringify(response), function(err) {
-          if (err) {
-            throw 'Data could not be written';
-          }
-          // console.log('GLOBAL DATA UPDATED  ')
-          // res.send({message:'Blog posts have been written'});
-        });
-
-      console.log('GLOBAL DATA ', response['header-menu'] )
- 
+      // console.log('GLOBAL DATA ', response['header-menu'] )
+     // res.json(STATICDATA)
      res.json(response)
      return
   } catch(error) {

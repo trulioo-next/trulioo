@@ -14,29 +14,32 @@ const CheckBalanceModal = forwardRef((props, ref) => {
     const [cardNumber, setCardNumber] = useState('');
     const user = useSelector(state => userDataSelector(state));
 
+    console.log('ERROR FOUND ', props.error )
+
     const showModal = () => {
-        setShow(true);
-      };  
-
+      setShow(true);
+    };  
+    
+    //
     useImperativeHandle(ref, () => {
-        return {
-          showModal: showModal
-        };
-      });    
-
+      return {
+        showModal: showModal
+      };
+    });    
+    
+    //
     function handleClose() {
-        setShow(false);
-        if(props.cb) {
-            props.cb();
-        }
+      setShow(false);
+      if(props.cb) {
+          props.cb();
+      }
     }
-
+    
+    //
     function onValueChange (e, type) {
-      
       setCardNumber(e.target.value );
-     
     }
-
+ 
     // Check the card ID 
     const checkCard = () => {
       dispatch(reqCheckCardAction({ payload: cardNumber }));
@@ -54,9 +57,9 @@ const CheckBalanceModal = forwardRef((props, ref) => {
 
                     <form>
                       <input value={cardNumber} placeholder="GIFT CARD NUMBER" type="number" id="card_number" onChange={e => onValueChange(e)}/>
-                      { user.cardBalance.error && 
-                         <p className="field__error">{user.cardBalance.error.payload.field_errors.loyalty_id}</p>
-                      }
+                        { props.error && 
+                         <p className="field__error">{props.error}</p>
+                        }
                     </form>
 
                     <div className="column__row">

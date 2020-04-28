@@ -33,6 +33,7 @@ export default (state = INITIAL_STATE, action) => {
         coupons:action.payload.coupons,
         deals:action.payload.deals,
         promotions:action.payload.promotions,
+        bonusOffers:action.payload.bonusOffers,
         registered: true,
         error:action.payload.error
       }  
@@ -46,6 +47,7 @@ export default (state = INITIAL_STATE, action) => {
         coupons:action.payload.coupons,
         deals:action.payload.deals,
         promotions:action.payload.promotions,
+        bonusOffers:action.payload.bonusOffers,
         registered: true,
         error:action.payload.error
       }  

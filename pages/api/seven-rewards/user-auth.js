@@ -69,6 +69,14 @@ export default async (req, res) => {
        headers: authHeaders
      });
 
+    // Rewards : 
+    // /v4/rewards/catalog/ 
+    const bonusOffers = await fetch(REWARDS_API_URL+'/v4/rewards/tier/',
+     {
+       method: 'GET',
+       headers: authHeaders
+     });
+
     // Coupons 
     // /v4/rewards/coupons/
     const coupons = await fetch(REWARDS_API_URL+'/v4/rewards/coupons/',
@@ -94,17 +102,17 @@ export default async (req, res) => {
      });
 
     //
-    // console.log('USER CARDS   ', promotions )
+    // console.log('bonusOffers   ', bonusOffers )
     // console.log('USER DEALS  ', deals )
     // console.log('USER COUPONS  ', coupons )
     // console.log('USER FULL PROFILE STRINGIFY :: >>  ',  fullProfile )
     // console.log('REWARDS ', rewards )
     // console.log('USER ACCESS TOKEN :: ', user )   
  
-     res.json({user:fullProfile, rewards, auth:user, coupons, deals, promotions, error:false  })
+     res.json({user:fullProfile, rewards, auth:user, coupons, deals, promotions, bonusOffers, error:false  })
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false  })
     // res.status(400).send({ error: error })
   }
 };

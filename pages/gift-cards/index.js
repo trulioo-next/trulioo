@@ -15,10 +15,7 @@ const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
-
-
-  console.log('THIS STORE ', props.data )
-
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: 'gift-cards'}));
@@ -26,9 +23,7 @@ const Page = props => {
  
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
-
-  // console.log('GIFT CARD DATA ', data )
-
+ 
   return (
     <Layout>
       <Header title="" />
@@ -45,9 +40,9 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res, store  }) => {
-  let data = store;
-  return { query, data };
+Page.getInitialProps = async ({ query, res }) => {
+  
+  return { query };
 };
 
 export default Page;

@@ -12,5 +12,6 @@ export const INITIAL_STATE = {
   deals:false,
   promotions:false,
   error:false,
-  cardBalance:false
+  cardBalance:false,
+  bonusOffers:false
 };
