@@ -71,7 +71,7 @@ export default async (req, res) => {
 
     // Rewards : 
     // /v4/rewards/catalog/ 
-    const bonusOffers = await fetch(REWARDS_API_URL+'/v4/rewards/tier/',
+    const bonusOffers = await fetch(REWARDS_API_URL+'/v4/rewards/bonuses/',
      {
        method: 'GET',
        headers: authHeaders
