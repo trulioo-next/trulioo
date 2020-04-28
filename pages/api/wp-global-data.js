@@ -27,7 +27,7 @@ export default async (req, res) => {
           // res.send({message:'Blog posts have been written'});
         });
 
-      // console.log('GLOBAL DATA ', response )
+      console.log('GLOBAL DATA ', response['header-menu'] )
  
      res.json(response)
      return
