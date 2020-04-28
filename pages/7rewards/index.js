@@ -86,14 +86,7 @@ class SevenRewards extends React.Component {
       rewards_tier_6000 = rewards.rewards_catalog.filter(function (item) {
         return item.tier_id == '6000_CA';
       })
-
-      //console.log('coupons  ::: >>  ', coupons)
-      //console.log('rewards  ::: >>  ', rewards.rewards_catalog);
-      //console.log('rewards tier 1000  ::: >>  ', rewards_tier_1000);
-      //console.log('bonus offers  ::: >>  ', this.props.user.bonusOffers)
     }
-
-
 
     return (
       <Layout>

@@ -2,7 +2,6 @@ import React from 'react'
 import './ListItemOffer.scss'
 
 const ListItemOffer = ({ data }) => {
-    console.log(data);
     return (
         <>
             {data && <div className="list-item offer-item"
