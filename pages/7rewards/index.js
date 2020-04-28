@@ -41,7 +41,7 @@ class SevenRewards extends React.Component {
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
     }
-    // console.log('::: this.props.user :: ', this.props )
+    //console.log('::: this.props.user :: ', this.props.user)
 
   }
   componentDidUpdate() { }
@@ -50,6 +50,7 @@ class SevenRewards extends React.Component {
 
     let coupons = this.props.userData.coupons;
     let rewards = this.props.userData.rewards;
+    let bonusOffers = this.props.userData.bonusOffers;
     let rewards_tier_1000 = null;
     let rewards_tier_1500 = null;
     let rewards_tier_2000 = null;
@@ -60,6 +61,7 @@ class SevenRewards extends React.Component {
     if (this.props.user && this.props.user.auth) {
       coupons = this.props.user.coupons;
       rewards = this.props.user.rewards;
+      bonusOffers = this.props.user.bonusOffers;
 
       rewards_tier_1000 = rewards.rewards_catalog.filter(function (item) {
         return item.tier_id == '1000_CA';
@@ -84,14 +86,7 @@ class SevenRewards extends React.Component {
       rewards_tier_6000 = rewards.rewards_catalog.filter(function (item) {
         return item.tier_id == '6000_CA';
       })
-
-      //console.log('coupons  ::: >>  ', coupons)
-      //console.log('rewards  ::: >>  ', rewards.rewards_catalog);
-      //console.log('rewards tier 1000  ::: >>  ', rewards_tier_1000);
-      console.log(this.props.user)
     }
-
-
 
     return (
       <Layout>
@@ -192,18 +187,13 @@ class SevenRewards extends React.Component {
                 <Tab eventKey="bonus-offers" title="Bonus Offers">
                   <Container>
                     <Row>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemOffer />
-                      </Col>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemOffer />
-                      </Col>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemOffer />
-                      </Col>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemOffer />
-                      </Col>
+                      {bonusOffers && bonusOffers.map((offer, i) => {
+                        return (
+                          <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemOffer key={i} data={offer} />
+                          </Col>
+                        )
+                      })}
                     </Row>
                   </Container>
                 </Tab>

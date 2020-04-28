@@ -4,6 +4,7 @@ import SectionHero from './SectionComponents/SectionHero';
 import SectionSlider from './SectionComponents/SectionSlider';
 import SectionCallToAction from './SectionComponents/SectionCallToAction';
 import SectionColumnGroup from './SectionComponents/SectionColumnGroup';
+import SectionColumnSpread from './SectionComponents/SectionColumnSpread';
 import SectionFaq from './SectionComponents/SectionFaq';
 import SectionGetDeliveryAddress from './SectionComponents/SectionGetDeliveryAddress';
 import Section7Rewards from './SectionComponents/Section7Rewards';
@@ -15,7 +16,13 @@ import SectionPostGrid from './SectionComponents/SectionPostGrid';
 import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
 import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
 
-const SectionMaker = ({ type, params, sectionIndex, category, defaultImage }) => {
+const SectionMaker = ({
+  type,
+  params,
+  sectionIndex,
+  category,
+  defaultImage,
+}) => {
   switch (type) {
     case 'section_hero_block':
       return <SectionHero sectionIndex={sectionIndex} {...params} />;
@@ -28,6 +35,9 @@ const SectionMaker = ({ type, params, sectionIndex, category, defaultImage }) =>
 
     case 'section_column_group_block':
       return <SectionColumnGroup sectionIndex={sectionIndex} {...params} />;
+
+    case 'section_column_spread_block':
+      return <SectionColumnSpread sectionIndex={sectionIndex} {...params} />;
 
     case 'section_faq_block':
       return <SectionFaq sectionIndex={sectionIndex} {...params} />;
@@ -53,13 +63,20 @@ const SectionMaker = ({ type, params, sectionIndex, category, defaultImage }) =>
       return <ReusableComponent sectionIndex={sectionIndex} {...params} />;
 
     case 'section_post_grid':
-      return <SectionPostGrid sectionIndex={sectionIndex} {...params} category={category} defaultImage={defaultImage} />;
+      return (
+        <SectionPostGrid
+          sectionIndex={sectionIndex}
+          {...params}
+          category={category}
+          defaultImage={defaultImage}
+        />
+      );
 
     case 'section_taste_of_asia':
-      return <SectionTasteOfAsia sectionIndex={sectionIndex} {...params} />; 
+      return <SectionTasteOfAsia sectionIndex={sectionIndex} {...params} />;
 
-     case 'section_gift_card_balance':
-      return <SectionGiftCardBalance sectionIndex={sectionIndex} {...params} />;      
+    case 'section_gift_card_balance':
+      return <SectionGiftCardBalance sectionIndex={sectionIndex} {...params} />;
 
     default:
       return '';

@@ -71,6 +71,7 @@ const SectionTasteOfAsia = props => {
                   key={sectionKey}
                   title={product[lang].title}
                   image={productImage}
+                  containImage
                   stacked
                   className="TasteOfAsia__card"
                 >
