@@ -31,7 +31,7 @@ class SevenRewards extends React.Component {
     }
   }
 
-  static async getInitialProps ({ isServer, store }) {
+  static async getInitialProps({ isServer, store }) {
     let userData = store.getState()
     return { isServer, userData };
   }
@@ -45,9 +45,51 @@ class SevenRewards extends React.Component {
   componentDidUpdate() { }
 
   render() {
-     
-    let coupons = this.props.user && this.props.user.auth ? this.props.user.coupons : this.props.userData.coupons;
-    // console.log('coupons  ::: >>  ', coupons )
+
+    let coupons = this.props.userData.coupons;
+    let rewards = this.props.userData.rewards;
+    let rewards_tier_1000 = null;
+    let rewards_tier_1500 = null;
+    let rewards_tier_2000 = null;
+    let rewards_tier_2750 = null;
+    let rewards_tier_4000 = null;
+    let rewards_tier_6000 = null;
+
+    if (this.props.user && this.props.user.auth) {
+      coupons = this.props.user.coupons;
+      rewards = this.props.user.rewards;
+
+      rewards_tier_1000 = rewards.rewards_catalog.filter(function (item) {
+        return item.tier_id == '1000_CA';
+      })
+
+      rewards_tier_1500 = rewards.rewards_catalog.filter(function (item) {
+        return item.tier_id == '1500_CA';
+      })
+
+      rewards_tier_2000 = rewards.rewards_catalog.filter(function (item) {
+        return item.tier_id == '2000_CA';
+      })
+
+      rewards_tier_2750 = rewards.rewards_catalog.filter(function (item) {
+        return item.tier_id == '2750_CA';
+      })
+
+      rewards_tier_4000 = rewards.rewards_catalog.filter(function (item) {
+        return item.tier_id == '4000_CA';
+      })
+
+      rewards_tier_6000 = rewards.rewards_catalog.filter(function (item) {
+        return item.tier_id == '6000_CA';
+      })
+
+      //console.log('coupons  ::: >>  ', coupons)
+      //console.log('rewards  ::: >>  ', rewards.rewards_catalog);
+      //console.log('rewards tier 1000  ::: >>  ', rewards_tier_1000);
+      console.log(this.props.user)
+    }
+
+
 
     return (
       <Layout>
@@ -68,80 +110,78 @@ class SevenRewards extends React.Component {
                     <Tab eventKey="tab1" title="1000 Points">
                       <Container>
                         <Row>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <div>
-                              <ListItemReward />
-                            </div>
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
+                          {rewards_tier_1000 && rewards_tier_1000.map((reward, i) => {
+                            return (
+                              <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                                <ListItemReward key={i} data={reward} />
+                              </Col>
+                            )
+                          })}
                         </Row>
                       </Container>
                     </Tab>
                     <Tab eventKey="tab2" title="1500 Points">
                       <Container>
                         <Row>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
+                          {rewards_tier_1500 && rewards_tier_1500.map((reward, i) => {
+                            return (
+                              <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                                <ListItemReward key={i} data={reward} />
+                              </Col>
+                            )
+                          })}
                         </Row>
                       </Container>
                     </Tab>
                     <Tab eventKey="tab3" title="2000 Points">
                       <Container>
                         <Row>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
+                          {rewards_tier_2000 && rewards_tier_2000.map((reward, i) => {
+                            return (
+                              <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                                <ListItemReward key={i} data={reward} />
+                              </Col>
+                            )
+                          })}
                         </Row>
                       </Container>
                     </Tab>
                     <Tab eventKey="tab4" title="2750 Points">
                       <Container>
                         <Row>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
+                          {rewards_tier_2750 && rewards_tier_2750.map((reward, i) => {
+                            return (
+                              <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                                <ListItemReward key={i} data={reward} />
+                              </Col>
+                            )
+                          })}
                         </Row>
                       </Container>
                     </Tab>
                     <Tab eventKey="tab5" title="4000 Points">
                       <Container>
                         <Row>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
+                          {rewards_tier_4000 && rewards_tier_4000.map((reward, i) => {
+                            return (
+                              <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                                <ListItemReward key={i} data={reward} />
+                              </Col>
+                            )
+                          })}
                         </Row>
                       </Container>
                     </Tab>
                     <Tab eventKey="tab6" title="6000 Points">
                       <Container>
                         <Row>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
-                          <Col className="col" lg="6" md="6" sm="12" xs="12">
-                            <ListItemReward />
-                          </Col>
+                          {rewards_tier_6000 && rewards_tier_6000.map((reward, i) => {
+                            return (
+                              <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                                <ListItemReward key={i} data={reward} />
+                              </Col>
+                            )
+                          })}
                         </Row>
                       </Container>
                     </Tab>
@@ -179,16 +219,13 @@ class SevenRewards extends React.Component {
                       </Col>
                     </Row>
                     <Row>
-
                       {coupons && coupons.map((coupon, i) => {
-
                         return (
                           <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
                             <ListItemCoupon key={i} data={coupon} />
                           </Col>
                         )
                       })}
-
                     </Row>
                   </Container>
                 </Tab>
@@ -235,12 +272,13 @@ class SevenRewards extends React.Component {
                       </Col>
                     </Row>
                     <Row className="coupons-row">
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemCoupon />
-                      </Col>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemCoupon />
-                      </Col>
+                      {coupons && coupons.map((coupon, i) => {
+                        return (
+                          <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemCoupon key={i} data={coupon} />
+                          </Col>
+                        )
+                      })}
                     </Row>
                   </Container>
                 </Tab>
@@ -262,21 +300,21 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 SevenRewards.defaultProps = {
-    description: false,
-    expiration_label: false,
-    expires: false,
-    expires_soon: false,
-    id: false,
-    image_large: false,
-    image_thumb: false,
-    is_limited_quantity: false,
-    is_location_specific: false,
-    legal_text: false,
-    participating_stores: false,
-    percentage_left: false,
-    quantity_is_low: false,
-    title: false,
-    type: false
+  description: false,
+  expiration_label: false,
+  expires: false,
+  expires_soon: false,
+  id: false,
+  image_large: false,
+  image_thumb: false,
+  is_limited_quantity: false,
+  is_location_specific: false,
+  legal_text: false,
+  participating_stores: false,
+  percentage_left: false,
+  quantity_is_low: false,
+  title: false,
+  type: false
 }
 
 const SevenRewards_ = connect(
