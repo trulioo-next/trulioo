@@ -12,8 +12,8 @@ import './Delivery.scss';
 
 function buildDeliveryQuery(location) {
   var url = new URL(
-      'https://liveapi.yext.com/v2/accounts/me/locations/geosearch',
-    ),
+    'https://liveapi.yext.com/v2/accounts/me/locations/geosearch',
+  ),
     params = {
       location: location,
       limit: 50,
@@ -252,7 +252,7 @@ class SectionGetDeliveryAddress extends Component {
                   ></div>
                 </div>
               </div>
-              <div className="row justify-content-center">
+              <div className="row justify-content-center mt-5">
                 <div className="col col-11 col-md-9">
                   <form className="Delivery__form">
                     <div className="Delivery__field">
@@ -316,8 +316,8 @@ class SectionGetDeliveryAddress extends Component {
                   })}
                 </DeliveryAvailable>
               ) : (
-                <DeliveryUnavailable {...this.props.delivery_unavailable} />
-              )}
+                  <DeliveryUnavailable {...this.props.delivery_unavailable} />
+                )}
             </DeliveryResult>
           )}
         </AnimatePresence>
