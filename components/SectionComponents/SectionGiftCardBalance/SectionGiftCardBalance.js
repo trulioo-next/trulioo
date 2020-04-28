@@ -1,11 +1,15 @@
 import classNames from 'classnames';
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Link from 'next/link';
 
 import Button from '@/components/Button';
 import Video from '@/components/Video';
 import CheckBalanceModal from '@/components/CheckBalanceModal';
+
+
+import { userDataSelector } from '@/stores/user/selectors';
 
 import './SectionGiftCardBalance.scss';
 
@@ -46,19 +50,7 @@ const SectionMedia = ({ media }) => {
     </div>
   );
 };
-
-const SectionCTA = ({ data, i }) => {
-
-    
-    
-    return (
-      <Button className="Section__cta">
-        {data.title}
-      </Button>
-    );
-   
-   
-};
+ 
 
 //
   
@@ -68,13 +60,11 @@ const SectionBody = props => {
   const mobileColumnSize = hasMedia ? 12 : 8;
   const desktopColumnSize = hasMedia ? 5 : 6;
   const ref = useRef(null);
-
-  
+ 
   const handleClick = () => {
     ref.current.showModal();
   };
- 
-
+  
   const bodyClasses = classNames(
     props.className,
     'Section__body',
@@ -121,15 +111,18 @@ const SectionGiftCardBalance = ({
   content,
   className,
   children,
-  modalData,
+  modalData
 }) => {
   hasMedia = params.add_media_column;
 
   let mobileAlignment = 'center';
   let desktopAlignment = 'around';
 
-
- // console.log('SECTION CTA PROPS ', media )
+  const userData = useSelector(state => userDataSelector(state));
+  let cardBalance = userData && userData.cardBalance && userData.cardBalance.balance ? userData.cardBalance.balance : 0;
+  // let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
+  
+  console.log('userData PROPS ', cardBalance )
 
   if (!hasMedia) {
     mobileAlignment = content.position.mobile;
@@ -196,5 +189,22 @@ const SectionGiftCardBalance = ({
 
 SectionGiftCardBalance.Media = SectionMedia;
 SectionGiftCardBalance.Body = SectionBody;
+SectionGiftCardBalance.defaultProps = {
+  user:{
+  auth:false,
+  registered:false,
+  user:false,
+  rewards:false,
+  coupons:false,
+  deals:false,
+  promotions:false,
+  error:false,
+  cardBalance:{
+      balance: 0,
+      card_number: false,
+      status: false
+    }
+  }
+}
 
 export default SectionGiftCardBalance;

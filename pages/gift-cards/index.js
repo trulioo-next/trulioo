@@ -15,20 +15,26 @@ const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
+
+  console.log('THIS STORE ', props.data);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(reqPageDataAction({ payload: 'gift-cards'}));
+    dispatch(reqPageDataAction({ payload: 'gift-cards' }));
   }, []);
- 
+
   const pageData = useSelector(state => pageDataSelector(state));
-  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
+  let data =
+    pageData && pageData.acf_data && pageData.acf_data.components
+      ? pageData.acf_data
+      : false;
 
   // console.log('GIFT CARD DATA ', data )
 
   return (
     <Layout>
-      <Header title="" />
-      { data &&
+      {pageData.page_data && <Header title={pageData.page_data.post_title} />}
+      {data &&
         data.components.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}
@@ -41,8 +47,9 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res }) => {
-  return { query };
+Page.getInitialProps = async ({ query, res, store }) => {
+  let data = store;
+  return { query, data };
 };
 
 export default Page;

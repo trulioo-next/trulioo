@@ -1,5 +1,4 @@
-import classNames from 'classnames';
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import Button from '@/components/Button';
@@ -150,6 +149,7 @@ class SectionGetDeliveryAddress extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNavigator = this.handleNavigator.bind(this);
 
+    this.sectionRef = React.createRef();
     this.input = React.createRef();
   }
 
@@ -178,6 +178,8 @@ class SectionGetDeliveryAddress extends Component {
         });
       },
     );
+
+    this.sectionRef.scrollIntoView({ behavior: 'smooth' });
   }
 
   async handleNavigator() {
@@ -221,6 +223,7 @@ class SectionGetDeliveryAddress extends Component {
     error.bind(this);
 
     navigator.geolocation.getCurrentPosition(success, error);
+    this.sectionRef.scrollIntoView({ behavior: 'smooth' });
   }
 
   render() {
@@ -230,7 +233,12 @@ class SectionGetDeliveryAddress extends Component {
 
     return (
       <>
-        <section className="Section Delivery">
+        <section
+          className="Section Delivery"
+          ref={sectionRef => {
+            this.sectionRef = sectionRef;
+          }}
+        >
           <div className="bg-white">
             <div className="container Section__container">
               <div className="row">

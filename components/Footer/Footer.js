@@ -10,26 +10,26 @@ import { selectFooterData } from '@/stores/app/selectors';
 const NavList = props => {
   let row = '';
   if (props.items) {
-    row = props.items.map((href, as, label, key) => {
-      let externalPath = href.href.split('://');
+    row = props.items.map(({ href, label }, key) => {
+      let externalPath = href.split('://');
       if (externalPath[0] === 'https' || externalPath[0] === 'http') {
         return (
           <li key={key} className="SiteFooter__item">
             <a
               className="SiteFooter__link"
-              href={href.href}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {href.label}
+              {label}
             </a>
           </li>
         );
       }
       return (
         <li key={key} className="SiteFooter__item">
-          <Link href={href.href}>
-            <a className="SiteFooter__link">{href.label}</a>
+          <Link href={href}>
+            <a className="SiteFooter__link">{label}</a>
           </Link>
         </li>
       );

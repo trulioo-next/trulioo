@@ -41,6 +41,8 @@ class SevenRewards extends React.Component {
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
     }
+    // console.log('::: this.props.user :: ', this.props )
+
   }
   componentDidUpdate() { }
 
