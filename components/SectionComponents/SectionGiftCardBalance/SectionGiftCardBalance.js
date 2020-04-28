@@ -50,10 +50,8 @@ const SectionMedia = ({ media }) => {
     </div>
   );
 };
- 
-
-//
   
+//
 const SectionBody = props => {
   const data = props.data;
 
@@ -81,7 +79,7 @@ const SectionBody = props => {
   return (
     <div className={bodyClasses}>
 
-      <CheckBalanceModal visible={false} ref={ref}  content={props.modalContent} error={props.error} />
+      <CheckBalanceModal visible={false} ref={ref}  content={props.modalContent} error={props.error} balance={props.balance} />
  
       {data.eyebrow && <span className="Section__eyebrow">{data.eyebrow}</span>}
       {data.title && <h2 className="Section__title">{data.title}</h2>}
@@ -182,7 +180,7 @@ const SectionGiftCardBalance = ({
       <div className={classNames('container', 'Section__container')}>
         <div className={rowClasses}>
           {hasMedia && <SectionMedia media={media} />}
-          <SectionBody data={content} modalContent={modalData} error={error}>{children}</SectionBody>
+          <SectionBody data={content} modalContent={modalData} error={error} balance={cardBalance}>{children}</SectionBody>
         </div>
       </div>
     </section>

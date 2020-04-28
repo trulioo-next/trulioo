@@ -13,9 +13,7 @@ const CheckBalanceModal = forwardRef((props, ref) => {
     const [show, setShow] = useState(props.visible);
     const [cardNumber, setCardNumber] = useState('');
     const user = useSelector(state => userDataSelector(state));
-
-    console.log('ERROR FOUND ', props.error )
-
+ 
     const showModal = () => {
       setShow(true);
     };  
@@ -54,14 +52,21 @@ const CheckBalanceModal = forwardRef((props, ref) => {
                   
                     <h2>{props.content.modal_title}</h2>
                     <p>{props.content.modal_subtitle}</p>
-
-                    <form>
-                      <input value={cardNumber} placeholder="GIFT CARD NUMBER" type="number" id="card_number" onChange={e => onValueChange(e)}/>
-                        { props.error && 
-                         <p className="field__error">{props.error}</p>
-                        }
-                    </form>
-
+                      
+                      { props.balance && 
+                        <div>
+                          <h4> Card Balance: ${ props.balance } </h4>
+                          <p>Try another Card.</p>
+                        </div>
+                      }
+                    
+                      <form>
+                        <input value={cardNumber} placeholder="GIFT CARD NUMBER" type="number" id="card_number" onChange={e => onValueChange(e)}/>
+                          { props.error && 
+                           <p className="field__error">{props.error}</p>
+                          }
+                      </form>
+                    
                     <div className="column__row">
                      <Button className="Section__cta" onClick={checkCard}>
                        Check Your Balance
