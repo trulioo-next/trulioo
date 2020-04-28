@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import Layout from '../../containers/Layout/Layout'
 import Header from '../../components/Header/Header'
 import Button from '@/components/Button';
@@ -30,24 +30,26 @@ class SevenRewards extends React.Component {
       rewardsKey: 'tab1'
     }
   }
-
-  static async getInitialProps({ isServer, store }) {
-    return {}
+ 
+  static async getInitialProps ({ isServer, store }) {
+    let userData = store.getState()
+    return { isServer, userData };
   }
 
   componentDidMount() {
-
     let isUserAuth = this.props.user.auth
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
     }
-
+    // console.log('::: this.props.user :: ', this.props )
+ 
   }
   componentDidUpdate() { }
 
-
   render() {
-
+     
+    let coupons = this.props.user && this.props.user.auth ? this.props.user.coupons : this.props.userData.coupons;
+     
     return (
       <Layout>
         <Header title="7 Rewards" />
@@ -178,12 +180,16 @@ class SevenRewards extends React.Component {
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemCoupon />
-                      </Col>
-                      <Col className="col" lg="6" md="6" sm="12" xs="12">
-                        <ListItemCoupon />
-                      </Col>
+
+                      {coupons && coupons.map((coupon, i) => {
+
+                        return (
+                          <Col key={i} className="col" lg="6" md="6" sm="12" xs="12">
+                            <ListItemCoupon key={i} data={coupon} />
+                          </Col>
+                        )
+                      })}
+
                     </Row>
                   </Container>
                 </Tab>
@@ -255,6 +261,24 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
 })
+
+SevenRewards.defaultProps = {
+    description: false,
+    expiration_label: false,
+    expires: false,
+    expires_soon: false,
+    id: false,
+    image_large: false,
+    image_thumb: false,
+    is_limited_quantity: false,
+    is_location_specific: false,
+    legal_text: false,
+    participating_stores: false,
+    percentage_left: false,
+    quantity_is_low: false,
+    title: false,
+    type: false
+}
 
 const SevenRewards_ = connect(
   mapStateToProps,
