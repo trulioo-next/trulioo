@@ -19,44 +19,47 @@ const Page = props => {
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: props.query.slug }));
 
-    if(window.location.hash)
-    { scrollToAnchor(window.location.hash.replace('#', ''))
+    if (window.location.hash) {
+      scrollToAnchor(window.location.hash.replace('#', ''));
     }
   }, []);
 
-
   let scrollAttempts = 0;
-   
-  function scrollToAnchor(anchor)
-  {
-    if (scrollAttempts > 100)
-    { console.log("Anchor #" + anchor + " not found in page.");
+
+  function scrollToAnchor(anchor) {
+    if (scrollAttempts > 100) {
+      console.log('Anchor #' + anchor + ' not found in page.');
       return false;
     }
 
-    const attempt = (function(a) { return function() { attemptScrollToAnchor(a); }})(anchor);
+    const attempt = (function(a) {
+      return function() {
+        attemptScrollToAnchor(a);
+      };
+    })(anchor);
     setTimeout(attempt, 100);
   }
 
-  function attemptScrollToAnchor(anchor)
-  {
+  function attemptScrollToAnchor(anchor) {
     scrollAttempts++;
     const a = document.querySelector("a[name='" + anchor + "']");
-    if (a)
-    { a.scrollIntoView({behavior: "smooth", block: "start"});
+    if (a) {
+      a.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return true;
     }
     scrollToAnchor(anchor);
   }
 
-
   const pageData = useSelector(state => pageDataSelector(state));
-  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
+  let data =
+    pageData && pageData.acf_data && pageData.acf_data.components
+      ? pageData.acf_data
+      : false;
 
   return (
     <Layout>
-      <Header title="" />
-      { data &&
+      {pageData.page_data && <Header title={pageData.page_data.post_title} />}
+      {data &&
         data.components.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}
