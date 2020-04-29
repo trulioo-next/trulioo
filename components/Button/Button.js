@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 
 import './Button.scss';
 
-const Button = ({ as, href, className, children, outlined, ...props }) => {
+const Button = ({ as, href, className, children, outlined, green, ...props }) => {
 
   let ButtonClasses = classNames(
     'Button',
     { '-outlined': outlined },
+    { '-green': green },
     className,
   );
 

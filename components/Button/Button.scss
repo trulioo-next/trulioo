@@ -34,6 +34,17 @@
     background-color: transparent;
   }
 
+  &.-green {
+    background-color: #a9c74d;
+
+    &:hover,
+    &:focus {
+      background-color: $black;
+      text-decoration: none;
+      border-color: $link-hover-color;
+    }
+  }
+
   &:hover,
   &:focus {
     background-color: $link-hover-color;

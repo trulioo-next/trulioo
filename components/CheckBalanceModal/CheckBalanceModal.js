@@ -13,12 +13,22 @@ const CheckBalanceModal = forwardRef((props, ref) => {
     const [show, setShow] = useState(props.visible);
     const [cardNumber, setCardNumber] = useState('');
     const [loaded, setLoaded] = useState(false);
+    const [errorLoaded, setErrorLoaded] = useState(false);
+    const [error, setError] = useState(false);
     const user = useSelector(state => userDataSelector(state));
     let balance = props.balance && props.balance > 0 ? props.balance : false;
  
     if(props.card && props.card.card_number && !loaded) {
         setCardNumber(props.card.card_number);
         setLoaded(true)
+    }
+
+    if(props.error && !errorLoaded) {
+
+      if(!props.error) {
+        setError(false)
+        setErrorLoaded(true)
+      }
     }
  
     const showModal = () => {
@@ -47,18 +57,27 @@ const CheckBalanceModal = forwardRef((props, ref) => {
  
     // Check the card ID 
     const checkCard = () => {
-      dispatch(reqCheckCardAction({ payload: cardNumber }));
+      if(cardNumber !== '') {
+        dispatch(reqCheckCardAction({ payload: cardNumber }));
+      } else {
+
+        if(props.error) {
+            // 
+        } else {
+          setError("That gift card number does not appear to be valid.");
+        }
+      }
     } 
  
     return (
-        <div>
+        <div className="CheckBalanceModal">
              
             <Modal show={show} onHide={ () => handleClose() } centered size="lg" className="modal__container">
                 <Modal.Header closeButton />
                 <Modal.Body className="center--text">
                   
                     <h2>{props.content.modal_title}</h2>
-                    <p>{props.content.modal_subtitle}</p>
+                    <p className="blue--text lg center">{props.content.modal_subtitle}</p>
                       
                       { balance && 
                         <div>
@@ -72,21 +91,25 @@ const CheckBalanceModal = forwardRef((props, ref) => {
                           { props.error && 
                            <p className="field__error">{props.error}</p>
                           }
+                          { error && 
+                           <p className="field__error">{error}</p>
+                          }
                       </form>
                     
                     <div className="column__row">
-                     <Button className="Section__cta" onClick={checkCard}>
+                     <Button green className="Section__cta" onClick={checkCard}>
                        Check Your Balance
                      </Button>
                    </div>
 
-                   <p dangerouslySetInnerHTML={{ __html:props.content.modal_description}} />
+                   <p className="sm--text" dangerouslySetInnerHTML={{ __html:props.content.modal_description}} />
                     
                    <div> 
                      <Button
-                        id="submit"
-                        onClick={ (e) => handleClose(e) } >
-                        Find a store
+                        id="submit">
+                        <a href="https://stores.7eleven.ca/" target="_blank">
+                          Find a store
+                        </a>
                       </Button>
                     </div>
                 </Modal.Body>

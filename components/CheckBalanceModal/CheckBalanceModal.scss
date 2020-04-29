@@ -1,11 +1,22 @@
 
 .modal__container {
+  position: relative;
+  max-width: 500px;
+  margin:auto;
+  text-align: center;
+  left: 0px;
+  right: 0px;
 
   .field__error {
     position: relative;
     margin: 20px 0px;
     color: red;
     display: block;
+  }
+
+  .lg {
+    font-size: 20px;
+    margin-top: -20px;
   }
 
 
@@ -27,4 +38,16 @@
     text-align: center;
   }
 
+  .blue--text {
+    color: #4693cf;
+  }
+
+  .sm--text {
+    font-size: 15px;
+  }
+  
+
+  .green {
+    background-color: #a9c74d;
+  }
 }
