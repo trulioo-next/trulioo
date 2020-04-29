@@ -8,7 +8,9 @@ import { combineReducers } from 'redux'
 import app from './app/reducers'
 import page from './page/reducers'
 import nutritionals from './nutritionals/reducers'
+import newsroom from './newsroom/reducers'
 import user from './user/reducers'
+import alert from './alert/reducers'
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -19,7 +21,9 @@ export default function createReducer() {
     app,
     page,
     nutritionals,
-    user
+    newsroom,
+    user,
+    alert
   })
 
   return rootReducer

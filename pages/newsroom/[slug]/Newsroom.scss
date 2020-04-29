@@ -1,0 +1,55 @@
+@import '~@/static/scss/component-includes';
+
+.ContentContainer {
+    
+  padding: 30px 30px 50px 30px;
+
+
+  .NewsroomPost__page {
+    width: 60%;
+    margin: 0px auto;
+  }
+
+
+  .NewsroomPost__more {
+
+    text-align: center;
+    
+  }
+
+  a.Button {
+    color: $white;
+  }
+
+  .backToNewsroomButton {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .backToNewsroomLink {
+    font-weight: 500;
+
+    .chevron {
+      padding-right: 5px;
+      color: $light-green;
+    }
+
+  }
+}
+
+
+@media (max-width: 576px) {
+  .ContentContainer {
+    padding: 10px 30px 30px 30px;
+
+    .NewsroomPost__page {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .backToNewsroomButton {
+      display: none;
+    }
+
+  }
+}

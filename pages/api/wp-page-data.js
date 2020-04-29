@@ -28,6 +28,7 @@ export default async (req, res) => {
      res.json(response)
      return
   } catch(error) {
+     console.log("ERROR FETCHING PAGE")
      res.json(STATICDATA)
      // res.status(502).send({ error: error })
   }

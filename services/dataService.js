@@ -15,13 +15,19 @@ export default function DataService(state) {
 	return data;
 	}
 
+	async function getAlertsData(payload) {
+	 let data = await API.post('/api/wp-alerts-data', payload);
+	return data;
+	}
+
 	function getPostData(data) {
 	 return {data:'single data'}
 	}
 
    return {
     getGlobalData,
-    getPageData
+	getPageData,
+	getAlertsData
   }
 
 }

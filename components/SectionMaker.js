@@ -13,6 +13,7 @@ import SectionWysiwyg from './SectionComponents/SectionWysiwyg';
 import SectionCodeEditor from './SectionComponents/SectionCodeEditor';
 import ReusableComponent from './SectionComponents/ReusableComponent';
 import SectionPostGrid from './SectionComponents/SectionPostGrid';
+import SectionNewsroomGrid from './SectionComponents/SectionNewsroomGrid';
 import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
 import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
 
@@ -71,6 +72,9 @@ const SectionMaker = ({
           defaultImage={defaultImage}
         />
       );
+
+    case 'section_newsroom_grid':
+      return <SectionNewsroomGrid sectionIndex={sectionIndex} {...params} />;
 
     case 'section_taste_of_asia':
       return <SectionTasteOfAsia sectionIndex={sectionIndex} {...params} />;

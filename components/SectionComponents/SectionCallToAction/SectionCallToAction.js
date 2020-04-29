@@ -137,8 +137,8 @@ const SectionBody = props => {
     `col-${mobileColumnSize}`,
     { 'col-md-6': hasMedia },
     `col-lg-${desktopColumnSize}`,
-    `text-${data.text_alignment.mobile}`,
-    `text-lg-${data.text_alignment.desktop}`,
+    `text-${(data && data.text_alignment && data.text_alignment.mobile) || 'center'}`,
+    `text-lg-${(data && data.text_alignment && data.text_alignment.desktop) || 'center'}`,
   );
 
   return (
@@ -173,7 +173,7 @@ const SectionCallToAction = ({
   className,
   children,
 }) => {
-  hasMedia = params.add_media_column;
+  hasMedia = params && params.add_media_column;
 
   let mobileAlignment = 'center';
   let desktopAlignment = 'around';
@@ -182,8 +182,8 @@ const SectionCallToAction = ({
   // console.log('SECTION CTA PROPS ', media )
 
   if (!hasMedia) {
-    mobileAlignment = content.position.mobile;
-    desktopAlignment = content.position.desktop;
+    mobileAlignment = (content && content.position && content.position.mobile) || "start";
+    desktopAlignment = (content && content.position && content.position.desktop) || "start";
   }
 
   let rowClasses = classNames(
@@ -194,9 +194,9 @@ const SectionCallToAction = ({
     `justify-content-lg-${desktopAlignment}`,
   );
 
-  let bgImage = params.background_image;
-  let mobileBg = bgImage.mobile;
-  let desktopBg = bgImage.desktop;
+  let bgImage = (params && params.background_image) || '';
+  let mobileBg = (bgImage && bgImage.mobile) || '';
+  let desktopBg = (bgImage && bgImage.desktop) || '';
 
   return (
     <section
@@ -204,8 +204,8 @@ const SectionCallToAction = ({
         '-bg-img': bgImage ? true : false,
       })}
       style={{
-        color: params.text_color,
-        backgroundColor: params.background_color,
+        color: (params && params.text && params.text_color) || '#ffffff',
+        backgroundColor: (params && params.background_color) || '#000000',
       }}
     >
       {mobileBg && (
@@ -247,4 +247,4 @@ const SectionCallToAction = ({
 SectionCallToAction.Media = SectionMedia;
 SectionCallToAction.Body = SectionBody;
 
-export default SectionCallToAction;
+export { SectionCallToAction, SectionCTA };

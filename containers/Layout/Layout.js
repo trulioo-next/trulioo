@@ -8,6 +8,7 @@ const STATICDATA = require('../../data/global.json')
 
 import Error from 'next/error';
 
+import Alert from '@/components/Alert';
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
 import CookiesBanner from '@/components/CookiesBanner';
@@ -20,6 +21,7 @@ import {
   selectHeaderData,
   selectFooterData,
 } from '../../stores/app/selectors';
+
 
 import {
   userDataSelector
@@ -48,9 +50,14 @@ const Layout = props => {
   }
   // console.log('HEADER DATA ', headerData )
 
+  const {alertsData} = {...props};
+
   return (
     <React.Fragment>
       <div className="Layout">
+      { alertsData &&
+        <Alert alertData={alertsData} />
+      }
         <Header
           title="7 Eleven"
           description="Page MetaData here"

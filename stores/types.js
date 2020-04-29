@@ -22,6 +22,11 @@ export const NUTRITIONAL_LOAD_REQUEST = 'nutritional/load/NUTRITIONAL_LOAD_REQUE
 export const NUTRITIONAL_LOADED = 'nutritional/loaded/NUTRITIONAL_LOADED'
 export const NUTRITIONAL_ERROR = 'nutritional/error/NUTRITIONAL_ERROR'
 
+// Page Level Events  newsroom
+export const NEWSROOM_LOAD_REQUEST = 'newsroom/load/NEWSROOM_LOAD_REQUEST'
+export const NEWSROOM_LOADED = 'newsroom/loaded/NEWSROOM_LOADED'
+export const NEWSROOM_ERROR = 'newsroom/error/NEWSROOM_ERROR'
+
 // 7 rewards Events 
 export const SEVEN_REWARDS_AUTH_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_AUTH_REQUEST'
 export const SEVEN_REWARDS_AUTH_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_AUTH_LOADED'
@@ -42,3 +47,9 @@ export const SEVEN_REWARDS_CHECKCARD = 'seven_rewards/card/SEVEN_REWARDS_CHECKCA
 
 export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'
 export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CHECK_LOADED'
+
+
+// Alert Events
+export const ALERT_LOAD_REQUEST = 'alert/load/ALERT_LOAD_REQUEST'
+export const ALERT_LOADED = 'alert/loaded/ALERT_LOAD_REQUEST'
+export const ALERT_LOAD_ERROR = 'alert/error/ALERT_LOAD_ERROR'

@@ -1,0 +1,107 @@
+@import '~@/static/scss/component-includes';
+
+.ColumnSpread {
+
+  .Card.-newsroom {
+    $block: '.Card';
+
+    a:hover {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    #{$block}__image {
+      width: 100%;
+      padding-top: 80%;
+      margin-left: auto;
+      margin-right: auto;
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 1.6rem;
+      }
+    }
+
+    &.isFeature {
+
+      #{$block}__body {
+        display: grid;
+        width: 100%;
+        grid-gap: 10px;
+        grid-template-columns: 1fr 2fr;
+      }
+
+      #{$block}__image {
+        width: 80%;
+        padding-top: 80%;
+        display: inline-block;
+      }
+    }
+
+    #{$block}__publishDate {
+      color: $light-green;
+      font-size: 0.8em;
+      margin-bottom: 10px;
+    }
+
+    &.isMorePosts {
+      #{$block}__publishDate {
+        color: inherit;
+      }
+    }
+
+
+    #{$block}__title {
+      margin-bottom: 0px;
+      line-height: 1em;
+    }
+
+    #{$block}__content {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    a.Button {
+      color: $white;
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+@media (max-width: 576px) {
+  .ColumnSpread {
+    padding: 10px;
+  }
+
+  .ColumnSpread:not(.isFeature) {
+    display: grid;
+    width: 100%;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ColumnSpread {
+    .Card.-newsroom {
+      &.isFeature {
+        .Card__body {
+          display: grid;
+          width: 100%;
+          grid-gap: 10px;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .Card__image {
+          width: 80%;
+          padding-top: 80%;
+          display: inline-block;
+        }
+
+        .Card__content {
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
