@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Section from './SectionCallToAction';
+import {SectionCallToAction as Section} from './SectionCallToAction';
 
 const SectionCallToAction = props => {
   // console.log('CALL TO ACTION PROPS :: ', props);
