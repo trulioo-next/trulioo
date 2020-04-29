@@ -50,7 +50,7 @@ const Page = (props) => {
         <Layout>
 			<Header title="Newsroom" />
 			<section className="Section">
-				<Hero src="/static/images/placeholders/Nutritional_Banner.jpg">
+				<Hero src="/static/images/placeholders/Newsroom_Banner.jpg">
 					<Hero.Title title="Newsroom" color="#FFF" shadow />
 				</Hero>
 			</section>
