@@ -3,7 +3,8 @@ const fetch = require('../utils/fetch')
 var fs = require('fs')
 import React from 'react';
 
-const WP_DATA = 'http://seven-eleven-wp.local/wp-json/wp/v2/pages';
+// TODO: Add .env var here 
+const WP_DATA = 'https://dev3.7eleven.ca/wp-json/wp/v2/pages';
 let newDate = new Date();
 const originalUrl = 'https://dev4.7eleven.ca'
 
