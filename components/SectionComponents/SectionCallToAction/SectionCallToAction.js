@@ -204,7 +204,7 @@ const SectionCallToAction = ({
         '-bg-img': bgImage ? true : false,
       })}
       style={{
-        color: (params && params.text && params.text_color) || '#ffffff',
+        color: (params && params.text_color && params.text_color) || '#ffffff',
         backgroundColor: (params && params.background_color) || '#000000',
       }}
     >
