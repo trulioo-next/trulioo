@@ -22,6 +22,8 @@ import {
   selectFooterData,
 } from '../../stores/app/selectors';
 
+import { reqAlertDataAction } from '../../stores/alert/actions';
+import { alertDataSelector } from '../../stores/alert/selectors';
 
 import {
   userDataSelector
@@ -31,11 +33,15 @@ import './Layout.scss';
 
 const Layout = props => {
    
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
   // }, []);
   
+  useEffect(() => {
+    dispatch(reqAlertDataAction({ }));
+  }, []);
+
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
   let userData = useSelector(state => userDataSelector(state));
@@ -50,7 +56,7 @@ const Layout = props => {
   }
   // console.log('HEADER DATA ', headerData )
 
-  const {alertsData} = {...props};
+  const alertsData = useSelector(state => alertDataSelector(state));
 
   return (
     <React.Fragment>
