@@ -9,6 +9,8 @@ import Error from 'next/error';
 
 import { reqPageDataAction } from '../stores/page/actions';
 import { pageDataSelector } from '../stores/page/selectors';
+import { reqAlertDataAction } from '../stores/alert/actions';
+import { alertDataSelector } from '../stores/alert/selectors';
 
 const Home = props => {
   if (props.errorCode) {
@@ -17,15 +19,17 @@ const Home = props => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: 'home' }));
+    dispatch(reqAlertDataAction({ }));
   }, []);
 
-   
+  const alertsData = useSelector(state => alertDataSelector(state));
+
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
  
 
   return (
-    <Layout>
+    <Layout alertsData={alertsData}>
       <Header title="" />
       { data &&
         data.components.map((section, sectionKey) => (

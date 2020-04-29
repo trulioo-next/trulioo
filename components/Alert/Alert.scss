@@ -1,0 +1,21 @@
+@import '~@/static/scss/component-includes';
+
+.AlertUI {
+  width: 100%;
+  padding: 10px 20px;
+  color: $white;
+  background-color: #4a4a4a;
+  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+
+  a {
+	color: $orange;
+	text-decoration: underline;
+
+	&:hover {
+		color: $orange;
+	}
+  }
+}

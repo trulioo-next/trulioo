@@ -42,3 +42,9 @@ export const SEVEN_REWARDS_CHECKCARD = 'seven_rewards/card/SEVEN_REWARDS_CHECKCA
 
 export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'
 export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CHECK_LOADED'
+
+
+// Alert Events
+export const ALERT_LOAD_REQUEST = 'alert/load/ALERT_LOAD_REQUEST'
+export const ALERT_LOADED = 'alert/loaded/ALERT_LOAD_REQUEST'
+export const ALERT_LOAD_ERROR = 'alert/error/ALERT_LOAD_ERROR'
