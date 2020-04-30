@@ -12,6 +12,7 @@ import ProductSlider from '@/components/ProductSlider';
 import ProductCard from '@/components/ProductCard';
 import SectionMaker from '@/components/SectionMaker';
 import { nutritionalsDataSelector } from '@/stores/nutritionals/selectors';
+import { taxonomiesSelector } from '@/stores/nutritionals/selectors';
 
 import { reqNutritionalsAction } from '@/stores/nutritionals/actions';
 
@@ -22,6 +23,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './Product.scss';
+
+
 
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
@@ -146,16 +149,18 @@ const Nutritionals = props => {
   );
 };
 
+
+
 const ProductHeader = props => {
   let productDetails = [];
 
   if (props.data && props.data.acf && props.data.acf.checkmark_section) {
     productDetails = props.data.acf.checkmark_section;
   }
- 
+
   let image = props.data.photos
     ? props.data.photos[0].url
-    : '/static/images/placeholders/Product_HeaderImage.jpg';
+    : props.data.categoryImage;
 
   return (
     <header
@@ -189,6 +194,8 @@ const ProductHeader = props => {
   );
 };
 
+
+
 const Product = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
@@ -202,14 +209,24 @@ const Product = props => {
     dispatch(reqNutritionalsAction({}));
   }, []);  
 
-
-
   const categoryData = useSelector(state =>
     nutritionalsDataSelector(state, category, product),
   );
 
   console.log(' categoryData :: ',  categoryData  )
   console.log(' product :: ',  product  )
+
+
+  const taxonomyData = useSelector(state => taxonomiesSelector(state));
+  let selected = [];
+  if(taxonomyData) {
+    for(var i = 0; i < taxonomyData.length; i++ ) {
+      if(taxonomyData[i].slug === category ) {
+        selected = taxonomyData[i]
+      }
+    }
+  }
+  const categoryImage = selected && selected.image && selected.image.url ? selected.image.url : '/static/images/placeholders/Product_HeaderImage.jpg';
 
   let { related } = categoryData;
   let relatedData = [];
@@ -221,7 +238,7 @@ const Product = props => {
     <Layout>
       <Header title="" />
       <div className="Product__page">
-        <ProductHeader data={categoryData} />
+        <ProductHeader data={{...categoryData, categoryImage: categoryImage}} />
         <Nutritionals data={categoryData} />
         <section className="Section -related">
           <Container>
@@ -234,7 +251,7 @@ const Product = props => {
           <ProductSlider>
             {relatedData.map((item, i) => (
               <ProductSlider.Item key={`product-slider-item-${i}`}>
-                <ProductCard item={item} />
+                <ProductCard item={{...item, categoryImage}} />
               </ProductSlider.Item>
             ))}
           </ProductSlider>
@@ -243,10 +260,11 @@ const Product = props => {
     </Layout>
   );
 };
-//
+
+
 Product.getInitialProps = async ({ query, res }) => {
- 
   return { query };
 };
-//
+
+
 export default Product;
