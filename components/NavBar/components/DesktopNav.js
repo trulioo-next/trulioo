@@ -11,7 +11,6 @@ import CaretIcon from '@/static/images/caret-down.svg';
 
 import { userDataSelector } from '@/stores/user/selectors';
 
-
 const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   const isOpen = i === expanded;
   let itemClassnames = classNames(
@@ -45,15 +44,16 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
 
   return (
     <li className={itemClassnames}>
-      {item.name != "Slurpee®" &&
+      {item.name != 'Slurpee®' && (
         <Link href="/[slug]" as={item.url}>
           <a className="SiteHeader__link">{item.name}</a>
         </Link>
-      }
-      {item.name === "Slurpee®" &&
-
-        <a href={item.url} className="SiteHeader__link">{item.name}</a>
-      }
+      )}
+      {item.name === 'Slurpee®' && (
+        <a href={item.url} className="SiteHeader__link">
+          {item.name}
+        </a>
+      )}
     </li>
   );
 };
@@ -66,7 +66,10 @@ const PrimaryNav = data => {
     LINKS = data.data.data;
   }
   const userData = useSelector(state => userDataSelector(state));
-  let userAccount = userData && userData.auth.isAuth ? `${userData.user.rewards_points} PTS` : 'Account';
+  let userAccount =
+    userData && userData.auth.isAuth
+      ? `${userData.user.rewards_points} PTS`
+      : 'Account';
 
   return (
     <>
@@ -88,7 +91,7 @@ const PrimaryNav = data => {
             })}
           </ul>
           <Toolbar>
-            <Toolbar.Item url="https://stores.7eleven.ca/" target={"_blank"}>
+            <Toolbar.Item url="https://stores.7eleven.ca/" target="_blank">
               <Toolbar.Icon>
                 <LocationIcon />
               </Toolbar.Icon>
@@ -98,7 +101,7 @@ const PrimaryNav = data => {
               <Toolbar.Icon>
                 <AccountIcon />
               </Toolbar.Icon>
-              <Toolbar.Label>{ userAccount }</Toolbar.Label>
+              <Toolbar.Label>{userAccount}</Toolbar.Label>
             </Toolbar.Item>
             <Toolbar.Search
               i={searchIndex}

@@ -7,9 +7,15 @@ import SearchIcon from '@/static/images/search.svg';
 
 const ToolbarItem = ({ url, target, children }) => (
   <li className="SiteHeader__item">
-    <Link href={url}>
-      <a className="SiteHeader__link" target={target}>{children}</a>
-    </Link>
+    {target ? (
+      <a className="SiteHeader__link" href={url} target={target}>
+        {children}
+      </a>
+    ) : (
+      <Link href={url}>
+        <a className="SiteHeader__link">{children}</a>
+      </Link>
+    )}
   </li>
 );
 

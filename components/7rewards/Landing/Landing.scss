@@ -1,0 +1,98 @@
+@import '~@/static/scss/component-includes';
+
+.SevenRewards__landing {
+
+  .lead {
+    @include media-breakpoint-down(md) {
+      font-size: 1.6rem;
+    }
+  }
+
+  .Landing {
+    $block: &;
+
+    &__heading {
+      font-size: 3.2rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 4rem;
+      }
+    }
+
+    &__colHeading {
+      font-size: 2.4rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 3rem;
+      }
+    }
+
+    &__button {
+      font-size: 1.4rem;
+    }
+
+    &__tile {
+      flex: 1 1;
+      background-color: $white;
+      box-shadow: 0.8rem 0.8rem 0 0 #E0E0E0;
+      padding: 3rem;
+      margin-bottom: 3rem;
+
+      @include media-breakpoint-up(md) {
+        padding: 6rem;
+      }
+
+      &Image {
+        position: relative;
+        width: 50%;
+        height: 0;
+        padding-top: 50%;
+        margin: 0 auto 3rem;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+
+    &__steps {
+      position: relative;
+      counter-reset: steps;
+      list-style: none;
+      padding: 0;
+
+      li {
+        position: relative;
+        padding-top: 1.4rem;
+        padding-left: 7rem;
+        padding-bottom: 1.4rem;
+        margin-bottom: 1.6rem;
+
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          counter-increment: steps;
+          content: counter(steps);
+
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 5rem;
+          height: 5rem;
+          background-color: #32004B;
+          border-radius: 50%;
+          color: $white;
+          font-size: 2.4rem;
+          font-weight: bolder;
+          line-height: 2.4rem;
+        }
+      }
+    }
+  }
+}
