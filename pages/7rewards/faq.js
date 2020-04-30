@@ -22,11 +22,12 @@ const Faq = props => {
   }, []);
 
   const pageData = useSelector(state => pageDataSelector(state));
+  let dataReady = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data.components : false;
 
   return (
     <Layout>
       <Header title="" />
-      {pageData.acf_data &&
+      { dataReady &&
         pageData.acf_data.components.map((section, sectionKey) => {
           return (
             <SectionMaker
