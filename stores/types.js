@@ -45,6 +45,8 @@ export const SEVEN_REWARDS_CHECKCARD_REQUEST = 'seven_rewards/card/SEVEN_REWARDS
 export const SEVEN_REWARDS_CHECKCARD = 'seven_rewards/card/SEVEN_REWARDS_CHECKCARD'
 export const SEVEN_REWARDS_REDEEM_REQUEST = 'seven_rewards/redeem/SEVEN_REWARDS_REDEEM_REQUEST'
 export const SEVEN_REWARDS_REDEEM = 'seven_rewards/redeem/SEVEN_REWARDS_REDEEM'
+export const SEVEN_REWARDS_SMS_REQUEST = 'seven_rewards/sms/SEVEN_REWARDS_SMS_REQUEST'
+export const SEVEN_REWARDS_SMS = 'seven_rewards/sms/SEVEN_REWARDS_SMS'
 
 
 export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'

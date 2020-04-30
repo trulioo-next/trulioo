@@ -110,6 +110,20 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
+	async function verifySms(payload) {
+		let data = await API.post('/api/seven-rewards/verify-sms', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'Verify Sms',
+		          message: 'Verify Sms Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
    return {
     userAuth,
     userAuthFb,
@@ -117,7 +131,8 @@ export default function SevenRewardsService(state) {
     registerUser,
     registerFacebookUser,
     checkCardBalance,
-    redeemPoints
+    redeemPoints,
+    verifySms
    }
 
 }

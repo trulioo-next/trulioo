@@ -21,7 +21,9 @@ import {
   SEVEN_REWARDS_CHECKCARD,
   APP_STOPLOADING,
   SEVEN_REWARDS_REDEEM_REQUEST,
-  SEVEN_REWARDS_REDEEM
+  SEVEN_REWARDS_REDEEM,
+  SEVEN_REWARDS_SMS_REQUEST,
+  SEVEN_REWARDS_SMS
 } from '../types'
 
 function* startup(payload) {
@@ -171,6 +173,27 @@ function* redeemPoints(payload) {
   }
 }
 
+
+//
+function* checkSms(payload) {
+ 
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const smsResponse = yield call(sevenRewardsService.verifySms, payload)
+
+    console.log('!! SMS  ', smsResponse )
+    
+    yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
 //
 // Log User Out
 function* logoutUser() {
@@ -200,7 +223,8 @@ function* startupFlow() {
       SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
       SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
       SEVEN_REWARDS_CHECKCARD_REQUEST,
-      SEVEN_REWARDS_REDEEM_REQUEST
+      SEVEN_REWARDS_REDEEM_REQUEST,
+      SEVEN_REWARDS_SMS_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -233,8 +257,12 @@ function* startupFlow() {
       yield call(redeemPoints, action.payload)
     }
 
-     if (action.type === SEVEN_REWARDS_CHECKCARD_REQUEST) {
+    if (action.type === SEVEN_REWARDS_CHECKCARD_REQUEST) {
       yield call(checkGiftcardBalance, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_SMS_REQUEST) {
+      yield call(checkSms, action.payload)
     }
 
 

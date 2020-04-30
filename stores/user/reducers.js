@@ -12,7 +12,8 @@ import {
   SEVEN_REWARDS_LOGOUT,
   SEVEN_REWARDS_FACEBOOK_AUTH,
   SEVEN_REWARDS_CHECKCARD,
-  SEVEN_REWARDS_REDEEM
+  SEVEN_REWARDS_REDEEM,
+  SEVEN_REWARDS_SMS
 } from '../types'
 
 
@@ -26,9 +27,14 @@ export default (state = INITIAL_STATE, action) => {
         cardBalance:action.payload
       }
 
+      case SEVEN_REWARDS_SMS:
+        return { ...state,
+          sms: action.payload
+        }  
+
       case SEVEN_REWARDS_REDEEM:
         return { ...state,
-          redeem: action.payload.redeem
+          redeem: action.payload
         }  
 
      case SEVEN_REWARDS_AUTH_LOADED:
@@ -83,7 +89,8 @@ export default (state = INITIAL_STATE, action) => {
         registered: false,
         error:false,
         redeem:false,
-        token:false
+        token:false,
+        sms:false
       }  
 
     default:

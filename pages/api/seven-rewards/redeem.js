@@ -1,19 +1,18 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api.7-eleven.com"
-const CLIENT_ID = process.env.CLIENT_ID_ANNO
-const CLIENT_SECRET = process.env.CLIENT_SECRET_ANNO
+const REWARDS_API_URL = "https://api.7-eleven.com";
+const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_SECRET = process.env.CLIENT_SECRET
  
 export default async (req, res) => {  
   try {
 
     const body = JSON.parse(req.body)
-    
-   // console.log('BODY :: >> ', body )
- 
+    const headers = { "Content-Type": "application/json" };
+    console.log('BODY :: >> ', body.body.token )
+
     const registerHeaders = { 
-      "Content-Type": "application/json",
-      "Authorization":`Bearer ${body.body.token}`,
-      "X-SEI-TZ": '-04:00'
+      "Content-type": "application/json",
+      "Authorization":`Bearer ${body.body.token}`
     };
 
     const redeemResponse = await fetch(REWARDS_API_URL+'/v4/rewards/redeem/',
