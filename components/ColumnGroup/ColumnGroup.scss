@@ -25,6 +25,17 @@
     @include media-breakpoint-down(sm) {
       grid-gap: 0.95rem;
     }
+    grid-gap: 4.0rem;
+
+    .ColumnGroup__media {
+      padding-top: percentage(350/480 * .80);
+    }
+
+    .ColumnGroup__media, .ColumnGroup__video {
+      img {
+        height: 88% !important;
+      }
+    }
   }
 
   &__item {
