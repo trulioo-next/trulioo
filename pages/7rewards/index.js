@@ -10,8 +10,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
-
+import Tab from 'react-bootstrap/Tab';
+import routerPush from '../../helpers/routerPush';
 import '../login/LoginScreen.scss';
 import './SevenRewards.scss';
 
@@ -40,6 +40,10 @@ class SevenRewards extends React.Component {
     let isUserAuth = this.props.user.auth
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true })
+    }
+
+    if (!isUserAuth) {
+     routerPush('/7rewards/register');
     }
     //console.log('::: this.props.user :: ', this.props.user)
 
