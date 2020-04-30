@@ -244,7 +244,7 @@ class MyAccount extends React.Component {
     return (
       <Layout>
 
-        <Header title="7 Rewards Register"/>
+        <Header title="My Account"/>
         <Hero src="/static/images/placeholders/Homepage_Banner.jpg">
         </Hero>
         <Container className="Section__container">

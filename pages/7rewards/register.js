@@ -55,7 +55,7 @@ class Register extends React.Component {
 
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
-      routerPush('/7rewards/myaccount');
+      routerPush('/7rewards');
     }
     
     
