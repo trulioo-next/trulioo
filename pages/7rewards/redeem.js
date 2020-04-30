@@ -29,7 +29,7 @@ const Home = props => {
     // 822165520
     // 7589290752
     // 7360138342
-    dispatch(reqRedeemAction({ token: user.token, id:73601 }));
+    dispatch(reqRedeemAction({ token: user.token, id:7589290752 }));
   } 
 
   //
@@ -55,6 +55,8 @@ const Home = props => {
   let redeemError = user && user.redeem && user.redeem.error ? user.redeem.error.payload.error_description : false;
   let smsError = user && user.sms && user.sms.error ? user.sms.error.payload.error_description : false;
   let smsSuccess = user && user.sms && user.sms.success ? user.sms.success : false;
+
+  let redeemSuccessPoints = user && user.redeem && user.redeem.rewards_points ? user.redeem.rewards_points : false;
    
   return (
     <Layout>
@@ -70,6 +72,29 @@ const Home = props => {
         <Button green className="Section__cta" onClick={redeemPoints}>
           Redeem Points 
         </Button>
+      
+        <div>
+        { redeemSuccessPoints && 
+          <h2>Points : {redeemSuccessPoints}</h2>
+        }
+        </div>
+        
+        <div>
+          { redeemSuccessPoints &&
+
+            user.redeem.member_rewards.map((item, key) => (
+                <div>
+                  <h5>{item.title}</h5>
+                  <p>{item.tier_label}</p>
+                  <p>{item.description}</p>
+                </div>
+            ))
+
+           }
+
+          </div>
+
+       
 
         { redeemError && 
 
