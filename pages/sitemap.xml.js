@@ -74,7 +74,6 @@ class Sitemap extends React.Component {
     }
 }
 //
-
 function readdirAsync(path) {
   return new Promise(function (resolve, reject) {
     fs.readdir(path, function (error, result) {
@@ -86,8 +85,6 @@ function readdirAsync(path) {
     });
   });
 }
-
-
 
 // Format date W3C
 //

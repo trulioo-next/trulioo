@@ -68,7 +68,7 @@ const Section7Rewards = props => {
           </ProductSlider>
         </div>
       }
-      
+      { !isAuth && 
       <div className="container Section__container">
         <div className="row justify-content-center">
           <div className="col col-12 col-lg-8 text-center">
@@ -90,6 +90,7 @@ const Section7Rewards = props => {
           </div>
         </div>
       </div>
+      }
     </section>
   );
 };
