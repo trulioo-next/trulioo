@@ -14,11 +14,13 @@ const ProductCard = ({ item }) => {
 
   let bodyClasses = classNames('Card__body', 'text-center');
 
+  const image = props.featured_image || props.categoryImage;
+
   return (
     <Card className={cardClasses}>
       <Card.Body className={bodyClasses}>
         <div className="Card__image -contain -square">
-          <img src={props.featured_image} />
+          <img src={image} />
         </div>
         <h3 className={classNames('h4', 'Card__title')}>{props.title}</h3>
         <div className="Card__content">
