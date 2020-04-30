@@ -10,6 +10,19 @@ export default async (req, res) => {
     const headers = { "Content-Type": "application/json" };
     console.log('BODY :: >> ', body.body )
 
+    let code = body.body.code;
+
+    let payload = {
+      "id": body.body.mobileNumber
+    }
+
+    if(code) {
+      payload = {
+        "id": body.body.mobileNumber,
+        "code" : code
+      }
+    }
+
     const registerHeaders = { 
       "Content-type": "application/json",
       "Authorization":`Bearer ${body.body.token}`
@@ -19,14 +32,18 @@ export default async (req, res) => {
      {
        method: 'POST',
        headers: registerHeaders,
-       body: JSON.stringify({
-         "id": body.body.mobileNumber
-      }) 
+       body: JSON.stringify(payload) 
      });
- 
+     
+     console.log('BODY :: >> ', body );
      console.log(smsResponse)   
- 
-     res.json({success:'SUCCESS! Code Sent to your Mobile Device'})
+     if(code) {
+       res.json({success:'SUCCESS! You have validated your device'})
+     } else {
+       res.json({success:'SUCCESS! Code Sent to your Mobile Device'})
+     }
+      
+
      return
   } catch(error) {
     res.json({error: error, sms:error })

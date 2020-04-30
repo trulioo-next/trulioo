@@ -183,7 +183,7 @@ function* checkSms(payload) {
    
     const smsResponse = yield call(sevenRewardsService.verifySms, payload)
 
-    console.log('!! SMS  ', smsResponse )
+    // console.log('!! SMS  ', smsResponse )
     
     yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
 

@@ -94,7 +94,7 @@ const PrimaryNav = data => {
               </Toolbar.Icon>
               <Toolbar.Label>Find A Store</Toolbar.Label>
             </Toolbar.Item>
-            <Toolbar.Item url="/7rewards/myaccount">
+            <Toolbar.Item url="/7rewards/">
               <Toolbar.Icon>
                 <AccountIcon />
               </Toolbar.Icon>

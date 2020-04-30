@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Layout from '@/containers/Layout/Layout';
@@ -19,11 +19,9 @@ const Home = props => {
     return <Error statusCode={props.errorCode} />;
   }
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(reqRedeemAction({ payload: 'home' }));
-  // }, []);
-
   const user = useSelector(state => userDataSelector(state));
+  const [code, setCode] = useState('');
+  const [phone, setPhone] = useState('');
 
   const redeemPoints = (code) => {
     // 822165536
@@ -35,9 +33,24 @@ const Home = props => {
   } 
 
   //
-  const verifySMS = (code) => {
-    dispatch(reqSMSAction({ token: user.token, mobileNumber:4166716261 }));
+  const verifySMS = () => {
+    dispatch(reqSMSAction({ token: user.token, mobileNumber:phone }));
   }  
+
+  const verifySMSWithCode = () => {
+    dispatch(reqSMSAction({ token: user.token, mobileNumber:phone, code:code }));
+  } 
+
+  //
+  function updateCode(e) {
+    setCode( e.target.value )
+  }
+
+  //
+  function updatePhone(e) {
+    setPhone( e.target.value )
+  }
+
 
   let redeemError = user && user.redeem && user.redeem.error ? user.redeem.error.payload.error_description : false;
   let smsError = user && user.sms && user.sms.error ? user.sms.error.payload.error_description : false;
@@ -64,8 +77,19 @@ const Home = props => {
         }
         </Col>
         <Col>
+        
+         <form className="form__test">
+          <input id="mobile_phone" type="number" value={phone} placeholder="Enter Mobile Phone" onChange={ (e) => updatePhone(e) }/>
+        </form>
 
-         <Button green className="Section__cta" onClick={verifySMS}>
+        <Button green className="Section__cta" onClick={verifySMS}>
+          Get Code
+        </Button>
+        <form className="form__test" > 
+          <input id="sms_code" type="text" value={code} placeholder="Enter Code Here" onChange={ (e) => updateCode(e) }/>
+        </form>
+
+        <Button green className="Section__cta" onClick={verifySMSWithCode}>
           Verify SMS
         </Button>
 

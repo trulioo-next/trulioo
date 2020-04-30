@@ -103,8 +103,7 @@ class MyAccount extends React.Component {
      //
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
-       
-     // routerPush('/account');
+     routerPush('/7rewards/register');
     }
   }
 
@@ -254,7 +253,7 @@ class MyAccount extends React.Component {
         <div className="register__screen__page">
           {!this.state.loggedIn &&  
           <div className="form__wrapper">
-            <h2>Register:</h2>
+            <h2>My Account:</h2>
 
             <Row>
               <Col className="text-center">

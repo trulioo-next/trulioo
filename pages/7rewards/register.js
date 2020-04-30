@@ -8,10 +8,12 @@ import appSelectors from '../../stores/user/selectors'
 import Hero from '@/components/Hero';
 import {css, jsx} from "@emotion/core";  
 import * as Yup from 'yup';
-
+import routerPush from '../../helpers/routerPush';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ModalWindow from '@/components/Modal';
+import {useFormik} from 'formik';
 
 import './RegisterScreen.scss';
 
@@ -23,6 +25,7 @@ class Register extends React.Component {
 
     this.submitForm = this.submitForm.bind(this)
     this.onValueChange = this.onValueChange.bind(this)
+    this.modalCallBack = this.modalCallBack.bind(this)
 
     this.state = {
       firstName:'',
@@ -38,7 +41,9 @@ class Register extends React.Component {
       postal:'',
       valid:false,
       isLoading:false,
-      loggedIn:false
+      loggedIn:false,
+      modalVisible:false,
+      facebookPayload:false
     }
   }
 
@@ -48,9 +53,9 @@ class Register extends React.Component {
 
   componentDidMount() {
 
-    let isUserAuth = this.props.user.auth
-    if( !isUserAuth.error && isUserAuth ) {
-      this.setState({loggedIn:true})
+    let isUserAuth = this.props.user ? this.props.user.auth : false;
+    if (!this.props.user.error && isUserAuth) {
+      routerPush('/7rewards/myaccount');
     }
     
     
@@ -92,7 +97,16 @@ class Register extends React.Component {
 
 
   }
-  componentDidUpdate() { }
+  componentDidUpdate() { 
+
+     // Check if user authenticated 
+     //
+    let isUserAuth = this.props.user ? this.props.user.auth : false;
+    if (!this.props.user.error && isUserAuth) {
+       
+     // routerPush('/account');
+    }
+  }
 
 
   checkLoginState() {
@@ -103,14 +117,20 @@ class Register extends React.Component {
 
   login() {
     FB.login(this.checkLoginState(), {
-      scope: 'email'
+      scope: 'public_profile,email',
+      return_scopes: true
     });
   }
 
   statusChangeCallback(response) {
+
+    console.log('FACEBOOK RESPONSE , ', response )
     if (response.status === 'connected') {
-      // this.logUserIn(response.authResponse.accessToken);
-      this.submitFacebookRequest(response);
+
+      console.log('TOKEN  , ', response.authResponse.accessToken )
+      this.logUserIn(response.authResponse.accessToken);
+      // this.submitFacebookRequest(response.authResponse.accessToken,response);
+      
 
     } else if (response.status === 'not_authorized') {
       console.log("[FacebookLoginButton] Person is logged into Facebook but not your app");
@@ -120,9 +140,9 @@ class Register extends React.Component {
   }
 
   logUserIn(access_token) {
-    FB.api('/me', function(response) {
+    FB.api('/me', {fields: 'first_name,last_name,email,birthday'}, function(response) {
       console.log('[FacebookLoginButton] Successful login for: ', response );
-      
+      this.submitFacebookRequest(access_token,response);
     }.bind(this));
   }
   
@@ -157,10 +177,66 @@ class Register extends React.Component {
   }
 
 
-  submitFacebookRequest(data) {
+  submitFacebookRequest(access_token,response) {
   
-    console.log('DATA ', data )
-   //  this.props.userFacebookRegisterRequest(access_token);
+    console.log('access_token ', access_token )
+    console.log('rresponse ', response )
+    let payload = {
+      token:access_token,
+      response:response
+    }
+    
+    this.props.userFacebookRegisterRequest(payload);
+
+    this.setState({facebookPayload:payload, modalVisible:true })
+
+  }
+
+  modalCallBack() {
+      this.props.userFacebookRegisterRequest(this.state.facebookPayload);
+  }
+
+  facebookForm() {
+    
+    
+    const phoneRegExp = /^\+?[0-9\-().\s]{10,15}$/gm
+
+
+    let schema = Yup.object().shape({
+      first_name: Yup.string().required("This field is required"),
+      last_name: Yup.string().required("This field is required"),
+      email: Yup.string().email().required("This field is required"),
+      phone: Yup.string().required("This field is required").matches(phoneRegExp, 'Phone number is not valid'),
+      postal: Yup.string().required("This field is required"),
+      password: Yup.string().required('Password is required'),
+      password_confirm: Yup.string()
+         .oneOf([Yup.ref('password'), null])
+         .required('Password confirm is required')
+    });
+
+    return (
+      <form>
+      <p>  
+        To complete your registration for 7Rewards, review and agree to the Terms & Conditions. Once you have done so, check the box below. 
+      </p>
+        <Row>
+          <Col className="text-center">
+            <div className="input__group bottom--margin--20">
+             <input type="checkbox" id="terms" name="terms" value="I accept the Terms & Conditions." />
+             <label className="show">I accept the Terms & Conditions.</label>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="">
+            <div className="input__group bottom--margin--80">
+             <input type="checkbox" id="agree" name="agree" value="I agree to receive news, promotions, and information from 7-Eleven®. You can unsubscribe at any time. Please read our Privacy Policy or Contact Us." />
+             <label className="show">I agree to receive news, promotions, and information from 7-Eleven®. You can unsubscribe at any time. Please read our Privacy Policy or Contact Us.</label>
+            </div>
+          </Col>
+        </Row>   
+      </form>
+    )
 
   }
  
@@ -173,6 +249,8 @@ class Register extends React.Component {
         <Hero src="/static/images/placeholders/Homepage_Banner.jpg">
         </Hero>
         <Container className="Section__container">
+
+        <ModalWindow content={ this.facebookForm() } visible={this.state.modalVisible} cb={this.modalCallBack}/>
         <div className="register__screen__page">
           {!this.state.loggedIn &&  
           <div className="form__wrapper">
@@ -222,7 +300,7 @@ class Register extends React.Component {
                 <Col className="text-center">
                   <div className="input__group">
                     <label>Confirm Password</label>
-                    <input id="password-confirm" type="password" value={this.state.confirmPassword} onChange={(e) => this.onValueChange(e,'confirmPassword')} name="password-confirm" placeholder="Confirm Password"/>
+                    <input id="password_confirm" type="password" value={this.state.confirmPassword} onChange={(e) => this.onValueChange(e,'confirmPassword')} name="password_confirm" placeholder="Confirm Password"/>
                   </div>
                 </Col>
               </Row>   
@@ -310,9 +388,7 @@ class Register extends React.Component {
                 onClick={ (e) => this.submitForm(e) } >
                 Register
               </Button>
-
-              
-              
+ 
             </form>
           </div>
           }
@@ -333,9 +409,9 @@ const mapDispatchToProps = (dispatch) => ({
   userFacebookRegisterRequest: payload => dispatch(appActions.reqUserFacebookRegisterAction(payload)),
 })
 
-const UserAuth_ = connect(
+const Register_ = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Register)
  
-export default UserAuth_;
+export default Register_;
