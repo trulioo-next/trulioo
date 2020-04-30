@@ -94,13 +94,30 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
+
+	async function redeemPoints(payload) {
+		// console.log('REDEEM SERVICE PAYLOAD ', payload )
+		let data = await API.post('/api/seven-rewards/redeem', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'redeem',
+		          message: 'Redeem Points Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
    return {
     userAuth,
     userAuthFb,
     userAuthAnonymous,
     registerUser,
     registerFacebookUser,
-    checkCardBalance
+    checkCardBalance,
+    redeemPoints
    }
 
 }

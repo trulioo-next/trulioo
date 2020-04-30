@@ -11,7 +11,8 @@ import {
   SEVEN_REWARDS_REGISTER_LOADED,
   SEVEN_REWARDS_LOGOUT,
   SEVEN_REWARDS_FACEBOOK_AUTH,
-  SEVEN_REWARDS_CHECKCARD
+  SEVEN_REWARDS_CHECKCARD,
+  SEVEN_REWARDS_REDEEM
 } from '../types'
 
 
@@ -25,6 +26,11 @@ export default (state = INITIAL_STATE, action) => {
         cardBalance:action.payload
       }
 
+      case SEVEN_REWARDS_REDEEM:
+        return { ...state,
+          redeem: action.payload.redeem
+        }  
+
      case SEVEN_REWARDS_AUTH_LOADED:
       return { ...state,
         auth: action.payload.auth,
@@ -35,7 +41,8 @@ export default (state = INITIAL_STATE, action) => {
         promotions:action.payload.promotions,
         bonusOffers:action.payload.bonusOffers,
         registered: true,
-        error:action.payload.error
+        error:action.payload.error,
+        token:action.payload.token
       }  
 
 
@@ -49,6 +56,7 @@ export default (state = INITIAL_STATE, action) => {
         promotions:action.payload.promotions,
         bonusOffers:action.payload.bonusOffers,
         registered: true,
+        token:action.payload.token,
         error:action.payload.error
       }  
 
@@ -73,7 +81,9 @@ export default (state = INITIAL_STATE, action) => {
         deals:false,
         promotions:false,
         registered: false,
-        error:false
+        error:false,
+        redeem:false,
+        token:false
       }  
 
     default:

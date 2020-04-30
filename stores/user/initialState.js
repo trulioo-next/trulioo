@@ -13,5 +13,7 @@ export const INITIAL_STATE = {
   promotions:false,
   error:false,
   cardBalance:false,
-  bonusOffers:false
+  bonusOffers:false,
+  redeem:false,
+  token:false
 };

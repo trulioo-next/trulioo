@@ -19,7 +19,9 @@ import {
   SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
   SEVEN_REWARDS_CHECKCARD_REQUEST,
   SEVEN_REWARDS_CHECKCARD,
-  APP_STOPLOADING
+  APP_STOPLOADING,
+  SEVEN_REWARDS_REDEEM_REQUEST,
+  SEVEN_REWARDS_REDEEM
 } from '../types'
 
 function* startup(payload) {
@@ -53,8 +55,8 @@ function* facebookUserAuth(payload) {
    
     const loginClientResponse = yield call(sevenRewardsService.userAuthFb, payload)
 
-    console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse  )
-    console.log('FACEBOOK payload !!   ', payload  )
+    // console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse  )
+    // console.log('FACEBOOK payload !!   ', payload  )
 
     yield put({ type:SEVEN_REWARDS_FACEBOOK_AUTH, payload:loginClientResponse})
 
@@ -95,7 +97,7 @@ function* registerUser(payload) {
    
     const registerClientResponse = yield call(sevenRewardsService.registerUser, payload)
 
-     console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
+    // console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
     
     yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse})
 
@@ -116,7 +118,7 @@ function* registerFacebookUser(payload) {
    
     const registerClientResponse = yield call(sevenRewardsService.registerFacebookUser, payload)
 
-     console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
+     // console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
     
     yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse})
 
@@ -138,9 +140,29 @@ function* checkGiftcardBalance(payload) {
    
     const checkBalanceResponse = yield call(sevenRewardsService.checkCardBalance, payload)
 
-     console.log('CHECK CARD BALANCE !!   ', checkBalanceResponse )
+     // console.log('CHECK CARD BALANCE !!   ', checkBalanceResponse )
     
     yield put({ type: SEVEN_REWARDS_CHECKCARD, payload:checkBalanceResponse})
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
+//
+function* redeemPoints(payload) {
+ 
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const redeemResponse = yield call(sevenRewardsService.redeemPoints, payload)
+
+    console.log('REDEEM!!   ', redeemResponse )
+    
+    yield put({ type: SEVEN_REWARDS_REDEEM, payload:redeemResponse})
 
   } catch(err) {
 
@@ -177,7 +199,8 @@ function* startupFlow() {
       SEVEN_REWARDS_LOGOUT_REQUEST,
       SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
       SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
-      SEVEN_REWARDS_CHECKCARD_REQUEST
+      SEVEN_REWARDS_CHECKCARD_REQUEST,
+      SEVEN_REWARDS_REDEEM_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -206,7 +229,11 @@ function* startupFlow() {
       yield call(registerFacebookUser, action.payload)
     }
 
-    if (action.type === SEVEN_REWARDS_CHECKCARD_REQUEST) {
+    if (action.type === SEVEN_REWARDS_REDEEM_REQUEST) {
+      yield call(redeemPoints, action.payload)
+    }
+
+     if (action.type === SEVEN_REWARDS_CHECKCARD_REQUEST) {
       yield call(checkGiftcardBalance, action.payload)
     }
 

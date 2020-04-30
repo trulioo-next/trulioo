@@ -19,7 +19,7 @@ const Section7Rewards = props => {
 
   const isAuth = USER && USER.auth ? true : false;
 
-
+  //
   let comTitle = props.title_logged_out;
   let subHeading = props.subheading_logged_out
   if(USER && USER.auth) {

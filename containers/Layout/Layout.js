@@ -72,7 +72,6 @@ const Layout = props => {
         { headerData &&
           <NavBar data={headerData} user={userData} />
         }
-
         <main className="SiteMain">
           {isLoading && <Loader />}
           {props.children}

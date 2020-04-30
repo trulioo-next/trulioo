@@ -34,10 +34,8 @@ export default async (req, res) => {
     if(!userToken || userToken.error) {
        res.json({error:userToken.error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false  })
     }
-
-
+ 
     // console.log('USER userToken >>  ',  userToken )
-
  
     let user = {
       isAuth: true,
@@ -109,10 +107,10 @@ export default async (req, res) => {
     // console.log('REWARDS ', rewards )
     // console.log('USER ACCESS TOKEN :: ', user )   
  
-     res.json({user:fullProfile, rewards, auth:user, coupons, deals, promotions, bonusOffers, error:false  })
+     res.json({user:fullProfile, rewards, auth:user, coupons, deals, promotions, bonusOffers, error:false, token: userToken.access_token })
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false, token: false  })
     // res.status(400).send({ error: error })
   }
 };

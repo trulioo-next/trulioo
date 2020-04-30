@@ -4,7 +4,8 @@ import {
   SEVEN_REWARDS_LOGOUT_REQUEST,
   SEVEN_REWARDS_FACEBOOK_AUTH_REQUEST,
   SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
-  SEVEN_REWARDS_CHECKCARD_REQUEST
+  SEVEN_REWARDS_CHECKCARD_REQUEST,
+  SEVEN_REWARDS_REDEEM_REQUEST
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -37,11 +38,17 @@ export const reqCheckCardAction = (payload) => ({
   payload: payload
 })
 
+export const reqRedeemAction = (payload) => ({
+  type: SEVEN_REWARDS_REDEEM_REQUEST,
+  payload: payload
+})
+
 export default {
   reqUserAuthAction,
   reqUserRegisterAction,
   reqUserLogoutAction,
   reqUserFacebookAuthAction,
   reqUserFacebookRegisterAction,
-  reqCheckCardAction
+  reqCheckCardAction,
+  reqRedeemAction
 }
