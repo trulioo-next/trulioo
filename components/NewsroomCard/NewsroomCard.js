@@ -9,6 +9,12 @@ import './NewsroomCard.scss';
 const NewsroomCard = props => {
   const { item: post, href, isFeature, isMorePosts } = props;
 
+  let addWhitespace = true;
+  if (post.summary.search(/\<p.*?\>.*\<\/p\>/gi) > -1)
+  { // --- Don't add whitespace if content has <p> tags
+    addWhitespace = false;
+  }
+
   let cardClasses = classNames('Card', '-newsroom', {'isFeature': isFeature}, {'isMorePosts': isMorePosts});
   let bodyClasses = classNames('Card__body', 'text-left');
 
@@ -37,7 +43,7 @@ const NewsroomCard = props => {
             <div className="content">
               <h3 className={classNames('h4', 'Card__title')}>{post.title}</h3>
               <div className="Card__publishDate">{post.publishDate}</div>
-              <div className="Card__content">
+              <div className={classNames('Card__content', {'addWhitespace': addWhitespace})}>
                 <p>{post.summary}</p>
               </div>
               <Link href={href}><a className="Button">Read More</a></Link>
