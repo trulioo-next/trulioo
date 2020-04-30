@@ -1,11 +1,14 @@
 import { Provider } from 'react-redux'
 import App from 'next/app'
+import Router from 'next/router'
 import withRedux from 'next-redux-wrapper'
 import configureStore from '../stores/configureStore'
 import appActions from '../stores/app/actions'
 import nutritionalsActions from '../stores/nutritionals/actions'
 import pageActions from '../stores/nutritionals/actions'
 import withError from '../components-stateful/withErrorWrapper'
+import * as gtag from '../utils/gtag'
+
 
 const withReduxDebugMode = false // process.env.NODE_ENV === 'development' || false;
 class MyApp extends App {
@@ -26,7 +29,8 @@ class MyApp extends App {
  
 
     constructor(props) {
-    	super(props);
+        super(props);
+        Router.events.on('routeChangeComplete', url => { console.log("Moving on to ", url); gtag.pageview(url); } )
     }
 
     componentWillUnmount() { }
