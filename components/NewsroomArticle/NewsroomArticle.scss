@@ -14,11 +14,13 @@
 
   #{$block}__publishDate {
     color: $light-green;
+    font-size: 1.1em;
+    font-weight: 500;
   }
 
 
   #{$block}__title {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     line-height: 1em;
   }
 
