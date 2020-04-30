@@ -58,7 +58,6 @@ class MyAccount extends React.Component {
       // routerPush('/account');
     }
     
-    
     // TODO: REMVOE THIS FORM HERE : 
     // facebook signin  button render
       (function(d, s, id) {
