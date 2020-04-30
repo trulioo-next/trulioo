@@ -10,7 +10,6 @@ import Hero from '@/components/Hero';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import routerPush from '../../helpers/routerPush';
 
 import Landing from '@/components/7rewards/Landing';
 import MyStatus from '@/components/7rewards/MyStatus';
@@ -47,9 +46,6 @@ class SevenRewards extends React.Component {
       this.setState({ loggedIn: true });
     }
 
-    if (!isUserAuth) {
-      routerPush('/7rewards/register');
-    }
     //console.log('::: this.props.user :: ', this.props.user)
   }
   componentDidUpdate() {}
