@@ -7,6 +7,8 @@
 
   &.-columns-3 {
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3.0rem;
+
     @include media-breakpoint-down(sm) {
       margin-top: 1.5rem;
       padding: 0 2.4rem;
@@ -22,10 +24,11 @@
 
   &.-columns-2 {
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 4.0rem;
+
     @include media-breakpoint-down(sm) {
       grid-gap: 0.95rem;
     }
-    grid-gap: 4.0rem;
 
     .ColumnGroup__media {
       padding-top: percentage(350/480 * .80);
