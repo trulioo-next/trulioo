@@ -17,7 +17,7 @@ const Video = props => {
   const videoID = getVideoID(props.video).id;
 
   let poster = props.poster
-    ? props.poster.url
+    ? props.poster
     : `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`;
 
   return (
