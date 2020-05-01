@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
@@ -10,12 +10,11 @@ import MyRewards from '@/components/7rewards/MyRewards';
 import './RewardsTabs.scss';
 
 const RewardsTabs = ({ data }) => {
+  const [tab, setTab] = useState('sevenrewards-reward-menu');
+
   return (
     <section className="RewardsTabs SevenRewards__Tabs">
-      <Tab.Container
-        id="rewards-tab"
-        defaultActiveKey="sevenrewards-reward-menu"
-      >
+      <Tab.Container id="rewards-tab" activeKey={tab} onSelect={k => setTab(k)}>
         <Nav
           fill
           justify
@@ -41,7 +40,7 @@ const RewardsTabs = ({ data }) => {
             <Deals data={data} />
           </Tab.Pane>
           <Tab.Pane eventKey="sevenrewards-my-rewards">
-            <MyRewards data={data} />
+            <MyRewards data={data} setTab={setTab} />
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
