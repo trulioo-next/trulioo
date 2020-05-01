@@ -13,6 +13,7 @@ import Form from 'react-bootstrap/Form';
 import FormCheck from 'react-bootstrap/FormCheck';
 
 import Button from '@/components/Button';
+import UserProfile from '@/components/7rewards/UserProfile';
 
 class MyAccount extends React.Component {
   constructor(props) {
@@ -47,8 +48,6 @@ class MyAccount extends React.Component {
 
   componentDidUpdate() {}
 
-  // TODO: Add in Edit Profile modal + form styles.
-  // TODO: Hook up Preferences to match user data.
   // TODO: Set up form actions for account page.
 
   render() {
@@ -62,51 +61,27 @@ class MyAccount extends React.Component {
               <Row className="justify-content-center mx-lg-n5">
                 <Col xs="12" md="10" lg="6" className="px-lg-5">
                   <Admin.Panel>
-                    <div className="p-5">
-                      <div className="d-flex w-100 align-items-end justify-content-between">
-                        <h2 className="h6 m-0">Profile</h2>
-                        <button type="button" className="btn btn-dark">
-                          Edit
-                        </button>
-                      </div>
-                      <hr />
-                      <div className="mb-4">
-                        <span className="d-block py-2 small">Name</span>
-                        <span className="d-block">
-                          {userInfo.first_name} {userInfo.last_name}
-                        </span>
-                      </div>
-                      <div className="mb-4">
-                        <span className="d-block py-2 small">Account ID</span>
-                        <span className="d-block">{userInfo.username}</span>
-                      </div>
-                      <div className="mb-4">
-                        <span className="d-block py-2 small">
-                          Email Address
-                        </span>
-                        <span className="d-block">{userInfo.email}</span>
-                      </div>
-                      <div className="mb-4">
-                        <span className="d-block py-2 small">Birthdate</span>
-                        <span className="d-block">{userInfo.birthdate}</span>
-                      </div>
-                    </div>
+                    <UserProfile data={userInfo} />
                   </Admin.Panel>
                   <Admin.Panel>
                     <div className="p-5">
                       <h2 className="h6">Preferences</h2>
                       <hr className="mb-4" />
                       <Form>
-                        <fieldset className="my-4">
-                          <legend className="mb-4">Communication</legend>
-                          <Form.Check id="communication-subscribe">
-                            <FormCheck.Input type="checkbox" />
-                            <FormCheck.Label className="ml-3">
-                              Yes, I&apos;d like to receive news, special offers
-                              and more from 7-Eleven.
-                            </FormCheck.Label>
-                          </Form.Check>
-                        </fieldset>
+                        {userInfo.preferences.map((preference, index) => (
+                          <fieldset className="my-4" key={index}>
+                            <legend className="mb-4">{preference.title}</legend>
+                            <Form.Check id={preference.id}>
+                              <FormCheck.Input
+                                type="checkbox"
+                                value={preference.enabled}
+                              />
+                              <FormCheck.Label className="ml-3">
+                                {preference.description}
+                              </FormCheck.Label>
+                            </Form.Check>
+                          </fieldset>
+                        ))}
                         <Button type="submit">Save</Button>
                       </Form>
                     </div>
