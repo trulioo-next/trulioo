@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { userDataSelector } from '../../stores/user/selectors';
 
 import UserHeader from '@/components/7rewards/UserHeader';
+import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 
 import './Admin.scss';
 
@@ -17,5 +18,7 @@ const Admin = props => {
     </div>
   );
 };
+
+Admin.Panel = AdminPanel;
 
 export default Admin;
