@@ -61,6 +61,7 @@ const Layout = props => {
   return (
     <React.Fragment>
       <div className="Layout">
+      <div className="sticky__header">
       { alertsData &&
         <Alert alertData={alertsData} />
       }
@@ -72,6 +73,7 @@ const Layout = props => {
         { headerData &&
           <NavBar data={headerData} user={userData} />
         }
+        </div>
         <main className="SiteMain">
           {isLoading && <Loader />}
           {props.children}

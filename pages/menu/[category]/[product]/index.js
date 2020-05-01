@@ -202,8 +202,7 @@ const Product = props => {
   }
 
   let { category, product } = props.query;
-
-  console.log('QUERY ', props.query )
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqNutritionalsAction({}));
@@ -212,11 +211,7 @@ const Product = props => {
   const categoryData = useSelector(state =>
     nutritionalsDataSelector(state, category, product),
   );
-
-  console.log(' categoryData :: ',  categoryData  )
-  console.log(' product :: ',  product  )
-
-
+  
   const taxonomyData = useSelector(state => taxonomiesSelector(state));
   let selected = [];
   if(taxonomyData) {
