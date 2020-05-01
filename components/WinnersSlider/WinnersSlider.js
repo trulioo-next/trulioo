@@ -39,7 +39,7 @@ const WinnersSliderItem = ({ image, title, winners_list, title_color, text_color
               style={{color: text_color || 'auto'}}
               >
           {winnersList.map((winnerName, idx) => (
-            <React.Fragment key={idx}>{winnerName} from Somewhere Far Away, ON<br/></React.Fragment>
+            <React.Fragment key={idx}>{winnerName}<br/></React.Fragment>
           ))}
         </div>
       }
