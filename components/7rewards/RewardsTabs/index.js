@@ -38,10 +38,10 @@ const RewardsTabs = ({ data }) => {
             <RewardMenu data={data} />
           </Tab.Pane>
           <Tab.Pane eventKey="sevenrewards-deals">
-            <Deals />
+            <Deals data={data} />
           </Tab.Pane>
           <Tab.Pane eventKey="sevenrewards-my-rewards">
-            <MyRewards />
+            <MyRewards data={data} />
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
