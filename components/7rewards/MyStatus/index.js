@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './MyStatus.scss';
+
+import Slider from 'react-slick';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const MyStatus = ({ data }) => {
-  const seventhCupPunchCard = data.punch_cards[0];
+  const [activePunchCard, setActivePunchCard] = useState(0);
 
   // TODO: Get points graph in.
 
+  const sliderSettings = {
+    className: 'PunchCard__slider',
+    dots: false,
+    arrows: true,
+    infinite: true,
+    centerMode: true,
+    centerPadding: '33%',
+    afterChange: newIndex => setActivePunchCard(newIndex),
+  };
+
   return (
     <aside className="MyStatus">
-      <Row>
-        <Col className="w-100">
-          <div className="RewardGraph MyStatus__RewardGraph"></div>
+      <Row className="align-items-center mx-md-n4">
+        <Col xs="12" md="6" lg="12" className="px-md-4">
+          <div className="RewardGraph MyStatus__rewardGraph"></div>
         </Col>
-        <Col xs="12" md="auto" lg="12">
-          <div className="MyStatus__divider" />
-        </Col>
-        <Col className="w-100">
-          <div className="MyStatus__stampCard text-center my-4">
-            <span className="StampCard__heading">
-              Any 7th <span className="text-success">Cup</span> Free
+        <Col xs="12" md="6" lg="12" className="px-md-4 px-lg-0">
+          <div className="PunchCard MyStatus__punchCard">
+            <span className="PunchCard__heading text-center">
+              {data.punch_cards[activePunchCard].title}
             </span>
-            <img
-              src={`/static/images/7rewards/cup-dial/${seventhCupPunchCard.punches_earned}.svg`}
-            />
+            <Slider {...sliderSettings}>
+              {data.punch_cards.map((punchCard, index) => (
+                <div key={index} className="PunchCard__card px-2">
+                  <img src={punchCard.web_image} className="PunchCard__stamp" />
+                </div>
+              ))}
+            </Slider>
           </div>
         </Col>
       </Row>

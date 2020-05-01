@@ -1,27 +1,74 @@
 @import '~@/static/scss/component-includes';
 
 .MyStatus {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 50%;
+    width: 0.1rem;
+    background-color: $text-muted;
+
+    @include media-breakpoint-only(md) {
+      display: block;
+    }
+  }
+
   .UserAdmin__panel & {
     padding: 2.6rem;
   }
 
-  &__divider {
-    width: 100%;
-    height: 1px;
-    background-color: $text-muted;
+  &__rewardGraph {
+    padding: 2rem 0;
+    border-bottom: solid 1px $text-muted;
 
     @include media-breakpoint-only(md) {
-      width: 1px;
-      height: 100%;
+      border-bottom: 0;
     }
   }
 }
 
-.StampCard {
+
+.PunchCard {
   &__heading {
-    display: block;
+    display: flex;
     font-size: 1.4rem;
     text-transform: uppercase;
+    margin-top: 0.8rem;
     margin-bottom: 0.8rem;
+    text-align: center;
+    min-height: 4.2em;
+    width: 100%;
+    padding: 0 2.8rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__slider {
+    padding: 0 3rem;
+
+    .slick-arrow {
+      background-image: svg-load('arrow-right.svg', fill= '#{$text-muted}');
+
+      &.slick-prev {
+        left: 0;
+      }
+
+      &.slick-next {
+        right: 0;
+      }
+    }
+
+    .slick-slide {
+      opacity: 0.5;
+
+      &.slick-active.slick-center {
+        opacity: 1;
+      }
+    }
   }
 }
