@@ -68,9 +68,20 @@ a:not([href]) {
   overflow: hidden;
 }
 
+.sticky__header {
+  position: fixed;
+  max-width: 145rem;
+  width: 100%;
+  z-index: 99;
+}
+
 .SiteMain {
   flex: 1 1 auto;
-  margin-top:90px;
+  margin-top:75px;
+
+   @include media-breakpoint-up(lg) {
+      margin-top:130px;
+   }
 }
 
 .Section {

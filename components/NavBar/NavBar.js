@@ -13,15 +13,12 @@ import Col from 'react-bootstrap/Col';
 
 const NavBar = data => (
   <nav className="SiteHeader">
-  <Container>
-  <Row>
    
     <Branding />
     <OffCanvasNav data={data} />
     <DesktopNav data={data}  />
      
-  </Row>
-  </Container>
+  
   
   </nav>
 );
