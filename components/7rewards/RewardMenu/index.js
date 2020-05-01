@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import Accordion from 'react-bootstrap/Accordion';
 import Media from 'react-bootstrap/Media';
 
+import RewardItem from '@/components/7rewards/RewardItem';
+
 import ChevronIcon from '@/static/images/caret-down.svg';
 
 import './RewardMenu.scss';
@@ -51,32 +53,14 @@ const RewardMenu = ({ data }) => {
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={`tier-${key}`}>
                   <div className="Accordion__collapse">
-                    <ul className="RewardMenu__rewardList list-unstyled">
+                    <ul className="RewardList list-unstyled">
                       {rewards.map((reward, rewardIndex) => (
-                        <Media
+                        <RewardItem
                           key={rewardIndex}
                           as="li"
-                          className="RewardMenu__reward"
-                        >
-                          <img
-                            className="RewardMenu__rewardImage"
-                            src={reward.image_thumb}
-                          />
-                          <Media.Body>
-                            <h4 className="RewardMenu__rewardTitle">
-                              {reward.title}
-                            </h4>
-                            <div className="RewardMenu__rewardDescription">
-                              <p>{reward.description}</p>
-                            </div>
-                            <button
-                              type="button"
-                              className="RewardMenu__redeemLink"
-                            >
-                              Redeem
-                            </button>
-                          </Media.Body>
-                        </Media>
+                          data={reward}
+                          type="reward"
+                        />
                       ))}
                     </ul>
                   </div>
