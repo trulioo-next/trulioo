@@ -16,6 +16,7 @@ import SectionPostGrid from './SectionComponents/SectionPostGrid';
 import SectionNewsroomGrid from './SectionComponents/SectionNewsroomGrid';
 import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
 import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
+import SectionContestWinners from './SectionComponents/SectionContestWinners';
 
 const SectionMaker = ({
   type,
@@ -81,6 +82,9 @@ const SectionMaker = ({
 
     case 'section_gift_card_balance':
       return <SectionGiftCardBalance sectionIndex={sectionIndex} {...params} />;
+
+    case 'selection_contest_winners':
+      return <SectionContestWinners {...params} />;
 
     default:
       return '';
