@@ -15,15 +15,6 @@ import Landing from '@/components/7rewards/Landing';
 import MyStatus from '@/components/7rewards/MyStatus';
 import RewardsTabs from '@/components/7rewards/RewardsTabs';
 
-import '../login/LoginScreen.scss';
-
-const AdminPanel = ({ label, children }) => (
-  <Fragment>
-    <span className="d-block px-4 px-md-0 mb-3">{label ? label : '\xA0'}</span>
-    <div className="UserAdmin__panel">{children}</div>
-  </Fragment>
-);
-
 class SevenRewards extends React.Component {
   constructor(props) {
     super(props);
@@ -59,14 +50,14 @@ class SevenRewards extends React.Component {
             <Container className="px-0">
               <Row className="justify-content-center mx-lg-n5">
                 <Col xs="12" md="10" lg="3" className="px-lg-5">
-                  <AdminPanel label="My Status">
+                  <Admin.Panel label="My Status">
                     <MyStatus data={this.props.user.user} />
-                  </AdminPanel>
+                  </Admin.Panel>
                 </Col>
                 <Col xs="12" md="10" lg="9" className="px-lg-5">
-                  <AdminPanel>
+                  <Admin.Panel>
                     <RewardsTabs data={this.props.user} />
-                  </AdminPanel>
+                  </Admin.Panel>
                 </Col>
               </Row>
             </Container>

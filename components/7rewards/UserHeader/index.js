@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 
 import Container from 'react-bootstrap/Container';
@@ -9,9 +9,28 @@ import Col from 'react-bootstrap/Col';
 
 import './UserHeader.scss';
 
-const UserHeader = ({ account, className }) => {
-  // TODO: Active state between 'My 7Rewards' and 'Account'
+const ActiveLink = ({ children, href }) => {
+  const router = useRouter();
 
+  const handleClick = e => {
+    e.preventDefault();
+    router.push(href);
+  };
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
+      className={classNames('UserHeader__navLink', {
+        '-active': router.pathname === href,
+      })}
+    >
+      {children}
+    </a>
+  );
+};
+
+const UserHeader = ({ account, className }) => {
   return (
     <header className={classNames('UserHeader', className)}>
       <Container className="px-4">
@@ -40,14 +59,10 @@ const UserHeader = ({ account, className }) => {
             <nav className="UserHeader__nav px-4">
               <Row as="ul" className="UserHeader__navList list-unstyled">
                 <Col as="li" xs="6" md="auto" className="UserHeader__navItem">
-                  <Link href="/7rewards">
-                    <a className="UserHeader__navLink -active">My 7Rewards</a>
-                  </Link>
+                  <ActiveLink href="/7rewards">My 7Rewards</ActiveLink>
                 </Col>
                 <Col as="li" xs="6" md="auto">
-                  <Link href="/7rewards/myaccount">
-                    <a className="UserHeader__navLink">Account</a>
-                  </Link>
+                  <ActiveLink href="/7rewards/myaccount">Account</ActiveLink>
                 </Col>
               </Row>
             </nav>
