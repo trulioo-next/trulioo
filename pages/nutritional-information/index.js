@@ -123,8 +123,7 @@ function Table({ columns, data }) {
 
  
 
-function Page() {
-// const Page = props => {
+const Page = (props) => {
   const columns = COLUMNS;
 
 
@@ -208,6 +207,9 @@ function Page() {
 
       <div className="Nutritionals__page">
         <section className="Section mb-0">
+          { pageData && pageData.acf_data && pageData.acf_data.page_content && (
+          <Container fluid className="Nutritionals inner__copy" dangerouslySetInnerHTML={{ __html: pageData.acf_data.page_content}}></Container>
+          )}
           <Container fluid className="px-0">
             <form
               id="nutritionals-search-form"
