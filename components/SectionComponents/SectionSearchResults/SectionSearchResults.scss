@@ -1,0 +1,74 @@
+@import '~@/static/scss/component-includes';
+
+
+.Search {
+
+	&.inner__copy {
+		position: relative;
+		margin: 50px 20px;
+	}
+
+	.Search__form {
+
+		label {
+			font-weight: 500;
+		}
+
+		.Search__inputGroup {
+			border-radius: 0;
+			border: 0;
+			box-shadow: 0 0.3rem 0.6rem 0 rgba($dark-gray, 0.25);
+		}
+
+		.Search__icon {
+
+			svg {
+			  height: 2.0rem;
+			}
+
+			@include media-breakpoint-up(lg) {
+				height: 5.5rem;
+				svg { height: 2.5rem; }
+			}
+		}
+
+		.Search__input {
+			display: flex;
+			padding-left: 5.5rem;
+			width: 100%;
+		}
+
+		.Search__submit {
+			display: flex;
+			position: absolute;
+			right: 0px;
+			height: 100%;
+		}
+	}
+
+
+	.Search__results {
+		margin: 50px 0px;
+		width: 100%;
+
+		.Search__resultsSummary {
+			margin: 30px 0px;
+			font-weight: 500;
+		}
+
+		.Search__resultsItem {
+			margin: 20px 0px;
+
+			a {
+				color: $green;
+				font-weight: 500;
+			}
+
+			.Search__resultsExcerpt {
+				margin-left: 20px;
+			}
+		}
+
+	}
+
+}

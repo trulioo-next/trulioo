@@ -17,6 +17,7 @@ import SectionNewsroomGrid from './SectionComponents/SectionNewsroomGrid';
 import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
 import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
 import SectionContestWinners from './SectionComponents/SectionContestWinners';
+import SectionSearchResults from './SectionComponents/SectionSearchResults';
 
 const SectionMaker = ({
   type,
@@ -24,6 +25,7 @@ const SectionMaker = ({
   sectionIndex,
   category,
   defaultImage,
+  props
 }) => {
   switch (type) {
     case 'section_hero_block':
@@ -85,6 +87,9 @@ const SectionMaker = ({
 
     case 'selection_contest_winners':
       return <SectionContestWinners {...params} />;
+
+    case 'search_results_placeholder':
+      return <SectionSearchResults props={{...props}} {...params} />;
 
     default:
       return '';

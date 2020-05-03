@@ -6,6 +6,7 @@ import NutritionalsSagas from './nutritionals/sagas'
 import NewsroomSagas from './newsroom/sagas'
 import UserSagas from './user/sagas'
 import AlertSagas from './alert/sagas'
+import SearchSiteSagas from './searchSite/sagas'
 
 // single entry point to start all Sagas at once
 //
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     NutritionalsSagas(),
     NewsroomSagas(),
     UserSagas(),
-    AlertSagas()
+    AlertSagas(),
+    SearchSiteSagas(),
   ]);
 }

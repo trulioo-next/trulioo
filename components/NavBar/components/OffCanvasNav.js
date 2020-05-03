@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Router from 'next/router'
 import Link from 'next/link';
 import { motion, useCycle } from 'framer-motion';
 import Accordion from 'react-bootstrap/Accordion';
@@ -187,6 +188,17 @@ const OffCanvasNav = data => {
     },
   };
 
+  const [searchTerm, setSearchTerm] = useState()
+
+  const handleSearchChange = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleSearchSubmit = event => {
+    event.preventDefault();
+    Router.push('/search?search=' + encodeURIComponent(searchTerm))
+  }
+
   return (
     <motion.div
       className="SiteHeader__menu -mobile"
@@ -208,7 +220,7 @@ const OffCanvasNav = data => {
           </Accordion>
         </motion.div>
         <motion.div variants={sectionVariant}>
-          <form className="OffCanvas__search">
+          <form className="OffCanvas__search" onSubmit={handleSearchSubmit}>
             <div className="Search__inputGroup">
               <label htmlFor="offcanvas-search" className="Search__icon">
                 <SearchIcon />
@@ -218,6 +230,7 @@ const OffCanvasNav = data => {
                 type="text"
                 className="Search__input"
                 placeholder="Search Site"
+                onChange={handleSearchChange}
               />
             </div>
             <input

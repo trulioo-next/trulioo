@@ -55,5 +55,10 @@ export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CH
 
 // Alert Events
 export const ALERT_LOAD_REQUEST = 'alert/load/ALERT_LOAD_REQUEST'
-export const ALERT_LOADED = 'alert/loaded/ALERT_LOAD_REQUEST'
+export const ALERT_LOADED = 'alert/loaded/ALERT_LOADED'
 export const ALERT_LOAD_ERROR = 'alert/error/ALERT_LOAD_ERROR'
+
+// Search Site Events
+export const SEARCHSITE_LOAD_REQUEST = 'searchSite/load/SEARCHSITE_LOAD_REQUEST'
+export const SEARCHSITE_LOADED = 'searchSite/loaded/SEARCHSITE_LOADED'
+export const SEARCHSITE_ERROR = 'searchSite/error/SEARCHSITE_ERROR'

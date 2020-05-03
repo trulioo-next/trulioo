@@ -66,6 +66,7 @@ const Page = props => {
             params={section}
             key={sectionKey}
             sectionIndex={sectionKey}
+            props={{...props}}
           />
         ))}
     </Layout>

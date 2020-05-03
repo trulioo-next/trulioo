@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
+import Router from 'next/router'
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -74,11 +75,22 @@ const SearchCollapse = () => {
     },
   };
 
+  const [searchTerm, setSearchTerm] = useState()
+
+  const handleSearchChange = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleSearchSubmit = event => {
+    event.preventDefault();
+    Router.push('/search?search=' + encodeURIComponent(searchTerm))
+  }
+
   return (
     <motion.div variants={collapseVariants} className="Search__collapse">
-      <form className="Search__form">
+      <form className="Search__form" onSubmit={handleSearchSubmit}>
         <div className="Search__inputGroup">
-          <input type="text" className="Search__input" placeholder="Search" />
+          <input type="text" className="Search__input" placeholder="Search" onChange={handleSearchChange}/>
           <input type="submit" className="sr-only" value="Search" />
         </div>
       </form>

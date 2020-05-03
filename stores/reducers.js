@@ -11,6 +11,7 @@ import nutritionals from './nutritionals/reducers'
 import newsroom from './newsroom/reducers'
 import user from './user/reducers'
 import alert from './alert/reducers'
+import searchSite from './searchSite/reducers'
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -23,7 +24,8 @@ export default function createReducer() {
     nutritionals,
     newsroom,
     user,
-    alert
+    alert,
+    searchSite,
   })
 
   return rootReducer
