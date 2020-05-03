@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 import './WinnersSlider.scss';
 
 
-const WinnersSliderItem = ({ image, title, winners_list, title_color, text_color }) => {
+const WinnersSliderItem = ({ image, title, subtitle, winners_list, background_color, title_color, text_color }) => {
 
   let winnersList = [];
   if (winners_list)
@@ -17,23 +17,28 @@ const WinnersSliderItem = ({ image, title, winners_list, title_color, text_color
   const numColumns = Math.max(1, Math.min(3, parseInt(Math.ceil(numWinners / 20))));
 
   const listClasses = classNames('WinnersSlider__winnersList', 'columns-'+numColumns);
-
+  
   const slide = (
-    <figure className="WinnersSlider__item" >
-      {title && (
-        <div className="WinnersSlider__header">
-          <h2 className="WinnersSlider__title"
-              style={{color: title_color || 'auto'}}
-              >{title}</h2>
-        </div>
-      )}
-      <img
-        className="WinnersSlider__image"
-        src={image.url}
-        width={image.width}
-        height={image.height}
-        alt={image.alt}
-      />
+    <figure className="WinnersSlider__item" style={{backgroundColor: background_color || 'auto'}}>
+      <div className="WinnersSlider__header">
+        {title && (
+            <h2 className="WinnersSlider__title"
+                style={{color: title_color || 'auto'}}
+                >{title}</h2>
+        )}
+        <img
+          className="WinnersSlider__image"
+          src={image.url}
+          width={image.width}
+          height={image.height}
+          alt={image.alt}
+        />
+        {subtitle && (
+            <h2 className="WinnersSlider__subtitle"
+                style={{color: title_color || 'auto'}}
+                >{subtitle}</h2>
+        )}
+      </div>
       {winnersList &&
         <div  className={listClasses}
               style={{color: text_color || 'auto'}}

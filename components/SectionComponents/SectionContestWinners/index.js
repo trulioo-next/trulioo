@@ -10,12 +10,14 @@ const SectionContestWinners = ({settings, contests}) => {
   return  contests ? (
     <section className="Section -slider">
       <WinnersSlider {...settings} >
-        {contests && contests.map(({ image, title, winners_list, title_color, text_color }, slideIndex) => (
+        {contests && contests.map(({ image, title, subtitle, winners_list, background_color, title_color, text_color }, slideIndex) => (
           <WinnersSlider.Item
             key={slideIndex}
             image={image}
             title={title}
+            subtitle={subtitle}
             winners_list={winners_list}
+            background_color={background_color}
             title_color={title_color}
             text_color={text_color}
           />
