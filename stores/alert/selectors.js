@@ -7,7 +7,7 @@
  
 
  export const alertDataSelector = (state) => {
-   return state.alert && state.alert.alerts ? [...state.alert.alerts] : [];
+   return state.alert && state.alert.alerts && Array.isArray(state.alert.alerts) ? [...state.alert.alerts] : [];
  }
 
  
