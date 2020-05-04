@@ -3,12 +3,10 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import ChevronIcon from '@/static/images/caret-down.svg';
 import { userDataSelector } from '@/stores/user/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '@/components/Button';
-
 
 const listVariants = {
   open: {
@@ -40,59 +38,52 @@ const SubNavMenu = props => {
   const isNested = props.nested;
   const parent = props.parent;
   const hasThirdLevel = props.hasThirdLevel;
-  const subnavIndex = props.i;
-  const parentIndex = isNested ? props.parentIndex : false;
-  const keyPrefix = isNested
-    ? `subnav-${parentIndex}-nested-${subnavIndex}`
-    : `subnav-${subnavIndex}`;
-
 
   const userData = useSelector(state => userDataSelector(state));
   const authenticated = userData && userData.auth ? userData.auth : false;
 
   function isVisible(target) {
     let bool = true;
-    if( authenticated && target === "auth--hidden" ) {
-       bool = false;
+    if (authenticated && target === 'auth--hidden') {
+      bool = false;
     }
-    if( !authenticated && target === "auth--required" ) {
-       bool = false;
+    if (!authenticated && target === 'auth--required') {
+      bool = false;
     }
     return bool;
   }
 
   //
-  function buildLink(url,name,className) {
+  function buildLink(url, name, className) {
     let isRewardsLink = url.split('/7rewards')[1];
     let isMenuLink = url.split('/menu')[1];
-    if(isVisible(className) ) {
-      let hrefPath = "/[slug]";
-      if(isRewardsLink) {
-          hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : "/[slug]";
+    if (isVisible(className)) {
+      let hrefPath = '/[slug]';
+      if (isRewardsLink) {
+        hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : '/[slug]';
       }
-      if(isMenuLink) {
-          hrefPath = isMenuLink ? `/menu/${isMenuLink}` : "/[slug]";
+      if (isMenuLink) {
+        hrefPath = isMenuLink ? `/menu/${isMenuLink}` : '/[slug]';
       }
-      if(url === '/7rewards') {
-        hrefPath =  "/7rewards";
-      }
-
-      if(url === '/') {
-        hrefPath =  "/";
+      if (url === '/7rewards') {
+        hrefPath = '/7rewards';
       }
 
-      if(!isRewardsLink && !isMenuLink) {
-          hrefPath = "/[slug]";
+      if (url === '/') {
+        hrefPath = '/';
       }
-      
+
+      if (!isRewardsLink && !isMenuLink) {
+        hrefPath = '/[slug]';
+      }
+
       return (
         <Link href={url}>
           <a>{name}</a>
         </Link>
-      ) 
+      );
     }
   }
-  
 
   return (
     <motion.ul
@@ -102,7 +93,7 @@ const SubNavMenu = props => {
       {props.items.map(({ name, url, children, className }, index) => (
         <motion.li
           variants={itemVariants}
-          key={`${keyPrefix}-item-${index}`}
+          key={index}
           className={classNames('SiteHeader__item', '-nested', {
             col: hasThirdLevel && !isNested,
           })}
@@ -110,16 +101,9 @@ const SubNavMenu = props => {
           {hasThirdLevel ? (
             <span className="SiteHeader__subnavHeading">{name}</span>
           ) : (
-            buildLink(url,name,className) 
+            buildLink(url, name, className)
           )}
-          {children.length > 0 && (
-            <SubNavMenu
-              items={children}
-              i={index}
-              parentIndex={subnavIndex}
-              nested
-            />
-          )}
+          {children.length > 0 && <SubNavMenu items={children} nested />}
         </motion.li>
       ))}
 
@@ -140,7 +124,6 @@ const SubNavMenu = props => {
 const SubNav = props => {
   const items = props.items;
   const parent = props.parent;
-  const subnavIndex = props.i;
   let hasThirdLevel = false;
 
   const subMenuAnimate = {
@@ -181,14 +164,7 @@ const SubNav = props => {
         '-has-grandchildren': hasThirdLevel,
       })}
     >
-       
-          <SubNavMenu
-            items={items}
-            parent={parent}
-            i={subnavIndex}
-            hasThirdLevel={hasThirdLevel}
-          />
-        
+      <SubNavMenu items={items} parent={parent} hasThirdLevel={hasThirdLevel} />
     </motion.div>
   );
 };

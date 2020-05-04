@@ -33,8 +33,11 @@ class Menu extends React.Component {
   buildColumnRows() {
     let data = this.props.data;
     if (data) {
+      const sortedData = data.sort((a, b) => {
+        return a.priority - b.priority;
+      })
       let counter = 0;
-      let containers = data.map(item => {
+      let containers = sortedData.map(item => {
         counter++;
         let image = item.image
           ? item.image.url
