@@ -200,8 +200,8 @@ const SectionCallToAction = ({
 
   return (
     <section
-      className={classNames('Section', className, {
-        '-bg-img': bgImage ? true : false,
+      className={classNames('Section SectionCTA', className, {
+        '-bg-img': bgImage.desktop ? true : false,
       })}
       style={{
         color: (params && params.text_color && params.text_color) || '#ffffff',
