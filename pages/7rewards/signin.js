@@ -6,7 +6,6 @@ import Button from '@/components/Button';
 import appActions from '../../stores/user/actions';
 import appSelectors from '../../stores/user/selectors';
 import Hero from '@/components/Hero';
-import { css, jsx } from '@emotion/core';
 import Link from 'next/link';
 import routerPush from '../../helpers/routerPush';
 import * as Yup from 'yup';
@@ -14,13 +13,14 @@ import * as Yup from 'yup';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 
+import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 
-
-import '../login/LoginScreen.scss';
+import SevenRewardsLogo from '@/static/images/7rewards/7-rewards-logo.svg';
 
 class UserAuth extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.submitForm = this.submitForm.bind(this);
@@ -35,13 +35,13 @@ class UserAuth extends React.Component {
     };
   }
 
-  static async getInitialProps ({ query, store }) {
-    let userData = store.getState()
+  static async getInitialProps({ query, store }) {
+    let userData = store.getState();
     return { query, userData };
   }
 
-  componentDidMount () {
-   //  console.log('user STORE :: >>  ', this.props.store.getState() )
+  componentDidMount() {
+    //  console.log('user STORE :: >>  ', this.props.store.getState() )
 
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
@@ -49,63 +49,62 @@ class UserAuth extends React.Component {
       routerPush('/7rewards');
     }
 
-
-
-    // TODO: REMVOE THIS FORM HERE : 
+    // TODO: REMVOE THIS FORM HERE :
     // facebook signin  button render
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-          return;
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
+
+    // PROD ID 1018851968129793
+    // STAGING ID 219346039373151
+
+    window.fbAsyncInit = () => {
+      FB.init({
+        appId: '1018851968129793',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v6.0',
+      });
+
+      FB.Event.subscribe('auth.statusChange', response => {
+        if (response.authResponse) {
+          this.checkLoginState();
+        } else {
+          console.log(
+            '[FacebookLoginButton] User cancelled login or did not fully authorize.',
+          );
         }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    
-
-       // PROD ID 1018851968129793
-       // STAGING ID 219346039373151
-
-      window.fbAsyncInit = () => {
-        FB.init({
-          appId: '1018851968129793', 
-          autoLogAppEvents: true,
-          xfbml: true,
-          version: 'v6.0'
-        });
-
-        FB.Event.subscribe('auth.statusChange', response => {
-          if (response.authResponse) {
-            this.checkLoginState();
-          } else {
-            console.log('[FacebookLoginButton] User cancelled login or did not fully authorize.');
-          }
-        });
-      };
-      
+      });
+    };
   }
 
-  componentDidUpdate () {
-   let isUserAuth = this.props.user ? this.props.user.auth : false;
+  componentDidUpdate() {
+    let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
       // this.setState({loggedIn:true})
       routerPush('/7rewards');
     }
- 
   }
 
-
   checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      this.statusChangeCallback(response);
-    }.bind(this));
+    FB.getLoginStatus(
+      function(response) {
+        this.statusChangeCallback(response);
+      }.bind(this),
+    );
   }
 
   login() {
     FB.login(this.checkLoginState(), {
-      scope: 'email'
+      scope: 'email',
     });
   }
 
@@ -113,23 +112,26 @@ class UserAuth extends React.Component {
     if (response.status === 'connected') {
       // this.logUserIn(response.authResponse.accessToken);
       this.submitFacebookRequest(response.authResponse.accessToken);
-
     } else if (response.status === 'not_authorized') {
-      console.log("[FacebookLoginButton] Person is logged into Facebook but not your app");
+      console.log(
+        '[FacebookLoginButton] Person is logged into Facebook but not your app',
+      );
     } else {
-      console.log("[FacebookLoginButton] Person is not logged into Facebook");
+      console.log('[FacebookLoginButton] Person is not logged into Facebook');
     }
   }
 
   logUserIn(access_token) {
-    FB.api('/me', function(response) {
-      console.log('[FacebookLoginButton] Successful login for: ', response );
-      
-    }.bind(this));
+    FB.api(
+      '/me',
+      function(response) {
+        console.log('[FacebookLoginButton] Successful login for: ', response);
+      }.bind(this),
+    );
   }
- 
+
   //
-  onValueChange (e, type) {
+  onValueChange(e, type) {
     if (type === 'user') {
       this.setState({ userName: e.target.value });
     }
@@ -140,7 +142,7 @@ class UserAuth extends React.Component {
   }
 
   //
-  submitForm (e) {
+  submitForm(e) {
     e.preventDefault();
     this.setState({ isLoading: true });
     const payload = {
@@ -153,102 +155,139 @@ class UserAuth extends React.Component {
 
   //
   submitFacebookRequest(access_token) {
-
     this.props.userFacebookAuthRequest(access_token);
-
   }
 
-  render () {
-
-    let error = this.props.user && this.props.user.error ? this.props.user.error : false;
-
+  render() {
+    let error =
+      this.props.user && this.props.user.error ? this.props.user.error : false;
 
     return (
       <Layout>
-        <Header title='Sign In' />
-        <Hero src='/static/images/placeholders/Pizza_Hero.jpg'></Hero>
-
-        <div className='login__screen__page'>
-          {!this.state.loggedIn && (
-            <div
-              className='form__wrapper'
-              css={css`
-                margin-top: 100px;
-              `}
-            >
-              <p
-                className='header__title'
-                css={css`
-                  margin-top: 0px;
-                  margin-bottom: 50px;
-                `}
-              >
-                EARN points for every $1 you spend. REDEEM points for FREE food
-                & drink. Enjoy bonus offers and get rewards even faster. And
-                every 7th cup still FREE!
-              </p>
-              <h3>Sign In</h3>
-              <form>
-                <p>
-                  If you’re an existing member, please sign in using your
-                  7Rewards email address and password.
-                </p>
-
-                 <Row>
-                  <Col className="text-center">
-                    <img className="facebook__btn" onClick={(e) => this.login(e) } src="/static/images/placeholders/facebook-btn.png" />
-                    <p className="bottom--margin--20">OR</p>
+        <Header title="Sign In" />
+        {this.state.loggedIn ? (
+          <Container>
+            <Row>
+              <Col>
+                <h2>You are logged in.</h2>
+              </Col>
+            </Row>
+          </Container>
+        ) : (
+          <Container className="my-md-5 px-5 px-md-4">
+            <Row className="justify-content-center">
+              <Col xs="12" md="10" lg="8">
+                <Row className="justify-content-center my-5">
+                  <Col xs="6" md="3" lg="4">
+                    <SevenRewardsLogo />
                   </Col>
                 </Row>
+                <Row className="justify-content-center my-5 py-lg-5">
+                  <Col xs="12" md="10">
+                    <p>
+                      <strong>EARN</strong> points for every $1 you spend.{' '}
+                      <strong>REDEEM</strong> points for <strong>FREE</strong>{' '}
+                      food &amp; drink. Enjoy bonus offers and get rewards even
+                      faster. And every 7th cup still <strong>FREE</strong>!
+                    </p>
+                  </Col>
+                </Row>
+                <Row className="justify-content-center my-5 mx-n5">
+                  <Col xs="12" md="6" className="px-5">
+                    <h3 className="text-center h5 mb-n4">Sign In</h3>
+                    <AdminPanel className="mb-5 mb-md-0">
+                      <Container className="p-5">
+                        <Form>
+                          <Row className="text-center">
+                            <Col>
+                              <p>
+                                If you’re an existing member, please sign in
+                                using your 7Rewards email address and password.
+                              </p>
+                              <img
+                                className="w-75 mx-auto"
+                                onClick={e => this.login(e)}
+                                src="/static/images/placeholders/facebook-btn.png"
+                              />
+                              <p className="my-4 small">OR</p>
+                            </Col>
+                          </Row>
 
+                          <Form.Group controlId="user_name">
+                            <Form.Label className="small">
+                              Email Address
+                            </Form.Label>
+                            <Form.Control
+                              size="lg"
+                              type="email"
+                              value={this.state.userName}
+                              onChange={e => this.onValueChange(e, 'user')}
+                              name="user_name"
+                            />
+                          </Form.Group>
 
-                <div className='input__group'>
-                  <label>User Name</label>
-                  <input
-                    id='user_name'
-                    value={this.state.userName}
-                    onChange={e => this.onValueChange(e, 'user')}
-                    name='user_name'
-                    placeholder='Email'
-                  />
-                </div>
-                <div className='input__group'>
-                  <label>Password</label>
-                  <input
-                    value={this.state.password}
-                    type='password'
-                    name='password'
-                    onChange={e => this.onValueChange(e, 'pass')}
-                    placeholder='Password'
-                  />
-                </div>
+                          <Form.Group controlId="password">
+                            <Form.Label className="small">Password</Form.Label>
+                            <Form.Control
+                              size="lg"
+                              value={this.state.password}
+                              type="password"
+                              name="password"
+                              onChange={e => this.onValueChange(e, 'pass')}
+                            />
+                          </Form.Group>
 
-                { error &&  
-                  <div className="form__wrapper" css={css`position: relative; display:block; margin-top:30px; text-align:center; width: 100%;`}>
-                  <h5>{ this.props.user.error.payload.error_description }</h5></div>
-                }
-               
-                <Button id='submit' onClick={e => this.submitForm(e)}>
-                  Login
-                </Button>
-                
- 
-              </form>
-            </div>
-          )}
-          {this.state.loggedIn && (
-            <div
-              className='form__wrapper'
-              css={css`
-                margin-top: 150px;
-                text-align: center;
-                width: 100%;
-              `}
-            >
-              <h2>You are logged in.</h2>
-            </div>
-          )}
-        </div>
+                          {error && (
+                            <Row>
+                              <Col>
+                                <p className="h5 my-4 text-danger text-center">
+                                  {
+                                    this.props.user.error.payload
+                                      .error_description
+                                  }
+                                </p>
+                              </Col>
+                            </Row>
+                          )}
+
+                          <Row>
+                            <Col className="text-center">
+                              <Button
+                                id="submit"
+                                onClick={e => this.submitForm(e)}
+                              >
+                                Login
+                              </Button>
+                              <Link href="/7rewards/forgotpassword">
+                                <a className="d-block mt-4">Forgot password?</a>
+                              </Link>
+                            </Col>
+                          </Row>
+                        </Form>
+                      </Container>
+                    </AdminPanel>
+                  </Col>
+                  <Col xs="12" md="6" className="px-5">
+                    <h3 className="text-center h5 mb-n4">Join Now</h3>
+                    <AdminPanel className="mb-5 mb-md-0 text-center">
+                      <Container className="p-5">
+                        <Row>
+                          <Col>
+                            <p>
+                              Register today and start collecting 7Rewards Bonus
+                              Points to redeem for FREE rewards!
+                            </p>
+                            <Button href="/7rewards/register">Register</Button>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </AdminPanel>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Container>
+        )}
       </Layout>
     );
   }
@@ -260,7 +299,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
-  userFacebookAuthRequest: payload => dispatch(appActions.reqUserFacebookAuthAction(payload)),
+  userFacebookAuthRequest: payload =>
+    dispatch(appActions.reqUserFacebookAuthAction(payload)),
 });
 
 const UserAuth_ = connect(mapStateToProps, mapDispatchToProps)(UserAuth);
