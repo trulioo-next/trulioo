@@ -46,6 +46,7 @@ export default (state = INITIAL_STATE, action) => {
       case SEVEN_REWARDS_REDEEM:
         return { ...state,
           redeem: action.payload,
+          myRewards: action.payload.myRewards,
 
         }  
 
@@ -60,7 +61,8 @@ export default (state = INITIAL_STATE, action) => {
         bonusOffers:action.payload.bonusOffers,
         registered: true,
         error:action.payload.error,
-        token:action.payload.token
+        token:action.payload.token,
+        myRewards:action.payload.myRewards
       }  
 
 
@@ -75,7 +77,8 @@ export default (state = INITIAL_STATE, action) => {
         bonusOffers:action.payload.bonusOffers,
         registered: true,
         token:action.payload.token,
-        error:action.payload.error
+        error:action.payload.error,
+         myRewards:action.payload.myRewards
       }  
 
       case SEVEN_REWARDS_CHECK_LOADED:
@@ -102,7 +105,8 @@ export default (state = INITIAL_STATE, action) => {
         error:false,
         redeem:false,
         token:false,
-        sms:false
+        sms:false,
+        myRewards:false
       }  
 
     default:

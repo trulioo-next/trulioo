@@ -98,19 +98,28 @@ export default async (req, res) => {
        method: 'GET',
        headers: authHeaders
      });
+  
+
+    // My Rewards
+    // /v4/rewards/me/
+    const myRewards = await fetch(REWARDS_API_URL+'/v4/rewards/me/',
+     {
+       method: 'GET',
+       headers: authHeaders
+     }); 
 
     //
-    // console.log('bonusOffers   ', bonusOffers )
+    console.log('myRewards :::    ', myRewards )
     // console.log('USER DEALS  ', deals )
     // console.log('USER COUPONS  ', coupons )
     // console.log('USER FULL PROFILE STRINGIFY :: >>  ',  fullProfile )
     // console.log('REWARDS ', rewards )
     // console.log('USER ACCESS TOKEN :: ', user )   
  
-     res.json({user:fullProfile, rewards, auth:user, coupons, deals, promotions, bonusOffers, error:false, token: userToken.access_token })
+     res.json({user:fullProfile, rewards, auth:user, coupons, deals, promotions, bonusOffers, error:false, token: userToken.access_token, myRewards })
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false, token: false  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false, token: false, myRewards:false  })
     // res.status(400).send({ error: error })
   }
 };

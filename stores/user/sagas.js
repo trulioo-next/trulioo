@@ -209,7 +209,7 @@ function* redeemPoints(payload) {
    
     const redeemResponse = yield call(sevenRewardsService.redeemPoints, payload)
 
-   // console.log('REDEEM!!   ', redeemResponse )
+    // console.log('REDEEM!!   ', redeemResponse )
     
     yield put({ type: SEVEN_REWARDS_REDEEM, payload:redeemResponse})
 

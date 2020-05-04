@@ -100,7 +100,7 @@ export default function SevenRewardsService(state) {
 		let data = await API.post('/api/seven-rewards/redeem', {body:payload});
 
         // console.log("REDEEM SERVICE ", payload )	
-        // console.log("REDEEM SERVICE DATA ", data )		
+        // console.log("REDEEM SERVICE DATA ", data )
 
         let updatedUser = payload.user.user;
         updatedUser.rewards_points = data.rewards_points
@@ -117,7 +117,7 @@ export default function SevenRewardsService(state) {
 		        }
 		    })
 		}
-		return { redeem:data, user:updatedUser, rewards:updatedRewards };
+		return { redeem:data, user:updatedUser, rewards:updatedRewards, myRewards:data };
 	}
 
 	async function verifySms(payload) {
