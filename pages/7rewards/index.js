@@ -5,8 +5,6 @@ import Admin from '@/containers/Admin';
 import Header from '@/components/Header';
 import appActions from '@/stores/user/actions';
 import appSelectors from '@/stores/user/selectors';
-import { css, jsx } from '@emotion/core';
-import Hero from '@/components/Hero';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

@@ -1,110 +1,149 @@
-import React from "react";
-import { connect } from 'react-redux'
-import Layout from '../../containers/Layout/Layout'
-import Header from '../../components/Header/Header'
+import React from 'react';
+import { connect } from 'react-redux';
+import Link from 'next/link';
+import Layout from '../../containers/Layout/Layout';
+import Header from '../../components/Header/Header';
 import Button from '@/components/Button';
-import appActions from '../../stores/user/actions'
-import appSelectors from '../../stores/user/selectors'
-import Hero from '@/components/Hero';
-import {css, jsx} from "@emotion/core";  
+import appActions from '../../stores/user/actions';
+import appSelectors from '../../stores/user/selectors';
 
-import '../login/LoginScreen.scss';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+
+import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
+
+import SevenRewardsLogo from '@/static/images/7rewards/7-rewards-logo.svg';
 
 class ResetPassword extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.submitForm = this.submitForm.bind(this)
-    this.onValueChange = this.onValueChange.bind(this)
+    this.submitForm = this.submitForm.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
 
     this.state = {
-      email:'',
-      valid:false,
-      isLoading:false,
-      loggedIn:false
-    }
+      email: '',
+      valid: false,
+      isLoading: false,
+      loggedIn: false,
+    };
   }
 
   static async getInitialProps({ isServer, store }) {
-    return {}
+    return {};
   }
 
   componentDidMount() {
-
-    let isUserAuth = this.props.user.auth
-    if( !isUserAuth.error && isUserAuth ) {
-      this.setState({loggedIn:true})
+    let isUserAuth = this.props.user.auth;
+    if (!isUserAuth.error && isUserAuth) {
+      this.setState({ loggedIn: true });
     }
-
   }
-  componentDidUpdate() { }
-  
+  componentDidUpdate() {}
+
   //
-  onValueChange(e,type) {
-    if( type === 'email') {
-      this.setState({email:e.target.value})
+  onValueChange(e, type) {
+    if (type === 'email') {
+      this.setState({ email: e.target.value });
     }
   }
-  
+
   //
   submitForm(e) {
-    e.preventDefault()
-    this.setState({isLoading:true})
+    e.preventDefault();
+    this.setState({ isLoading: true });
     const payload = {
-      email: this.state.email
-    }
-    this.setState({loggedIn:true})
+      email: this.state.email,
+    };
+    this.setState({ loggedIn: true });
 
-    // Add email reset action here 
+    // Add email reset action here
     //  this.props.userAuthRequest(payload)
   }
- 
-  render() {
 
+  render() {
     return (
       <Layout>
         <Header title="Forgot Password" />
-        <Hero src="/static/images/placeholders/Get7Rewards_Background.jpg">
-        </Hero>
-        <div className="login__screen__page">
-          { !this.state.loggedIn &&  
-          <div className="form__wrapper" css={css`margin-top:150px;`}>
-            <h2>Login:</h2>
-            <form>
-              <div className="input__group">
-                <label>Email</label>
-                <input id="user_name" value={this.state.email} onChange={(e) => this.onValueChange(e,'email')} name="email" placeholder="Email Address"/>
-              </div>
-              <Button
-                id="submit"
-                onClick={ (e) => this.submitForm(e) } >
-                Login
-              </Button>
-              {this.props.user.auth.error &&  
-                <div className="form__wrapper" css={css`position: relative; display:block; margin-top:30px; text-align:center; width: 100%;`}>
-                <h5>{ this.props.user.auth.error.payload.error_description }</h5></div>
-              }
-            </form>
-          </div>
-          }
-           
-        </div>
-     </Layout>
-    )
+        <Container className="my-md-5 px-5 px-md-4">
+          <Row className="justify-content-center">
+            <Col xs="12" md="8" lg="6">
+              <Row className="justify-content-center my-5">
+                <Col xs="6" md="4" lg="5">
+                  <SevenRewardsLogo />
+                </Col>
+              </Row>
+              <Row className="justify-content-center my-5 py-lg-5">
+                <Col>
+                  <h1 className="h4">Forgot Your Password?</h1>
+                  <p>
+                    Please enter the email address that was used to register
+                    your account. If the email you provide is valid, you will
+                    receive a link to reset your password shortly.
+                  </p>
+                </Col>
+              </Row>
+              <Row className="justify-content-center my-5">
+                <Col>
+                  <AdminPanel className="mt-n5 mb-5 mb-md-0">
+                    <Container className="p-5">
+                      <Form>
+                        <Form.Group className="mb-4 mb-lg-5" controlId="email">
+                          <Form.Label className="small">
+                            Email Address
+                          </Form.Label>
+                          <Form.Control
+                            size="lg"
+                            id="email"
+                            type="email"
+                            value={this.state.email}
+                            onChange={e => this.onValueChange(e, 'email')}
+                            name="email"
+                          />
+                        </Form.Group>
+                        <Button id="submit" onClick={e => this.submitForm(e)}>
+                          Send Email
+                        </Button>
+                        <Link href="/7rewards/signin">
+                          <a className="ml-4">Cancel</a>
+                        </Link>
+
+                        {/* {this.props.user.auth.error && (
+                          <div className="form__wrapper">
+                            <h5>
+                              {
+                                this.props.user.auth.error.payload
+                                  .error_description
+                              }
+                            </h5>
+                          </div>
+                        )} */}
+                      </Form>
+                    </Container>
+                  </AdminPanel>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      </Layout>
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: appSelectors.userDataSelector(state),
-})
+});
 
-const mapDispatchToProps = (dispatch) => ({
-  userAuthRequest: (payload) => dispatch(appActions.reqUserAuthAction(payload)),
-})
+const mapDispatchToProps = dispatch => ({
+  userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
+});
 
 const ResetPassword_ = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(ResetPassword)
- 
+  mapDispatchToProps,
+)(ResetPassword);
+
 export default ResetPassword_;
