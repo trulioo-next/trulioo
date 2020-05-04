@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Router from 'next/router'
+import Router from 'next/router';
 import Link from 'next/link';
 import { motion, useCycle } from 'framer-motion';
 import Accordion from 'react-bootstrap/Accordion';
@@ -9,31 +9,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import SearchIcon from '@/static/images/search.svg';
 import ChevronIcon from '@/static/images/caret-down.svg';
 import { userDataSelector } from '@/stores/user/selectors';
-
-
-
-// import linkData from '../placeholder-links.json';
-
-const RewardsArea = props => (
-  <motion.div className="OffCanvas__rewards" variants={props.variants}>
-    <h2 className="OffCanvas__rewardsHeading">Welcome back, Jane Smith.</h2>
-    <div className="OffCanvas__rewardsInfo">
-      <p>Earn 7Rewards points for every purchase.</p>
-    </div>
-    <ul className="OffCanvas__rewardsNav">
-      <li className="OffCanvas__rewardsNavItem">
-        <Link href="/7rewards/account" as="/7rewards/account">
-          <a>Account</a>
-        </Link>
-      </li>
-      <li className="OffCanvas__rewardsNavItem">
-        <Link href="/7rewards/logout" as="/7rewards/logout">
-          <a>Sign Out</a>
-        </Link>
-      </li>
-    </ul>
-  </motion.div>
-);
 
 const NavToggle = props => (
   <button role="tab" className="OffCanvas__toggle -menu" onClick={props.toggle}>
@@ -46,73 +21,62 @@ const NavToggle = props => (
 const SubNavMenu = props => {
   const isNested = props.nested;
   const hasThirdLevel = props.hasThirdLevel;
-  const subnavIndex = props.i;
-  const parentIndex = isNested ? props.parentIndex : false;
-  const keyPrefix = isNested
-    ? `offcanvas-subnav-${parentIndex}-nested-${subnavIndex}`
-    : `offcanvas-subnav-${subnavIndex}`;
 
   const userData = useSelector(state => userDataSelector(state));
 
-  function buildLink(url,name) {
+  function buildLink(url, name) {
     let isRewardsLink = url.split('/7rewards')[1];
     let isMenuLink = url.split('/menu')[1];
-     
-      let hrefPath = "/[slug]";
-      if(isRewardsLink) {
-          hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : "/[slug]";
-      }
-      if(isMenuLink) {
-          hrefPath = isMenuLink ? `/menu/${isMenuLink}` : "/[slug]";
-      }
-      if(url === '/7rewards') {
-        hrefPath =  "/7rewards";
-      }
 
-      if(url === '/') {
-        hrefPath =  "/";
-      }
+    let hrefPath = '/[slug]';
+    if (isRewardsLink) {
+      hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : '/[slug]';
+    }
+    if (isMenuLink) {
+      hrefPath = isMenuLink ? `/menu/${isMenuLink}` : '/[slug]';
+    }
+    if (url === '/7rewards') {
+      hrefPath = '/7rewards';
+    }
 
-      if(!isRewardsLink && !isMenuLink) {
-          hrefPath = "/[slug]";
-      }
-      
-      return (
-        <Link href={url}>
-          <a>{name}</a>
-        </Link>
-      ) 
-    
+    if (url === '/') {
+      hrefPath = '/';
+    }
+
+    if (!isRewardsLink && !isMenuLink) {
+      hrefPath = '/[slug]';
+    }
+
+    return (
+      <Link href={url}>
+        <a>{name}</a>
+      </Link>
+    );
   }
 
   return (
     <>
-    { props.items && 
-    <ul className={classNames('OffCanvas__subnav', { '-nested': isNested })}>
-      {props.items.map(({ name, url, children }, index) => (
-        <li
-          key={`${keyPrefix}-item-${index}`}
-          className={classNames('OffCanvas__subnavItem', '-nested', {
-            col: hasThirdLevel && !isNested,
-          })}
+      {props.items && (
+        <ul
+          className={classNames('OffCanvas__subnav', { '-nested': isNested })}
         >
-          {hasThirdLevel ? (
-            <span className="OffCanvas__subnavHeading">{name}</span>
-          ) : (
-            buildLink(url,name) 
-          )}
-          {children.length > 0 && (
-            <SubNavMenu
-              items={children}
-              i={index}
-              parentIndex={subnavIndex}
-              nested
-            />
-          )}
-        </li>
-      ))}
-    </ul>
-    }
+          {props.items.map(({ name, url, children }, index) => (
+            <li
+              key={index}
+              className={classNames('OffCanvas__subnavItem', '-nested', {
+                col: hasThirdLevel && !isNested,
+              })}
+            >
+              {hasThirdLevel ? (
+                <span className="OffCanvas__subnavHeading">{name}</span>
+              ) : (
+                buildLink(url, name)
+              )}
+              {children.length > 0 && <SubNavMenu items={children} nested />}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
@@ -159,7 +123,6 @@ const NavItem = props => {
             <SubNavMenu
               i={itemIndex}
               items={item.children}
-              parent={item}
               hasThirdLevel={hasThirdLevel}
             />
           </Accordion.Collapse>
@@ -217,16 +180,16 @@ const OffCanvasNav = data => {
     },
   };
 
-  const [searchTerm, setSearchTerm] = useState()
+  const [searchTerm, setSearchTerm] = useState();
 
   const handleSearchChange = e => {
-    setSearchTerm(e.target.value)
-  }
+    setSearchTerm(e.target.value);
+  };
 
   const handleSearchSubmit = event => {
     event.preventDefault();
-    Router.push('/search?search=' + encodeURIComponent(searchTerm))
-  }
+    Router.push('/search?search=' + encodeURIComponent(searchTerm));
+  };
 
   return (
     <motion.div
@@ -240,11 +203,10 @@ const OffCanvasNav = data => {
           className="OffCanvas__toggle -close"
           onClick={() => toggleOpen()}
         ></button>
-        <RewardsArea variants={sectionVariant} />
         <motion.div variants={sectionVariant}>
           <Accordion as="ul" className="OffCanvas__nav">
-            {LINKS.map((item, i) => (
-              <NavItem item={item} key={`offcanvas-item-${i}`} i={i} />
+            {LINKS.map((item, index) => (
+              <NavItem item={item} key={index} i={index} />
             ))}
           </Accordion>
         </motion.div>
