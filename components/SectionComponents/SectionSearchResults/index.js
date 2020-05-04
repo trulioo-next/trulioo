@@ -12,7 +12,12 @@ import { searchSiteDataSelector } from "../../../stores/searchSite/selectors";
 
 const SectionSearchResults = ({props, ...params}) => {
 
-	const [searchTerm, setSearchTerm] = useState(props && props.query && props.query.search);
+	let searchQuery = props && props.query && props.query.search;
+	if (typeof searchQuery === 'undefined')
+	{	searchQuery = '';
+	}
+
+	const [searchTerm, setSearchTerm] = useState(searchQuery);
 	const [inputText, setInputText] = useState(searchTerm);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
@@ -41,8 +46,7 @@ const SectionSearchResults = ({props, ...params}) => {
 
 	useEffect(() => {
 		if (searchSiteData)
-		{  console.log(searchSiteData.isLoading)
-		   setSearchResults(searchSiteData.results)
+		{  setSearchResults(searchSiteData.results)
 		   setIsLoading(false);
 		}
 	 }, [searchSiteData]);
@@ -55,7 +59,7 @@ const SectionSearchResults = ({props, ...params}) => {
 			<SearchResults
 						isLoading={isLoading}
 						searchTerm={''+searchTerm}
-						results={[...searchResults]} />
+						results={((searchResults && Array.isArray(searchResults)) ? [...searchResults] : [])} />
 		</div>
 	)
 };
@@ -63,9 +67,8 @@ const SectionSearchResults = ({props, ...params}) => {
 
 
 const doSearch = (searchTerm, dispatch, setIsLoading) => {
-	if (searchTerm.trim() !== '')
+	if (searchTerm && searchTerm.trim() !== '')
 	{
-		console.log("Sending search for " + searchTerm);
 		dispatch(reqSearchSiteDataAction({ payload: searchTerm }));
 		setIsLoading(true);
 	}
@@ -102,14 +105,16 @@ const SearchForm = ({searchTerm, handleSearchChange, handleSearchSubmit}) => {
 
 const SearchResults = ({isLoading, searchTerm, results}) => {
 
-	console.log("ST: ", searchTerm);
-	console.log("SR: ", results);
-
 	let resultType = 'loading';
-	if (!isLoading && results && results.length > 0)
-	{	resultType = 'found';
-	}else if (!isLoading && results && results.length < 1)
-	{	resultType = 'notFound';
+	if (searchTerm !== '')
+	{
+		if (!isLoading && results && results.length > 0)
+		{	resultType = 'found';
+		}else if (!isLoading && results && results.length < 1)
+		{	resultType = 'notFound';
+		}
+	}else
+	{	resultType = 'noSearch';
 	}
 
 	return (
