@@ -7,6 +7,8 @@ import Slider from 'react-slick';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import RewardsGraph from './RewardsGraph';
+
 const MyStatus = ({ data }) => {
   const [activePunchCard, setActivePunchCard] = useState(0);
 
@@ -22,11 +24,40 @@ const MyStatus = ({ data }) => {
     afterChange: newIndex => setActivePunchCard(newIndex),
   };
 
+  let tiers = [
+    {
+      tier: '1000',
+      color: '#EE7102',
+    },
+    {
+      tier: '1500',
+      color: '#008062',
+    },
+    {
+      tier: '2000',
+      color: '#ED2525',
+    },
+    {
+      tier: '2750',
+      color: '#007CBA',
+    },
+    {
+      tier: '4000',
+      color: '#8C2C7E',
+    },
+    {
+      tier: '6000',
+      color: '#50488A',
+    },
+  ];
+
   return (
     <aside className="MyStatus">
       <Row className="align-items-center mx-md-n4">
         <Col xs="12" md="6" lg="12" className="px-md-4">
-          <div className="RewardGraph MyStatus__rewardGraph"></div>
+          <div className="RewardGraph MyStatus__rewardGraph">
+            <RewardsGraph tiers={tiers} points={data.rewards_points || 0} />
+          </div>
         </Col>
         <Col xs="12" md="6" lg="12" className="px-md-4 px-lg-0">
           <div className="PunchCard MyStatus__punchCard">
