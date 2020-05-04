@@ -54,6 +54,37 @@ const SubNavMenu = props => {
 
   const userData = useSelector(state => userDataSelector(state));
 
+  function buildLink(url,name) {
+    let isRewardsLink = url.split('/7rewards')[1];
+    let isMenuLink = url.split('/menu')[1];
+     
+      let hrefPath = "/[slug]";
+      if(isRewardsLink) {
+          hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : "/[slug]";
+      }
+      if(isMenuLink) {
+          hrefPath = isMenuLink ? `/menu/${isMenuLink}` : "/[slug]";
+      }
+      if(url === '/7rewards') {
+        hrefPath =  "/7rewards";
+      }
+
+      if(url === '/') {
+        hrefPath =  "/";
+      }
+
+      if(!isRewardsLink && !isMenuLink) {
+          hrefPath = "/[slug]";
+      }
+      
+      return (
+        <Link href={url}>
+          <a>{name}</a>
+        </Link>
+      ) 
+    
+  }
+
   return (
     <>
     { props.items && 
@@ -68,9 +99,7 @@ const SubNavMenu = props => {
           {hasThirdLevel ? (
             <span className="OffCanvas__subnavHeading">{name}</span>
           ) : (
-            <Link href="/[slug]" as={url} >
-              <a>{name}</a>
-            </Link>
+            buildLink(url,name) 
           )}
           {children.length > 0 && (
             <SubNavMenu

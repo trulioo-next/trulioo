@@ -63,11 +63,9 @@ const SubNavMenu = props => {
 
   //
   function buildLink(url,name,className) {
-    // console.log('URL ', url)
     let isRewardsLink = url.split('/7rewards')[1];
     let isMenuLink = url.split('/menu')[1];
-    // console.log('IS REWARD LINK ', url )
-   if(isVisible(className) ) {
+    if(isVisible(className) ) {
       let hrefPath = "/[slug]";
       if(isRewardsLink) {
           hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : "/[slug]";
