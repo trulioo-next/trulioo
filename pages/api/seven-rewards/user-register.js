@@ -54,7 +54,7 @@ export default async (req, res) => {
     }
 
     //
-    console.log('PAYLOAD BODY EMAIL ',  payload )
+    // console.log('PAYLOAD BODY EMAIL ',  payload )
 
     // // Get an Access Token
     // //

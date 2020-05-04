@@ -98,6 +98,16 @@ export default function SevenRewardsService(state) {
 	async function redeemPoints(payload) {
 		// console.log('REDEEM SERVICE PAYLOAD ', payload )
 		let data = await API.post('/api/seven-rewards/redeem', {body:payload});
+
+        // console.log("REDEEM SERVICE ", payload )	
+        // console.log("REDEEM SERVICE DATA ", data )		
+
+        let updatedUser = payload.user.user;
+        updatedUser.rewards_points = data.rewards_points
+
+        let updatedRewards = payload.user.rewards;
+        updatedRewards.rewards_points = data.rewards_points
+
 		if(data.error) {
 			ErrorHandler({
 		        error: data.error.payload.error_description,
@@ -107,7 +117,7 @@ export default function SevenRewardsService(state) {
 		        }
 		    })
 		}
-		return data;
+		return { redeem:data, user:updatedUser, rewards:updatedRewards };
 	}
 
 	async function verifySms(payload) {
@@ -124,6 +134,35 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
+	async function updateUser(payload) {
+		let data = await API.post('/api/seven-rewards/user-update', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'User Update',
+		          message: 'User Update Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
+
+	async function passwordReset(payload) {
+		let data = await API.post('/api/seven-rewards/reset-password', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'Password Reset',
+		          message: 'Password Reset Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
    return {
     userAuth,
     userAuthFb,
@@ -132,7 +171,9 @@ export default function SevenRewardsService(state) {
     registerFacebookUser,
     checkCardBalance,
     redeemPoints,
-    verifySms
+    verifySms,
+    updateUser,
+    passwordReset
    }
 
 }

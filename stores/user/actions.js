@@ -6,7 +6,9 @@ import {
   SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
   SEVEN_REWARDS_CHECKCARD_REQUEST,
   SEVEN_REWARDS_REDEEM_REQUEST,
-  SEVEN_REWARDS_SMS_REQUEST
+  SEVEN_REWARDS_SMS_REQUEST,
+  SEVEN_REWARDS_UPDATE_REQUEST,
+  SEVEN_REWARDS_PASSWORD_RESET_REQUEST
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -49,6 +51,17 @@ export const reqSMSAction = (payload) => ({
   payload: payload
 })
 
+export const reqUpdateAction = (payload) => ({
+  type: SEVEN_REWARDS_UPDATE_REQUEST,
+  payload: payload
+})
+
+export const reqPasswordResetAction = (payload) => ({
+  type: SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
+  payload: payload
+})
+
+
 export default {
   reqUserAuthAction,
   reqUserRegisterAction,
@@ -57,5 +70,7 @@ export default {
   reqUserFacebookRegisterAction,
   reqCheckCardAction,
   reqRedeemAction,
-  reqSMSAction
+  reqSMSAction,
+  reqUpdateAction,
+  reqPasswordResetAction
 }

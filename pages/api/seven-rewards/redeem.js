@@ -8,7 +8,7 @@ export default async (req, res) => {
 
     const body = JSON.parse(req.body)
     const headers = { "Content-Type": "application/json" };
-    console.log('BODY :: >> ', body.body.token )
+   // console.log('BODY :: >> ', body.body.token )
 
     const registerHeaders = { 
       "Content-type": "application/json",
@@ -24,7 +24,7 @@ export default async (req, res) => {
       }) 
      });
  
-     console.log('CARD RESPNSE --- : ', redeemResponse)   
+     // console.log('CARD RESPNSE --- : ', redeemResponse)   
  
      res.json(redeemResponse)
      return

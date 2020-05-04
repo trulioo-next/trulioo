@@ -31,7 +31,6 @@ export const NEWSROOM_ERROR = 'newsroom/error/NEWSROOM_ERROR'
 export const SEVEN_REWARDS_AUTH_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_AUTH_REQUEST'
 export const SEVEN_REWARDS_AUTH_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_AUTH_LOADED'
 export const SEVEN_REWARDS_AUTH_ERROR = 'seven_rewards/error/SEVEN_REWARDS_AUTH_ERROR'
-
 export const SEVEN_REWARDS_REGISTER_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_REGISTER_REQUEST'
 export const SEVEN_REWARDS_REGISTER_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_REGISTER_LOADED'
 export const SEVEN_REWARDS_LOGOUT_REQUEST = 'seven_rewards/logout/SEVEN_REWARDS_LOGOUT_REQUEST'
@@ -47,7 +46,10 @@ export const SEVEN_REWARDS_REDEEM_REQUEST = 'seven_rewards/redeem/SEVEN_REWARDS_
 export const SEVEN_REWARDS_REDEEM = 'seven_rewards/redeem/SEVEN_REWARDS_REDEEM'
 export const SEVEN_REWARDS_SMS_REQUEST = 'seven_rewards/sms/SEVEN_REWARDS_SMS_REQUEST'
 export const SEVEN_REWARDS_SMS = 'seven_rewards/sms/SEVEN_REWARDS_SMS'
-
+export const SEVEN_REWARDS_UPDATE_REQUEST = 'seven_rewards/update/SEVEN_REWARDS_UPDATE_REQUEST'
+export const SEVEN_REWARDS_UPDATE = 'seven_rewards/update/SEVEN_REWARDS_UPDATE'
+export const SEVEN_REWARDS_PASSWORD_RESET_REQUEST = 'seven_rewards/password/SEVEN_REWARDS_PASSWORD_RESET_REQUEST'
+export const SEVEN_REWARDS_PASSWORD_RESET = 'seven_rewards/password/SEVEN_REWARDS_PASSWORD_RESET'
 
 export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHECK_REQUEST'
 export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CHECK_LOADED'

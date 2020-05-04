@@ -13,18 +13,29 @@ import {
   SEVEN_REWARDS_FACEBOOK_AUTH,
   SEVEN_REWARDS_CHECKCARD,
   SEVEN_REWARDS_REDEEM,
-  SEVEN_REWARDS_SMS
+  SEVEN_REWARDS_SMS,
+  SEVEN_REWARDS_UPDATE,
+  SEVEN_REWARDS_PASSWORD_RESET
 } from '../types'
 
 
 export default (state = INITIAL_STATE, action) => {
-
+  
   switch (action.type) {
 
+      case SEVEN_REWARDS_PASSWORD_RESET:
+        return { ...state,
+         passwordReset: action.payload
+      }
+      
+      case SEVEN_REWARDS_UPDATE:
+        return { ...state,
+         user: action.payload.user
+      }
 
-    case SEVEN_REWARDS_CHECKCARD:
-      return { ...state,
-        cardBalance:action.payload
+      case SEVEN_REWARDS_CHECKCARD:
+        return { ...state,
+          cardBalance:action.payload
       }
 
       case SEVEN_REWARDS_SMS:
@@ -34,7 +45,8 @@ export default (state = INITIAL_STATE, action) => {
 
       case SEVEN_REWARDS_REDEEM:
         return { ...state,
-          redeem: action.payload
+          redeem: action.payload,
+
         }  
 
      case SEVEN_REWARDS_AUTH_LOADED:

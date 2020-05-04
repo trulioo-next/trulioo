@@ -23,7 +23,11 @@ import {
   SEVEN_REWARDS_REDEEM_REQUEST,
   SEVEN_REWARDS_REDEEM,
   SEVEN_REWARDS_SMS_REQUEST,
-  SEVEN_REWARDS_SMS
+  SEVEN_REWARDS_SMS,
+  SEVEN_REWARDS_UPDATE_REQUEST,
+  SEVEN_REWARDS_UPDATE,
+  SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
+  SEVEN_REWARDS_PASSWORD_RESET
 } from '../types'
 
 function* startup(payload) {
@@ -112,6 +116,49 @@ function* registerUser(payload) {
 
 
 //
+function* updateUser(payload) {
+
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const updateResponse = yield call(sevenRewardsService.updateUser, payload)
+
+    // console.log('REGISTER USER PAYLOAD REWARDS !!   ', updateResponse )
+    
+    yield put({ type: SEVEN_REWARDS_UPDATE, payload:updateResponse })
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
+
+
+//
+function* passwordReset(payload) {
+
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const resetResponse = yield call(sevenRewardsService.passwordReset, payload)
+
+    console.log('RESET PASSWORD !!   ', resetResponse )
+    
+    yield put({ type:SEVEN_REWARDS_PASSWORD_RESET, payload:resetResponse })
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+  }
+}
+
+
+//
 function* registerFacebookUser(payload) {
  
   try {
@@ -162,7 +209,7 @@ function* redeemPoints(payload) {
    
     const redeemResponse = yield call(sevenRewardsService.redeemPoints, payload)
 
-    console.log('REDEEM!!   ', redeemResponse )
+   // console.log('REDEEM!!   ', redeemResponse )
     
     yield put({ type: SEVEN_REWARDS_REDEEM, payload:redeemResponse})
 
@@ -224,7 +271,9 @@ function* startupFlow() {
       SEVEN_REWARDS_FACEBOOK_REGISTER_REQUEST,
       SEVEN_REWARDS_CHECKCARD_REQUEST,
       SEVEN_REWARDS_REDEEM_REQUEST,
-      SEVEN_REWARDS_SMS_REQUEST
+      SEVEN_REWARDS_SMS_REQUEST,
+      SEVEN_REWARDS_UPDATE_REQUEST,
+      SEVEN_REWARDS_PASSWORD_RESET_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -263,6 +312,14 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_SMS_REQUEST) {
       yield call(checkSms, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_UPDATE_REQUEST) {
+      yield call(updateUser, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_PASSWORD_RESET_REQUEST) {
+      yield call(passwordReset, action.payload)
     }
 
 

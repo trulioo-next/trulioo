@@ -16,5 +16,6 @@ export const INITIAL_STATE = {
   bonusOffers:false,
   redeem:false,
   token:false,
-  sms:false
+  sms:false,
+  passwordReset:false
 };
