@@ -234,7 +234,9 @@ const Product = props => {
       <Header title="" />
       <div className="Product__page">
         <ProductHeader data={{...categoryData, categoryImage: categoryImage}} />
+        {categoryData.acf && categoryData.acf.show_nutritionals === true &&
         <Nutritionals data={categoryData} />
+        }
         <section className="Section -related">
           <Container>
             <Row>

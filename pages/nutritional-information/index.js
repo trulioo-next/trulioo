@@ -171,11 +171,18 @@ const Page = (props) => {
     });
   }
 
+  function removeHiddenProducts(prods)
+  {
+    return prods.filter(product => {
+      return product.show_nutritionals === true;
+    });
+  }
 
   function filterProducts(taxonomy) {
     let filtered = [];
     if (products) {
       products = removeProductsFromHiddenCategories([...products]);
+      products = removeHiddenProducts([...products]);
       if (taxonomy === '')
       { return [...products];
       }
@@ -199,6 +206,7 @@ const Page = (props) => {
     let filtered = [];
     if (products) {
       products = removeProductsFromHiddenCategories([...products]);
+      products = removeHiddenProducts([...products]);
       for (var i = 0; i < products.length; i++) {
         if (products[i].flavour.toLowerCase().includes(searchTerm)) {
           filtered.push(products[i]);

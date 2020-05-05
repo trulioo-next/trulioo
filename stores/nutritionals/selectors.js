@@ -107,6 +107,7 @@
  	let additionalInformation = obj.additional_information ? obj.additional_information : ''
  	let payload = {
 		flavour: title + " " + additionalInformation,
+		show_nutritionals: obj.show_nutritionals !== false,
 		additional_information: obj.additional_information || '0',
 		serving_size: obj.serving_size || '0',
 		calories: obj.calories || '0',
