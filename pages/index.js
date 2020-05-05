@@ -33,8 +33,8 @@ const Home = props => {
       description={seoDesc}
       openGraph={{
         url: 'https://7-11.ca/home',
-        title: {seoTitle},
-        description: {seoDesc},
+        title: seoTitle,
+        description: seoDesc,
         images: [
           {
             url: seoImage,
