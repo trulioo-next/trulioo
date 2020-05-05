@@ -24,12 +24,9 @@ import Col from 'react-bootstrap/Col';
 
 import './Product.scss';
 
-
-
 const Nutritionals = props => {
   const [opened, setOpened] = useState(false);
-  let nutritionals = props.data.nutritionals;
-    
+  let nutritionals = props.data.nutritionals;  
   let nutritionalInfo = {
       'Serving Size': '',
       'Total Fat': '',
@@ -77,6 +74,8 @@ const Nutritionals = props => {
     <section className="Section">
       <Container className="Section__container">
         <Accordion className="Accordion -product">
+          
+          
           <div className={classNames('Accordion__item', { '-opened': opened })}>
             <Accordion.Toggle
               eventKey="nutritionals"
@@ -113,6 +112,8 @@ const Nutritionals = props => {
               </dl>
             </Accordion.Collapse>
           </div>
+
+
           {ingredients.length > 0 && (
             <div
               className={classNames('Accordion__item', { '-opened': opened })}
@@ -202,7 +203,6 @@ const Product = props => {
   }
 
   let { category, product } = props.query;
- 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqNutritionalsAction({}));
@@ -211,7 +211,7 @@ const Product = props => {
   const categoryData = useSelector(state =>
     nutritionalsDataSelector(state, category, product),
   );
-  
+   
   const taxonomyData = useSelector(state => taxonomiesSelector(state));
   let selected = [];
   if(taxonomyData) {
