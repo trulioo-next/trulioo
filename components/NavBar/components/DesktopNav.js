@@ -73,7 +73,11 @@ const PrimaryNav = data => {
 
   let accountSigned =  userData && userData.auth.isAuth
       ? `account__active`
-      : ''; 
+      : '';
+
+  let accountLink =  userData && userData.auth.isAuth
+      ? `/7rewards/`
+      : '/7rewards/signin';     
 
   return (
     <>
@@ -101,7 +105,7 @@ const PrimaryNav = data => {
               </Toolbar.Icon>
               <Toolbar.Label>Find A Store</Toolbar.Label>
             </Toolbar.Item>
-            <Toolbar.Item url="/7rewards/">
+            <Toolbar.Item url={accountLink}>
               <Toolbar.Icon>
                 <span className={accountSigned}><AccountIcon /></span>
               </Toolbar.Icon>
