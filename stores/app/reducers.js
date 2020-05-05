@@ -10,7 +10,9 @@ import {
   APP_STARTUP_ERROR,
   APP_STARTLOADING,
   APP_STOPLOADING,
-  GLOBAL_DATA_LOADED
+  GLOBAL_DATA_LOADED,
+  ALERT_LOADED,
+  ALERT_LOAD_ERROR
 } from '../types'
 
 
@@ -45,6 +47,16 @@ export default (state = INITIAL_STATE, action) => {
         isLoaded: true,
         globalData: action.payload
       }
+
+    case ALERT_LOADED:
+      return { ...state,
+                alerts: action.payload };
+
+    case ALERT_LOAD_ERROR:
+      return { ...state,
+        error: action.payload,
+        errorSource: APP_STARTUP_ERROR
+      }  
  
 
     default:

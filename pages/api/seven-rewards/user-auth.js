@@ -109,7 +109,7 @@ export default async (req, res) => {
      }); 
 
     //
-    console.log('myRewards :::    ', myRewards )
+    // console.log('myRewards :::    ', myRewards )
     // console.log('USER DEALS  ', deals )
     // console.log('USER COUPONS  ', coupons )
     // console.log('USER FULL PROFILE STRINGIFY :: >>  ',  fullProfile )

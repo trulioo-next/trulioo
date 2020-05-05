@@ -15,13 +15,25 @@ import {
   SEVEN_REWARDS_REDEEM,
   SEVEN_REWARDS_SMS,
   SEVEN_REWARDS_UPDATE,
-  SEVEN_REWARDS_PASSWORD_RESET
+  SEVEN_REWARDS_PASSWORD_RESET,
+  SEVEN_REWARDS_UPDATE_ERROR,
+  SEVEN_REWARDS_UPDATE_PREFERNCES
 } from '../types'
 
 
 export default (state = INITIAL_STATE, action) => {
   
   switch (action.type) {
+
+      case SEVEN_REWARDS_UPDATE_PREFERNCES:
+        return { ...state,
+           user: action.payload.user
+        }
+
+      case SEVEN_REWARDS_UPDATE_ERROR:
+        return { ...state,
+           fieldErrors: action.payload
+        }
 
       case SEVEN_REWARDS_PASSWORD_RESET:
         return { ...state,
@@ -30,7 +42,8 @@ export default (state = INITIAL_STATE, action) => {
       
       case SEVEN_REWARDS_UPDATE:
         return { ...state,
-         user: action.payload.user
+         user: action.payload.user,
+         fieldErrors:false
       }
 
       case SEVEN_REWARDS_CHECKCARD:
@@ -62,7 +75,8 @@ export default (state = INITIAL_STATE, action) => {
         registered: true,
         error:action.payload.error,
         token:action.payload.token,
-        myRewards:action.payload.myRewards
+        myRewards:action.payload.myRewards,
+        fieldErrors:false
       }  
 
 

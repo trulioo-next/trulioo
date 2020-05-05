@@ -14,7 +14,6 @@ export default async (req, res) => {
 
     const body = JSON.parse(req.body)
     const tokenHeaders = { "Content-Type": "application/json"};
-
     const userToken = await fetch(REWARDS_API_URL+'/auth/token',
      {
        method: 'POST',

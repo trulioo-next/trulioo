@@ -11,7 +11,7 @@ export class UserProfile extends Component {
   constructor(props) {
     super(props);
 
-    let user = this.props.data
+    let user = this.props.user && this.props.user.user ? this.props.user.user : false;
     let gender = user.gender ? user.gender : 'Prefer not to say'
     let address1 = user && user.address_line_1 ? user.address_line_1 : '';
     let address2 = user && user.address_line_2 ? user.address_line_2 : '';
@@ -25,11 +25,9 @@ export class UserProfile extends Component {
     let month = user && user.birthdate ? user.birthdate.split('-')[1] : '';
     let day = user && user.birthdate ? user.birthdate.split('-')[2] : '';
     let year = user && user.birthdate ? user.birthdate.split('-')[0] : '';
-
-    // console.log('USER', user )
-
+   
     this.state = {
-      user: this.props.data,
+      user: user,
       showModal: false,
       firstName: firstName,
       lastName: lastName,
@@ -57,12 +55,20 @@ export class UserProfile extends Component {
 
   submitForm (e) {
     e.preventDefault()
-    
+    let user = this.props.user && this.props.user.user ? this.props.user.user : false;
+    let phone = user && user.phone_number ? user.phone_number : this.state.phone;
+
+    if( phone === this.state.phone ) {
+        phone = null;
+    } else {
+      phone = this.state.phone;
+    }
+  
     let payload = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      phone: this.state.phone,
+      phone: phone,
       postal: this.state.postal,
       address1:this.state.address1,
       address2:this.state.address2,
@@ -77,13 +83,11 @@ export class UserProfile extends Component {
 
     this.props.userUpdateRequest(payload);
 
-    // console.log('PAYLOAD  ', payload )
   }
 
   // Update state value
   //
   onValueChange(e, type) {
-    // console.log('ON VALUE CHANGED ', type, e.target.value)
     this.setState({ [type]: e.target.value });
   }
 
@@ -120,34 +124,34 @@ export class UserProfile extends Component {
 
     let months = [
       { name: 'Month', value: '' },
-      { name: 'Jan', value: '0' },
-      { name: 'Feb', value: '1' },
-      { name: 'Mar', value: '2' },
-      { name: 'Apr', value: '3' },
-      { name: 'May', value: '4' },
-      { name: 'Jun', value: '5' },
-      { name: 'Jul', value: '6' },
-      { name: 'Aug', value: '7' },
-      { name: 'Sep', value: '8' },
-      { name: 'Oct', value: '9' },
-      { name: 'Nov', value: '10' },
-      { name: 'Dec', value: '11' },
+      { name: 'Jan', value: '01' },
+      { name: 'Feb', value: '02' },
+      { name: 'Mar', value: '03' },
+      { name: 'Apr', value: '04' },
+      { name: 'May', value: '05' },
+      { name: 'Jun', value: '06' },
+      { name: 'Jul', value: '07' },
+      { name: 'Aug', value: '08' },
+      { name: 'Sep', value: '09' },
+      { name: 'Oct', value: '10' },
+      { name: 'Nov', value: '11' },
+      { name: 'Dec', value: '12' },
     ];
 
-    let days = [
-       { name: 'Day', value: '' }
-    ]
-    for(var i = 0; i < 31; i++) {
-      days.push({ name: (i+1), value: (i+1) })
-    }
+    let days = [  { name: 'Day', value: '' } ]
+    for(var i = 0; i < 31; i++) {  days.push({ name: (i+1), value: (i+1) }) }
 
-    let years = [
-      { name: 'Year', value: '' }
-    ]
-    for(var i = 0; i < 100; i++) {
-      let year = 2020 - i;
-      years.push({ name: year, value: year })
-    }
+    let years = [ { name: 'Year', value: '' } ]
+    for(var i = 0; i < 100; i++) { let year = 2020 - i; years.push({ name: year, value: year })  }
+
+    // validation : 
+    const fieldErrors = this.props.user && this.props.user.fieldErrors ? this.props.user.fieldErrors.error : false;
+    const phoneError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.mobile_number[0] ? fieldErrors.payload.field_errors.mobile_number[0] : false;
+    const firstNameError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.first_name[0] ? fieldErrors.payload.field_errors.first_name[0] : false;
+    const lastNameError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.last_name[0] ? fieldErrors.payload.field_errors.last_name[0] : false;
+    const birthdateError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.birthdate[0] ? fieldErrors.payload.field_errors.birthdate[0] : false;
+
+   // console.log('fieldErrors:  ', this.props.user  )
 
     return (
       <div className="p-5">
@@ -173,6 +177,7 @@ export class UserProfile extends Component {
                       <Form.Label className="small">First Name</Form.Label>
                       <Form.Control
                         size="lg"
+                        isInvalid={firstNameError}
                         value={this.state.firstName}
                         onChange={e => this.onValueChange(e, 'firstName')}
                       />
@@ -183,6 +188,7 @@ export class UserProfile extends Component {
                       <Form.Label className="small">Last Name</Form.Label>
                       <Form.Control
                         size="lg"
+                        isInvalid={lastNameError}
                         value={this.state.lastName}
                         onChange={e => this.onValueChange(e, 'lastName')}
                       />
@@ -205,12 +211,12 @@ export class UserProfile extends Component {
                     size="lg"
                     as="input"
                     type="tel"
+                    isInvalid={phoneError}
                     value={this.state.phone}
                     onChange={e => this.onValueChange(e, 'phone')}
                   />
+                  
                 </Form.Group>
-
-                
                 <Form.Row>
                   <Col>
                     <Form.Group controlId="edit-city">
@@ -219,6 +225,7 @@ export class UserProfile extends Component {
                         size="lg"
                         as="select"
                         value={this.state.bMonth}
+                        isInvalid={birthdateError}
                         onChange={e => this.onValueChange(e, 'bMonth')}
                       >
                         {months.map((month, index) => (
@@ -236,6 +243,7 @@ export class UserProfile extends Component {
                         size="lg"
                         as="select"
                         value={this.state.bDay}
+                        isInvalid={birthdateError}
                         onChange={e => this.onValueChange(e, 'bDay')}
                       >
                         {days.map((day, index) => (
@@ -253,6 +261,7 @@ export class UserProfile extends Component {
                       <Form.Control
                         size="lg"
                         as="select"
+                        isInvalid={birthdateError}
                         value={this.state.bYear}
                         onChange={e => this.onValueChange(e, 'bYear')}
                       >
@@ -265,10 +274,6 @@ export class UserProfile extends Component {
                     </Form.Group>
                   </Col>
                 </Form.Row>
-
-
-
-
                 <Form.Group>
                   <span className="d-block small mb-2">Password</span>
                   <Button variant="dark" type="button" onClick={() => this.passwordReset() }>
@@ -343,24 +348,30 @@ export class UserProfile extends Component {
           </Modal>
         </div>
         <hr />
-        <div className="mb-4">
-          <span className="d-block py-2 small">Name</span>
-          <span className="d-block">
-            {this.state.user.first_name} {this.state.user.last_name}
-          </span>
-        </div>
+        { this.props.user && 
+          <div className="mb-4">
+            <span className="d-block py-2 small">Name</span>
+            <span className="d-block">
+              {this.props.user.user.first_name} {this.props.user.user.last_name}
+            </span>
+          </div>
+        }
         <div className="mb-4">
           <span className="d-block py-2 small">Account ID</span>
-          <span className="d-block">{this.state.user.username}</span>
+          <span className="d-block">{this.props.user.user.username}</span>
         </div>
+        { this.props.user && 
         <div className="mb-4">
           <span className="d-block py-2 small">Email Address</span>
-          <span className="d-block">{this.state.user.email}</span>
+          <span className="d-block">{this.props.user.user.email}</span>
         </div>
+        }
+        { this.props.user && 
         <div className="mb-4">
           <span className="d-block py-2 small">Birthdate</span>
-          <span className="d-block">{this.state.user.birthdate}</span>
+          <span className="d-block">{this.props.user.user.birthdate}</span>
         </div>
+        }
       </div>
     );
   }

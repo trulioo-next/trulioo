@@ -23,7 +23,12 @@ class MyAccount extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
+      isChecked: false
     };
+
+
+    this.updatePreferences = this.updatePreferences.bind(this);
+    this.savePreferences = this.savePreferences.bind(this)
   }
 
   static async getInitialProps({ isServer, store }) {
@@ -32,26 +37,65 @@ class MyAccount extends React.Component {
   }
 
   componentDidMount() {
-    let isUserAuth = this.props.user.auth;
+    let isUserAuth = this.props.user && this.props.user.auth ? this.props.user.auth : false ;
     if (!isUserAuth.error && isUserAuth) {
       this.setState({ loggedIn: true });
+      let preferences = this.props.user.user.preferences
+      
+      if(preferences) {
+        for(var i = 0; i < preferences.length; i++ ) {
+            if(preferences[i].enabled === 'true' || preferences[i].enabled === true) {
+               this.setState({isChecked:true})
+            }
+        }
+      }
     }
-
-    // TODO: Setup redirect if not logged in.
-
-    // if (!isUserAuth) {
-    //   routerPush('/7rewards/signin');
-    // }
-
-    // console.log('::: this.props.user :: ', this.props.user);
   }
 
   componentDidUpdate() {}
 
+  updatePreferences(e) {
+     
+    let newUser = this.props.user;
+    if(this.state.isChecked) {
+      newUser.user.preferences[0].enabled = false
+      this.setState({isChecked:false})
+       
+    } else {
+      newUser.user.preferences[0].enabled = true
+      this.setState({isChecked:true})
+       
+    }
+ 
+  }
+
+  savePreferences(e) {
+    e.preventDefault()
+    let newUser = this.props.user;
+ 
+    if(this.state.isChecked) {
+      newUser.user.preferences[0].enabled = false
+       this.setState({isChecked:false})
+    } else {
+      newUser.user.preferences[0].enabled = true
+       this.setState({isChecked:true})
+      
+    }
+
+    let payload = {
+      token: newUser.token,
+      value:newUser.user.preferences[0].enabled,
+      user:newUser.user
+    }
+
+    this.props.updatePrefernecesRequest(payload)
+  }
+
   // TODO: Set up form actions for account page.
 
   render() {
-    const userInfo = this.props.user.user;
+    const userInfo = this.props.user && this.props.user.user ? this.props.user.user : false;
+   
     return (
       <Layout>
         <Header title="7Rewards" />
@@ -60,21 +104,24 @@ class MyAccount extends React.Component {
             <Container className="px-0">
               <Row className="justify-content-center mx-lg-n5">
                 <Col xs="12" md="10" lg="6" className="px-lg-5">
+                 { userInfo && 
                   <Admin.Panel>
                     <UserProfile data={userInfo} />
                   </Admin.Panel>
+                  }
                   <Admin.Panel>
                     <div className="p-5">
                       <h2 className="h6">Preferences</h2>
                       <hr className="mb-4" />
                       <Form>
-                        {userInfo.preferences.map((preference, index) => (
+                        { userInfo.preferences.map((preference, index) => (
                           <fieldset className="my-4" key={index}>
                             <legend className="mb-4">{preference.title}</legend>
                             <Form.Check id={preference.id}>
                               <FormCheck.Input
                                 type="checkbox"
-                                value={preference.enabled}
+                                checked={this.state.isChecked}
+                                onChange={(e) => this.updatePreferences(e) }
                               />
                               <FormCheck.Label className="ml-3">
                                 {preference.description}
@@ -82,7 +129,7 @@ class MyAccount extends React.Component {
                             </Form.Check>
                           </fieldset>
                         ))}
-                        <Button type="submit">Save</Button>
+                        <Button type="submit" onClick={(e) => this.savePreferences(e) }>Save</Button>
                       </Form>
                     </div>
                   </Admin.Panel>
@@ -124,6 +171,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
+  updatePrefernecesRequest: payload => dispatch(appActions.reqPreferenceUpdateAction(payload)),
 });
 
 MyAccount.defaultProps = {

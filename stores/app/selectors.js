@@ -57,7 +57,12 @@ export const selectError = (state) => {
    return footerData
  }
 
+ // Alert selector 
+export const alertDataSelector = (state) => {
+  return state.app.alerts
+ }
 
+ 
 export default {
   selectIsLoading,
   selectIsLoaded,
@@ -65,5 +70,6 @@ export default {
   selectErrorSource,
   selectIsAuthenticated,
   selectHeaderData,
-  selectFooterData
+  selectFooterData,
+  alertDataSelector
 }

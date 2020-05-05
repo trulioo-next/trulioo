@@ -27,7 +27,10 @@ import {
   SEVEN_REWARDS_UPDATE_REQUEST,
   SEVEN_REWARDS_UPDATE,
   SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
-  SEVEN_REWARDS_PASSWORD_RESET
+  SEVEN_REWARDS_PASSWORD_RESET,
+  SEVEN_REWARDS_UPDATE_ERROR,
+  SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST,
+  SEVEN_REWARDS_UPDATE_PREFERNCES
 } from '../types'
 
 function* startup(payload) {
@@ -116,22 +119,49 @@ function* registerUser(payload) {
 
 
 //
+function* updatePreferences(payload) {
+
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+    const updateResponse = yield call(sevenRewardsService.updatePreferences, payload)
+    console.log('UPDATE USER PREFERENCES   !!   ', updateResponse )
+
+    if(updateResponse.error) {
+      yield put({ type: SEVEN_REWARDS_UPDATE_PREFERNCES, payload:updateResponse })
+    } else {
+      yield put({ type: SEVEN_REWARDS_UPDATE, payload:updateResponse })
+    }
+
+  } catch(err) {
+    console.log('SAGA ERROR ', err )
+     
+    yield put({ type:SEVEN_REWARDS_UPDATE_ERROR, payload: err })
+  }
+}
+
+
+//
 function* updateUser(payload) {
 
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
-   
     const updateResponse = yield call(sevenRewardsService.updateUser, payload)
+    // console.log('UPDATE USER DETAILS  !!   ', updateResponse )
 
-    // console.log('REGISTER USER PAYLOAD REWARDS !!   ', updateResponse )
+    if(updateResponse.error) {
+      yield put({ type: SEVEN_REWARDS_UPDATE_ERROR, payload:updateResponse })
+    } else {
+      yield put({ type: SEVEN_REWARDS_UPDATE, payload:updateResponse })
+    }
     
-    yield put({ type: SEVEN_REWARDS_UPDATE, payload:updateResponse })
+   
 
   } catch(err) {
-
-    const errors = err.payload || err
-    yield put({ type:SEVEN_REWARDS_REGISTER_ERROR, payload: errors})
+    console.log('SAGA ERROR ', err )
+     
+    yield put({ type:SEVEN_REWARDS_UPDATE_ERROR, payload: err })
   }
 }
 
@@ -273,7 +303,8 @@ function* startupFlow() {
       SEVEN_REWARDS_REDEEM_REQUEST,
       SEVEN_REWARDS_SMS_REQUEST,
       SEVEN_REWARDS_UPDATE_REQUEST,
-      SEVEN_REWARDS_PASSWORD_RESET_REQUEST
+      SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
+      SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -320,6 +351,10 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_PASSWORD_RESET_REQUEST) {
       yield call(passwordReset, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST) {
+      yield call(updatePreferences, action.payload)
     }
 
 

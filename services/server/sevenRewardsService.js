@@ -148,6 +148,21 @@ export default function SevenRewardsService(state) {
 		return data;
 	}
 
+	//
+	async function updatePreferences(payload) {
+		let data = await API.post('/api/seven-rewards/update-account-preferences', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'Update User Preferences',
+		          message: 'Update User Preferences Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
 
 	async function passwordReset(payload) {
 		let data = await API.post('/api/seven-rewards/reset-password', {body:payload});
@@ -173,7 +188,8 @@ export default function SevenRewardsService(state) {
     redeemPoints,
     verifySms,
     updateUser,
-    passwordReset
+    passwordReset,
+    updatePreferences
    }
 
 }

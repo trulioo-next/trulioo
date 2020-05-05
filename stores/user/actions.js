@@ -8,7 +8,8 @@ import {
   SEVEN_REWARDS_REDEEM_REQUEST,
   SEVEN_REWARDS_SMS_REQUEST,
   SEVEN_REWARDS_UPDATE_REQUEST,
-  SEVEN_REWARDS_PASSWORD_RESET_REQUEST
+  SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
+  SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -61,6 +62,11 @@ export const reqPasswordResetAction = (payload) => ({
   payload: payload
 })
 
+export const reqPreferenceUpdateAction = (payload) => ({
+  type: SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST,
+  payload: payload
+})
+
 
 export default {
   reqUserAuthAction,
@@ -72,5 +78,6 @@ export default {
   reqRedeemAction,
   reqSMSAction,
   reqUpdateAction,
-  reqPasswordResetAction
+  reqPasswordResetAction,
+  reqPreferenceUpdateAction
 }

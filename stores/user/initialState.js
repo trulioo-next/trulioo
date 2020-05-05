@@ -18,5 +18,6 @@ export const INITIAL_STATE = {
   token:false,
   sms:false,
   passwordReset:false,
-  myRewards:false
+  myRewards:false,
+  fieldErrors:false
 };

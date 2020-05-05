@@ -11,7 +11,10 @@ import {
   APP_STARTUP_ERROR,
   APP_STOPLOADING,
   GLOBAL_DATA_LOADED,
-  NUTRITIONAL_LOADED
+  NUTRITIONAL_LOADED,
+  ALERT_LOAD_REQUEST,
+  ALERT_LOAD_ERROR,
+  ALERT_LOADED
 } from '../types'
 
 
@@ -22,8 +25,9 @@ function* startup(payload) {
     const state = yield select((state) => state)
     const dataService = DataService(state)
     const response = yield call(dataService.getGlobalData, true)
-
-    // console.log('STARTUP GLOBAL DATA SAGA  ', response )
+    const alertAesponse = yield call(dataService.getAlertsData)
+    
+    yield put({ type: ALERT_LOADED, payload: alertAesponse  })
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
      
@@ -34,7 +38,6 @@ function* startup(payload) {
     yield put({ type: APP_STARTUP_ERROR, payload: errors})
   }
 }
-
 
 /*
 * Startup flow to allow concurrent actions to be dispatched

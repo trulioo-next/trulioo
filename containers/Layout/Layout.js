@@ -22,8 +22,8 @@ import {
   selectFooterData,
 } from '../../stores/app/selectors';
 
-import { reqAlertDataAction } from '../../stores/alert/actions';
-import { alertDataSelector } from '../../stores/alert/selectors';
+ 
+import { alertDataSelector } from '../../stores/app/selectors';
 
 import {
   userDataSelector
@@ -34,27 +34,15 @@ import './Layout.scss';
 const Layout = props => {
    
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(reqStartupAction({ isAuthenticated: false,  query: false }));
-  // }, []);
-  
-  useEffect(() => {
-    dispatch(reqAlertDataAction({ }));
-  }, []);
-
+   
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
   let userData = useSelector(state => userDataSelector(state));
   const isLoading = useSelector(state => selectIsLoading(state));
-
-  // console.log('IS LOADING  ', isLoading )
-
-
+ 
   if(!headerData) {
     headerData = STATICDATA['header-menu'];
-    // console.log('STATIC HEADER DATA ', headerData )
   }
-  // console.log('HEADER DATA ', headerData )
 
   const alertsData = useSelector(state => alertDataSelector(state));
 

@@ -7,6 +7,12 @@ export const reqStartupAction = ({ isAuthenticated, ip, query }) => ({
   payload: {isAuthenticated, ip, query }
 })
 
+export const reqAlertDataAction = ( ) => (
+  {
+  type: ALERT_LOAD_REQUEST
+})
+
 export default {
-  reqStartupAction
+  reqStartupAction,
+  reqAlertDataAction
 }
