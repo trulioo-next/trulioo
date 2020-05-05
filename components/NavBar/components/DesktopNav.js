@@ -45,7 +45,7 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   return (
     <li className={itemClassnames}>
       {item.name != 'Slurpee®' && (
-        <Link href="/[slug]" as={item.url}>
+        <Link href="/[page]" as={item.url}>
           <a className="SiteHeader__link">{item.name}</a>
         </Link>
       )}
