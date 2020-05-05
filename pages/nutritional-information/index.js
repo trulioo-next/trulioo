@@ -133,13 +133,14 @@ const Page = (props) => {
   }, []);
 
   const pageData = useSelector(state => pageDataSelector(state));
-  const taxonomies = useSelector(state => taxonomiesSelector(state));
+  let taxonomies = useSelector(state => taxonomiesSelector(state));
 
   let defaultCategory = '';
 
   // console.log('PROPS TO LOAD ---> >>>>  ', taxonomies )
   let taxObjects = '';
   if(taxonomies) {
+    taxonomies = taxonomies.filter(item => item.show_on_nutritionals_page !== false);
     taxObjects = taxonomies.map((item, key) =>
       <option key={item.term_id} value={item.slug}>{item.name}</option>
     );
@@ -155,9 +156,33 @@ const Page = (props) => {
   let productsSelected = filterProducts(defaultCategory);
   let [filterSelected, setfilterSelected] = useState(productsSelected);
 
+
+  function removeProductsFromHiddenCategories(prods)
+  {
+    let taxTerms = [];
+    taxonomies.map(t => {
+      if (t.show_on_nutritionals_page !== false)
+      { taxTerms.push(t.slug);
+      }
+    });
+
+    return prods.filter(product => {
+      return taxTerms.includes(product.term);
+    });
+  }
+
+  function removeHiddenProducts(prods)
+  {
+    return prods.filter(product => {
+      return product.show_nutritionals === true;
+    });
+  }
+
   function filterProducts(taxonomy) {
     let filtered = [];
     if (products) {
+      products = removeProductsFromHiddenCategories([...products]);
+      products = removeHiddenProducts([...products]);
       if (taxonomy === '')
       { return [...products];
       }
@@ -175,10 +200,13 @@ const Page = (props) => {
     setfilterSelected(productsSelected);
   }
 
+
   function searchProducts(searchTermParam) {
     const searchTerm = searchTermParam.toLowerCase().trim();
     let filtered = [];
     if (products) {
+      products = removeProductsFromHiddenCategories([...products]);
+      products = removeHiddenProducts([...products]);
       for (var i = 0; i < products.length; i++) {
         if (products[i].flavour.toLowerCase().includes(searchTerm)) {
           filtered.push(products[i]);
@@ -197,6 +225,7 @@ const Page = (props) => {
     productsSelected = searchProducts(searchFor);
     setfilterSelected(productsSelected);
   }
+
 
   return (
     <Layout>

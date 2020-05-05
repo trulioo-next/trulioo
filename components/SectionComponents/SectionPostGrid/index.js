@@ -44,6 +44,7 @@ const SectionPostGrid = props => {
                 containImage
                 product={{
                   href: '/menu/' + category + '/' + post.slug,
+                  show_calorie_count: post.show_calorie_count,
                   calories: post.calories,
                 }}
                 stacked

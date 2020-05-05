@@ -34,7 +34,9 @@ const ProductCard = ({ item }) => {
         
             <Card.Footer className="Card__footer d-flex justify-content-between">
               <span>View product details</span>
+              {props && props.show_calorie_count === true &&
               <span>{props.calories} cal</span>
+              }
             </Card.Footer>
           
         </a>

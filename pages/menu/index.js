@@ -33,6 +33,7 @@ class Menu extends React.Component {
   buildColumnRows() {
     let data = this.props.data;
     if (data) {
+      data = [...data];
       const sortedData = data.sort((a, b) => {
         return a.priority - b.priority;
       })

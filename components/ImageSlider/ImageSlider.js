@@ -32,7 +32,12 @@ const SliderItem = ({ image, title, text, link }) => {
   if (link) {
     if (link.target) {
       return (
-        <a href={link.url} target={link.target} rel="noopener noreferrer">
+        <a
+          className="d-block w-100"
+          href={link.url}
+          target={link.target}
+          rel="noopener noreferrer"
+        >
           {slide}
         </a>
       );
@@ -40,7 +45,7 @@ const SliderItem = ({ image, title, text, link }) => {
 
     return (
       <Link href={link.url}>
-        <a>{slide}</a>
+        <a className="d-block w-100">{slide}</a>
       </Link>
     );
   }

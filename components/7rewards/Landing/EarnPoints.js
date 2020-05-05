@@ -72,7 +72,37 @@ const EarnPointsColumns = () => (
           </Link>
         </Col>
         <Col xs="12" lg="4" className="mb-5">
-          <Button className="Landing__button">Download the App</Button>
+          <h3 className="h5">Download the 7-Eleven App</h3>
+          <a
+            className="d-inline-block mr-3"
+            href="https://apps.apple.com/ca/app/7-eleven/id589653414"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/static/images/AppleAppStoreBadge.png"
+              alt="Download on the App Store"
+              style={{
+                width: '113px',
+                height: '39px',
+              }}
+            />
+          </a>
+          <a
+            className="d-inline-block"
+            href="https://play.google.com/store/apps/details?id=com.sei.android"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/static/images/GooglePlayBadge.png"
+              alt="Get it on Google Play"
+              style={{
+                width: '128px',
+                height: '39px',
+              }}
+            />
+          </a>
         </Col>
       </Row>
     </Col>

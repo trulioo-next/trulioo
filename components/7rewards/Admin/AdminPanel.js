@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 
+import '@/containers/Admin/Admin.scss';
+
 const AdminPanel = ({ label, className, children, ...props }) => (
   <Fragment>
     <span className="d-block px-4 px-md-0 mb-3">{label ? label : '\xA0'}</span>

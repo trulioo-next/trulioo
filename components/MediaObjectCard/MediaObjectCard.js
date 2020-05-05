@@ -73,7 +73,9 @@ const MediaCard = props => {
           <a className="Card__linkedFooter">
             <Card.Footer className="Card__footer d-flex justify-content-between">
               <span>View product details</span>
+              {props.product.show_calorie_count === true &&
               <span>{props.product.calories} cal</span>
+              }
             </Card.Footer>
           </a>
         </Link>

@@ -8,10 +8,7 @@ import RewardItem from '@/components/7rewards/RewardItem';
 import Button from '@/components/Button';
 
 const MyRewards = ({ data, setTab }) => {
-  const rewards = data.rewards;
-
-  // TODO: Populate redeemed rewards into wallet.
-  const wallet = [];
+  const rewards = data.myRewards;
 
   return (
     <section className="MyRewards">
@@ -36,23 +33,26 @@ const MyRewards = ({ data, setTab }) => {
         </Container>
       </header>
       <div className="MyWallet MyRewards__myWallet p-5">
-        {rewards.rewards_loaded > 0 && wallet ? (
+        {rewards.rewards_loaded > 0 && rewards.member_rewards ? (
           <ul className="RewardList list-unstyled">
-            {wallet.map((item, index) => (
+            {rewards.member_rewards.map((item, index) => (
               <RewardItem key={index} data={item} />
             ))}
           </ul>
         ) : (
           <div className="text-center">
             <p>Rewards are waiting for you.</p>
-            <Button
-              type="button"
-              onClick={() => setTab('sevenrewards-reward-menu')}
-            >
-              + Add Items
-            </Button>
           </div>
         )}
+        <div className="text-center mt-5">
+          <Button
+            className="mx-auto"
+            type="button"
+            onClick={() => setTab('sevenrewards-reward-menu')}
+          >
+            + Add Items
+          </Button>
+        </div>
       </div>
     </section>
   );

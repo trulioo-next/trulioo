@@ -56,14 +56,12 @@
   }
 
   &__caption {
-    font-size: 10px;
     font-weight: 500;
     color: #000;
     margin-top: 1.2rem;
 
     @include media-breakpoint-up(lg) {
       margin-top: 1.6rem;
-      font-size: 1.4rem;
     }
   }
 }
