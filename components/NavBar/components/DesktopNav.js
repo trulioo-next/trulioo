@@ -99,7 +99,7 @@ const PrimaryNav = data => {
             })}
           </ul>
           <Toolbar>
-            <Toolbar.Item url="https://stores.7eleven.ca/" target="_blank">
+            <Toolbar.Item url="https://stores.7-eleven.ca/" target="_blank">
               <Toolbar.Icon>
                 <LocationIcon />
               </Toolbar.Icon>
