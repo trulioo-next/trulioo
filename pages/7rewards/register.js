@@ -17,7 +17,7 @@ import Form from 'react-bootstrap/Form';
 
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 
-import SevenRewardsLogo from '@/static/images/7rewards/7-rewards-logo.svg';
+import SevenRewards from '@/containers/SevenRewards';
 
 import ModalWindow from '@/components/Modal';
 import { useFormik } from 'formik';
@@ -279,208 +279,207 @@ class RegisterScreen extends React.Component {
     return (
       <Layout>
         <Header title="Register" />
-        {this.state.loggedIn ? (
-          <Container>
-            <Row>
-              <Col>
-                <h2>You are logged in.</h2>
-              </Col>
-            </Row>
-          </Container>
-        ) : (
-          <Container className="my-md-5 px-5 px-md-4">
-            <Row className="justify-content-center">
-              <Col xs="12" md="10">
-                <Row className="justify-content-center my-5">
-                  <Col xs="6" md="3">
-                    <SevenRewardsLogo />
-                  </Col>
-                </Row>
-                <Row className="justify-content-center mt-5 mb-2 pt-lg-5">
-                  <Col xs="12" md="10" lg="8" className="text-center">
-                    <h1 className="h3">Become a 7Rewards Member</h1>
-                    <p>
-                      Rack up points for the things you buy every day. Plus,
-                      when you register, you’ll get 1,000 Bonus Points which you
-                      can redeem for a free Slurpee®, coffee or snack!
-                    </p>
-                    <img
-                      className="mt-3 w-50 mx-auto"
-                      onClick={e => this.login(e)}
-                      src="/static/images/placeholders/facebook-btn.png"
-                    />
-                    <p className="my-4 small">OR</p>
-                  </Col>
-                </Row>
-                <Row className="justify-content-center mt-2 mb-5 mx-n5">
-                  <Col xs="12" md="10" className="px-5">
-                    <AdminPanel className="mt-n5 mb-5 mb-md-0">
-                      <Container className="p-5">
-                        <ModalWindow
-                          content={this.facebookForm()}
-                          visible={this.state.modalVisible}
-                          cb={this.modalCallBack}
-                        />
-                        <Form>
-                          <Form.Row>
-                            <Col xs="12" md="6">
-                              <Form.Group controlId="first_name">
-                                <Form.Label className="small">
-                                  First Name
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  value={this.state.firstName}
-                                  onChange={e =>
-                                    this.onValueChange(e, 'firstName')
-                                  }
-                                />
-                              </Form.Group>
-                            </Col>
-                            <Col xs="12" md="6">
-                              <Form.Group controlId="last_name">
-                                <Form.Label className="small">
-                                  Last Name
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  value={this.state.lastName}
-                                  onChange={e =>
-                                    this.onValueChange(e, 'lastName')
-                                  }
-                                />
-                              </Form.Group>
-                            </Col>
-                          </Form.Row>
-                          <Form.Group controlId="email">
-                            <Form.Label className="small">
-                              Email Address
-                            </Form.Label>
-                            <Form.Control
-                              size="lg"
-                              as="input"
-                              type="email"
-                              value={this.state.email}
-                              onChange={e => this.onValueChange(e, 'email')}
-                            />
-                          </Form.Group>
-                          <Form.Row>
-                            <Col xs="12" md="6">
-                              <Form.Group controlId="password">
-                                <Form.Label className="small">
-                                  Password
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  as="input"
-                                  type="password"
-                                  value={this.state.password}
-                                  onChange={e =>
-                                    this.onValueChange(e, 'password')
-                                  }
-                                />
-                              </Form.Group>
-                            </Col>
-                            <Col xs="12" md="6">
-                              <Form.Group controlId="password_confirm">
-                                <Form.Label className="small">
-                                  Confirm Password
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  as="input"
-                                  type="password"
-                                  value={this.state.confirmPassword}
-                                  onChange={e =>
-                                    this.onValueChange(e, 'confirmPassword')
-                                  }
-                                />
-                              </Form.Group>
-                            </Col>
-                          </Form.Row>
-                          <Form.Row>
-                            <Col xs="12" md="6">
-                              <Form.Group controlId="phone">
-                                <Form.Label className="small">
-                                  Mobile Number
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  value={this.state.phone}
-                                  onChange={e => this.onValueChange(e, 'phone')}
-                                />
-                              </Form.Group>
-                            </Col>
-                            <Col xs="12" md="6">
-                              <Form.Group controlId="postal">
-                                <Form.Label className="small">
-                                  Postal Code
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  value={this.state.postal}
-                                  onChange={e =>
-                                    this.onValueChange(e, 'postal')
-                                  }
-                                />
-                              </Form.Group>
-                            </Col>
-                          </Form.Row>
-                          <Form.Group controlId="card-number">
-                            <Form.Label className="small">
-                              7Rewards Card Number
-                            </Form.Label>
-                            <Form.Control
-                              size="lg"
-                              value={this.state.cardNumber}
-                              onChange={e =>
-                                this.onValueChange(e, 'cardNumber')
-                              }
-                            />
-                          </Form.Group>
-                          <fieldset className="mt-5">
-                            <Form.Group>
-                              <Form.Check id="terms">
-                                <Form.Check.Input />
-                                <Form.Check.Label className="ml-3">
-                                  I accept the{' '}
-                                  <Link href="/terms-conditions">
-                                    <a>Terms &amp; Conditions</a>
-                                  </Link>
-                                </Form.Check.Label>
-                              </Form.Check>
+        <SevenRewards>
+          {this.state.loggedIn ? (
+            <Container>
+              <Row>
+                <Col>
+                  <h2>You are logged in.</h2>
+                </Col>
+              </Row>
+            </Container>
+          ) : (
+            <Container className="my-md-5 px-5 px-md-4">
+              <Row className="justify-content-center">
+                <Col xs="12" md="10">
+                  <Row className="justify-content-center mt-5 mb-2">
+                    <Col xs="12" md="10" lg="8" className="text-center">
+                      <h1 className="h3">Become a 7Rewards Member</h1>
+                      <p>
+                        Rack up points for the things you buy every day. Plus,
+                        when you register, you’ll get 1,000 Bonus Points which
+                        you can redeem for a free Slurpee®, coffee or snack!
+                      </p>
+                      <img
+                        className="mt-3 w-50 mx-auto"
+                        onClick={e => this.login(e)}
+                        src="/static/images/placeholders/facebook-btn.png"
+                      />
+                      <p className="my-4 small">OR</p>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center mt-2 mb-5 mx-n5">
+                    <Col xs="12" md="10" className="px-5">
+                      <AdminPanel className="mt-n5 mb-5 mb-md-0">
+                        <Container className="p-5">
+                          <ModalWindow
+                            content={this.facebookForm()}
+                            visible={this.state.modalVisible}
+                            cb={this.modalCallBack}
+                          />
+                          <Form>
+                            <Form.Row>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="first_name">
+                                  <Form.Label className="small">
+                                    First Name
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.firstName}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'firstName')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="last_name">
+                                  <Form.Label className="small">
+                                    Last Name
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.lastName}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'lastName')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                            </Form.Row>
+                            <Form.Group controlId="email">
+                              <Form.Label className="small">
+                                Email Address
+                              </Form.Label>
+                              <Form.Control
+                                size="lg"
+                                as="input"
+                                type="email"
+                                value={this.state.email}
+                                onChange={e => this.onValueChange(e, 'email')}
+                              />
                             </Form.Group>
-                            <Form.Group>
-                              <Form.Check id="agree">
-                                <Form.Check.Input />
-                                <Form.Check.Label className="ml-3">
-                                  I agree to receive news, promotions, and
-                                  information from 7-Eleven®. You can
-                                  unsubscribe at any time. Please read our{' '}
-                                  <Link href="/privacy">
-                                    <a>Privacy Policy</a>
-                                  </Link>{' '}
-                                  or{' '}
-                                  <Link href="/contact-us">
-                                    <a>Contact Us</a>
-                                  </Link>
-                                  .
-                                </Form.Check.Label>
-                              </Form.Check>
+                            <Form.Row>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="password">
+                                  <Form.Label className="small">
+                                    Password
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    as="input"
+                                    type="password"
+                                    value={this.state.password}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'password')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="password_confirm">
+                                  <Form.Label className="small">
+                                    Confirm Password
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    as="input"
+                                    type="password"
+                                    value={this.state.confirmPassword}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'confirmPassword')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                            </Form.Row>
+                            <Form.Row>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="phone">
+                                  <Form.Label className="small">
+                                    Mobile Number
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.phone}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'phone')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="postal">
+                                  <Form.Label className="small">
+                                    Postal Code
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.postal}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'postal')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                            </Form.Row>
+                            <Form.Group controlId="card-number">
+                              <Form.Label className="small">
+                                7Rewards Card Number
+                              </Form.Label>
+                              <Form.Control
+                                size="lg"
+                                value={this.state.cardNumber}
+                                onChange={e =>
+                                  this.onValueChange(e, 'cardNumber')
+                                }
+                              />
                             </Form.Group>
-                          </fieldset>
-                          <Button type="submit" className="mt-4">
-                            Register
-                          </Button>
-                        </Form>
-                      </Container>
-                    </AdminPanel>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Container>
-        )}
+                            <fieldset className="mt-5">
+                              <Form.Group>
+                                <Form.Check id="terms">
+                                  <Form.Check.Input />
+                                  <Form.Check.Label className="ml-3">
+                                    I accept the{' '}
+                                    <Link href="/terms-conditions">
+                                      <a>Terms &amp; Conditions</a>
+                                    </Link>
+                                  </Form.Check.Label>
+                                </Form.Check>
+                              </Form.Group>
+                              <Form.Group>
+                                <Form.Check id="agree">
+                                  <Form.Check.Input />
+                                  <Form.Check.Label className="ml-3">
+                                    I agree to receive news, promotions, and
+                                    information from 7-Eleven®. You can
+                                    unsubscribe at any time. Please read our{' '}
+                                    <Link href="/privacy">
+                                      <a>Privacy Policy</a>
+                                    </Link>{' '}
+                                    or{' '}
+                                    <Link href="/contact-us">
+                                      <a>Contact Us</a>
+                                    </Link>
+                                    .
+                                  </Form.Check.Label>
+                                </Form.Check>
+                              </Form.Group>
+                            </fieldset>
+                            <Button type="submit" className="mt-4">
+                              Register
+                            </Button>
+                          </Form>
+                        </Container>
+                      </AdminPanel>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          )}
+        </SevenRewards>
       </Layout>
     );
   }

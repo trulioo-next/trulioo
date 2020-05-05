@@ -7,12 +7,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Intro = () => (
-  <Row className="justify-content-center text-center mt-5 pt-md-4">
-    <Col xs="12" md="9">
-      <h2 className="Landing__heading">Earn Points on Everyday Purchases</h2>
+  <Row className="justify-content-center text-center mt-5">
+    <Col xs="12" md="9" lg="8">
+      <h2 className="Landing__heading mb-5">
+        Earn Points on Everyday Purchases
+      </h2>
       <p className="lead">
-        Drink and snack to the max with more points for your money on everything
-        you buy at 7-Eleven.
+        Drink and snack to the max with more points for your purchases at
+        7&#8209;Eleven.
       </p>
     </Col>
   </Row>
@@ -28,7 +30,7 @@ const EarnPointsColumns = () => (
               <img src="/static/images/7rewards/join-rewards.png" />
             </Col>
             <Col xs="12" md="8" lg="11" className="px-md-4">
-              <h3 className="Landing__colHeading mt-5">Join 7Rewards</h3>
+              <h3 className="Landing__colHeading mt-5 mb-5">Join 7Rewards</h3>
               <p className="lead">
                 Download the app or register. It's free, easy, and fast.
               </p>
@@ -118,7 +120,7 @@ const EarnPointsTiles = () => (
             <div className="Landing__tileImage">
               <img src="/static/images/7rewards/earn-bonus-points-fast.png" />
             </div>
-            <h3 className="Landing__heading">Earn Bonus Points Fast</h3>
+            <h3 className="h2">Earn Bonus Points Fast</h3>
             <p className="lead">
               Earn faster with extra points when you buy select snacks, drinks,
               and other items in store.
@@ -130,7 +132,7 @@ const EarnPointsTiles = () => (
             <div className="Landing__tileImage">
               <img src="/static/images/7rewards/7th-cup-always-free.png" />
             </div>
-            <h3 className="Landing__heading">7th Cup Always Free</h3>
+            <h3 className="h2">7th Cup Always Free</h3>
             <p className="lead">
               Keep scanning and keep sipping, because when you buy six
               qualifying cups you&apos;ll get the 7th cup free.
