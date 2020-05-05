@@ -104,9 +104,22 @@
 
     .thead {
       padding-top: 6em;
+      background-color: #f2f2f2;
+
+      &.sticky {
+        position: fixed;
+        top:115px;
+        z-index: 99;
+      }
 
       @include media-breakpoint-down(sm) {
         display: none;
+
+        &.sticky {
+          position: relative;
+          top:0px;
+          z-index: 1;
+        }
       }
     }
 

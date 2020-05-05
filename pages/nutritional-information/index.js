@@ -89,7 +89,7 @@ function Table({ columns, data }) {
     <Container fluid className="px-0">
       <div {...getTableProps()} className="Nutritionals__table">
         <div className="thead">
-          {headerGroups.map((headerGroup, i) => {
+          { headerGroups.map((headerGroup, i) => {
             return (
               <div
                 {...headerGroup.getHeaderGroupProps()}
@@ -145,12 +145,7 @@ const Page = (props) => {
       <option key={item.term_id} value={item.slug}>{item.name}</option>
     );
   }
-
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(reqNutritionalsAction({}));
-  // }, []);
-
+ 
   let [taxonomySelected, setTaxonomySelected] = useState( defaultCategory );
   let products = useSelector(nutritionalByTaxonomySelector());
   let productsSelected = filterProducts(defaultCategory);

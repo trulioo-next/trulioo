@@ -71,6 +71,10 @@ const PrimaryNav = data => {
       ? `${userData.user.rewards_points} PTS`
       : 'Account';
 
+  let accountSigned =  userData && userData.auth.isAuth
+      ? `account__active`
+      : ''; 
+
   return (
     <>
       {LINKS && (
@@ -99,9 +103,9 @@ const PrimaryNav = data => {
             </Toolbar.Item>
             <Toolbar.Item url="/7rewards/">
               <Toolbar.Icon>
-                <AccountIcon />
+                <span className={accountSigned}><AccountIcon /></span>
               </Toolbar.Icon>
-              <Toolbar.Label>{userAccount}</Toolbar.Label>
+              <Toolbar.Label ><span className={accountSigned}>{userAccount}</span></Toolbar.Label>
             </Toolbar.Item>
             <Toolbar.Search
               i={searchIndex}
