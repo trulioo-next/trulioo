@@ -12,9 +12,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
+import SevenRewards from '@/containers/SevenRewards';
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
-
-import SevenRewardsLogo from '@/static/images/7rewards/7-rewards-logo.svg';
 
 class ResetPassword extends React.Component {
   constructor(props) {
@@ -67,67 +66,58 @@ class ResetPassword extends React.Component {
     return (
       <Layout>
         <Header title="Forgot Password" />
-        <Container className="my-md-5 px-5 px-md-4">
-          <Row className="justify-content-center">
-            <Col xs="12" md="8" lg="6">
-              <Row className="justify-content-center my-5">
-                <Col xs="6" md="4" lg="5">
-                  <SevenRewardsLogo />
-                </Col>
-              </Row>
-              <Row className="justify-content-center my-5 py-lg-5">
-                <Col>
-                  <h1 className="h4">Forgot Your Password?</h1>
-                  <p>
-                    Please enter the email address that was used to register
-                    your account. If the email you provide is valid, you will
-                    receive a link to reset your password shortly.
-                  </p>
-                </Col>
-              </Row>
-              <Row className="justify-content-center my-5">
-                <Col>
-                  <AdminPanel className="mt-n5 mb-5 mb-md-0">
-                    <Container className="p-5">
-                      <Form>
-                        <Form.Group className="mb-4 mb-lg-5" controlId="email">
-                          <Form.Label className="small">
-                            Email Address
-                          </Form.Label>
-                          <Form.Control
-                            size="lg"
-                            id="email"
-                            type="email"
-                            value={this.state.email}
-                            onChange={e => this.onValueChange(e, 'email')}
-                            name="email"
-                          />
-                        </Form.Group>
-                        <Button id="submit" onClick={e => this.submitForm(e)}>
-                          Send Email
-                        </Button>
-                        <Link href="/7rewards/signin">
-                          <a className="ml-4">Cancel</a>
-                        </Link>
+        <SevenRewards>
+          <Container className="py-5">
+            <Row className="justify-content-center mb-5">
+              <Col xs="12" md="9" lg="8">
+                <h1 className="h4">Forgot Your Password?</h1>
+                <p>
+                  Please enter the email address that was used to register your
+                  account. If the email you provide is valid, you will receive a
+                  link to reset your password shortly.
+                </p>
+              </Col>
+            </Row>
+            <Row className="justify-content-center my-5">
+              <Col xs="12" md="9" lg="8">
+                <AdminPanel className="mt-n5 mb-5 mb-md-0">
+                  <Container className="p-5">
+                    <Form>
+                      <Form.Group className="mb-4 mb-lg-5" controlId="email">
+                        <Form.Label className="small">Email Address</Form.Label>
+                        <Form.Control
+                          size="lg"
+                          id="email"
+                          type="email"
+                          value={this.state.email}
+                          onChange={e => this.onValueChange(e, 'email')}
+                          name="email"
+                        />
+                      </Form.Group>
+                      <Button id="submit" onClick={e => this.submitForm(e)}>
+                        Send Email
+                      </Button>
+                      <Link href="/7rewards/signin">
+                        <a className="ml-4">Cancel</a>
+                      </Link>
 
-                        {/* {this.props.user.auth.error && (
-                          <div className="form__wrapper">
-                            <h5>
-                              {
-                                this.props.user.auth.error.payload
-                                  .error_description
-                              }
-                            </h5>
-                          </div>
-                        )} */}
-                      </Form>
-                    </Container>
-                  </AdminPanel>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
+                      {/* {this.props.user.auth.error && (
+                        <div className="form__wrapper">
+                          <h5>
+                            {
+                              this.props.user.auth.error.payload
+                                .error_description
+                            }
+                          </h5>
+                        </div>
+                      )} */}
+                    </Form>
+                  </Container>
+                </AdminPanel>
+              </Col>
+            </Row>
+          </Container>
+        </SevenRewards>
       </Layout>
     );
   }

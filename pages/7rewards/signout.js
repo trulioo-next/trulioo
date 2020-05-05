@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 
-import SevenRewardsLogo from '@/static/images/7rewards/7-rewards-logo.svg';
+import SevenRewards from '@/containers/SevenRewards';
 
 class UserAuth extends React.Component {
   constructor(props) {
@@ -46,22 +46,19 @@ class UserAuth extends React.Component {
     return (
       <Layout>
         <Header title="Sign Out" />
-        <Container className="my-5 px-5 px-md-4">
-          <Row className="justify-content-center py-lg-4 my-5">
-            <Col xs="6" md="3">
-              <SevenRewardsLogo />
-            </Col>
-          </Row>
-          <Row className="justify-content-center">
-            <Col xs="12" md="10" lg="8">
-              <AdminPanel className="mt-n5 p-5">
-                <h1 className="h4 text-center m-0">
-                  You have successfully logged out.
-                </h1>
-              </AdminPanel>
-            </Col>
-          </Row>
-        </Container>
+        <SevenRewards>
+          <Container className="my-5 px-5 px-md-4">
+            <Row className="justify-content-center">
+              <Col xs="12" md="10" lg="8">
+                <AdminPanel className="mt-n5 p-5">
+                  <h1 className="h4 text-center m-0">
+                    You have successfully logged out.
+                  </h1>
+                </AdminPanel>
+              </Col>
+            </Row>
+          </Container>
+        </SevenRewards>
       </Layout>
     );
   }

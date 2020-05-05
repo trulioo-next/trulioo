@@ -15,14 +15,11 @@ const HowToRedeem = () => (
         <Row className="my-md-5 justify-content-center">
           <Col className="w-100">
             <ol className="Landing__steps lead mb-5">
-              <li>Sign in to 7Rewards.ca or your 7-Eleven app</li>
-              <li>Select your FREE food or drink from the Rewards Menu</li>
-              <li>
-                Get your reward item in-store by scanning the barcode on your
-                card, app or online… or use the phone number associated with
-                your account
-              </li>
-              <li>Your reward will be automatically applied</li>
+              <li>Sign in to 7Rewards.ca or the 7-Eleven app</li>
+              <li>Click “Choose reward” button</li>
+              <li>Select your reward</li>
+              <li>Click “redeem” button</li>
+              <li>Scan your customer barcode at checkout</li>
             </ol>
           </Col>
           <Col xs="12" md="4">
