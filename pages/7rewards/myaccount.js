@@ -75,11 +75,10 @@ class MyAccount extends React.Component {
  
     if(this.state.isChecked) {
       newUser.user.preferences[0].enabled = false
-       this.setState({isChecked:false})
+        
     } else {
       newUser.user.preferences[0].enabled = true
-       this.setState({isChecked:true})
-      
+        
     }
 
     let payload = {
