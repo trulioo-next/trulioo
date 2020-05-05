@@ -39,7 +39,7 @@ export default async (req, res) => {
        body: JSON.stringify(payload)
      });
  
-    // console.log('updateUser ', updateUser)
+     // console.log('updateUser ', body.body.user)
       
     res.json({user:body.body.user, fieldErrors:false })  
      

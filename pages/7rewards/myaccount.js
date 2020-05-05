@@ -59,8 +59,7 @@ class MyAccount extends React.Component {
     let newUser = this.props.user;
     if(this.state.isChecked) {
       newUser.user.preferences[0].enabled = false
-      this.setState({isChecked:false})
-       
+      this.setState({isChecked:false}) 
     } else {
       newUser.user.preferences[0].enabled = true
       this.setState({isChecked:true})
@@ -72,15 +71,8 @@ class MyAccount extends React.Component {
   savePreferences(e) {
     e.preventDefault()
     let newUser = this.props.user;
+    newUser.user.preferences[0].enabled = this.state.isChecked
  
-    if(this.state.isChecked) {
-      newUser.user.preferences[0].enabled = false
-        
-    } else {
-      newUser.user.preferences[0].enabled = true
-        
-    }
-
     let payload = {
       token: newUser.token,
       value:newUser.user.preferences[0].enabled,

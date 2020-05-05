@@ -125,7 +125,7 @@ function* updatePreferences(payload) {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
     const updateResponse = yield call(sevenRewardsService.updatePreferences, payload)
-    console.log('UPDATE USER PREFERENCES   !!   ', updateResponse )
+    // console.log('UPDATE USER PREFERENCES   !!   ', updateResponse )
 
     if(updateResponse.error) {
       yield put({ type: SEVEN_REWARDS_UPDATE_PREFERNCES, payload:updateResponse })
