@@ -22,17 +22,37 @@ const Home = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
-  
-
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Home - 7-11 Canada'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
+  let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
 
-  console.log('seoTitle ::>> ', seoTitle )
   return (
     <Layout>
     <NextSeo
       title={seoTitle}
       description={seoDesc}
+      openGraph={{
+        url: 'https://7-11.ca/home',
+        title: {seoTitle},
+        description: {seoDesc},
+        images: [
+          {
+            url: seoImage,
+            width: 800,
+            height: 600,
+            alt: '7-11 Canada',
+          },
+           
+          { url: seoImage },
+        ],
+        site_name: '7-11 Canada',
+      }}
+      twitter={{
+        handle: '@7-11',
+        site: '@7-11 Canada',
+        cardType: 'summary_large_image',
+      }}
+
     />
       <Header title={seoTitle} />
       { data &&
