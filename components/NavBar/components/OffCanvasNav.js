@@ -112,9 +112,22 @@ const NavItem = props => {
     return (
       <>
         <li className="OffCanvas__item">
+          {item.url !== '#' &&
           <Link href="/[slug]" as={item.url}>
             <a className="OffCanvas__link">{item.name}</a>
           </Link>
+          }
+          {item.url === '#' &&
+          <Accordion.Toggle
+            as="a"
+            eventKey={`offcanvas-nav-${itemIndex}`}
+            className={classNames('OffCanvas__link', {
+              '-toggled': opened,
+            })}
+          >
+          {item.name}
+          </Accordion.Toggle>
+          }
           <Accordion.Toggle
             as="button"
             eventKey={`offcanvas-nav-${itemIndex}`}
