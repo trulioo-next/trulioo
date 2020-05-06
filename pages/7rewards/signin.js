@@ -104,14 +104,15 @@ class UserAuth extends React.Component {
 
   login() {
     FB.login(this.checkLoginState(), {
-      scope: 'email',
+      scope: 'public_profile,email',
+      return_scopes: true,
     });
   }
 
   statusChangeCallback(response) {
     if (response.status === 'connected') {
-      // this.logUserIn(response.authResponse.accessToken);
-      this.submitFacebookRequest(response.authResponse.accessToken);
+      this.logUserIn(response.authResponse.accessToken);
+      // this.submitFacebookRequest(response.authResponse.accessToken);
     } else if (response.status === 'not_authorized') {
       console.log(
         '[FacebookLoginButton] Person is logged into Facebook but not your app',
@@ -123,9 +124,11 @@ class UserAuth extends React.Component {
 
   logUserIn(access_token) {
     FB.api(
-      '/me',
+       '/me',
+      { fields: 'first_name,last_name,email,birthday' },
       function(response) {
         console.log('[FacebookLoginButton] Successful login for: ', response);
+         this.submitFacebookRequest(response.authResponse.accessToken);
       }.bind(this),
     );
   }
