@@ -31,8 +31,8 @@ const ProductSlider = props => {
       {
         breakpoint: 577,
         settings: {
-          arrows: false,
-          dots: true,
+          arrows: true,
+          dots: false,
           slidesToShow: 2,
           slidesToScroll: 2,
         },

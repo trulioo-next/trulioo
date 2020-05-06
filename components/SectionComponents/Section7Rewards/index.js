@@ -27,7 +27,6 @@ const Section7Rewards = props => {
       subHeading = props.subheading_logged_in
   }
   
-  // TODO: Add this logic to the selector 
   //
   if(USER && USER.rewards && USER.rewards.rewards_catalog) {
     let rewards = USER.rewards.rewards_catalog;
