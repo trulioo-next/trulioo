@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
+import base64 from 'base-64';
 import bwipjs from 'bwip-js';
 
 const RewardsBarcode = ({ data }) => {
   useEffect(() => {
     bwipjs.toCanvas('user-barcode', {
       bcid: 'pdf417',
-      text: data,
+      text: base64.decode(data),
       scale: 4,
-      includetext: false,
+      includetext: true,
+      textxalign: 'center',
       height: 10,
+      padding: 0,
     });
   });
 
