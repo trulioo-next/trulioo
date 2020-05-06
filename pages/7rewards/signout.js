@@ -4,11 +4,11 @@ import Layout from '../../containers/Layout/Layout';
 import Header from '../../components/Header/Header';
 import appActions from '../../stores/user/actions';
 import appSelectors from '../../stores/user/selectors';
-
+import Button from '@/components/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import routerPush from '@/helpers/routerPush';
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 
 import SevenRewards from '@/containers/SevenRewards';
@@ -52,9 +52,16 @@ class UserAuth extends React.Component {
               <Row className="justify-content-center">
                 <Col xs="12" md="10" lg="8" className="col">
                   <AdminPanel className="mt-n5 p-5">
-                    <h1 className="h4 text-center m-0">
-                      You have successfully logged out.
-                    </h1>
+                    <div>
+                      <h1 className="h4 text-center m-0">
+                        You have successfully logged out.
+                      </h1>
+                    </div>
+                    <div className="home__button" style={{marginTop:'30px;', position:'relative', textAlign:'center', display:'block', top:'20px'}}>
+                      <Button id="submit" onClick={e => routerPush('/') }>
+                        Back to Home
+                      </Button>
+                    </div>
                   </AdminPanel>
                 </Col>
               </Row>
