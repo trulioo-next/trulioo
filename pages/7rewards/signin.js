@@ -128,7 +128,7 @@ class UserAuth extends React.Component {
       { fields: 'first_name,last_name,email,birthday' },
       function(response) {
         console.log('[FacebookLoginButton] Successful login for: ', response);
-         this.submitFacebookRequest(response.authResponse.accessToken);
+         this.submitFacebookRequest(access_token);
       }.bind(this),
     );
   }
