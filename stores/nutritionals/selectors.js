@@ -5,7 +5,7 @@
 
 // Direct selector to the app state domain
  
- export const nutritionalsSelector = (state) => {
+export const nutritionalsSelector = (state) => {
 	let nutritionals = [];
 	if(state.nutritionals.menuItems) {
 		for(var i = 0; i < state.nutritionals.menuItems.length; i++ ) {
@@ -73,7 +73,7 @@
 					let title = false;
 					if(state.nutritionals.menuItems[i] && state.nutritionals.menuItems[i].acf ) {
 						 
-					     title = state.nutritionals.menuItems[i].acf.flavour
+					     title = state.nutritionals.menuItems[i].acf.display_title + ' ' + state.nutritionals.menuItems[i].acf.flavour;
 						 if(!title) {
 							title = state.nutritionals.menuItems[i].title
 						 }
