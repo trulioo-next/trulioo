@@ -91,7 +91,7 @@ export default async (req, res) => {
       expire:userToken.expires_in
     }
 
-    res.json({user:userRegister, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false  })  
+    res.json({user:userRegister, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: userToken.access_token, myRewards:rewards.myRewards  })  
      
      return
   } catch(error) {
