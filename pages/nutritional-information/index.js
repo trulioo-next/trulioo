@@ -22,6 +22,8 @@ import { pageDataSelector } from '@/stores/page/selectors';
 
 import SectionMaker from '@/components/SectionMaker';
 
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+
 import './Nutritionals.scss';
 
 import { reqNutritionalsAction } from '@/stores/nutritionals/actions';
@@ -84,11 +86,26 @@ function Table({ columns, data }) {
     columns,
     data,
   });
+  
+  // Set sticky header 
+  // 
+  const [sticky, setSticky] = useState('')
+  useScrollPosition(
+  ({ prevPos, currPos }) => {
+      const isVisible = currPos.y <= -550;
+      if (isVisible) {
+        setSticky('sticky')
+      } else {
+        setSticky('')
+      }
+    },
+    [sticky]
+  )
 
   return (
     <Container fluid className="px-0">
       <div {...getTableProps()} className="Nutritionals__table">
-        <div className="thead">
+        <div className={`thead ${sticky}`}>
           { headerGroups.map((headerGroup, i) => {
             return (
               <div
@@ -125,19 +142,21 @@ function Table({ columns, data }) {
 
 const Page = (props) => {
   const columns = COLUMNS;
-
+ 
 
   const dispatch = useDispatch();
+
+  // Component did Mount 
   useEffect(() => {
-    dispatch(reqPageDataAction({ payload: 'nutritional-information' }));
+     dispatch(reqPageDataAction({ payload: 'nutritional-information' }));
   }, []);
 
+  
+  //
   const pageData = useSelector(state => pageDataSelector(state));
   let taxonomies = useSelector(state => taxonomiesSelector(state));
-
   let defaultCategory = '';
-
-  // console.log('PROPS TO LOAD ---> >>>>  ', taxonomies )
+ 
   let taxObjects = '';
   if(taxonomies) {
     taxonomies = taxonomies.filter(item => item.show_on_nutritionals_page !== false);
@@ -221,6 +240,8 @@ const Page = (props) => {
     setfilterSelected(productsSelected);
   }
 
+  let isAvailable = pageData && pageData.acf_data && pageData.acf_data.components ? true : false
+
 
   return (
     <Layout>
@@ -282,8 +303,8 @@ const Page = (props) => {
           </Container>
           <Table data={filterSelected} columns={columns} />
           <Container fluid className="px-0">
-          { pageData.acf_data.components &&
-        pageData.acf_data.components.map((section, sectionKey) => {
+          { isAvailable  &&
+            pageData.acf_data.components.map((section, sectionKey) => {
           return (
             <SectionMaker
               type={section.acf_fc_layout}
@@ -301,18 +322,10 @@ const Page = (props) => {
   );
 };
 
-// Page Static Props 
-// 
-Page.getStaticProps = async ({ query, res }) => {
-  return {
-     nutritionals:'getStaticProps '
-  }
-}
-
 // Page Initial Props 
 //
 Page.getInitialProps = async ({ query, res }) => {
-  return { query, nutritionals:'getInitialProps ' };
+  return { query };
 };
 
 export default Page;

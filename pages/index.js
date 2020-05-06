@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import fetch from 'isomorphic-unfetch'
 import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
@@ -69,6 +70,12 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ query, res }) => {
+  // TODO: GET STATE DATA HERE 
+  // 
+  // https://content.7-eleven.ca/blog_data/home.json 
+  // https://content.7-eleven.ca/blog_data/home.json 
+  // const data = await fetch('https://content.7-eleven.ca/blog_data/home.json')
+  // const json = await data.json()
   return { query };
 };
 

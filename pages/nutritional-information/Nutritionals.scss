@@ -105,11 +105,21 @@
     .thead {
       padding-top: 6em;
       background-color: #f2f2f2;
+      transition: all 0.5s ease;
 
       &.sticky {
         position: fixed;
-        top:115px;
+        top:134px;
         z-index: 99;
+          max-width: 145rem;
+        transition: all 0.5s ease;
+         
+
+        @include media-breakpoint-down(sm) {
+          position: relative;
+          top: 0px;
+          z-index: 1;
+        }
       }
 
       @include media-breakpoint-down(sm) {
