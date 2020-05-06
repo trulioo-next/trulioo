@@ -35,17 +35,14 @@
 
 .PunchCard {
   &__heading {
-    display: flex;
+    display: block;
     font-size: 1.4rem;
     text-transform: uppercase;
-    margin-top: 0.8rem;
-    margin-bottom: 0.8rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
-    min-height: 4.2em;
     width: 100%;
-    padding: 0 2.8rem;
-    align-items: center;
-    justify-content: center;
+    padding: 0 3.8rem;
   }
 
   &__slider {

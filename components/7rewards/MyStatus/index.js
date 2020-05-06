@@ -12,8 +12,6 @@ import RewardsGraph from './RewardsGraph';
 const MyStatus = ({ data }) => {
   const [activePunchCard, setActivePunchCard] = useState(0);
 
-  // TODO: Get points graph in.
-
   const sliderSettings = {
     className: 'PunchCard__slider',
     dots: false,
@@ -61,9 +59,17 @@ const MyStatus = ({ data }) => {
         </Col>
         <Col xs="12" md="6" lg="12" className="px-md-4 px-lg-0">
           <div className="PunchCard MyStatus__punchCard">
-            <span className="PunchCard__heading text-center">
-              {data.punch_cards[activePunchCard].title}
-            </span>
+            <span
+              className="PunchCard__heading text-center"
+              dangerouslySetInnerHTML={{
+                __html: data.punch_cards[activePunchCard].title.replace(
+                  new RegExp(
+                    `(${data.punch_cards[activePunchCard].highlight_text})`,
+                  ),
+                  `<strong style="color: ${data.punch_cards[activePunchCard].active_color}">$1</strong>`,
+                ),
+              }}
+            ></span>
             <Slider {...sliderSettings}>
               {data.punch_cards.map((punchCard, index) => (
                 <div key={index} className="PunchCard__card px-2">
@@ -71,6 +77,10 @@ const MyStatus = ({ data }) => {
                 </div>
               ))}
             </Slider>
+            <p className="px-4 mt-4 text-center">
+              Finish a punch card and earn a free item! Rules and products vary
+              per punch card.
+            </p>
           </div>
         </Col>
       </Row>
