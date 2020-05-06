@@ -64,8 +64,8 @@ function* facebookUserAuth(payload) {
    
     const loginClientResponse = yield call(sevenRewardsService.userAuthFb, payload)
 
-    // console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse  )
-    // console.log('FACEBOOK payload !!   ', payload  )
+    console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse  )
+    console.log('FACEBOOK payload !!   ', payload  )
 
     yield put({ type:SEVEN_REWARDS_FACEBOOK_AUTH, payload:loginClientResponse})
 
