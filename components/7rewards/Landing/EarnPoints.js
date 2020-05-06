@@ -31,7 +31,7 @@ const EarnPointsColumns = () => (
               <img src="/static/images/7rewards/join-rewards.png" />
             </Col>
             <Col xs="12" md="8" lg="11" className="col">
-              <h3 className="Landing__colHeading mt-5 mb-5">Join 7Rewards</h3>
+              <h3 className="Landing__colHeading mt-5 mb-5">Join Rewards</h3>
               <p className="lead">
                 Download the app or register. It's free, easy, and fast.
               </p>
@@ -46,7 +46,7 @@ const EarnPointsColumns = () => (
             <Col xs="12" md="8" lg="11" className="col">
               <h3 className="Landing__colHeading mt-5">Earn Points</h3>
               <p className="lead">
-                Scan the 7-Eleven app in store after each purchase.
+                Scan the 7-Eleven app or barcode in store with each purchase.
               </p>
             </Col>
           </Row>
@@ -73,39 +73,6 @@ const EarnPointsColumns = () => (
           <Link href="/7rewards/signin">
             <a className="d-block mt-4">Already a member? Sign in.</a>
           </Link>
-        </Col>
-        <Col xs="12" lg="4" className="col mb-5">
-          <h3 className="h5">Download the 7-Eleven App</h3>
-          <a
-            className="d-inline-block mr-3"
-            href="https://apps.apple.com/ca/app/7-eleven/id589653414"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/static/images/AppleAppStoreBadge.png"
-              alt="Download on the App Store"
-              style={{
-                width: '113px',
-                height: '39px',
-              }}
-            />
-          </a>
-          <a
-            className="d-inline-block"
-            href="https://play.google.com/store/apps/details?id=com.sei.android"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/static/images/GooglePlayBadge.png"
-              alt="Get it on Google Play"
-              style={{
-                width: '128px',
-                height: '39px',
-              }}
-            />
-          </a>
         </Col>
       </Row>
     </Col>
@@ -150,7 +117,6 @@ const EarnPoints = () => (
     <Container className="Section__container">
       <Intro />
       <EarnPointsColumns />
-      <EarnPointsTiles />
     </Container>
   </section>
 );

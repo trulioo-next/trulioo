@@ -16,4 +16,12 @@
       text-align: left;
     }
   }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      color: inherit;
+    }
+  }
 }

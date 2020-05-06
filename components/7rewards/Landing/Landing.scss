@@ -8,6 +8,11 @@
     }
   }
 
+  .fineprint {
+    font-size: 0.7em;
+    font-weight: 500;
+  }
+
   .Landing {
     $block: &;
 
@@ -31,6 +36,11 @@
 
     &__button {
       font-size: 1.4rem;
+      background-color: $light-green;
+
+      &:hover {
+        background-color: $black;
+      }
     }
 
     &__tile {
@@ -97,4 +107,5 @@
       }
     }
   }
+
 }
