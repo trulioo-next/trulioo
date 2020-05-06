@@ -51,6 +51,8 @@
       }
 
       &__header {
+        font-family: 'Trasandina', sans-serif;
+        font-weight: bold;
         background-color: $gray;
         color: $white;
         transition: font-size 200ms ease;

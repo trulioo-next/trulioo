@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Landing from '@/components/7rewards/Landing';
 import MyStatus from '@/components/7rewards/MyStatus';
 import RewardsTabs from '@/components/7rewards/RewardsTabs';
+import NeedHelp from '@/components/7rewards/NeedHelp';
 
 class SevenRewards extends React.Component {
   constructor(props) {
@@ -56,6 +57,16 @@ class SevenRewards extends React.Component {
                   <Admin.Panel>
                     <RewardsTabs data={this.props.user} />
                   </Admin.Panel>
+                </Col>
+              </Row>
+              <Row className="my-5 pt-md-5">
+                <Col>
+                  <p className="text-center">
+                    <strong className="font-trasandina mr-2 text-success">
+                      Need Help?
+                    </strong>
+                    <NeedHelp.AdminText />
+                  </p>
                 </Col>
               </Row>
             </Container>

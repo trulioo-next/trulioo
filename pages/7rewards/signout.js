@@ -47,17 +47,19 @@ class UserAuth extends React.Component {
       <Layout>
         <Header title="Sign Out" />
         <SevenRewards>
-          <Container className="my-5 px-5 px-md-4">
-            <Row className="justify-content-center">
-              <Col xs="12" md="10" lg="8">
-                <AdminPanel className="mt-n5 p-5">
-                  <h1 className="h4 text-center m-0">
-                    You have successfully logged out.
-                  </h1>
-                </AdminPanel>
-              </Col>
-            </Row>
-          </Container>
+          <section className="Section">
+            <Container className="Section__container">
+              <Row className="justify-content-center">
+                <Col xs="12" md="10" lg="8" className="col">
+                  <AdminPanel className="mt-n5 p-5">
+                    <h1 className="h4 text-center m-0">
+                      You have successfully logged out.
+                    </h1>
+                  </AdminPanel>
+                </Col>
+              </Row>
+            </Container>
+          </section>
         </SevenRewards>
       </Layout>
     );

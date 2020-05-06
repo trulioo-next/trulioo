@@ -17,6 +17,7 @@ import Form from 'react-bootstrap/Form';
 
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 import SevenRewards from '@/containers/SevenRewards';
+import NeedHelp from '@/components/7rewards/NeedHelp';
 
 class UserAuth extends React.Component {
   constructor(props) {
@@ -165,132 +166,142 @@ class UserAuth extends React.Component {
       <Layout>
         <Header title="Sign In" />
         <SevenRewards>
-          {this.state.loggedIn ? (
-            <Container>
-              <Row>
-                <Col>
-                  <h2>You are logged in.</h2>
-                </Col>
-              </Row>
-            </Container>
-          ) : (
-            <Container className="my-md-5 px-5 px-md-4">
-              <Row className="justify-content-center">
-                <Col xs="12" md="10" lg="8">
-                  <Row className="justify-content-center my-5 py-lg-5">
-                    <Col xs="12" md="10">
-                      <p>
-                        <strong>EARN</strong> points for every $1 you spend.{' '}
-                        <strong>REDEEM</strong> points for <strong>FREE</strong>{' '}
-                        food &amp; drink. Enjoy bonus offers and get rewards
-                        even faster. And every 7th cup still{' '}
-                        <strong>FREE</strong>!
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row className="justify-content-center my-5 mx-n5">
-                    <Col xs="12" md="6" className="px-5">
-                      <h3 className="text-center h5 mb-n4">Sign In</h3>
-                      <AdminPanel className="mb-5 mb-md-0">
-                        <Container className="p-5">
-                          <Form>
-                            <Row className="text-center">
-                              <Col>
-                                <p>
-                                  If you’re an existing member, please sign in
-                                  using your 7Rewards email address and
-                                  password.
-                                </p>
-                                <img
-                                  className="w-75 mx-auto"
-                                  onClick={e => this.login(e)}
-                                  src="/static/images/placeholders/facebook-btn.png"
-                                />
-                                <p className="my-4 small">OR</p>
-                              </Col>
-                            </Row>
-
-                            <Form.Group controlId="user_name">
-                              <Form.Label className="small">
-                                Email Address
-                              </Form.Label>
-                              <Form.Control
-                                size="lg"
-                                type="email"
-                                value={this.state.userName}
-                                onChange={e => this.onValueChange(e, 'user')}
-                                name="user_name"
-                              />
-                            </Form.Group>
-
-                            <Form.Group controlId="password">
-                              <Form.Label className="small">
-                                Password
-                              </Form.Label>
-                              <Form.Control
-                                size="lg"
-                                value={this.state.password}
-                                type="password"
-                                name="password"
-                                onChange={e => this.onValueChange(e, 'pass')}
-                              />
-                            </Form.Group>
-
-                            {error && (
-                              <Row>
+          <section className="Section">
+            <Container className="Section__container">
+              {this.state.loggedIn ? (
+                <Row>
+                  <Col>
+                    <h2>You are logged in.</h2>
+                  </Col>
+                </Row>
+              ) : (
+                <Row className="justify-content-center">
+                  <Col xs="12" md="10" lg="8" className="col">
+                    <Row className="justify-content-center mb-5">
+                      <Col xs="12" md="10" className="col">
+                        <p>
+                          <strong>EARN</strong> points for every $1 you spend.{' '}
+                          <strong>REDEEM</strong> points for{' '}
+                          <strong>FREE</strong> food &amp; drink. Enjoy bonus
+                          offers and get rewards even faster. And every 7th cup
+                          still <strong>FREE</strong>!
+                        </p>
+                      </Col>
+                    </Row>
+                    <Row className="justify-content-center my-5">
+                      <Col xs="12" md="6" className="col">
+                        <AdminPanel className="mb-5 mb-md-0">
+                          <Container className="p-5">
+                            <Form>
+                              <Row className="text-center">
                                 <Col>
-                                  <p className="h5 my-4 text-danger text-center">
-                                    {
-                                      this.props.user.error.payload
-                                        .error_description
-                                    }
+                                  <h2 className="SevenRewards__heading text-center">
+                                    Sign In
+                                  </h2>
+                                  <p>
+                                    If you’re an existing member, please sign in
+                                    using your 7Rewards email address and
+                                    password.
                                   </p>
+                                  <img
+                                    className="w-75 mx-auto"
+                                    onClick={e => this.login(e)}
+                                    src="/static/images/placeholders/facebook-btn.png"
+                                  />
+                                  <p className="my-4 small">OR</p>
                                 </Col>
                               </Row>
-                            )}
 
+                              <Form.Group controlId="user_name">
+                                <Form.Label className="small">
+                                  Email Address
+                                </Form.Label>
+                                <Form.Control
+                                  size="lg"
+                                  type="email"
+                                  value={this.state.userName}
+                                  onChange={e => this.onValueChange(e, 'user')}
+                                  name="user_name"
+                                />
+                              </Form.Group>
+
+                              <Form.Group controlId="password">
+                                <Form.Label className="small">
+                                  Password
+                                </Form.Label>
+                                <Form.Control
+                                  size="lg"
+                                  value={this.state.password}
+                                  type="password"
+                                  name="password"
+                                  onChange={e => this.onValueChange(e, 'pass')}
+                                />
+                              </Form.Group>
+
+                              {error && (
+                                <Row>
+                                  <Col>
+                                    <p className="h5 my-4 text-danger text-center">
+                                      {
+                                        this.props.user.error.payload
+                                          .error_description
+                                      }
+                                    </p>
+                                  </Col>
+                                </Row>
+                              )}
+
+                              <Row>
+                                <Col className="text-center">
+                                  <Button
+                                    id="submit"
+                                    onClick={e => this.submitForm(e)}
+                                  >
+                                    Login
+                                  </Button>
+                                  <Link href="/7rewards/forgotpassword">
+                                    <a className="d-block mt-4">
+                                      Forgot password?
+                                    </a>
+                                  </Link>
+                                </Col>
+                              </Row>
+                            </Form>
+                          </Container>
+                        </AdminPanel>
+                      </Col>
+                      <Col xs="12" md="6" className="col">
+                        <AdminPanel className="mb-5 mb-md-0 text-center">
+                          <Container className="p-5">
                             <Row>
-                              <Col className="text-center">
-                                <Button
-                                  id="submit"
-                                  onClick={e => this.submitForm(e)}
-                                >
-                                  Login
+                              <Col>
+                                <h3 className="SevenRewards__heading text-center">
+                                  Join Now
+                                </h3>
+                                <p>
+                                  Register today and start collecting 7Rewards
+                                  Bonus Points to redeem for FREE rewards!
+                                </p>
+                                <Button href="/7rewards/register">
+                                  Register
                                 </Button>
-                                <Link href="/7rewards/forgotpassword">
-                                  <a className="d-block mt-4">
-                                    Forgot password?
-                                  </a>
-                                </Link>
                               </Col>
                             </Row>
-                          </Form>
-                        </Container>
-                      </AdminPanel>
-                    </Col>
-                    <Col xs="12" md="6" className="px-5">
-                      <h3 className="text-center h5 mb-n4">Join Now</h3>
-                      <AdminPanel className="mb-5 mb-md-0 text-center">
-                        <Container className="p-5">
-                          <Row>
-                            <Col>
-                              <p>
-                                Register today and start collecting 7Rewards
-                                Bonus Points to redeem for FREE rewards!
-                              </p>
-                              <Button href="/7rewards/register">
-                                Register
-                              </Button>
-                            </Col>
-                          </Row>
-                        </Container>
-                      </AdminPanel>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
+                          </Container>
+                        </AdminPanel>
+                        <div className="mt-5">
+                          <h3 className="h5 text-success">Need help?</h3>
+                          <p>
+                            <NeedHelp.AdminText />
+                          </p>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              )}
             </Container>
-          )}
+          </section>
         </SevenRewards>
       </Layout>
     );

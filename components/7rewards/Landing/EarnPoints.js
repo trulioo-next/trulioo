@@ -3,12 +3,13 @@ import Link from 'next/link';
 
 import Button from '@/components/Button';
 
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Intro = () => (
-  <Row className="justify-content-center text-center mt-5">
-    <Col xs="12" md="9" lg="8">
+  <Row className="justify-content-center text-center mt-md-5">
+    <Col xs="12" md="9" lg="8" className="col">
       <h2 className="Landing__heading mb-5">
         Earn Points on Everyday Purchases
       </h2>
@@ -22,14 +23,14 @@ const Intro = () => (
 
 const EarnPointsColumns = () => (
   <Row className="justify-content-center mt-5 pt-md-4">
-    <Col xs="12" md="10">
+    <Col xs="12" md="10" className="col">
       <Row className="text-center text-md-left text-lg-center">
-        <Col xs="12" md="12" lg="4" className="mb-5">
-          <Row className="mx-md-n4 justify-content-center">
-            <Col xs="12" md="4" lg="9" className="px-md-4">
+        <Col xs="12" md="12" lg="4" className="col mb-5">
+          <Row className="justify-content-center">
+            <Col xs="12" md="4" lg="9" className="col">
               <img src="/static/images/7rewards/join-rewards.png" />
             </Col>
-            <Col xs="12" md="8" lg="11" className="px-md-4">
+            <Col xs="12" md="8" lg="11" className="col">
               <h3 className="Landing__colHeading mt-5 mb-5">Join 7Rewards</h3>
               <p className="lead">
                 Download the app or register. It's free, easy, and fast.
@@ -37,12 +38,12 @@ const EarnPointsColumns = () => (
             </Col>
           </Row>
         </Col>
-        <Col xs="12" md="12" lg="4" className="mb-5">
-          <Row className="mx-md-n4 justify-content-center">
+        <Col xs="12" md="12" lg="4" className="col mb-5">
+          <Row className="justify-content-center">
             <Col xs="12" md="4" lg="9" className="px-md-4">
               <img src="/static/images/7rewards/earn-points.png" />
             </Col>
-            <Col xs="12" md="8" lg="11" className="px-md-4">
+            <Col xs="12" md="8" lg="11" className="col">
               <h3 className="Landing__colHeading mt-5">Earn Points</h3>
               <p className="lead">
                 Scan the 7-Eleven app in store after each purchase.
@@ -50,12 +51,12 @@ const EarnPointsColumns = () => (
             </Col>
           </Row>
         </Col>
-        <Col xs="12" md="12" lg="4" className="mb-5">
-          <Row className="mx-md-n4 justify-content-center">
-            <Col xs="12" md="4" lg="9" className="px-md-4">
+        <Col xs="12" md="12" lg="4" className="col mb-5">
+          <Row className="justify-content-center">
+            <Col xs="12" md="4" lg="9" className="col">
               <img src="/static/images/7rewards/roll-in-rewards.png" />
             </Col>
-            <Col xs="12" md="8" lg="11" className="px-md-4">
+            <Col xs="12" md="8" lg="11" className="col">
               <h3 className="Landing__colHeading mt-5">Roll In Rewards</h3>
               <p className="lead">
                 Redeem your points for a ton of tasty goodness.
@@ -64,8 +65,8 @@ const EarnPointsColumns = () => (
           </Row>
         </Col>
       </Row>
-      <Row className="justify-content-center text-center my-5 pt-md-4">
-        <Col xs="12" lg="4" className="mb-5">
+      <Row className="justify-content-center text-center mt-5 pt-md-4">
+        <Col xs="12" lg="4" className="col mb-5">
           <Button className="Landing__button" href="/7rewards/register">
             Join 7Rewards
           </Button>
@@ -73,7 +74,7 @@ const EarnPointsColumns = () => (
             <a className="d-block mt-4">Already a member? Sign in.</a>
           </Link>
         </Col>
-        <Col xs="12" lg="4" className="mb-5">
+        <Col xs="12" lg="4" className="col mb-5">
           <h3 className="h5">Download the 7-Eleven App</h3>
           <a
             className="d-inline-block mr-3"
@@ -113,9 +114,9 @@ const EarnPointsColumns = () => (
 
 const EarnPointsTiles = () => (
   <Row className="justify-content-center">
-    <Col xs="12" md="8" lg="10">
-      <Row className="align-items-stretch justify-content-center mt-5 py-lg-5 mx-lg-n5">
-        <Col xs="12" lg="6" className="d-flex px-lg-5">
+    <Col xs="12" md="8" lg="10" className="col">
+      <Row className="align-items-stretch justify-content-center mt-5 py-lg-5">
+        <Col xs="12" lg="6" className="d-flex col">
           <div className="Landing__tile">
             <div className="Landing__tileImage">
               <img src="/static/images/7rewards/earn-bonus-points-fast.png" />
@@ -127,7 +128,7 @@ const EarnPointsTiles = () => (
             </p>
           </div>
         </Col>
-        <Col xs="12" lg="6" className="d-flex px-lg-5">
+        <Col xs="12" lg="6" className="d-flex col">
           <div className="Landing__tile">
             <div className="Landing__tileImage">
               <img src="/static/images/7rewards/7th-cup-always-free.png" />
@@ -145,10 +146,12 @@ const EarnPointsTiles = () => (
 );
 
 const EarnPoints = () => (
-  <section className="p-5">
-    <Intro />
-    <EarnPointsColumns />
-    <EarnPointsTiles />
+  <section className="Section">
+    <Container className="Section__container">
+      <Intro />
+      <EarnPointsColumns />
+      <EarnPointsTiles />
+    </Container>
   </section>
 );
 

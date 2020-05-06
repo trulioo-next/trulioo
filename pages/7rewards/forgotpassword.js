@@ -14,6 +14,7 @@ import Form from 'react-bootstrap/Form';
 
 import SevenRewards from '@/containers/SevenRewards';
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
+import NeedHelp from '@/components/7rewards/NeedHelp';
 
 class ResetPassword extends React.Component {
   constructor(props) {
@@ -67,56 +68,70 @@ class ResetPassword extends React.Component {
       <Layout>
         <Header title="Forgot Password" />
         <SevenRewards>
-          <Container className="py-5">
-            <Row className="justify-content-center mb-5">
-              <Col xs="12" md="9" lg="8">
-                <h1 className="h4">Forgot Your Password?</h1>
-                <p>
-                  Please enter the email address that was used to register your
-                  account. If the email you provide is valid, you will receive a
-                  link to reset your password shortly.
-                </p>
-              </Col>
-            </Row>
-            <Row className="justify-content-center my-5">
-              <Col xs="12" md="9" lg="8">
-                <AdminPanel className="mt-n5 mb-5 mb-md-0">
-                  <Container className="p-5">
-                    <Form>
-                      <Form.Group className="mb-4 mb-lg-5" controlId="email">
-                        <Form.Label className="small">Email Address</Form.Label>
-                        <Form.Control
-                          size="lg"
-                          id="email"
-                          type="email"
-                          value={this.state.email}
-                          onChange={e => this.onValueChange(e, 'email')}
-                          name="email"
-                        />
-                      </Form.Group>
-                      <Button id="submit" onClick={e => this.submitForm(e)}>
-                        Send Email
-                      </Button>
-                      <Link href="/7rewards/signin">
-                        <a className="ml-4">Cancel</a>
-                      </Link>
+          <section className="Section">
+            <Container className="Section__container">
+              <Row className="justify-content-center">
+                <Col xs="12" md="9" lg="8" className="col">
+                  <h1 className="h4">Forgot Your Password?</h1>
+                  <p>
+                    Please enter the email address that was used to register
+                    your account. If the email you provide is valid, you will
+                    receive a link to reset your password shortly.
+                  </p>
+                </Col>
+              </Row>
+              <Row className="justify-content-center mt-5">
+                <Col xs="12" md="9" lg="8" className="col">
+                  <AdminPanel className="mt-n5 mb-5 mb-md-0">
+                    <Container className="p-5">
+                      <Form>
+                        <Form.Group className="mb-4 mb-lg-5" controlId="email">
+                          <Form.Label className="small">
+                            Email Address
+                          </Form.Label>
+                          <Form.Control
+                            size="lg"
+                            id="email"
+                            type="email"
+                            value={this.state.email}
+                            onChange={e => this.onValueChange(e, 'email')}
+                            name="email"
+                          />
+                        </Form.Group>
+                        <Button id="submit" onClick={e => this.submitForm(e)}>
+                          Send Email
+                        </Button>
+                        <Link href="/7rewards/signin">
+                          <a className="ml-4">Cancel</a>
+                        </Link>
 
-                      {/* {this.props.user.auth.error && (
-                        <div className="form__wrapper">
-                          <h5>
-                            {
-                              this.props.user.auth.error.payload
-                                .error_description
-                            }
-                          </h5>
-                        </div>
-                      )} */}
-                    </Form>
-                  </Container>
-                </AdminPanel>
-              </Col>
-            </Row>
-          </Container>
+                        {/* {this.props.user.auth.error && (
+                          <div className="form__wrapper">
+                            <h5>
+                              {
+                                this.props.user.auth.error.payload
+                                  .error_description
+                              }
+                            </h5>
+                          </div>
+                        )} */}
+                      </Form>
+                    </Container>
+                  </AdminPanel>
+                </Col>
+              </Row>
+              <Row className="justify-content-center mt-5">
+                <Col xs="12" md="9" lg="8" className="col">
+                  <p className="text-center">
+                    <strong className="font-trasandina mr-2 text-success">
+                      Need Help?
+                    </strong>
+                    <NeedHelp.AdminText />
+                  </p>
+                </Col>
+              </Row>
+            </Container>
+          </section>
         </SevenRewards>
       </Layout>
     );

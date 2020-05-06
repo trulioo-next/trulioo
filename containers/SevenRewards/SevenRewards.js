@@ -10,7 +10,7 @@ const SevenRewards = props => {
   return (
     <div className="SevenRewards">
       <Container>
-        <Row className="my-5">
+        <Row className="my-5 pt-md-5">
           <Col className="text-center">
             <img
               className="SevenRewards__logo"
