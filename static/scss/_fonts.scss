@@ -24,3 +24,17 @@
   font-weight: 900;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Trasandina';
+  src: url('/static/fonts/TrasandinaBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trasandina';
+  src: url('/static/fonts/TrasandinaUltra.woff') format('woff');
+  font-weight: 950;
+  font-style: normal;
+}

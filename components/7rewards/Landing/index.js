@@ -6,6 +6,7 @@ import SevenRewards from '@/containers/SevenRewards';
 import EarnPoints from './EarnPoints';
 import WaysToGet from './WaysToGet';
 import HowToRedeem from './HowToRedeem';
+import NeedHelp from '@/components/7rewards/NeedHelp';
 
 import './Landing.scss';
 
@@ -13,11 +14,10 @@ export const Landing = props => {
   return (
     <SevenRewards>
       <div className="Landing SevenRewards__landing">
-        <Container>
-          <EarnPoints />
-          <WaysToGet />
-          <HowToRedeem />
-        </Container>
+        <EarnPoints />
+        <WaysToGet />
+        <HowToRedeem />
+        <NeedHelp />
       </div>
     </SevenRewards>
   );

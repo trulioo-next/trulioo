@@ -1,5 +1,23 @@
+@import '~@/static/scss/component-includes';
+
 .SevenRewards {
   &__logo {
-    max-width: 48rem;
+    max-width: 19rem;
+
+    @include media-breakpoint-up(md) {
+      max-width: 30rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-width: 48rem;
+    }
+  }
+
+  &__heading {
+    font-family: 'Trasandina', sans-serif;
+    font-weight: 950;
+    color: $purple;
+    text-transform: uppercase;
+    font-size: 3.8rem;
   }
 }
