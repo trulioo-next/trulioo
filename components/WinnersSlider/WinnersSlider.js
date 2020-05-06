@@ -56,9 +56,17 @@ const WinnersSliderItem = ({ image, title, subtitle, winners_list, background_co
 
 
 const WinnersSlider = props => {
+
+  const autoplay = props.autoplay !== false;
+  let autoplay_speed = props.autoplay_speed ? parseFloat(props.autoplay_speed) : 4.0;
+  autoplay_speed = Math.max(1.0, Math.min(300, autoplay_speed));
+  autoplay_speed *= 1000;
+
   var settings = {
     dots: true,
     infinite: true,
+    autoplay: autoplay,
+    autoplaySpeed: autoplay_speed,
     speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
