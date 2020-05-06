@@ -49,7 +49,7 @@ class SevenRewards extends React.Component {
             <Container className="px-0">
               <Row className="justify-content-center mx-lg-n5">
                 <Col xs="12" md="10" lg="3" className="px-lg-5">
-                  <Admin.Panel label="My Status">
+                  <Admin.Panel label="My Status" className="p-4">
                     <MyStatus data={this.props.user.user} />
                   </Admin.Panel>
                 </Col>

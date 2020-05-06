@@ -2,6 +2,11 @@
 
 .MyStatus {
   position: relative;
+  font-size: 1.4rem;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 1.6rem;
+  }
 
   &::before {
     content: '';
@@ -19,15 +24,24 @@
   }
 
   .UserAdmin__panel & {
-    padding: 2.6rem;
+    padding: 1.1rem;
+
+    @include media-breakpoint-up(lg) {
+      padding: 2.6rem;
+    }
   }
 
-  &__rewardGraph {
-    padding: 2rem 0;
-    border-bottom: solid 1px $text-muted;
+  .col {
+    + .col {
+      border-top: solid 1px $text-muted;
+      padding-top: 2rem;
+      margin-top: 2rem;
 
-    @include media-breakpoint-only(md) {
-      border-bottom: 0;
+      @include media-breakpoint-only(md) {
+        border-top: 0;
+        padding-top: 0;
+        margin-top: 0;
+      }
     }
   }
 }
@@ -38,7 +52,6 @@
     display: block;
     font-size: 1.4rem;
     text-transform: uppercase;
-    margin-top: 2rem;
     margin-bottom: 2rem;
     text-align: center;
     width: 100%;
