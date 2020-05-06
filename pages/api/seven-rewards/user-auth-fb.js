@@ -15,20 +15,7 @@ export default async (req, res) => {
     const body = JSON.parse(req.body)
     const headers = { "Content-Type": "application/json" };
 
-     
-    const tokenHeaders = { "Content-Type": "application/json"};
-    const userToken = await fetch(REWARDS_API_URL+'/auth/token',
-     {
-       method: 'POST',
-       headers: tokenHeaders,
-       body: JSON.stringify({
-        "client_id": CLIENT_ID_ANNO,
-        "client_secret": CLIENT_SECRET_ANNO,
-        "grant_type": "client_credentials"
-      }) 
-     });
-
-
+      
     const userAuth = await fetch(REWARDS_API_URL+'/auth/token/social',
      {
        method: 'POST',
@@ -46,7 +33,6 @@ export default async (req, res) => {
        res.json({error: error, user:false, rewards:false, auth:userAuth, coupons:false, deals:false, promotions:false,token: false, myRewards:false,  body:JSON.parse(req.body) })
     }
  
-
     // Get a rewards list 
     const userRewards = Rewards();
     let rewards = await userRewards.getUserRewards(userAuth.access_token, userAuth.expires_in)
@@ -63,7 +49,7 @@ export default async (req, res) => {
  
      return
   } catch(error) {
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:JSON.parse(req.body)  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, body:JSON.parse(req.body), token: false, myRewards:false })
     // res.status(400).send({ error: error })
   }
 };
