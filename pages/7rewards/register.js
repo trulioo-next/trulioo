@@ -387,7 +387,7 @@ class RegisterScreen extends React.Component {
                                 <Col xs="12" md="6">
                                   <Form.Group controlId="last_name">
                                     <Form.Label className="small">
-                                      Last Name
+                                      Last Name (Optional)
                                     </Form.Label>
                                     <Form.Control
                                       size="lg"
@@ -483,7 +483,7 @@ class RegisterScreen extends React.Component {
                               </Form.Row>
                               <Form.Group controlId="card-number">
                                 <Form.Label className="small">
-                                  7Rewards Card Number
+                                  7Rewards Card Number (Optional)
                                 </Form.Label>
                                 <Form.Control
                                   size="lg"
@@ -502,7 +502,9 @@ class RegisterScreen extends React.Component {
                                     <Form.Check.Label className="ml-3">
                                       I accept the{' '}
                                       <Link href="/terms-conditions">
-                                        <a>Terms &amp; Conditions</a>
+                                        <a>
+                                          <u>Terms &amp; Conditions</u>
+                                        </a>
                                       </Link>
                                     </Form.Check.Label>
                                   </Form.Check>
@@ -517,11 +519,15 @@ class RegisterScreen extends React.Component {
                                       information from 7-Eleven®. You can
                                       unsubscribe at any time. Please read our{' '}
                                       <Link href="/privacy">
-                                        <a>Privacy Policy</a>
+                                        <a>
+                                          <u>Privacy Policy</u>
+                                        </a>
                                       </Link>{' '}
                                       or{' '}
                                       <Link href="/contact-us">
-                                        <a>Contact Us</a>
+                                        <a>
+                                          <u>Contact Us</u>
+                                        </a>
                                       </Link>
                                       .
                                     </Form.Check.Label>
