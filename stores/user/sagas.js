@@ -108,7 +108,7 @@ function* registerUser(payload) {
 
     console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
     
-    // yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse})
+    yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse})
 
   } catch(err) {
 

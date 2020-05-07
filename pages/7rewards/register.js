@@ -223,10 +223,7 @@ class RegisterScreen extends React.Component {
     ) {
       isValid = false;
     }
-
-    // console.log('checkBox1 ', this.state.checkBox1 )
-    // console.log('checkBox2 ', this.state.checkBox2 )
-
+ 
     if(isValid) {
       this.setState({loggedIn:true})
       this.props.userRegisterRequest(payload);
@@ -333,6 +330,13 @@ class RegisterScreen extends React.Component {
       { name: 'Female', value: 'Female' },
     ];
 
+    // 
+    let fieldError = this.props.user && this.props.user.error && this.props.user.error.payload ? this.props.user.error.payload.field_errors : false
+
+    let emailError = fieldError && fieldError.email ? fieldError.email[0] : false;
+    let passwordError = fieldError && fieldError.password ? fieldError.password : false;
+
+    console.log('FIELD ERROS ', fieldError)
     return (
       <Layout>
         <Header title="Register" />
@@ -412,6 +416,9 @@ class RegisterScreen extends React.Component {
                                   isInvalid={this.state.fieldErrors.email}
                                   onChange={e => this.onValueChange(e, 'email')}
                                 />
+                                 { emailError && 
+                                     <p> <span>{emailError}</span>  </p>
+                                 }
                               </Form.Group>
                               <Form.Row>
                                 <Col xs="12" md="6">
@@ -429,6 +436,16 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'password')
                                       }
                                     />
+
+                                    { passwordError && 
+
+                                      passwordError.map((error, index) => (
+                                        <div key={index} >
+                                          {error}
+                                        </div>
+                                      ))
+
+                                    }
                                   </Form.Group>
                                 </Col>
                                 <Col xs="12" md="6">
