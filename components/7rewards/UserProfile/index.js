@@ -12,21 +12,22 @@ export class UserProfile extends Component {
   constructor(props) {
     super(props);
 
-    let user = this.props.user && this.props.user.user ? this.props.user.user : false;
-    let gender = user.gender ? user.gender : 'Prefer not to say'
+    let user =
+      this.props.user && this.props.user.user ? this.props.user.user : false;
+    let gender = user.gender ? user.gender : 'Prefer not to say';
     let address1 = user && user.address_line_1 ? user.address_line_1 : '';
     let address2 = user && user.address_line_2 ? user.address_line_2 : '';
     let province = user && user.state_or_province ? user.state_or_province : '';
     let city = user && user.city ? user.city : '';
     let phone = user && user.phone_number ? user.phone_number : '';
     let postal = user && user.postal_code ? user.postal_code : '';
-    let email = user && user.email ? user.email : '';  
-    let firstName = user && user.first_name ? user.first_name : ''; 
+    let email = user && user.email ? user.email : '';
+    let firstName = user && user.first_name ? user.first_name : '';
     let lastName = user && user.last_name ? user.last_name : '';
     let month = user && user.birthdate ? user.birthdate.split('-')[1] : '';
     let day = user && user.birthdate ? user.birthdate.split('-')[2] : '';
     let year = user && user.birthdate ? user.birthdate.split('-')[0] : '';
-   
+
     this.state = {
       user: user,
       showModal: false,
@@ -35,57 +36,56 @@ export class UserProfile extends Component {
       email: email,
       phone: phone,
       postal: postal,
-      address1:address1,
-      address2:address2,
-      province:province,
-      city:city,
-      gender:gender,
+      address1: address1,
+      address2: address2,
+      province: province,
+      city: city,
+      gender: gender,
       bMonth: month,
       bDay: day,
       bYear: year,
-      token:this.props.user.token,
+      token: this.props.user.token,
       valid: false,
       isLoading: false,
-      showSuccess:false,
-      loaded:false
+      showSuccess: false,
+      loaded: false,
     };
-   
 
     this.submitForm = this.submitForm.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
   }
 
+  submitForm(e) {
+    e.preventDefault();
+    let user =
+      this.props.user && this.props.user.user ? this.props.user.user : false;
+    let phone =
+      user && user.phone_number ? user.phone_number : this.state.phone;
 
-  submitForm (e) {
-    e.preventDefault()
-    let user = this.props.user && this.props.user.user ? this.props.user.user : false;
-    let phone = user && user.phone_number ? user.phone_number : this.state.phone;
-
-    if( phone === this.state.phone ) {
-        phone = null;
+    if (phone === this.state.phone) {
+      phone = null;
     } else {
       phone = this.state.phone;
     }
-  
+
     let payload = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
       phone: phone,
       postal: this.state.postal,
-      address1:this.state.address1,
-      address2:this.state.address2,
-      province:this.state.province,
-      city:this.state.city,
+      address1: this.state.address1,
+      address2: this.state.address2,
+      province: this.state.province,
+      city: this.state.city,
       bMonth: this.state.bMonth,
       bDay: this.state.bDay,
       bYear: this.state.bYear,
-      gender:this.state.gender,
-      token:this.state.token
-    }
+      gender: this.state.gender,
+      token: this.state.token,
+    };
 
     this.props.userUpdateRequest(payload);
-
   }
 
   // Update state value
@@ -96,20 +96,19 @@ export class UserProfile extends Component {
 
   passwordReset() {
     let payload = {
-      email:this.state.email
-    }
-     
-   this.props.passwordResetRequest(payload)
+      email: this.state.email,
+    };
+
+    this.props.passwordResetRequest(payload);
   }
 
   handleClose() {
-    this.setState({showSuccess:false })
-    this.props.passwordResetRequest("clear")
+    this.setState({ showSuccess: false });
+    this.props.passwordResetRequest('clear');
   }
 
   render() {
-
-    // TODO: Add these to an external resource 
+    // TODO: Add these to an external resource
     //
     let provinces = [
       { name: '', value: '' },
@@ -150,35 +149,72 @@ export class UserProfile extends Component {
       { name: 'Dec', value: '12' },
     ];
 
-    let days = [  { name: 'Day', value: '' } ]
-    for(var i = 0; i < 31; i++) {  days.push({ name: (i+1), value: (i+1) }) }
+    let days = [{ name: 'Day', value: '' }];
+    for (var i = 0; i < 31; i++) {
+      days.push({ name: i + 1, value: i + 1 });
+    }
 
-    let years = [ { name: 'Year', value: '' } ]
-    for(var i = 0; i < 100; i++) { let year = 2020 - i; years.push({ name: year, value: year })  }
+    let years = [{ name: 'Year', value: '' }];
+    for (var i = 0; i < 100; i++) {
+      let year = 2020 - i;
+      years.push({ name: year, value: year });
+    }
 
-    // validation : 
-    // TODO: create a helper service to validate inline state 
-    //  
-    const fieldErrors = this.props.user && this.props.user.fieldErrors ? this.props.user.fieldErrors.error : false;
-    const phoneError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.mobile_number[0] ? fieldErrors.payload.field_errors.mobile_number[0] : false;
-    const firstNameError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.first_name[0] ? fieldErrors.payload.field_errors.first_name[0] : false;
-    const lastNameError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.last_name[0] ? fieldErrors.payload.field_errors.last_name[0] : false;
-    const birthdateError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.birthdate[0] ? fieldErrors.payload.field_errors.birthdate[0] : false;
+    // validation :
+    // TODO: create a helper service to validate inline state
+    //
+    const fieldErrors =
+      this.props.user && this.props.user.fieldErrors
+        ? this.props.user.fieldErrors.error
+        : false;
+    const phoneError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.mobile_number[0]
+        ? fieldErrors.payload.field_errors.mobile_number[0]
+        : false;
+    const firstNameError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.first_name[0]
+        ? fieldErrors.payload.field_errors.first_name[0]
+        : false;
+    const lastNameError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.last_name[0]
+        ? fieldErrors.payload.field_errors.last_name[0]
+        : false;
+    const birthdateError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.birthdate[0]
+        ? fieldErrors.payload.field_errors.birthdate[0]
+        : false;
 
-    let formError = this.props.user && 
-                    this.props.user.passwordReset && 
-                    this.props.user.passwordReset.error && 
-                    this.props.user.passwordReset.error.payload && 
-                    this.props.user.passwordReset.error.payload.field_errors ? this.props.user.passwordReset.error.payload.field_errors.email : false
-    
-    let formSuccess = this.props.user && 
-                      this.props.user.passwordReset && 
-                      this.props.user.passwordReset.success ? this.props.user.passwordReset.success : false
+    let formError =
+      this.props.user &&
+      this.props.user.passwordReset &&
+      this.props.user.passwordReset.error &&
+      this.props.user.passwordReset.error.payload &&
+      this.props.user.passwordReset.error.payload.field_errors
+        ? this.props.user.passwordReset.error.payload.field_errors.email
+        : false;
 
-     
-    if(formSuccess && !this.state.loaded) {
-      this.setState({showSuccess:true, loaded:true })
-    }     
+    let formSuccess =
+      this.props.user &&
+      this.props.user.passwordReset &&
+      this.props.user.passwordReset.success
+        ? this.props.user.passwordReset.success
+        : false;
+
+    if (formSuccess && !this.state.loaded) {
+      this.setState({ showSuccess: true, loaded: true });
+    }
 
     return (
       <div className="p-5">
@@ -191,13 +227,22 @@ export class UserProfile extends Component {
           >
             Edit
           </Button>
-            <Modal show={this.state.showSuccess} onHide={ () => this.handleClose() } centered size="sm">
-                <Modal.Header closeButton />
-                <Modal.Body>
-                   <div className="check__mark"><CheckMark/></div>
-                   <div className="center--text"><h5>EMAIL SENT</h5></div>
-                </Modal.Body>
-            </Modal>
+          <Modal
+            show={this.state.showSuccess}
+            onHide={() => this.handleClose()}
+            centered
+            size="sm"
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>
+              <div className="check__mark">
+                <CheckMark />
+              </div>
+              <div className="center--text">
+                <h5>EMAIL SENT</h5>
+              </div>
+            </Modal.Body>
+          </Modal>
           <Modal
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
@@ -219,7 +264,9 @@ export class UserProfile extends Component {
                   </Col>
                   <Col>
                     <Form.Group controlId="edit-last-name">
-                      <Form.Label className="small">Last Name</Form.Label>
+                      <Form.Label className="small">
+                        Last Name (Optional)
+                      </Form.Label>
                       <Form.Control
                         size="lg"
                         isInvalid={lastNameError}
@@ -249,7 +296,6 @@ export class UserProfile extends Component {
                     value={this.state.phone}
                     onChange={e => this.onValueChange(e, 'phone')}
                   />
-                  
                 </Form.Group>
                 <Form.Row>
                   <Col>
@@ -310,16 +356,19 @@ export class UserProfile extends Component {
                 </Form.Row>
                 <Form.Group>
                   <span className="d-block small mb-2">Password</span>
-                  <Button variant="dark" type="button" onClick={() => this.passwordReset() }>
+                  <Button
+                    variant="dark"
+                    type="button"
+                    onClick={() => this.passwordReset()}
+                  >
                     Change Password
                   </Button>
-                  { formError && 
-                    <p>{ formError[0] }</p>
-                  }
-
+                  {formError && <p>{formError[0]}</p>}
                 </Form.Group>
                 <Form.Group controlId="edit-address-line-1">
-                  <Form.Label className="small">Address Line 1</Form.Label>
+                  <Form.Label className="small">
+                    Address Line 1 (Optional)
+                  </Form.Label>
                   <Form.Control
                     size="lg"
                     value={this.state.address1}
@@ -327,7 +376,9 @@ export class UserProfile extends Component {
                   />
                 </Form.Group>
                 <Form.Group controlId="edit-address-line-2">
-                  <Form.Label className="small">Address Line 2</Form.Label>
+                  <Form.Label className="small">
+                    Address Line 2 (Optional)
+                  </Form.Label>
                   <Form.Control
                     size="lg"
                     value={this.state.address2}
@@ -337,13 +388,19 @@ export class UserProfile extends Component {
                 <Form.Row>
                   <Col>
                     <Form.Group controlId="edit-city">
-                      <Form.Label className="small">City</Form.Label>
-                      <Form.Control size="lg" value={this.state.city} onChange={e => this.onValueChange(e, 'city')} />
+                      <Form.Label className="small">City (Optional)</Form.Label>
+                      <Form.Control
+                        size="lg"
+                        value={this.state.city}
+                        onChange={e => this.onValueChange(e, 'city')}
+                      />
                     </Form.Group>
                   </Col>
                   <Col>
                     <Form.Group controlId="edit-province">
-                      <Form.Label className="small">Province</Form.Label>
+                      <Form.Label className="small">
+                        Province (Optional)
+                      </Form.Label>
                       <Form.Control
                         size="lg"
                         as="select"
@@ -360,8 +417,14 @@ export class UserProfile extends Component {
                   </Col>
                 </Form.Row>
                 <Form.Group controlId="edit-postal-code">
-                  <Form.Label className="small">Postal Code</Form.Label>
-                  <Form.Control size="lg" value={this.state.postal} onChange={e => this.onValueChange(e, 'postal')} />
+                  <Form.Label className="small">
+                    Postal Code (Optional)
+                  </Form.Label>
+                  <Form.Control
+                    size="lg"
+                    value={this.state.postal}
+                    onChange={e => this.onValueChange(e, 'postal')}
+                  />
                 </Form.Group>
                 <Form.Group controlId="edit-gender">
                   <Form.Label className="small">Gender</Form.Label>
@@ -378,7 +441,7 @@ export class UserProfile extends Component {
                     ))}
                   </Form.Control>
                 </Form.Group>
-                <button type="submit" className="Button mt-4" >
+                <button type="submit" className="Button mt-4">
                   Submit
                 </button>
               </Form>
@@ -386,36 +449,35 @@ export class UserProfile extends Component {
           </Modal>
         </div>
         <hr />
-        { this.props.user && 
+        {this.props.user && (
           <div className="mb-4">
             <span className="d-block py-2 small">Name</span>
             <span className="d-block">
               {this.props.user.user.first_name} {this.props.user.user.last_name}
             </span>
           </div>
-        }
+        )}
         <div className="mb-4">
           <span className="d-block py-2 small">Account ID</span>
           <span className="d-block">{this.props.user.user.username}</span>
         </div>
-        { this.props.user && 
-        <div className="mb-4">
-          <span className="d-block py-2 small">Email Address</span>
-          <span className="d-block">{this.props.user.user.email}</span>
-        </div>
-        }
-        { this.props.user && 
-        <div className="mb-4">
-          <span className="d-block py-2 small">Birthdate</span>
-          <span className="d-block">{this.props.user.user.birthdate}</span>
-        </div>
-        }
+        {this.props.user && (
+          <div className="mb-4">
+            <span className="d-block py-2 small">Email Address</span>
+            <span className="d-block">{this.props.user.user.email}</span>
+          </div>
+        )}
+        {this.props.user && (
+          <div className="mb-4">
+            <span className="d-block py-2 small">Birthdate</span>
+            <span className="d-block">{this.props.user.user.birthdate}</span>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-  
 const mapStateToProps = state => ({
   user: appSelectors.userDataSelector(state),
   token: appSelectors.userTokenSelector(state),
@@ -423,7 +485,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   userUpdateRequest: payload => dispatch(appActions.reqUpdateAction(payload)),
-  passwordResetRequest: payload => dispatch(appActions.reqPasswordResetAction(payload))
+  passwordResetRequest: payload =>
+    dispatch(appActions.reqPasswordResetAction(payload)),
 });
 
 const UserProfile_ = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
