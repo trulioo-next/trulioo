@@ -60,7 +60,7 @@ class ResetPassword extends React.Component {
     this.setState({ loggedIn: true });
 
     // Add email reset action here
-    //  this.props.userAuthRequest(payload)
+    this.props.userResetPasswordRequest(payload)
   }
 
   render() {
@@ -144,6 +144,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
+  userResetPasswordRequest: payload => dispatch(appActions.reqPasswordResetAction(payload)),
 });
 
 const ResetPassword_ = connect(

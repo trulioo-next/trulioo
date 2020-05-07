@@ -4,7 +4,8 @@ var fs = require('fs')
 import React from 'react';
 
 // TODO: Add .env var here 
-const WP_DATA = 'https://dev3.7eleven.ca/wp-json/wp/v2/pages';
+const WP_DATA = 'https://content.7-eleven.ca/wp-json/wp/v2/pages';
+const WP_NUTITIONALS = 'https://content.7-eleven.ca/wp-json/api/v1/nutritionals';
 let newDate = new Date();
 const originalUrl = 'https://dev4.7eleven.ca'
 
@@ -25,15 +26,20 @@ const createSitemap = (posts) => `<?xml version="1.0" encoding="UTF-8"?>
     `;
 
 class Sitemap extends React.Component {
+
+
     static async getInitialProps({res}) {
       const request = await fetch(WP_DATA);
+      const nutritionals = await fetch(WP_NUTITIONALS);
+
       let pages = await request;
       let formatted = [];
-
       const excluded = ['[slug].js', '_app.js', '_document.js', 'api', '.DS_Store']
       let dateFormatted = formatDate(newDate)
-
       let pageNames = await readdirAsync('./pages');
+
+
+      console.log('nutritionals ::>> ' , nutritionals.taxonomies)
 
       // add home page first :
       formatted.push( {slug:'', date:dateFormatted , priority:'1.0'} )
