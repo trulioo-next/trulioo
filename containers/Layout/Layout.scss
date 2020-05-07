@@ -175,4 +175,9 @@ a:not([href]) {
 
 .field--error {
   color: red;
+
+  &.sm {
+    font-size: 12px;
+    margin-top:8px;
+  }
 }

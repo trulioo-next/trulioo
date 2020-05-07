@@ -17,13 +17,19 @@ import {
   SEVEN_REWARDS_UPDATE,
   SEVEN_REWARDS_PASSWORD_RESET,
   SEVEN_REWARDS_UPDATE_ERROR,
-  SEVEN_REWARDS_UPDATE_PREFERNCES
+  SEVEN_REWARDS_UPDATE_PREFERNCES,
+  SEVEN_REWARDS_ADDCARD
 } from '../types'
 
 
 export default (state = INITIAL_STATE, action) => {
   
   switch (action.type) {
+
+      case SEVEN_REWARDS_ADDCARD:
+        return { ...state,
+           addCard: action.payload.user
+        }
 
       case SEVEN_REWARDS_UPDATE_PREFERNCES:
         return { ...state,

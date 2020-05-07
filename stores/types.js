@@ -55,6 +55,9 @@ export const SEVEN_REWARDS_CHECK_REQUEST = 'seven_rewards/load/SEVEN_REWARDS_CHE
 export const SEVEN_REWARDS_CHECK_LOADED = 'seven_rewards/loaded/SEVEN_REWARDS_CHECK_LOADED'
 export const SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST = 'seven_rewards/update/SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST'
 export const SEVEN_REWARDS_UPDATE_PREFERNCES = 'seven_rewards/update/SEVEN_REWARDS_UPDATE_PREFERNCES'
+export const SEVEN_REWARDS_ADDCARD_REQUEST = 'seven_rewards/addcard/SEVEN_REWARDS_ADDCARD_REQUEST'
+export const SEVEN_REWARDS_ADDCARD = 'seven_rewards/addcard/SEVEN_REWARDS_ADDCARD'
+
 
 
 // Alert Events

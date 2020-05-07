@@ -80,6 +80,21 @@ export default function SevenRewardsService(state) {
 	}
 
 
+	async function addCard(payload) {
+		let data = await API.post('/api/seven-rewards/check-card-balance', {body:payload});
+		if(data.error) {
+			ErrorHandler({
+		        error: data.error.payload.error_description,
+		        crumb: {
+		          category: 'checkCardBalance',
+		          message: 'Checking Card Balance Failed'
+		        }
+		    })
+		}
+		return data;
+	}
+
+
 	async function checkCardBalance(payload) {
 		let data = await API.post('/api/seven-rewards/check-card-balance', {body:payload});
 		if(data.error) {
@@ -189,7 +204,8 @@ export default function SevenRewardsService(state) {
     verifySms,
     updateUser,
     passwordReset,
-    updatePreferences
+    updatePreferences,
+    addCard
    }
 
 }

@@ -25,6 +25,7 @@ export default async (req, res) => {
     let day = body.body.bDay >= 10 ? body.body.bDay : `0${body.body.bDayh}`
     let birthdate = body.body.bYear +'-'+ month +'-'+ day;
     let phone = body.body.phone === 'null' ||  body.body.phone === null ? false : true;
+    let gender =  body.body.gender === 'Prefer not to say' ? false : true;
 
     let payload = {
         "first_name": body.body.firstName,
@@ -35,7 +36,6 @@ export default async (req, res) => {
         "address_line_1": body.body.address1,
         "address_line_2": body.body.address2,
         "city": body.body.city,
-        "gender":body.body.gender,
         "state_or_province": body.body.province,
         "favorite_store_ids":[],
         "mp_needs_alias": false,
@@ -43,9 +43,18 @@ export default async (req, res) => {
         "email": body.body.email
       }
 
+
+      console.log('PHONE ', phone )    
+
       if(phone) {
         payload.mobile_number = body.body.phone;
       }
+      if(gender) {
+        payload.gender = body.body.gender;
+      }
+
+
+      console.log('PAYLOAD ', payload )    
  
     //
     // console.log('PAYLOAD BODY EMAIL ',  payload )

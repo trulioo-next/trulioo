@@ -9,7 +9,8 @@ import {
   SEVEN_REWARDS_SMS_REQUEST,
   SEVEN_REWARDS_UPDATE_REQUEST,
   SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
-  SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST
+  SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST,
+  SEVEN_REWARDS_ADDCARD_REQUEST
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -39,6 +40,11 @@ export const reqUserFacebookRegisterAction = (payload) => ({
 
 export const reqCheckCardAction = (payload) => ({
   type: SEVEN_REWARDS_CHECKCARD_REQUEST,
+  payload: payload
+})
+
+export const reqAddCardAction = (payload) => ({
+  type: SEVEN_REWARDS_ADDCARD_REQUEST,
   payload: payload
 })
 
@@ -79,5 +85,6 @@ export default {
   reqSMSAction,
   reqUpdateAction,
   reqPasswordResetAction,
-  reqPreferenceUpdateAction
+  reqPreferenceUpdateAction,
+  reqAddCardAction
 }

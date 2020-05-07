@@ -57,12 +57,11 @@ export class UserProfile extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    let user =
-      this.props.user && this.props.user.user ? this.props.user.user : false;
-    let phone =
-      user && user.phone_number ? user.phone_number : this.state.phone;
+    let user = this.props.user && this.props.user.user ? this.props.user.user : false;
+    let phone = user && user.phone_number ? user.phone_number : this.state.phone;
+    let currentPhone = user && user.phone_number ? user.phone_number : false;
 
-    if (phone === this.state.phone) {
+    if (this.state.phone === currentPhone) {
       phone = null;
     } else {
       phone = this.state.phone;
@@ -85,6 +84,7 @@ export class UserProfile extends Component {
       token: this.state.token,
     };
 
+    console.log('PHONE ', phone , 'CURRENT PHONE ' ,currentPhone  )
     this.props.userUpdateRequest(payload);
   }
 
@@ -167,32 +167,39 @@ export class UserProfile extends Component {
       this.props.user && this.props.user.fieldErrors
         ? this.props.user.fieldErrors.error
         : false;
+
+     
+
+
     const phoneError =
       fieldErrors &&
       fieldErrors.payload &&
       fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.mobile_number[0]
+      fieldErrors.payload.field_errors.mobile_number
         ? fieldErrors.payload.field_errors.mobile_number[0]
         : false;
+    
+     console.log('fieldErrors ', phoneError )
+
     const firstNameError =
       fieldErrors &&
       fieldErrors.payload &&
       fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.first_name[0]
+      fieldErrors.payload.field_errors.first_name
         ? fieldErrors.payload.field_errors.first_name[0]
         : false;
     const lastNameError =
       fieldErrors &&
       fieldErrors.payload &&
       fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.last_name[0]
+      fieldErrors.payload.field_errors.last_name
         ? fieldErrors.payload.field_errors.last_name[0]
         : false;
     const birthdateError =
       fieldErrors &&
       fieldErrors.payload &&
       fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.birthdate[0]
+      fieldErrors.payload.field_errors.birthdate
         ? fieldErrors.payload.field_errors.birthdate[0]
         : false;
 
@@ -296,6 +303,11 @@ export class UserProfile extends Component {
                     value={this.state.phone}
                     onChange={e => this.onValueChange(e, 'phone')}
                   />
+                  { phoneError && 
+
+                    <p className="field--error sm">{phoneError}</p>
+
+                  }
                 </Form.Group>
                 <Form.Row>
                   <Col>

@@ -30,7 +30,9 @@ import {
   SEVEN_REWARDS_PASSWORD_RESET,
   SEVEN_REWARDS_UPDATE_ERROR,
   SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST,
-  SEVEN_REWARDS_UPDATE_PREFERNCES
+  SEVEN_REWARDS_UPDATE_PREFERNCES,
+  SEVEN_REWARDS_ADDCARD_REQUEST,
+  SEVEN_REWARDS_ADDCARD
 } from '../types'
 
 function* startup(payload) {
@@ -234,6 +236,27 @@ function* checkGiftcardBalance(payload) {
   }
 }
 
+
+//
+function* addCard(payload) {
+ 
+  try {
+    const state = yield select((state) => state)
+    const sevenRewardsService = SevenRewardsService(state);
+   
+    const addCardResponse = yield call(sevenRewardsService.checkCardBalance, payload)
+
+     // console.log('CHECK CARD BALANCE !!   ', checkBalanceResponse )
+    
+    yield put({ type: SEVEN_REWARDS_ADDCARD, payload:addCardResponse})
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type:SEVEN_REWARDS_ADDCARD, payload: errors})
+  }
+}
+
 //
 function* redeemPoints(payload) {
  
@@ -308,7 +331,8 @@ function* startupFlow() {
       SEVEN_REWARDS_SMS_REQUEST,
       SEVEN_REWARDS_UPDATE_REQUEST,
       SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
-      SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST
+      SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST,
+      SEVEN_REWARDS_ADDCARD_REQUEST
     ])
 
     yield put({ type: APP_STARTLOADING })
@@ -359,6 +383,10 @@ function* startupFlow() {
 
     if (action.type === SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST) {
       yield call(updatePreferences, action.payload)
+    }
+
+    if (action.type === SEVEN_REWARDS_ADDCARD_REQUEST) {
+      yield call(addCard, action.payload)
     }
 
 

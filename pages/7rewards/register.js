@@ -390,9 +390,7 @@ class RegisterScreen extends React.Component {
                                 </Col>
                                 <Col xs="12" md="6">
                                   <Form.Group controlId="last_name">
-                                    <Form.Label className="small">
-                                      Last Name (Optional)
-                                    </Form.Label>
+                                    <Form.Label className="small">Last Name</Form.Label>
                                     <Form.Control
                                       size="lg"
                                       value={this.state.lastName}
