@@ -30,7 +30,7 @@ class MyApp extends App {
 
     constructor(props) {
         super(props);
-        Router.events.on('routeChangeComplete', url => { console.log("Moving on to ", url); gtag.pageview(url); } )
+        Router.events.on('routeChangeComplete', url => { gtag.pageview(url); } )
     }
 
     componentWillUnmount() { }
