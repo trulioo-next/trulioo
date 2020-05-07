@@ -35,7 +35,7 @@ export default async (req, res) => {
     };
 
     // console.log('REGITERS TOKEN ', registerHeaders )
-    let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
+    // let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
     let payload = {
         "email": body.body.email,
         "email_secondary": body.body.email,
@@ -53,7 +53,7 @@ export default async (req, res) => {
     }
 
     //
-    // console.log('PAYLOAD BODY EMAIL ',  payload )
+    console.log('PAYLOAD BODY EMAIL ',  payload )
 
     // // Get an Access Token
     // //
@@ -96,7 +96,7 @@ export default async (req, res) => {
      return
   } catch(error) {
     console.log('ERROR ', error )
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false, token: false, myRewards:false  })
     // res.status(400).send({ error: error })
   }
 };

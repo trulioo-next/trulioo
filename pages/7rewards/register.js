@@ -339,13 +339,7 @@ class RegisterScreen extends React.Component {
         <SevenRewards>
           <section className="Section">
             <Container className="Section__container">
-              {this.state.loggedIn ? (
-                <Row>
-                  <Col>
-                    <h2>You are logged in.</h2>
-                  </Col>
-                </Row>
-              ) : (
+              
                 <Row className="justify-content-center">
                   <Col xs="12" md="10">
                     <Row className="justify-content-center">
@@ -554,7 +548,7 @@ class RegisterScreen extends React.Component {
                     </Row>
                   </Col>
                 </Row>
-              )}
+              
             </Container>
           </section>
         </SevenRewards>
