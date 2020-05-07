@@ -417,9 +417,7 @@ export class UserProfile extends Component {
                   </Col>
                 </Form.Row>
                 <Form.Group controlId="edit-postal-code">
-                  <Form.Label className="small">
-                    Postal Code (Optional)
-                  </Form.Label>
+                  <Form.Label className="small">Postal Code</Form.Label>
                   <Form.Control
                     size="lg"
                     value={this.state.postal}
