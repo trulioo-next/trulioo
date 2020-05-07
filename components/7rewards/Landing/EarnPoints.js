@@ -27,7 +27,7 @@ const EarnPointsColumns = () => (
       <Row className="text-center text-md-left text-lg-center">
         <Col xs="12" md="12" lg="4" className="col mb-5">
           <Row className="justify-content-center">
-            <Col xs="12" md="4" lg="9" className="col">
+            <Col xs="7" md="4" lg="9" className="col">
               <img src="/static/images/7rewards/join-rewards.png" />
             </Col>
             <Col xs="12" md="8" lg="11" className="col">
@@ -40,7 +40,7 @@ const EarnPointsColumns = () => (
         </Col>
         <Col xs="12" md="12" lg="4" className="col mb-5">
           <Row className="justify-content-center">
-            <Col xs="12" md="4" lg="9" className="px-md-4">
+            <Col xs="7" md="4" lg="9" className="px-md-4">
               <img src="/static/images/7rewards/earn-points.png" />
             </Col>
             <Col xs="12" md="8" lg="11" className="col">
@@ -53,7 +53,7 @@ const EarnPointsColumns = () => (
         </Col>
         <Col xs="12" md="12" lg="4" className="col mb-5">
           <Row className="justify-content-center">
-            <Col xs="12" md="4" lg="9" className="col">
+            <Col xs="7" md="4" lg="9" className="col">
               <img src="/static/images/7rewards/roll-in-rewards.png" />
             </Col>
             <Col xs="12" md="8" lg="11" className="col">
