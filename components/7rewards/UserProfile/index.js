@@ -264,9 +264,7 @@ export class UserProfile extends Component {
                   </Col>
                   <Col>
                     <Form.Group controlId="edit-last-name">
-                      <Form.Label className="small">
-                        Last Name (Optional)
-                      </Form.Label>
+                      <Form.Label className="small">Last Name</Form.Label>
                       <Form.Control
                         size="lg"
                         isInvalid={lastNameError}
