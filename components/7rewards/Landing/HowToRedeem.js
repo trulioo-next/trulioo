@@ -15,7 +15,7 @@ const HowToRedeem = () => (
             </Col>
           </Row>
           <Row className="my-md-1 justify-content-center">
-            <Col className="w-100" classNAme="col">
+            <Col className="w-100" className="col">
               <ol className="Landing__steps lead mb-5">
                 <li>Sign in to 7Rewards.ca or the 7-Eleven app</li>
                 <li>Click “CHOOSE REWARD” button</li>
