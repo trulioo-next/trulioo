@@ -22,6 +22,9 @@ import SevenRewards from '@/containers/SevenRewards';
 import ModalWindow from '@/components/Modal';
 import { useFormik } from 'formik';
 
+import { ReCaptcha } from 'react-recaptcha-v3'
+import { GOOGLE_RECAPTCHA_V3_KEY, verify } from '../../utils/recaptcha'
+
 class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -340,6 +343,11 @@ class RegisterScreen extends React.Component {
     return (
       <Layout>
         <Header title="Register" />
+        <ReCaptcha
+            sitekey={GOOGLE_RECAPTCHA_V3_KEY}
+            action='register'
+            verifyCallback={ verify }
+        />
         <SevenRewards>
           <section className="Section">
             <Container className="Section__container">
