@@ -19,8 +19,8 @@ import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 import SevenRewards from '@/containers/SevenRewards';
 import NeedHelp from '@/components/7rewards/NeedHelp';
 
-
 import { ReCaptcha } from 'react-recaptcha-v3'
+import { GOOGLE_RECAPTCHA_V3_KEY, verify } from '../../utils/recaptcha'
 
 
 
@@ -167,18 +167,6 @@ class UserAuth extends React.Component {
   submitFacebookRequest(access_token) {
     this.props.userFacebookAuthRequest(access_token);
   }
-  
-
-  verifyCallback(recaptchaToken) {
-    // Here you will get the final recaptchaToken!!!  
-    console.log(recaptchaToken, "<= your recaptcha token")
-  }
-
-   // <ReCaptcha
-   //          sitekey="6Leco_MUAAAAAGk7Xg2792extwUQtJWPJafuaBnr"
-   //          action='signin'
-   //          verifyCallback={this.verifyCallback}
-   //      />
 
 
   render() {
@@ -188,10 +176,11 @@ class UserAuth extends React.Component {
     return (
       <Layout>
         <Header title="Sign In" />
-
-       
-
-
+        <ReCaptcha
+            sitekey={GOOGLE_RECAPTCHA_V3_KEY}
+            action='signin'
+            verifyCallback={ verify }
+        />
         <SevenRewards>
           <section className="Section">
             <Container className="Section__container">

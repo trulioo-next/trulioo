@@ -8,6 +8,8 @@ import nutritionalsActions from '../stores/nutritionals/actions'
 import pageActions from '../stores/nutritionals/actions'
 import withError from '../components-stateful/withErrorWrapper'
 import * as gtag from '../utils/gtag'
+import { GOOGLE_RECAPTCHA_V3_KEY } from '../utils/recaptcha'
+import { loadReCaptcha } from 'react-recaptcha-v3'
 
 
 const withReduxDebugMode = false // process.env.NODE_ENV === 'development' || false;
@@ -48,7 +50,8 @@ class MyApp extends App {
             //
             // console.log('IS USER AUTH  ', isUserAuth.user.auth )
         }
- 
+
+        loadReCaptcha(GOOGLE_RECAPTCHA_V3_KEY);
     }
 
 

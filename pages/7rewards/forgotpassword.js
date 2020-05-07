@@ -18,6 +18,9 @@ import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 import NeedHelp from '@/components/7rewards/NeedHelp';
 import CheckMark from '@/static/images/modal-check.svg';
 
+import { ReCaptcha } from 'react-recaptcha-v3'
+import { GOOGLE_RECAPTCHA_V3_KEY, verify } from '../../utils/recaptcha'
+
 class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
@@ -91,6 +94,11 @@ class ResetPassword extends React.Component {
     return (
       <Layout>
         <Header title="Forgot Password" />
+        <ReCaptcha
+            sitekey={GOOGLE_RECAPTCHA_V3_KEY}
+            action='forgotPassword'
+            verifyCallback={ verify }
+        />
         <SevenRewards>
           
           <Modal show={this.state.show} onHide={ () => this.handleClose() } centered size="sm">
