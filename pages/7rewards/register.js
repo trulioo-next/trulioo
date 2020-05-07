@@ -47,22 +47,22 @@ class RegisterScreen extends React.Component {
       loggedIn: false,
       modalVisible: false,
       facebookPayload: false,
-      checkBox1:false,
-      checkBox2:false,
-      fieldErrors:{
-        firstName:null,
-        lastName:null,
-        email:null,
-        password:null,
-        confirmPassword:null,
-        bMonth:null,
+      checkBox1: false,
+      checkBox2: false,
+      fieldErrors: {
+        firstName: null,
+        lastName: null,
+        email: null,
+        password: null,
+        confirmPassword: null,
+        bMonth: null,
         bDay: null,
         bYear: null,
         phone: null,
         postal: null,
-        checkBox1:null,
-        checkBox2:null
-      }
+        checkBox1: null,
+        checkBox2: null,
+      },
     };
   }
 
@@ -187,48 +187,52 @@ class RegisterScreen extends React.Component {
       cardNumber: this.state.cardNumber,
     };
 
-    const validateEmail = (email) =>  {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
+    const validateEmail = email => {
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    };
 
-    let passwordValid = this.state.password !== this.state.confirmPassword || this.state.password === '' ? true : null;
+    let passwordValid =
+      this.state.password !== this.state.confirmPassword ||
+      this.state.password === ''
+        ? true
+        : null;
     let emailValid = validateEmail(this.state.email) ? null : true;
 
     this.setState({
-        fieldErrors:{
-          firstName:this.state.firstName === '' ? true : null,
-          lastName:this.state.lastName === '' ? true : null,
-          email:emailValid,
-          password:passwordValid,
-          confirmPassword:passwordValid,
-          phone: this.state.phone === '' ? true : null,
-          postal: this.state.postal === '' ? true : null,
-          checkBox1:this.state.checkBox1 === false ? true : null,
-          checkBox2:this.state.checkBox2 === false ? true : null,
-      }
-    })
+      fieldErrors: {
+        firstName: this.state.firstName === '' ? true : null,
+        lastName: this.state.lastName === '' ? true : null,
+        email: emailValid,
+        password: passwordValid,
+        confirmPassword: passwordValid,
+        phone: this.state.phone === '' ? true : null,
+        postal: this.state.postal === '' ? true : null,
+        checkBox1: this.state.checkBox1 === false ? true : null,
+        checkBox2: this.state.checkBox2 === false ? true : null,
+      },
+    });
 
     let isValid = true;
 
-    // if all is valid, pass alogn to the action : 
-    if(this.state.firstName === '' || 
+    // if all is valid, pass alogn to the action :
+    if (
+      this.state.firstName === '' ||
       this.state.lastName === '' ||
       emailValid ||
-      passwordValid || 
+      passwordValid ||
       this.state.phone === '' ||
-      this.state.postal === '' || 
-      this.state.checkBox1 === false || 
+      this.state.postal === '' ||
+      this.state.checkBox1 === false ||
       this.state.checkBox2 === false
     ) {
       isValid = false;
     }
- 
-    if(isValid) {
-      this.setState({loggedIn:true})
+
+    if (isValid) {
+      this.setState({ loggedIn: true });
       this.props.userRegisterRequest(payload);
     }
-    
   }
 
   submitFacebookRequest(access_token, response) {
@@ -330,248 +334,261 @@ class RegisterScreen extends React.Component {
       { name: 'Female', value: 'Female' },
     ];
 
-    // 
-    let fieldError = this.props.user && this.props.user.error && this.props.user.error.payload ? this.props.user.error.payload.field_errors : false
+    //
+    let fieldError =
+      this.props.user && this.props.user.error && this.props.user.error.payload
+        ? this.props.user.error.payload.field_errors
+        : false;
 
-    let emailError = fieldError && fieldError.email ? fieldError.email[0] : false;
-    let passwordError = fieldError && fieldError.password ? fieldError.password : false;
+    let emailError =
+      fieldError && fieldError.email ? fieldError.email[0] : false;
+    let passwordError =
+      fieldError && fieldError.password ? fieldError.password : false;
 
-    console.log('FIELD ERROS ', fieldError)
+    console.log('FIELD ERROS ', fieldError);
     return (
       <Layout>
         <Header title="Register" />
         <SevenRewards>
           <section className="Section">
             <Container className="Section__container">
-              
-                <Row className="justify-content-center">
-                  <Col xs="12" md="10">
-                    <Row className="justify-content-center">
-                      <Col xs="12" md="10" lg="8" className="col text-center">
-                        <h1 className="h3">Become a 7Rewards Member</h1>
-                        <p>
-                          Rack up points for the things you buy every day. Plus,
-                          when you register, you’ll get 1,000 Bonus Points which
-                          you can redeem for a free Slurpee®, coffee or snack!
-                        </p>
-                        <img
-                          className="mt-3 w-50 mx-auto"
-                          onClick={e => this.login(e)}
-                          src="/static/images/placeholders/facebook-btn.png"
-                        />
-                        <p className="my-4">OR</p>
-                      </Col>
-                    </Row>
-                    <Row className="justify-content-center mb-md-5">
-                      <Col xs="12" md="10" className="col">
-                        <AdminPanel className="mt-n5 mb-5 mb-md-0">
-                          <Container className="p-5">
-                            <ModalWindow
-                              content={this.facebookForm()}
-                              visible={this.state.modalVisible}
-                              cb={this.modalCallBack}
-                            />
-                            <Form>
-                              <Form.Row>
-                                <Col xs="12" md="6">
-                                  <Form.Group controlId="first_name">
-                                    <Form.Label className="small">
-                                      First Name
-                                    </Form.Label>
-                                    <Form.Control
-                                      size="lg"
-                                      value={this.state.firstName}
-                                      isInvalid={this.state.fieldErrors.firstName}
-                                      onChange={e =>
-                                        this.onValueChange(e, 'firstName')
-                                      }
-                                    />
-                                  </Form.Group>
-                                </Col>
-                                <Col xs="12" md="6">
-                                  <Form.Group controlId="last_name">
-                                    <Form.Label className="small">
-                                      Last Name (Optional)
-                                    </Form.Label>
-                                    <Form.Control
-                                      size="lg"
-                                      value={this.state.lastName}
-                                      isInvalid={this.state.fieldErrors.lastName}
-                                      onChange={e =>
-                                        this.onValueChange(e, 'lastName')
-                                      }
-                                    />
-                                  </Form.Group>
-                                </Col>
-                              </Form.Row>
-                              <Form.Group controlId="email">
-                                <Form.Label className="small">
-                                  Email Address
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  as="input"
-                                  type="email"
-                                  value={this.state.email}
-                                  isInvalid={this.state.fieldErrors.email}
-                                  onChange={e => this.onValueChange(e, 'email')}
-                                />
-                                 { emailError && 
-                                     <p> <span>{emailError}</span>  </p>
-                                 }
-                              </Form.Group>
-                              <Form.Row>
-                                <Col xs="12" md="6">
-                                  <Form.Group controlId="password">
-                                    <Form.Label className="small">
-                                      Password
-                                    </Form.Label>
-                                    <Form.Control
-                                      size="lg"
-                                      as="input"
-                                      type="password"
-                                      value={this.state.password}
-                                      isInvalid={this.state.fieldErrors.password}
-                                      onChange={e =>
-                                        this.onValueChange(e, 'password')
-                                      }
-                                    />
-
-                                    { passwordError && 
-
-                                      passwordError.map((error, index) => (
-                                        <div key={index} >
-                                          {error}
-                                        </div>
-                                      ))
-
+              <Row className="justify-content-center">
+                <Col xs="12" md="10">
+                  <Row className="justify-content-center">
+                    <Col xs="12" md="10" lg="8" className="col text-center">
+                      <h1 className="h3">Become a 7Rewards Member</h1>
+                      <p>
+                        Rack up points for the things you buy every day. Plus,
+                        when you register, you’ll get 1,000 Bonus Points which
+                        you can redeem for a free Slurpee®, coffee or snack!
+                      </p>
+                      <img
+                        className="mt-3 w-50 mx-auto"
+                        onClick={e => this.login(e)}
+                        src="/static/images/placeholders/facebook-btn.png"
+                      />
+                      <p className="my-4">OR</p>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center mb-md-5">
+                    <Col xs="12" md="10" className="col">
+                      <AdminPanel className="mt-n5 mb-5 mb-md-0">
+                        <Container className="p-5">
+                          <ModalWindow
+                            content={this.facebookForm()}
+                            visible={this.state.modalVisible}
+                            cb={this.modalCallBack}
+                          />
+                          <Form>
+                            <Form.Row>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="first_name">
+                                  <Form.Label className="small">
+                                    First Name
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.firstName}
+                                    isInvalid={this.state.fieldErrors.firstName}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'firstName')
                                     }
-                                  </Form.Group>
-                                </Col>
-                                <Col xs="12" md="6">
-                                  <Form.Group controlId="password_confirm">
-                                    <Form.Label className="small">
-                                      Confirm Password
-                                    </Form.Label>
-                                    <Form.Control
-                                      size="lg"
-                                      as="input"
-                                      type="password"
-                                      isInvalid={this.state.fieldErrors.confirmPassword}
-                                      value={this.state.confirmPassword}
-                                      onChange={e =>
-                                        this.onValueChange(e, 'confirmPassword')
-                                      }
-                                    />
-                                  </Form.Group>
-                                </Col>
-                              </Form.Row>
-                              <Form.Row>
-                                <Col xs="12" md="6">
-                                  <Form.Group controlId="phone">
-                                    <Form.Label className="small">
-                                      Mobile Number
-                                    </Form.Label>
-                                    <Form.Control
-                                      size="lg"
-                                      value={this.state.phone}
-                                      isInvalid={this.state.fieldErrors.phone}
-                                      onChange={e =>
-                                        this.onValueChange(e, 'phone')
-                                      }
-                                    />
-                                  </Form.Group>
-                                </Col>
-                                <Col xs="12" md="6">
-                                  <Form.Group controlId="postal">
-                                    <Form.Label className="small">
-                                      Postal Code
-                                    </Form.Label>
-                                    <Form.Control
-                                      size="lg"
-                                      value={this.state.postal}
-                                      isInvalid={this.state.fieldErrors.postal}
-                                      onChange={e =>
-                                        this.onValueChange(e, 'postal')
-                                      }
-                                    />
-                                  </Form.Group>
-                                </Col>
-                              </Form.Row>
-                              <Form.Group controlId="card-number">
-                                <Form.Label className="small">
-                                  7Rewards Card Number (Optional)
-                                </Form.Label>
-                                <Form.Control
-                                  size="lg"
-                                  value={this.state.cardNumber}
-                                  onChange={e =>
-                                    this.onValueChange(e, 'cardNumber')
-                                  }
-                                />
+                                  />
+                                </Form.Group>
+                              </Col>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="last_name">
+                                  <Form.Label className="small">
+                                    Last Name
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.lastName}
+                                    isInvalid={this.state.fieldErrors.lastName}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'lastName')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                            </Form.Row>
+                            <Form.Group controlId="email">
+                              <Form.Label className="small">
+                                Email Address
+                              </Form.Label>
+                              <Form.Control
+                                size="lg"
+                                as="input"
+                                type="email"
+                                value={this.state.email}
+                                isInvalid={this.state.fieldErrors.email}
+                                onChange={e => this.onValueChange(e, 'email')}
+                              />
+                              {emailError && (
+                                <p>
+                                  {' '}
+                                  <span>{emailError}</span>{' '}
+                                </p>
+                              )}
+                            </Form.Group>
+                            <Form.Row>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="password">
+                                  <Form.Label className="small">
+                                    Password
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    as="input"
+                                    type="password"
+                                    value={this.state.password}
+                                    isInvalid={this.state.fieldErrors.password}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'password')
+                                    }
+                                  />
+
+                                  {passwordError &&
+                                    passwordError.map((error, index) => (
+                                      <div key={index}>{error}</div>
+                                    ))}
+                                </Form.Group>
+                              </Col>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="password_confirm">
+                                  <Form.Label className="small">
+                                    Confirm Password
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    as="input"
+                                    type="password"
+                                    isInvalid={
+                                      this.state.fieldErrors.confirmPassword
+                                    }
+                                    value={this.state.confirmPassword}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'confirmPassword')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                            </Form.Row>
+                            <Form.Row>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="phone">
+                                  <Form.Label className="small">
+                                    Mobile Number
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.phone}
+                                    isInvalid={this.state.fieldErrors.phone}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'phone')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                              <Col xs="12" md="6">
+                                <Form.Group controlId="postal">
+                                  <Form.Label className="small">
+                                    Postal Code
+                                  </Form.Label>
+                                  <Form.Control
+                                    size="lg"
+                                    value={this.state.postal}
+                                    isInvalid={this.state.fieldErrors.postal}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'postal')
+                                    }
+                                  />
+                                </Form.Group>
+                              </Col>
+                            </Form.Row>
+                            <Form.Group controlId="card-number">
+                              <Form.Label className="small">
+                                7Rewards Card Number (Optional)
+                              </Form.Label>
+                              <Form.Control
+                                size="lg"
+                                value={this.state.cardNumber}
+                                onChange={e =>
+                                  this.onValueChange(e, 'cardNumber')
+                                }
+                              />
+                            </Form.Group>
+                            <fieldset className="mt-5">
+                              <Form.Group>
+                                <Form.Check id="terms">
+                                  <Form.Check.Input
+                                    isInvalid={this.state.fieldErrors.checkBox1}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'checkBox1')
+                                    }
+                                  />
+                                  <Form.Check.Label className="ml-3">
+                                    I accept the{' '}
+                                    <Link href="/terms-conditions">
+                                      <a>
+                                        <u>Terms &amp; Conditions</u>
+                                      </a>
+                                    </Link>
+                                  </Form.Check.Label>
+                                </Form.Check>
                               </Form.Group>
-                              <fieldset className="mt-5">
-                                <Form.Group>
-                                  <Form.Check id="terms">
-                                    <Form.Check.Input isInvalid={this.state.fieldErrors.checkBox1} onChange={e =>
-                                        this.onValueChange(e, 'checkBox1')
-                                      } />
-                                    <Form.Check.Label className="ml-3">
-                                      I accept the{' '}
-                                      <Link href="/terms-conditions">
-                                        <a>
-                                          <u>Terms &amp; Conditions</u>
-                                        </a>
-                                      </Link>
-                                    </Form.Check.Label>
-                                  </Form.Check>
-                                </Form.Group>
-                                <Form.Group>
-                                  <Form.Check id="agree">
-                                    <Form.Check.Input isInvalid={this.state.fieldErrors.checkBox2} onChange={e =>
-                                        this.onValueChange(e, 'checkBox2')
-                                      }/>
-                                    <Form.Check.Label className="ml-3">
-                                      I agree to receive news, promotions, and
-                                      information from 7-Eleven®. You can
-                                      unsubscribe at any time. Please read our{' '}
-                                      <Link href="/privacy">
-                                        <a>
-                                          <u>Privacy Policy</u>
-                                        </a>
-                                      </Link>{' '}
-                                      or{' '}
-                                      <Link href="/contact-us">
-                                        <a>
-                                          <u>Contact Us</u>
-                                        </a>
-                                      </Link>
-                                      .
-                                    </Form.Check.Label>
-                                  </Form.Check>
-                                </Form.Group>
-                              </fieldset>
-                              <Button type="submit" className="mt-4" onClick={(e) => this.submitForm(e)}>
-                                Register
-                              </Button>
-                            </Form>
-                          </Container>
-                        </AdminPanel>
-                      </Col>
-                    </Row>
-                    <Row className="justify-content-center">
-                      <Col xs="12" md="10" lg="8" className="col text-center">
-                        <p>
-                          <strong className="d-inline font-trasandina mr-2 text-success">
-                            Need Help?
-                          </strong>
-                          <NeedHelp.AdminText />
-                        </p>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              
+                              <Form.Group>
+                                <Form.Check id="agree">
+                                  <Form.Check.Input
+                                    isInvalid={this.state.fieldErrors.checkBox2}
+                                    onChange={e =>
+                                      this.onValueChange(e, 'checkBox2')
+                                    }
+                                  />
+                                  <Form.Check.Label className="ml-3">
+                                    I agree to receive news, promotions, and
+                                    information from 7-Eleven®. You can
+                                    unsubscribe at any time. Please read our{' '}
+                                    <Link href="/privacy">
+                                      <a>
+                                        <u>Privacy Policy</u>
+                                      </a>
+                                    </Link>{' '}
+                                    or{' '}
+                                    <Link href="/contact-us">
+                                      <a>
+                                        <u>Contact Us</u>
+                                      </a>
+                                    </Link>
+                                    .
+                                  </Form.Check.Label>
+                                </Form.Check>
+                              </Form.Group>
+                            </fieldset>
+                            <Button
+                              type="submit"
+                              className="mt-4"
+                              onClick={e => this.submitForm(e)}
+                            >
+                              Register
+                            </Button>
+                          </Form>
+                        </Container>
+                      </AdminPanel>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center">
+                    <Col xs="12" md="10" lg="8" className="col text-center">
+                      <p>
+                        <strong className="d-inline font-trasandina mr-2 text-success">
+                          Need Help?
+                        </strong>
+                        <NeedHelp.AdminText />
+                      </p>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
             </Container>
           </section>
         </SevenRewards>

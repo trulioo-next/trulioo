@@ -107,5 +107,14 @@
       }
     }
   }
+}
 
+.Landing {
+  &__downloadBadge {
+    max-height: 5rem;
+
+    @include media-breakpoint-up(md) {
+      max-height: 7.7rem;
+    }
+  }
 }

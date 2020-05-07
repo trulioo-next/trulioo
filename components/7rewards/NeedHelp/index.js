@@ -10,11 +10,11 @@ const NeedHelpAdminText = () => (
   <Fragment>
     If you are having trouble, please{' '}
     <a
-      href="http://survey.medallia.com/?711-need-help&feedback-area=1"
+      href="https://survey.medallia.com/?711-gr"
       target="_blank"
       rel="noopener noreferrer"
     >
-      click here
+      <u>click here</u>
     </a>{' '}
     and we’d be happy to help.
   </Fragment>
@@ -24,13 +24,15 @@ const NeedHelpText = () => (
   <Fragment>
     Call <a href="tel:18002550711">1-800-255-0711</a> Monday through Friday from
     7am to 11pm CST and a Customer Relations representative will be available to
-    assist you or email us at <a href="mailto:7-11custrel@7-11.com">7-11custrel@7-11.com</a>. You may also provide feedback through our{' '}
+    assist you or email us at{' '}
+    <a href="mailto:7-11custrel@7-11.com">7-11custrel@7-11.com</a>. You may also
+    provide feedback through our{' '}
     <a
       href="https://survey.medallia.com/?711-gr"
       target="_blank"
       rel="noopener noreferrer"
     >
-      online survey
+      <u>online survey</u>
     </a>
     .
   </Fragment>
