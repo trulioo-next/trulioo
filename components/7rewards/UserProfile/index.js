@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import appActions from '@/stores/user/actions';
 import appSelectors from '@/stores/user/selectors';
+import CheckMark from '@/static/images/modal-check.svg';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -44,7 +45,9 @@ export class UserProfile extends Component {
       bYear: year,
       token:this.props.user.token,
       valid: false,
-      isLoading: false
+      isLoading: false,
+      showSuccess:false,
+      loaded:false
     };
    
 
@@ -95,7 +98,13 @@ export class UserProfile extends Component {
     let payload = {
       email:this.state.email
     }
-      this.props.passwordResetRequest(payload)
+     
+   this.props.passwordResetRequest(payload)
+  }
+
+  handleClose() {
+    this.setState({showSuccess:false })
+    this.props.passwordResetRequest("clear")
   }
 
   render() {
@@ -151,7 +160,20 @@ export class UserProfile extends Component {
     const lastNameError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.last_name[0] ? fieldErrors.payload.field_errors.last_name[0] : false;
     const birthdateError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.birthdate[0] ? fieldErrors.payload.field_errors.birthdate[0] : false;
 
-   // console.log('fieldErrors:  ', this.props.user  )
+    let formError = this.props.user && 
+                    this.props.user.passwordReset && 
+                    this.props.user.passwordReset.error && 
+                    this.props.user.passwordReset.error.payload && 
+                    this.props.user.passwordReset.error.payload.field_errors ? this.props.user.passwordReset.error.payload.field_errors.email : false
+    
+    let formSuccess = this.props.user && 
+                      this.props.user.passwordReset && 
+                      this.props.user.passwordReset.success ? this.props.user.passwordReset.success : false
+
+     
+    if(formSuccess && !this.state.loaded) {
+      this.setState({showSuccess:true, loaded:true })
+    }     
 
     return (
       <div className="p-5">
@@ -164,6 +186,13 @@ export class UserProfile extends Component {
           >
             Edit
           </Button>
+            <Modal show={this.state.showSuccess} onHide={ () => this.handleClose() } centered size="sm">
+                <Modal.Header closeButton />
+                <Modal.Body>
+                   <div className="check__mark"><CheckMark/></div>
+                   <div className="center--text"><h5>EMAIL SENT</h5></div>
+                </Modal.Body>
+            </Modal>
           <Modal
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
@@ -279,6 +308,10 @@ export class UserProfile extends Component {
                   <Button variant="dark" type="button" onClick={() => this.passwordReset() }>
                     Change Password
                   </Button>
+                  { formError && 
+                    <p>{ formError[0] }</p>
+                  }
+
                 </Form.Group>
                 <Form.Group controlId="edit-address-line-1">
                   <Form.Label className="small">Address Line 1</Form.Label>

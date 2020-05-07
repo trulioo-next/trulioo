@@ -52,7 +52,7 @@ export default async (req, res) => {
     // console.log('PAYLOAD  ', body )
     // console.log('RESET PASSWORD ', updateUser)
       
-    res.json({user:updateUser})  
+    res.json({success:"Email Send"})  
      
      return
   } catch(error) {

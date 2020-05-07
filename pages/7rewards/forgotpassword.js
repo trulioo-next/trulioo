@@ -11,10 +11,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 import SevenRewards from '@/containers/SevenRewards';
 import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 import NeedHelp from '@/components/7rewards/NeedHelp';
+import CheckMark from '@/static/images/modal-check.svg';
 
 class ResetPassword extends React.Component {
   constructor(props) {
@@ -28,6 +30,8 @@ class ResetPassword extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
+      show:false,
+      loaded:false
     };
   }
 
@@ -57,17 +61,47 @@ class ResetPassword extends React.Component {
     const payload = {
       email: this.state.email,
     };
-    this.setState({ loggedIn: true });
+    this.setState({ loggedIn: true,loaded:false });
 
     // Add email reset action here
     this.props.userResetPasswordRequest(payload)
   }
 
+  handleClose() {
+    this.setState({show:false,loaded:false})
+    this.props.userResetPasswordRequest("clear")
+  }
+
   render() {
+
+    let formError = this.props.user && 
+                    this.props.user.passwordReset && 
+                    this.props.user.passwordReset.error && 
+                    this.props.user.passwordReset.error.payload && 
+                    this.props.user.passwordReset.error.payload.field_errors ? this.props.user.passwordReset.error.payload.field_errors.email : false
+    
+    let formSuccess = this.props.user && 
+                      this.props.user.passwordReset && 
+                      this.props.user.passwordReset.success ? this.props.user.passwordReset.success : false
+    
+    if(formSuccess && !this.state.loaded) {
+      this.setState({show:true, loaded:true, email:''})
+    }  
+
     return (
       <Layout>
         <Header title="Forgot Password" />
         <SevenRewards>
+          
+          <Modal show={this.state.show} onHide={ () => this.handleClose() } centered size="sm">
+                <Modal.Header closeButton />
+                <Modal.Body>
+                   <div className="check__mark"><CheckMark/></div>
+                   <div className="center--text"><h5>EMAIL SENT</h5></div>
+                </Modal.Body>
+            </Modal>
+
+
           <section className="Section">
             <Container className="Section__container">
               <Row className="justify-content-center">
@@ -85,7 +119,7 @@ class ResetPassword extends React.Component {
                   <AdminPanel className="mt-n5 mb-5 mb-md-0">
                     <Container className="p-5">
                       <Form>
-                        <Form.Group className="mb-4 mb-lg-5" controlId="email">
+                        <Form.Group className="mb-4 mb-lg-5">
                           <Form.Label className="small">
                             Email Address
                           </Form.Label>
@@ -98,23 +132,16 @@ class ResetPassword extends React.Component {
                             name="email"
                           />
                         </Form.Group>
+                        { formError && 
+                          <p>{ formError[0] }</p>
+                        }
                         <Button id="submit" onClick={e => this.submitForm(e)}>
                           Send Email
                         </Button>
+
                         <Link href="/7rewards/signin">
                           <a className="ml-4">Cancel</a>
                         </Link>
-
-                        {/* {this.props.user.auth.error && (
-                          <div className="form__wrapper">
-                            <h5>
-                              {
-                                this.props.user.auth.error.payload
-                                  .error_description
-                              }
-                            </h5>
-                          </div>
-                        )} */}
                       </Form>
                     </Container>
                   </AdminPanel>

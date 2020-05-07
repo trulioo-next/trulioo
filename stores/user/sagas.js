@@ -173,12 +173,13 @@ function* passwordReset(payload) {
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
-   
-    const resetResponse = yield call(sevenRewardsService.passwordReset, payload)
-
-    console.log('RESET PASSWORD !!   ', resetResponse )
     
-    yield put({ type:SEVEN_REWARDS_PASSWORD_RESET, payload:resetResponse })
+    if(payload === "clear") {
+      yield put({ type:SEVEN_REWARDS_PASSWORD_RESET, payload:false })
+    } else {
+      const resetResponse = yield call(sevenRewardsService.passwordReset, payload)
+      yield put({ type:SEVEN_REWARDS_PASSWORD_RESET, payload:resetResponse })
+    }
 
   } catch(err) {
 
