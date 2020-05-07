@@ -108,6 +108,9 @@ export class UserProfile extends Component {
   }
 
   render() {
+
+    // TODO: Add these to an external resource 
+    //
     let provinces = [
       { name: '', value: '' },
       { name: 'Alberta', value: 'AB' },
@@ -154,6 +157,8 @@ export class UserProfile extends Component {
     for(var i = 0; i < 100; i++) { let year = 2020 - i; years.push({ name: year, value: year })  }
 
     // validation : 
+    // TODO: create a helper service to validate inline state 
+    //  
     const fieldErrors = this.props.user && this.props.user.fieldErrors ? this.props.user.fieldErrors.error : false;
     const phoneError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.mobile_number[0] ? fieldErrors.payload.field_errors.mobile_number[0] : false;
     const firstNameError = fieldErrors && fieldErrors.payload &&  fieldErrors.payload.field_errors && fieldErrors.payload.field_errors.first_name[0] ? fieldErrors.payload.field_errors.first_name[0] : false;

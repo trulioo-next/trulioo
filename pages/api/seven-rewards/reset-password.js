@@ -13,9 +13,7 @@ export default async (req, res) => {
   try {
 
     const body = JSON.parse(req.body)
-    
     const tokenHeaders = { "Content-Type": "application/json"};
-
     const userToken = await fetch(REWARDS_API_URL+'/auth/token',
      {
        method: 'POST',
@@ -31,26 +29,18 @@ export default async (req, res) => {
       "Content-Type": "application/json",
       "Authorization":`Bearer ${userToken.access_token}`,
       "X-SEI-TZ": '-04:00'
-
     };
 
-    
     let payload = { "email": body.body.email }
-
-    //
-    // console.log('PAYLOAD BODY EMAIL ',  payload )
-
+    
     // Get an Access Token
-    // //
+    //
     const updateUser = await fetch(REWARDS_API_URL+'/v4/accounts/reset-password/',
      {
        method: 'POST',
        headers: registerHeaders,
        body: JSON.stringify(payload)
      });
-
-    // console.log('PAYLOAD  ', body )
-    // console.log('RESET PASSWORD ', updateUser)
       
     res.json({success:"Email Send"})  
      
