@@ -36,6 +36,8 @@ export default function Rewards() {
        method: 'GET',
        headers: authHeaders
      });
+
+    // console.log('FULL PROFILE ', fullProfile )
      
     // Rewards : 
     // /v4/rewards/catalog/ 
@@ -77,15 +79,16 @@ export default function Rewards() {
        headers: authHeaders
      });
 
-    //
-    // console.log('USER CARDS   ', promotions )
-    // console.log('USER DEALS  ', deals )
-    // console.log('USER COUPONS  ', coupons )
-    // console.log('USER FULL PROFILE STRINGIFY :: >>  ',  fullProfile )
-    // console.log('REWARDS ', rewards )
-    // console.log('USER ACCESS TOKEN :: ', user )   
+    // Rewards : 
+    // /v4/rewards/catalog/ 
+    const bonusOffers = await fetch(REWARDS_API_URL+'/v4/rewards/bonuses/',
+     {
+       method: 'GET',
+       headers: authHeaders
+     });
+
  
-     return {user:fullProfile, rewards, auth:userAuth, coupons, deals, promotions, myRewards, error:false  }
+     return {user:fullProfile, rewards, auth:userAuth, coupons, deals, promotions, myRewards, bonusOffers, error:false  }
   }
  
    return {

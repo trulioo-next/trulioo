@@ -73,7 +73,7 @@ class RegisterScreen extends React.Component {
   componentDidMount() {
     let isUserAuth = this.props.user ? this.props.user.auth : false;
     if (!this.props.user.error && isUserAuth) {
-      // routerPush('/account');
+       routerPush('/7rewards');
     }
 
     // TODO: REMVOE THIS FORM HERE :
@@ -116,8 +116,8 @@ class RegisterScreen extends React.Component {
     // Check if user authenticated
     //
     let isUserAuth = this.props.user ? this.props.user.auth : false;
-    if (!this.props.user.error && isUserAuth) {
-      // routerPush('/7rewards/register');
+    if (isUserAuth) {
+      routerPush('/7rewards');
     }
   }
 
@@ -336,7 +336,7 @@ class RegisterScreen extends React.Component {
     let emailError = fieldError && fieldError.email ? fieldError.email[0] : false;
     let passwordError = fieldError && fieldError.password ? fieldError.password : false;
 
-    console.log('FIELD ERROS ', fieldError)
+    // console.log('FIELD ERROS ', this.props.user.error)
     return (
       <Layout>
         <Header title="Register" />
@@ -417,7 +417,7 @@ class RegisterScreen extends React.Component {
                                   onChange={e => this.onValueChange(e, 'email')}
                                 />
                                  { emailError && 
-                                     <p> <span>{emailError}</span>  </p>
+                                     <p><span className="field--error">{emailError}</span>  </p>
                                  }
                               </Form.Group>
                               <Form.Row>
@@ -440,7 +440,7 @@ class RegisterScreen extends React.Component {
                                     { passwordError && 
 
                                       passwordError.map((error, index) => (
-                                        <div key={index} >
+                                        <div key={index} className="field--error">
                                           {error}
                                         </div>
                                       ))

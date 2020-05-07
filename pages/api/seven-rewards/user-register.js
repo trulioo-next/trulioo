@@ -53,7 +53,7 @@ export default async (req, res) => {
     }
 
     //
-    // console.log('PAYLOAD BODY EMAIL ',  payload )
+    console.log('PAYLOAD BODY EMAIL ',  payload )
 
     // // Get an Access Token
     // //
@@ -91,7 +91,7 @@ export default async (req, res) => {
       expire:userToken.expires_in
     }
 
-    res.json({user:rewards.fullProfil, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: userToken.access_token, myRewards:rewards.myRewards  })  
+    res.json({user:rewards.user, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: loginToken.access_token, myRewards:rewards.myRewards, bonusOffers:rewards.bonusOffers })  
      
      return
   } catch(error) {

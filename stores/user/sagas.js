@@ -98,19 +98,17 @@ function* checkUserAuth(payload) {
 //
 function* registerUser(payload) {
 
-
-   
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
    
     const registerClientResponse = yield call(sevenRewardsService.registerUser, payload)
 
-    console.log('REGISTER USER PAYLOAD REWARDS !!   ', registerClientResponse )
-
     if(registerClientResponse.error) {
-      yield put({ type: SEVEN_REWARDS_UPDATE_ERROR, payload:registerClientResponse })
+       console.log('ERROR DATA  !!   ', registerClientResponse )
+       yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse })
     } else {
+      console.log('GOOD TO GO DATA !!   ', registerClientResponse )
       yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse })
     }
      
