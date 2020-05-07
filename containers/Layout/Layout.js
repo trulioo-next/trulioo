@@ -13,6 +13,7 @@ import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
 import CookiesBanner from '@/components/CookiesBanner';
 import BrowserCheck from '@/components/BrowserCheck';
+import GoogleTagManager from '@/components/GoogleTagManager';
 import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 
@@ -70,6 +71,7 @@ const Layout = props => {
         <Footer />
       </div>
       <CookiesBanner />
+      <GoogleTagManager />
       <BrowserCheck />
     </React.Fragment>
   );
