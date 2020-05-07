@@ -12,6 +12,7 @@ import Alert from '@/components/Alert';
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
 import CookiesBanner from '@/components/CookiesBanner';
+import BrowserCheck from '@/components/BrowserCheck';
 import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 
@@ -69,6 +70,7 @@ const Layout = props => {
         <Footer />
       </div>
       <CookiesBanner />
+      <BrowserCheck />
     </React.Fragment>
   );
 };
