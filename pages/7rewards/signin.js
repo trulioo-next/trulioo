@@ -19,6 +19,11 @@ import AdminPanel from '@/components/7rewards/Admin/AdminPanel';
 import SevenRewards from '@/containers/SevenRewards';
 import NeedHelp from '@/components/7rewards/NeedHelp';
 
+
+import { ReCaptcha } from 'react-recaptcha-v3'
+
+
+
 class UserAuth extends React.Component {
   constructor(props) {
     super(props);
@@ -84,6 +89,8 @@ class UserAuth extends React.Component {
         }
       });
     };
+
+   
   }
 
   componentDidUpdate() {
@@ -160,6 +167,19 @@ class UserAuth extends React.Component {
   submitFacebookRequest(access_token) {
     this.props.userFacebookAuthRequest(access_token);
   }
+  
+
+  verifyCallback(recaptchaToken) {
+    // Here you will get the final recaptchaToken!!!  
+    console.log(recaptchaToken, "<= your recaptcha token")
+  }
+
+   // <ReCaptcha
+   //          sitekey="6Leco_MUAAAAAGk7Xg2792extwUQtJWPJafuaBnr"
+   //          action='signin'
+   //          verifyCallback={this.verifyCallback}
+   //      />
+
 
   render() {
     let error =
@@ -168,6 +188,10 @@ class UserAuth extends React.Component {
     return (
       <Layout>
         <Header title="Sign In" />
+
+       
+
+
         <SevenRewards>
           <section className="Section">
             <Container className="Section__container">

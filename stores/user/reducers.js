@@ -102,9 +102,18 @@ export default (state = INITIAL_STATE, action) => {
 
       case SEVEN_REWARDS_REGISTER_LOADED:
       return { ...state,
-        auth:action.payload.auth,
+        auth: action.payload.auth,
         user: action.payload.user,
-        registered: action.payload.registered
+        rewards:action.payload.rewards,
+        coupons:action.payload.coupons,
+        deals:action.payload.deals,
+        promotions:action.payload.promotions,
+        bonusOffers:action.payload.bonusOffers,
+        registered: true,
+        error:action.payload.error,
+        token:action.payload.token,
+        myRewards:action.payload.myRewards,
+        fieldErrors:false
       } 
 
       case SEVEN_REWARDS_LOGOUT:

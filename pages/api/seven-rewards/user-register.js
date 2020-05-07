@@ -83,7 +83,7 @@ export default async (req, res) => {
     const userRewards = Rewards();
     let rewards = await userRewards.getUserRewards(loginToken.access_token, loginToken.expires_in)
     //
-    // console.log('REGITERS TOKEN ', rewards )
+    // console.log('USER REWARDS ', rewards )
       
     let userAuthToken = {
       isAuth: true,
@@ -91,7 +91,7 @@ export default async (req, res) => {
       expire:userToken.expires_in
     }
 
-    res.json({user:userRegister, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: userToken.access_token, myRewards:rewards.myRewards  })  
+    res.json({user:rewards.fullProfil, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: userToken.access_token, myRewards:rewards.myRewards  })  
      
      return
   } catch(error) {

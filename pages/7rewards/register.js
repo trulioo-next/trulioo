@@ -47,6 +47,22 @@ class RegisterScreen extends React.Component {
       loggedIn: false,
       modalVisible: false,
       facebookPayload: false,
+      checkBox1:false,
+      checkBox2:false,
+      fieldErrors:{
+        firstName:null,
+        lastName:null,
+        email:null,
+        password:null,
+        confirmPassword:null,
+        bMonth:null,
+        bDay: null,
+        bYear: null,
+        phone: null,
+        postal: null,
+        checkBox1:null,
+        checkBox2:null
+      }
     };
   }
 
@@ -171,9 +187,51 @@ class RegisterScreen extends React.Component {
       cardNumber: this.state.cardNumber,
     };
 
-    // console.log('REGISTER USER ', payload )
-    // this.setState({loggedIn:true})
-    this.props.userRegisterRequest(payload);
+    const validateEmail = (email) =>  {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    let passwordValid = this.state.password !== this.state.confirmPassword || this.state.password === '' ? true : null;
+    let emailValid = validateEmail(this.state.email) ? null : true;
+
+    this.setState({
+        fieldErrors:{
+          firstName:this.state.firstName === '' ? true : null,
+          lastName:this.state.lastName === '' ? true : null,
+          email:emailValid,
+          password:passwordValid,
+          confirmPassword:passwordValid,
+          phone: this.state.phone === '' ? true : null,
+          postal: this.state.postal === '' ? true : null,
+          checkBox1:this.state.checkBox1 === false ? true : null,
+          checkBox2:this.state.checkBox2 === false ? true : null,
+      }
+    })
+
+    let isValid = true;
+
+    // if all is valid, pass alogn to the action : 
+    if(this.state.firstName === '' || 
+      this.state.lastName === '' ||
+      emailValid ||
+      passwordValid || 
+      this.state.phone === '' ||
+      this.state.postal === '' || 
+      this.state.checkBox1 === false || 
+      this.state.checkBox2 === false
+    ) {
+      isValid = false;
+    }
+
+    // console.log('checkBox1 ', this.state.checkBox1 )
+    // console.log('checkBox2 ', this.state.checkBox2 )
+
+    if(isValid) {
+      this.setState({loggedIn:true})
+      this.props.userRegisterRequest(payload);
+    }
+    
   }
 
   submitFacebookRequest(access_token, response) {
@@ -185,7 +243,6 @@ class RegisterScreen extends React.Component {
     };
 
     this.props.userFacebookRegisterRequest(payload);
-
     this.setState({ facebookPayload: payload, modalVisible: true });
   }
 
@@ -326,6 +383,7 @@ class RegisterScreen extends React.Component {
                                     <Form.Control
                                       size="lg"
                                       value={this.state.firstName}
+                                      isInvalid={this.state.fieldErrors.firstName}
                                       onChange={e =>
                                         this.onValueChange(e, 'firstName')
                                       }
@@ -340,6 +398,7 @@ class RegisterScreen extends React.Component {
                                     <Form.Control
                                       size="lg"
                                       value={this.state.lastName}
+                                      isInvalid={this.state.fieldErrors.lastName}
                                       onChange={e =>
                                         this.onValueChange(e, 'lastName')
                                       }
@@ -356,6 +415,7 @@ class RegisterScreen extends React.Component {
                                   as="input"
                                   type="email"
                                   value={this.state.email}
+                                  isInvalid={this.state.fieldErrors.email}
                                   onChange={e => this.onValueChange(e, 'email')}
                                 />
                               </Form.Group>
@@ -370,6 +430,7 @@ class RegisterScreen extends React.Component {
                                       as="input"
                                       type="password"
                                       value={this.state.password}
+                                      isInvalid={this.state.fieldErrors.password}
                                       onChange={e =>
                                         this.onValueChange(e, 'password')
                                       }
@@ -385,6 +446,7 @@ class RegisterScreen extends React.Component {
                                       size="lg"
                                       as="input"
                                       type="password"
+                                      isInvalid={this.state.fieldErrors.confirmPassword}
                                       value={this.state.confirmPassword}
                                       onChange={e =>
                                         this.onValueChange(e, 'confirmPassword')
@@ -402,6 +464,7 @@ class RegisterScreen extends React.Component {
                                     <Form.Control
                                       size="lg"
                                       value={this.state.phone}
+                                      isInvalid={this.state.fieldErrors.phone}
                                       onChange={e =>
                                         this.onValueChange(e, 'phone')
                                       }
@@ -416,6 +479,7 @@ class RegisterScreen extends React.Component {
                                     <Form.Control
                                       size="lg"
                                       value={this.state.postal}
+                                      isInvalid={this.state.fieldErrors.postal}
                                       onChange={e =>
                                         this.onValueChange(e, 'postal')
                                       }
@@ -438,7 +502,9 @@ class RegisterScreen extends React.Component {
                               <fieldset className="mt-5">
                                 <Form.Group>
                                   <Form.Check id="terms">
-                                    <Form.Check.Input />
+                                    <Form.Check.Input isInvalid={this.state.fieldErrors.checkBox1} onChange={e =>
+                                        this.onValueChange(e, 'checkBox1')
+                                      } />
                                     <Form.Check.Label className="ml-3">
                                       I accept the{' '}
                                       <Link href="/terms-conditions">
@@ -449,7 +515,9 @@ class RegisterScreen extends React.Component {
                                 </Form.Group>
                                 <Form.Group>
                                   <Form.Check id="agree">
-                                    <Form.Check.Input />
+                                    <Form.Check.Input isInvalid={this.state.fieldErrors.checkBox2} onChange={e =>
+                                        this.onValueChange(e, 'checkBox2')
+                                      }/>
                                     <Form.Check.Label className="ml-3">
                                       I agree to receive news, promotions, and
                                       information from 7-Eleven®. You can
@@ -466,7 +534,7 @@ class RegisterScreen extends React.Component {
                                   </Form.Check>
                                 </Form.Group>
                               </fieldset>
-                              <Button type="submit" className="mt-4">
+                              <Button type="submit" className="mt-4" onClick={(e) => this.submitForm(e)}>
                                 Register
                               </Button>
                             </Form>
