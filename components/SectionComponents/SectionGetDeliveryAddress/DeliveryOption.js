@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 import UberEatsLogo from '@/static/images/uber-eats.svg';
-import FoodoraLogo from '@/static/images/foodora.svg';
+import SkipTheDishesLogo from '@/static/images/skip-the-dishes.svg';
 
 const DeliveryOption = props => {
   const optionVariants = {
@@ -34,7 +34,7 @@ const DeliveryOption = props => {
           {props.deliveryService === 'UberEats' ? (
             <UberEatsLogo className="Delivery__optionLogo" />
           ) : (
-            <FoodoraLogo className="Delivery__optionLogo" />
+            <SkipTheDishesLogo className="Delivery__optionLogo" />
           )}
           <span className="Delivery__optionLabel">See Menu &rsaquo;</span>
         </div>
