@@ -1,5 +1,5 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api.7-eleven.com";
+const REWARDS_API_URL = process.env.REWARDS_API_URL
 import Rewards from './user-rewards';
  
 export default async (req, res) => {  

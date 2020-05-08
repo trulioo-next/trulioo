@@ -286,7 +286,10 @@ function* checkSms(payload) {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
      
+
+
     if(payload.clear) {
+      console.log('CLEAR SMS ')
       yield put({ type: SEVEN_REWARDS_SMS, payload:false})
     } else {
       const smsResponse = yield call(sevenRewardsService.verifySms, payload)

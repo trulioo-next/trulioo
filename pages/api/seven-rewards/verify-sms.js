@@ -1,5 +1,5 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api.7-eleven.com";
+const REWARDS_API_URL = process.env.REWARDS_API_URL
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
  
@@ -39,7 +39,7 @@ export default async (req, res) => {
        body: JSON.stringify(payload) 
      });
       
-      console.log(smsResponse)   
+     console.log('SMS RESPONSE ', smsResponse)   
      if(code) {
        res.json({success:'SUCCESS! You have validated your device'})
      } else {

@@ -1,5 +1,8 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api.7-eleven.com";
+const REWARDS_API_URL = process.env.REWARDS_API_URL
+
+// PRODUCTION : "https://api.7-eleven.com";
+// https://api-test.7-eleven.com
 // https://api-test.7-eleven.com 
 // https://api-stage.7-eleven.com
 const CLIENT_ID = process.env.CLIENT_ID
@@ -32,30 +35,26 @@ export default async (req, res) => {
       "Authorization":`Bearer ${userToken.access_token}`,
       "X-SEI-TZ": '-04:00'
     };
-
-     
+ 
     let month = body.body.bMonth
     let day = body.body.bDay
     let birthdate = body.body.bYear +'-'+ month +'-'+ day;
 
     let payload = {
         "email": body.body.email,
-        "email_secondary": body.body.email,
         "password": body.body.password,
         "first_name": body.body.firstName,
         "last_name":body.body.lastName,
+        "mobile_phone": body.body.phone,
+        "mobile_number": body.body.phone,
         "birthdate": birthdate, // year-month-day
         "postal_code": body.body.postal,
         "country": "CA",
-        "mobile_phone": body.body.phone,  
-        "accepts_us_terms":false,
         "accepts_ca_terms":true,
-        "accepts_ca_communications":false,
-        "link_card": '1773927800088888888' // 19 digit number
+        "accepts_ca_communications":true,
+        "link_card": body.body.cardNumber // 19 digit number
     }
-
-
-    console.log('birthdate',birthdate )
+ 
  
     // // Get an Access Token
     // //
@@ -65,7 +64,7 @@ export default async (req, res) => {
        headers: registerHeaders,
        body: JSON.stringify(payload)
      });
-
+     
     // Once you create an account, we log you in 
     //
     const loginToken = await fetch(REWARDS_API_URL+'/auth/token',
@@ -89,16 +88,24 @@ export default async (req, res) => {
       
     let userAuthToken = {
       isAuth: true,
-      token: userToken.access_token,
-      expire:userToken.expires_in
+      token: loginToken.access_token,
+      expire:loginToken.expires_in
     }
 
-    res.json({user:rewards.user, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: loginToken.access_token, myRewards:rewards.myRewards, bonusOffers:rewards.bonusOffers })  
+    const smsHeaders = { 
+      "Content-type": "application/json",
+      "Authorization":`Bearer ${loginToken.access_token}`
+    };
+    let phone = body.body.phone;
+    let n = phone.replace(/.(?=.{4})/g, '');
+    let sms = { success:`We sent a 6 digit pin to (***)***-${n}. Please enter it below. `}
+
+    res.json({user:rewards.user, rewards:rewards.rewards, auth:userAuthToken, coupons:rewards.coupons, deals:rewards.deals, promotions:rewards.promotions, error:false, token: loginToken.access_token, myRewards:rewards.myRewards, bonusOffers:rewards.bonusOffers, sms:sms })  
      
      return
   } catch(error) {
     console.log('ERROR ', error )
-    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false, token: false, myRewards:false  })
+    res.json({error: error, user:false, rewards:false, auth:false, coupons:false, deals:false, promotions:false, bonusOffers:false, token: false, myRewards:false, sms:false  })
     // res.status(400).send({ error: error })
   }
 };

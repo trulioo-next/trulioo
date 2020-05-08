@@ -8,12 +8,13 @@ import appSelectors from '@/stores/user/selectors';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Modal from 'react-bootstrap/Modal';
 import Landing from '@/components/7rewards/Landing';
 import MyStatus from '@/components/7rewards/MyStatus';
 import RewardsTabs from '@/components/7rewards/RewardsTabs';
 import NeedHelp from '@/components/7rewards/NeedHelp';
-
+import Button from 'react-bootstrap/Button';
+ 
 class SevenRewards extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +23,11 @@ class SevenRewards extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
+      showSMSModal:true,
+      modalMessage:'',
+      modalLoaded:false,
+      smscode:'',
+      errorLoaded:false
     };
   }
 
@@ -36,13 +42,122 @@ class SevenRewards extends React.Component {
       this.setState({ loggedIn: true });
     }
 
-    //console.log('::: this.props.user :: ', this.props.user)
+     
+    let sendSmsPrompt = 
+       this.props.user && 
+       this.props.user.sms && 
+       this.props.user.sms.success ? this.props.user.sms.success : false
+
+    if(sendSmsPrompt && !this.state.modalLoaded) {
+      this.setState({modalMessage:sendSmsPrompt,modalLoaded:true  })
+    }   
+
   }
   componentDidUpdate() {}
 
+  updateCode(e) {
+    this.setState({smscode:e.target.value})
+  }
+
+  verifySMSWithCode(e) {
+    e.preventDefault()
+    const props = this.props;
+    // console.log('USER ', this.props.user )
+    let phone = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.mobile_number 
+      ? this.props.user.user.mobile_number
+      : false;
+
+      if(phone) {
+        this.setState({validateNumberModal:false, codeSet:true})
+        let payload = { token: this.props.user.token, mobileNumber: phone, code: this.state.smscode  }
+        this.props.verifySmsRequest(payload)
+        this.setState({showSMSModal:false});
+ 
+      }
+   
+  }
+
+  handleClose(e) {
+    e.preventDefault();
+    this.setState({showSMSModal:false});
+  }
+
+  modalClose(e) {
+    this.setState({showSMSModal:false});
+  }
+
   render() {
+    
+    let smsError = 
+      this.props.user &&
+      this.props.user && 
+      this.props.user.sms &&
+      this.props.user.sms.error &&
+      this.props.user.sms.error.payload &&
+      this.props.user.sms.error.payload.error_description 
+      ? this.props.user.sms.error.payload.error_description
+      : false
+
+
+      if(!smsError && this.state.errorLoaded) {
+
+        console.log('CLEAR MODAL ')
+        this.props.verifySmsRequest({ clear: true })
+        this.setState({errorLoaded:true})
+        
+      }
+ 
+
     return (
       <Layout>
+         <Modal
+            className="modal__container"
+            show={this.state.showSMSModal}
+            onHide={() => this.modalClose()}
+            centered
+            size="md"
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>
+               
+              <div className="center--text">
+                <h2>Lets Verify Your Mobile Phone</h2>
+                <p>Account verification required for new members to receive welcome offer.</p>
+                <h6>{this.state.modalMessage}</h6>
+
+                <form>
+                  <input
+                    className="verify--input"
+                    id="sms_code"
+                    type="text"
+                    value={this.state.smscode}
+                    placeholder="Verification PIN"
+                    onChange={e => this.updateCode(e)}
+                  />
+                </form>
+                { smsError && 
+                  <p className="field--error">{smsError}</p>
+                }
+
+               <button
+                green className="verify--button" 
+                onClick={(e) =>  this.verifySMSWithCode(e) }
+              >
+                Verify
+              </button> 
+              <div className="close--button">
+               <a href="/" onClick={(e) => this.handleClose(e)}>Cancel</a>
+              </div>
+
+
+              </div>
+            </Modal.Body>
+          </Modal>
+
+
         <Header title="7Rewards" />
         {this.state.loggedIn ? (
           <Admin>
@@ -85,6 +200,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
+  verifySmsRequest: payload => dispatch(appActions.reqSMSAction(payload)),
 });
 
 SevenRewards.defaultProps = {

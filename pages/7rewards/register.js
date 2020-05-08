@@ -533,6 +533,9 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'phone')
                                       }
                                     />
+                                    { phoneError && 
+                                      <p className="field--error">{phoneError}</p>
+                                    }
                                   </Form.Group>
                                 </Col>
                                 <Col xs="12" md="6">

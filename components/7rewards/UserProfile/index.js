@@ -259,6 +259,7 @@ export class UserProfile extends Component {
               
                <form className="form__test">
                 <input
+                   className="underlined__input"
                   id="sms_code"
                   type="text"
                   value={this.state.smscode}

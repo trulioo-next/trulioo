@@ -2,7 +2,7 @@ const fetch = require('../../../utils/fetch')
 
 // NOTE: CURRENTLY USING PRODUCTION ENDPOINT 
 //
-const REWARDS_API_URL = "https://api.7-eleven.com";
+const REWARDS_API_URL = process.env.REWARDS_API_URL
 // "https://api-test.7-eleven.com";
 
 const CLIENT_ID = process.env.CLIENT_ID

@@ -98,7 +98,7 @@ export default (state = INITIAL_STATE, action) => {
         registered: true,
         token:action.payload.token,
         error:action.payload.error,
-         myRewards:action.payload.myRewards
+        myRewards:action.payload.myRewards
       }  
 
       case SEVEN_REWARDS_CHECK_LOADED:
@@ -119,7 +119,8 @@ export default (state = INITIAL_STATE, action) => {
         error:action.payload.error,
         token:action.payload.token,
         myRewards:action.payload.myRewards,
-        fieldErrors:false
+        fieldErrors:false,
+        sms:action.payload.sms
       } 
 
       case SEVEN_REWARDS_LOGOUT:

@@ -1,5 +1,5 @@
 const fetch = require('../../../utils/fetch')
-const REWARDS_API_URL = "https://api.7-eleven.com"
+const REWARDS_API_URL = process.env.REWARDS_API_URL
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
  
