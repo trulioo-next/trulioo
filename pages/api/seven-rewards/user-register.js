@@ -53,6 +53,9 @@ export default async (req, res) => {
         "accepts_ca_communications":false,
         "link_card": '1773927800088888888' // 19 digit number
     }
+
+
+    console.log('birthdate',birthdate )
  
     // // Get an Access Token
     // //

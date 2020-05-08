@@ -8,6 +8,7 @@ import appActions from '@/stores/user/actions';
 import appSelectors from '@/stores/user/selectors';
 import loadSelectors from '@/stores/app/selectors';
 import CheckMark from '@/static/images/modal-check.svg';
+import FormData from '@/helpers/formData';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -48,21 +49,72 @@ export class UserProfile extends Component {
       token: this.props.user.token,
       valid: false,
       isLoading: false,
-      showSuccess: false,
-      loaded: false,
+      showSuccessModal: false,
+      showSuccessModalLoaded: false,
       successMessage:'',
-      updateSuccess:false,
+      closeSuccessModal:false,
+      loaded: false,
       formloaded:false,
       formSubmit:false,
       validateNumberModal: false,
       smscode:'',
-      smsSuccess:false,
-      smsLoaded:false,
-      codeSet:false
+      codeSet:false,
+      verifyDisabled:true,
+      phoneLoaded:false
     };
 
     this.submitForm = this.submitForm.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
+  }
+
+  getFieldErrors() {
+
+    let formErrors = this.props.user && 
+                    this.props.user.fieldErrors && 
+                    this.props.user.fieldErrors.error && 
+                    this.props.user.fieldErrors.error.payload && 
+                    this.props.user.fieldErrors.error.payload.field_errors 
+                    ? this.props.user.fieldErrors.error.payload.field_errors 
+                    : false
+
+    return  formErrors                        
+
+  }
+
+  // 
+  componentDidUpdate() {
+     
+     if( !this.props.loading ) {
+        
+         // 1. Success Modal 
+         if(this.state.formSubmit && !this.state.showSuccessModalLoaded && !this.state.closeSuccessModal) {
+              
+             let formErrors =  this.getFieldErrors();
+             let message = 'SUCCESS!'
+             if(formErrors) {
+                if(formErrors.birthdate) {
+                  message = formErrors.birthdate[0]
+                }
+                if(formErrors.mobile_number) {
+                  message = formErrors.mobile_number[0]
+                }
+             }
+              
+             this.setState({ showSuccessModalLoaded:true, showSuccessModal:true, successMessage:message })
+         }
+
+        // 2. Verify Phone Modal
+        if(this.state.codeSet && !this.state.formloaded ) {
+          this.setState({ showSuccessModalLoaded:true, showSuccessModal:true, successMessage:'SUCCESS!', formloaded:true })
+        }
+
+        // 3. Is phone verified 
+        if(this.props.user && this.props.user.user && this.props.user.user.mobile_number && !this.state.phoneLoaded ) {
+          this.setState({phoneLoaded:true,verifyDisabled:false})
+        }
+       
+     }
+
   }
 
   submitForm(e) {
@@ -94,7 +146,7 @@ export class UserProfile extends Component {
       token: this.state.token,
     };
     this.props.userUpdateRequest(payload);
-    this.setState({formSubmit:true})
+    this.setState({formSubmit:true,closeSuccessModal:false})
   }
 
   //
@@ -108,7 +160,7 @@ export class UserProfile extends Component {
   //
   verifySMSWithCode(e) {
     e.preventDefault()
-     this.setState({ codeSet:true })
+    this.setState({validateNumberModal:false, codeSet:true})
     let payload = { token: this.props.user.token, mobileNumber: this.state.phone, code: this.state.smscode  }
     this.props.verifySmsRequest(payload)
   }
@@ -124,17 +176,16 @@ export class UserProfile extends Component {
       email: this.state.email,
     };
 
-    this.setState({formSubmit:true})
-
     this.props.passwordResetRequest(payload);
   }
 
   handleClose() {
-    this.setState({ showSuccess: false, successMessage:'', formSubmit:false, validateNumberModal:false, codeSet:false, smscode:'',loaded:false, formloaded:false});
-    let payload = { clear: true }
-    this.props.verifySmsRequest(payload)
-
-    console.log('HANDLE CLOSE ', this.state.showSuccess )
+      
+    // Clear success modal   
+    this.setState({ showSuccessModalLoaded:false, showSuccessModal:false, successMessage:'', closeSuccessModal:true, validateNumberModal:false, codeSet:false, formloaded:false})  
+    
+    // let payload = { clear: true }
+    // this.props.verifySmsRequest(payload)
   }
 
   updateCode(e) {
@@ -143,129 +194,46 @@ export class UserProfile extends Component {
  
   render() {
     //
-    // TODO: Add these to an external resource They are required in mulitple locations 
-    //
-    let provinces = [
-      { name: '', value: '' },
-      { name: 'Alberta', value: 'AB' },
-      { name: 'British Columbia', value: 'BC' },
-      { name: 'Manitoba', value: 'MB' },
-      { name: 'New Brunswick', value: 'NB' },
-      { name: 'Newfoundland & Labrador', value: 'NL' },
-      { name: 'Northwest Territories', value: 'NT' },
-      { name: 'Nova Scotia', value: 'NS' },
-      { name: 'Nunavut', value: 'NU' },
-      { name: 'Ontario', value: 'ON' },
-      { name: 'Prince Edward Island', value: 'PE' },
-      { name: 'Québec', value: 'QC' },
-      { name: 'Saskatchewan', value: 'SK' },
-      { name: 'Yukon', value: 'YT' },
-    ];
-
-    let genders = [
-      { name: 'Prefer not to say', value: '' },
-      { name: 'Male', value: 'Male' },
-      { name: 'Female', value: 'Female' },
-    ];
-
-    let months = [
-      { name: 'Month', value: '' },
-      { name: 'Jan', value: '01' },
-      { name: 'Feb', value: '02' },
-      { name: 'Mar', value: '03' },
-      { name: 'Apr', value: '04' },
-      { name: 'May', value: '05' },
-      { name: 'Jun', value: '06' },
-      { name: 'Jul', value: '07' },
-      { name: 'Aug', value: '08' },
-      { name: 'Sep', value: '09' },
-      { name: 'Oct', value: '10' },
-      { name: 'Nov', value: '11' },
-      { name: 'Dec', value: '12' },
-    ];
-
-    let days = [{ name: 'Day', value: '' }];
-    for (var i = 0; i < 31; i++) {
-      days.push({ name: i + 1, value: i + 1 });
-    }
-
-    let years = [{ name: 'Year', value: '' }];
-    for (var i = 0; i < 100; i++) {
-      let year = 2020 - i;
-      years.push({ name: year, value: year });
-    }
-
+    // Form data 
+    let { provinces,genders,months,days,years } = FormData()
+    
     // validation :
     // TODO: create a helper service to validate inline state
     //
-    const fieldErrors =
-      this.props.user && this.props.user.fieldErrors
-        ? this.props.user.fieldErrors.error
-        : false;
+    const fieldErrors = this.getFieldErrors();
  
     const phoneError =
       fieldErrors &&
-      fieldErrors.payload &&
-      fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.mobile_number
-        ? fieldErrors.payload.field_errors.mobile_number[0]
+      fieldErrors.mobile_number
+        ? fieldErrors.mobile_number[0]
         : false;
-    
     const firstNameError =
       fieldErrors &&
-      fieldErrors.payload &&
-      fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.first_name
-        ? fieldErrors.payload.field_errors.first_name[0]
+      fieldErrors.first_name
+        ? fieldErrors.first_name[0]
         : false;
     const lastNameError =
       fieldErrors &&
-      fieldErrors.payload &&
-      fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.last_name
-        ? fieldErrors.payload.field_errors.last_name[0]
+      fieldErrors.last_name
+        ? fieldErrors.last_name[0]
         : false;
     const birthdateError =
       fieldErrors &&
-      fieldErrors.payload &&
-      fieldErrors.payload.field_errors &&
-      fieldErrors.payload.field_errors.birthdate
-        ? fieldErrors.payload.field_errors.birthdate[0]
+      fieldErrors.birthdate
+        ? fieldErrors.birthdate[0]
         : false;
 
-    let formError =
-      this.props.user &&
-      this.props.user.passwordReset &&
-      this.props.user.passwordReset.error &&
-      this.props.user.passwordReset.error.payload &&
-      this.props.user.passwordReset.error.payload.field_errors
-        ? this.props.user.passwordReset.error.payload.field_errors.email
+    let emailError =
+      fieldErrors &&
+      fieldErrors.email 
+        ? fieldErrors.email[0]
         : false;
 
-    let formSuccess =
-      this.props.user &&
-      this.props.user.passwordReset &&
-      this.props.user.passwordReset.success
-        ? this.props.user.passwordReset.success
-        : false;
-
-    let updateSuccess =
-      this.props.user && !this.props.user.fieldErrors ? true : false;
-
-    if (formSuccess && !this.state.loaded && this.state.formSubmit) {
-      this.setState({ showSuccess: true, loaded: true, successMessage:'CHECK YOUR INBOX' });
-    }
-
-    if (updateSuccess && !this.state.formloaded && this.state.formSubmit && !this.props.loading ) {
-      this.setState({ showSuccess: true, formloaded: true, successMessage:'SUCCESS', smsLoaded:false });
-    }
-    
-    let smsSuccess = this.props.user && this.props.user.sms && this.props.user.sms.success ? true : false
-
-    if(smsSuccess && !this.state.smsLoaded && this.state.codeSet ) {
-       this.setState({smsLoaded:true, successMessage:'SUCCESS', showSuccess: true, validateNumberModal:false })
-    }
-
+    let smsError = this.props.user && 
+        this.props.user.sms && 
+        this.props.user.sms.error && 
+        this.props.user.sms.error.payload ? this.props.user.sms.error.payload.error_description : false
+ 
     return (
       <div className="p-5">
         <div className="d-flex w-100 align-items-end justify-content-between">
@@ -277,6 +245,8 @@ export class UserProfile extends Component {
           >
             Edit
           </Button>
+
+          
 
           <Modal
             show={this.state.validateNumberModal}
@@ -306,8 +276,10 @@ export class UserProfile extends Component {
               </Button></div>
             </Modal.Body>
           </Modal>
+          
+
           <Modal
-            show={this.state.showSuccess}
+            show={this.state.showSuccessModal}
             onHide={() => this.handleClose()}
             centered
             size="sm"
@@ -322,6 +294,8 @@ export class UserProfile extends Component {
               </div>
             </Modal.Body>
           </Modal>
+
+
           <Modal
             show={this.state.showModal}
             onHide={() => this.setState({ showModal: false })}
@@ -371,6 +345,7 @@ export class UserProfile extends Component {
                     green
                     type="button"
                     className="-fixed--height"
+                    disabled={this.state.verifyDisabled}
                     onClick={(e) => this.verifyMobileNumber(e)}
                   >
                     <span className="white--text">Verify</span>
@@ -383,6 +358,9 @@ export class UserProfile extends Component {
                     value={this.state.phone}
                     onChange={e => this.onValueChange(e, 'phone')}
                   />
+                  { smsError && 
+                    <p className="field--error sm">{smsError}</p>
+                  }
                   { phoneError && 
 
                     <p className="field--error sm">{phoneError}</p>
@@ -455,7 +433,7 @@ export class UserProfile extends Component {
                   >
                     Change Password
                   </Button>
-                  {formError && <p>{formError[0]}</p>}
+                  {emailError && <p>{emailError}</p>}
                 </Form.Group>
                 <Form.Group controlId="edit-address-line-1">
                   <Form.Label className="small">

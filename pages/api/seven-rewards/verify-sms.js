@@ -8,7 +8,7 @@ export default async (req, res) => {
 
     const body = JSON.parse(req.body)
     const headers = { "Content-Type": "application/json" };
-   // console.log('BODY :: >> ', body.body )
+    console.log('BODY :: >> ', body.body )
 
     let code = body.body.code;
 
@@ -23,6 +23,10 @@ export default async (req, res) => {
       }
     }
 
+    if(body.body.mobileNumber ==='') {
+      res.json({error: 'No Number Was Added', sms:{error:{payload:{ error_description:'Please save a valid phone number before trying to verify.' }}}})
+    }
+
     const registerHeaders = { 
       "Content-type": "application/json",
       "Authorization":`Bearer ${body.body.token}`
@@ -34,9 +38,8 @@ export default async (req, res) => {
        headers: registerHeaders,
        body: JSON.stringify(payload) 
      });
-     
-     // console.log('BODY :: >> ', body );
-     // console.log(smsResponse)   
+      
+      console.log(smsResponse)   
      if(code) {
        res.json({success:'SUCCESS! You have validated your device'})
      } else {

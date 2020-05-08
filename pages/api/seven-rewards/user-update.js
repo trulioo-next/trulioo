@@ -21,11 +21,14 @@ export default async (req, res) => {
     };
  
     // console.log('REGITERS TOKEN ', registerHeaders )
-    let month = body.body.bMonth >= 10 ? body.body.bMonth : `${body.body.bMonth}`
-    let day = body.body.bDay >= 10 ? body.body.bDay : `0${body.body.bDay}`
+    let month = body.body.bMonth;
+    let day = body.body.bDay;
     let birthdate = body.body.bYear +'-'+ month +'-'+ day;
     let phone = body.body.phone === 'null' ||  body.body.phone === null ? false : true;
     let gender =  body.body.gender === 'Prefer not to say' ? false : true;
+
+
+    console.log('BIRTHDAY ', birthdate )
 
     let payload = {
         "first_name": body.body.firstName,

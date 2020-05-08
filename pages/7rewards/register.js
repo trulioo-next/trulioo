@@ -24,6 +24,7 @@ import { useFormik } from 'formik';
 
 import { ReCaptcha } from 'react-recaptcha-v3'
 import { GOOGLE_RECAPTCHA_V3_KEY, verify } from '../../utils/recaptcha'
+import FormData from '@/helpers/formData';
 
 class RegisterScreen extends React.Component {
   constructor(props) {
@@ -177,7 +178,7 @@ class RegisterScreen extends React.Component {
     e.preventDefault();
     this.setState({ isLoading: true });
 
-    let bday = this.state.bDay <= 9 ? `0${this.state.bDay}` : this.state.bDay;
+    let bday = this.state.bDay;
 
     const payload = {
       firstName: this.state.firstName,
@@ -322,57 +323,10 @@ class RegisterScreen extends React.Component {
   }
 
   render() {
-    let provinces = [
-      { name: '', value: '' },
-      { name: 'Alberta', value: 'AB' },
-      { name: 'British Columbia', value: 'BC' },
-      { name: 'Manitoba', value: 'MB' },
-      { name: 'New Brunswick', value: 'NB' },
-      { name: 'Newfoundland & Labrador', value: 'NL' },
-      { name: 'Northwest Territories', value: 'NT' },
-      { name: 'Nova Scotia', value: 'NS' },
-      { name: 'Nunavut', value: 'NU' },
-      { name: 'Ontario', value: 'ON' },
-      { name: 'Prince Edward Island', value: 'PE' },
-      { name: 'Québec', value: 'QC' },
-      { name: 'Saskatchewan', value: 'SK' },
-      { name: 'Yukon', value: 'YT' },
-    ];
 
-    let genders = [
-      { name: 'Prefer not to say', value: '' },
-      { name: 'Male', value: 'Male' },
-      { name: 'Female', value: 'Female' },
-    ];
-
-     let months = [
-      { name: 'Month', value: '' },
-      { name: 'Jan', value: '01' },
-      { name: 'Feb', value: '02' },
-      { name: 'Mar', value: '03' },
-      { name: 'Apr', value: '04' },
-      { name: 'May', value: '05' },
-      { name: 'Jun', value: '06' },
-      { name: 'Jul', value: '07' },
-      { name: 'Aug', value: '08' },
-      { name: 'Sep', value: '09' },
-      { name: 'Oct', value: '10' },
-      { name: 'Nov', value: '11' },
-      { name: 'Dec', value: '12' },
-    ];
-
-    let days = [{ name: 'Day', value: '' }];
-    for (var i = 0; i < 31; i++) {
-      days.push({ name: i + 1, value: i + 1 });
-    }
-
-    let years = [{ name: 'Year', value: '' }];
-    for (var i = 0; i < 100; i++) {
-      let year = 2020 - i;
-      years.push({ name: year, value: year });
-    }
-
-
+    // Form data 
+    let { provinces, genders, months, days, years } = FormData()
+     
     // 
     let fieldError = this.props.user && this.props.user.error && this.props.user.error.payload ? this.props.user.error.payload.field_errors : false
 
