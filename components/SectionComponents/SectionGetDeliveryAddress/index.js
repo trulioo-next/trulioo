@@ -38,14 +38,16 @@ async function getLocations(url) {
     var locations = result.response.locations,
       deliveryOptions = [],
       uberEatsOption,
-      foodoraOption,
+      skipthedishesOption,
       geo = result.response.geo;
 
     for (var i = 0; i < locations.length; i++) {
       if (locations[i].customFields['169457']) {
-        if (uberEatsOption && foodoraOption) {
+        
+        if (uberEatsOption && skipthedishesOption) {
           break;
-        } else if (!uberEatsOption) {
+        }
+        if (!uberEatsOption) {
           var uberIndex = locations[i].customFields['169457'].findIndex(item =>
             item.includes('ubereats'),
           );
@@ -58,17 +60,17 @@ async function getLocations(url) {
               url: locations[i].customFields['169457'][uberIndex],
             });
           }
-        } else if (!foodoraOption) {
-          var foodoraIndex = locations[i].customFields[
+        } 
+        if (!skipthedishesOption) {
+          var skipthedishesIndex = locations[i].customFields[
             '169457'
-          ].findIndex(item => item.includes('foodora'));
-
-          if (foodoraIndex >= 0) {
-            foodoraOption = true;
+          ].findIndex(item => item.includes('skipthedishes'));
+          if (skipthedishesIndex >= 0) {
+            skipthedishesOption = true;
 
             deliveryOptions.push({
-              deliveryService: 'Foodora',
-              url: locations[i].customFields['169457'][foodoraIndex],
+              deliveryService: 'skipthedishes',
+              url: locations[i].customFields['169457'][skipthedishesIndex],
             });
           }
         }
@@ -308,7 +310,7 @@ class SectionGetDeliveryAddress extends Component {
                         image={
                           option.deliveryService === 'UberEats'
                             ? this.props.delivery_available.ubereats_image
-                            : this.props.delivery_available.foodora_image
+                            : this.props.delivery_available.skipthedishes_image
                         }
                         {...option}
                       />
