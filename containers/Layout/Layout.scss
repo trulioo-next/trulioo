@@ -180,4 +180,28 @@ a:not([href]) {
     font-size: 12px;
     margin-top:8px;
   }
+
+  &.white {
+    color: #fff;
+    margin-top:15px;
+  }
 }
+
+.verify__button {
+  position: absolute;
+  right: -97px;
+  height: 50px;
+  width: 200px;
+  z-index: 99;
+
+  &.white--text {
+    color: #fff;
+    padding: 20px;
+  }
+}
+
+
+.margin--top {
+  margin-top:15px;
+}
+

@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import appActions from '@/stores/user/actions';
 import appSelectors from '@/stores/user/selectors';
+import loadSelectors from '@/stores/app/selectors';
 import CheckMark from '@/static/images/modal-check.svg';
 
 export class UserProfile extends Component {
@@ -49,6 +50,15 @@ export class UserProfile extends Component {
       isLoading: false,
       showSuccess: false,
       loaded: false,
+      successMessage:'',
+      updateSuccess:false,
+      formloaded:false,
+      formSubmit:false,
+      validateNumberModal: false,
+      smscode:'',
+      smsSuccess:false,
+      smsLoaded:false,
+      codeSet:false
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -83,9 +93,26 @@ export class UserProfile extends Component {
       gender: this.state.gender,
       token: this.state.token,
     };
-
-    console.log('PHONE ', phone , 'CURRENT PHONE ' ,currentPhone  )
     this.props.userUpdateRequest(payload);
+
+    this.setState({formSubmit:true})
+  }
+
+  //
+  verifyMobileNumber(e) {
+    e.preventDefault();
+
+    this.setState({validateNumberModal:true})
+    let payload = { token: this.props.user.token, mobileNumber: this.state.phone }
+    this.props.verifySmsRequest(payload)
+  }
+  
+  //
+  verifySMSWithCode(e) {
+    e.preventDefault()
+     this.setState({ codeSet:true })
+    let payload = { token: this.props.user.token, mobileNumber: this.state.phone, code: this.state.smscode  }
+    this.props.verifySmsRequest(payload)
   }
 
   // Update state value
@@ -103,10 +130,16 @@ export class UserProfile extends Component {
   }
 
   handleClose() {
-    this.setState({ showSuccess: false });
-    this.props.passwordResetRequest('clear');
+    this.setState({ showSuccess: false, successMessage:'', formSubmit:false, validateNumberModal:false, codeSet:false, smscode:'' });
+    let payload = { clear: true }
+    this.props.verifySmsRequest(payload)
+
   }
 
+  updateCode(e) {
+    this.setState({smscode:e.target.value})
+  }
+ 
   render() {
     // TODO: Add these to an external resource
     //
@@ -167,10 +200,7 @@ export class UserProfile extends Component {
       this.props.user && this.props.user.fieldErrors
         ? this.props.user.fieldErrors.error
         : false;
-
-     
-
-
+ 
     const phoneError =
       fieldErrors &&
       fieldErrors.payload &&
@@ -179,8 +209,6 @@ export class UserProfile extends Component {
         ? fieldErrors.payload.field_errors.mobile_number[0]
         : false;
     
-     console.log('fieldErrors ', phoneError )
-
     const firstNameError =
       fieldErrors &&
       fieldErrors.payload &&
@@ -219,8 +247,21 @@ export class UserProfile extends Component {
         ? this.props.user.passwordReset.success
         : false;
 
+     let updateSuccess =
+      this.props.user && !this.props.user.fieldErrors ? true : false;
+
     if (formSuccess && !this.state.loaded) {
-      this.setState({ showSuccess: true, loaded: true });
+      this.setState({ showSuccess: true, loaded: true, successMessage:'EMAIL SENT' });
+    }
+
+    if (updateSuccess && !this.state.formloaded && this.state.formSubmit && !this.props.loading ) {
+      this.setState({ showSuccess: true, formloaded: true, successMessage:'SUCCESS', smsLoaded:false });
+    }
+    
+    let smsSuccess = this.props.user && this.props.user.sms && this.props.user.sms.success ? true : false
+
+    if(smsSuccess && !this.state.smsLoaded && this.state.codeSet ) {
+       this.setState({smsLoaded:true, successMessage:'SUCCESS', showSuccess: true, validateNumberModal:false })
     }
 
     return (
@@ -234,6 +275,37 @@ export class UserProfile extends Component {
           >
             Edit
           </Button>
+
+          <Modal
+            show={this.state.validateNumberModal}
+            onHide={() => this.handleClose()}
+            centered
+            size="sm"
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>
+              
+               <form className="form__test">
+                <input
+                  id="sms_code"
+                  type="text"
+                  value={this.state.smscode}
+                  placeholder="Enter Code Here"
+                  onChange={e => this.updateCode(e)}
+                />
+              </form>
+
+              <div className="margin--top"><Button
+                green
+                className="Section__cta"
+                onClick={(e) =>  this.verifySMSWithCode(e) }
+              >
+                Verify SMS
+              </Button></div>
+            </Modal.Body>
+          </Modal>
+
+
           <Modal
             show={this.state.showSuccess}
             onHide={() => this.handleClose()}
@@ -246,7 +318,7 @@ export class UserProfile extends Component {
                 <CheckMark />
               </div>
               <div className="center--text">
-                <h5>EMAIL SENT</h5>
+                <h5>{this.state.successMessage}</h5>
               </div>
             </Modal.Body>
           </Modal>
@@ -295,6 +367,14 @@ export class UserProfile extends Component {
                 </Form.Group>
                 <Form.Group controlId="edit-mobile-number">
                   <Form.Label className="small">Mobile Number</Form.Label>
+                   <div className="verify__button"><Button
+                    green
+                    type="button"
+                    className="-fixed--height"
+                    onClick={(e) => this.verifyMobileNumber(e)}
+                  >
+                    <span className="white--text">Verify</span>
+                  </Button></div>
                   <Form.Control
                     size="lg"
                     as="input"
@@ -452,7 +532,7 @@ export class UserProfile extends Component {
                   </Form.Control>
                 </Form.Group>
                 <button type="submit" className="Button mt-4">
-                  Submit
+                  Update
                 </button>
               </Form>
             </Modal.Body>
@@ -490,13 +570,14 @@ export class UserProfile extends Component {
 
 const mapStateToProps = state => ({
   user: appSelectors.userDataSelector(state),
+  loading: loadSelectors.selectIsLoading(state),
   token: appSelectors.userTokenSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   userUpdateRequest: payload => dispatch(appActions.reqUpdateAction(payload)),
-  passwordResetRequest: payload =>
-    dispatch(appActions.reqPasswordResetAction(payload)),
+  passwordResetRequest: payload => dispatch(appActions.reqPasswordResetAction(payload)),
+  verifySmsRequest: payload => dispatch(appActions.reqSMSAction(payload)),
 });
 
 const UserProfile_ = connect(mapStateToProps, mapDispatchToProps)(UserProfile);

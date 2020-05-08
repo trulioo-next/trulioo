@@ -44,7 +44,7 @@ export default async (req, res) => {
       }
 
 
-      console.log('PHONE ', phone )    
+      console.log('PHONE ', body.body.phone )    
 
       if(phone) {
         payload.mobile_number = body.body.phone;
@@ -52,13 +52,7 @@ export default async (req, res) => {
       if(gender) {
         payload.gender = body.body.gender;
       }
-
-
-      console.log('PAYLOAD ', payload )    
  
-    //
-    // console.log('PAYLOAD BODY EMAIL ',  payload )
-
     // Get an Access Token
     //
     const updateUser = await fetch(REWARDS_API_URL+'/v4/users/me/?profile=full',
@@ -67,9 +61,7 @@ export default async (req, res) => {
        headers: updateHeaders,
        body: JSON.stringify(payload)
      });
- 
-    // console.log('updateUser ', updateUser)
-      
+   
     res.json({user:updateUser, fieldErrors:false })  
      
      return

@@ -45,6 +45,7 @@
     }
   }
 
+
   &:hover,
   &:focus {
     background-color: $link-hover-color;
@@ -59,3 +60,8 @@
     }
   }
 }
+
+
+.-fixed--height {
+    height: 41px !important;
+  }

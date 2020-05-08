@@ -23,7 +23,8 @@ class MyAccount extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
-      isChecked: false
+      isChecked: false,
+      card:''
     };
 
 
@@ -82,10 +83,35 @@ class MyAccount extends React.Component {
     this.props.updatePrefernecesRequest(payload)
   }
 
+  //
+  updateCardId(e) {
+    this.setState({ card: e.target.value });
+  }
+
+  addNewCard(e) {
+    e.preventDefault();
+    let token = this.props.user && this.props.user.token ? this.props.user.token : false;
+
+    if(token) {
+       this.props.addCardRequest({card:this.state.card,token})
+    } else {
+      alert('NEED TO AUTHENTICATE ')
+    }
+   
+  }
+
   // TODO: Set up form actions for account page.
 
   render() {
     const userInfo = this.props.user && this.props.user.user ? this.props.user.user : false;
+
+    const cardError = 
+    this.props.user && 
+    this.props.user.addCard && 
+    this.props.user.addCard.error && 
+    this.props.user.addCard.error.payload && 
+    this.props.user.addCard.error.payload.field_errors && 
+    this.props.user.addCard.error.payload.field_errors.new_loyalty_id ? this.props.user.addCard.error.payload.field_errors.new_loyalty_id[0] : false;
    
     return (
       <Layout>
@@ -141,9 +167,16 @@ class MyAccount extends React.Component {
                           className="form-control form-control-lg"
                           type="number"
                           placeholder="Card Number"
+                          value={this.state.card}
+                          onChange={(e) => this.updateCardId(e) }
                         />
+                        { cardError && 
+
+                          <p className="field--error white">{cardError}</p>
+
+                        }
                       </Form.Group>
-                      <Button type="submit">Add Card</Button>
+                      <Button type="submit" onClick={ (e) => this.addNewCard(e) }>Add Card</Button>
                     </Form>
                   </Admin.Panel>
                 </Col>
@@ -163,6 +196,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
   updatePrefernecesRequest: payload => dispatch(appActions.reqPreferenceUpdateAction(payload)),
+  addCardRequest: payload => dispatch(appActions.reqAddCardAction(payload)),
 });
 
 MyAccount.defaultProps = {

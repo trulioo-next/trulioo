@@ -66,8 +66,8 @@ function* facebookUserAuth(payload) {
    
     const loginClientResponse = yield call(sevenRewardsService.userAuthFb, payload)
 
-    console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse  )
-    console.log('FACEBOOK payload !!   ', payload  )
+    // console.log('FACEBOOK LOGIN SAGA !!   ', loginClientResponse  )
+    // console.log('FACEBOOK payload !!   ', payload  )
 
     yield put({ type:SEVEN_REWARDS_FACEBOOK_AUTH, payload:loginClientResponse})
 
@@ -107,10 +107,10 @@ function* registerUser(payload) {
     const registerClientResponse = yield call(sevenRewardsService.registerUser, payload)
 
     if(registerClientResponse.error) {
-       console.log('ERROR DATA  !!   ', registerClientResponse )
+      // console.log('ERROR DATA  !!   ', registerClientResponse )
        yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse })
     } else {
-      console.log('GOOD TO GO DATA !!   ', registerClientResponse )
+      // console.log('GOOD TO GO DATA !!   ', registerClientResponse )
       yield put({ type: SEVEN_REWARDS_REGISTER_LOADED, payload:registerClientResponse })
     }
      
@@ -240,18 +240,19 @@ function* checkGiftcardBalance(payload) {
 //
 function* addCard(payload) {
  
+ 
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
    
-    const addCardResponse = yield call(sevenRewardsService.checkCardBalance, payload)
+    const addCardResponse = yield call(sevenRewardsService.addCard, payload)
 
-     // console.log('CHECK CARD BALANCE !!   ', checkBalanceResponse )
+    // console.log('ADD CARD   ', addCardResponse )
     
     yield put({ type: SEVEN_REWARDS_ADDCARD, payload:addCardResponse})
 
   } catch(err) {
-
+    console.log('ADD CARD ERROR  ', err )
     const errors = err.payload || err
     yield put({ type:SEVEN_REWARDS_ADDCARD, payload: errors})
   }
@@ -284,13 +285,14 @@ function* checkSms(payload) {
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
-   
-    const smsResponse = yield call(sevenRewardsService.verifySms, payload)
-
-    // console.log('!! SMS  ', smsResponse )
+     
+    if(payload.clear) {
+      yield put({ type: SEVEN_REWARDS_SMS, payload:false})
+    } else {
+      const smsResponse = yield call(sevenRewardsService.verifySms, payload)
+      yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
+    }
     
-    yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
-
   } catch(err) {
 
     const errors = err.payload || err
@@ -385,7 +387,7 @@ function* startupFlow() {
       yield call(updatePreferences, action.payload)
     }
 
-    if (action.type === SEVEN_REWARDS_ADDCARD_REQUEST) {
+    if (action.type === SEVEN_REWARDS_ADDCARD_REQUEST ) {
       yield call(addCard, action.payload)
     }
 

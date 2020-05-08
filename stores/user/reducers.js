@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
 
       case SEVEN_REWARDS_ADDCARD:
         return { ...state,
-           addCard: action.payload.user
+           addCard: action.payload
         }
 
       case SEVEN_REWARDS_UPDATE_PREFERNCES:

@@ -81,13 +81,13 @@ export default function SevenRewardsService(state) {
 
 
 	async function addCard(payload) {
-		let data = await API.post('/api/seven-rewards/check-card-balance', {body:payload});
+		let data = await API.post('/api/seven-rewards/add-new-card', {body:payload});
 		if(data.error) {
 			ErrorHandler({
 		        error: data.error.payload.error_description,
 		        crumb: {
-		          category: 'checkCardBalance',
-		          message: 'Checking Card Balance Failed'
+		          category: 'add-new-card',
+		          message: 'Add New Card Failed Failed'
 		        }
 		    })
 		}
