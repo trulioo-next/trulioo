@@ -124,6 +124,8 @@ export class UserProfile extends Component {
       email: this.state.email,
     };
 
+    this.setState({formSubmit:true})
+
     this.props.passwordResetRequest(payload);
   }
 
@@ -131,6 +133,8 @@ export class UserProfile extends Component {
     this.setState({ showSuccess: false, successMessage:'', formSubmit:false, validateNumberModal:false, codeSet:false, smscode:'',loaded:false, formloaded:false});
     let payload = { clear: true }
     this.props.verifySmsRequest(payload)
+
+    console.log('HANDLE CLOSE ', this.state.showSuccess )
   }
 
   updateCode(e) {
@@ -248,7 +252,7 @@ export class UserProfile extends Component {
      let updateSuccess =
       this.props.user && !this.props.user.fieldErrors ? true : false;
 
-    if (formSuccess && !this.state.loaded) {
+    if (formSuccess && !this.state.loaded && this.state.formSubmit) {
       this.setState({ showSuccess: true, loaded: true, successMessage:'EMAIL SENT' });
     }
 
