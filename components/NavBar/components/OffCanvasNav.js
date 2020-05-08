@@ -225,6 +225,7 @@ const OffCanvasNav = data => {
     >
       <NavToggle toggle={() => toggleOpen()} />
       <motion.div className="OffCanvas" variants={sidebar}>
+        <span className="OffCanvas__logo"><img src="/static/images/7Eleven-logo-maple-square.png" alt="7Eleven logo" /></span>
         <button
           className="OffCanvas__toggle -close"
           onClick={() => toggleOpen()}
