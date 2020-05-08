@@ -94,14 +94,12 @@ export class UserProfile extends Component {
       token: this.state.token,
     };
     this.props.userUpdateRequest(payload);
-
     this.setState({formSubmit:true})
   }
 
   //
   verifyMobileNumber(e) {
     e.preventDefault();
-
     this.setState({validateNumberModal:true})
     let payload = { token: this.props.user.token, mobileNumber: this.state.phone }
     this.props.verifySmsRequest(payload)
@@ -130,10 +128,9 @@ export class UserProfile extends Component {
   }
 
   handleClose() {
-    this.setState({ showSuccess: false, successMessage:'', formSubmit:false, validateNumberModal:false, codeSet:false, smscode:'' });
+    this.setState({ showSuccess: false, successMessage:'', formSubmit:false, validateNumberModal:false, codeSet:false, smscode:'',loaded:false, formloaded:false});
     let payload = { clear: true }
     this.props.verifySmsRequest(payload)
-
   }
 
   updateCode(e) {
@@ -141,7 +138,8 @@ export class UserProfile extends Component {
   }
  
   render() {
-    // TODO: Add these to an external resource
+    //
+    // TODO: Add these to an external resource They are required in mulitple locations 
     //
     let provinces = [
       { name: '', value: '' },
@@ -304,8 +302,6 @@ export class UserProfile extends Component {
               </Button></div>
             </Modal.Body>
           </Modal>
-
-
           <Modal
             show={this.state.showSuccess}
             onHide={() => this.handleClose()}
