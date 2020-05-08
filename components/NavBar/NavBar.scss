@@ -290,13 +290,26 @@
 
 .OffCanvas {
   position: fixed;
-  top: 0;
+  top: 0px;
   left: 0;
   bottom: 0;
   background-color: $white;
   z-index: 105;
   line-height: 1.2rem;
   font-size: 1rem;
+
+  &__logo {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 5px auto;
+
+    img {
+      width: 50px;
+      margin: 5px auto;
+    }
+  }
 
   &__toggle {
     border: 0;
@@ -331,6 +344,7 @@
       width: 4.5rem;
       height: 3.3rem;
       z-index: 5;
+      margin-bottom: 40px;
 
       &::before,
       &::after {
@@ -463,6 +477,12 @@
 
   &__search {
     padding: 2.4rem 1.6rem;
+    text-align: center;
+  }
+
+  .Search__submit {
+    margin: 15px auto 0px auto;
+    background-color: $blue;
   }
 }
 

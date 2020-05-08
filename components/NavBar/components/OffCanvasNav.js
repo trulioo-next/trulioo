@@ -10,6 +10,8 @@ import SearchIcon from '@/static/images/search.svg';
 import ChevronIcon from '@/static/images/caret-down.svg';
 import { userDataSelector } from '@/stores/user/selectors';
 
+import Button from '@/components/Button';
+
 const NavToggle = props => (
   <button role="tab" className="OffCanvas__toggle -menu" onClick={props.toggle}>
     <div></div>
@@ -223,6 +225,7 @@ const OffCanvasNav = data => {
     >
       <NavToggle toggle={() => toggleOpen()} />
       <motion.div className="OffCanvas" variants={sidebar}>
+        <span className="OffCanvas__logo"><img src="/static/images/7Eleven-logo-maple-square.png" alt="7Eleven logo" /></span>
         <button
           className="OffCanvas__toggle -close"
           onClick={() => toggleOpen()}
@@ -248,11 +251,7 @@ const OffCanvasNav = data => {
                 onChange={handleSearchChange}
               />
             </div>
-            <input
-              type="submit"
-              className="Search__submit sr-only"
-              value="Search"
-            />
+            <Button type="submit" className="Search__submit">Search</Button>
           </form>
         </motion.div>
       </motion.div>
