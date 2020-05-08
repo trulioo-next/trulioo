@@ -463,6 +463,12 @@
 
   &__search {
     padding: 2.4rem 1.6rem;
+    text-align: center;
+  }
+
+  .Search__submit {
+    margin: 15px auto 0px auto;
+    background-color: $blue;
   }
 }
 
