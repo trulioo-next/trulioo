@@ -20,7 +20,7 @@ export const verify = async (recaptchaToken) => {
 		console.log("Bot");
 		Router.push('/');
 	}else
-	{	console.log("Not a bot");
+	{	console.log( (verify.score * 100) + "% not a bot");
 	}
 }
 

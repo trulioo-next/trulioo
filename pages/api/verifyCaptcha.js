@@ -16,7 +16,7 @@ export default async (req, res) => {
 			body: `secret=${GOOGLE_RECAPTCHA_V3_SECRET}&response=${body.token}`
 		})
 
-		console.log(verify);
+		// console.log(verify);
 
 		res.json(verify)
 		return
