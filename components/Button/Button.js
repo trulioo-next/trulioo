@@ -11,7 +11,6 @@ const Button = ({ as, href, className, children, outlined, green, ...props }) =>
     'Button',
     { '-outlined': outlined },
     { '-green': green },
-    { '-fixed--height': className },
     className,
   );
 

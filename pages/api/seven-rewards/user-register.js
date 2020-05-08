@@ -31,18 +31,20 @@ export default async (req, res) => {
       "Content-Type": "application/json",
       "Authorization":`Bearer ${userToken.access_token}`,
       "X-SEI-TZ": '-04:00'
-
     };
 
-    // console.log('REGITERS TOKEN ', registerHeaders )
-    // let birthdate = body.body.bYear +'-'+ body.body.bMonth +'-'+ body.body.bDay
+     
+    let month = body.body.bMonth
+    let day = body.body.bDay
+    let birthdate = body.body.bYear +'-'+ month +'-'+ day;
+
     let payload = {
         "email": body.body.email,
         "email_secondary": body.body.email,
         "password": body.body.password,
         "first_name": body.body.firstName,
         "last_name":body.body.lastName,
-        "birthdate": '1982-05-28', // year-month-day
+        "birthdate": birthdate, // year-month-day
         "postal_code": body.body.postal,
         "country": "CA",
         "mobile_phone": body.body.phone,  
@@ -51,10 +53,7 @@ export default async (req, res) => {
         "accepts_ca_communications":false,
         "link_card": '1773927800088888888' // 19 digit number
     }
-
-    //
-    console.log('PAYLOAD BODY EMAIL ',  payload )
-
+ 
     // // Get an Access Token
     // //
     const userRegister = await fetch(REWARDS_API_URL+'/v4/users',

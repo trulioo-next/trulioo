@@ -176,6 +176,9 @@ class RegisterScreen extends React.Component {
   submitForm(e) {
     e.preventDefault();
     this.setState({ isLoading: true });
+
+    let bday = this.state.bDay <= 9 ? `0${this.state.bDay}` : this.state.bDay;
+
     const payload = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -183,13 +186,14 @@ class RegisterScreen extends React.Component {
       password: this.state.password,
       email: this.state.email,
       bMonth: this.state.bMonth,
-      bDay: this.state.bDay,
+      bDay: bday,
       bYear: this.state.bYear,
       phone: this.state.phone,
       postal: this.state.postal,
       cardNumber: this.state.cardNumber,
     };
-
+   
+ 
     const validateEmail = (email) =>  {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
@@ -209,6 +213,9 @@ class RegisterScreen extends React.Component {
           postal: this.state.postal === '' ? true : null,
           checkBox1:this.state.checkBox1 === false ? true : null,
           checkBox2:this.state.checkBox2 === false ? true : null,
+          bMonth: this.state.bMonth === '' ? true : null,
+          bDay: this.state.bDay === '' ? true : null,
+          bYear: this.state.bYear === '' ? true : null,
       }
     })
 
@@ -222,14 +229,19 @@ class RegisterScreen extends React.Component {
       this.state.phone === '' ||
       this.state.postal === '' || 
       this.state.checkBox1 === false || 
-      this.state.checkBox2 === false
+      this.state.checkBox2 === false || 
+      this.state.bMonth === '' ||
+      this.state.bDay === '' || 
+      this.state.bYear === ''
     ) {
       isValid = false;
     }
+
+    // console.log('FIELDS', this.state.fieldErrors )
  
     if(isValid) {
-      this.setState({loggedIn:true})
-      this.props.userRegisterRequest(payload);
+     this.setState({loggedIn:true})
+     this.props.userRegisterRequest(payload);
     }
     
   }
@@ -333,13 +345,94 @@ class RegisterScreen extends React.Component {
       { name: 'Female', value: 'Female' },
     ];
 
+     let months = [
+      { name: 'Month', value: '' },
+      { name: 'Jan', value: '01' },
+      { name: 'Feb', value: '02' },
+      { name: 'Mar', value: '03' },
+      { name: 'Apr', value: '04' },
+      { name: 'May', value: '05' },
+      { name: 'Jun', value: '06' },
+      { name: 'Jul', value: '07' },
+      { name: 'Aug', value: '08' },
+      { name: 'Sep', value: '09' },
+      { name: 'Oct', value: '10' },
+      { name: 'Nov', value: '11' },
+      { name: 'Dec', value: '12' },
+    ];
+
+    let days = [{ name: 'Day', value: '' }];
+    for (var i = 0; i < 31; i++) {
+      days.push({ name: i + 1, value: i + 1 });
+    }
+
+    let years = [{ name: 'Year', value: '' }];
+    for (var i = 0; i < 100; i++) {
+      let year = 2020 - i;
+      years.push({ name: year, value: year });
+    }
+
+
     // 
     let fieldError = this.props.user && this.props.user.error && this.props.user.error.payload ? this.props.user.error.payload.field_errors : false
 
     let emailError = fieldError && fieldError.email ? fieldError.email[0] : false;
     let passwordError = fieldError && fieldError.password ? fieldError.password : false;
 
-    // console.log('FIELD ERROS ', this.props.user.error)
+    // validation :
+    // TODO: create a helper service to validate inline state
+    //
+    const fieldErrors =
+      this.props.user && this.props.user.error
+        ? this.props.user.error
+        : false;
+ 
+    const phoneError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.mobile_number
+        ? fieldErrors.payload.field_errors.mobile_number[0]
+        : false;
+    
+    const firstNameError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.first_name
+        ? fieldErrors.payload.field_errors.first_name[0]
+        : false;
+    const lastNameError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.last_name
+        ? fieldErrors.payload.field_errors.last_name[0]
+        : false;
+    const birthdateError =
+      fieldErrors &&
+      fieldErrors.payload &&
+      fieldErrors.payload.field_errors &&
+      fieldErrors.payload.field_errors.birthdate
+        ? fieldErrors.payload.field_errors.birthdate[0]
+        : false;
+
+    let formError =
+      this.props.user &&
+      this.props.user.passwordReset &&
+      this.props.user.passwordReset.error &&
+      this.props.user.passwordReset.error.payload &&
+      this.props.user.passwordReset.error.payload.field_errors
+        ? this.props.user.passwordReset.error.payload.field_errors.email
+        : false;
+
+    let formSuccess =
+      this.props.user &&
+      this.props.user.passwordReset &&
+      this.props.user.passwordReset.success
+        ? this.props.user.passwordReset.success
+        : false;
+
     return (
       <Layout>
         <Header title="Register" />
@@ -504,6 +597,70 @@ class RegisterScreen extends React.Component {
                                   </Form.Group>
                                 </Col>
                               </Form.Row>
+
+                              <Form.Row>
+                                <Col>
+                                  <Form.Group controlId="edit-city">
+                                    <Form.Label className="small">Month</Form.Label>
+                                    <Form.Control
+                                      size="lg"
+                                      as="select"
+                                      value={this.state.bMonth}
+                                      isInvalid={this.state.fieldErrors.bMonth}
+                                      onChange={e => this.onValueChange(e, 'bMonth')}
+                                    >
+                                      {months.map((month, index) => (
+                                        <option key={index} value={month.value}>
+                                          {month.name}
+                                        </option>
+                                      ))}
+                                    </Form.Control>
+                                  </Form.Group>
+                                </Col>
+                                <Col>
+                                  <Form.Group controlId="edit-province">
+                                    <Form.Label className="small">Day</Form.Label>
+                                    <Form.Control
+                                      size="lg"
+                                      as="select"
+                                      value={this.state.bDay}
+                                      isInvalid={this.state.fieldErrors.bDay}
+                                      onChange={e => this.onValueChange(e, 'bDay')}
+                                    >
+                                      {days.map((day, index) => (
+                                        <option key={index} value={day.value}>
+                                          {day.name}
+                                        </option>
+                                      ))}
+                                    </Form.Control>
+                                  </Form.Group>
+                                </Col>
+
+                                <Col>
+                                  <Form.Group controlId="edit-province">
+                                    <Form.Label className="small">Year</Form.Label>
+                                    <Form.Control
+                                      size="lg"
+                                      as="select"
+                                      isInvalid={this.state.fieldErrors.bYear}
+                                      value={this.state.bYear}
+                                      onChange={e => this.onValueChange(e, 'bYear')}
+                                    >
+                                      {years.map((year, index) => (
+                                        <option key={index} value={year.value}>
+                                          {year.name}
+                                        </option>
+                                      ))}
+                                    </Form.Control>
+                                  </Form.Group>
+                                </Col>
+                              </Form.Row>
+                              {birthdateError && 
+                                <Form.Row>
+                                   <p className="field--error">{birthdateError}</p>
+                                </Form.Row>
+                              }
+
                               <Form.Group controlId="card-number">
                                 <Form.Label className="small">
                                   7Rewards Card Number (Optional)
