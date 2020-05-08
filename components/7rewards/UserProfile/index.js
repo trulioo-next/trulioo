@@ -249,11 +249,11 @@ export class UserProfile extends Component {
         ? this.props.user.passwordReset.success
         : false;
 
-     let updateSuccess =
+    let updateSuccess =
       this.props.user && !this.props.user.fieldErrors ? true : false;
 
     if (formSuccess && !this.state.loaded && this.state.formSubmit) {
-      this.setState({ showSuccess: true, loaded: true, successMessage:'EMAIL SENT' });
+      this.setState({ showSuccess: true, loaded: true, successMessage:'CHECK YOUR INBOX' });
     }
 
     if (updateSuccess && !this.state.formloaded && this.state.formSubmit && !this.props.loading ) {
