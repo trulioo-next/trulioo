@@ -66,7 +66,10 @@ a:not([href]) {
   margin-right: auto;
  
 }
-
+.grecaptcha-badge { visibility: hidden; }
+.recaptcha-language {
+  color:#888;
+}
 .sticky__header {
   position: fixed;
   max-width: 145rem;
