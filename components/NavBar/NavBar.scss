@@ -195,6 +195,7 @@
     background-color: $white;
     position: absolute;
     top: 100%;
+    z-index: 200;
 
     &:not(.-has-grandchildren) {
       &:before,
