@@ -137,6 +137,17 @@ export default function SevenRewardsService(state) {
 
 	async function verifySms(payload) {
 		let data = await API.post('/api/seven-rewards/verify-sms', {body:payload});
+
+
+	    let updatedUser = payload.user.user;
+        updatedUser.is_sms_verified = true;		
+		
+
+		let user = {
+		 user: updatedUser,
+		 sms:data
+		}
+
 		if(data.error) {
 			ErrorHandler({
 		        error: data.error.payload.error_description,

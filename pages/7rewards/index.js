@@ -23,11 +23,12 @@ class SevenRewards extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
-      showSMSModal:true,
+      showSMSModal:false,
       modalMessage:'',
       modalLoaded:false,
       smscode:'',
-      errorLoaded:false
+      errorLoaded:false,
+      smsLoaded:false
     };
   }
 
@@ -63,6 +64,7 @@ class SevenRewards extends React.Component {
     e.preventDefault()
     const props = this.props;
     // console.log('USER ', this.props.user )
+
     let phone = 
       this.props.user && 
       this.props.user.user &&
@@ -70,12 +72,20 @@ class SevenRewards extends React.Component {
       ? this.props.user.user.mobile_number
       : false;
 
+
+      console.log('PHONE SENDING SMS REQUEST ', phone )
+       
       if(phone) {
         this.setState({validateNumberModal:false, codeSet:true})
         let payload = { token: this.props.user.token, mobileNumber: phone, code: this.state.smscode  }
         this.props.verifySmsRequest(payload)
         this.setState({showSMSModal:false});
- 
+        
+        setTimeout(function () {
+          // props.verifySmsRequest({ clear: true })
+          console.log('PHONE SENDING SMS REQUEST ', phone )
+        },10000)
+        
       }
    
   }
@@ -83,6 +93,7 @@ class SevenRewards extends React.Component {
   handleClose(e) {
     e.preventDefault();
     this.setState({showSMSModal:false});
+      
   }
 
   modalClose(e) {
@@ -101,16 +112,26 @@ class SevenRewards extends React.Component {
       ? this.props.user.sms.error.payload.error_description
       : false
 
+    let smsSuccess = 
+      this.props.user &&
+      this.props.user && 
+      this.props.user.sms &&
+      this.props.user.sms.success
+      ? true
+      : false  
+      
 
-      if(!smsError && this.state.errorLoaded) {
+    if(smsError && !this.state.errorLoaded) {
+      // this.props.verifySmsRequest({ clear: true })
+      this.setState({errorLoaded:true,showSMSModal:true})
+    }  
 
-        console.log('CLEAR MODAL ')
-        this.props.verifySmsRequest({ clear: true })
-        this.setState({errorLoaded:true})
-        
-      }
+    console.log('smsSuccess' , smsSuccess )
+    if(smsSuccess && !this.state.smsLoaded) {
+      this.setState({showSMSModal:true,smsLoaded:true})
+      // this.props.verifySmsRequest({ clear: true })
+    }
  
-
     return (
       <Layout>
          <Modal

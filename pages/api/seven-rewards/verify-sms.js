@@ -39,7 +39,9 @@ export default async (req, res) => {
        body: JSON.stringify(payload) 
      });
       
-     console.log('SMS RESPONSE ', smsResponse)   
+     console.log('SMS RESPONSE ', smsResponse)
+
+
      if(code) {
        res.json({success:'SUCCESS! You have validated your device'})
      } else {

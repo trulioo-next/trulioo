@@ -59,7 +59,8 @@ export default (state = INITIAL_STATE, action) => {
 
       case SEVEN_REWARDS_SMS:
         return { ...state,
-          sms: action.payload
+          sms: action.payload.sms,
+          user:action.payload.user
         }  
 
       case SEVEN_REWARDS_REDEEM:

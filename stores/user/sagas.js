@@ -285,15 +285,18 @@ function* checkSms(payload) {
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
-     
 
+
+    console.log('CLEAR SMS PAYLOAD  ', payload )
 
     if(payload.clear) {
       console.log('CLEAR SMS ')
-      yield put({ type: SEVEN_REWARDS_SMS, payload:false})
+     //  yield put({ type: SEVEN_REWARDS_SMS, payload:false})
     } else {
       const smsResponse = yield call(sevenRewardsService.verifySms, payload)
-      yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
+      console.log('SMS RESONSE ', smsResponse )
+       
+     // yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
     }
     
   } catch(err) {
