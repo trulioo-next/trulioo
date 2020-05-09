@@ -106,7 +106,7 @@ export class UserProfile extends Component {
          if(this.state.formSubmit && !this.state.showSuccessModalLoaded && !this.state.closeSuccessModal) {
               
              let formErrors =  this.getFieldErrors();
-             let message = 'SUCCESS!'
+             let message = 'YOUR PROFILE HAS BEEN UPDATED'
              if(formErrors) {
                 if(formErrors.birthdate) {
                   message = formErrors.birthdate[0]
@@ -305,9 +305,10 @@ export class UserProfile extends Component {
           <Button
             type="button"
             variant="dark"
+            className="bt--md"
             onClick={() => this.setState({ showModal: true })}
           >
-            Edit
+            EDIT
           </Button>
  
           <Modal

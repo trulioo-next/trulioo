@@ -22,7 +22,7 @@ export default async (req, res) => {
       }) 
      });
 
-     console.log('CARD RESPNSE --- : ',cardCheckResponse)   
+     console.log('CARD RESPNSE --- : ', cardCheckResponse)   
  
      res.json(cardCheckResponse)
      return

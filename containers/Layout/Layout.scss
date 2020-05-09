@@ -246,3 +246,30 @@ a:not([href]) {
   text-align: left !important;
 }
 
+.more--options {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 0px;
+
+  a {
+    color: #1b8065;
+  }
+}
+
+// 
+.sms__toggle__header {
+  position: relative;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  
+}
+
+
+.inner__modal__page {
+  a {
+    color:  #1b8065;
+  }
+}

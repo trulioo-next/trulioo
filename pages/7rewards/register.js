@@ -178,8 +178,13 @@ class RegisterScreen extends React.Component {
     e.preventDefault();
     this.setState({ isLoading: true });
 
-    let bday = this.state.bDay;
+    console.log('SUBMIT FORM ')
 
+    // TODO: VALIDATION NEEDS TO BE MOVED INTO A HELPER CLASS 
+    //
+    let bday = this.state.bDay;
+    let terms = this.state.checkBox1 === false ? false : true;
+    let communications = this.state.checkBox2 === false ? false : true;
     const payload = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -192,9 +197,10 @@ class RegisterScreen extends React.Component {
       phone: this.state.phone,
       postal: this.state.postal,
       cardNumber: this.state.cardNumber,
+      terms,
+      communications
     };
    
- 
     const validateEmail = (email) =>  {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
@@ -212,8 +218,6 @@ class RegisterScreen extends React.Component {
           confirmPassword:passwordValid,
           phone: this.state.phone === '' ? true : null,
           postal: this.state.postal === '' ? true : null,
-          checkBox1:this.state.checkBox1 === false ? true : null,
-          checkBox2:this.state.checkBox2 === false ? true : null,
           bMonth: this.state.bMonth === '' ? true : null,
           bDay: this.state.bDay === '' ? true : null,
           bYear: this.state.bYear === '' ? true : null,
@@ -229,8 +233,6 @@ class RegisterScreen extends React.Component {
       passwordValid || 
       this.state.phone === '' ||
       this.state.postal === '' || 
-      this.state.checkBox1 === false || 
-      this.state.checkBox2 === false || 
       this.state.bMonth === '' ||
       this.state.bDay === '' || 
       this.state.bYear === ''
@@ -238,7 +240,7 @@ class RegisterScreen extends React.Component {
       isValid = false;
     }
 
-    // console.log('FIELDS', this.state.fieldErrors )
+    // console.log('FIELDS', payload )
  
     if(isValid) {
      this.setState({loggedIn:true})
@@ -671,7 +673,7 @@ class RegisterScreen extends React.Component {
                                   </Form.Check>
                                 </Form.Group>
                               </fieldset>
-                              <p class='recaptcha-language'>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+                              <p className='recaptcha-language'>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
                               <Button type="submit" className="mt-4" onClick={(e) => this.submitForm(e)}>
                                 Register
                               </Button>

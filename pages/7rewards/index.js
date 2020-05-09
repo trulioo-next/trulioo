@@ -23,12 +23,13 @@ class SevenRewards extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
-      showSMSModal:false,
+      showSMSModal:true,
       modalMessage:'',
       modalLoaded:false,
       smscode:'',
       errorLoaded:false,
-      smsLoaded:false
+      smsLoaded:false,
+      verifyToggle:false
     };
   }
 
@@ -43,7 +44,6 @@ class SevenRewards extends React.Component {
       this.setState({ loggedIn: true });
     }
 
-     
     let sendSmsPrompt = 
        this.props.user && 
        this.props.user.sms && 
@@ -54,7 +54,10 @@ class SevenRewards extends React.Component {
     }   
 
   }
-  componentDidUpdate() {}
+  componentDidUpdate() {
+
+    // 
+  }
 
   updateCode(e) {
     this.setState({smscode:e.target.value})
@@ -79,7 +82,7 @@ class SevenRewards extends React.Component {
         this.setState({validateNumberModal:false, codeSet:true})
         let payload = { token: this.props.user.token, mobileNumber: phone, code: this.state.smscode  }
         this.props.verifySmsRequest(payload)
-        this.setState({showSMSModal:false});
+       // this.setState({showSMSModal:false});
         
         setTimeout(function () {
           // props.verifySmsRequest({ clear: true })
@@ -100,6 +103,32 @@ class SevenRewards extends React.Component {
     this.setState({showSMSModal:false});
   }
 
+  handleVerifyToggle(e) {
+     e.preventDefault();
+     this.setState({verifyToggle:true})
+  }
+
+  handleVerifyToggleOff(e) {
+     e.preventDefault();
+     this.setState({verifyToggle:false})
+  }
+
+  resendSms(e) {
+    e.preventDefault();
+    this.setState({verifyToggle:false});
+    let phone = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.mobile_number 
+      ? this.props.user.user.mobile_number
+      : false;
+
+      if(phone) {
+        let payload = { token: this.props.user.token, mobileNumber: phone  }
+        this.props.verifySmsRequest(payload)
+      }
+  }
+
   render() {
     
     let smsError = 
@@ -114,12 +143,23 @@ class SevenRewards extends React.Component {
 
     let smsSuccess = 
       this.props.user &&
-      this.props.user && 
       this.props.user.sms &&
       this.props.user.sms.success
       ? true
       : false  
+
+    let userPhone = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.mobile_number 
+      ? this.props.user.user.mobile_number
+      : false
       
+    if(userPhone) {
+     let n = userPhone.toString()
+     userPhone = n.replace(/.(?=.{4})/g, '');
+      
+    }  
 
     if(smsError && !this.state.errorLoaded) {
       // this.props.verifySmsRequest({ clear: true })
@@ -131,6 +171,8 @@ class SevenRewards extends React.Component {
       this.setState({showSMSModal:true,smsLoaded:true})
       // this.props.verifySmsRequest({ clear: true })
     }
+
+    console.log('showSMSModal', this.state.showSMSModal )
  
     return (
       <Layout>
@@ -143,38 +185,74 @@ class SevenRewards extends React.Component {
           >
             <Modal.Header closeButton />
             <Modal.Body>
-               
-              <div className="center--text">
-                <h2 className="SevenRewards__heading text-center">Lets Verify Your Mobile Phone</h2>
-                <p>Account verification required for new members to receive welcome offer.</p>
-                <h6>{this.state.modalMessage}</h6>
+              { !this.state.verifyToggle &&  
+                <div className="center--text">
+                  <h2 className="SevenRewards__heading text-center">Lets Verify Your Mobile Phone</h2>
+                  <p>Account verification required for new members to receive welcome offer.</p>
+                  <h6>{this.state.modalMessage}</h6>
 
-                <form>
-                  <input
-                    className="verify--input"
-                    id="sms_code"
-                    type="text"
-                    value={this.state.smscode}
-                    placeholder="Verification PIN"
-                    onChange={e => this.updateCode(e)}
-                  />
-                </form>
-                { smsError && 
-                  <p className="field--error">{smsError}</p>
-                }
+                  <form>
+                    <input
+                      className="verify--input"
+                      id="sms_code"
+                      type="text"
+                      value={this.state.smscode}
+                      placeholder="Verification PIN"
+                      onChange={e => this.updateCode(e)}
+                    />
+                  </form>
+                  { smsError && 
+                    <p className="field--error">{smsError}</p>
+                  }
 
-               <button
-                green className="verify--button" 
-                onClick={(e) =>  this.verifySMSWithCode(e) }
-              >
-                Verify
-              </button> 
-              <div className="close--button">
-               <a href="/" onClick={(e) => this.handleClose(e)}>Cancel</a>
-              </div>
+                 <button
+                  green className="verify--button" 
+                  onClick={(e) =>  this.verifySMSWithCode(e) }
+                >
+                  Verify
+                </button> 
+                <div className="close--button">
+                 <a href="/" onClick={(e) => this.handleClose(e)}>Cancel</a>
+                </div>
+                
+                <div className="more--options">
+                 <a href="/" onClick={(e) => this.handleVerifyToggle(e)}>Click Here</a><span> for more options</span>
+                </div>  
+              
+                </div>
+              }
 
+              { this.state.verifyToggle && 
+                  <div className="inner__modal__page">
+                     <h2 className="SevenRewards__heading text-center">Lets Verify Your Mobile Phone</h2>  
+                     <div className="sms__toggle__header">
+                        <div>Verify (***)***-{ userPhone }</div>
+                        <div><a href="/" onClick={(e) => this.resendSms(e)}>Resend</a></div>
+                     </div>
+                     <div>
+                      <p>
+                        Didn't receive your 6 digit PIN? No problem, click the resend and we will send you a new unique PIN to verify your mobile phone.
+                      </p>
+                      <p>
+                        Help? <a href="" target="_blank">Contact Support</a>
+                      </p>
+                      <p>
+                       If you are having issues verifying your mobile phone, contact support and we will look into it for you. 
+                      </p>
+                     </div>
 
-              </div>
+                     <div>
+                      <button
+                        green className="verify--button" 
+                        onClick={(e) =>  this.handleVerifyToggleOff(e) }
+                      >
+                        Back
+                      </button> 
+
+                     </div>
+
+                  </div>
+              }
             </Modal.Body>
           </Modal>
 
