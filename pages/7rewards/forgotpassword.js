@@ -143,7 +143,7 @@ class ResetPassword extends React.Component {
                         { formError && 
                           <p>{ formError[0] }</p>
                         }
-                        <p class='recaptcha-language'>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p> 
+                        <p class='recaptcha-language'>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.</p> 
                         <Button id="submit" onClick={e => this.submitForm(e)}>
                           Send Email
                         </Button>
