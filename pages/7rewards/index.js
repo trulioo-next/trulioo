@@ -177,11 +177,16 @@ class SevenRewards extends React.Component {
 
     // console.log('isVerified' , isVerified )
     if(!isVerified && !this.state.smsLoaded) {
-      this.setState({showSMSModal:true,smsLoaded:true})
+       this.setState({smsLoaded:true});
+      setTimeout(() => {
+        this.setState({showSMSModal:true });
+      }, 3000)
+      
       // this.props.verifySmsRequest({ clear: true })
     } 
 
     if( isVerified && !this.state.verifiedLoaded) {
+
       this.setState({showSMSModal:false,verifiedLoaded:true})
       // this.props.verifySmsRequest({ clear: true })
     } 

@@ -107,14 +107,30 @@ class MyAccount extends React.Component {
   render() {
     const userInfo = this.props.user && this.props.user.user ? this.props.user.user : false;
 
-    const cardError = 
+    let cardError = 
+    this.props.user && 
+    this.props.user.addCard && 
+    this.props.user.addCard.error && 
+    this.props.user.addCard.error.payload && 
+    this.props.user.addCard.error.payload.error_description
+    ? this.props.user.addCard.error.payload.error_description
+    : false;
+
+    if(cardError === 'Invalid input.') {
+      cardError = false;
+    }
+
+    const loyaltyError = 
     this.props.user && 
     this.props.user.addCard && 
     this.props.user.addCard.error && 
     this.props.user.addCard.error.payload && 
     this.props.user.addCard.error.payload.field_errors && 
-    this.props.user.addCard.error.payload.field_errors.new_loyalty_id ? this.props.user.addCard.error.payload.field_errors.new_loyalty_id[0] : false;
-   
+    this.props.user.addCard.error.payload.field_errors.new_loyalty_id 
+    ? this.props.user.addCard.error.payload.field_errors.new_loyalty_id[0] 
+    : false;
+
+     
     return (
       <Layout>
         <Header title="7Rewards" />
@@ -175,6 +191,11 @@ class MyAccount extends React.Component {
                         { cardError && 
 
                           <p className="field--error white">{cardError}</p>
+
+                        }
+                        { loyaltyError && 
+
+                          <p className="field--error white">{loyaltyError}</p>
 
                         }
                       </Form.Group>
