@@ -29,7 +29,8 @@ class SevenRewards extends React.Component {
       smscode:'',
       errorLoaded:false,
       smsLoaded:false,
-      verifyToggle:false
+      verifyToggle:false,
+      verifiedLoaded:false
     };
   }
 
@@ -74,20 +75,19 @@ class SevenRewards extends React.Component {
       this.props.user.user.mobile_number 
       ? this.props.user.user.mobile_number
       : false;
-
-
+ 
       // console.log('PHONE SENDING SMS REQUEST ', phone )
        
       if(phone) {
         this.setState({validateNumberModal:false, codeSet:true})
         let payload = { token: this.props.user.token, mobileNumber: phone, code: this.state.smscode  }
         this.props.verifySmsRequest(payload)
-       // this.setState({showSMSModal:false});
+        // this.setState({showSMSModal:false});
         
-        setTimeout(function () {
-          // props.verifySmsRequest({ clear: true })
-          console.log('PHONE SENDING SMS REQUEST ', phone )
-        },10000)
+        // setTimeout(function () {
+        //   // props.verifySmsRequest({ clear: true })
+        //   console.log('PHONE SENDING SMS REQUEST ', phone )
+        // },10000)
         
       }
    
@@ -158,8 +158,8 @@ class SevenRewards extends React.Component {
     let isVerified = 
       this.props.user && 
       this.props.user.user &&
-      this.props.user.user.is_email_verified 
-      ? this.props.user.user.is_email_verified
+      this.props.user.user.is_sms_verified 
+      ? this.props.user.user.is_sms_verified
       : false  
 
       
@@ -175,12 +175,17 @@ class SevenRewards extends React.Component {
       this.setState({errorLoaded:true,showSMSModal:true})
     }  
 
-    // console.log('smsError' , this.props.user )
+    // console.log('isVerified' , isVerified )
     if(!isVerified && !this.state.smsLoaded) {
       this.setState({showSMSModal:true,smsLoaded:true})
       // this.props.verifySmsRequest({ clear: true })
-    }
- 
+    } 
+
+    if( isVerified && !this.state.verifiedLoaded) {
+      this.setState({showSMSModal:false,verifiedLoaded:true})
+      // this.props.verifySmsRequest({ clear: true })
+    } 
+        
     return (
       <Layout>
          <Modal

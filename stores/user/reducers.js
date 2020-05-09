@@ -19,7 +19,8 @@ import {
   SEVEN_REWARDS_UPDATE_ERROR,
   SEVEN_REWARDS_UPDATE_PREFERNCES,
   SEVEN_REWARDS_ADDCARD,
-  SEVEN_REWARDS_SMS_ERROR
+  SEVEN_REWARDS_SMS_ERROR,
+  SEVEN_REWARDS_SMS_CLEAR
 } from '../types'
 
 
@@ -60,8 +61,13 @@ export default (state = INITIAL_STATE, action) => {
 
       case SEVEN_REWARDS_SMS:
         return { ...state,
-          sms: action.payload
+          sms: action.payload.success,
+          user:action.payload.user
         }  
+      case SEVEN_REWARDS_SMS_CLEAR:
+        return { ...state,
+          sms: action.payload
+        }    
 
       case SEVEN_REWARDS_SMS_ERROR:
         return { ...state,

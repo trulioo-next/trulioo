@@ -33,7 +33,8 @@ import {
   SEVEN_REWARDS_UPDATE_PREFERNCES,
   SEVEN_REWARDS_ADDCARD_REQUEST,
   SEVEN_REWARDS_ADDCARD,
-  SEVEN_REWARDS_SMS_ERROR
+  SEVEN_REWARDS_SMS_ERROR,
+  SEVEN_REWARDS_SMS_CLEAR
 } from '../types'
 
 function* startup(payload) {
@@ -288,23 +289,21 @@ function* checkSms(payload) {
   try {
     const state = yield select((state) => state)
     const sevenRewardsService = SevenRewardsService(state);
-
-
-    console.log('SMS PAYLOAD  ', payload )
-
+ 
     if(payload.clear) {
       console.log('CLEAR SMS ')
-      yield put({ type: SEVEN_REWARDS_SMS, payload:false})
+      yield put({ type: SEVEN_REWARDS_SMS_CLEAR, payload:false})
     } else {
       const smsResponse = yield call(sevenRewardsService.verifySms, payload)
-      console.log('SMS RESONSE ', smsResponse )
-       
-      yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
+      if( !smsResponse.user ) {
+        yield put({ type:SEVEN_REWARDS_SMS_ERROR, payload: smsResponse })
+      } else {
+        yield put({ type: SEVEN_REWARDS_SMS, payload:smsResponse})
+      }
+      
     }
     
   } catch(err) {
-
-   
     console.log('SMS ERROR SAGA  ', err )
     yield put({ type:SEVEN_REWARDS_SMS_ERROR, payload: err })
   }

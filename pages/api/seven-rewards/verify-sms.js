@@ -8,8 +8,6 @@ export default async (req, res) => {
 
     const body = JSON.parse(req.body)
     const headers = { "Content-Type": "application/json" };
-    console.log('BODY :: >> ', body.body )
-
     let code = body.body.code;
 
     let payload = {
@@ -23,17 +21,10 @@ export default async (req, res) => {
       }
     }
 
-    // if(body.body.mobileNumber ==='') {
-    //   res.json({error: 'No Number Was Added', sms:{error:{payload:{ error_description:'Please save a valid phone number before trying to verify.' }}}})
-    // }
-
     const registerHeaders = { 
       "Content-type": "application/json",
       "Authorization":`Bearer ${body.body.token}`
     };
-
-
-    console.log('registerHeaders  ', registerHeaders )
 
     const smsResponse = await fetch(REWARDS_API_URL+'/v4/users/me/verify/sms',
      {
@@ -42,10 +33,7 @@ export default async (req, res) => {
        body: JSON.stringify(payload) 
      });
       
-     console.log('SMS RESPONSE ', smsResponse)
-
-
-      // User Full Profile 
+    // User Full Profile 
     // /v4/users/me/?profile=full
     const fullProfile = await fetch(REWARDS_API_URL+'/v4/users/me/?profile=full',
      {
@@ -53,13 +41,8 @@ export default async (req, res) => {
        headers: registerHeaders
      }); 
 
-      console.log('USER FULL PROFILE ', fullProfile )
-
-
      res.json({success:smsResponse, user:fullProfile})
     
-      
-
      return
   } catch(error) {
     console.log('SMS ERROR ', error )
