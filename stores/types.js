@@ -46,6 +46,7 @@ export const SEVEN_REWARDS_REDEEM_REQUEST = 'seven_rewards/redeem/SEVEN_REWARDS_
 export const SEVEN_REWARDS_REDEEM = 'seven_rewards/redeem/SEVEN_REWARDS_REDEEM'
 export const SEVEN_REWARDS_SMS_REQUEST = 'seven_rewards/sms/SEVEN_REWARDS_SMS_REQUEST'
 export const SEVEN_REWARDS_SMS = 'seven_rewards/sms/SEVEN_REWARDS_SMS'
+export const SEVEN_REWARDS_SMS_ERROR = 'seven_rewards/error/SEVEN_REWARDS_SMS_ERROR'
 export const SEVEN_REWARDS_UPDATE_REQUEST = 'seven_rewards/update/SEVEN_REWARDS_UPDATE_REQUEST'
 export const SEVEN_REWARDS_UPDATE = 'seven_rewards/update/SEVEN_REWARDS_UPDATE'
 export const SEVEN_REWARDS_UPDATE_ERROR = 'seven_rewards/error/SEVEN_REWARDS_UPDATE_ERROR'

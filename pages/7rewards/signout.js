@@ -57,7 +57,7 @@ class UserAuth extends React.Component {
                         You have successfully logged out.
                       </h1>
                     </div>
-                    <div className="home__button" style={{marginTop:'30px;', position:'relative', textAlign:'center', display:'block', top:'20px'}}>
+                    <div className="home__button" style={{marginTop:'30px', position:'relative', textAlign:'center', display:'block', top:'20px'}}>
                       <Button id="submit" onClick={e => routerPush('/') }>
                         Back to Home
                       </Button>

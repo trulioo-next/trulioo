@@ -23,14 +23,17 @@ export default async (req, res) => {
       }
     }
 
-    if(body.body.mobileNumber ==='') {
-      res.json({error: 'No Number Was Added', sms:{error:{payload:{ error_description:'Please save a valid phone number before trying to verify.' }}}})
-    }
+    // if(body.body.mobileNumber ==='') {
+    //   res.json({error: 'No Number Was Added', sms:{error:{payload:{ error_description:'Please save a valid phone number before trying to verify.' }}}})
+    // }
 
     const registerHeaders = { 
       "Content-type": "application/json",
       "Authorization":`Bearer ${body.body.token}`
     };
+
+
+    console.log('registerHeaders  ', registerHeaders )
 
     const smsResponse = await fetch(REWARDS_API_URL+'/v4/users/me/verify/sms',
      {
@@ -43,14 +46,15 @@ export default async (req, res) => {
 
 
      if(code) {
-       res.json({success:'SUCCESS! You have validated your device'})
+       res.json({success:smsResponse})
      } else {
-       res.json({success:'SUCCESS! Code Sent to your Mobile Device'})
+       res.json({success:smsResponse})
      }
       
 
      return
   } catch(error) {
+    console.log('SMS ERROR ', error )
     res.json({error: error, sms:error })
     // res.status(400).send({ error: error })
   }

@@ -50,6 +50,8 @@ class MyAccount extends React.Component {
             }
         }
       }
+    } else {
+      routerPush('/7rewards/signin')
     }
   }
 

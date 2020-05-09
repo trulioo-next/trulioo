@@ -161,6 +161,9 @@ a:not([href]) {
   }
 }
 
+
+// TODO: MOVE THESE FROM HERE : RT
+
 .bg-gray {
   background-color: $gray;
 }
@@ -237,5 +240,9 @@ a:not([href]) {
 .close--button {
   position: relative;
   margin-top: 20px;
+}
+
+.left--align {
+  text-align: left !important;
 }
 

@@ -9,6 +9,7 @@ import appSelectors from '@/stores/user/selectors';
 import loadSelectors from '@/stores/app/selectors';
 import CheckMark from '@/static/images/modal-check.svg';
 import FormData from '@/helpers/formData';
+import routerPush from '@/helpers/routerPush';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -60,7 +61,8 @@ export class UserProfile extends Component {
       smscode:'',
       codeSet:false,
       verifyDisabled:true,
-      phoneLoaded:false
+      phoneLoaded:false,
+      showEmailModal:false
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -75,6 +77,20 @@ export class UserProfile extends Component {
                     this.props.user.fieldErrors.error.payload && 
                     this.props.user.fieldErrors.error.payload.field_errors 
                     ? this.props.user.fieldErrors.error.payload.field_errors 
+                    : false
+
+    return  formErrors                        
+
+  }
+
+  getPasswordResetErrors() {
+
+    let formErrors = this.props.user && 
+                    this.props.user.passwordReset && 
+                    this.props.user.passwordReset.error && 
+                    this.props.user.passwordReset.error.payload && 
+                    this.props.user.passwordReset.error.payload.field_errors 
+                    ? this.props.user.passwordReset.error.payload.field_errors 
                     : false
 
     return  formErrors                        
@@ -170,12 +186,19 @@ export class UserProfile extends Component {
   onValueChange(e, type) {
     this.setState({ [type]: e.target.value });
   }
+  
+  openPasswordReset(e) {
+    e.preventDefault();
+    this.setState({showEmailModal:true, showModal:false})
+  }
+  passwordReset(e) {
 
-  passwordReset() {
+    e.preventDefault();
+
+    // routerPush('/7rewards/forgotpassword');
     let payload = {
       email: this.state.email,
     };
-
     this.props.passwordResetRequest(payload);
   }
 
@@ -186,6 +209,31 @@ export class UserProfile extends Component {
     
     // let payload = { clear: true }
     // this.props.verifySmsRequest(payload)
+  }
+
+  closeEmailModal(e) {
+    e.preventDefault();
+    this.setState({showEmailModal:false})
+  }
+  handleEmailClose() {
+    
+    let isSuccess =
+      this.props.user && 
+      this.props.user.passwordReset && 
+      this.props.user.passwordReset.success
+      ? true
+      : false
+      
+      // Rehydrate ! 
+      if(isSuccess) {
+         let payload = {
+          clear: true,
+        };
+        this.props.passwordResetRequest(payload);
+      }
+
+
+    this.setState({showEmailModal:false})
   }
 
   updateCode(e) {
@@ -229,6 +277,22 @@ export class UserProfile extends Component {
         ? fieldErrors.email[0]
         : false;
 
+   let passwordFieldErrors = this.getPasswordResetErrors()     
+
+   let passwordResetError =
+      passwordFieldErrors &&
+      passwordFieldErrors.email 
+        ? passwordFieldErrors.email[0]
+        : false;     
+
+    let passwordResetSuccess =
+      this.props.user && 
+      this.props.user.passwordReset && 
+      this.props.user.passwordReset.success
+      ? true
+      : false
+
+
     let smsError = this.props.user && 
         this.props.user.sms && 
         this.props.user.sms.error && 
@@ -245,40 +309,7 @@ export class UserProfile extends Component {
           >
             Edit
           </Button>
-
-          
-
-          <Modal
-            show={this.state.validateNumberModal}
-            onHide={() => this.handleClose()}
-            centered
-            size="sm"
-          >
-            <Modal.Header closeButton />
-            <Modal.Body>
-              
-               <form className="form__test">
-                <input
-                   className="underlined__input"
-                  id="sms_code"
-                  type="text"
-                  value={this.state.smscode}
-                  placeholder="Enter Code Here"
-                  onChange={e => this.updateCode(e)}
-                />
-              </form>
-
-              <div className="margin--top"><Button
-                green
-                className="Section__cta"
-                onClick={(e) =>  this.verifySMSWithCode(e) }
-              >
-                Verify SMS
-              </Button></div>
-            </Modal.Body>
-          </Modal>
-          
-
+ 
           <Modal
             show={this.state.showSuccessModal}
             onHide={() => this.handleClose()}
@@ -293,6 +324,72 @@ export class UserProfile extends Component {
               <div className="center--text">
                 <h5>{this.state.successMessage}</h5>
               </div>
+            </Modal.Body>
+          </Modal>
+
+          <Modal
+            className="modal__rounded"
+            show={this.state.showEmailModal}
+            onHide={() => this.handleEmailClose()}
+            centered
+            size="md"
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>
+              { !passwordResetSuccess && 
+              <div>
+                <h2 className="SevenRewards__heading text-center">
+                  Forgot your password?
+                </h2>
+                <div>
+                  <p className="center--text">
+                    Please enter the email adress that was used to register your account.
+                    If the email you provide is valid, you will receive a link to reset your password shortly.
+                  </p>
+
+                  <Form>
+                    <Form.Row>
+                      <Col>
+                        <Form.Group controlId="edit-email">
+                          <Form.Label className="left--align">Email</Form.Label>
+                          <Form.Control
+                            size="lg"  
+                            value={this.state.email}
+                            onChange={e => this.onValueChange(e, 'email')}
+                          />
+                        </Form.Group>
+                        { passwordResetError && 
+                          <p className="field--error">{passwordResetError}</p>
+                        }
+                      </Col>
+                      </Form.Row>
+                      <div className="center--text">
+                        <button type="submit" className="Button mt-4" onClick={(e) => this.passwordReset(e) }>
+                          Update
+                        </button>
+                        <div className="margin--top">
+                          <a href="/" onClick={ (e) => this.closeEmailModal(e) }>Cancel</a>
+                        </div>
+                      </div>
+                   </Form> 
+                </div>
+              </div>
+              }
+
+              { passwordResetSuccess &&
+
+                <div>
+                  <div className="check__mark">
+                    <CheckMark />
+                  </div>
+                  <div className="center--text">
+                    <h2 className="SevenRewards__heading text-center">
+                      Check your inbox
+                    </h2>
+                    <p>We have sent you an email with further instructions on resetting your password. You should receive it momentarily.</p>
+                  </div>
+                </div>
+              }
             </Modal.Body>
           </Modal>
 
@@ -342,15 +439,7 @@ export class UserProfile extends Component {
                 </Form.Group>
                 <Form.Group controlId="edit-mobile-number">
                   <Form.Label className="small">Mobile Number</Form.Label>
-                   <div className="verify__button"><Button
-                    green
-                    type="button"
-                    className="-fixed--height"
-                    disabled={this.state.verifyDisabled}
-                    onClick={(e) => this.verifyMobileNumber(e)}
-                  >
-                    <span className="white--text">Verify</span>
-                  </Button></div>
+                    
                   <Form.Control
                     size="lg"
                     as="input"
@@ -430,7 +519,7 @@ export class UserProfile extends Component {
                   <Button
                     variant="dark"
                     type="button"
-                    onClick={() => this.passwordReset()}
+                    onClick={(e) => this.openPasswordReset(e)}
                   >
                     Change Password
                   </Button>

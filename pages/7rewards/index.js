@@ -145,7 +145,7 @@ class SevenRewards extends React.Component {
             <Modal.Body>
                
               <div className="center--text">
-                <h2>Lets Verify Your Mobile Phone</h2>
+                <h2 className="SevenRewards__heading text-center">Lets Verify Your Mobile Phone</h2>
                 <p>Account verification required for new members to receive welcome offer.</p>
                 <h6>{this.state.modalMessage}</h6>
 

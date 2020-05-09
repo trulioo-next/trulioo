@@ -139,14 +139,15 @@ export default function SevenRewardsService(state) {
 		let data = await API.post('/api/seven-rewards/verify-sms', {body:payload});
 
 
-	    let updatedUser = payload.user.user;
-        updatedUser.is_sms_verified = true;		
+	    let updatedUser = state.user.user;	
 		
 
 		let user = {
 		 user: updatedUser,
 		 sms:data
 		}
+
+		console.log('SMS SERVICE ', user )
 
 		if(data.error) {
 			ErrorHandler({
@@ -157,7 +158,7 @@ export default function SevenRewardsService(state) {
 		        }
 		    })
 		}
-		return data;
+		return user;
 	}
 
 	async function updateUser(payload) {
