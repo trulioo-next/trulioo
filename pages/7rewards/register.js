@@ -178,12 +178,12 @@ class RegisterScreen extends React.Component {
     e.preventDefault();
     this.setState({ isLoading: true });
 
-    console.log('SUBMIT FORM ')
+   
 
     // TODO: VALIDATION NEEDS TO BE MOVED INTO A HELPER CLASS 
     //
     let bday = this.state.bDay;
-    let terms = this.state.checkBox1 === false ? false : true;
+   // let terms = this.state.checkBox1 === false ? false : true;
     let communications = this.state.checkBox2 === false ? false : true;
     const payload = {
       firstName: this.state.firstName,
@@ -197,7 +197,7 @@ class RegisterScreen extends React.Component {
       phone: this.state.phone,
       postal: this.state.postal,
       cardNumber: this.state.cardNumber,
-      terms,
+      checkBox1:this.state.checkBox1 === false ? true : null,
       communications
     };
    
@@ -221,6 +221,7 @@ class RegisterScreen extends React.Component {
           bMonth: this.state.bMonth === '' ? true : null,
           bDay: this.state.bDay === '' ? true : null,
           bYear: this.state.bYear === '' ? true : null,
+         checkBox1:this.state.checkBox1 === false ? true : null,
       }
     })
 
@@ -235,12 +236,15 @@ class RegisterScreen extends React.Component {
       this.state.postal === '' || 
       this.state.bMonth === '' ||
       this.state.bDay === '' || 
-      this.state.bYear === ''
+      this.state.bYear === '' || 
+      this.state.checkBox1 === false 
     ) {
       isValid = false;
     }
 
-    // console.log('FIELDS', payload )
+    console.log('FIELDS', payload )
+
+   //  console.log('SUBMIT FORM ', this.state.checkBox1 )
  
     if(isValid) {
      this.setState({loggedIn:true})

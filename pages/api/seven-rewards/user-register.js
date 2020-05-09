@@ -50,7 +50,7 @@ export default async (req, res) => {
         "birthdate": birthdate, // year-month-day
         "postal_code": body.body.postal,
         "country": "CA",
-        "accepts_ca_terms":body.body.terms,
+        "accepts_ca_terms":true,
         "accepts_ca_communications":body.body.communications,
         "link_card": body.body.cardNumber // 19 digit number
     }

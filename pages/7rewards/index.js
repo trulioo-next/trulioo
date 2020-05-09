@@ -23,7 +23,7 @@ class SevenRewards extends React.Component {
       valid: false,
       isLoading: false,
       loggedIn: false,
-      showSMSModal:true,
+      showSMSModal:false,
       modalMessage:'',
       modalLoaded:false,
       smscode:'',
@@ -154,6 +154,15 @@ class SevenRewards extends React.Component {
       this.props.user.user.mobile_number 
       ? this.props.user.user.mobile_number
       : false
+
+    let isVerified = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.is_email_verified 
+      ? this.props.user.user.is_email_verified
+      : false  
+
+      
       
     if(userPhone) {
      let n = userPhone.toString()
@@ -166,13 +175,11 @@ class SevenRewards extends React.Component {
       this.setState({errorLoaded:true,showSMSModal:true})
     }  
 
-    console.log('smsSuccess' , smsSuccess )
-    if(smsSuccess && !this.state.smsLoaded) {
+    console.log('isVerified' , isVerified )
+    if(!isVerified && !this.state.smsLoaded) {
       this.setState({showSMSModal:true,smsLoaded:true})
       // this.props.verifySmsRequest({ clear: true })
     }
-
-    console.log('showSMSModal', this.state.showSMSModal )
  
     return (
       <Layout>
