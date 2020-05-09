@@ -140,11 +140,11 @@ export default function SevenRewardsService(state) {
 
 
 	    let updatedUser = state.user.user;	
-		
+		console.log('SERVICE SMS DATA ', data )
 
 		let user = {
-		 user: updatedUser,
-		 sms:data
+		 user: data.user,
+		 sms:data.success
 		}
 
 		console.log('SMS SERVICE ', user )
@@ -158,7 +158,7 @@ export default function SevenRewardsService(state) {
 		        }
 		    })
 		}
-		return user;
+		return data;
 	}
 
 	async function updateUser(payload) {

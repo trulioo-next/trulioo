@@ -45,17 +45,25 @@ export default async (req, res) => {
      console.log('SMS RESPONSE ', smsResponse)
 
 
-     if(code) {
-       res.json({success:smsResponse})
-     } else {
-       res.json({success:smsResponse})
-     }
+      // User Full Profile 
+    // /v4/users/me/?profile=full
+    const fullProfile = await fetch(REWARDS_API_URL+'/v4/users/me/?profile=full',
+     {
+       method: 'GET',
+       headers: registerHeaders
+     }); 
+
+      console.log('USER FULL PROFILE ', fullProfile )
+
+
+     res.json({success:smsResponse, user:fullProfile})
+    
       
 
      return
   } catch(error) {
     console.log('SMS ERROR ', error )
-    res.json({error: error, sms:error })
+    res.json({error: error  })
     // res.status(400).send({ error: error })
   }
 };

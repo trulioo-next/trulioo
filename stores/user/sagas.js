@@ -290,7 +290,7 @@ function* checkSms(payload) {
     const sevenRewardsService = SevenRewardsService(state);
 
 
-    console.log('CLEAR SMS PAYLOAD  ', payload )
+    console.log('SMS PAYLOAD  ', payload )
 
     if(payload.clear) {
       console.log('CLEAR SMS ')

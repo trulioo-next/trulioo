@@ -76,7 +76,7 @@ class SevenRewards extends React.Component {
       : false;
 
 
-      console.log('PHONE SENDING SMS REQUEST ', phone )
+      // console.log('PHONE SENDING SMS REQUEST ', phone )
        
       if(phone) {
         this.setState({validateNumberModal:false, codeSet:true})
@@ -175,7 +175,7 @@ class SevenRewards extends React.Component {
       this.setState({errorLoaded:true,showSMSModal:true})
     }  
 
-    console.log('isVerified' , isVerified )
+    // console.log('smsError' , this.props.user )
     if(!isVerified && !this.state.smsLoaded) {
       this.setState({showSMSModal:true,smsLoaded:true})
       // this.props.verifySmsRequest({ clear: true })
