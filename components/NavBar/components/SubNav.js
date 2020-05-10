@@ -79,9 +79,21 @@ const SubNavMenu = props => {
       }
  
       return (
-        <Link href={url}>
-          <a>{name}</a>
-        </Link>
+        <>
+        {name != 'Slurpee®' && (
+          <Link href={url}>
+            <a>{name}</a>
+          </Link>
+        )}
+        {name === 'Slurpee®' && (
+          <a  href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+            {name}
+          </a>
+        )}
+        </>
       );
     }
   }
