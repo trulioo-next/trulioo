@@ -46,7 +46,18 @@ const SubNavMenu = props => {
     }
 
     if (!isRewardsLink && !isMenuLink) {
-      hrefPath = '/[slug]';
+      let externalPath = url.split('://');
+      if (externalPath[0] === 'https' || externalPath[0] === 'http') {
+        return (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {name}
+            </a>
+        );
+      }
     }
 
     return (
@@ -159,9 +170,20 @@ const NavItem = props => {
 
   return (
     <li className="OffCanvas__item">
-      <Link href="/[slug]" as={item.url}>
-        <a className="OffCanvas__link">{item.name}</a>
-      </Link>
+      {item.name != 'Slurpee®' && (
+        <Link href="/[slug]" as={item.url}>
+          <a className="OffCanvas__link">{item.name}</a>
+        </Link>
+      )}
+      {item.name === 'Slurpee®' && (
+        <a  href={item.url}
+            className="OffCanvas__link"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+          {item.name}
+        </a>
+      )}
     </li>
   );
 };
