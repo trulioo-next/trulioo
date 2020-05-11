@@ -188,6 +188,7 @@ class SevenRewards extends React.Component {
             onHide={() => this.modalClose()}
             centered
             size="md"
+            animation={false}
           >
             <Modal.Header closeButton />
             <Modal.Body>

@@ -422,6 +422,7 @@ export class UserProfile extends Component {
             show={this.state.showSMSModal}
             onHide={() => this.modalClose()}
             centered
+            animation={false}
             size="md"
           >
             <Modal.Header closeButton />
