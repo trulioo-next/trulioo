@@ -263,13 +263,13 @@ a:not([href]) {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
-
-  
 }
 
 
 .inner__modal__page {
   a {
     color:  #1b8065;
+    text-decoration: underline;
+
   }
 }
