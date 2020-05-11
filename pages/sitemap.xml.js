@@ -8,7 +8,7 @@ const WP_DATA = 'https://content.7-eleven.ca/wp-json/wp/v2/pages';
 const WP_NUTITIONALS = 'https://content.7-eleven.ca/wp-json/api/v1/nutritionals';
 const WP_NEWSROOM = 'https://content.7-eleven.ca/wp-json/api/v1/newsroom';
 let newDate = new Date();
-const originalUrl = 'https://dev4.7eleven.ca'
+const originalUrl = 'https://7-eleven.ca'
 
 const createSitemap = (posts) => `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
