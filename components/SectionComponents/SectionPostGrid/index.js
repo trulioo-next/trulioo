@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import ColumnSpread from '@/components/ColumnSpread';
 import MediaObjectCard from '@/components/MediaObjectCard';
 
-import { nutritionalsDataSelector } from '@/stores/nutritionals/selectors';
+import { nutritionalsDataSelector, menuItemsSelector } from '@/stores/nutritionals/selectors';
 
 const SectionPostGrid = props => {
   let { posts, category, defaultImage } = props;
@@ -17,14 +17,32 @@ const SectionPostGrid = props => {
 
   // console.log('POSTS  props ', props )
 
-  function getDisplayTitle(category, slug, title) {
-    const displayTitle = useSelector(state =>
-      nutritionalsDataSelector(state, category, slug),
+  const nutritionals = useSelector(state =>
+      menuItemsSelector(state)
     );
+
+   
+
+  function getDisplayTitle(category, slug, title) {
+    
+    let menuItems = nutritionals;
+    let data = [];
+      if(menuItems) {
+        for(var i =0; i < menuItems.length; i++ ) {
+          if(menuItems[i].terms && menuItems[i].terms[0] ) {
+
+            if(  menuItems[i].slug === slug ) {
+              // console.log('FOUND DATA  ', menuItems[i] )
+            data = menuItems[i];
+          }
+          }
+        }
+      }    
+ 
     let defaultTitle = title;
-    if (displayTitle.nutritionals) {
-      if (displayTitle.nutritionals.display_title) {
-        defaultTitle = displayTitle.nutritionals.display_title;
+    if (data.nutritionals) {
+      if (data.nutritionals.display_title) {
+        defaultTitle = data.nutritionals.display_title;
       }
     }
 

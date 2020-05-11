@@ -61,6 +61,10 @@ export const nutritionalsSelector = (state) => {
    return state.nutritionals.taxonomies
  }	
 
+  export const menuItemsSelector = (state) => {
+   return state.nutritionals.menuItems
+ }
+
 
   export const nutritionalByTaxonomySelector = (taxName) => {
   	return (state) => {
@@ -137,5 +141,6 @@ export default {
   nutritionalByTaxonomySelector,
   taxonomiesSelector,
   lastFourSelector,
-  nutritionalsDataSelector
+  nutritionalsDataSelector,
+  menuItemsSelector
 }

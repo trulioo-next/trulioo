@@ -64,7 +64,7 @@ const SubNavMenu = props => {
         hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : '/[slug]';
       }
       if (isMenuLink) {
-        hrefPath = isMenuLink ? `/menu/[category]` : '/[slug]';
+        hrefPath =  `/menu/[category]`;
       }
       if (url === '/7rewards') {
         hrefPath = '/7rewards';
