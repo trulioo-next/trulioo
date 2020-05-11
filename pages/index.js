@@ -6,6 +6,7 @@ import SectionMaker from '../components/SectionMaker';
 import Layout from '../containers/Layout/Layout';
 import Header from '../components/Header/Header';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 
 import Error from 'next/error';
 
@@ -26,6 +27,11 @@ const Home = props => {
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Home - 7-Eleven Canada'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
+// 
+
+  // <Link href="/menu/[category]" as="/menu/crispy-classic-chicken">
+    //  <a>crispy classic chicken</a>
+   // </Link>
 
   return (
     <Layout>
@@ -56,6 +62,7 @@ const Home = props => {
 
     />
       <Header title={seoTitle} />
+  
       { data &&
         data.components.map((section, sectionKey) => (
           <SectionMaker

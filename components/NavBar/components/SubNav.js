@@ -64,7 +64,7 @@ const SubNavMenu = props => {
         hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : '/[slug]';
       }
       if (isMenuLink) {
-        hrefPath = isMenuLink ? `/menu/${isMenuLink}` : '/[slug]';
+        hrefPath = isMenuLink ? `/menu/[category]` : '/[slug]';
       }
       if (url === '/7rewards') {
         hrefPath = '/7rewards';
@@ -77,11 +77,13 @@ const SubNavMenu = props => {
       if (!isRewardsLink && !isMenuLink) {
         hrefPath = '/[page]';
       }
+
+     // console.log('HREFE ',  hrefPath, 'AS ', url )
  
       return (
         <>
         {name != 'Slurpee®' && (
-          <Link href={url}>
+          <Link href={hrefPath} as={url}>
             <a>{name}</a>
           </Link>
         )}

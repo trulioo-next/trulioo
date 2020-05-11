@@ -27,6 +27,7 @@ class Menu extends React.Component {
 
   componentDidMount() {
     this.props.getTheData();
+    console.log('THIS PAGE LOAD ? ')
   }
   componentDidUpdate() {}
 
