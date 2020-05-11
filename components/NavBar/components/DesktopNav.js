@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -10,9 +10,14 @@ import AccountIcon from '@/static/images/account.svg';
 import CaretIcon from '@/static/images/caret-down.svg';
 
 import { userDataSelector } from '@/stores/user/selectors';
+import { selectIsLoading } from '@/stores/app/selectors';
 
 const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   const isOpen = i === expanded;
+
+   
+   
+
   let itemClassnames = classNames(
     'SiteHeader__item',
     {
@@ -63,6 +68,7 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
 };
 const PrimaryNav = data => {
   const [expanded, setExpanded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   var searchIndex = 0;
   let LINKS = false;
   if (data && data.data && data.data.data) {
@@ -80,7 +86,17 @@ const PrimaryNav = data => {
 
   let accountLink =  userData && userData.auth.isAuth
       ? `/7rewards/`
-      : '/7rewards/signin';     
+      : '/7rewards/signin';  
+
+ 
+    const loading = useSelector(state => selectIsLoading(state));
+    useEffect(() => {
+       console.log('LOADING ', loading , expanded )
+       if(!loading && !loaded) {
+        setLoaded(true)
+        setExpanded(null)
+      }
+    }, []);
 
   return (
     <>
