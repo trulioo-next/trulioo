@@ -94,7 +94,8 @@ const SubNavMenu = props => {
        : true
 
       let rewardsLinks =
-        name === '7Rewards' ||
+       name === '7Rewards' ||
+       name === '7Rewards®' ||
        name === 'My Account' ||
        name === '7Rewards My Account' ||
        name === '7Rewards Sign-Out' ||
