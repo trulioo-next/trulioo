@@ -12,13 +12,16 @@ const NavList = props => {
   if (props.items) {
     row = props.items.map(({ href, label }, key) => {
       let externalPath = href.split('://');
-      
+        
       let isDynamic =
         label === 'Newsroom' || 
         label === 'Sign-In / Join Now' || 
         label === 'My Account' ||
         label === 'Promos & Contests' || 
-        label === 'Gift Cards'
+        label === 'Gift Cards' || 
+        label === 'Terms and Conditions' || 
+        label === 'Contact Us' || 
+        label === 'Privacy'
         ? false
         : true
       
@@ -40,7 +43,7 @@ const NavList = props => {
       }
       if(isDynamic) {
         return ( <li key={key} className="SiteFooter__item">
-          <Link href="/[page]" as={href} prefetch replace>
+          <Link href="/[page]" as={href} replace={true}>
             <a className="SiteFooter__link">{label}</a>
           </Link>
         </li>)
