@@ -4,8 +4,8 @@ import Card from 'react-bootstrap/Card';
 
 import './RewardsCard.scss';
 
-const RewardsCard = ({ item }) => (
-  <Card className="Card -rewards">
+const RewardsCard = ({ item, ...props }) => (
+  <Card className="Card -rewards" {...props}>
     <Card.Body className="Card__body text-center">
       <div className="Card__image">
         <img src={item.image_thumb} />

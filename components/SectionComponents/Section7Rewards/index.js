@@ -59,7 +59,7 @@ const Section7Rewards = props => {
             {rewardData.map((item, i) => (
               <ProductSlider.Item key={i}>
                 <Link href="/7rewards">
-                  <RewardsCard item={item} />
+                  <RewardsCard as="a" href="/7rewards" item={item} />
                 </Link>
               </ProductSlider.Item>
             ))}

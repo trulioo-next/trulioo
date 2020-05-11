@@ -3,6 +3,7 @@
 .Card.-rewards {
   $block: '.Card';
   cursor: pointer;
+  text-decoration: none;
 
   #{$block}__image {
     position: relative;
