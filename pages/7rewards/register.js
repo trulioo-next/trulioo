@@ -319,7 +319,7 @@ class RegisterScreen extends React.Component {
               <label className="show">
                 I agree to receive news, promotions, and information from
                 7-Eleven®. You can unsubscribe at any time. Please read our
-                Privacy Policy or Contact Us.
+                Privacy Policy or Contact Us. (Optional)
               </label>
             </div>
           </Col>
@@ -421,6 +421,7 @@ class RegisterScreen extends React.Component {
                           src="/static/images/placeholders/facebook-btn.png"
                         />
                         <p className="my-4">OR</p>
+                        <p className="my-4">All fields must be compeleted, unless marked (optional)</p>
                       </Col>
                     </Row>
                     <Row className="justify-content-center mb-md-5">
@@ -672,7 +673,7 @@ class RegisterScreen extends React.Component {
                                           <u>Contact Us</u>
                                         </a>
                                       </Link>
-                                      .
+                                       &nbsp; (optional).
                                     </Form.Check.Label>
                                   </Form.Check>
                                 </Form.Group>
