@@ -77,13 +77,19 @@ const SubNavMenu = props => {
       if (!isRewardsLink && !isMenuLink) {
         hrefPath = '/[page]';
       }
-
-     // console.log('HREFE ',  hrefPath, 'AS ', url )
+    // Nutritional Information
+     // console.log('NAV NAME ',  name )
+     let dynamicLinks = name === 'Slurpee®' || name == 'Nutritional Information' ? false : true
  
       return (
         <>
-        {name != 'Slurpee®' && (
+        {dynamicLinks  && (
           <Link href={hrefPath} as={url}>
+            <a>{name}</a>
+          </Link>
+        )}
+        {name === 'Nutritional Information'  && (
+          <Link href='/nutritional-information'>
             <a>{name}</a>
           </Link>
         )}
