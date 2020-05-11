@@ -87,6 +87,7 @@ const SubNavMenu = props => {
        name === '7Rewards My Account' ||
        name === '7Rewards Sign-Out' ||
        name === 'Sign-Out' ||
+       name === 'Sign-In / Join Now' ||
        name === '7Rewards® FAQ' ||
        name === 'FAQ' ||
        name === 'Promos'
@@ -99,6 +100,7 @@ const SubNavMenu = props => {
        name === '7Rewards My Account' ||
        name === '7Rewards Sign-Out' ||
        name === 'Sign-Out' ||
+       name === 'Sign-In / Join Now' ||
        name === '7Rewards® FAQ' ||
        name === 'FAQ' ||
        name === 'Promos'
