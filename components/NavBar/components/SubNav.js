@@ -78,11 +78,40 @@ const SubNavMenu = props => {
         hrefPath = '/[page]';
       }
     // Nutritional Information
-     // console.log('NAV NAME ',  name )
-     let dynamicLinks = name === 'Slurpee®' || name == 'Nutritional Information' ? false : true
+     console.log('NAV NAME ',  name )
+     let dynamicLinks = 
+       name === 'Slurpee®' || 
+       name === 'Nutritional Information' || 
+       name === '7Rewards' ||
+       name === 'My Account' ||
+       name === '7Rewards My Account' ||
+       name === '7Rewards Sign-Out' ||
+       name === 'Sign-Out' ||
+       name === '7Rewards® FAQ' ||
+       name === 'FAQ' ||
+       name === 'Promos'
+       ? false 
+       : true
+
+      let rewardsLinks =
+        name === '7Rewards' ||
+       name === 'My Account' ||
+       name === '7Rewards My Account' ||
+       name === '7Rewards Sign-Out' ||
+       name === 'Sign-Out' ||
+       name === '7Rewards® FAQ' ||
+       name === 'FAQ' ||
+       name === 'Promos'
+       ? true 
+       : false
  
       return (
         <>
+        {rewardsLinks  && (
+          <Link href={url} prefetch={false} replace>
+            <a>{name}</a>
+          </Link>
+        )}
         {dynamicLinks  && (
           <Link href={hrefPath} as={url}>
             <a>{name}</a>
