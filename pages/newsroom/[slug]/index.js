@@ -86,7 +86,7 @@ const LeftPanel = props => {
 
 const BackToNewsroom = props => {
   return (
-    <Link href={props.backToNewsroomHref}><a className="backToNewsroomLink"><span className="chevron">&lt;</span><span className="">Back to Newsroom</span></a></Link>
+    <Link href="/newsroom" as={props.backToNewsroomHref}><a className="backToNewsroomLink"><span className="chevron">&lt;</span><span className="">Back to Newsroom</span></a></Link>
   )
 }
 
