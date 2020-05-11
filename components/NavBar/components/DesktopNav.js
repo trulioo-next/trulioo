@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -10,11 +10,10 @@ import AccountIcon from '@/static/images/account.svg';
 import CaretIcon from '@/static/images/caret-down.svg';
 
 import { userDataSelector } from '@/stores/user/selectors';
-import { selectIsLoading } from '@/stores/app/selectors';
 
 const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   const isOpen = i === expanded;
- 
+
   let itemClassnames = classNames(
     'SiteHeader__item',
     {
@@ -39,7 +38,13 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
             <CaretIcon />
           </span>
         </button>
-        <SubNav i={i} items={item.children} parent={item} />
+        <SubNav
+          i={i}
+          items={item.children}
+          parent={item}
+          expanded={expanded}
+          setExpanded={setExpanded}
+        />
       </motion.li>
     );
   }
@@ -52,10 +57,11 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
         </Link>
       )}
       {item.name === 'Slurpee®' && (
-        <a  href={item.url}
-            className="SiteHeader__link"
-            target="_blank"
-            rel="noopener noreferrer"
+        <a
+          href={item.url}
+          className="SiteHeader__link"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {item.name}
         </a>
@@ -65,7 +71,6 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
 };
 const PrimaryNav = data => {
   const [expanded, setExpanded] = useState(false);
-  const [loaded, setLoaded] = useState(false);
   var searchIndex = 0;
   let LINKS = false;
   if (data && data.data && data.data.data) {
@@ -77,23 +82,10 @@ const PrimaryNav = data => {
       ? `${userData.user.rewards_points} PTS`
       : 'Account';
 
-  let accountSigned =  userData && userData.auth.isAuth
-      ? `account__active`
-      : '';
+  let accountSigned = userData && userData.auth.isAuth ? `account__active` : '';
 
-  let accountLink =  userData && userData.auth.isAuth
-      ? `/7rewards/`
-      : '/7rewards/signin';  
-
- 
-    const loading = useSelector(state => selectIsLoading(state));
-    useEffect(() => {
-       console.log('LOADING ', loading , expanded )
-       if(!loading && !loaded) {
-        setLoaded(true)
-        setExpanded(null)
-      }
-    }, []);
+  let accountLink =
+    userData && userData.auth.isAuth ? `/7rewards/` : '/7rewards/signin';
 
   return (
     <>
@@ -108,8 +100,10 @@ const PrimaryNav = data => {
                   key={`nav-item-${i}`}
                   i={i}
                   item={link}
-                  expanded={link.children.length > 0 ? expanded : null}
-                  setExpanded={link.children.length > 0 ? setExpanded : null}
+                  {...(link.children.length > 0 && {
+                    expanded: expanded,
+                    setExpanded: setExpanded,
+                  })}
                 />
               );
             })}
@@ -123,9 +117,13 @@ const PrimaryNav = data => {
             </Toolbar.Item>
             <Toolbar.Item url={accountLink}>
               <Toolbar.Icon>
-                <span className={accountSigned}><AccountIcon /></span>
+                <span className={accountSigned}>
+                  <AccountIcon />
+                </span>
               </Toolbar.Icon>
-              <Toolbar.Label ><span className={accountSigned}>{userAccount}</span></Toolbar.Label>
+              <Toolbar.Label>
+                <span className={accountSigned}>{userAccount}</span>
+              </Toolbar.Label>
             </Toolbar.Item>
             <Toolbar.Search
               i={searchIndex}
