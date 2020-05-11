@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
- 
+
 import Button from '@/components/Button';
 import ProductSlider from '@/components/ProductSlider';
 import { useSelector, useDispatch } from 'react-redux';
-import { userDataSelector } from "../../../stores/user/selectors";
+import { userDataSelector } from '../../../stores/user/selectors';
 import RewardsCard from '@/components/RewardsCard';
 
 let rewardData = [];
@@ -14,38 +14,35 @@ const Section7Rewards = props => {
   // console.log('Section7Rewards  PROPS :: ', props);
   let sectionClasses = classNames('Section');
 
-  const USER = useSelector( state =>  userDataSelector(state) );
+  const USER = useSelector(state => userDataSelector(state));
   // console.log('USER DATA  ', USER )
 
   const isAuth = USER && USER.auth ? true : false;
 
   //
   let comTitle = props.title_logged_out;
-  let subHeading = props.subheading_logged_out
-  if(USER && USER.auth) {
-      comTitle = props.title_logged_in
-      subHeading = props.subheading_logged_in
+  let subHeading = props.subheading_logged_out;
+  if (USER && USER.auth) {
+    comTitle = props.title_logged_in;
+    subHeading = props.subheading_logged_in;
   }
-  
+
   //
-  if(USER && USER.rewards && USER.rewards.rewards_catalog) {
+  if (USER && USER.rewards && USER.rewards.rewards_catalog) {
     let rewards = USER.rewards.rewards_catalog;
     rewardData = [];
-    for(var i = 0; i < rewards.length; i++ ) {
+    for (var i = 0; i < rewards.length; i++) {
       let itemDate = new Date(rewards[i].catalog_end_date);
-       rewardData.push(
-          {
-            image_thumb: rewards[i].image_thumb,
-            description: rewards[i].title,
-            bonus_value: rewards[i].tier,
-            expiration_label: 'Expires '+itemDate.toLocaleDateString(),
-          }
-       )
+      rewardData.push({
+        image_thumb: rewards[i].image_thumb,
+        description: rewards[i].title,
+        bonus_value: rewards[i].tier,
+        expiration_label: 'Expires ' + itemDate.toLocaleDateString(),
+      });
     }
   }
- 
-  return (
 
+  return (
     <section className={sectionClasses}>
       <div className="container Section__container">
         <div className="row justify-content-center">
@@ -56,47 +53,47 @@ const Section7Rewards = props => {
         </div>
       </div>
 
-      { isAuth && 
+      {isAuth && (
         <div className="container-fluid px-0">
           <ProductSlider>
-            { rewardData.map((item, i) => (
-              <ProductSlider.Item key={`product-slider-item-${i}`}>
-                <RewardsCard item={item} />
+            {rewardData.map((item, i) => (
+              <ProductSlider.Item key={i}>
+                <Link href="/7rewards">
+                  <RewardsCard item={item} />
+                </Link>
               </ProductSlider.Item>
             ))}
           </ProductSlider>
         </div>
-      }
-      { !isAuth && 
-      <div className="container Section__container">
-        <div className="row justify-content-center">
-          <div className="col col-12 col-lg-8 text-center">
-            <p>
-              <Button href="/7rewards/signin">
-                Sign Up
-              </Button>
-            </p>
-            <br />
-            <p>
-              Already have an account?
+      )}
+      {!isAuth && (
+        <div className="container Section__container">
+          <div className="row justify-content-center">
+            <div className="col col-12 col-lg-8 text-center">
+              <p>
+                <Button href="/7rewards/signin">Sign Up</Button>
+              </p>
               <br />
-              <Link href="/7rewards/signin">
-                <a className="SevenRewards__link">
-                  <strong>Log In &rsaquo;</strong>
-                </a>
-              </Link>
-            </p>
+              <p>
+                Already have an account?
+                <br />
+                <Link href="/7rewards/signin">
+                  <a className="SevenRewards__link">
+                    <strong>Log In &rsaquo;</strong>
+                  </a>
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      }
+      )}
     </section>
   );
 };
 
 // Section7Rewards.defaultProps = {};
-Section7Rewards.getInitialProps = async ({ req,query }) => {
-    return {  query }
+Section7Rewards.getInitialProps = async ({ req, query }) => {
+  return { query };
 };
 
 export default Section7Rewards;

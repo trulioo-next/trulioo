@@ -2,6 +2,7 @@
 
 .Card.-rewards {
   $block: '.Card';
+  cursor: pointer;
 
   #{$block}__image {
     position: relative;
