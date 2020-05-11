@@ -82,7 +82,7 @@ const SubNavMenu = props => {
      let dynamicLinks = 
        name === 'Slurpee®' || 
        name === 'Nutritional Information' || 
-       name === '7Rewards' ||
+       name === '7Rewards®' ||
        name === 'My Account' ||
        name === '7Rewards My Account' ||
        name === '7Rewards Sign-Out' ||
