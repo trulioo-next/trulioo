@@ -421,7 +421,7 @@ class RegisterScreen extends React.Component {
                           src="/static/images/placeholders/facebook-btn.png"
                         />
                         <p className="my-4">OR</p>
-                        <p className="my-4">All fields must be compeleted, unless marked (optional)</p>
+                        <p className="my-4 "><strong>All fields must be completed, unless marked (optional)</strong></p>
                       </Col>
                     </Row>
                     <Row className="justify-content-center mb-md-5">

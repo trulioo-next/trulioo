@@ -34,7 +34,8 @@ import {
   SEVEN_REWARDS_ADDCARD_REQUEST,
   SEVEN_REWARDS_ADDCARD,
   SEVEN_REWARDS_SMS_ERROR,
-  SEVEN_REWARDS_SMS_CLEAR
+  SEVEN_REWARDS_SMS_CLEAR,
+  SEVEN_REWARDS_ADDCARD_ERROR
 } from '../types'
 
 function* startup(payload) {
@@ -250,15 +251,22 @@ function* addCard(payload) {
     const sevenRewardsService = SevenRewardsService(state);
    
     const addCardResponse = yield call(sevenRewardsService.addCard, payload)
+  
+    if(addCardResponse.success && addCardResponse.success.error ) {
+     // console.log('ADD CARD ERROR    ', addCardResponse  )
+      yield put({ type:SEVEN_REWARDS_ADDCARD_ERROR, payload: addCardResponse})
+    } else {
+      
+      //console.log('ADD CARD   ', addCardResponse )
+      yield put({ type: SEVEN_REWARDS_ADDCARD, payload:addCardResponse})
+    }
 
-    // console.log('ADD CARD   ', addCardResponse )
-    
-    yield put({ type: SEVEN_REWARDS_ADDCARD, payload:addCardResponse})
+   
 
   } catch(err) {
-    console.log('ADD CARD ERROR  ', err )
+    //console.log('ADD CARD ERROR  ', err )
     const errors = err.payload || err
-    yield put({ type:SEVEN_REWARDS_ADDCARD, payload: errors})
+    yield put({ type:SEVEN_REWARDS_ADDCARD_ERROR, payload: errors})
   }
 }
 

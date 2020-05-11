@@ -130,6 +130,14 @@ class MyAccount extends React.Component {
     ? this.props.user.addCard.error.payload.field_errors.new_loyalty_id[0] 
     : false;
 
+    
+    const loyaltySuccess = 
+    this.props.user && 
+    this.props.user.addCard && 
+    ! this.props.user.addCard.error
+    ? "You have successfully added a new card!" 
+    : false;
+    
      
     return (
       <Layout>
@@ -197,6 +205,9 @@ class MyAccount extends React.Component {
 
                           <p className="field--error white">{loyaltyError}</p>
 
+                        }
+                        { loyaltySuccess && 
+                           <p className="field--error white">{loyaltySuccess}</p>
                         }
                       </Form.Group>
                       <Button type="submit" onClick={ (e) => this.addNewCard(e) }>Add Card</Button>
