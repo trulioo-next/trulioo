@@ -61,7 +61,6 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
     </li>
   );
 };
-
 const PrimaryNav = data => {
   const [expanded, setExpanded] = useState(false);
   var searchIndex = 0;
