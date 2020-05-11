@@ -208,7 +208,8 @@ export class UserProfile extends Component {
     this.props.passwordResetRequest(payload);
   }
 
-  handleClose() {
+  handleClose(e) {
+    e.preventDefault();
     let user = this.props.user && this.props.user.user ? this.props.user.user : false;
     let phone = user && user.phone_number ? user.phone_number : this.state.phone;
     let currentPhone = user && user.phone_number ? user.phone_number : false;
@@ -228,7 +229,7 @@ export class UserProfile extends Component {
     // this.props.verifySmsRequest(payload)
   }
 
-  modalClose(e) {
+  modalClose() {
     this.setState({showSMSModal:false});
   }
 
@@ -414,9 +415,7 @@ export class UserProfile extends Component {
           >
             EDIT
           </Button>
-
-
-
+  
           <Modal
             className="modal__container"
             show={this.state.showSMSModal}
@@ -504,7 +503,7 @@ export class UserProfile extends Component {
 
           <Modal
             show={this.state.showSuccessModal}
-            onHide={() => this.handleClose()}
+            onHide={() => this.modalClose()}
             centered
             size="sm"
           >
@@ -588,7 +587,7 @@ export class UserProfile extends Component {
 
           <Modal
             show={this.state.showModal}
-            onHide={ () => this.handleClose() }
+            onHide={ () => this.modalClose() }
           >
             <Modal.Header closeButton />
             <Modal.Body>

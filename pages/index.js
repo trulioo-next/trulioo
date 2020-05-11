@@ -27,11 +27,7 @@ const Home = props => {
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Home - 7-Eleven Canada'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
-// 
-
-  // <Link href="/menu/[category]" as="/menu/crispy-classic-chicken">
-    //  <a>crispy classic chicken</a>
-   // </Link>
+ 
 
   return (
     <Layout>
