@@ -6,6 +6,7 @@ import React from 'react';
 // TODO: Add .env var here 
 const WP_DATA = 'https://content.7-eleven.ca/wp-json/wp/v2/pages';
 const WP_NUTITIONALS = 'https://content.7-eleven.ca/wp-json/api/v1/nutritionals';
+const WP_NEWSROOM = 'https://content.7-eleven.ca/wp-json/api/v1/newsroom';
 let newDate = new Date();
 const originalUrl = 'https://dev4.7eleven.ca'
 
@@ -31,6 +32,7 @@ class Sitemap extends React.Component {
     static async getInitialProps({res}) {
       const request = await fetch(WP_DATA);
       const nutritionals = await fetch(WP_NUTITIONALS);
+      const newsroom = await fetch(WP_NEWSROOM);
 
       let pages = await request;
       let formatted = [];
@@ -38,8 +40,6 @@ class Sitemap extends React.Component {
       let dateFormatted = formatDate(newDate)
       let pageNames = await readdirAsync('./pages');
 
-
-      console.log('nutritionals ::>> ' , nutritionals.taxonomies)
 
       // add home page first :
       formatted.push( {slug:'', date:dateFormatted , priority:'1.0'} )
@@ -63,6 +63,13 @@ class Sitemap extends React.Component {
         }
       }
 
+      // Food Category pages:
+      nutritionals.taxonomies.forEach(nutritional => {
+        if (nutritional.show_on_nutritionals_page === true)
+        { formatted.push( {slug: 'menu/' + nutritional.slug, date:dateFormatted, priority:'0.9'} );
+        }
+      })
+
       // Format static pages
       formatted.push( {slug:'7rewards/account', date:dateFormatted , priority:'0.9'} )
       formatted.push( {slug:'7rewards/faq', date:dateFormatted , priority:'0.9'} )
@@ -73,6 +80,13 @@ class Sitemap extends React.Component {
       formatted.push( {slug:'7rewards/signin', date:dateFormatted , priority:'0.9'} )
       formatted.push( {slug:'7rewards/signout', date:dateFormatted , priority:'0.9'} )
      
+
+      // Newsroom articles:
+      newsroom.allPosts.forEach(news => {
+        var pubDate = news.publishDate;
+        formatted.push( {slug:'newsroom/' + news.slug, date:formatDate(new Date(Date.parse(pubDate))), priority:'0.8'} );
+      })
+
       //
       res.setHeader('Content-Type', 'text/xml');
       res.write(createSitemap(formatted));

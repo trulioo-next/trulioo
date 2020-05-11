@@ -50,7 +50,11 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
         </Link>
       )}
       {item.name === 'Slurpee®' && (
-        <a href={item.url} className="SiteHeader__link">
+        <a  href={item.url}
+            className="SiteHeader__link"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
           {item.name}
         </a>
       )}
