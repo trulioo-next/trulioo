@@ -34,10 +34,8 @@ const itemVariants = {
   },
 };
 
-const SubNavMenu = props => {
-  const isNested = props.nested;
-  const parent = props.parent;
-  const hasThirdLevel = props.hasThirdLevel;
+const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
+  const isNested = nested;
 
   const userData = useSelector(state => userDataSelector(state));
   const authenticated = userData && userData.auth ? userData.auth : false;
@@ -57,14 +55,14 @@ const SubNavMenu = props => {
   function buildLink(url, name, className) {
     let isRewardsLink = url.split('/7rewards')[1];
     let isMenuLink = url.split('/menu')[1];
- 
+
     if (isVisible(className)) {
       let hrefPath = '/[page]';
       if (isRewardsLink) {
         hrefPath = isRewardsLink ? `/7rewards/${isRewardsLink}` : '/[slug]';
       }
       if (isMenuLink) {
-        hrefPath =  `/menu/[category]`;
+        hrefPath = `/menu/[category]`;
       }
       if (url === '/7rewards') {
         hrefPath = '/7rewards';
@@ -77,61 +75,58 @@ const SubNavMenu = props => {
       if (!isRewardsLink && !isMenuLink) {
         hrefPath = '/[page]';
       }
-     // Nutritional Information
-     // console.log('NAV NAME ',  name )
-     let dynamicLinks = 
-       name === 'Slurpee®' || 
-       name === 'Nutritional Information' || 
-       name === '7Rewards®' ||
-       name === 'My Account' ||
-       name === '7Rewards My Account' ||
-       name === '7Rewards Sign-Out' ||
-       name === 'Sign-Out' ||
-       name === 'Sign-In / Join Now' ||
-       name === '7Rewards® FAQ' ||
-       name === 'FAQ' ||
-       name === 'Promos'
-       ? false 
-       : true
+      // Nutritional Information
+      // console.log('NAV NAME ',  name )
+      let dynamicLinks =
+        name === 'Slurpee®' ||
+        name === 'Nutritional Information' ||
+        name === '7Rewards®' ||
+        name === 'My Account' ||
+        name === '7Rewards My Account' ||
+        name === '7Rewards Sign-Out' ||
+        name === 'Sign-Out' ||
+        name === 'Sign-In / Join Now' ||
+        name === '7Rewards® FAQ' ||
+        name === 'FAQ' ||
+        name === 'Promos'
+          ? false
+          : true;
 
       let rewardsLinks =
-       name === '7Rewards®' ||
-       name === 'My Account' ||
-       name === '7Rewards My Account' ||
-       name === '7Rewards Sign-Out' ||
-       name === 'Sign-Out' ||
-       name === 'Sign-In / Join Now' ||
-       name === '7Rewards® FAQ' ||
-       name === 'FAQ' ||
-       name === 'Promos'
-       ? true 
-       : false
- 
+        name === '7Rewards®' ||
+        name === 'My Account' ||
+        name === '7Rewards My Account' ||
+        name === '7Rewards Sign-Out' ||
+        name === 'Sign-Out' ||
+        name === 'Sign-In / Join Now' ||
+        name === '7Rewards® FAQ' ||
+        name === 'FAQ' ||
+        name === 'Promos'
+          ? true
+          : false;
+
       return (
         <>
-        {rewardsLinks  && (
-          <Link href={url} prefetch={false} replace>
-            <a>{name}</a>
-          </Link>
-        )}
-        {dynamicLinks  && (
-          <Link href={hrefPath} as={url}>
-            <a>{name}</a>
-          </Link>
-        )}
-        {name === 'Nutritional Information'  && (
-          <Link href='/nutritional-information' replace={true}>
-            <a>{name}</a>
-          </Link>
-        )}
-        {name === 'Slurpee®' && (
-          <a  href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            {name}
-          </a>
-        )}
+          {rewardsLinks && (
+            <Link href={url} prefetch={false} replace>
+              <a>{name}</a>
+            </Link>
+          )}
+          {dynamicLinks && (
+            <Link href={hrefPath} as={url}>
+              <a onClick={() => setExpanded(false)}>{name}</a>
+            </Link>
+          )}
+          {name === 'Nutritional Information' && (
+            <Link href="/nutritional-information" replace={true}>
+              <a>{name}</a>
+            </Link>
+          )}
+          {name === 'Slurpee®' && (
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {name}
+            </a>
+          )}
         </>
       );
     }
@@ -142,7 +137,7 @@ const SubNavMenu = props => {
       variants={listVariants}
       className={classNames('SiteHeader__submenu', { '-nested': isNested })}
     >
-      {props.items.map(({ name, url, children, className }, index) => (
+      {items.map(({ name, url, children, className }, index) => (
         <motion.li
           variants={itemVariants}
           key={index}
@@ -155,7 +150,9 @@ const SubNavMenu = props => {
           ) : (
             buildLink(url, name, className)
           )}
-          {children.length > 0 && <SubNavMenu items={children} nested />}
+          {children.length > 0 && (
+            <SubNavMenu items={children} setExpanded={setExpanded} nested />
+          )}
         </motion.li>
       ))}
 
@@ -164,10 +161,10 @@ const SubNavMenu = props => {
           variants={itemVariants}
           className="SiteHeader__item -nested col col-12 text-center"
         >
-         <Link href='/menu' replace={true}>
-          <Button outlined>
-            View Full Menu
-          </Button>
+          <Link href="/menu" replace={true}>
+            <Button href="/menu" outlined>
+              View Full Menu
+            </Button>
           </Link>
         </motion.li>
       )}
@@ -175,9 +172,7 @@ const SubNavMenu = props => {
   );
 };
 
-const SubNav = props => {
-  const items = props.items;
-  const parent = props.parent;
+const SubNav = ({ items, parent, expanded, setExpanded, ...props }) => {
   let hasThirdLevel = false;
 
   const subMenuAnimate = {
@@ -218,7 +213,12 @@ const SubNav = props => {
         '-has-grandchildren': hasThirdLevel,
       })}
     >
-      <SubNavMenu items={items} parent={parent} hasThirdLevel={hasThirdLevel} />
+      <SubNavMenu
+        items={items}
+        parent={parent}
+        hasThirdLevel={hasThirdLevel}
+        setExpanded={setExpanded}
+      />
     </motion.div>
   );
 };
