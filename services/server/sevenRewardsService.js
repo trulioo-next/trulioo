@@ -82,6 +82,18 @@ export default function SevenRewardsService(state) {
 
 	async function addCard(payload) {
 		let data = await API.post('/api/seven-rewards/add-new-card', {body:payload});
+	    let currentUser = state.user.user;	
+		let user = {
+		 user: currentUser,
+		 success: data
+		}
+		if(data && data.digital_id) {
+			user = {
+			 user: data,
+			 success:true
+			}
+		}	
+
 		if(data.error) {
 			ErrorHandler({
 		        error: data.error.payload.error_description,
@@ -91,7 +103,7 @@ export default function SevenRewardsService(state) {
 		        }
 		    })
 		}
-		return data;
+		return user;
 	}
 
 

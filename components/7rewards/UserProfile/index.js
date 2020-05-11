@@ -209,24 +209,24 @@ export class UserProfile extends Component {
   }
 
   handleClose(e) {
+    if(e) {
     e.preventDefault();
+    }
     let user = this.props.user && this.props.user.user ? this.props.user.user : false;
     let phone = user && user.phone_number ? user.phone_number : this.state.phone;
     let currentPhone = user && user.phone_number ? user.phone_number : false;
-
-    console.log('PHONE ', this.state.phone, 'CURRENT', currentPhone, 'phoneUpdated', this.state.phoneUpdated )
-
+ 
     if (this.state.phone === currentPhone) {
       this.setState({showSMSModal:false, showSuccessModalLoaded:false, showSuccessModal:false, successMessage:'', closeSuccessModal:true, validateNumberModal:false, codeSet:false, formloaded:false, showModal:false, phoneUpdated:false})  
     } else {
-      console.log('ADD PHONE LOADED  ', this.state.phoneUpdated )
+      
       this.setState({ showSMSModal:true, phoneUpdated:false, phoneLoaded:true, showModal:false, showSuccessModal:false})
     }
-      
-     
+       
+  }
 
-    // let payload = { clear: true }
-    // this.props.verifySmsRequest(payload)
+  successClose() {
+      this.setState({  showSuccessModal:false })
   }
 
   modalClose() {
@@ -398,10 +398,6 @@ export class UserProfile extends Component {
       this.setState({showSMSModal:false,verifiedLoaded:true})
       // this.props.verifySmsRequest({ clear: true })
     } 
-
-
-   
-
  
     return (
       <div className="p-5">
@@ -503,7 +499,7 @@ export class UserProfile extends Component {
 
           <Modal
             show={this.state.showSuccessModal}
-            onHide={() => this.modalClose()}
+            onHide={() => this.successClose()}
             centered
             size="sm"
           >
@@ -587,7 +583,7 @@ export class UserProfile extends Component {
 
           <Modal
             show={this.state.showModal}
-            onHide={ () => this.modalClose() }
+            onHide={ () => this.handleClose() }
           >
             <Modal.Header closeButton />
             <Modal.Body>
