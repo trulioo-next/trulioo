@@ -41,7 +41,7 @@ const NavList = props => {
       if(isDynamic) {
         return ( <li key={key} className="SiteFooter__item">
           <Link href="/[page]" as={href} replace={true}>
-            <a className="SiteFooter__link">{label} asd </a>
+            <a className="SiteFooter__link">{label}</a>
           </Link>
         </li>)
       }
