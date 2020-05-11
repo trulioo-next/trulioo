@@ -12,6 +12,18 @@ const NavList = props => {
   if (props.items) {
     row = props.items.map(({ href, label }, key) => {
       let externalPath = href.split('://');
+      
+      let isDynamic =
+        label === 'Newsroom' || 
+        label === 'Sign-In / Join Now' || 
+        label === 'My Account' ||
+        label === 'Promos & Contests' || 
+        label === 'Gift Cards'
+        ? false
+        : true
+      
+      // console.log('label:: ', label, isDynamic)
+
       if (externalPath[0] === 'https' || externalPath[0] === 'http') {
         return (
           <li key={key} className="SiteFooter__item">
@@ -26,13 +38,22 @@ const NavList = props => {
           </li>
         );
       }
+      if(isDynamic) {
+        return ( <li key={key} className="SiteFooter__item">
+          <Link href="/[page]" as={href} replace={true}>
+            <a className="SiteFooter__link">{label} asd </a>
+          </Link>
+        </li>)
+      }
+      if(!isDynamic) {
       return (
         <li key={key} className="SiteFooter__item">
-          <Link href={href}>
+          <Link href={href} replace={true}>
             <a className="SiteFooter__link">{label}</a>
           </Link>
         </li>
       );
+      }
     });
   }
 
