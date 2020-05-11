@@ -474,7 +474,7 @@ export class UserProfile extends Component {
                         Help? <a href="https://survey.medallia.com/?711-gr" target="_blank">Contact Support</a>
                       </p>
                       <p>
-                       If you are having issues verifying your mobile phone, contact support and we will look into it for you. 
+                       If you are having issues verifying your mobile phone, <Link href="/contact-us"><a><u>Contact Us</u></a></Link> <a href="https://policies.google.com/privacy" target="_blank">support</a>  and we will look into it for you.
                       </p>
                      </div>
 

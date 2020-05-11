@@ -53,6 +53,7 @@ class RegisterScreen extends React.Component {
       facebookPayload: false,
       checkBox1:false,
       checkBox2:false,
+      formValidated:false,
       fieldErrors:{
         firstName:null,
         lastName:null,
@@ -176,7 +177,7 @@ class RegisterScreen extends React.Component {
   //
   submitForm(e) {
     e.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, formValidated:true });
 
    
 
@@ -242,8 +243,7 @@ class RegisterScreen extends React.Component {
       isValid = false;
     }
 
-    console.log('FIELDS', payload )
-
+     
    //  console.log('SUBMIT FORM ', this.state.checkBox1 )
  
     if(isValid) {
@@ -393,6 +393,20 @@ class RegisterScreen extends React.Component {
         ? this.props.user.passwordReset.success
         : false;
 
+    let fnameEmpty = this.state.firstName === '' && this.state.formValidated ? true : false
+    let lnameEmpty = this.state.firstName === '' && this.state.formValidated ? true : false
+    let phoneEmpty = this.state.phone === '' && this.state.formValidated ? true : false
+    let emailEmpty = this.state.email === '' && this.state.formValidated ? true : false
+    let postalEmpty = this.state.postal === '' && this.state.formValidated ? true : false
+    let bMonthEmpty = this.state.bMonth === '' && this.state.formValidated ? true : false
+    let bDayEmpty = this.state.bDay === '' && this.state.formValidated ? true : false
+    let bYearEmpty = this.state.bYear === '' && this.state.formValidated ? true : false
+    let passwordEmpty = this.state.password === '' && this.state.formValidated ? true : false
+    let confirmPasswordEmpty = this.state.confirmPassword === '' && this.state.formValidated ? true : false
+    let passwordMatchError = this.state.password !== this.state.confirmPassword ? 'Password Must Match' : false;
+    
+    
+          
     return (
       <Layout>
         <Header title="Register" />
@@ -448,6 +462,9 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'firstName')
                                       }
                                     />
+                                    { fnameEmpty && 
+                                     <p><span className="field--error">This field is required.</span></p>
+                                    }
                                   </Form.Group>
                                 </Col>
                                 <Col xs="12" md="6">
@@ -461,6 +478,9 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'lastName')
                                       }
                                     />
+                                    { lnameEmpty && 
+                                     <p><span className="field--error">This field is required.</span></p>
+                                    }
                                   </Form.Group>
                                 </Col>
                               </Form.Row>
@@ -476,6 +496,9 @@ class RegisterScreen extends React.Component {
                                   isInvalid={this.state.fieldErrors.email}
                                   onChange={e => this.onValueChange(e, 'email')}
                                 />
+                                { emailEmpty && 
+                                 <p><span className="field--error">This field is required.</span></p>
+                                }
                                  { emailError && 
                                      <p><span className="field--error">{emailError}</span>  </p>
                                  }
@@ -496,6 +519,12 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'password')
                                       }
                                     />
+                                    { passwordMatchError && 
+                                      <p><span className="field--error">{passwordMatchError}</span></p>
+                                    }
+                                    { passwordEmpty && 
+                                     <p><span className="field--error">This field is required.</span></p>
+                                    }
 
                                     { passwordError && 
 
@@ -523,6 +552,9 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'confirmPassword')
                                       }
                                     />
+                                    { confirmPasswordEmpty && 
+                                     <p><span className="field--error">This field is required.</span></p>
+                                    }
                                   </Form.Group>
                                 </Col>
                               </Form.Row>
@@ -540,6 +572,9 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'phone')
                                       }
                                     />
+                                     { phoneEmpty && 
+                                     <p><span className="field--error">This field is required.</span></p>
+                                    }
                                     { phoneError && 
                                       <p className="field--error">{phoneError}</p>
                                     }
@@ -558,6 +593,9 @@ class RegisterScreen extends React.Component {
                                         this.onValueChange(e, 'postal')
                                       }
                                     />
+                                     { postalEmpty && 
+                                       <p><span className="field--error">This field is required.</span></p>
+                                      }
                                   </Form.Group>
                                 </Col>
                               </Form.Row>
@@ -579,6 +617,9 @@ class RegisterScreen extends React.Component {
                                         </option>
                                       ))}
                                     </Form.Control>
+                                     { bMonthEmpty && 
+                                 <p><span className="field--error">This field is required.</span></p>
+                                }
                                   </Form.Group>
                                 </Col>
                                 <Col>
@@ -597,6 +638,9 @@ class RegisterScreen extends React.Component {
                                         </option>
                                       ))}
                                     </Form.Control>
+                                     { bDayEmpty && 
+                                 <p><span className="field--error">This field is required.</span></p>
+                                }
                                   </Form.Group>
                                 </Col>
 
@@ -616,9 +660,13 @@ class RegisterScreen extends React.Component {
                                         </option>
                                       ))}
                                     </Form.Control>
+                                     { bYearEmpty && 
+                                 <p><span className="field--error">This field is required.</span></p>
+                                }
                                   </Form.Group>
                                 </Col>
                               </Form.Row>
+
                               {birthdateError && 
                                 <Form.Row>
                                    <p className="field--error">{birthdateError}</p>
