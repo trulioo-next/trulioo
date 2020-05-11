@@ -55,10 +55,7 @@ class SevenRewards extends React.Component {
     }   
 
   }
-  componentDidUpdate() {
-
-    // 
-  }
+  componentDidUpdate() {}
 
   updateCode(e) {
     this.setState({smscode:e.target.value})
@@ -83,12 +80,7 @@ class SevenRewards extends React.Component {
         let payload = { token: this.props.user.token, mobileNumber: phone, code: this.state.smscode  }
         this.props.verifySmsRequest(payload)
         // this.setState({showSMSModal:false});
-        
-        // setTimeout(function () {
-        //   // props.verifySmsRequest({ clear: true })
-        //   console.log('PHONE SENDING SMS REQUEST ', phone )
-        // },10000)
-        
+        // props.verifySmsRequest({ clear: true })
       }
    
   }
@@ -161,22 +153,19 @@ class SevenRewards extends React.Component {
       this.props.user.user.is_sms_verified 
       ? this.props.user.user.is_sms_verified
       : false  
-
-      
-      
+ 
     if(userPhone) {
      let n = userPhone.toString()
      userPhone = n.replace(/.(?=.{4})/g, '');
-      
     }  
 
-    if(smsError && !this.state.errorLoaded) {
+    if(smsError && !this.state.errorLoaded  ) {
       // this.props.verifySmsRequest({ clear: true })
       this.setState({errorLoaded:true,showSMSModal:true})
     }  
 
     // console.log('isVerified' , isVerified )
-    if(!isVerified && !this.state.smsLoaded) {
+    if(!isVerified && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
        this.setState({smsLoaded:true});
       setTimeout(() => {
         this.setState({showSMSModal:true });
@@ -251,7 +240,7 @@ class SevenRewards extends React.Component {
                         Didn't receive your 6 digit PIN? No problem, click the resend and we will send you a new unique PIN to verify your mobile phone.
                       </p>
                       <p>
-                        Help? <a href="" target="_blank">Contact Support</a>
+                        Help? <a href="https://survey.medallia.com/?711-gr" target="_blank">Contact Support</a>
                       </p>
                       <p>
                        If you are having issues verifying your mobile phone, contact support and we will look into it for you. 

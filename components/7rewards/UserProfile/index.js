@@ -62,7 +62,11 @@ export class UserProfile extends Component {
       codeSet:false,
       verifyDisabled:true,
       phoneLoaded:false,
-      showEmailModal:false
+      showEmailModal:false,
+      showSMSModal:false,
+      verifiedLoaded:false,
+      phoneUpdated:false,
+      phoneLoaded:false
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -128,7 +132,7 @@ export class UserProfile extends Component {
         if(this.props.user && this.props.user.user && this.props.user.user.mobile_number && !this.state.phoneLoaded ) {
           this.setState({phoneLoaded:true,verifyDisabled:false})
         }
-       
+ 
      }
 
   }
@@ -141,8 +145,10 @@ export class UserProfile extends Component {
 
     if (this.state.phone === currentPhone) {
       phone = null;
+      this.setState({phoneUpdated:false})
     } else {
       phone = this.state.phone;
+      this.setState({phoneUpdated:true})
     }
 
     let payload = {
@@ -203,12 +209,54 @@ export class UserProfile extends Component {
   }
 
   handleClose() {
+    let user = this.props.user && this.props.user.user ? this.props.user.user : false;
+    let phone = user && user.phone_number ? user.phone_number : this.state.phone;
+    let currentPhone = user && user.phone_number ? user.phone_number : false;
+
+    console.log('PHONE ', this.state.phone, 'CURRENT', currentPhone, 'phoneUpdated', this.state.phoneUpdated )
+
+    if (this.state.phone === currentPhone) {
+      this.setState({showSMSModal:false, showSuccessModalLoaded:false, showSuccessModal:false, successMessage:'', closeSuccessModal:true, validateNumberModal:false, codeSet:false, formloaded:false, showModal:false, phoneUpdated:false})  
+    } else {
+      console.log('ADD PHONE LOADED  ', this.state.phoneUpdated )
+      this.setState({ showSMSModal:true, phoneUpdated:false, phoneLoaded:true, showModal:false, showSuccessModal:false})
+    }
       
-    // Clear success modal   
-    this.setState({ showSuccessModalLoaded:false, showSuccessModal:false, successMessage:'', closeSuccessModal:true, validateNumberModal:false, codeSet:false, formloaded:false})  
-    
+     
+
     // let payload = { clear: true }
     // this.props.verifySmsRequest(payload)
+  }
+
+  modalClose(e) {
+    this.setState({showSMSModal:false});
+  }
+
+  handleVerifyToggle(e) {
+     e.preventDefault();
+     this.setState({verifyToggle:true})
+  }
+
+  handleVerifyToggleOff(e) {
+     e.preventDefault();
+     this.setState({verifyToggle:false})
+  }
+
+
+  resendSms(e) {
+    e.preventDefault();
+    this.setState({verifyToggle:false});
+    let phone = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.mobile_number 
+      ? this.props.user.user.mobile_number
+      : false;
+
+      if(phone) {
+        let payload = { token: this.props.user.token, mobileNumber: phone  }
+        this.props.verifySmsRequest(payload)
+      }
   }
 
   closeEmailModal(e) {
@@ -293,10 +341,66 @@ export class UserProfile extends Component {
       : false
 
 
-    let smsError = this.props.user && 
-        this.props.user.sms && 
-        this.props.user.sms.error && 
-        this.props.user.sms.error.payload ? this.props.user.sms.error.payload.error_description : false
+    let smsError = 
+      this.props.user &&
+      this.props.user && 
+      this.props.user.sms &&
+      this.props.user.sms.error &&
+      this.props.user.sms.error.payload &&
+      this.props.user.sms.error.payload.error_description 
+      ? this.props.user.sms.error.payload.error_description
+      : false
+
+    let smsSuccess = 
+      this.props.user &&
+      this.props.user.sms &&
+      this.props.user.sms.success
+      ? true
+      : false  
+
+    let userPhone = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.mobile_number 
+      ? this.props.user.user.mobile_number
+      : false
+
+    let isVerified = 
+      this.props.user && 
+      this.props.user.user &&
+      this.props.user.user.is_sms_verified 
+      ? this.props.user.user.is_sms_verified
+      : false  
+ 
+    if(userPhone) {
+     let n = userPhone.toString()
+     userPhone = n.replace(/.(?=.{4})/g, '');
+    }  
+
+    if(smsError && !this.state.errorLoaded  ) {
+      // this.props.verifySmsRequest({ clear: true })
+      this.setState({errorLoaded:true,showSMSModal:true})
+    }  
+
+    // console.log('isVerified' , isVerified )
+    if(!isVerified && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
+       this.setState({smsLoaded:true});
+      setTimeout(() => {
+        this.setState({showSMSModal:true });
+      }, 3000)
+      
+      // this.props.verifySmsRequest({ clear: true })
+    } 
+
+    if( isVerified && !this.state.verifiedLoaded) {
+
+      this.setState({showSMSModal:false,verifiedLoaded:true})
+      // this.props.verifySmsRequest({ clear: true })
+    } 
+
+
+   
+
  
     return (
       <div className="p-5">
@@ -310,7 +414,93 @@ export class UserProfile extends Component {
           >
             EDIT
           </Button>
- 
+
+
+
+          <Modal
+            className="modal__container"
+            show={this.state.showSMSModal}
+            onHide={() => this.modalClose()}
+            centered
+            size="md"
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>
+              { !this.state.verifyToggle &&  
+                <div className="center--text">
+                  <h2 className="SevenRewards__heading text-center">Lets Verify Your Mobile Phone</h2>
+                  <p>Account verification required for new members to receive welcome offer.</p>
+                  <h6>{this.state.modalMessage}</h6>
+
+                  <form>
+                    <input
+                      className="verify--input"
+                      id="sms_code"
+                      type="text"
+                      value={this.state.smscode}
+                      placeholder="Verification PIN"
+                      onChange={e => this.updateCode(e)}
+                    />
+                  </form>
+                  { smsError && 
+                    <p className="field--error">{smsError}</p>
+                  }
+
+                 <button
+                  green className="verify--button" 
+                  onClick={(e) =>  this.verifySMSWithCode(e) }
+                >
+                  Verify
+                </button> 
+                <div className="close--button">
+                 <a href="/" onClick={(e) => this.handleClose(e)}>Cancel</a>
+                </div>
+                
+                <div className="more--options">
+                 <a href="/" onClick={(e) => this.handleVerifyToggle(e)}>Click Here</a><span> for more options</span>
+                </div>  
+              
+                </div>
+              }
+
+              { this.state.verifyToggle && 
+                  <div className="inner__modal__page">
+                     <h2 className="SevenRewards__heading text-center">Lets Verify Your Mobile Phone</h2>  
+                     <div className="sms__toggle__header">
+                        <div>Verify (***)***-{ userPhone }</div>
+                        <div><a href="/" onClick={(e) => this.resendSms(e)}>Resend</a></div>
+                     </div>
+                     <div>
+                      <p>
+                        Didn't receive your 6 digit PIN? No problem, click the resend and we will send you a new unique PIN to verify your mobile phone.
+                      </p>
+                      <p>
+                        Help? <a href="https://survey.medallia.com/?711-gr" target="_blank">Contact Support</a>
+                      </p>
+                      <p>
+                       If you are having issues verifying your mobile phone, contact support and we will look into it for you. 
+                      </p>
+                     </div>
+
+                     <div>
+                      <button
+                        green className="verify--button" 
+                        onClick={(e) =>  this.handleVerifyToggleOff(e) }
+                      >
+                        Back
+                      </button> 
+
+                     </div>
+
+                  </div>
+              }
+            </Modal.Body>
+          </Modal>
+
+
+
+
+
           <Modal
             show={this.state.showSuccessModal}
             onHide={() => this.handleClose()}
@@ -397,7 +587,7 @@ export class UserProfile extends Component {
 
           <Modal
             show={this.state.showModal}
-            onHide={() => this.setState({ showModal: false })}
+            onHide={ () => this.handleClose() }
           >
             <Modal.Header closeButton />
             <Modal.Body>

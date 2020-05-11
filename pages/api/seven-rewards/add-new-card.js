@@ -27,6 +27,7 @@ export default async (req, res) => {
      res.json(cardCheckResponse)
      return
   } catch(error) {
+    console.log(error)
     res.json({error: error, body:req.body })
     // res.status(400).send({ error: error })
   }

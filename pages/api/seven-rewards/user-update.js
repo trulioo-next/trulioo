@@ -28,7 +28,7 @@ export default async (req, res) => {
     let gender =  body.body.gender === 'Prefer not to say' ? false : true;
 
 
-    console.log('BIRTHDAY ', birthdate )
+    // console.log('BIRTHDAY ', birthdate )
 
     let payload = {
         "first_name": body.body.firstName,
@@ -46,9 +46,7 @@ export default async (req, res) => {
         "email": body.body.email
       }
 
-
-      console.log('PHONE ', body.body.phone )    
-
+      // console.log('PHONE ', body.body.phone )    
       if(phone) {
         payload.mobile_number = body.body.phone;
       }
@@ -64,7 +62,7 @@ export default async (req, res) => {
        headers: updateHeaders,
        body: JSON.stringify(payload)
      });
-   
+     
     res.json({user:updateUser, fieldErrors:false })  
      
      return
