@@ -14,10 +14,7 @@ import { selectIsLoading } from '@/stores/app/selectors';
 
 const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   const isOpen = i === expanded;
-
-   
-   
-
+ 
   let itemClassnames = classNames(
     'SiteHeader__item',
     {

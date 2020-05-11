@@ -36,7 +36,7 @@ const MediaCard = props => {
               })}
             >
               {props.product ? (
-                <Link href={props.product.href}>
+                <Link href="/menu/[category]/[product]" as={props.product.href}>
                   <a>
                     <img
                       className={classNames({ 'w-100': !props.containImage })}
@@ -57,7 +57,7 @@ const MediaCard = props => {
               className={classNames(props.stacked ? 'h4' : 'h3', 'Card__title')}
             >
               {props.product ? (
-                <Link href={props.product.href}>
+                 <Link href="/menu/[category]/[product]" as={props.product.href}>
                   <a>{props.title}</a>
                 </Link>
               ) : (
@@ -69,7 +69,7 @@ const MediaCard = props => {
         </Row>
       </Card.Body>
       {props.product && (
-        <Link href={props.product.href}>
+         <Link href="/menu/[category]/[product]" as={props.product.href}>
           <a className="Card__linkedFooter">
             <Card.Footer className="Card__footer d-flex justify-content-between">
               <span>View product details</span>

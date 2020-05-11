@@ -18,7 +18,7 @@ const ProductCard = ({ item }) => {
 
   return (
     <Card className={cardClasses}>
-      <Link href={props.href}>
+      <Link href="/menu/[category]/[product]" as={props.href}>
         <a className="Card__linkedFooter">
         <Card.Body className={bodyClasses}>
           <div className="Card__image -contain -square">
