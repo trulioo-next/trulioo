@@ -89,7 +89,7 @@ const SubNavMenu = props => {
           </Link>
         )}
         {name === 'Nutritional Information'  && (
-          <Link href='/nutritional-information'>
+          <Link href='/nutritional-information' replace={true}>
             <a>{name}</a>
           </Link>
         )}
@@ -133,9 +133,11 @@ const SubNavMenu = props => {
           variants={itemVariants}
           className="SiteHeader__item -nested col col-12 text-center"
         >
-          <Button outlined href="/menu">
+         <Link href='/menu' replace={true}>
+          <Button outlined>
             View Full Menu
           </Button>
+          </Link>
         </motion.li>
       )}
     </motion.ul>
