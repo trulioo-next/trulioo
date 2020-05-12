@@ -137,6 +137,13 @@ class MyAccount extends React.Component {
     ! this.props.user.addCard.error
     ? "You have successfully added a new card!" 
     : false;
+
+    let linkedCards = 
+      this.props.user && 
+      this.props.user.user && 
+      this.props.user.user.linked_cards
+      ? true
+      : false 
     
      
     return (
@@ -178,6 +185,20 @@ class MyAccount extends React.Component {
                   </Admin.Panel>
                 </Col>
                 <Col xs="12" md="10" lg="6" className="px-lg-5">
+
+                  { linkedCards &&
+                    <Admin.Panel>
+                      <div className="p-5">
+                        <h2 className="h6">Card Numbers</h2>
+                        <hr className="mb-4" />
+                         { this.props.user.user.linked_cards.map((code, index) => (
+                              <h6 key={`code--id-${code}`}>{code}</h6>
+                         ))}
+                      </div>
+                    </Admin.Panel>
+                  }
+
+
                   <Admin.Panel
                     className="text-center text-white"
                     style={{

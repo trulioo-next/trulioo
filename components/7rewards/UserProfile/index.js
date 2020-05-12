@@ -182,7 +182,7 @@ export class UserProfile extends Component {
         } 
 
         if( isVerified && !this.state.verifiedLoaded) {
-          this.props.unValidateSMSAction();
+          this.props.validateSMSAction();
           this.setState({showSMSModal:false,verifiedLoaded:true})
           // this.props.verifySmsRequest({ clear: true })
         } 
@@ -279,6 +279,7 @@ export class UserProfile extends Component {
 
   modalClose() {
     this.setState({showSMSModal:false});
+    this.props.validateSMSAction()
   }
 
   handleVerifyToggle(e) {
