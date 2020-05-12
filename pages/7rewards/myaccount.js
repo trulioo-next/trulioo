@@ -11,7 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import FormCheck from 'react-bootstrap/FormCheck';
-
+import Link from 'next/link';
 import Button from '@/components/Button';
 import UserProfile from '@/components/7rewards/UserProfile';
 
@@ -174,7 +174,22 @@ class MyAccount extends React.Component {
                                 onChange={(e) => this.updatePreferences(e) }
                               />
                               <FormCheck.Label className="ml-3">
-                                {preference.description}
+                                  I agree to receive news, promotions, and
+                                      information from 7-Eleven®. You can
+                                      unsubscribe at any time. Please read our{' '}
+                                      <Link href="/privacy">
+                                        <a>
+                                          <u>Privacy Policy</u>
+                                        </a>
+                                      </Link>{' '}
+                                      or{' '}
+                                      <Link href="/contact-us">
+                                        <a>
+                                          <u>Contact Us</u>
+                                        </a>
+                                      </Link>
+                                       &nbsp; (optional).
+
                               </FormCheck.Label>
                             </Form.Check>
                           </fieldset>
