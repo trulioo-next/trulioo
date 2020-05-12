@@ -71,6 +71,20 @@ export class UserProfile extends Component {
 
     this.submitForm = this.submitForm.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
+    this.modalClose = this.modalClose.bind(this)
+    this.successClose = this.successClose.bind(this)
+    this.handleVerifyToggle = this.handleVerifyToggle.bind(this)
+    this.handleVerifyToggleOff = this.handleVerifyToggleOff.bind(this)
+    this.resendSms = this.resendSms.bind(this)
+    this.closeEmailModal = this.closeEmailModal.bind(this)
+    this.handleEmailClose = this.handleEmailClose.bind(this)
+    this.updateCode = this.updateCode.bind(this)
+    this.getFieldErrors = this.getFieldErrors.bind(this)
+    this.getPasswordResetErrors = this.getPasswordResetErrors.bind(this)
+    this.verifySMSWithCode = this.verifySMSWithCode.bind(this)
+    this.openPasswordReset = this.openPasswordReset.bind(this)
+    this.passwordReset = this.passwordReset.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   getFieldErrors() {
@@ -132,6 +146,46 @@ export class UserProfile extends Component {
         if(this.props.user && this.props.user.user && this.props.user.user.mobile_number && !this.state.phoneLoaded ) {
           this.setState({phoneLoaded:true,verifyDisabled:false})
         }
+        
+        // 4. setup sms modal
+        let smsError = 
+          this.props.user &&
+          this.props.user && 
+          this.props.user.sms &&
+          this.props.user.sms.error &&
+          this.props.user.sms.error.payload &&
+          this.props.user.sms.error.payload.error_description 
+          ? this.props.user.sms.error.payload.error_description
+          : false
+
+        let isVerified = 
+          this.props.user && 
+          this.props.user.user &&
+          this.props.user.user.is_sms_verified 
+          ? this.props.user.user.is_sms_verified
+          : false    
+
+
+        if(smsError && !this.state.errorLoaded  ) {
+          // this.props.verifySmsRequest({ clear: true })
+          this.setState({errorLoaded:true,showSMSModal:true})
+        }  
+
+        // console.log('isVerified' , isVerified )
+        if(!isVerified && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
+           this.setState({smsLoaded:true});
+          setTimeout(() => {
+            this.setState({showSMSModal:true });
+          }, 3000)
+          
+          // this.props.verifySmsRequest({ clear: true })
+        } 
+
+        if( isVerified && !this.state.verifiedLoaded) {
+
+          this.setState({showSMSModal:false,verifiedLoaded:true})
+          // this.props.verifySmsRequest({ clear: true })
+        } 
  
      }
 
@@ -171,14 +225,6 @@ export class UserProfile extends Component {
     this.setState({formSubmit:true,closeSuccessModal:false})
   }
 
-  //
-  verifyMobileNumber(e) {
-    e.preventDefault();
-    this.setState({validateNumberModal:true})
-    let payload = { token: this.props.user.token, mobileNumber: this.state.phone }
-    this.props.verifySmsRequest(payload)
-  }
-  
   //
   verifySMSWithCode(e) {
     e.preventDefault()
@@ -377,27 +423,6 @@ export class UserProfile extends Component {
      let n = userPhone.toString()
      userPhone = n.replace(/.(?=.{4})/g, '');
     }  
-
-    if(smsError && !this.state.errorLoaded  ) {
-      // this.props.verifySmsRequest({ clear: true })
-      this.setState({errorLoaded:true,showSMSModal:true})
-    }  
-
-    // console.log('isVerified' , isVerified )
-    if(!isVerified && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
-       this.setState({smsLoaded:true});
-      setTimeout(() => {
-        this.setState({showSMSModal:true });
-      }, 3000)
-      
-      // this.props.verifySmsRequest({ clear: true })
-    } 
-
-    if( isVerified && !this.state.verifiedLoaded) {
-
-      this.setState({showSMSModal:false,verifiedLoaded:true})
-      // this.props.verifySmsRequest({ clear: true })
-    } 
  
     return (
       <div className="p-5">
@@ -415,8 +440,9 @@ export class UserProfile extends Component {
           <Modal
             className="modal__container"
             show={this.state.showSMSModal}
-            onHide={() => this.modalClose()}
-            centered
+            onHide={this.modalClose}
+            top
+            aria-labelledby="contained-modal-title-vcenter"
             animation={false}
             size="md"
           >
@@ -443,7 +469,7 @@ export class UserProfile extends Component {
                   }
 
                  <button
-                  green className="verify--button" 
+                  green="true" className="verify--button" 
                   onClick={(e) =>  this.verifySMSWithCode(e) }
                 >
                   Verify
@@ -480,7 +506,7 @@ export class UserProfile extends Component {
 
                      <div>
                       <button
-                        green className="verify--button" 
+                        green="true" className="verify--button" 
                         onClick={(e) =>  this.handleVerifyToggleOff(e) }
                       >
                         Back
@@ -493,13 +519,10 @@ export class UserProfile extends Component {
             </Modal.Body>
           </Modal>
 
-
-
-
-
+ 
           <Modal
             show={this.state.showSuccessModal}
-            onHide={() => this.successClose()}
+            onHide={this.successClose}
             centered
             size="sm"
           >
@@ -517,7 +540,7 @@ export class UserProfile extends Component {
           <Modal
             className="modal__rounded"
             show={this.state.showEmailModal}
-            onHide={() => this.handleEmailClose()}
+            onHide={this.handleEmailClose}
             centered
             size="md"
           >
@@ -583,7 +606,7 @@ export class UserProfile extends Component {
 
           <Modal
             show={this.state.showModal}
-            onHide={ () => this.handleClose() }
+            onHide={ this.handleClose }
           >
             <Modal.Header closeButton />
             <Modal.Body>

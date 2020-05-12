@@ -106,7 +106,7 @@ const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
           : false;
 
       return (
-        <>
+        <div>
           {rewardsLinks && (
             <Link href={url} prefetch={false} replace>
               <a>{name}</a>
@@ -127,12 +127,13 @@ const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
               {name}
             </a>
           )}
-        </>
+        </div>
       );
     }
   }
 
   return (
+      
     <motion.ul
       variants={listVariants}
       className={classNames('SiteHeader__submenu', { '-nested': isNested })}
@@ -162,7 +163,7 @@ const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
           className="SiteHeader__item -nested col col-12 text-center"
         >
           <Link href="/menu" replace={true}>
-            <Button href="/menu" outlined>
+            <Button outlined>
               View Full Menu
             </Button>
           </Link>
