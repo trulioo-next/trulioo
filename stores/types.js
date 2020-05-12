@@ -60,7 +60,8 @@ export const SEVEN_REWARDS_UPDATE_PREFERNCES = 'seven_rewards/update/SEVEN_REWAR
 export const SEVEN_REWARDS_ADDCARD_REQUEST = 'seven_rewards/addcard/SEVEN_REWARDS_ADDCARD_REQUEST'
 export const SEVEN_REWARDS_ADDCARD = 'seven_rewards/addcard/SEVEN_REWARDS_ADDCARD'
 export const SEVEN_REWARDS_ADDCARD_ERROR = 'seven_rewards/error/SEVEN_REWARDS_ADDCARD_ERROR'
-
+export const SEVEN_REWARDS_VALIDATE_SMS = 'seven_rewards/sms/SEVEN_REWARDS_VALIDATE_SMS'
+export const SEVEN_REWARDS_UNVALIDATE_SMS = 'seven_rewards/unsms/SEVEN_REWARDS_UNVALIDATE_SMS'
 
 // Alert Events
 export const ALERT_LOAD_REQUEST = 'alert/load/ALERT_LOAD_REQUEST'

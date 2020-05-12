@@ -20,5 +20,6 @@ export const INITIAL_STATE = {
   passwordReset:false,
   myRewards:false,
   fieldErrors:false,
-  addCard:false
+  addCard:false,
+  hasValidatedSms:false
 };

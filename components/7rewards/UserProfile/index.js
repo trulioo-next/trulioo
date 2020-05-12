@@ -117,6 +117,9 @@ export class UserProfile extends Component {
 
   // 
   componentDidUpdate() {
+
+
+
      
      if( !this.props.loading ) {
         
@@ -167,22 +170,19 @@ export class UserProfile extends Component {
 
 
         if(smsError && !this.state.errorLoaded  ) {
-          // this.props.verifySmsRequest({ clear: true })
           this.setState({errorLoaded:true,showSMSModal:true})
+          this.props.unValidateSMSAction();
         }  
-
-        // console.log('isVerified' , isVerified )
-        if(!isVerified && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
+        
+        if(!this.props.smsValid && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
            this.setState({smsLoaded:true});
           setTimeout(() => {
             this.setState({showSMSModal:true });
           }, 3000)
-          
-          // this.props.verifySmsRequest({ clear: true })
         } 
 
         if( isVerified && !this.state.verifiedLoaded) {
-
+          this.props.unValidateSMSAction();
           this.setState({showSMSModal:false,verifiedLoaded:true})
           // this.props.verifySmsRequest({ clear: true })
         } 
@@ -263,9 +263,11 @@ export class UserProfile extends Component {
     let currentPhone = user && user.phone_number ? user.phone_number : false;
  
     if (this.state.phone === currentPhone) {
+      // kill modal 
+      this.props.validateSMSAction()
       this.setState({showSMSModal:false, showSuccessModalLoaded:false, showSuccessModal:false, successMessage:'', closeSuccessModal:true, validateNumberModal:false, codeSet:false, formloaded:false, showModal:false, phoneUpdated:false})  
     } else {
-      
+       this.props.unValidateSMSAction();
       this.setState({ showSMSModal:true, phoneUpdated:false, phoneLoaded:true, showModal:false, showSuccessModal:false})
     }
        
@@ -339,7 +341,7 @@ export class UserProfile extends Component {
     //
     // Form data 
     let { provinces,genders,months,days,years } = FormData()
-    
+     
     // validation :
     // TODO: create a helper service to validate inline state
     //
@@ -438,10 +440,10 @@ export class UserProfile extends Component {
           </Button>
   
           <Modal
-            className="modal__container"
+             
             show={this.state.showSMSModal}
             onHide={this.modalClose}
-            top
+            center
             aria-labelledby="contained-modal-title-vcenter"
             animation={false}
             size="md"
@@ -850,12 +852,15 @@ const mapStateToProps = state => ({
   user: appSelectors.userDataSelector(state),
   loading: loadSelectors.selectIsLoading(state),
   token: appSelectors.userTokenSelector(state),
+  smsValid:appSelectors.smsValidatedSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   userUpdateRequest: payload => dispatch(appActions.reqUpdateAction(payload)),
   passwordResetRequest: payload => dispatch(appActions.reqPasswordResetAction(payload)),
   verifySmsRequest: payload => dispatch(appActions.reqSMSAction(payload)),
+  validateSMSAction: payload => dispatch(appActions.validateSMSAction(payload)),
+  unValidateSMSAction: payload => dispatch(appActions.unValidateSMSAction(payload)),
 });
 
 const UserProfile_ = connect(mapStateToProps, mapDispatchToProps)(UserProfile);

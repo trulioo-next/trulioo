@@ -88,11 +88,17 @@ class SevenRewards extends React.Component {
   handleClose(e) {
     e.preventDefault();
     this.setState({showSMSModal:false});
+
+    // kill modal 
+    this.props.validateSMSAction()
       
   }
 
   modalClose(e) {
     this.setState({showSMSModal:false});
+
+    // kill modal 
+    this.props.validateSMSAction()
   }
 
   handleVerifyToggle(e) {
@@ -165,7 +171,7 @@ class SevenRewards extends React.Component {
     }  
 
     // console.log('isVerified' , isVerified )
-    if(!isVerified && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
+    if(!this.props.smsValid && !this.state.smsLoaded && ( this.props.user && this.props.user.auth ) ) {
        this.setState({smsLoaded:true});
       setTimeout(() => {
         this.setState({showSMSModal:true });
@@ -302,11 +308,13 @@ class SevenRewards extends React.Component {
 
 const mapStateToProps = state => ({
   user: appSelectors.userDataSelector(state),
+  smsValid:appSelectors.smsValidatedSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   userAuthRequest: payload => dispatch(appActions.reqUserAuthAction(payload)),
   verifySmsRequest: payload => dispatch(appActions.reqSMSAction(payload)),
+  validateSMSAction: payload => dispatch(appActions.validateSMSAction(payload)),
 });
 
 SevenRewards.defaultProps = {

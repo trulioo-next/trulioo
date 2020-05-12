@@ -21,7 +21,9 @@ import {
   SEVEN_REWARDS_ADDCARD,
   SEVEN_REWARDS_SMS_ERROR,
   SEVEN_REWARDS_SMS_CLEAR,
-  SEVEN_REWARDS_ADDCARD_ERROR
+  SEVEN_REWARDS_ADDCARD_ERROR,
+  SEVEN_REWARDS_VALIDATE_SMS,
+  SEVEN_REWARDS_UNVALIDATE_SMS
 } from '../types'
 
 
@@ -34,6 +36,16 @@ export default (state = INITIAL_STATE, action) => {
            addCard: action.payload.success,
            user:action.payload.user
         }
+
+      case SEVEN_REWARDS_VALIDATE_SMS:
+        return { ...state,
+           hasValidatedSms: true
+        }  
+
+      case SEVEN_REWARDS_UNVALIDATE_SMS:
+        return { ...state,
+           hasValidatedSms: false
+        }    
 
       case SEVEN_REWARDS_ADDCARD_ERROR:
         return { ...state,

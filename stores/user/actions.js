@@ -10,7 +10,9 @@ import {
   SEVEN_REWARDS_UPDATE_REQUEST,
   SEVEN_REWARDS_PASSWORD_RESET_REQUEST,
   SEVEN_REWARDS_UPDATE_PREFERNCES_REQUEST,
-  SEVEN_REWARDS_ADDCARD_REQUEST
+  SEVEN_REWARDS_ADDCARD_REQUEST,
+  SEVEN_REWARDS_VALIDATE_SMS,
+  SEVEN_REWARDS_UNVALIDATE_SMS
 } from '../types'
 
 export const reqUserAuthAction = (payload) => ({
@@ -73,6 +75,15 @@ export const reqPreferenceUpdateAction = (payload) => ({
   payload: payload
 })
 
+export const validateSMSAction = (payload) => ({
+  type: SEVEN_REWARDS_VALIDATE_SMS,
+  payload: payload
+})
+
+export const unValidateSMSAction = (payload) => ({
+  type: SEVEN_REWARDS_UNVALIDATE_SMS,
+  payload: payload
+})
 
 export default {
   reqUserAuthAction,
@@ -86,5 +97,7 @@ export default {
   reqUpdateAction,
   reqPasswordResetAction,
   reqPreferenceUpdateAction,
-  reqAddCardAction
+  reqAddCardAction,
+  validateSMSAction,
+  unValidateSMSAction
 }

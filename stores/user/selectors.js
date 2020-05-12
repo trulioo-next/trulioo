@@ -19,7 +19,15 @@ export const userTokenSelector = (state) => {
    return state.user.token
  }
 
+export const smsValidatedSelector = (state) => {
+ 	if (!process.browser) {
+        return null;
+    }
+   return state.user.hasValidatedSms
+ } 
+
 export default {
   userDataSelector,
-  userTokenSelector
+  userTokenSelector,
+  smsValidatedSelector
 }
