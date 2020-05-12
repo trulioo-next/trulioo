@@ -18,6 +18,7 @@ import SectionTasteOfAsia from './SectionComponents/SectionTasteOfAsia';
 import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
 import SectionContestWinners from './SectionComponents/SectionContestWinners';
 import SectionSearchResults from './SectionComponents/SectionSearchResults';
+import SectionLoggedOutSlider from './SectionComponents/SectionLoggedOutSlider';
 
 const SectionMaker = ({
   type,
@@ -51,8 +52,11 @@ const SectionMaker = ({
         <SectionGetDeliveryAddress sectionIndex={sectionIndex} {...params} />
       );
 
-    case 'section_7rewards_block':
-      return <Section7Rewards sectionIndex={sectionIndex} {...params} />;
+      case 'section_7rewards_block':
+        return <Section7Rewards sectionIndex={sectionIndex} {...params} />;
+
+      case 'section_loggedout_slider_block':
+        return <SectionLoggedOutSlider sectionIndex={sectionIndex} {...params} />;
 
     case 'section_newsletter_block':
       return <SectionNewsletter sectionIndex={sectionIndex} {...params} />;
