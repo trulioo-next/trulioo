@@ -274,6 +274,7 @@ class SectionGetDeliveryAddress extends Component {
                     </div>
                     <div className="Delivery__field align-items-center justify-content-between">
                       <Button
+                        id="delivery_search"
                         type="submit"
                         onClick={this.handleSubmit}
                         className="bg-info Delivery__action"
@@ -282,6 +283,7 @@ class SectionGetDeliveryAddress extends Component {
                       </Button>
                       <span className="Delivery__actionDivider">or</span>
                       <Button
+                        id="delivery_usemylocation"
                         type="button"
                         className="bg-info Delivery__action"
                         onClick={this.handleNavigator}
