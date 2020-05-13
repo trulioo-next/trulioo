@@ -21,24 +21,25 @@ const Page = props => {
 
   const backToNewsroomHref = '/newsroom';
 
-  const [post, setPost] = useState(null);
-  const [morePosts, setMorePosts] = useState([]);
+  let post = null;
+  let morePosts = [];
 
   const dispatch = useDispatch();
   useEffect(() => {
     const slug = props.query.slug;
     dispatch(reqNewsroomDataAction({ payload: slug }));
-  }, []);
+  }, [props.query.slug]);
 
   const data = useSelector(state => newsroomDataSelector(state));
 
-  useEffect(() => {
-    if (data && data.post)
-    { 
-      setPost({...data.post});
-      setMorePosts([...data.morePosts]);
+  if (data)
+  { if (data.post)
+    { post = {...data.post};
     }
-  }, [data]);
+    if (data.morePosts)
+    { morePosts = [...data.morePosts];
+    }
+  }
 
   return (
     <Layout>
