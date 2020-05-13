@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import Link from 'next/link';
 
 import Layout from '../../containers/Layout/Layout'
 import Header from '../../components/Header/Header'
@@ -22,10 +23,37 @@ const Page = (props) => {
 		return <Error statusCode={props.errorCode} />
    }
    
-   const [featurePost, setFeaturePost] = useState([]);
-   const [allPosts, setAllPosts] = useState([]);
-   const [morePosts, setMorePosts] = useState([]);
+   let featurePost = [];
+   let morePosts = [];
+   let taxonomies = [];
    
+   // --- Use the 'category' param to pre-select a category:
+   const [selectedCategory, setSelectedCategory] = useState(props.query.category ? props.query.category : '');
+   console.log("Selected category: " + selectedCategory);
+
+
+   const filterPosts = (posts, category) => {
+      return posts.filter(post => {
+         if (category === '')
+         {  return true;
+         }
+         if (category === 'general')
+         {  return post.terms.length < 1;
+         }
+         let inCategory = false;
+         post.terms.forEach(term => {
+            inCategory |= term.slug == category;
+         });
+         return inCategory;
+      })
+   }
+
+
+   const categoryClicked = evt => {
+      setSelectedCategory(evt.currentTarget.dataset.category);
+   }
+
+
    const dispatch = useDispatch();
    useEffect(() => {
       const slug = props.query.slug || '';
@@ -34,16 +62,24 @@ const Page = (props) => {
 
    const newsroomData = useSelector(state => newsroomDataSelector(state));
 
-  
-   useEffect(() => {
-      if (newsroomData && newsroomData.allPosts && featurePost.length === 0)
-      {  
-         const posts = [...newsroomData.allPosts];
-         setAllPosts([...posts]);
-         setFeaturePost([...posts.slice(0, 1)]);
-         setMorePosts([...posts.slice(1)]);
+   if (newsroomData)
+   {
+      if (newsroomData.taxonomies)
+      {
+         const defaultTaxonomies = [
+            { 'name': 'All', 'slug': '' },
+            { 'name': 'General', 'slug': 'general' },
+         ]
+         taxonomies = [...defaultTaxonomies, ...newsroomData.taxonomies];
       }
-   }, [newsroomData]);
+
+      if (newsroomData.allPosts)
+      {
+         const posts = filterPosts([...newsroomData.allPosts], selectedCategory);
+         featurePost = [...posts.slice(0, 1)];
+         morePosts = [...posts.slice(1)];
+      }
+   }
 
 
    return ( 
@@ -54,7 +90,15 @@ const Page = (props) => {
 					<Hero.Title title="Newsroom" color="#FFF" shadow />
 				</Hero>
 			</section>
-			<div className="Newsroom__page">
+         <div className="Newsroom__page">
+			{taxonomies &&
+            <div className="Newsroom__Categories ColumnSpread -spread-3">
+               { taxonomies.map((term, idx) => (
+                  <div><a className="Button" onClick={categoryClicked} data-category={term.slug} key={idx}>{term.name}</a></div>
+                  ))
+               }
+            </div>
+         }
 			{ featurePost && featurePost.length &&
                <SectionMaker
                   type="section_newsroom_grid"

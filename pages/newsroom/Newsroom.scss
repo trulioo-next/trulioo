@@ -6,4 +6,38 @@
 	color: $white;
 	cursor: pointer;
   }
+
+  .Newsroom__Categories {
+    margin-bottom: 30px;
+
+    div {
+      text-align: center;
+
+      a.Button {
+        min-width: 50%;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .Newsroom__page {
+
+    .Newsroom__Categories {
+      margin-bottom: 0px;
+
+      &.ColumnSpread {
+        display: inline-block;
+        text-align: center;
+      }
+
+      div {
+        display: inline-block;
+        margin: 5px 10px;
+        a.Button {
+          min-width: inherit;
+        }
+      }
+    }
+  }
 }
