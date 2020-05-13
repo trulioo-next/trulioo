@@ -1,0 +1,61 @@
+@import '~@/static/scss/component-includes';
+
+.Section.-ImageLinkBlocks {
+  display: grid;
+  grid-gap: 2.1rem;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4.1rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-gap: 6.1rem;
+  }
+
+  .Hero + & {
+    margin-top: 2.1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 4.1rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 6.1rem;
+    }
+  }
+
+  .card,
+  .card-img {
+    border-radius: 0;
+  }
+
+  .card {
+    height: (162/376 * 100vw);
+
+    @include media-breakpoint-up(md) {
+      height: 0;
+      padding-top: percentage(277/441);
+    }
+  }
+
+  .card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-shadow: 0 0.3rem 0.6rem #53472D;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 4rem;
+    }
+  }
+}

@@ -19,6 +19,10 @@ import SectionGiftCardBalance from './SectionComponents/SectionGiftCardBalance';
 import SectionContestWinners from './SectionComponents/SectionContestWinners';
 import SectionSearchResults from './SectionComponents/SectionSearchResults';
 import SectionLoggedOutSlider from './SectionComponents/SectionLoggedOutSlider';
+import SectionImageLinkBlocks from './SectionComponents/SectionImageLinkBlocks';
+import SectionTextSlider from './SectionComponents/SectionTextSlider';
+import SectionSlurpeeTrivia from './SectionComponents/SectionSlurpeeTrivia';
+import SlurpeeSpacer from '@/components/SlurpeeSpacer';
 
 const SectionMaker = ({
   type,
@@ -26,7 +30,7 @@ const SectionMaker = ({
   sectionIndex,
   category,
   defaultImage,
-  props
+  props,
 }) => {
   switch (type) {
     case 'section_hero_block':
@@ -52,11 +56,11 @@ const SectionMaker = ({
         <SectionGetDeliveryAddress sectionIndex={sectionIndex} {...params} />
       );
 
-      case 'section_7rewards_block':
-        return <Section7Rewards sectionIndex={sectionIndex} {...params} />;
+    case 'section_7rewards_block':
+      return <Section7Rewards sectionIndex={sectionIndex} {...params} />;
 
-      case 'section_loggedout_slider_block':
-        return <SectionLoggedOutSlider sectionIndex={sectionIndex} {...params} />;
+    case 'section_loggedout_slider_block':
+      return <SectionLoggedOutSlider sectionIndex={sectionIndex} {...params} />;
 
     case 'section_newsletter_block':
       return <SectionNewsletter sectionIndex={sectionIndex} {...params} />;
@@ -93,7 +97,19 @@ const SectionMaker = ({
       return <SectionContestWinners {...params} />;
 
     case 'search_results_placeholder':
-      return <SectionSearchResults props={{...props}} {...params} />;
+      return <SectionSearchResults props={{ ...props }} {...params} />;
+
+    case 'section_image_overlay_link_blocks':
+      return <SectionImageLinkBlocks {...params} />;
+
+    case 'section_text_slider':
+      return <SectionTextSlider {...params} />;
+
+    case 'slurpee_trivia':
+      return <SectionSlurpeeTrivia {...params} />;
+
+    case 'slurpee_spacer':
+      return <SlurpeeSpacer {...params} />;
 
     default:
       return '';

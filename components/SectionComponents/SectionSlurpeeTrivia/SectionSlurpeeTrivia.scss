@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+@import '~@/static/scss/component-includes';
+
+.Section.-SlurpeeTrivia {
+  position: relative;
+  margin-top: 2.1rem;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 4.1rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 6.1rem;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 9.2rem;
+  }
+
+  .Section {
+    &__header {
+      @include media-breakpoint-down(sm) {
+        position: absolute;
+        top: -1rem;
+        left: auto;
+        right: 1rem;
+        width: 70%;
+      }
+    }
+
+    &__title {
+      z-index: 3;
+      margin-left: 2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: $white;
+      font-size: 3.6rem;
+      transform: rotate(-2.5deg);
+      line-height: (10/11);
+      text-shadow:
+        0px 3px 6px #6E6E6E4D,
+        4px -3px 0 #2894D4,
+        -1px -1px 0 #76BEE6,
+        1px -1px 0 #76BEE6,
+        -1px 1px 0 #76BEE6,
+        1px 1px 0 #76BEE6;
+
+      @supports (-webkit-text-stroke: 4px #76BEE6) {
+        -webkit-text-stroke: 2px #76BEE6;
+        -webkit-text-fill-color: currentcolor;
+        paint-order: stroke fill;
+      }
+
+      @include media-breakpoint-up(md) {
+        position: relative;
+        top: -5rem;
+        margin-left: 0;
+        margin-bottom: -0.125em;
+        font-size: 6.4rem;
+        text-shadow:
+        0px 3px 6px #6E6E6E4D,
+        7px -4px 0 #2894D4,
+        -1px -1px 0 #76BEE6,
+        1px -1px 0 #76BEE6,
+        -1px 1px 0 #76BEE6,
+        1px 1px 0 #76BEE6;
+
+        @supports (-webkit-text-stroke: 4px #76BEE6) {
+          -webkit-text-stroke: 4px #76BEE6;
+        }
+      }
+
+      @include media-breakpoint-up(lg) {
+        font-size: 11rem;
+        text-shadow:
+        0px 3px 6px #6E6E6E4D,
+        11px -6px 0 #2894D4,
+        -1px -1px 0 #76BEE6,
+        1px -1px 0 #76BEE6,
+        -1px 1px 0 #76BEE6,
+        1px 1px 0 #76BEE6;
+      }
+    }
+  }
+}
+
+.SlurpeeTrivia {
+  &__imageGrid {
+    @include media-breakpoint-up(md) {
+      padding-left: 1rem;
+      padding-right: 4rem;
+    }
+  }
+
+  &__imageRow.row {
+    align-items: stretch;
+    margin-left: -1rem;
+    margin-right: -1rem;
+
+     + .SlurpeeTrivia__imageRow {
+       margin-top: 2rem;
+     }
+  }
+
+  &__imageColumn.col {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__contentColumn.col {
+    position: static;
+
+    @include media-breakpoint-down(sm) {
+      margin-top: 1.3rem;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__listItem{
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      background-image: svg-load('slurpee/slurpee.svg', fill = #2894d4);
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 1.5rem;
+      height: 3.625rem;
+      flex: 0 0 auto;
+      margin-right: 1.4rem;
+
+      @include media-breakpoint-up(lg) {
+        width: 2.962rem;
+        height: 7.136rem;
+      }
+    }
+
+    + .SlurpeeTrivia__listItem {
+      margin-top: 1.4rem;
+      @include media-breakpoint-up(lg) {
+        margin-top: 2.1rem;
+      }
+    }
+  }
+
+  &__fact {
+    flex: 1 1 auto;
+  }
+}
