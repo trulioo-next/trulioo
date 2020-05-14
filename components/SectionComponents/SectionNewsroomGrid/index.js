@@ -69,7 +69,7 @@ const SectionNewsroomGrid = props => {
               <NewsroomCard
                 key={sectionKey}
                 item={post}
-                href={ '/newsroom/'+category+'/' + post.slug }
+                href={ '/news-and-events/'+category+'/' + post.slug }
                 isFeature={isFeature}
                 isMorePosts={isMorePosts}
               />

@@ -88,7 +88,7 @@ class Sitemap extends React.Component {
         if (news.terms && news.terms[0] && news.terms[0].slug)
         { category = news.terms[0].slug;
         }
-        formatted.push( {slug:'newsroom/' + category + '/' + news.slug, date:formatDate(new Date(Date.parse(pubDate))), priority:'0.8'} );
+        formatted.push( {slug:'news-and-events/' + category + '/' + news.slug, date:formatDate(new Date(Date.parse(pubDate))), priority:'0.8'} );
       })
 
       //

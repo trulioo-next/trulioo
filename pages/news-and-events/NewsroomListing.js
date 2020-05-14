@@ -77,7 +77,7 @@ const NewsroomListing = (props) => {
                return isValid || (term.slug === selectedCategory);
             }, false);
             if (!validCategory)
-            {  Router.push('/newsroom');
+            {  Router.push('/news-and-events');
             }
          }
       }
@@ -103,8 +103,8 @@ const NewsroomListing = (props) => {
 			{taxonomies &&
             <div className="Newsroom__Categories">
                { taxonomies.map((term, idx) => {
-                     const href = term.slug === '' ? '/newsroom' : '/newsroom/[category]';
-                     const url = term.slug === '' ? href : '/newsroom/' + term.slug;
+                     const href = term.slug === '' ? '/news-and-events' : '/news-and-events/[category]';
+                     const url = term.slug === '' ? href : '/news-and-events/' + term.slug;
                      const isSelected = (selectedCategory === term.slug) || (selectedCategory === '' && term.slug === 'all');
                      const btnClass = "Button" + (isSelected ? ' selected' : '');
                   return (

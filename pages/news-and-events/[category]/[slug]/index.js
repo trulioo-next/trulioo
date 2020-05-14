@@ -20,7 +20,7 @@ const Page = props => {
     return <Error statusCode={props.errorCode} />;
   }
 
-  const backToNewsroomHref = '/newsroom';
+  const backToNewsroomHref = '/news-and-events';
 
   let post = null;
   let morePosts = [];
@@ -88,7 +88,7 @@ const LeftPanel = props => {
 
 const BackToNewsroom = props => {
   return (
-    <Link href="/newsroom" as={props.backToNewsroomHref}><a className="backToNewsroomLink"><span className="chevron">&lt;</span><span className="">Back to Newsroom</span></a></Link>
+    <Link href="/news-and-events" as={props.backToNewsroomHref}><a className="backToNewsroomLink"><span className="chevron">&lt;</span><span className="">Back to Newsroom</span></a></Link>
   )
 }
 
