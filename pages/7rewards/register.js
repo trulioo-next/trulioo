@@ -710,18 +710,17 @@ class RegisterScreen extends React.Component {
                                       I agree to receive news, promotions, and
                                       information from 7-Eleven®. You can
                                       unsubscribe at any time. Please read our{' '}
-                                      <Link href="/privacy">
-                                        <a>
-                                          <u>Privacy Policy</u>
-                                        </a>
-                                      </Link>{' '}
-                                      or{' '}
-                                      <Link href="/contact-us">
-                                        <a>
-                                          <u>Contact Us</u>
-                                        </a>
-                                      </Link>
-                                       &nbsp; (optional).
+                                      <a href="/privacy" target="_blank">
+                                        <u>Privacy Policy</u>
+                                      </a>
+                                      {' '}
+                                      or 
+                                      {' '}
+                                      <a href="/contact" target="_blank">
+                                        <u>Contact Us</u>
+                                      </a>
+                                    
+                                     &nbsp; (optional).
                                     </Form.Check.Label>
                                   </Form.Check>
                                 </Form.Group>
