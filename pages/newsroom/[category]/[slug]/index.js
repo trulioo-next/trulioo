@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Link from 'next/link';
-import SectionMaker from '@/components/SectionMaker';
-
-import NewsroomArticle from '../../../components/NewsroomArticle';
-import Layout from '../../../containers/Layout/Layout';
-import Header from '../../../components/Header/Header';
-
-import './Newsroom.scss';
 import Error from 'next/error';
 
-import { reqNewsroomDataAction } from "../../../stores/newsroom/actions";
-import { newsroomDataSelector } from "../../../stores/newsroom/selectors";
+import SectionMaker from '@/components/SectionMaker';
+import NewsroomArticle from '@/components/NewsroomArticle';
+import Layout from '@/containers/Layout/Layout';
+import Header from '@/components/Header/Header';
+
+import './Newsroom.scss';
+
+import { reqNewsroomDataAction } from "@/stores/newsroom/actions";
+import { newsroomDataSelector } from "@/stores/newsroom/selectors";
+
 
 const Page = props => {
   if (props.errorCode) {

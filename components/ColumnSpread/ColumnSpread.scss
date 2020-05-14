@@ -38,4 +38,16 @@
       grid-gap: 3.6rem 3.2rem;
     }
   }
+
+  &.-spread-5 {
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 2rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 3.6rem 3.2rem;
+    }
+  }
 }

@@ -15,12 +15,16 @@
 
       a.Button {
         min-width: 50%;
+
+        &.selected {
+          background-color: $orange;
+        }
       }
     }
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .Newsroom__page {
 
     .Newsroom__Categories {
@@ -33,7 +37,7 @@
 
       div {
         display: inline-block;
-        margin: 5px 10px;
+        margin: 5px 5px;
         a.Button {
           min-width: inherit;
         }

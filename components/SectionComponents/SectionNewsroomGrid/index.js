@@ -60,15 +60,20 @@ const SectionNewsroomGrid = props => {
       <Container fluid className="px-0">
         <ColumnSpread spread={columns} className={columnClasses}>
           {listPosts && 
-            listPosts.map((post, sectionKey) => (
+            listPosts.map((post, sectionKey) => {
+                let category = 'all';
+                if (post.terms && post.terms[0] && post.terms[0].slug)
+                { category = post.terms[0].slug;
+                }
+              return (
               <NewsroomCard
                 key={sectionKey}
                 item={post}
-                href={ '/newsroom/' + post.slug }
+                href={ '/newsroom/'+category+'/' + post.slug }
                 isFeature={isFeature}
                 isMorePosts={isMorePosts}
               />
-            ))}
+            )})}
         </ColumnSpread>
       </Container>
 

@@ -21,7 +21,7 @@ const NewsroomCard = props => {
   return (
     <Card className={cardClasses}>
         {!isFeature &&
-          <Link href="/newsroom/[slug]" as={href}><a>
+          <Link href="/newsroom/[category]/[slug]" as={href}><a>
             <Card.Body className={bodyClasses}>
               { post.featureImage && 
               <div className="Card__image -cover -square">
@@ -46,7 +46,7 @@ const NewsroomCard = props => {
               <div className={classNames('Card__content', {'addWhitespace': addWhitespace})}>
                 <p>{post.summary}</p>
               </div>
-              <Link href="/newsroom/[slug]" as={href}><a className="Button">Read More</a></Link>
+              <Link href="/newsroom/[category]/[slug]" as={href}><a className="Button">Read More</a></Link>
             </div>
           </Card.Body>
         }
