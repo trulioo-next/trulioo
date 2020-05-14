@@ -105,7 +105,8 @@ const NewsroomListing = (props) => {
                { taxonomies.map((term, idx) => {
                      const href = term.slug === '' ? '/newsroom' : '/newsroom/[category]';
                      const url = term.slug === '' ? href : '/newsroom/' + term.slug;
-                     const btnClass = "Button" + (selectedCategory === term.slug ? ' selected' : '');
+                     const isSelected = (selectedCategory === term.slug) || (selectedCategory === '' && term.slug === 'all');
+                     const btnClass = "Button" + (isSelected ? ' selected' : '');
                   return (
                      <Link href={href} as={url} key={idx}><div><a className={btnClass} >{term.name}</a></div></Link>
                   )})
