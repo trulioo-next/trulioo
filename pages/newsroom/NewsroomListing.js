@@ -112,7 +112,7 @@ const NewsroomListing = (props) => {
                }
             </div>
          }
-			{ featurePost && featurePost.length &&
+			{ featurePost && featurePost.length > 0 &&
                <SectionMaker
                   type="section_newsroom_grid"
 						sectionIndex="newsroomFeature"
@@ -123,7 +123,7 @@ const NewsroomListing = (props) => {
                       } }
 					/>
          }
-         { morePosts && morePosts.length &&
+         { morePosts && morePosts.length > 0 &&
 					<SectionMaker
 						type="section_newsroom_grid"
                   params={ {
