@@ -9,12 +9,14 @@
 
   .Newsroom__Categories {
     margin-bottom: 30px;
+    text-align: center;
 
     div {
+      display: inline-block;
       text-align: center;
+      margin: 0px 15px;
 
       a.Button {
-        min-width: 50%;
 
         &.selected {
           background-color: $orange;
@@ -29,11 +31,6 @@
 
     .Newsroom__Categories {
       margin-bottom: 0px;
-
-      &.ColumnSpread {
-        display: inline-block;
-        text-align: center;
-      }
 
       div {
         display: inline-block;

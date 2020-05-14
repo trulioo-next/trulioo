@@ -101,7 +101,7 @@ const NewsroomListing = (props) => {
 			</section>
          <div className="Newsroom__page">
 			{taxonomies &&
-            <div className="Newsroom__Categories ColumnSpread -spread-5">
+            <div className="Newsroom__Categories">
                { taxonomies.map((term, idx) => {
                      const href = term.slug === '' ? '/newsroom' : '/newsroom/[category]';
                      const url = term.slug === '' ? href : '/newsroom/' + term.slug;
