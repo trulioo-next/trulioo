@@ -183,7 +183,7 @@ class MyAccount extends React.Component {
                                       {' '}
                                       or 
                                       {' '}
-                                      <a href="/contact" target="_blank">
+                                      <a href="/contact-us" target="_blank">
                                         <u>Contact Us</u>
                                       </a>
                                     
