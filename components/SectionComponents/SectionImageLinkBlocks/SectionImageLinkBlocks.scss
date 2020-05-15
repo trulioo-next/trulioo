@@ -2,26 +2,26 @@
 
 .Section.-ImageLinkBlocks {
   display: grid;
-  grid-gap: 2.1rem;
+  grid-gap: 1rem;
 
   @include media-breakpoint-up(md) {
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 4.1rem;
+    grid-gap: 2rem;
   }
 
   @include media-breakpoint-up(lg) {
-    grid-gap: 6.1rem;
+    grid-gap: 4rem;
   }
 
   .Hero + & {
-    margin-top: 2.1rem;
+    margin-top: 1rem;
 
     @include media-breakpoint-up(md) {
-      margin-top: 4.1rem;
+      margin-top: 2rem;
     }
 
     @include media-breakpoint-up(lg) {
-      margin-top: 6.1rem;
+      margin-top: 4rem;
     }
   }
 

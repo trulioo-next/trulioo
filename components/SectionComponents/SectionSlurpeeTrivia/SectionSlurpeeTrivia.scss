@@ -3,15 +3,6 @@
 
 .Section.-SlurpeeTrivia {
   position: relative;
-  margin-top: 2.1rem;
-
-  @include media-breakpoint-up(md) {
-    margin-top: 4.1rem;
-  }
-
-  @include media-breakpoint-up(lg) {
-    margin-top: 6.1rem;
-  }
 
   .Section {
     &__header {
