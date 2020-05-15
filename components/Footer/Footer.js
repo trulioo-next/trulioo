@@ -14,6 +14,8 @@ const NavList = props => {
       let externalPath = href.split('://');
         
       let isDynamic =
+        label === 'Newsroom' || 
+        label === 'News & Events' || 
         label === 'Sign-In / Join Now' || 
         label === 'My Account' ||
         label === 'Promos & Contests' || 
