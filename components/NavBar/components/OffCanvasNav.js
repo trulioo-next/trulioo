@@ -176,13 +176,9 @@ const NavItem = props => {
         </Link>
       )}
       {item.name === 'Slurpee®' && (
-        <a  href={item.url}
-            className="OffCanvas__link"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-          {item.name}
-        </a>
+         <Link href="/slurpee">
+          <a className="OffCanvas__link">{item.name}</a>
+        </Link>
       )}
     </li>
   );

@@ -123,9 +123,9 @@ const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
             </Link>
           )}
           {name === 'Slurpee®' && (
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              {name}
-            </a>
+           <Link href="/slurpee" replace={true}>
+              <a>{name}</a>
+            </Link>
           )}
         </div>
       );
