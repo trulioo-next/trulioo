@@ -10,7 +10,7 @@ const ToolbarItem = ({ url, target, children }) => (
   <li className="SiteHeader__item">
     {target ? (
       <a className="SiteHeader__link" href={url} target={target}>
-        {children} asd 
+        {children}
       </a>
     ) : (
       <Link href={url}>
