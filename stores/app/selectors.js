@@ -51,7 +51,7 @@ export const selectError = (state) => {
       { footer2:data['footer-2-menu'] },
       { footer3:data['footer-3-menu'] },
       { footer4:data['footer-4-menu'] }
-     
+    
     ]
     
    return footerData
