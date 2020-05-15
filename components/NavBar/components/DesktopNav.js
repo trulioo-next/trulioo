@@ -48,24 +48,22 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
       </motion.li>
     );
   }
+  // {item.name === 'Slurpee®' && (
+  //   <a
+  //     href={item.url}
+  //     className="SiteHeader__link"
+  //     target="_blank"
+  //     rel="noopener noreferrer"
+  //   >
+  //     {item.name}
+  //   </a>
+  // )}
 
   return (
     <li className={itemClassnames}>
-      {item.name != 'Slurpee®' && (
-        <Link href={item.url} replace={true}>
-          <a className="SiteHeader__link">{item.name}</a>
-        </Link>
-      )}
-      {item.name === 'Slurpee®' && (
-        <a
-          href={item.url}
-          className="SiteHeader__link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {item.name}
-        </a>
-      )}
+      <Link href={item.url} replace={true}>
+        <a className="SiteHeader__link">{item.name}</a>
+      </Link>
     </li>
   );
 };
