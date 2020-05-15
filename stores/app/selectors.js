@@ -42,9 +42,9 @@ export const selectError = (state) => {
 
     let data = state.app.globalData;
     // console.log('FOOTER SELECTOR ', state.app.globalData.code )
-    if( state.app.globalData.code ) {
-      data = headerData
-    }
+    // if( state.app.globalData.code ) {
+    //   data = headerData
+    // }
  
     let footerData = [
       { footer1:data['footer-1-menu'] },
