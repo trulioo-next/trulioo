@@ -10,9 +10,10 @@ const SectionTextSlider = ({ corner_image, heading, slides }) => {
     className: 'TextSlider',
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     dots: true,
     autoplay: true,
+    autoplaySpeed: 10000,
   };
 
   return (
@@ -54,7 +55,7 @@ const SectionTextSlider = ({ corner_image, heading, slides }) => {
                 }}
               >
                 <Container
-                  className="d-flex align-items-center justify-content-center text-center h2 my-0"
+                  className="text-center h2 my-0"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
               </div>

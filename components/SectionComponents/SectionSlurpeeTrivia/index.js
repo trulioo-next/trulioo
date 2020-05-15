@@ -6,44 +6,24 @@ import Col from 'react-bootstrap/Col';
 
 import './SectionSlurpeeTrivia.scss';
 
-const ImageGrid = ({ data, windowWidth }) => {
-  const breakpoint = 576;
-  return windowWidth < breakpoint ? (
-    <div className="SlurpeeTrivia__imageGrird">
-      <Row className="SlurpeeTrivia__imageRow">
-        {data.map(({ row }, index) => (
-          <Fragment key={index}>
-            {row.map(({ image }, index) => (
-              <Col key={index} className="SlurpeeTrivia__imageColumn">
-                <img
-                  src={image.url}
-                  alt={image.alt}
-                  width={image.width}
-                  height={image.height}
-                />
-              </Col>
-            ))}
-          </Fragment>
-        ))}
-      </Row>
-    </div>
-  ) : (
-    <div className="SlurpeeTrivia__imageGrid">
-      {data.map(({ row }, index) => (
-        <Row key={index} className="SlurpeeTrivia__imageRow">
-          {row.map(({ image }, index) => (
-            <Col key={index} className="SlurpeeTrivia__imageColumn">
-              <img
-                src={image.url}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-              />
-            </Col>
-          ))}
-        </Row>
-      ))}
-    </div>
+const SectionHeader = ({ heading, subheading }) => {
+  return (
+    <header className="Section__header">
+      {heading && (
+        <h2 className="Section__title">
+          {heading.type === 'image' && heading.image ? (
+            <img src={heading.image.url} alt={heading.image.alt} />
+          ) : (
+            heading.text
+          )}
+        </h2>
+      )}
+      {subheading && (
+        <h3 className="Section__subheading h2 text-center text-md-left">
+          {subheading}
+        </h3>
+      )}
+    </header>
   );
 };
 
@@ -87,29 +67,36 @@ const SectionSlurpeeTrivia = ({
       }}
     >
       <Container className="Section__container">
+        {windowWidth < 576 && (
+          <SectionHeader heading={heading} subheading={subheading} />
+        )}
         <Row className="align-items-center">
           <Col xs="12" md="6" className="col">
             {image_grid && (
-              <ImageGrid data={image_grid} windowWidth={windowWidth} />
+              <div className="SlurpeeTrivia__imageGrid my-3">
+                {image_grid.map(({ row }, index) => (
+                  <Row key={index} className="SlurpeeTrivia__imageRow">
+                    {row.map(({ image }, index) => (
+                      <Col key={index} className="SlurpeeTrivia__imageColumn">
+                        <img
+                          src={image.url}
+                          alt={image.alt}
+                          width={image.width}
+                          height={image.height}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                ))}
+              </div>
             )}
           </Col>
           <Col xs="12" md="6" className="SlurpeeTrivia__contentColumn col">
-            <header className="Section__header">
-              {heading && (
-                <h2 className="Section__title">
-                  {heading.type === 'image' && heading.image ? (
-                    <img src={heading.image.url} alt={heading.image.alt} />
-                  ) : (
-                    heading.text
-                  )}
-                </h2>
-              )}
-              {subheading && (
-                <h3 className="Section__subheading h2">{subheading}</h3>
-              )}
-            </header>
+            {windowWidth > 576 && (
+              <SectionHeader heading={heading} subheading={subheading} />
+            )}
             {trivia && (
-              <ul className="SlurpeeTrivia__list">
+              <ul className="SlurpeeTrivia__list px-4 px-md-0">
                 {trivia.map(({ fact }, index) => (
                   <li key={index} className="SlurpeeTrivia__listItem">
                     <span className="SlurpeeTrivia__fact">{fact}</span>
