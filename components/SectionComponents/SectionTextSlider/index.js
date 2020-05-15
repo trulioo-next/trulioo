@@ -5,7 +5,12 @@ import Slider from 'react-slick';
 
 import './SectionTextSlider.scss';
 
-const SectionTextSlider = ({ corner_image, heading, slides }) => {
+const SectionTextSlider = ({
+  corner_image,
+  heading,
+  slides,
+  slider_settings,
+}) => {
   const sliderSettings = {
     className: 'TextSlider',
     slidesToShow: 1,
@@ -13,7 +18,7 @@ const SectionTextSlider = ({ corner_image, heading, slides }) => {
     arrows: true,
     dots: true,
     autoplay: true,
-    autoplaySpeed: 10000,
+    autoplaySpeed: slider_settings.autoplaySpeed * 1000 || 10000,
   };
 
   return (
