@@ -83,8 +83,12 @@ class Sitemap extends React.Component {
 
       // Newsroom articles:
       newsroom.allPosts.forEach(news => {
-        var pubDate = news.publishDate;
-        formatted.push( {slug:'newsroom/' + news.slug, date:formatDate(new Date(Date.parse(pubDate))), priority:'0.8'} );
+        const pubDate = news.publishDate;
+        let category = 'all';
+        if (news.terms && news.terms[0] && news.terms[0].slug)
+        { category = news.terms[0].slug;
+        }
+        formatted.push( {slug:'news-and-events/' + category + '/' + news.slug, date:formatDate(new Date(Date.parse(pubDate))), priority:'0.8'} );
       })
 
       //

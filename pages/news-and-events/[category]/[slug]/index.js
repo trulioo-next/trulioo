@@ -2,43 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Link from 'next/link';
-import SectionMaker from '@/components/SectionMaker';
-
-import NewsroomArticle from '../../../components/NewsroomArticle';
-import Layout from '../../../containers/Layout/Layout';
-import Header from '../../../components/Header/Header';
-
-import './Newsroom.scss';
 import Error from 'next/error';
 
-import { reqNewsroomDataAction } from "../../../stores/newsroom/actions";
-import { newsroomDataSelector } from "../../../stores/newsroom/selectors";
+import SectionMaker from '@/components/SectionMaker';
+import NewsroomArticle from '@/components/NewsroomArticle';
+import Layout from '@/containers/Layout/Layout';
+import Header from '@/components/Header/Header';
+
+import './Newsroom.scss';
+
+import { reqNewsroomDataAction } from "@/stores/newsroom/actions";
+import { newsroomDataSelector } from "@/stores/newsroom/selectors";
+
 
 const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
 
-  const backToNewsroomHref = '/newsroom';
+  const backToNewsroomHref = '/news-and-events';
 
-  const [post, setPost] = useState(null);
-  const [morePosts, setMorePosts] = useState([]);
+  let post = null;
+  let morePosts = [];
 
   const dispatch = useDispatch();
   useEffect(() => {
     const slug = props.query.slug;
     dispatch(reqNewsroomDataAction({ payload: slug }));
-  }, []);
+  }, [props.query.slug]);
 
   const data = useSelector(state => newsroomDataSelector(state));
 
-  useEffect(() => {
-    if (data && data.post)
-    { 
-      setPost({...data.post});
-      setMorePosts([...data.morePosts]);
+  if (data)
+  { if (data.post)
+    { post = {...data.post};
     }
-  }, [data]);
+    if (data.morePosts)
+    { morePosts = [...data.morePosts];
+    }
+  }
 
   return (
     <Layout>
@@ -86,7 +88,7 @@ const LeftPanel = props => {
 
 const BackToNewsroom = props => {
   return (
-    <Link href="/newsroom" as={props.backToNewsroomHref}><a className="backToNewsroomLink"><span className="chevron">&lt;</span><span className="">Back to Newsroom</span></a></Link>
+    <Link href="/news-and-events" as={props.backToNewsroomHref}><a className="backToNewsroomLink"><span className="chevron">&lt;</span><span className="">Back to Newsroom</span></a></Link>
   )
 }
 

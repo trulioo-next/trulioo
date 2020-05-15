@@ -61,5 +61,7 @@ This project tries to follow the following git workflow pattern:
 - git checkout origin/develop
 - rm -rf .next
 - yarb build
-- pm2 restart IdealRebel
+
+- STAGING :
+- pm2 restart SevenStage
  

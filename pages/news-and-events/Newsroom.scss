@@ -1,0 +1,44 @@
+@import '~@/static/scss/component-includes';
+
+.Newsroom__page {
+
+  a.Button {
+	color: $white;
+	cursor: pointer;
+  }
+
+  .Newsroom__Categories {
+    margin-bottom: 30px;
+    text-align: center;
+
+    div {
+      display: inline-block;
+      text-align: center;
+      margin: 0px 15px;
+
+      a.Button {
+
+        &.selected {
+          background-color: $light-green;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .Newsroom__page {
+
+    .Newsroom__Categories {
+      margin-bottom: 0px;
+
+      div {
+        display: inline-block;
+        margin: 5px 5px;
+        a.Button {
+          min-width: inherit;
+        }
+      }
+    }
+  }
+}
