@@ -3,15 +3,6 @@
 
 .Section.-TextSlider {
   position: relative;
-  margin-top: 2.1rem;
-
-  @include media-breakpoint-up(md) {
-    margin-top: 4.1rem;
-  }
-
-  @include media-breakpoint-up(lg) {
-    margin-top: 6.1rem;
-  }
 
   .Section {
     &__title {
@@ -71,7 +62,7 @@
 
     &__cornerImage {
       position: absolute;
-      top: -18rem;
+      top: -16rem;
       right: 0;
       width: auto;
       height: 41.4rem;
@@ -79,7 +70,7 @@
       transform: rotate(2.5deg);
 
       @include media-breakpoint-down(md) {
-        top: -8rem;
+        top: -6rem;
         height: 20.7rem;
       }
 
