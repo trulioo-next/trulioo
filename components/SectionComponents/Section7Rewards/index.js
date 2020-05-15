@@ -40,6 +40,8 @@ const Section7Rewards = props => {
         expiration_label: 'Expires ' + itemDate.toLocaleDateString(),
       });
     }
+  } else if (props.offers_logged_out) {
+    rewardData = props.offers_logged_out;
   }
 
   return (
@@ -53,19 +55,34 @@ const Section7Rewards = props => {
         </div>
       </div>
 
-      {isAuth && (
+      {rewardData && (
         <div className="container-fluid px-0">
           <ProductSlider>
             {rewardData.map((item, i) => (
               <ProductSlider.Item key={i}>
-                <Link href="/7rewards">
-                  <RewardsCard as="a" href="/7rewards" item={item} />
-                </Link>
+                {item.link && item.link.target ? (
+                  <RewardsCard
+                    as="a"
+                    href={item.link.url}
+                    item={item}
+                    target={item.link.target}
+                    rel="noopener noreferrer"
+                  />
+                ) : (
+                  <Link href={item.link ? item.link.url : '/7rewards'}>
+                    <RewardsCard
+                      as="a"
+                      href={item.link ? item.link.url : '/7rewards'}
+                      item={item}
+                    />
+                  </Link>
+                )}
               </ProductSlider.Item>
             ))}
           </ProductSlider>
         </div>
       )}
+
       {!isAuth && (
         <div className="container Section__container">
           <div className="row justify-content-center">
