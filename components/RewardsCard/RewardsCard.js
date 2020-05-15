@@ -19,9 +19,11 @@ const RewardsCard = ({ item, ...props }) => (
         <p>{item.description}</p>
       </div>
     </Card.Body>
-    <Card.Footer className="Card__footer text-center text-muted">
-      <span className="Rewards__expiration">{item.expiration_label}</span>
-    </Card.Footer>
+    {item.expiration_label && (
+      <Card.Footer className="Card__footer text-center text-muted">
+        <span className="Rewards__expiration">{item.expiration_label}</span>
+      </Card.Footer>
+    )}
   </Card>
 );
 
