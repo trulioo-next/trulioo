@@ -107,7 +107,7 @@ const CheckBalanceModal = forwardRef((props, ref) => {
                    <div> 
                      <Button
                         id="submit">
-                        <a href="https://stores.7eleven.ca/" target="_blank">
+                        <a href="https://stores.7-eleven.ca/" target="_blank">
                           Find a store
                         </a>
                       </Button>
