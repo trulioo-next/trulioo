@@ -167,10 +167,16 @@ class SectionGetDeliveryAddress extends Component {
 
     await getLocations(url).then(
       result => {
+        if(result.geo.address)
         this.setState({
           isLoaded: true,
           deliveryOptions: result.filtered,
           computedAddress: `${result.geo.address}, ${result.geo.locality}, ${result.geo.region}`,
+        });
+        else this.setState({
+          isLoaded: true,
+          deliveryOptions: result.filtered,
+          computedAddress: `${result.geo.locality}, ${result.geo.region}`,
         });
       },
       error => {
