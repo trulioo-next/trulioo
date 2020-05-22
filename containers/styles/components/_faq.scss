@@ -1,0 +1,52 @@
+.accordion {
+  &-item {
+    padding: 2.5rem 0 0;
+    border-bottom: solid 1px $text-muted;
+
+    @include media-breakpoint-up(md) {
+      padding-top: 1.9rem;
+    }
+  }
+
+  &-header {
+    margin-bottom: 3.3rem;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 1.8rem;
+    }
+
+    &.opened {
+      color: $primary;
+
+      .accordion-toggle-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-heading {
+    padding-top: 0.5rem;
+    display: inline-block;
+    flex: 1 1 80%;
+
+    @include media-breakpoint-up(md) {
+      max-width: 80%;
+    }
+  }
+
+  &-toggle-icon {
+    width: 3.8rem;
+    height: 3.8rem;
+    flex: 0 0 auto;
+    opacity: .46;
+    margin-left: 0.8rem;
+  }
+
+  &-content {
+    padding-right: 4.6rem;
+    @include media-breakpoint-up(md) {
+      padding-right: 0;
+      max-width: 80%;
+    }
+  }
+}

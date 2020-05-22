@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
 import Layout from '../containers/Layout/Layout';
-import Header from '../components/Header/Header';
+
 
 import Error from 'next/error';
 
@@ -25,7 +25,7 @@ const Page404 = props => {
 
   return (
     <Layout>
-      <Header title="" />
+       
       { data &&
         data.components.map((section, sectionKey) => (
           <SectionMaker

@@ -9,6 +9,5 @@ export const INITIAL_STATE = {
   isLoaded: false,
   error: null,
   errorSource: null,
-  globalData:false,
-  alerts:false
+  globalData:false
 };

@@ -1,0 +1,94 @@
+.resources-hero {
+  position: relative;
+
+  .hero-bg-img {
+    @include media-breakpoint-down(sm) {
+      height: 100vw;
+      object-fit: cover;
+    }
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.resources-section {
+  padding-top: 4.4rem;
+  padding-bottom: 6rem;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.featured-resources {
+  .card-deck {
+    @include media-breakpoint-between(sm, lmd) {
+      .resources-card {
+        flex: 1 0 calc(#{percentage(1/2)} - #{$card-deck-margin * 2});
+        max-width: calc(#{percentage(1/2)} - #{$card-deck-margin * 2});
+        margin-bottom: #{$card-deck-margin * 2};
+      }
+    }
+  }
+}
+
+.resources-card {
+  text-decoration: none;
+  transition: box-shadow 175ms ease;
+  border-top-left-radius: 0;
+  
+  &:hover, &:focus {
+    box-shadow: 0 0 16px 0 rgba(0,0,0,0.19);
+    background-color: $white;
+  }
+
+  .type-label {
+    padding: 0.3rem 2.6rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    text-transform: uppercase;
+    z-index: 5;
+
+    + .card-body {
+      padding-top: 6.5rem;
+    }
+  }
+
+  .card-image {
+    position: relative;
+    height: 0;
+    padding-top: percentage(2/3);
+  }
+
+  .card-img-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: contain;
+  }
+
+  .card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    min-height: (2.7rem * 8);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-image + .card-body {
+    .card-text {
+      -webkit-line-clamp: 5;
+      min-height: (2.7rem * 5);
+    }
+  }
+}

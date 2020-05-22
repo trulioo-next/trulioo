@@ -1,0 +1,239 @@
+.parallax-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &.type-video {
+    @include media-breakpoint-down(sm) {
+      position: relative;
+      top: auto;
+      left: auto;
+      height: auto;
+    }
+  }
+}
+
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+
+  @include media-breakpoint-down(sm) {
+    transform: none !important;
+  }
+
+  @include media-breakpoint-up(lmd) {
+    height: 120vh;
+  }
+
+  .parallax-bg-foreground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    object-fit: cover;
+  }
+
+  .parallax-bg-circle {
+    position: absolute;
+    bottom: 0;
+    right: auto;
+    left: 20vw;
+    z-index: 1;
+    width: 80vh;
+    height: 80vh;
+    border-radius: 50%;
+    border-style: solid;
+    opacity: 0.75;
+    border-width: 12.5vh;
+
+    @include media-breakpoint-up(lmd) {
+      bottom: calc(-50vh + 55vh);
+      left: auto;
+      right: -5rem;
+      width: 110vh;
+      height: 110vh;
+      border-width: 18.75vh;
+    }
+  }
+
+  .parallax-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .type-video & {
+    height: (1024/1440 * 100vw);
+    top: 50%;
+    margin-top: -(1024/1440 * 50vw);
+    overflow: visible;
+
+    @include media-breakpoint-down(sm) {
+      position: relative;
+      margin-top: -3rem;
+      margin-bottom: 5.5rem;
+      height: 100vw;
+    }
+  }
+
+  .parallax-video {
+    position: absolute;
+    top: 50%;
+    margin-top: -50vw;
+    width: 100vw;
+    height: 100vw;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 14vw rgba($yellow, 0.2);
+    
+    @include media-breakpoint-up(md) {
+      margin-top: -25vw;
+      width: 50vw;
+      height: 50vw;
+      border-width: 9vw;
+    }
+    
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &.video-left {
+    .parallax-video{
+      left: -5vw;
+  
+      @include media-breakpoint-up(md) {
+        margin-left: -42.625vh;
+        left: 0;
+      }
+  
+      @include media-breakpoint-up(lg) {
+        left: 12.5%;
+      }
+    }
+  }
+
+  &.video-right {
+    .parallax-video {
+      right: -5vw;
+  
+      @include media-breakpoint-up(md) {
+        right: 0;
+      }
+  
+      @include media-breakpoint-up(lmd) {
+        right: -12.5%;
+      }
+    }
+  }
+
+}
+.parallax-content {
+  position: relative;
+  z-index: 5;
+}
+
+.parallax-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.parallax-circle {
+  position: absolute;
+  border-style: solid;
+  border-radius: 50%;
+  z-index: 5;
+  
+  .video-left & {
+    left: var(--x-distance);
+  }
+
+  .video-right & {
+    right: var(--x-distance);
+  }
+
+  &:nth-child(1) {
+    --x-distance: 85vw;
+    top: 2.5vw;
+    width: 6.94vw;
+    height: 6.94vw;
+    border-width: 1.22vw;
+    border-color: $orange;
+
+    @include media-breakpoint-up(md) {
+      --x-distance: 32.5vw;
+      top: 10vw;
+    }
+  }
+
+  &:nth-child(2) {
+    --x-distance: 40vw;
+    top: 4vw;
+    width: 3.47vw;
+    height: 3.47vw;
+    border-width: 0.6vw;
+    border-color: $white;
+
+    @include media-breakpoint-up(md) {
+      --x-distance: 8vw;
+  
+      top: 12.75vw;
+    }
+  }
+
+  &:nth-child(3) {
+    --x-distance: 32.5vw;
+    bottom: 12.5vw;
+    width: 5.25vw;
+    height: 5.25vw;
+    border-width: 1vw;
+    border-color: $white;
+
+    @include media-breakpoint-up(md) {
+      --x-distance: 6.25vw;
+  
+      bottom: 16.25vw;
+    }
+  }
+  
+  &:nth-child(4) {
+    --x-distance: 63vw;
+    bottom: 0vw;
+    width: 8.33vw;
+    height: 8.33vw;
+    border-width: 1.46vw;
+    border-color: $orange;
+
+    @include media-breakpoint-up(md) {
+      --x-distance: 17.5vw;
+      bottom: 8vw;
+    }
+  }
+
+  &:nth-child(5) {
+    --x-distance: 90vw;
+    border-color: $orange;
+    bottom: 10vw;
+    width: 4.86vw;
+    height: 4.86vw;
+    border-width: 0.86vw;
+    
+    @include media-breakpoint-up(md) {
+      --x-distance: 37.5vw;
+      bottom: 12.5vw;
+    }
+  }
+}

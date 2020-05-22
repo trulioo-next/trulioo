@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
 import Layout from '../containers/Layout/Layout';
-import Header from '../components/Header/Header';
+ 
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 
@@ -23,11 +23,12 @@ const Home = props => {
   }, []);
 
   const pageData = useSelector(state => pageDataSelector(state));
-  let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
+  let data = pageData && pageData.acf_data && pageData.acf_data.content_block_collection ? pageData.acf_data : false;
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Home - 7-Eleven Canada'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
- 
+  
+  console.log('HELLO PAGE ', pageData )
 
   return (
     <Layout>
@@ -35,7 +36,7 @@ const Home = props => {
       title={seoTitle}
       description={seoDesc}
       openGraph={{
-        url: 'https://7-eleven.ca/',
+        url: 'https://trulioo.com/',
         title: seoTitle,
         description: seoDesc,
         images: [
@@ -43,24 +44,24 @@ const Home = props => {
             url: seoImage,
             width: 800,
             height: 600,
-            alt: '7-Eleven Canada',
+            alt: 'Trulioo',
           },
            
           { url: seoImage },
         ],
-        site_name: '7-Eleven Canada',
+        site_name: 'https://trulioo.com',
       }}
       twitter={{
-        handle: '@7ElevenCanada',
-        site: '@7ElevenCanada',
+        handle: '@trullio',
+        site: '@trullio',
         cardType: 'summary_large_image',
       }}
 
     />
-      <Header title={seoTitle} />
+       
   
       { data &&
-        data.components.map((section, sectionKey) => (
+        data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}
             params={section}
@@ -74,11 +75,7 @@ const Home = props => {
 
 Home.getInitialProps = async ({ query, res }) => {
   // TODO: GET STATE DATA HERE 
-  // 
-  // https://content.7-eleven.ca/blog_data/home.json 
-  // https://content.7-eleven.ca/blog_data/home.json 
-  // const data = await fetch('https://content.7-eleven.ca/blog_data/home.json')
-  // const json = await data.json()
+  //
   return { query };
 };
 

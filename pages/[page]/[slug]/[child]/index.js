@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout/Layout';
-import Header from '@/components/Header/Header';
+ 
 
 import Error from 'next/error';
 
@@ -64,7 +64,7 @@ const Page = props => {
 
   return (
     <Layout>
-      {pageData.page_data && <Header title={pageData.page_data.post_title} />}
+       
       {data &&
         data.components.map((section, sectionKey) => (
           <SectionMaker

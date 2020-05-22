@@ -1,0 +1,18 @@
+<svg viewBox="0 0 1440 951" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+  <g transform="scale(1 .47763)">
+    <path fill="none" d="M0 0h1440v1989H0z"/>
+    <clipPath id="a">
+      <path d="M0 0h1440v1989H0z"/>
+    </clipPath>
+    <g clip-path="url(#a)">
+      <g transform="matrix(1 0 0 2.09368 0 0)">
+        <clipPath id="b">
+          <path d="M2393 376.5c0-431.058-348.77-780.5-779-780.5S835-54.558 835 376.5c0 431.06 348.77 780.5 779 780.5s779-349.44 779-780.5V1157H0V-404h2393v780.5zm-267 0c0 283.6-229.45 513.5-512.5 513.5S1101 660.1 1101 376.5c0-283.598 229.45-513.5 512.5-513.5S2126 92.902 2126 376.5z" clip-rule="nonzero"/>
+        </clipPath>
+        <g clip-path="url(#b)">
+          <path fill="#AED644" fill-opacity=".92" fill-rule="nonzero" d="M0 0h1440v953H0z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

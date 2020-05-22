@@ -7,9 +7,6 @@ import { combineReducers } from 'redux'
 // Import reducers here
 import app from './app/reducers'
 import page from './page/reducers'
-import nutritionals from './nutritionals/reducers'
-import newsroom from './newsroom/reducers'
-import user from './user/reducers'
 import searchSite from './searchSite/reducers'
 
 /**
@@ -20,9 +17,6 @@ export default function createReducer() {
   const rootReducer = combineReducers({
     app,
     page,
-    nutritionals,
-    newsroom,
-    user,
     searchSite,
   })
 

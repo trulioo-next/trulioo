@@ -1,0 +1,37 @@
+@import "abstracts/variables";
+@import "abstracts/function";
+@import "abstracts/mixin";
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+@import "base/common";
+@import "base/fonts";
+@import "base/typography";
+@import "base/button";
+@import "base/animate";
+
+@import "../../node_modules/slick-carousel/slick/slick.scss";
+
+@import "components/homepage";
+@import "components/parallax";
+@import "components/hero";
+@import "components/navigation";
+@import "components/circle";
+@import "components/slider";
+@import "components/slick-slider";
+@import "components/sectionImageList";
+@import "components/successFinanical";
+@import "components/solutionTwoColumn";
+@import "components/meetTheProducts";
+@import "components/footer";
+@import "components/onPageScroller";
+@import "components/search";
+@import "components/resources";
+@import "components/blog";
+@import "components/marketo";
+@import "components/investorsList";
+@import "components/aboutManagement";
+@import "components/faq";
+@import "components/pricing";
+@import "components/multipleRowSection";
+@import "components/video";

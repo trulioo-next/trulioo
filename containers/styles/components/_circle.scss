@@ -1,0 +1,82 @@
+.circle-container {
+  position: relative;
+  overflow: hidden;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+
+  .circle-bg {
+    &::before {
+      top: calc(-5rem - 2vw);
+  
+      @include media-breakpoint-up(md) {
+        left: auto;
+        top: 50%;
+        right: -9rem;
+      }
+    }
+  }
+}
+
+.circle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  @include media-breakpoint-up(md) {
+    opacity: 0.85;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    left: 50%;
+    z-index: 0;
+    background-color: inherit;
+    
+    @include media-breakpoint-up(md) {
+      top: 50%;
+    }
+    
+    @media (orientation: landscape) {
+      width: 300vh;
+      height: 300vh;
+      margin-left: -150vh;
+  
+      @include media-breakpoint-up(md) {
+        margin-top: -150vh;
+        margin-left: auto;
+      }
+    }
+  
+    @media (orientation: portrait) {
+      width: 300vw;
+      height: 300vw;
+      margin-left: -150vw;
+  
+      @include media-breakpoint-up(md) {
+        margin-top: -150vw;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.inverted-circle-bg {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: -9rem;
+  width: (3/4 * 100vw);
+  height: calc(120%  + 9rem);
+  transform: translateY(-50%);
+  background-image: url('../../assets/inverted-circle.svg');
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+}

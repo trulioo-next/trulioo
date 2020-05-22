@@ -1,0 +1,147 @@
+.homepage-one-column,
+.homepage-two-column {
+    position: relative;
+    color: $white;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    @include media-breakpoint-up(lg) {
+        min-height: 100vh;
+    }
+
+    canvas{
+        display: none;
+    }
+
+    &.secure-solution {
+        ul {
+            list-style-image: url('../../assets/white-bullet.svg');
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .homepage-one-column {
+        padding-top: 6rem;
+    }
+    .homepage-two-column{
+        background-image:none !important;
+        &.secure-solution{
+            background-color: #29a7e9;
+        }
+
+        &.securely-board{
+            background-color: #b9d762;
+        }
+        
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .homepage-one-column {
+        min-height: 0;
+    }
+
+    .homepage-two-column{
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        &.borders-invisible{
+            canvas{
+                display:block;
+                position: absolute;
+                right:0;
+            }
+        }
+        &.secure-solution,
+        &.securely-board {
+            .parallax-bg::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-size: cover;
+                background-repeat: no-repeat;
+                z-index: 0;
+            }
+        }
+        &.secure-solution {
+            .parallax-bg::before {
+                background-image: url('../../assets/blue-circle-peak.svg');
+            }
+        }
+        &.securely-board {
+            .parallax-bg::before {
+                background-image: url('../../assets/green-circle-peak.svg');
+            }
+        }
+    }
+}
+
+.securely-board {
+    .image-column {
+        position: relative;
+        height: 75vw;
+
+        img {
+            position: absolute;
+            top: -25vw;
+            width: 100vw;
+            height: 100vw;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        &.image-left {
+            img {
+                left: -3rem;
+            }
+        }
+
+        &.image-right {
+            img {
+                right: -3rem;
+            }
+        }
+    }
+}
+
+.section-image-list {
+    &-left,
+    &-right {
+        .section-bg {
+            .section-bg-img {
+                @include media-breakpoint-down(lg) {
+                    background-size: 100% auto;
+                }
+            }
+        }
+    }
+    &-left {
+        .section-bg {
+            .section-bg-img {
+                @include media-breakpoint-down(lg) {
+                    background-position: right center;
+                }
+            }
+        }
+    }
+
+    &-right {
+        .section-bg {
+            .section-bg-img {
+                @include media-breakpoint-down(lg) {
+                    background-position: left center;
+                }
+            }
+        }
+    }
+}

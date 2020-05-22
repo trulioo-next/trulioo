@@ -1,7 +1,27 @@
 // Main Site Layout
 //
 
-@import '~@/static/scss/variables';
+
+
+@import "../styles/abstracts/variables";
+@import "../styles/abstracts/function";
+@import "../styles/abstracts/mixin";
+
+@import '~bootstrap/scss/bootstrap';
+
+@import "../styles/base/common";
+@import "../styles/base/fonts";
+@import "../styles/base/typography";
+@import "../styles/base/button";
+@import "../styles/base/animate";
+
+@import "../../node_modules/slick-carousel/slick/slick.scss";
+
+
+
+
+
+/*@import '~@/static/scss/variables';
 @import '~@/static/scss/fonts';
 
 @import '~bootstrap/scss/bootstrap';
@@ -273,3 +293,4 @@ a:not([href]) {
 
   }
 }
+*/

@@ -1,0 +1,7 @@
+.homepage {
+  .section {
+    @include media-breakpoint-up(md) {
+      min-height: 100vh;
+    }
+  }
+}

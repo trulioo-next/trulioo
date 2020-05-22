@@ -1,0 +1,280 @@
+html {
+  font-size: 62.5%; // Use 10px as the base value for rem calculations.
+  width: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  width: 100%; 
+  height: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  &.custom-cursor-enabled {
+    cursor: none !important;
+
+    a, button, input {
+      cursor: none !important;
+    }    
+  }
+}
+
+img {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+.custom-cursor {
+  width: 3rem;
+  height: 3rem;
+  margin-top: -1.5rem;
+  margin-left: -1.5rem;
+  color: $primary;
+  border: solid 0.2rem currentColor;
+  border-radius: 50%;
+  pointer-events: none;
+  position: fixed;
+  z-index: $zindex-fixed + 5;
+  transition: all 400ms ease;
+  transition-property: transform, color, opacity;
+  
+  &.grow {
+    transform: scale(#{(5/3)});
+    color: $text-muted;
+    opacity: 0.5;
+    z-index: $zindex-fixed + 1;
+  }
+
+  &.white {
+    color: $white;
+  }
+}
+
+.title + .subtitle {
+  margin-top: 1.5rem;
+}
+
+.opacity-none{
+  opacity: 0;
+}
+
+.text-grey {
+  color: $grey;
+}
+
+.icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: $primary;
+  line-height: 4rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include media-breakpoint-up(lmd) {
+    width: 5rem;
+    height: 5rem;
+    line-height: 5rem;
+  }
+
+  img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+    margin: 0;
+  }
+
+  &.bg-yellow {
+    background-color: $yellow;
+  }
+
+  &.icon-lg {
+    width: 8.3rem;
+    height: 8.3rem;
+
+    img {
+      width: 60%;
+      height: 60%;
+    }
+  }
+}
+
+ul{
+  padding-left: 2.8rem;
+  list-style-image: url('../../assets/blue-bullet.svg');
+
+  li{
+    line-height: (24/16);
+    margin: 0.2rem 0 0.5rem;
+    padding-left: 1.3rem;
+  }
+  
+  &.text-white,
+  .text-white & {
+    list-style-image: url('../../assets/white-bullet.svg');
+  }
+}
+
+.card {
+  &-deck {
+    .card {
+      margin-bottom: 2.5rem;
+
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-body {
+    padding: 2.4rem 1.4rem;
+
+    @include media-breakpoint-up(md) {
+      padding: 2.8rem 3.4rem;
+    }
+  }
+
+  &-footer {
+    padding: 1.6rem 1.4rem 3rem;
+
+    @include media-breakpoint-up(md) {
+      padding-left: 2.4rem;
+      padding-right: 2.4rem;
+    }
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-breakpoint-up(lmd) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .bg-gray & {
+    background-color: $white;
+  }
+
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.modal {
+  .close {
+    background-color: $primary;
+    color: $white;
+    opacity: 1;
+    width: 6.8rem;
+    height: 6.8rem;
+  }
+}
+
+blockquote {
+  display: flex;
+  flex-direction: column;
+
+  cite {
+    font-family: $font-family-base;
+    display: block;
+    font-style: normal;
+    width: percentage(4/5);
+    align-self: flex-end;
+
+    @include media-breakpoint-up(md) {
+      width: 100%;
+    }
+
+    &::before {
+      content: "\2014";
+      margin-right: 0.5em;
+    }
+  }
+}
+
+ul, ol {
+  margin-bottom: $paragraph-margin-bottom;
+}
+
+.bg-gray {
+  background-color: #F6F6F6;
+}
+
+.bg-orange {
+  background-color: $orange;
+}
+
+.bg-blue {
+  background-color: $blue;
+}
+
+.bg-green {
+  background-color: $green;
+}
+
+.bg-purple {
+  background-color: $purple;
+}
+
+.bg-yellow {
+  background-color: $yellow;
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.opacity-100 {
+  opacity: 1 !important;
+}
+
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+
+  .section-bg-img {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+  }
+}
+
+.section-content {
+  position: relative;
+  z-index: 3;
+}
+
+.instagram-image {
+  margin-bottom: 2rem;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+iframe {
+  max-width: 100%;
+}

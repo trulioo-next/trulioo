@@ -1,0 +1,74 @@
+.meet-the-products {
+    overflow: hidden;
+    padding: 2.5rem 0;
+
+    @include media-breakpoint-up(md) {
+        padding: 4.5rem 1.5rem;
+    }
+    
+    .title {
+        margin-bottom: 3.2rem;
+        
+        @include media-breakpoint-up(md) {
+            margin-bottom: 3.5rem;
+        }
+    }
+    
+    .slick-slider {
+        position: static;
+
+        .slick-track {
+            display: flex;
+            align-items: stretch;
+        
+        }
+        
+        .slick-list {
+            overflow: visible;
+
+        }
+
+        .slick-slide {
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+
+            &, > div {
+                display: flex;
+                height: auto;
+            }
+        }
+
+        .slick-slide {            
+            .card {
+                opacity: 0.25;
+                transition: opacity 400ms ease;
+            }
+        }
+    }
+
+    .product-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background-color: $brandBlue;
+
+      @include media-breakpoint-up(lmd) {
+        width: 5rem;
+        height: 5rem;
+      }
+
+      img {
+        width: 2rem;
+        height: 2rem;
+        object-fit: contain;
+
+        @include media-breakpoint-up(lmd) {
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+      }
+    }
+}

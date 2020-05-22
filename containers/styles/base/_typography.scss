@@ -1,0 +1,70 @@
+h1, .h1 {
+    line-height: (50/40);
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+        font-size: 6rem;
+        line-height: (88/80);
+        margin-bottom: 2rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+        font-size: 8rem;
+    }
+}
+
+h2, .h2 {
+    @include media-breakpoint-up(md) {
+
+    }
+
+    @include media-breakpoint-up(lmd) {
+        font-size: 4.5rem;
+        line-height: (58/45);
+    }
+}
+
+h3, .h3 {
+    @include media-breakpoint-up(md) {
+        
+    }
+    @include media-breakpoint-up(lmd) {
+        font-size: 3rem;
+        line-height: (39/30);
+    }
+}
+
+h4, .h4 {
+    @include media-breakpoint-up(lmd) {
+        font-size: 2.4rem;
+        line-height: (32/24);
+    }
+}
+
+h5, .h5 {
+    @include media-breakpoint-up(lmd) {
+        font-size: 2.1rem;
+        line-height: (26/21);
+    }
+}
+
+h6, .h6 {
+    @include media-breakpoint-up(lmd) {
+        font-size: 1.8rem;
+        line-height: (26/18);
+    }
+}
+
+.lead {
+    line-height: (31/21);
+
+    @include media-breakpoint-down(lg) {
+        font-size: 1.6rem;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    p {
+        margin-bottom: inherit;
+    }
+}

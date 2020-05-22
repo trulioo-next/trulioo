@@ -1,0 +1,180 @@
+$brandBlue: #1BA5EA;
+$buttonHover: #036c9f;
+$grey: #4D4D4F;
+$lightGrey: #D8D8D8;
+$darkGrey: #323232;
+$darkGreyHover: #121212;
+$white: #ffffff;
+
+// Breakpoints
+//
+// Keeping for now so commits/PRs prior to the switch to Bootstrap SCSS don't break.
+// Can be removed later if we update all styles to reference Bootstrap.
+$sm: 480px;
+$md: 768px;
+$lmd: 992px;
+$lg: 1024px;
+$xl: 1440px;
+
+// Bootstrap Variables
+//
+// Refer to https://github.com/twbs/bootstrap/blob/v4.4.1/scss/_variables.scss
+// if you need to change any of the default Bootstrap variables.
+
+$blue:   #1BA5EA;
+$green:  #AED644;
+$purple: #9F83D7;
+$orange: #F27146;
+$yellow: #E3B200;
+
+$primary:       #1BA5EA;
+$light:         #fff;
+$dark:          #323232;
+
+$body-bg: #FFF;
+$body-color: #4D4D4F;
+
+$link-color:                              inherit;
+$link-decoration:                         underline;
+$link-hover-color:                        inherit;
+$link-hover-decoration:                   none;
+
+$paragraph-margin-bottom:   1.6875em;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 480px,
+  md: 768px,
+  lmd: 992px,
+  lg: 1024px,
+  xl: 1200px
+);
+
+$container-max-widths: (
+  sm: 688px,
+  md: 720px,
+  lmd: 960px,
+  xl: 1140px
+);
+
+$line-height-lg:              (31/21);
+$line-height-sm:              (31/21);
+
+$border-width:                1px;
+$border-color:                #D7D7D7;
+
+$border-radius:               1.7rem;
+$border-radius-lg:            3.75rem;
+$border-radius-sm:            2.35rem;
+
+$rounded-pill:                50rem !default;
+
+$font-family-sans-serif:      'acumin-pro', sans-serif;
+$font-family-base:            $font-family-sans-serif;
+
+$font-size-base:              1.6rem;
+$font-size-lg:                2.1rem;
+$font-size-sm:                1.4rem;
+
+$font-weight-base:            normal;
+$line-height-base:            1.6875;
+
+$h1-font-size:                4rem;
+$h2-font-size:                3rem;
+$h3-font-size:                2.4rem;
+$h4-font-size:                2.1rem;
+$h5-font-size:                1.8rem;
+$h6-font-size:                1.6rem;
+
+$headings-margin-bottom:      0.5em;
+$headings-font-family:        'Circular', sans-serif;
+$headings-font-weight:        900;
+$headings-line-height:        1.2;
+
+$display1-size:               8rem;
+$display2-size:               4.5rem;
+$display3-size:               3rem;
+$display4-size:               2.4rem;
+
+$display1-weight:             normal;
+$display2-weight:             normal;
+$display3-weight:             normal;
+$display4-weight:             normal;
+
+$lead-font-size:              2.1rem;
+$lead-font-weight:            normal;
+
+$small-font-size:             1rem;
+
+$text-muted:                  #D8D8D8;
+
+$btn-padding-y:         1.25em;
+$btn-padding-x:         2.25em;
+$btn-font-family:       'Circular', sans-serif;
+$btn-font-size:         1.6rem;
+$btn-line-height:       1;
+
+$btn-padding-y-sm:      1.5rem;
+$btn-padding-x-sm:      3.6rem;
+$btn-font-size-sm:      1.4rem;
+$btn-line-height-sm:    (19/14);
+
+$btn-padding-y-lg:      2.3rem;
+$btn-padding-x-lg:      4.4rem;
+$btn-font-size-lg:      2.1rem;
+$btn-line-height-lg:    1;
+
+$btn-border-width:      0.3rem;
+
+$btn-font-weight:       900;
+
+$btn-block-spacing-y:         .5em;
+
+$btn-border-radius:           4rem;
+$btn-border-radius-lg:        4rem;
+$btn-border-radius-sm:        4rem;
+
+$input-padding-y:                       1rem;
+$input-padding-x:                       2.4rem;
+$input-font-size:                       1.6rem;
+$input-line-height:                     (27/16);
+
+$input-border-radius:                   $btn-border-radius;
+$input-border-radius-lg:                $btn-border-radius-lg;
+$input-border-radius-sm:                $btn-border-radius-sm;
+
+$zindex-dropdown:                   1000;
+$zindex-sticky:                     1020;
+$zindex-fixed:                      1030;
+$zindex-modal-backdrop:             1040;
+$zindex-modal:                      1050;
+$zindex-popover:                    1060;
+$zindex-tooltip:                    1070;
+
+$dropdown-padding-y:                3rem;
+$dropdown-bg:                       #F5F5F5;
+$dropdown-border-radius:            0;
+$dropdown-border-width:             0;
+$dropdown-inner-border-radius:      0;
+
+$dropdown-link-hover-bg:            $white;
+
+$dropdown-item-padding-y:           0.3rem;
+$dropdown-item-padding-x:           2.8rem;
+
+$card-spacer-y:                     2.4rem;
+$card-spacer-x:                     2.2rem;
+$card-border-width:                 0;
+$card-border-radius:                1.7rem;
+$card-bg:                           #F5F5F5;
+
+$card-deck-margin:                  1rem;
+
+$card-columns-gap:                  2rem;
+$card-columns-margin:               2rem;
+
+$modal-inner-padding:               2.5rem;
+
+$modal-content-border-radius:       0;
+$modal-header-padding-y:            1.6rem;
+$modal-header-padding-x:            2.5rem;

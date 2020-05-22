@@ -1,0 +1,79 @@
+.btn {
+  text-transform: uppercase;
+  
+  &-sm {
+    border-width: 1px;
+    text-transform: none;
+  }
+
+  &-lg {
+    @include media-breakpoint-down(md) {
+      font-size: $btn-font-size;
+      line-height: $btn-line-height;
+      padding: $btn-padding-y $btn-padding-x;
+    }
+
+    &[class*="btn-outline"] {
+      @include media-breakpoint-up(lg) {
+        padding: 2.0rem 6.3rem;
+      }
+    }
+  }
+
+  &-outline-primary {
+    color: $body-color;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+a.btn {
+  text-decoration: none;
+}
+
+.flip-button {
+  position: relative;
+  
+  .btn-text,
+  .flip-text {
+    transition: all 0.15s ease;
+    transition-property: transform, opacity;
+  }
+
+  .btn-text {
+    display: inline-block;
+  }
+
+  .flip-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: inherit;
+    padding: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    opacity: 0;
+    transform: translateY(50%);
+    color: $white;
+    text-align: inherit;
+  }
+
+  &:hover {
+    background-color: $darkGrey;
+    border-color: $darkGrey;
+
+    .btn-text {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    .flip-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

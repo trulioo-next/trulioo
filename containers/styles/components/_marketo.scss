@@ -1,0 +1,161 @@
+#marketo-book-request { 
+  .background-image{
+    height: 45%;
+  }
+  @media only screen and (max-width:1023px){
+    .card-thank-you{
+      display: none !important;
+    }
+    .card-book-demo{
+      margin-top: 0 !important;
+    }
+  }
+  @media only screen and (max-width:1199px){
+    .card-thank-you{
+      margin-top: 22rem !important;
+    }
+  }
+}
+
+.marketo-nav-bar {
+  padding: 2.3rem 5rem;
+}
+
+.marketo-gated-forms { 
+  margin-top: 11rem !important;
+}
+
+.marketo-form-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.marketo-form.mktoForm {
+  font-family: $font-family-base !important;
+  width: 100% !important;
+  padding: 0;
+
+  * {
+    float: none !important;
+  }
+
+  .mktoFormRow {
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+
+  .mktoFormCol,
+  .mktoFieldWrap {
+    width: 100%;
+  }
+
+  .mktoFieldWrap {
+    position: relative;
+    font-size: 0;
+  }
+
+  .mktoOffset,
+  .mktoGutter,
+  .mktoClear {
+    display: none;
+  }
+
+  .mktoLabel {
+    width: auto !important;
+    font-size: 0;
+    max-width: 100%;
+
+    p {
+      font-size: 1.6rem;
+      line-height: (27/16);
+      font-weight: normal !important;
+      margin-bottom: 2.7rem;
+    }
+
+    .mktoAsterix {
+      display: none;
+    }
+  }
+
+  .mktoField {
+    @extend .form-control;
+    border: 0;
+
+    &:not([type=checkbox]) {
+      width: 100% !important;
+    }
+
+    &[type=checkbox] {
+      width: 3.3rem;
+      height: 3.3rem;
+      border: solid 1px #979797;
+      opacity: 1;
+
+      + label {
+        margin: 0;
+        padding: 0;
+        margin-left: 1.5rem;
+
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    &::placeholder {
+      color: #979797;
+    }
+  }
+
+  .mktoLogicalField {
+    display: flex;
+    width: 100% !important;
+    font-size: 1.6rem;
+  }
+
+  .mktoError {
+    font-size: 1.4rem;
+  }
+
+  span {
+    font-size: inherit !important;
+    font-family: inherit !important;
+  }
+
+  .mktoButtonRow {
+    @include media-breakpoint-down(sm) {
+      display: block;
+    }
+
+    .mktoButtonWrap {
+      margin-left: 0 !important;
+
+      @include media-breakpoint-down(sm) {
+        display: block;
+      }
+
+      .mktoButton {
+        @extend .btn;
+        font-size: 1.6rem;
+        background: $primary;
+        padding: 2.2rem 3rem;
+        border-radius: $border-radius-lg;
+        color: $white;
+        border-width: 0.3rem;
+        min-width: 22rem;
+        width: 100%;
+
+        @include media-breakpoint-up(md) {
+          width: auto;
+        }
+
+        &:hover {
+          border-width: 0.3rem;
+          border-color: $primary;
+          background-color: $primary;
+        }
+      }
+    }
+  }
+}

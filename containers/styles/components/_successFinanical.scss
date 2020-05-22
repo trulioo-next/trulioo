@@ -1,0 +1,7 @@
+.quote-marker {
+  width: 3rem;
+  
+  @include media-breakpoint-up(md) {
+    width: 4rem;
+  }
+}

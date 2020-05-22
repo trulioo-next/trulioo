@@ -1,9 +1,7 @@
 import { take, call, put, all, select } from 'redux-saga/effects'
 
 import DataService from '../../services/dataService'
-const nutritionalData = require('../../data/nutritionals.json')
-
-import NutritionalService from '../../services/nutritionalService';
+ 
  
 import {
   APP_STARTUP_REQUEST,
@@ -11,10 +9,8 @@ import {
   APP_STARTUP_ERROR,
   APP_STOPLOADING,
   GLOBAL_DATA_LOADED,
-  NUTRITIONAL_LOADED,
-  ALERT_LOAD_REQUEST,
-  ALERT_LOAD_ERROR,
-  ALERT_LOADED
+  PAGE_LOAD_REQUEST,
+  PAGE_LOADED
 } from '../types'
 
 
@@ -25,11 +21,11 @@ function* startup(payload) {
     const state = yield select((state) => state)
     const dataService = DataService(state)
     const response = yield call(dataService.getGlobalData, true)
-    const alertAesponse = yield call(dataService.getAlertsData)
-    
-    yield put({ type: ALERT_LOADED, payload: alertAesponse  })
+      
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
-
+   
+    const pageLoaded = yield call(dataService.getPageData, {payload:'home'})
+    yield put({ type: PAGE_LOADED, payload: pageLoaded  })
      
  
   } catch(err) {
