@@ -51,12 +51,13 @@ const Page = props => {
   }
 
   const pageData = useSelector(state => pageDataSelector(state));
+  // console.log('SINGLE CHILD PAGE DATA ', pageData )
   if(!pageData.acf_data) {
-     routerPush('/404');
+    // routerPush('/404');
   }
   
   let data =
-    pageData && pageData.acf_data && pageData.acf_data.components
+    pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data
       : false;
 
@@ -64,7 +65,7 @@ const Page = props => {
     <Layout>
        
       {data &&
-        data.components.map((section, sectionKey) => (
+        data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}
             params={section}

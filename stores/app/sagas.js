@@ -23,8 +23,24 @@ function* startup(payload) {
     const response = yield call(dataService.getGlobalData, true)
       
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
+
+    const pageSlug = payload && 
+      payload.query && 
+      payload.query.page &&
+      payload.query.page.query &&
+      payload.query.page.query.page !== 'favicon.ico'
+      ? payload.query.page
+      : 'home';
+
+    const query = payload.query;  
+    let slug = query.page;
+    if(query.page && query.slug){
+      slug = query.page +'--'+ query.slug;
+    }
+    console.log('PAGE SLUG / QUERY  pageSlug ', query )
+    console.log('SLUG ', slug )
    
-    const pageLoaded = yield call(dataService.getPageData, {payload:'home'})
+    const pageLoaded = yield call(dataService.getPageData, {payload:slug})
     yield put({ type: PAGE_LOADED, payload: pageLoaded  })
      
  

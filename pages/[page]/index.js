@@ -51,9 +51,10 @@ const Page = props => {
   }
 
   const pageData = useSelector(state => pageDataSelector(state));
-  if(!pageData.acf_data) {
-     routerPush('/404');
-  }
+  console.log('SINGLE PAGE DATA ', pageData )
+  // if(!pageData.acf_data) {
+  //    routerPush('/404');
+  // }
 
   let data =
     pageData && pageData.acf_data && pageData.acf_data.components
