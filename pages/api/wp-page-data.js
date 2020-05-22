@@ -1,9 +1,7 @@
 const fetch = require('../../utils/fetch')
 
 const ENDPOINT_URL = process.env.ENDPOINT_URL
-
-import STATICDATA from '../../data/home.json'
-
+ 
 export default async (req, res) => {  
   try {
     
@@ -28,7 +26,7 @@ export default async (req, res) => {
      return
   } catch(error) {
      console.log("ERROR FETCHING PAGE", error )
-     res.json(STATICDATA)
+     res.json({error:"Page data couldn't loaded"})
      // res.status(502).send({ error: error })
   }
 };

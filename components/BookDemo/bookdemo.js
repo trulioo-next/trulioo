@@ -20,21 +20,21 @@ const SectionBackground = ({ background }) => {
 
   if (process.browser && !bgLoaded ) {
     setIsWindow(true)
-    setWindowInnerWidth(window.innerWidth);
+    setWindowInnerWidth(windowInnerWidth);
     setBgLoaded(true)
   }
-
-
-   
+ 
   const breakpoint = 768;
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+    if (process.browser) {
+      const handleResize = () => {
+        setWindowInnerWidth(windowInnerWidth);
+      };
 
-    window.addEventListener('resize', handleResize);
-    return () => { window.removeEventListener('resize', handleResize); };
+      window.addEventListener('resize', handleResize);
+      return () => { window.removeEventListener('resize', handleResize); };
+    }
   });
 
   return windowInnerWidth < breakpoint ? (

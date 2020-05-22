@@ -30,10 +30,11 @@ export const ParallaxContent = ({ children, topOffset = 83, bottomOffset = 83, r
   const breakpoint = 992;
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
     if (process.browser) {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+    
       window.addEventListener('resize', handleResize);
       return () => { window.removeEventListener('resize', handleResize); };
     }

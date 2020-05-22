@@ -2,8 +2,7 @@
  * Selectors let us factorize logic that queries the state. Selectors can be used
  * in sagas or components to avoid duplicating that logic.
  */
-
-const headerData = require('../../data/global.json')
+ 
 
 // Direct selector to the app state domain
 export const selectIsLoading = (state) => {
@@ -35,7 +34,7 @@ export const selectError = (state) => {
    //    return  staticData;
    // }
 
-   return state.app.globalData['header-menu']
+   return state.app.globalData['main']
  }
 
  export const selectFooterData = (state) => {
@@ -47,10 +46,9 @@ export const selectError = (state) => {
     // }
  
     let footerData = [
-      { footer1:data['footer-1-menu'] },
-      { footer2:data['footer-2-menu'] },
-      { footer3:data['footer-3-menu'] },
-      { footer4:data['footer-4-menu'] }
+      { footer:data['footer'] },
+      { footerSubMenu:data['footer-sub-menu'] }
+      
     
     ]
     

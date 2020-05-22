@@ -1,0 +1,112 @@
+[
+  {
+    "url": "/7rewards",
+    "name": "7Rewards",
+    "children": [
+      {
+        "url": "/7rewards/login",
+        "name": "Login/Signup",
+        "children": []
+      },
+      {
+        "url": "/7rewards/promos",
+        "name": "Promos",
+        "children": []
+      },
+      {
+        "url": "/7rewards/about",
+        "name": "About 7Rewards",
+        "children": []
+      }
+    ]
+  },
+  {
+    "url": "/menu",
+    "name": "Menu",
+    "children": [
+      {
+        "url": "/menu/meals-snacks",
+        "name": "Meals & Snacks",
+        "children": [
+          {
+            "url": "/menu/meals-snacks/pizza",
+            "name": "Pizza",
+            "children": []
+          },
+          {
+            "url": "/menu/meals-snacks/hot-foods",
+            "name": "Hot Foods",
+            "children": []
+          },
+          {
+            "url": "/menu/meals-snacks/crispy-classic-chicken",
+            "name": "Crispy Classic Chicken",
+            "children": []
+          },
+          {
+            "url": "/menu/meals-snacks/bakery",
+            "name": "Bakery",
+            "children": []
+          },
+          {
+            "url": "/menu/meals-snacks/snacks",
+            "name": "Snacks",
+            "children": []
+          }
+        ]
+      },
+      {
+        "url": "/menu/drinks",
+        "name": "Drinks",
+        "children": [
+          {
+            "url": "/menu/drinks/coffee-latte",
+            "name": "Coffee & Latte",
+            "children": []
+          },
+          {
+            "url": "/menu/drinks/bottled-canned",
+            "name": "Bottled & Canned",
+            "children": []
+          },
+          {
+            "url": "/menu/drinks/gulps",
+            "name": "Gulps®",
+            "children": []
+          }
+        ]
+      },
+      {
+        "url": "/menu/specialty",
+        "name": "Specialty",
+        "children": [
+          {
+            "url": "/menu/specialty/taste-of-asia",
+            "name": "A Taste of Asia",
+            "children": []
+          },
+          {
+            "url": "/menu/specialty/healthy-to-go",
+            "name": "Healthy To Go",
+            "children": []
+          }
+        ]
+      },
+      {
+        "url": "/menu/nutritionals",
+        "name": "Nutritionals",
+        "children": []
+      }
+    ]
+  },
+  {
+    "url": "/slurpee",
+    "name": "Slurpee",
+    "children": []
+  },
+  {
+    "url": "/delivery",
+    "name": "Delivery",
+    "children": []
+  }
+]

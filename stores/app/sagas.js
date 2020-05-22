@@ -37,6 +37,10 @@ function* startup(payload) {
     if(query.page && query.slug){
       slug = query.page +'--'+ query.slug;
     }
+    if(!slug) {
+      slug = 'home';
+    }
+
     console.log('PAGE SLUG / QUERY  pageSlug ', query )
     console.log('SLUG ', slug )
    

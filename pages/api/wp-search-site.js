@@ -1,7 +1,6 @@
 const fetch = require('../../utils/fetch')
 const ENDPOINT_URL = process.env.ENDPOINT_URL
-
-
+ 
 export default async (req, res) => {  
   try {
     

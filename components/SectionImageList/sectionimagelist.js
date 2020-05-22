@@ -8,6 +8,8 @@ import { ContentCenter } from './content-center';
 
 export const SectionImageList = ({ component, parallax }) => {
 
+  console.log('section_image_list_block', component )
+
   const componentSections = (component) => {
     switch (component.position) {
       case 'right':
