@@ -18,6 +18,8 @@ const Page = props => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: props.query.page+'--'+props.query.slug+'--'+props.query.child }));
+    
+    console.log('DISPATCH CHILD  : >>> ', props.query )
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -50,15 +52,18 @@ const Page = props => {
     scrollToAnchor(anchor);
   }
 
-  const pageData = useSelector(state => pageDataSelector(state));
-  if(!pageData.acf_data) {
+  // const pageData = useSelector(state => pageDataSelector(state));
+
+  const pageData = props.pageData ? props.pageData : false;
+  
+  if(!pageData) {
      routerPush('/404');
   }
 
   // console.log('QUERY ', pageData )
   
   let data =
-    pageData && pageData.acf_data && pageData.acf_data.components
+    pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data
       : false;
 
@@ -66,7 +71,7 @@ const Page = props => {
     <Layout>
        
       {data &&
-        data.components.map((section, sectionKey) => (
+        data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}
             params={section}
@@ -79,8 +84,9 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res }) => {
- 
+Page.getInitialProps = async ({ query, res, store }) => {
+  const initalState = store.getState();
+  const pageData = initalState.page.data;
   return { query };
 };
 

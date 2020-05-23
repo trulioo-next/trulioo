@@ -19,6 +19,8 @@ const Page = props => {
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: props.query.page+'--'+props.query.slug }));
 
+    console.log('DISPATCH SLUG : >>> ', props.query )
+
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
     }
@@ -52,9 +54,9 @@ const Page = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   // console.log('SINGLE CHILD PAGE DATA ', pageData )
-  if(!pageData.acf_data) {
-    // routerPush('/404');
-  }
+  // if(!pageData.acf_data) {
+  //   // routerPush('/404');
+  // }
   
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection

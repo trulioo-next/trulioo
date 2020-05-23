@@ -6,7 +6,9 @@
 export const INITIAL_STATE = {
   data:{
   	page_date:[], 
-  	acf_data:[], 
+  	acf_data:[],
+  	seo:[],
+  	parent:[], 
   	isLoading: true
   }
   

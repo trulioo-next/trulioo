@@ -6,11 +6,20 @@ export default async (req, res) => {
   try {
     
     const body = JSON.parse(req.body)
-    let id = 'components';
+    let id = 'home';
 
     if(body.payload) {
       id = body.payload
     }
+
+    if(id === 'favicon.ico' ) {
+      res.json({error:"Page data couldn't loaded"});
+      return;
+    }
+
+    // console.log('BODY PASSED  ',  req.body )
+
+    // console.log('PAGE ID ', id )
    
     // TODO: Normalise page ID : 
     const response = await fetch(ENDPOINT_URL+'/api/v1/page/'+id,

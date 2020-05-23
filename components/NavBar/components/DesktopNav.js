@@ -48,7 +48,7 @@ const NavItem = ({ item, i, expanded, setExpanded, className }) => {
   return (
     <li className={itemClassnames}>
       {item.name != isExternal && (
-        <Link href={item.url} replace={true}>
+        <Link href="[page]/" as={item.url} replace={true}>
           <a className="SiteHeader__link">{item.name}</a>
         </Link>
       )}

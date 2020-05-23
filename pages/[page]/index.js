@@ -6,18 +6,16 @@ import Layout from '@/containers/Layout/Layout';
  
 import routerPush from '@/helpers/routerPush';
 import Error from 'next/error';
-
-import { reqPageDataAction } from '@/stores/page/actions';
-
 import { pageDataSelector } from '@/stores/page/selectors';
-
+import { reqPageDataAction } from '@/stores/page/actions';
+ 
 const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(reqPageDataAction({ payload: props.query.page }));
+      dispatch(reqPageDataAction({ payload: props.query.page }));
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -50,8 +48,9 @@ const Page = props => {
     scrollToAnchor(anchor);
   }
 
-  const pageData = useSelector(state => pageDataSelector(state));
-  console.log('SINGLE PAGE DATA ', pageData )
+   
+   const pageData = useSelector(state => pageDataSelector(state));
+  // console.log('SINGLE PAGE DATA ', pageData )
   // if(!pageData.acf_data) {
   //    routerPush('/404');
   // }
@@ -78,8 +77,10 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res, req }) => {
-  return { query };
+Page.getInitialProps = async ({ query, res, req, store }) => {
+  const initalState = store.getState();
+  const pageData = initalState.page.data;
+  return { query, pageData };
 };
 
 export default Page;

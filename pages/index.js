@@ -17,18 +17,14 @@ const Home = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(reqPageDataAction({ payload: 'home' }));
-  }, []);
-
-  const pageData = useSelector(state => pageDataSelector(state));
+  
+  const pageData = props.pageData ? props.pageData : false;
   let data = pageData && pageData.acf_data && pageData.acf_data.content_block_collection ? pageData.acf_data : false;
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Home - 7-Eleven Canada'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
   
-  // console.log('HELLO PAGE ', pageData )
+  console.log('HELLO PAGE ', pageData )
 
   return (
     <Layout>
@@ -73,10 +69,12 @@ const Home = props => {
   );
 };
 
-Home.getInitialProps = async ({ query, res }) => {
+Home.getInitialProps = async ({ query, res, store }) => {
   // TODO: GET STATE DATA HERE 
   //
-  return { query };
+  const initalState = store.getState();
+  const pageData = initalState.page.data;
+  return { query, pageData };
 };
 
 export default Home;

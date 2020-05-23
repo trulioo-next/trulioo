@@ -4,6 +4,7 @@ import Router from 'next/router'
 import withRedux from 'next-redux-wrapper'
 import configureStore from '../stores/configureStore'
 import appActions from '../stores/app/actions'
+import pageActions from '../stores/page/actions'
 import withError from '../components-stateful/withErrorWrapper'
 import * as gtag from '../utils/gtag'
  
@@ -16,16 +17,15 @@ class MyApp extends App {
  
     	if(ctx.isServer) {
           await ctx.store.execSagaTask(appActions.reqStartupAction({ isAuthenticated: false,  query: ctx.query }));
-           
+          await ctx.store.execSagaTask(pageActions.reqPageDataAction({ query: ctx.query }));
         }
- 
+          
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
- 
         return { pageProps }
  
     }
- 
-
+    
+    // 
     constructor(props) {
         super(props);
         Router.events.on('routeChangeComplete', url => { gtag.pageview(url); } )
@@ -35,12 +35,7 @@ class MyApp extends App {
 
     componentDidUpdate() { }
 
-    componentDidMount() {
-
-        // Pass user auth to anywhere in the app 
-        //
-          
-    }
+    componentDidMount() { }
 
 
     render() {

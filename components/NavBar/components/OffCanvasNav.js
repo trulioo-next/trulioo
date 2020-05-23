@@ -85,16 +85,7 @@ const SubNavMenu = props => {
               {children.length > 0 && <SubNavMenu items={children} nested />}
             </li>
           ))}
-          {props.parent && props.parent.name === 'Menu' && (
-            <li className="OffCanvas__subnavItem -nested col">
-              <span className="OffCanvas__subnavHeading">Menu</span>
-              <ul className="OffCanvas__subnav -nested">
-                <li className="OffCanvas__subnavItem -nested">
-                  <a href="/menu">View Full Menu</a>
-                </li>
-              </ul>
-            </li>
-          )}
+           
         </ul>
       )}
     </>

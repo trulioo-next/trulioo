@@ -52,15 +52,14 @@ const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
       if( num === 4) {
         hrefPath = '/[page]/[slug]/[child]';
       }
-      
+       
       return (
         <div>
-          <Link href={hrefPath} as={url} prefetch={false} replace>
+          <Link href={hrefPath} as={url} replace>
             <a>{name}</a>
           </Link>
         </div>
       );
-    
   }
 
   return (

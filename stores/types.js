@@ -3,6 +3,7 @@
 export const APP_STARTUP_REQUEST = 'app/index/APP_STARTUP_REQUEST'
 export const APP_STARTUP_LOADED = 'app/index/LOADED'
 export const APP_STARTUP_ERROR = 'app/startup/APP_STARTUP_ERROR'
+export const APP_PAGE_LOAD_ERROR = 'app-page/error/APP_PAGE_LOAD_ERROR'
 
 export const APP_STARTLOADING = 'app/loader/STARTLOADING'
 export const APP_STOPLOADING = 'app/loader/STOPLOADING'

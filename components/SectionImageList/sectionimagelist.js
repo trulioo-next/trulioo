@@ -1,14 +1,11 @@
 import React, { Fragment }from 'react';
 import PropTypes from 'prop-types';
-
 import { ContentLeft } from './content-left';
 import { ContentRight } from './content-right';
 import { ContentCenter } from './content-center';
 
 
 export const SectionImageList = ({ component, parallax }) => {
-
-  console.log('section_image_list_block', component )
 
   const componentSections = (component) => {
     switch (component.position) {

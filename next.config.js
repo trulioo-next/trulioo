@@ -44,7 +44,7 @@ const nextConfig = {
 
     // Here goes env that are available in the client side
     config.plugins.push(
-      new webpack.EnvironmentPlugin(['VERSION', 'ROOT_URL', 'ENDPOINT_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'CLIENT_ID_ANNO', 'CLIENT_SECRET_ANNO', 'GOOGLE_RECAPTCHA_V3_KEY', 'GOOGLE_RECAPTCHA_V3_SECRET']),
+      new webpack.EnvironmentPlugin(['VERSION', 'ROOT_URL', 'ENDPOINT_URL']),
       new FilterWarningsPlugin({
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
       }),

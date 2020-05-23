@@ -22,8 +22,12 @@ function* startup(payload) {
     const state = yield select((state) => state)
 
     const dataService = DataService(state)
-    yield put({ type: PAGE_LOADED, payload: { page_data:[], acf_data:[], isLoading: true } })
+    yield put({ type: PAGE_LOADED, payload: { page_data:[], acf_data:[], seo:[], isLoading: true } })
 
+
+    // payload 
+    console.log('PAGE QUERY FROM SAGA  ', payload )
+    
     const response = yield call(dataService.getPageData, payload)
 
     // console.log('DATA RESPONSE', response )

@@ -55,11 +55,11 @@ export const ParallaxBackground = ({ className, background, mobileBackground, ci
   var updateRate = 10;
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(windowInnerWidth);
-    };
-    
-    if (process.browser) {
+   if (process.browser) {
+      const handleResize = () => {
+        setWindowWidth(windowInnerWidth);
+      };
+     
       window.addEventListener('resize', handleResize);
       return () => { window.removeEventListener('resize', handleResize); };
     }

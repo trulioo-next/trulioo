@@ -10,7 +10,8 @@ import {
   APP_STOPLOADING,
   GLOBAL_DATA_LOADED,
   PAGE_LOAD_REQUEST,
-  PAGE_LOADED
+  PAGE_LOADED,
+  APP_PAGE_LOAD_ERROR
 } from '../types'
 
 
@@ -24,28 +25,6 @@ function* startup(payload) {
       
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
-    const pageSlug = payload && 
-      payload.query && 
-      payload.query.page &&
-      payload.query.page.query &&
-      payload.query.page.query.page !== 'favicon.ico'
-      ? payload.query.page
-      : 'home';
-
-    const query = payload.query;  
-    let slug = query.page;
-    if(query.page && query.slug){
-      slug = query.page +'--'+ query.slug;
-    }
-    if(!slug) {
-      slug = 'home';
-    }
-
-    console.log('PAGE SLUG / QUERY  pageSlug ', query )
-    console.log('SLUG ', slug )
-   
-    const pageLoaded = yield call(dataService.getPageData, {payload:slug})
-    yield put({ type: PAGE_LOADED, payload: pageLoaded  })
      
  
   } catch(err) {
