@@ -49,19 +49,4 @@ This project tries to follow the following git workflow pattern:
 - Use full commit messages with reference to the possible Asana ticket in the headline.
  
 
-## Environments
-### NOW Testing Env. 
-- https://7-11-n21wjd3vq.now.sh/
-
-### DEV 4 Deployment : 
-- ssh root@65.151.136.46 -p 2202
-- p: 5Le96Wkn7KYnSZsTrN
-- cd /var/www/sites/dev4.7eleven.ca/httpdocs
-- git fetch 
-- git checkout origin/develop
-- rm -rf .next
-- yarb build
-
-- STAGING :
-- pm2 restart SevenStage
  
