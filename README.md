@@ -36,6 +36,9 @@ cp sample.env .env
 3. Run `yarn install` to install all dependencies.
 4. Run `yarn dev` to start the develoment server.
 
+## ENV 
+1. Copy .env-sample to .env
+
 ## Git workflow
 
 This project tries to follow the following git workflow pattern:
@@ -48,5 +51,7 @@ This project tries to follow the following git workflow pattern:
 - Use descriptive branch names. Examples of good feature branch names are: `feature/vat-number-field`, `bugfix/fix-vat-number-field`, `issue/OSS-123` where the **OSS-123** would be the JIRA ticket number.
 - Use full commit messages with reference to the possible Asana ticket in the headline.
  
+## Wordpress 
 
+- Install WP locally and add theme from /wp-theme
  
