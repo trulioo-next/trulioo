@@ -6,6 +6,18 @@ import { IdentityVerification } from '@/components/IdentityVerification';
 import { SuccessFinancial } from '@/components/SuccessFinancial';
 import { DidYouKnow } from '@/components/DidYouKnow';
 import { BookDemo } from '@/components/BookDemo';
+import { HalfHero } from '@/components/HalfHero';
+import { InvestorList } from '@/components/InvestorList';
+import { MultipleRowSection } from '@/components/MultipleRowSection';
+import { DidYouKnowHalf } from '@/components/DidYouKnowHalf';
+import { BookDemoHalf } from '@/components/BookDemoHalf';
+import { MeetTheProduct } from '@/components/MeetTheProduct';
+import { TwoColumnContent } from '@/components/TwoColumnContent';
+import { VideoSection } from '@/components/VideoSection';
+import { BusinessIntelligence } from '@/components/BusinessIntelligence';
+import { Pricing } from '@/components/Pricing';
+import { Marketo } from '@/components/Marketo';
+
 // 
 const SectionMaker = ({
   type,
@@ -32,7 +44,40 @@ const SectionMaker = ({
       return <DidYouKnow sectionIndex={sectionIndex} component={params} />; 
 
     case 'book_demo_block':
-      return <BookDemo sectionIndex={sectionIndex} component={params} />;          
+      return <BookDemo sectionIndex={sectionIndex} component={params} />; 
+
+    case 'header_half_block':
+      return <HalfHero sectionIndex={sectionIndex} component={params} />;     
+
+    case 'about_investor_list_block':
+      return <InvestorList sectionIndex={sectionIndex} component={params} />;
+
+    case 'multi_row_section_block':
+      return <MultipleRowSection sectionIndex={sectionIndex} component={params} />; 
+
+    case 'did_you_know_half_block':
+      return <DidYouKnowHalf sectionIndex={sectionIndex} component={params} />;   
+
+    case 'book_demo_half_block':
+      return <BookDemoHalf sectionIndex={sectionIndex} component={params} />;
+
+    case 'meet_the_product_block':
+      return <MeetTheProduct sectionIndex={sectionIndex} component={params} />;
+
+    case 'two_column_content_block':
+      return <TwoColumnContent sectionIndex={sectionIndex} component={params} />;
+
+    case 'video_block':
+      return <VideoSection sectionIndex={sectionIndex} component={params} />;  
+
+    case 'business_intelligence_block':
+      return <BusinessIntelligence sectionIndex={sectionIndex} component={params} />;
+
+    case 'pricing_block':
+      return <Pricing sectionIndex={sectionIndex} component={params} />; 
+
+    // case 'marketo_forms_block':
+    //   return <Marketo sectionIndex={sectionIndex} component={params} />;                               
  
 
     default:

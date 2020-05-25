@@ -26,7 +26,7 @@ function* startup(payload) {
 
 
     // payload 
-    console.log('PAGE QUERY FROM SAGA  ', payload )
+    // console.log('PAGE QUERY FROM SAGA  ', payload )
     
     const response = yield call(dataService.getPageData, payload)
 

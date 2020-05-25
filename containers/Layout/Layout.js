@@ -5,6 +5,7 @@ import { reqPageDataAction } from '../../stores/page/actions';
 import { reqStartupAction } from '../../stores/app/actions';
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
+import { Footer } from '@/components/Footer';
 
 import Error from 'next/error';
 import Loader from '@/components/Loader';
@@ -42,6 +43,8 @@ const Layout = props => {
           {isLoading && <Loader />}
           {props.children}
         </main>
+
+        <Footer />
 
         </div>
     </React.Fragment>

@@ -20,11 +20,11 @@ const Home = props => {
   
   const pageData = props.pageData ? props.pageData : false;
   let data = pageData && pageData.acf_data && pageData.acf_data.content_block_collection ? pageData.acf_data : false;
-  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Home - 7-Eleven Canada'
+  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
   
-  console.log('HELLO PAGE ', pageData )
+  // console.log('HELLO PAGE ', pageData )
 
   return (
     <Layout>

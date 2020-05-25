@@ -55,7 +55,7 @@ const SubNavMenu = ({ items, parent, hasThirdLevel, setExpanded, nested }) => {
        
       return (
         <div>
-          <Link href={hrefPath} as={url} replace>
+          <Link href={hrefPath} as={url} prefetch={false}>
             <a>{name}</a>
           </Link>
         </div>
