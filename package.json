@@ -60,6 +60,7 @@
     "redux-saga": "0.16.2",
     "slick-carousel": "^1.8.1",
     "webpack-filter-warnings-plugin": "^1.2.1",
+    "yarn": "^1.22.4",
     "yup": "^0.27.0"
   },
   "devDependencies": {

@@ -22,6 +22,30 @@ require_once 'api/global-settings.php';
 require_once 'api/page.php';
 require_once 'api/post.php';
 
+
+require_once 'trulioo_inc/utilities.php';
+require_once 'trulioo_inc/menus.php';
+
+if(class_exists('ACF') ) {
+	require_once 'trulioo_inc/logo.php';
+    require_once 'trulioo_inc/routes.php';
+    require_once 'trulioo_inc/custom-filter.php';
+    require_once 'trulioo_inc/options.php';
+    require_once 'trulioo_inc/posts.php';
+    require_once 'trulioo_inc/resources.php';
+    require_once 'trulioo_inc/press-releases.php';
+    require_once 'trulioo_inc/custom-articles-types.php';
+    require_once 'trulioo_inc/custom-resources-types.php';
+    require_once 'trulioo_inc/custom-press-release-types.php';
+    require_once 'trulioo_inc/theme-setup.php';
+    require_once 'trulioo_inc/featured-image.php';
+    require_once 'trulioo_inc/resources-types-topics.php';
+    require_once 'trulioo_inc/post-types-topics.php';
+    require_once 'trulioo_inc/press-releases-types-topics.php';
+    require_once 'trulioo_inc/settings.php';
+    require_once 'trulioo_inc/wpseo-yoast-sitemap-post-types.php';
+}
+
 //add SVG to allowed file uploads
 function add_file_types_to_uploads($file_types){
 
