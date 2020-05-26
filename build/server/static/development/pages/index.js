@@ -388,7 +388,7 @@ const Header = props => __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, 
 }), __jsx("link", {
   rel: "icon",
   type: "image/png",
-  href: "/static/images/favicon.ico",
+  href: "/static/assets/favicon.ico",
   __source: {
     fileName: _jsxFileName,
     lineNumber: 21
@@ -396,7 +396,7 @@ const Header = props => __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, 
   __self: undefined
 }), __jsx("link", {
   rel: "apple-touch-icon",
-  href: "/static/images/favicon.ico",
+  href: "/static/assets/favicon.ico",
   __source: {
     fileName: _jsxFileName,
     lineNumber: 22
@@ -421,7 +421,7 @@ const Header = props => __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, 
   __self: undefined
 }) : __jsx("meta", {
   property: "og:image",
-  content: "/static/images/default-site-image.png",
+  content: "/static/assets/default-site-image.png",
   __source: {
     fileName: _jsxFileName,
     lineNumber: 30
@@ -597,7 +597,7 @@ const NavBar = () => __jsx("nav", {
   },
   __self: undefined
 }, __jsx("img", {
-  src: "/static/images/default-site-image.png",
+  src: "/static/assets/default-site-image.png",
   __source: {
     fileName: _jsxFileName,
     lineNumber: 19

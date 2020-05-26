@@ -8,13 +8,12 @@ const webpack = require('webpack');
 const withSass = require('@zeit/next-sass');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
-const withCss = require("@zeit/next-css");
+const withCss = require('@zeit/next-css');
 const path = require('path');
 
 if (process.env.NODE_ENV === 'development') {
   process.traceDeprecation = true;
 }
-
 
 // exportTrailingSlash: true,
 const nextConfig = {
@@ -57,10 +56,14 @@ const nextConfig = {
   //  ...dotEnvResult
 
   env: {
-   // ROOT_URL: 'https://dev4.7eleven.ca',
-   // ENDPOINT_URL: 'https://dev3.7eleven.ca/wp-json',
-   // VERSION:'1.0.41', 
-   ...dotEnvResult,
+    // ROOT_URL: 'https://dev4.7eleven.ca',
+    // ENDPOINT_URL: 'https://dev3.7eleven.ca/wp-json',
+    // VERSION:'1.0.41',
+    ...dotEnvResult,
+  },
+
+  sassLoaderOptions: {
+    includePaths: ['static', 'styles'],
   },
 };
 

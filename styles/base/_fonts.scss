@@ -1,14 +1,14 @@
 @font-face {
   font-family: 'Circular';
   font-weight: 900;
-  src:  url('../fonts/CircularXXWeb-Black.woff2') format('woff2'),
-        url('../fonts/CircularXXWeb-Black.woff') format('woff');
+  src:  url('/static/fonts/CircularXXWeb-Black.woff2') format('woff2'),
+        url('/static/fonts/CircularXXWeb-Black.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Circular';
   font-weight: normal;
-  src:  url('../fonts/CircularStd-Book.otf')
+  src:  url('/static/fonts/CircularStd-Book.otf')
 }
 
 .is-font-heading {

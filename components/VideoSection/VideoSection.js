@@ -9,7 +9,7 @@ import {
   Col,
 } from 'reactstrap';
 
-import PlayIcon from '@/static/images/play.svg';
+import PlayIcon from '@/static/assets/play.svg';
 
 const ReactPlayerWrapper = ({ children }) => (
   <div className="react-player-wrapper">{ children }</div>

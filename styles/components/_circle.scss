@@ -9,7 +9,7 @@
   .circle-bg {
     &::before {
       top: calc(-5rem - 2vw);
-  
+
       @include media-breakpoint-up(md) {
         left: auto;
         top: 50%;
@@ -38,27 +38,27 @@
     left: 50%;
     z-index: 0;
     background-color: inherit;
-    
+
     @include media-breakpoint-up(md) {
       top: 50%;
     }
-    
+
     @media (orientation: landscape) {
       width: 300vh;
       height: 300vh;
       margin-left: -150vh;
-  
+
       @include media-breakpoint-up(md) {
         margin-top: -150vh;
         margin-left: auto;
       }
     }
-  
+
     @media (orientation: portrait) {
       width: 300vw;
       height: 300vw;
       margin-left: -150vw;
-  
+
       @include media-breakpoint-up(md) {
         margin-top: -150vw;
         margin-left: auto;
@@ -75,7 +75,7 @@
   width: (3/4 * 100vw);
   height: calc(120%  + 9rem);
   transform: translateY(-50%);
-  background-image: url('../../assets/inverted-circle.svg');
+  background-image: url('/static/assets/inverted-circle.svg');
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { ParallaxBackground, ParallaxContent } from '../Parallax';
 import { FlipButton } from '../FlipButton';
 
-import QuoteMarker from '@/static/images/quote-marker.svg';
+import QuoteMarker from '@/static/assets/quote-marker.svg';
 
 export const SuccessFinancial = ({ component }) => {
   return (

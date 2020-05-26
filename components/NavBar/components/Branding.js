@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import Logo from '@/static/images/heart.svg';
+import Logo from '@/static/assets/heart.svg';
 
 const Branding = () => (
   <Link href="/" as="/">

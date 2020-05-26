@@ -3,14 +3,12 @@
   text-align: left;
   color: #4D4D4F;
   background: #F0F0F0;
-  @media screen and (min-width: $sm) {
-    footer.container{
-      @include pxtorem(margin-top, 50px);
+  footer.container{
+    @include media-breakpoint-up(sm) {
+      margin-top: 5rem;
     }
-  }
-  @media screen and (min-width: $lmd) {
-    footer.container{
-      @include pxtorem(margin-top, 0);
+    @include media-breakpoint-up(lmd) {
+      margin-top: 0;
     }
   }
   h3 {
@@ -40,7 +38,7 @@
 
 .footer__main {
   font-family: $headings-font-family;
-  
+
   a {
     text-decoration: none;
 
@@ -59,12 +57,12 @@
   .newsletter {
     display: flex;
     &-background {
-      @include pxtorem(border-radius, 100px);
+      border-radius: 10rem;
       background: $white;
       margin-right: 0.8rem;
       ion-icon {
         flex-shrink: 0;
-        @include pxtorem(padding, 5px);
+        padding: 0.5rem;
       }
     }
   }

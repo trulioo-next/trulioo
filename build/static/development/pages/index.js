@@ -316,7 +316,7 @@ var Header = function Header(props) {
   }), __jsx("link", {
     rel: "icon",
     type: "image/png",
-    href: "/static/images/favicon.ico",
+    href: "/static/assets/favicon.ico",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21
@@ -324,7 +324,7 @@ var Header = function Header(props) {
     __self: this
   }), __jsx("link", {
     rel: "apple-touch-icon",
-    href: "/static/images/favicon.ico",
+    href: "/static/assets/favicon.ico",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22
@@ -349,7 +349,7 @@ var Header = function Header(props) {
     __self: this
   }) : __jsx("meta", {
     property: "og:image",
-    content: "/static/images/default-site-image.png",
+    content: "/static/assets/default-site-image.png",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 30
@@ -518,7 +518,7 @@ var NavBar = function NavBar() {
     },
     __self: this
   }, __jsx("img", {
-    src: "/static/images/default-site-image.png",
+    src: "/static/assets/default-site-image.png",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 19

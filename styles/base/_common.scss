@@ -5,7 +5,7 @@ html {
 
 body {
   font-size: 1.6rem;
-  width: 100%; 
+  width: 100%;
   height: auto;
   overflow: hidden;
   overflow-y: scroll;
@@ -15,7 +15,7 @@ body {
 
     a, button, input {
       cursor: none !important;
-    }    
+    }
   }
 }
 
@@ -39,7 +39,7 @@ img {
   z-index: $zindex-fixed + 5;
   transition: all 400ms ease;
   transition-property: transform, color, opacity;
-  
+
   &.grow {
     transform: scale(#{(5/3)});
     color: $text-muted;
@@ -105,17 +105,17 @@ img {
 
 ul{
   padding-left: 2.8rem;
-  list-style-image: url('../../assets/blue-bullet.svg');
+  list-style-image: url('/static/assets/blue-bullet.svg');
 
   li{
     line-height: (24/16);
     margin: 0.2rem 0 0.5rem;
     padding-left: 1.3rem;
   }
-  
+
   &.text-white,
   .text-white & {
-    list-style-image: url('../../assets/white-bullet.svg');
+    list-style-image: url('/static/assets/white-bullet.svg');
   }
 }
 

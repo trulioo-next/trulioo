@@ -5,7 +5,7 @@ import { GA_TRACKING_ID } from '../utils/gtag.js'
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
-        
+
         const originalRenderPage = ctx.renderPage
 
         ctx.renderPage = () =>
@@ -29,7 +29,7 @@ class MyDocument extends Document {
         return (
             <Html>
               <Head>
-
+                <link rel="stylesheet" href="https://use.typekit.net/aek2dxs.css" />
                 <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
                 <script
                     dangerouslySetInnerHTML={{
@@ -43,10 +43,10 @@ class MyDocument extends Document {
                 `,
                     }}
                 />
-                    
+
               </Head>
               <body>
-               
+
                 <Main/>
                 <NextScript/>
               </body>

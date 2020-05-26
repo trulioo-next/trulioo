@@ -2624,7 +2624,7 @@ input[type="button"].btn-block {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .marketo-form.mktoForm .mktoButtonRow .mktoButtonWrap .btn-group-vertical > .mktoButton,
   .btn-group-vertical > .btn-group {
@@ -7816,14 +7816,14 @@ img {
 
 ul {
   padding-left: 2.8rem;
-  list-style-image: url("../../assets/blue-bullet.svg"); }
+  list-style-image: url("/static/assets/blue-bullet.svg"); }
   ul li {
     line-height: 1.5;
     margin: 0.2rem 0 0.5rem;
     padding-left: 1.3rem; }
   ul.text-white,
   .text-white ul {
-    list-style-image: url("../../assets/white-bullet.svg"); }
+    list-style-image: url("/static/assets/white-bullet.svg"); }
 
 .card-deck .card {
   margin-bottom: 2.5rem; }
@@ -7945,12 +7945,12 @@ iframe {
 @font-face {
   font-family: 'Circular';
   font-weight: 900;
-  src: url("../fonts/CircularXXWeb-Black.woff2") format("woff2"), url("../fonts/CircularXXWeb-Black.woff") format("woff"); }
+  src: url("/static/fonts/CircularXXWeb-Black.woff2") format("woff2"), url("/static/fonts/CircularXXWeb-Black.woff") format("woff"); }
 
 @font-face {
   font-family: 'Circular';
   font-weight: normal;
-  src: url("../fonts/CircularStd-Book.otf"); }
+  src: url("/static/fonts/CircularStd-Book.otf"); }
 
 .is-font-heading {
   font-family: 'Circular', sans-serif; }
@@ -8914,7 +8914,7 @@ a.btn, .marketo-form.mktoForm .mktoButtonRow .mktoButtonWrap a.mktoButton {
   width: 75vw;
   height: calc(120%  + 9rem);
   transform: translateY(-50%);
-  background-image: url("../../assets/inverted-circle.svg");
+  background-image: url("/static/assets/inverted-circle.svg");
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat; }
@@ -8928,10 +8928,10 @@ a.btn, .marketo-form.mktoForm .mktoButtonRow .mktoButtonWrap a.mktoButton {
     margin: 0; }
     .homepage-slider .slick-slider .slick-arrow.slick-prev {
       left: 3rem;
-      background-image: url(../../assets/white-arrow-left.svg); }
+      background-image: url(/static/assets/white-arrow-left.svg); }
     .homepage-slider .slick-slider .slick-arrow.slick-next {
       right: 3rem;
-      background-image: url(../../assets/white-arrow-right.svg); }
+      background-image: url(/static/assets/white-arrow-right.svg); }
     .homepage-slider .slick-slider .slick-dots {
       display: block;
       top: auto;
@@ -8986,10 +8986,10 @@ a.btn, .marketo-form.mktoForm .mktoButtonRow .mktoButtonWrap a.mktoButton {
         height: 5.5rem; } }
     .slick-slider .slick-arrow.slick-prev {
       left: 0.6rem;
-      background-image: url("../../assets/blue-arrow-left.svg"); }
+      background-image: url("/static/assets/blue-arrow-left.svg"); }
     .slick-slider .slick-arrow.slick-next {
       right: 0.6rem;
-      background-image: url("../../assets/blue-arrow-right.svg"); }
+      background-image: url("/static/assets/blue-arrow-right.svg"); }
   .slick-slider .slick-dots {
     position: absolute;
     top: 100%;
@@ -9036,7 +9036,7 @@ a.btn, .marketo-form.mktoForm .mktoButtonRow .mktoButtonWrap a.mktoButton {
     display: none; }
   .homepage-one-column.secure-solution ul,
   .homepage-two-column.secure-solution ul {
-    list-style-image: url("../../assets/white-bullet.svg"); }
+    list-style-image: url("/static/assets/white-bullet.svg"); }
 
 @media (max-width: 767.98px) {
   .homepage-one-column {
@@ -9070,9 +9070,9 @@ a.btn, .marketo-form.mktoForm .mktoButtonRow .mktoButtonWrap a.mktoButton {
       background-repeat: no-repeat;
       z-index: 0; }
     .homepage-two-column.secure-solution .parallax-bg::before {
-      background-image: url("../../assets/blue-circle-peak.svg"); }
+      background-image: url("/static/assets/blue-circle-peak.svg"); }
     .homepage-two-column.securely-board .parallax-bg::before {
-      background-image: url("../../assets/green-circle-peak.svg"); } }
+      background-image: url("/static/assets/green-circle-peak.svg"); } }
 
 .securely-board .image-column {
   position: relative;

@@ -52,7 +52,7 @@ HalfHero.propTypes = {
 
 HalfHero.defaultProps = {
   component: {
-    background_image: '../../static/images/placeholders/ResourcesBanner.jpg',
+    background_image: '/static/assets/placeholders/ResourcesBanner.jpg',
     title: 'Get the latest resources on Identity Verification. '
   }
 };

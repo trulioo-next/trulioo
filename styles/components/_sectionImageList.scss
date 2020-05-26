@@ -5,12 +5,12 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    
+
     @include media-breakpoint-down(sm) {
         flex-direction: column;
         justify-content: center;
     }
-    
+
     @include media-breakpoint-up(lg) {
         min-height: 100vh;
     }
@@ -21,7 +21,7 @@
 
     &.secure-solution {
         ul {
-            list-style-image: url('../../assets/white-bullet.svg');
+            list-style-image: url('/static/assets/white-bullet.svg');
         }
     }
 }
@@ -39,7 +39,7 @@
         &.securely-board{
             background-color: #b9d762;
         }
-        
+
     }
 }
 
@@ -75,12 +75,12 @@
         }
         &.secure-solution {
             .parallax-bg::before {
-                background-image: url('../../assets/blue-circle-peak.svg');
+                background-image: url('/static/assets/blue-circle-peak.svg');
             }
         }
         &.securely-board {
             .parallax-bg::before {
-                background-image: url('../../assets/green-circle-peak.svg');
+                background-image: url('/static/assets/green-circle-peak.svg');
             }
         }
     }
