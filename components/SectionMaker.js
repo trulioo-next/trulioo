@@ -17,6 +17,8 @@ import { VideoSection } from '@/components/VideoSection';
 import { BusinessIntelligence } from '@/components/BusinessIntelligence';
 import { Pricing } from '@/components/Pricing';
 import { Marketo } from '@/components/Marketo';
+import { SectionVideoBg } from '@/components/SectionVideoBg';
+// import { SliderSection } from '@/components/Slider';
 
 // 
 const SectionMaker = ({
@@ -75,6 +77,12 @@ const SectionMaker = ({
 
     case 'pricing_block':
       return <Pricing sectionIndex={sectionIndex} component={params} />; 
+
+    case 'section_video_bg_block':
+      return <SectionVideoBg sectionIndex={sectionIndex} component={params} />;   
+
+    // case 'homepage_slider_block':
+    //   return <SliderSection sectionIndex={sectionIndex} component={params} />;   
 
     // case 'marketo_forms_block':
     //   return <Marketo sectionIndex={sectionIndex} component={params} />;                               
