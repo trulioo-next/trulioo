@@ -2,7 +2,7 @@
 @import "abstracts/function";
 @import "abstracts/mixin";
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./node_modules/bootstrap/scss/bootstrap";
 
 @import "base/common";
 @import "base/fonts";
@@ -10,7 +10,7 @@
 @import "base/button";
 @import "base/animate";
 
-@import "../../node_modules/slick-carousel/slick/slick.scss";
+@import "./node_modules/slick-carousel/slick/slick.scss";
 
 @import "components/homepage";
 @import "components/parallax";

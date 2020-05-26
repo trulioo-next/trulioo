@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const withSass = require('@zeit/next-sass');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
-// const withCss = require("@zeit/next-css");
+const withCss = require("@zeit/next-css");
 const path = require('path');
 
 if (process.env.NODE_ENV === 'development') {
