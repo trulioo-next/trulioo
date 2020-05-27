@@ -19,7 +19,6 @@ import { Pricing } from '@/components/Pricing';
 import { Marketo } from '@/components/Marketo';
 import { SectionVideoBg } from '@/components/SectionVideoBg';
 // import { SliderSection } from '@/components/Slider';
-
 // 
 const SectionMaker = ({
   type,
