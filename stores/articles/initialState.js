@@ -7,6 +7,7 @@ export const INITIAL_STATE = {
 	postList:[],
 	topics:[],
 	types:[], 
+	postDataById:[],
 	isLoading: true,
 	error:false,
 	errorSource:false

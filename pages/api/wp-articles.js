@@ -7,12 +7,14 @@ export default async (req, res) => {
     const body = JSON.parse(req.body)
     let page = 1;
 
-    if(body.payload) {
-		  page = body.payload.payload
-    } 
     
+		const postsPerPage = body.payload.posts_per_page
+    const offset = body.payload.offset
+    const postId = body.payload.post_id
+      
+ 
     //
-    const postList = await fetch(ENDPOINT_URL+'/wp/v2/resources/?_embed&per_page=9&page='+page, {
+    const postList = await fetch(ENDPOINT_URL+'/trulioo/posts/?offset='+offset+'&posts_per_page='+postsPerPage, {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -20,15 +22,25 @@ export default async (req, res) => {
        }
      })
 
-    const topics = await fetch(ENDPOINT_URL+'/wp/v2/resources_topics?per_page=100', {
+    
+
+    const topics = await fetch(ENDPOINT_URL+'/wp/v2/articles_topics?per_page=100', {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json'
        }
      })
+   
+    const types = await fetch(ENDPOINT_URL+'/wp/v2/articles_types?per_page=100', {
+       method: 'GET',
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       }
+     }) 
 
-    const types = await fetch(ENDPOINT_URL+'/wp/v2/resources_types?per_page=100', {
+    const postDataById = await fetch(ENDPOINT_URL+'/trulioo/post/'+postId, {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -39,7 +51,8 @@ export default async (req, res) => {
     let data = {
       postList,
       topics,
-      types
+      types,
+      postDataById
     }
   
     res.json(data)

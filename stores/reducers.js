@@ -9,7 +9,8 @@ import app from './app/reducers'
 import page from './page/reducers'
 import searchSite from './searchSite/reducers'
 import resources from  './resources/reducers'
-
+import pressRelease from  './pressRelease/reducers'
+import articles from  './articles/reducers'
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
@@ -19,6 +20,9 @@ export default function createReducer() {
     app,
     page,
     searchSite,
+    resources,
+    pressRelease,
+    articles,
   })
   return rootReducer
 }

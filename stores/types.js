@@ -26,3 +26,13 @@ export const SEARCHSITE_ERROR = 'searchSite/error/SEARCHSITE_ERROR'
 export const RESOURCES_LOAD_REQUEST = 'resources/load/RESOURCES_LOAD_REQUEST'
 export const RESOURCES__LOADED = 'resources/loaded/RESOURCES__LOADED'
 export const RESOURCES__ERROR = 'resources/error/RESOURCES__ERROR'
+
+// Press Release
+export const PRESS_LOAD_REQUEST = 'press/load/PRESS_LOAD_REQUEST'
+export const PRESS__LOADED = 'press/loaded/PRESS__LOADED'
+export const PRESS__ERROR = 'press/error/PRESS__ERROR'
+
+// Articles
+export const ARTICLES_LOAD_REQUEST = 'articles/load/ARTICLES_LOAD_REQUEST'
+export const ARTICLES__LOADED = 'articles/loaded/ARTICLES__LOADED'
+export const ARTICLES__ERROR = 'articles/error/ARTICLES__ERROR'

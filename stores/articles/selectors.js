@@ -6,11 +6,11 @@
 // Direct selector to the app state domain
  
 
- export const resourceDataSelector = (state) => {
-   return state.resources
- }
+export const articlesDataSelector = (state) => {
+	return state.articles
+}
 
  
 export default {
-  resourceDataSelector
+  articlesDataSelector
 }

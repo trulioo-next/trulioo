@@ -5,9 +5,9 @@ import ResourcesService from '../../services/resourcesService'
 import {
   APP_STARTLOADING,
   APP_STARTUP_ERROR,
-  RESOURCES_LOAD_REQUEST,
-  RESOURCES__LOADED,
-  RESOURCES__ERROR, 
+  ARTICLES_LOAD_REQUEST,
+  ARTICLES__LOADED,
+  ARTICLES__ERROR, 
   APP_STOPLOADING
 } from '../types'
 
@@ -16,20 +16,17 @@ function* startup(payload) {
 
    
   try {
-    
-    // yield call(getGeolocation, payload.ip)
 
     const state = yield select((state) => state)
     const resourcesService = ResourcesService(state)
-    const response = yield call(resourcesService.getResourceData, payload)
- 
-    // console.log('RESONSE ', response)
-    yield put({ type: RESOURCES__LOADED, payload: response  })
+    const response = yield call(resourcesService.getArticleData, payload)
+   
+    yield put({ type: ARTICLES__LOADED, payload: response  })
 
   } catch(err) {
 
     const errors = err.payload || err
-    yield put({ type: RESOURCES__ERROR, payload: errors})
+    yield put({ type: ARTICLES__ERROR, payload: errors})
   }
 }
 
@@ -41,12 +38,12 @@ function* startupFlow() {
   while (true) {
 
     const action = yield take([
-      RESOURCES_LOAD_REQUEST
+      ARTICLES_LOAD_REQUEST
    ])
 
     yield put({ type: APP_STARTLOADING })
 
-    if (action.type === RESOURCES_LOAD_REQUEST) {
+    if (action.type === ARTICLES_LOAD_REQUEST) {
       yield call(startup, action.payload)
     }
 
@@ -56,7 +53,7 @@ function* startupFlow() {
   }
 }
 
-export default function* ResourceSagas() {
+export default function* ArticlesSagas() {
    yield all([
      startupFlow(),
    ])

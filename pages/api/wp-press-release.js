@@ -12,7 +12,7 @@ export default async (req, res) => {
     } 
     
     //
-    const postList = await fetch(ENDPOINT_URL+'/wp/v2/resources/?_embed&per_page=9&page='+page, {
+    const postList = await fetch(ENDPOINT_URL+'/wp/v2/press_releases/?per_page=9&page='+page, {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -20,7 +20,7 @@ export default async (req, res) => {
        }
      })
 
-    const topics = await fetch(ENDPOINT_URL+'/wp/v2/resources_topics?per_page=100', {
+    const years = await fetch(ENDPOINT_URL+'/wp/v2/press_releases_years?per_page=100', {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -28,7 +28,7 @@ export default async (req, res) => {
        }
      })
 
-    const types = await fetch(ENDPOINT_URL+'/wp/v2/resources_types?per_page=100', {
+    const types = await fetch(ENDPOINT_URL+'/wp/v2/press_releases_types?per_page=100', {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -38,7 +38,7 @@ export default async (req, res) => {
 
     let data = {
       postList,
-      topics,
+      years,
       types
     }
   
