@@ -57,16 +57,3 @@ function add_file_types_to_uploads($file_types){
 } 
 add_action('upload_mimes', 'add_file_types_to_uploads');
  
-
-
-// Create menu locations 
-// 
-function register_trulioo_menus() {
-	register_nav_menus(
-		array(
-		'footer' => __( 'Footer' ),
-		'footer-sub-menu' => __( 'Footer Sub Menu' )
-		)
-	);
-}
-add_action( 'init', 'register_trulioo_menus' );
