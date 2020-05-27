@@ -11,13 +11,18 @@ export default function DataService(state) {
 	}
 
 	async function getPageData(payload) {
-	 let data = await API.post('/api/wp-page-data', payload);
-	return data;
+	 	let data = await API.post('/api/wp-page-data', payload);
+		return data;
 	}
 
 	async function getAlertsData(payload) {
-	 let data = await API.post('/api/wp-alerts-data', payload);
-	return data;
+	 	let data = await API.post('/api/wp-alerts-data', payload);
+		return data;
+	}
+
+	async function getLogo() {
+		let data = await API.post('/wp/v2/logo', {});
+	   	return data;
 	}
 
 	function getPostData(data) {
@@ -27,7 +32,8 @@ export default function DataService(state) {
    return {
     getGlobalData,
 	getPageData,
-	getAlertsData
+	getAlertsData,
+	getLogo
   }
 
 }

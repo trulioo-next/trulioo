@@ -3,8 +3,7 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 
 import { reqPageDataAction } from '../../stores/page/actions';
 import { reqStartupAction } from '../../stores/app/actions';
-import Header from '@/components/Header';
-import NavBar from '@/components/NavBar';
+import { Header }  from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
 import Error from 'next/error';
@@ -16,9 +15,6 @@ import {
   selectHeaderData,
   selectFooterData,
 } from '../../stores/app/selectors';
-
-  
-// import './Layout.scss';
 
 
 const Layout = props => {
@@ -36,10 +32,7 @@ const Layout = props => {
           title="Trulioo"
         />
 
-        { headerData &&
-          <NavBar data={headerData} user={false} />
-        }
-       
+
         <main className="SiteMain">
           {isLoading && <Loader />}
           {props.children}

@@ -37,9 +37,9 @@ function return_global_settings() {
 
 	// Build Menus 
 	//
-	$headerNav = getMenuItemsFromLocation('header-menu');
-	$footerSubMenu = getMenuItemsFromLocation('footer-sub-menu');
-	$footer = getMenuItemsFromLocation('footer');
+	$headerNav = getMenuSlug('main');
+	$footerSubMenu = getMenuSlug('footer-sub-menu');
+	$footer = getMenuSlug('footer');
  
 	// 
 	$GLOBAL['main'] = $headerNav;
@@ -60,6 +60,56 @@ function getMenuItemsFromLocation($location) {
 	return  getMenuItemsForParent($menu_obj->slug, 0, $menu_obj);
 }
 
+function getBuildTree( $elements, $parentId = 0 ) {
+    $branch = array();
+    foreach ( $elements as $element )
+    {
+        if ( $element->menu_item_parent == $parentId )
+        {
+            $children = buildTree( $elements, $element->ID );
+            
+            if ( $children ) {
+              foreach ($children as $child) {
+                if ($child->object === 'page') {
+                  $parsedURL = parse_url($child->url);
+                  $child->url = $parsedURL['path'];
+                }
+              }
+
+              $element->sub_nav = $children;
+            }
+
+            $branch[] = $element;
+            $element->{'acf'} = get_fields($element->ID);
+        }
+    }
+    return $branch;
+}
+
+function getMenuSlug($data) {
+	$menu_items = wp_get_nav_menu_items($data);
+	$menu_items_tree = $menu_items ? buildTree( $menu_items, 0 ) : null;
+  
+  
+	if ($menu_items_tree) {
+	  foreach ($menu_items_tree as $item) {
+  
+		if ($item->object === 'page') {
+		  $post = get_post($item->object_id);
+		  $slug = $post->post_name;
+  
+		  $item->url = '/' . $slug;
+		}
+	  }
+  
+	  return array(
+		'slug' => $data['slug'],
+		'menu' => $menu_items_tree
+	  );
+	}
+  
+	return array();
+}
 
 /**
  * Format Navigation 
