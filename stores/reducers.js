@@ -8,6 +8,7 @@ import { combineReducers } from 'redux'
 import app from './app/reducers'
 import page from './page/reducers'
 import searchSite from './searchSite/reducers'
+import resources from  './resources/reducers'
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -19,6 +20,5 @@ export default function createReducer() {
     page,
     searchSite,
   })
-
   return rootReducer
 }

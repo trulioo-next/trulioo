@@ -6,8 +6,8 @@
 import { INITIAL_STATE } from './initialState'
 
 import {
-  PAGE_LOADED,
-  PAGE_LOAD_ERROR
+  RESOURCES__LOADED,
+  RESOURCES__ERROR
 } from '../types'
 
 
@@ -15,15 +15,17 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-    case PAGE_LOADED:
+    case RESOURCES__LOADED:
       return { ...state,
-        data: action.payload
+        postList: action.payload.postList,
+        topics: action.payload.topics,
+        types: action.payload.types
       }
 
-    case PAGE_LOAD_ERROR:
+    case RESOURCES__ERROR:
       return { ...state,
         error: action.payload,
-        errorSource: APP_STARTUP_ERROR
+        errorSource: RESOURCES_LOAD_ERROR
       }
 
     default:

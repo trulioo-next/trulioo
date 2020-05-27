@@ -21,3 +21,8 @@ export const PAGE_LOAD_ERROR = 'page/error/PAGE_LOAD_ERROR'
 export const SEARCHSITE_LOAD_REQUEST = 'searchSite/load/SEARCHSITE_LOAD_REQUEST'
 export const SEARCHSITE_LOADED = 'searchSite/loaded/SEARCHSITE_LOADED'
 export const SEARCHSITE_ERROR = 'searchSite/error/SEARCHSITE_ERROR'
+
+// Resources
+export const RESOURCES_LOAD_REQUEST = 'resources/load/RESOURCES_LOAD_REQUEST'
+export const RESOURCES__LOADED = 'resources/loaded/RESOURCES__LOADED'
+export const RESOURCES__ERROR = 'resources/error/RESOURCES__ERROR'

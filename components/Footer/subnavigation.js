@@ -16,7 +16,7 @@ const SubNavigationList = ({ information }) => {
   const footerData = useSelector(state =>  selectFooterData(state));
   
   // 
-  console.log('FOOTER DATA ', information )
+  // console.log('FOOTER DATA ', information )
 
   return (
     <div className="d-flex justify-content-between Footer__subnav mb-5">

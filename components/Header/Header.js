@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigation }  from './navigation';
 import { connect, useDispatch } from 'react-redux';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+ 
 import PropTypes from 'prop-types';
 import {
   Collapse,
