@@ -20,8 +20,8 @@ export default function DataService(state) {
 		return data;
 	}
 
-	async function getLogo() {
-		let data = await API.post('/wp/v2/logo', {});
+	async function getSiteInformation() {
+		let data = await API.post('/api/wp-site-information', {});
 	   	return data;
 	}
 	
@@ -38,7 +38,7 @@ export default function DataService(state) {
     getGlobalData,
 	getPageData,
 	getAlertsData,
-	getLogo
+	getSiteInformation
   }
 
 }

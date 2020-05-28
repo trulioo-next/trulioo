@@ -29,26 +29,15 @@ class MyDocument extends Document {
         return (
             <Html>
               <Head>
-                <link rel="stylesheet" href="https://use.typekit.net/aek2dxs.css" />
-                <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
-                <script
-                    dangerouslySetInnerHTML={{
-                    __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${GA_TRACKING_ID}', {
-                    page_path: window.location.pathname,
-                    });
-                `,
-                    }}
-                />
-
+                <link rel="stylesheet" href="//use.typekit.net/aek2dxs.css" />
+                <script src="//unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+                <script src="//app-sjqe.marketo.com/js/forms2/js/forms2.js"></script>
               </Head>
               <body>
-
                 <Main/>
                 <NextScript/>
+                <script src="//irtrulioo4.wpengine.com/wp-content/uploads/custom-css-js/google-analytics.js"></script>
+		        <script src="//irtrulioo4.wpengine.com/wp-content/uploads/custom-css-js/live-chat.js"></script>
               </body>
             </Html>
         );
