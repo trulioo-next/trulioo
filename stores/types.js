@@ -16,6 +16,9 @@ export const GLOBAL_DATA_LOADED = 'global/data/GLOBAL_DATA_LOADED'
 export const PAGE_LOAD_REQUEST = 'page/load/PAGE_LOAD_REQUEST'
 export const PAGE_LOADED = 'page/loaded/PAGE_LOAD_REQUEST'
 export const PAGE_LOAD_ERROR = 'page/error/PAGE_LOAD_ERROR'
+export const PAGE_BANNER_REQUEST = 'page/load/PAGE_BANNER_REQUEST'
+export const PAGE_BANNER_LOADED = 'page/load/PAGE_BANNER_LOADED'
+export const PAGE_BANNER_ERROR = 'page/load/PAGE_BANNER_ERROR'
 
 // Search Site Events
 export const SEARCHSITE_LOAD_REQUEST = 'searchSite/load/SEARCHSITE_LOAD_REQUEST'

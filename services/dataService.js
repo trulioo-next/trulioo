@@ -24,6 +24,11 @@ export default function DataService(state) {
 		let data = await API.post('/wp/v2/logo', {});
 	   	return data;
 	}
+	
+	async function getBannerData() {
+		let data = await API.post('/api/wp-banners', {});
+	   	return data;
+	}
 
 	function getPostData(data) {
 	 return {data:'single data'}

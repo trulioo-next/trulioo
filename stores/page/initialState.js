@@ -9,7 +9,8 @@ export const INITIAL_STATE = {
   	acf_data:[],
   	seo:[],
   	parent:[], 
-  	isLoading: true
+  	isLoading: true,
+  	banners:false
   }
   
 };
