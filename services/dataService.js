@@ -38,6 +38,7 @@ export default function DataService(state) {
     getGlobalData,
 	getPageData,
 	getAlertsData,
+	getBannerData,
 	getSiteInformation
   }
 
