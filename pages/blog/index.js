@@ -42,7 +42,6 @@ const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
   const articles = useSelector(articlesDataSelector);
-  console.log(articles);
   //const { result, max_page, isSearching, term, types, topics, hasError } = useSelector(state => state.api.blogs.search);
   const blogsList = articles.postList;
   const blogsPage = 1;
@@ -58,11 +57,10 @@ const Blog = props => {
   }
 
   useEffect(() => {
-      dispatch(reqPageDataAction({ payload: props.query.page }));
-
+ 
       // Dispatch Articles
       dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page:100 }));
-
+      dispatch(reqPageDataAction({ payload:'blog' }));
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -150,7 +148,7 @@ const Blog = props => {
   //   }
   // };
 
-  const postsToRender = isSearching ? result : blogsList;
+  const postsToRender = isSearching ? result : blogsList.posts;
 
   let pagination;
   if (isSearching) {
@@ -165,21 +163,19 @@ const Blog = props => {
     <Layout>
       {/* { getHeroBlog && <HalfHero component={ getHeroBlog }/> }
       <SearchBlogs />
-      <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } />
+      <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } /> */}
       <section className="blog-posts-section">
         <Container fluid className="py-4 p-md-5 container-md">
           <Row className="py-5 justify-content-between">
             <Col xs="12" md="8" lg="7" className="px-0 mb-5 px-md-4 mb-md-0">
               {
-                !hasError && postsToRender.map((post, index) => (
+                postsToRender.map((post, index) => (
                   <GroupPost isSearching={ isSearching } key={ index } post={ post } />
                 ))
               }
-              { hasError || postsToRender.length === 0 && 'There are no more posts!'}
-              {pagination}
             </Col>
             <Col xs="12" md="4" className="px-5 mt-5 px-md-4 mt-md-0">
-              <PopularArticles getPopularArticles={ popularArticles }/>
+              {/* <PopularArticles getPopularArticles={ popularArticles }/> */}
             </Col>
           </Row>
         </Container>

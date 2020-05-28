@@ -5,7 +5,7 @@ import {
   Row,
   Col
 } from 'reactstrap';
-import api from '../../../services/api';
+
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -20,29 +20,29 @@ export const SliderSection = ({ slides }) => {
   const [ loader, setLoader ] = useState(true);
   const [ getSlider, setSlider ] = useState(null);
 
-  useEffect(() => {
-    const loadHomepageSliderData = (sliderData) => dispatch(
-      { type: 'HOMEPAGE_SLIDER', payload: sliderData }
-    );
+  // useEffect(() => {
+  //   const loadHomepageSliderData = (sliderData) => dispatch(
+  //     { type: 'HOMEPAGE_SLIDER', payload: sliderData }
+  //   );
 
-    const isMounted = loader;
+  //   const isMounted = loader;
 
-    const fetchData = () => {
-      if (slides.selected_tag.slug) {
-        api.Content.postsBasedOnTags('post',slides.selected_tag.slug,5)
-        .then((data) => {
-          if (isMounted) {
-            loadHomepageSliderData(data);
-            setSlider(data);
-          }
-        });
-      }
-    };
-    fetchData();
-    return () => {
-      setLoader(false);
-    };
-  });
+  //   const fetchData = () => {
+  //     if (slides.selected_tag.slug) {
+  //       api.Content.postsBasedOnTags('post',slides.selected_tag.slug,5)
+  //       .then((data) => {
+  //         if (isMounted) {
+  //           loadHomepageSliderData(data);
+  //           setSlider(data);
+  //         }
+  //       });
+  //     }
+  //   };
+  //   fetchData();
+  //   return () => {
+  //     setLoader(false);
+  //   };
+  // });
 
   const sliderSettings = {
     dots: true,
