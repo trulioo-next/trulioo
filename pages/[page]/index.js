@@ -3,19 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout/Layout';
- 
+
 import routerPush from '@/helpers/routerPush';
 import Error from 'next/error';
 import { pageDataSelector } from '@/stores/page/selectors';
 import { reqPageDataAction } from '@/stores/page/actions';
- 
+
 const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(reqPageDataAction({ payload: props.query.page }));
+    dispatch(reqPageDataAction({ payload: props.query.page }));
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -48,8 +48,7 @@ const Page = props => {
     scrollToAnchor(anchor);
   }
 
-   
-   const pageData = useSelector(state => pageDataSelector(state));
+  const pageData = useSelector(state => pageDataSelector(state));
   // console.log('SINGLE PAGE DATA ', pageData )
   // if(!pageData.acf_data) {
   //    routerPush('/404');
@@ -62,7 +61,6 @@ const Page = props => {
 
   return (
     <Layout>
-       
       {data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
@@ -70,7 +68,7 @@ const Page = props => {
             params={section}
             key={sectionKey}
             sectionIndex={sectionKey}
-            props={{...props}}
+            props={{ ...props }}
           />
         ))}
     </Layout>
