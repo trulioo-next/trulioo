@@ -45,7 +45,6 @@ function* startup(payload) {
 
 function* getBanners(payload) {
 
-   
   try {
     
     // yield call(getGeolocation, payload.ip)
@@ -63,7 +62,7 @@ function* getBanners(payload) {
   } catch(err) {
 
     const errors = err.payload || err
-    yield put({ type: PAGE_LOAD_ERROR, payload: errors})
+    yield put({ type: PAGE_BANNER_ERROR, payload: errors})
   }
 }
 

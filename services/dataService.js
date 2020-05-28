@@ -24,9 +24,9 @@ export default function DataService(state) {
 		let data = await API.post('/wp/v2/logo', {});
 	   	return data;
 	}
-	
-	async function getBannerData() {
-		let data = await API.post('/api/wp-banners', {});
+
+	async function getBannerData(payload) {
+		let data = await API.post('/api/wp-banners', payload);
 	   	return data;
 	}
 
@@ -38,7 +38,8 @@ export default function DataService(state) {
     getGlobalData,
 	getPageData,
 	getAlertsData,
-	getLogo
+	getLogo,
+	getBannerData
   }
 
 }

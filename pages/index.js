@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 import Error from 'next/error';
 
-import { reqPageDataAction } from '../stores/page/actions';
+import { reqPageDataAction, reqPageBannersAction } from '../stores/page/actions';
 import { pageDataSelector } from '../stores/page/selectors';
 
 const Home = props => {
@@ -23,8 +23,14 @@ const Home = props => {
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
-  
-  // console.log('HELLO PAGE ', pageData )
+    
+
+  const dispatch = useDispatch();
+  dispatch(reqPageBannersAction({ postType:'', tagName:'' }));
+  const bannerData = useSelector(pageDataSelector)
+
+
+  console.log('PAGE DATA SELECTOR ', bannerData )
 
   return (
     <Layout>
