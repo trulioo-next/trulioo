@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { isNil } from 'lodash';
 import SectionMaker from '../../components/SectionMaker';
 import Layout from '../../containers/Layout';
  
@@ -39,15 +39,17 @@ import {
 
 
 const Blog = props => {
-
+  const isSearching = false;
   const dispatch = useDispatch();
-  const { result, max_page, isSearching, term, types, topics, hasError } = useSelector(state => state.api.blogs.search);
-  const blogsList = useSelector(state => state.api.blogs.list);
-  const blogsPage = useSelector(state => state.api.blogs.page);
-  const [ popularArticles, setPopularArticles ] = useState(null);
-  const [ getComponents, setComponents ] = useState(null);
-  const [ getHeroBlog, setHeroBlog ] = useState(null);
-  const [ getFeaturedBlogs, setFeaturedBlogs ] = useState(null);
+  const articles = useSelector(articlesDataSelector);
+  console.log(articles);
+  //const { result, max_page, isSearching, term, types, topics, hasError } = useSelector(state => state.api.blogs.search);
+  const blogsList = articles.postList;
+  const blogsPage = 1;
+  // const [ popularArticles, setPopularArticles ] = useState(null);
+  // const [ getComponents, setComponents ] = useState(null);
+  // const [ getHeroBlog, setHeroBlog ] = useState(null);
+  // const [ getFeaturedBlogs, setFeaturedBlogs ] = useState(null);
 
   const [ loader, setLoader ] = useState(true);
 
@@ -93,46 +95,39 @@ const Blog = props => {
     scrollToAnchor(anchor);
   }
 
-   
-
    const pageData = useSelector(state => pageDataSelector(state));
-  // console.log('SINGLE PAGE DATA ', pageData )
-  // if(!pageData.acf_data) {
-  //    routerPush('/404');
-  // }
-
-  let data =
-    pageData && pageData.acf_data && pageData.acf_data.content_block_collection
-      ? pageData.acf_data
-      : false;
+    let data =
+      pageData && pageData.acf_data && pageData.acf_data.content_block_collection
+        ? pageData.acf_data
+        : false;
 
   ///
 
-  useEffect(() => {
-    const loadMarketoBlog = (data) => dispatch(
-      { type: 'LOAD_MARKETO_BLOG', payload: data }
-    );
+  // useEffect(() => {
+  //   const loadMarketoBlog = (data) => dispatch(
+  //     { type: 'LOAD_MARKETO_BLOG', payload: data }
+  //   );
 
-    const isMounted = loader;
+  //   const isMounted = loader;
 
-    // acf.Content.getOptions('marketo-on-blog-pages')
-    // .then((data) => {
-    //   if (isMounted) {
-    //     loadMarketoBlog(data.acf.marketo_on_blog_page);
-    //   }
-    // });
-    getBlogs(dispatch)(4);
-    getInitialData(dispatch)(setComponents, setHeroBlog, setFeaturedBlogs, setPopularArticles, data);
-    searchBlogsFromUrl(dispatch)(searchBlogs);
-    return () => {
-      setLoader(false);
-      clearBlogs(dispatch)();
-    };
-  }, [ dispatch ]);
+  //   // acf.Content.getOptions('marketo-on-blog-pages')
+  //   // .then((data) => {
+  //   //   if (isMounted) {
+  //   //     loadMarketoBlog(data.acf.marketo_on_blog_page);
+  //   //   }
+  //   // });
+  //   getBlogs(dispatch)(4);
+  //   getInitialData(dispatch)(setComponents, setHeroBlog, setFeaturedBlogs, setPopularArticles, data);
+  //   searchBlogsFromUrl(dispatch)(searchBlogs);
+  //   return () => {
+  //     setLoader(false);
+  //     clearBlogs(dispatch)();
+  //   };
+  // }, [ dispatch ]);
 
-  useEffect(() => {
-    onPagination();
-  }, [ blogsPage ]);
+  // useEffect(() => {
+  //   onPagination();
+  // }, [ blogsPage ]);
 
   if (isNil(blogsList)) {
     return (
@@ -144,16 +139,16 @@ const Blog = props => {
     );
   }
 
-  const onPagination = () => {
-    // offsetBy should match the per_page number passed in 'services/api.js'
-    if (isSearching) {
-      const pageOffset = calcPageOffset({ page: blogsPage, offsetBy: 10 });
-      searchBlogs(dispatch)({ pageOffset, term, types, topics, page: 1 });
-    } else {
-      const pageOffset = calcPageOffset({ page: blogsPage, offsetBy: 5 });
-      getBlogs(dispatch)(pageOffset);
-    }
-  };
+  // const onPagination = () => {
+  //   // offsetBy should match the per_page number passed in 'services/api.js'
+  //   if (isSearching) {
+  //     const pageOffset = calcPageOffset({ page: blogsPage, offsetBy: 10 });
+  //     searchBlogs(dispatch)({ pageOffset, term, types, topics, page: 1 });
+  //   } else {
+  //     const pageOffset = calcPageOffset({ page: blogsPage, offsetBy: 5 });
+  //     getBlogs(dispatch)(pageOffset);
+  //   }
+  // };
 
   const postsToRender = isSearching ? result : blogsList;
 
@@ -165,10 +160,10 @@ const Blog = props => {
   } else {
     pagination = <BlogsPagination windowSize={ 5 } />;
   }
-  console.log('Articles ',articles)
+
   return (
     <Layout>
-      { getHeroBlog && <HalfHero component={ getHeroBlog }/> }
+      {/* { getHeroBlog && <HalfHero component={ getHeroBlog }/> }
       <SearchBlogs />
       <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } />
       <section className="blog-posts-section">
@@ -189,6 +184,8 @@ const Blog = props => {
           </Row>
         </Container>
       </section>
+
+      {/* <MarketoBlog/> */}
       {data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
@@ -199,7 +196,6 @@ const Blog = props => {
             props={{...props}}
           />
         ))}
-      <MarketoBlog/>
     </Layout>
   );
 };
