@@ -28,12 +28,15 @@ export const selectError = (state) => {
   return state.app.errorSource
  }
 
- export const selectHeaderData = (state) => {
-   // if( !state.app.globalData ) {
-   //    let staticData = headerData['header-menu']
-   //    return  staticData;
-   // }
+ export const selectSiteInformation = (state) => {
+  return state.app.globalDataSiteInformation['siteInformation']
+}
 
+export const selectGeneralSettings = (state) => {
+  return state.app.globalDataSiteInformation['generalSettings']
+}
+
+ export const selectHeaderData = (state) => {
    return state.app.globalData['main']
  }
 
@@ -61,6 +64,7 @@ export default {
   selectError,
   selectErrorSource,
   selectIsAuthenticated,
+  selectSiteInformation,
   selectHeaderData,
   selectFooterData,
   alertDataSelector

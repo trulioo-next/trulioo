@@ -9,6 +9,7 @@ import {
   APP_STARTUP_ERROR,
   APP_STOPLOADING,
   GLOBAL_DATA_LOADED,
+  GLOBAL_DATA_SITE_INFORMATION,
   PAGE_LOAD_REQUEST,
   PAGE_LOADED,
   APP_PAGE_LOAD_ERROR
@@ -34,6 +35,24 @@ function* startup(payload) {
   }
 }
 
+function* startupSiteInformation(payload) {
+
+  try {
+ 
+    const state = yield select((state) => state)
+    const dataService = DataService(state)
+    const response = yield call(dataService.getSiteInformation, true)
+      
+    yield put({ type: GLOBAL_DATA_SITE_INFORMATION, payload: response })
+ 
+ 
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type: APP_STARTUP_ERROR, payload: errors})
+  }
+}
+
 /*
 * Startup flow to allow concurrent actions to be dispatched
 */
@@ -48,6 +67,7 @@ function* startupFlow() {
 
     if (action.type === APP_STARTUP_REQUEST) {
       yield call(startup, action.payload)
+      yield call(startupSiteInformation, action.payload)
     }
 
 
