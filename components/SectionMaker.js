@@ -19,7 +19,7 @@ import { Pricing } from '@/components/Pricing';
 import { Marketo } from '@/components/Marketo';
 import { SectionVideoBg } from '@/components/SectionVideoBg';
 // import { SliderSection } from '@/components/Slider';
-// 
+
 const SectionMaker = ({
   type,
   params,
@@ -83,8 +83,8 @@ const SectionMaker = ({
     // case 'homepage_slider_block':
     //   return <SliderSection sectionIndex={sectionIndex} component={params} />;   
 
-    // case 'marketo_forms_block':
-    //   return <Marketo sectionIndex={sectionIndex} component={params} />;                               
+    case 'marketo_forms_block':
+      return <Marketo sectionIndex={sectionIndex} component={params} />;                               
  
 
     default:
