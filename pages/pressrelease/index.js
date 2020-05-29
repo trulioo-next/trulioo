@@ -43,7 +43,6 @@ const PressReleases = props => {
   const pageData = useSelector(state => pageDataSelector(state));
   const pressReleases = useSelector(pressDataSelector);
 
-
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
 
   let featuredPosts = pressReleases.featured;
