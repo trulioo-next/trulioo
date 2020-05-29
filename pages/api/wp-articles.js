@@ -23,7 +23,6 @@ export default async (req, res) => {
      })
 
     
-
     const topics = await fetch(ENDPOINT_URL+'/wp/v2/articles_topics?per_page=100', {
        method: 'GET',
        headers: {
