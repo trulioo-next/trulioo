@@ -1,6 +1,5 @@
-import acf from '../../../services/acf';
-import api from '../../../services/api';
-import { parseUrl, urlHasParams, pushUrl } from '../../../utilities/parseURL';
+
+import { parseUrl, urlHasParams, pushUrl } from '../../../utils/parseURL';
 import { calcPageOffset } from './utils';
 
 
