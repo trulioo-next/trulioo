@@ -8,7 +8,7 @@ import fetch from 'isomorphic-unfetch';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { reqPageDataAction } from '@/stores/page/actions';
-import { reqPressReleaseAction } from '@/stores/pressrelease/actions';
+import { reqPressReleaseAction } from '@/stores/pressRelease/actions';
 import { pageDataSelector } from '@/stores/page/selectors';
 import { pressDataSelector } from '@/stores/pressrelease/selectors';
 
