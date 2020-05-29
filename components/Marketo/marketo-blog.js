@@ -16,7 +16,7 @@ import {
 export const MarketoBlog = ({ component }) => {
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
   let marketoOnBlog = generalSettings.acf.marketo_on_blog_page;
-  console.log(marketoOnBlog);
+
   useEffect(() => {
     if (MktoForms2) {
       MktoForms2.loadForm('//app-ab31.marketo.com', '392-YOD-077', marketoOnBlog.form_id);
