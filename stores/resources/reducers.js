@@ -15,9 +15,8 @@ export default (state = INITIAL_STATE, action) => {
         postList: action.payload.postList,
         topics: action.payload.topics,
         types: action.payload.types,
-        marketoBlog: action.payload.marketoBlog,
-        popularArticles: action.payload.popularArticles,
-      }
+        featured: action.payload.featured,
+      };
 
     case RESOURCES__ERROR:
       return {
