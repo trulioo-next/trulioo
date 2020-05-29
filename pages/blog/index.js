@@ -22,10 +22,6 @@ import { selectGeneralSettings } from '@/stores/app/selectors';
 import {
   GroupPost
 } from '../../components/Post';
-import { SearchBlogs } from './search';
-import { BlogsPagination } from './pagination';
-import { calcPageOffset } from './utils';
-
 
 
 import {
@@ -38,14 +34,6 @@ import {
 const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
-
-  //const { result, max_page, isSearching, term, types, topics, hasError } = useSelector(state => state.api.blogs.search);
-  // const [ popularArticles, setPopularArticles ] = useState(null);
-  // const [ getComponents, setComponents ] = useState(null);
-  // const [ getHeroBlog, setHeroBlog ] = useState(null);
-  // const [ getFeaturedBlogs, setFeaturedBlogs ] = useState(null);
-
-  const [ loader, setLoader ] = useState(true);
 
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
@@ -100,7 +88,7 @@ const Blog = props => {
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data
       : false;
-  console.log('dd', data);
+ 
   const postsToRender = isSearching ? result : blogsList;
 
   // useEffect(() => {
@@ -161,9 +149,13 @@ const Blog = props => {
   //   pagination = <BlogsPagination windowSize={ 5 } />;
   // }
 
+
+  let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
+  let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
+
   return (
     <Layout>
-      {/* { data && <HalfHero component={ data.hero }/> } */}
+      { acfData && <HalfHero component={ acfData.hero }/> }
       {/* <SearchBlogs /> */}
       {/* <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } /> */}
       <section className="blog-posts-section">
@@ -178,9 +170,9 @@ const Blog = props => {
               {/* { hasError || postsToRender.length === 0 && 'There are no more posts!'} */}
               {/* {pagination} */}
             </Col>
-            {/* <Col xs="12" md="4" className="px-5 mt-5 px-md-4 mt-md-0">
-              <PopularArticles getPopularArticles={ popularArticles }/>
-            </Col> */}
+            <Col xs="12" md="4" className="px-5 mt-5 px-md-4 mt-md-0">
+              {popularArticles && <PopularArticles getPopularArticles={ popularArticles.popular_articles }/>}
+            </Col>
           </Row>
         </Container>
       </section>
@@ -194,7 +186,7 @@ const Blog = props => {
             props={{...props}}
           />
         ))}
-      {/* <MarketoBlog/> */}
+      <MarketoBlog/>
     </Layout>
   );
 };

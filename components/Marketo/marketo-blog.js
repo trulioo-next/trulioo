@@ -1,7 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
+import {connect, useSelector } from 'react-redux';
+import { selectGeneralSettings } from '@/stores/app/selectors';
 
 import { SectionBackground } from '../SectionBackground';
 
@@ -11,15 +12,14 @@ import {
   Col
 } from 'reactstrap';
 
-const mapStateToProps = state => {
-  return { component: state.api.marketo };
-};
 
-export const MarketoBlogList = ({ component }) => {
-
+export const MarketoBlog = ({ component }) => {
+  const generalSettings = useSelector(state =>  selectGeneralSettings(state));
+  let marketoOnBlog = generalSettings.acf.marketo_on_blog_page;
+  console.log(marketoOnBlog);
   useEffect(() => {
     if (MktoForms2) {
-      MktoForms2.loadForm('//app-ab31.marketo.com', '392-YOD-077', component.form_id);
+      MktoForms2.loadForm('//app-ab31.marketo.com', '392-YOD-077', marketoOnBlog.form_id);
     }
   });
 
@@ -62,17 +62,7 @@ export const MarketoBlogList = ({ component }) => {
 
   return (
     <Fragment>
-      {component && componentSections(component)}
+      {marketoOnBlog && componentSections(marketoOnBlog)}
     </Fragment>
   );
 };
-
-MarketoBlogList.propTypes = {
-  component: PropTypes.any.isRequired,
-};
-
-MarketoBlogList.defaultProps = {
-  component: null
-};
-
-export const MarketoBlog = connect(mapStateToProps)(MarketoBlogList);
