@@ -1,0 +1,1 @@
+export { FeaturedBlog } from './featuredblog';

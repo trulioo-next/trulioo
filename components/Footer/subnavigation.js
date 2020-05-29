@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectFooterData } from '@/stores/app/selectors';
+import {connect, useDispatch,  useSelector } from 'react-redux';
+import { selectSiteInformation, selectGeneralSettings } from '@/stores/app/selectors';
 
+import AppLogo from '../../static/assets/trulioo-logo.svg';
 
 const mapStateToProps = state => {
   return { information: state.app.globalData };
@@ -12,20 +12,17 @@ const mapStateToProps = state => {
 const SubNavigationList = ({ information }) => {
 
   const dispatch = useDispatch();
-  const [ subFooterList, setSubFooterList ] = useState(undefined);
-  const footerData = useSelector(state =>  selectFooterData(state));
-  
-  // 
-  // console.log('FOOTER DATA ', information )
+  const siteInformation = useSelector(state =>  selectSiteInformation(state));
+  const generalSettings = useSelector(state =>  selectGeneralSettings(state));
 
   return (
     <div className="d-flex justify-content-between Footer__subnav mb-5">
         <a className="navbar-item" href='/'>
-          {/*<img title={ information.title } alt={ information.description } src={ information.logo }/>*/}
+          <AppLogo title={ siteInformation.title } alt={ siteInformation.description } src={ siteInformation.logo } className="logo"/>
         </a>
-      <ul className="socialIcons">
-        { subFooterList ?
-          subFooterList.social.map((social, index) =>
+        <ul className="socialIcons">
+        { generalSettings.acf.social ?
+          generalSettings.acf.social.map((social, index) =>
           <a className="socialIcon pl-4" href={ social.link } key={ index } title={ social.title }>
             <ion-icon name={ `logo-${ social.slug }` }></ion-icon>
           </a>

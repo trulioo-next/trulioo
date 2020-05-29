@@ -7,6 +7,7 @@ export const INITIAL_STATE = {
 	postList:[],
 	years:[],
 	types:[], 
+	featured: [],
 	isLoading: true,
 	error:false,
 	errorSource:false

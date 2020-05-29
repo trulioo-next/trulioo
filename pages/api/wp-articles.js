@@ -12,8 +12,6 @@ export default async (req, res) => {
     const offset = body.payload.offset
     const postId = body.payload.post_id
       
- 
-    //
     const postList = await fetch(ENDPOINT_URL+'/trulioo/posts/?offset='+offset+'&posts_per_page='+postsPerPage, {
        method: 'GET',
        headers: {
@@ -22,7 +20,7 @@ export default async (req, res) => {
        }
      })
 
-    
+ 
     const topics = await fetch(ENDPOINT_URL+'/wp/v2/articles_topics?per_page=100', {
        method: 'GET',
        headers: {
@@ -47,11 +45,31 @@ export default async (req, res) => {
        }
      }) 
 
+    const marketoBlog = await fetch(ENDPOINT_URL+'/acf/v3/options/marketo-on-blog-pages', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }) 
+
+
+    const popularArticles = await fetch(ENDPOINT_URL+'/acf/v3/options/popular-articles-settings', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }) 
+
+
     let data = {
       postList,
       topics,
       types,
-      postDataById
+      postDataById,
+      marketoBlog,
+      popularArticles
     }
   
     res.json(data)
