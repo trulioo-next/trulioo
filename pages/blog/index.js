@@ -81,8 +81,8 @@ const Blog = props => {
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
 
   let featuredPosts = articles.featured;
-  let blogsList = articles.postList.posts;
-
+  let blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
+  : false;
 
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
