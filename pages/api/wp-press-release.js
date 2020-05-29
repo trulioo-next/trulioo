@@ -36,10 +36,22 @@ export default async (req, res) => {
        }
      }) 
 
+     const featured = await fetch(
+      ENDPOINT_URL + '/trulioo/press/featured',
+      {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
     let data = {
       postList,
       years,
-      types
+      types,
+      featured
     }
   
     res.json(data)

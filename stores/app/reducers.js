@@ -11,12 +11,12 @@ import {
   APP_STARTLOADING,
   APP_STOPLOADING,
   GLOBAL_DATA_LOADED,
+  GLOBAL_DATA_SITE_INFORMATION
 } from '../types'
 
 
 export default (state = INITIAL_STATE, action) => {
    
-  // console.log('REDUCER DATA ',  action );
 
   switch (action.type) {
 
@@ -45,6 +45,13 @@ export default (state = INITIAL_STATE, action) => {
         isLoaded: true,
         globalData: action.payload
       }
+
+    
+    case GLOBAL_DATA_SITE_INFORMATION:
+      return { ...state,
+        isLoaded: true,
+        globalDataSiteInformation: action.payload
+      } 
 
     
 

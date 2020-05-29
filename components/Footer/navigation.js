@@ -1,20 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
- 
+import {connect, useDispatch,  useSelector } from 'react-redux';
+import { selectFooterData } from '@/stores/app/selectors';
+
 export const Navigation = () => {
 	const dispatch = useDispatch();
-	const [ footerList, setFooterList ] = useState(undefined);
-
-	useEffect(() => {
-		 // Return state here 
-		 // 
-
-	}, [ dispatch ]);
-
-  const buildMenu = () => {
-		if (footerList) {
-			return footerList.map((item,index) => {
+	const footerData = useSelector(state => selectFooterData(state));
+	
+  	const buildMenu = () => {
+		if (footerData) {
+			return footerData[0].footer.menu.map((item,index) => {
 				if (item['post_type'] === 'nav_menu_item') {
 					const { title, url, sub_nav } = item;
 					return (

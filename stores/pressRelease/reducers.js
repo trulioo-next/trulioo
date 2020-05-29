@@ -19,7 +19,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state,
         postList: action.payload.postList,
         years: action.payload.topics,
-        types: action.payload.types
+        types: action.payload.types,
+        featured: [],
       }
 
     case RESOURCES__ERROR:

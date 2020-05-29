@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
 	Nav,
@@ -15,32 +14,19 @@ import {
 	CardTitle,
 	CardText
 } from 'reactstrap';
-
+import { useSelector } from 'react-redux';
+import { selectHeaderData } from '@/stores/app/selectors';
 
 import { FlipButton } from '../FlipButton';
 
 export const Navigation = () => {
-	const dispatch = useDispatch();
-	const [ menuList, setMenuList ] = useState(undefined);
-
-	useEffect(() => {
-		const loadMenu = (menu) => dispatch(
-			{ type: 'LOAD_MENU', payload: menu }
-		);
-
-		api.Menus.bySlug('main')
-		.then((data) => {
-			loadMenu(data.menu);
-			setMenuList(data.menu);
-		});
-
-  }, [ dispatch ]);
-
-  const buildMenu = (menuList) => {
-    if (menuList) {
+  const headerData = useSelector(state =>  selectHeaderData(state));
+  
+  const buildMenu = (headerData) => {
+    if (headerData) {
 			const navigationMenu = [];
 
-			menuList.map((item, index) => {
+			headerData.menu.map((item, index) => {
 				if (item.title === 'Home') {
 					item.url = '/';
 				}
@@ -112,7 +98,7 @@ export const Navigation = () => {
   };
   return (
 		<Fragment>
-			{buildMenu(menuList)}
+	    {buildMenu(headerData)}
 		</Fragment>
   );
 };
