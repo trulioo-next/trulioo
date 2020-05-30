@@ -23,8 +23,6 @@ const Home = props => {
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
-  
-  // console.log('HELLO PAGE ', pageData )
 
   return (
     <Layout>
