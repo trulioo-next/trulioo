@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ParallaxBackground } from '../Parallax';
+import { useMediaQuery } from 'react-responsive';
 
 export const SectionBackground = ({ background }) => {
-    const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
-    const breakpoint = 768;
+  const mediaMdUp = useMediaQuery({ minWidth: 768 });
 
-    useEffect(() => {
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-  
-      window.addEventListener('resize', handleResize);
-      return () => { window.removeEventListener('resize', handleResize); };
-    });
-  
-    return windowWidth > breakpoint ? (
-       <ParallaxBackground background={ background } />
-    ) :
-    null;
+  return mediaMdUp ? <ParallaxBackground background={background} /> : null;
 };
-
 
 SectionBackground.propTypes = {
-    background: PropTypes.oneOfType([ PropTypes.object, PropTypes.string ])
+  background: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 };
-  

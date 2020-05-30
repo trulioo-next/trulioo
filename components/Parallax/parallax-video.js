@@ -1,23 +1,21 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  // useLayoutEffect,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import classnames from 'classnames';
 import { useInView } from 'react-intersection-observer';
+import { useMediaQuery } from 'react-responsive';
 
 export const ParallaxVideo = ({ className, video }) => {
-  const [isWindow, setIsWindow] = useState(false);
   const [windowInnerWidth, setWindowInnerWidth] = useState(0);
   const [windowInnerHeight, setWindowInnerHeight] = useState(0);
-  const [bgLoaded, setBgLoaded] = useState(false);
 
-  if (process.browser && !bgLoaded) {
-    setIsWindow(true);
-    setWindowInnerWidth(window.innerWidth);
-    setWindowInnerHeight(window.innerHeight);
-    setBgLoaded(true);
-  }
-
-  const breakpoint = 992;
+  const mediaLgUp = useMediaQuery({ minWidth: 992 });
 
   const containerRef = useRef();
   const [inViewRef, inView] = useInView({
@@ -41,15 +39,17 @@ export const ParallaxVideo = ({ className, video }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setWindowInnerWidth(windowInnerWidth);
+      setWindowInnerWidth(window.innerWidth);
+      setWindowInnerHeight(window.innerHeight);
     };
 
-    if (process.browser) {
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   });
 
   useEffect(() => {
@@ -64,6 +64,7 @@ export const ParallaxVideo = ({ className, video }) => {
     };
 
     updateScroll();
+
     window.addEventListener('resize', updateScroll);
     window.addEventListener('scroll', updateScroll, { passive: true });
 
@@ -79,9 +80,9 @@ export const ParallaxVideo = ({ className, video }) => {
     [outputRange.start, outputRange.end],
   );
 
-  const initialY = windowInnerWidth > breakpoint ? outputRange.start : 0,
-    backgroundY = windowInnerWidth > breakpoint ? bgTransformY : 0,
-    bgScale = windowInnerWidth > breakpoint ? 0.833 : 1;
+  const initialY = mediaLgUp ? outputRange.start : 0,
+    backgroundY = mediaLgUp ? bgTransformY : 0,
+    bgScale = mediaLgUp ? 0.833 : 1;
 
   const circles = [
     {

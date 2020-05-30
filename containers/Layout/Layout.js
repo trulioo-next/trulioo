@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
+import classnames from 'classnames';
 
 import { reqPageDataAction } from '../../stores/page/actions';
 import { reqStartupAction } from '../../stores/app/actions';
-import { Header }  from '@/components/Header';
+import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
 import Error from 'next/error';
@@ -16,22 +17,15 @@ import {
   selectFooterData,
 } from '../../stores/app/selectors';
 
-
 const Layout = props => {
-   
-
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
   const isLoading = useSelector(state => selectIsLoading(state));
-   
+
   return (
     <React.Fragment>
-      <div className="Layout">
-       
-       <Header
-          title="Trulioo"
-        />
-
+      <div className={classnames('Layout', props.className)}>
+        <Header title="Trulioo" />
 
         <main className="SiteMain">
           {isLoading && <Loader />}
@@ -39,8 +33,7 @@ const Layout = props => {
         </main>
 
         <Footer />
-
-        </div>
+      </div>
     </React.Fragment>
   );
 };
