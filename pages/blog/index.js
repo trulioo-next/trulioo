@@ -16,20 +16,13 @@ import {
   MarketoBlog,
 } from '../../components/Marketo';
 
+import { selectGeneralSettings } from '@/stores/app/selectors';
+
+
 import {
   GroupPost
 } from '../../components/Post';
-import { SearchBlogs } from './search';
-import { BlogsPagination } from './pagination';
-import { calcPageOffset } from './utils';
 
-// import {
-//   getInitialData,
-//   getBlogs,
-//   searchBlogsFromUrl,
-//   searchBlogs,
-//   clearBlogs
-// } from './thunks';
 
 import {
   Container,
@@ -41,16 +34,6 @@ import {
 const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
-  const articles = useSelector(articlesDataSelector);
-  //const { result, max_page, isSearching, term, types, topics, hasError } = useSelector(state => state.api.blogs.search);
-  const blogsList = articles.postList;
-  const blogsPage = 1;
-  // const [ popularArticles, setPopularArticles ] = useState(null);
-  // const [ getComponents, setComponents ] = useState(null);
-  // const [ getHeroBlog, setHeroBlog ] = useState(null);
-  // const [ getFeaturedBlogs, setFeaturedBlogs ] = useState(null);
-
-  const [ loader, setLoader ] = useState(true);
 
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
@@ -59,7 +42,7 @@ const Blog = props => {
   useEffect(() => {
  
       // Dispatch Articles
-      dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page:100 }));
+      dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
       dispatch(reqPageDataAction({ payload:'blog' }));
 
     if (window.location.hash) {
@@ -93,13 +76,20 @@ const Blog = props => {
     scrollToAnchor(anchor);
   }
 
-   const pageData = useSelector(state => pageDataSelector(state));
-    let data =
-      pageData && pageData.acf_data && pageData.acf_data.content_block_collection
-        ? pageData.acf_data
-        : false;
+  const pageData = useSelector(state => pageDataSelector(state));
+  const articles = useSelector(articlesDataSelector);
+  const generalSettings = useSelector(state =>  selectGeneralSettings(state));
 
-  ///
+  let featuredPosts = articles.featured;
+  let blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
+  : false;
+
+  let data =
+    pageData && pageData.acf_data && pageData.acf_data.content_block_collection
+      ? pageData.acf_data
+      : false;
+ 
+  const postsToRender = isSearching ? result : blogsList;
 
   // useEffect(() => {
   //   const loadMarketoBlog = (data) => dispatch(
@@ -127,15 +117,15 @@ const Blog = props => {
   //   onPagination();
   // }, [ blogsPage ]);
 
-  if (isNil(blogsList)) {
-    return (
-      <div className="text-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
-  }
+  // if (isNil(blogsList)) {
+  //   return (
+  //     <div className="text-center">
+  //       <div className="spinner-border" role="status">
+  //         <span className="sr-only">Loading...</span>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   // const onPagination = () => {
   //   // offsetBy should match the per_page number passed in 'services/api.js'
@@ -148,40 +138,44 @@ const Blog = props => {
   //   }
   // };
 
-  const postsToRender = isSearching ? result : blogsList.posts;
 
-  let pagination;
-  if (isSearching) {
-    if (max_page && max_page['x-wp-totalpages'] > 1 ) {
-      pagination = <BlogsPagination maxPage={ max_page } windowSize={ 5 } />;
-    }
-  } else {
-    pagination = <BlogsPagination windowSize={ 5 } />;
-  }
+
+  // let pagination;
+  // if (isSearching) {
+  //   if (max_page && max_page['x-wp-totalpages'] > 1 ) {
+  //     pagination = <BlogsPagination maxPage={ max_page } windowSize={ 5 } />;
+  //   }
+  // } else {
+  //   pagination = <BlogsPagination windowSize={ 5 } />;
+  // }
+
+
+  let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
+  let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
 
   return (
     <Layout>
-      {/* { getHeroBlog && <HalfHero component={ getHeroBlog }/> }
-      <SearchBlogs />
-      <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } /> */}
+      { acfData && <HalfHero component={ acfData.hero }/> }
+      {/* <SearchBlogs /> */}
+      {/* <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } /> */}
       <section className="blog-posts-section">
         <Container fluid className="py-4 p-md-5 container-md">
           <Row className="py-5 justify-content-between">
             <Col xs="12" md="8" lg="7" className="px-0 mb-5 px-md-4 mb-md-0">
               {
-                postsToRender.map((post, index) => (
+                postsToRender && postsToRender.map((post, index) => (
                   <GroupPost isSearching={ isSearching } key={ index } post={ post } />
                 ))
               }
+              {/* { hasError || postsToRender.length === 0 && 'There are no more posts!'} */}
+              {/* {pagination} */}
             </Col>
             <Col xs="12" md="4" className="px-5 mt-5 px-md-4 mt-md-0">
-              {/* <PopularArticles getPopularArticles={ popularArticles }/> */}
+              {popularArticles && <PopularArticles getPopularArticles={ popularArticles.popular_articles }/>}
             </Col>
           </Row>
         </Container>
       </section>
-
-      {/* <MarketoBlog/> */}
       {data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
@@ -192,6 +186,7 @@ const Blog = props => {
             props={{...props}}
           />
         ))}
+      <MarketoBlog/>
     </Layout>
   );
 };
