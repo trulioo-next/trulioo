@@ -7,43 +7,20 @@ import {
   useSpring,
 } from 'framer-motion';
 
+import { useMediaQuery } from 'react-responsive';
+
 export const ParallaxContent = ({
   children,
   topOffset = 83,
   bottomOffset = 83,
   range = 60,
 }) => {
-  const [isWindow, setIsWindow] = useState(false);
-  const [windowInnerWidth, setWindowInnerWidth] = useState(0);
-  const [windowInnerHeight, setWindowInnerHeight] = useState(0);
-  const [bgLoaded, setBgLoaded] = useState(false);
-
-  if (process.browser && !bgLoaded) {
-    setIsWindow(true);
-    setWindowInnerWidth(window.innerWidth);
-    setWindowInnerHeight(window.innerHeight);
-    setBgLoaded(true);
-  }
-
   const { scrollY } = useViewportScroll();
   const ref = useRef();
   const [minHeight, setMinHeight] = useState('auto');
   const [triggerRange, setTriggerRange] = useState({ start: 0, end: 0 });
 
-  const breakpoint = 992;
-
-  useEffect(() => {
-    if (process.browser) {
-      const handleResize = () => {
-        setWindowInnerWidth(window.innerWidth);
-      };
-
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  });
+  const mediaLgUp = useMediaQuery({ minWidth: 992 });
 
   useEffect(() => {
     if (!ref.current) return;
@@ -59,12 +36,10 @@ export const ParallaxContent = ({
     };
 
     onResize();
-    if (process.browser) {
-      window.addEventListener('resize', onResize);
-      return () => {
-        window.removeEventListener('resize', onResize);
-      };
-    }
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
   }, [
     ref,
     range,
@@ -83,7 +58,7 @@ export const ParallaxContent = ({
     },
   );
 
-  return windowInnerWidth > breakpoint ? (
+  return mediaLgUp ? (
     <div className="parallax-content" style={{ minHeight }}>
       <motion.div
         ref={ref}
