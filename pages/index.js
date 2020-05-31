@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
 import Layout from '../containers/Layout/Layout';
- 
+import CookieConsent from 'react-cookie-consent';
+
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 
@@ -52,7 +53,9 @@ const Home = props => {
       }}
 
     />
-       
+      <CookieConsent>
+		  	This website uses cookies to enhance the user experience.
+	    </CookieConsent>
   
       { data &&
         data.content_block_collection.map((section, sectionKey) => (
