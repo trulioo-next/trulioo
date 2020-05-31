@@ -21,6 +21,12 @@ const SectionBackground = ({ background }) => {
 };
 
 export const BookDemo = ({ component }) => {
+  const [showBg, setShowBg] = useState(false);
+
+  useEffect(() => {
+    setShowBg(true);
+  });
+
   return (
     <section
       className="section circle-container d-flex align-items-center book-demo"
@@ -35,7 +41,7 @@ export const BookDemo = ({ component }) => {
         if (customCursor) customCursor.classList.remove('white');
       }}
     >
-      {component.background_image && (
+      {component.background_image && showBg && (
         <SectionBackground background={component.background_image} />
       )}
       <Container className="py-5">

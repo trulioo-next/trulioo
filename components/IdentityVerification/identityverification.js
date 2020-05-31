@@ -18,13 +18,19 @@ const SectionBackground = ({ background }) => {
 };
 
 export const IdentityVerification = ({ component }) => {
+  const [showBg, setShowBg] = useState(false);
+
+  useEffect(() => {
+    setShowBg(true);
+  });
+
   return (
     <section
       className={classnames(
         'section hero-body hero-body-expanded circle-container align-items-center',
       )}
     >
-      {component.background_image && (
+      {component.background_image && showBg && (
         <SectionBackground background={component.background_image} />
       )}
       <Container className="py-md-5">

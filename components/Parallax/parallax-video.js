@@ -23,7 +23,7 @@ export const ParallaxVideo = ({ className, video }) => {
   });
   const scrollProgress = useMotionValue(-1);
   const outputRange = {
-    start: windowInnerHeight + windowInnerHeight * 0.1,
+    start: -windowInnerHeight + windowInnerHeight * 0.1,
     end: windowInnerHeight - windowInnerHeight * 0.1,
   };
 
