@@ -56,9 +56,9 @@ const Page = props => {
 
   const pageData = props.pageData ? props.pageData : false;
   
-  if(!pageData) {
-     routerPush('/404');
-  }
+  // if(!pageData) {
+  //    routerPush('/404');
+  // }
 
   // console.log('QUERY ', pageData )
   

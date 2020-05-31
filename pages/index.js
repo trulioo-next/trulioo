@@ -4,15 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
 import Layout from '../containers/Layout/Layout';
-import CookieConsent from 'react-cookie-consent';
 
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 
 import Error from 'next/error';
 
-import { reqPageDataAction } from '../stores/page/actions';
+import { reqStartupAction } from '../stores/app/actions';
 import { pageDataSelector } from '../stores/page/selectors';
+
+import { selectYoastSettings } from '../stores/app/selectors';
+
 
 const Home = props => {
   if (props.errorCode) {
@@ -24,6 +26,8 @@ const Home = props => {
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
+
+  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
 
   return (
     <Layout>
@@ -51,12 +55,9 @@ const Home = props => {
         site: '@trullio',
         cardType: 'summary_large_image',
       }}
+      additionalMetaTags={yoastDataSeo[0].yoast_meta}
 
     />
-      <CookieConsent>
-		  	This website uses cookies to enhance the user experience.
-	    </CookieConsent>
-  
       { data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker

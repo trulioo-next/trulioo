@@ -13,8 +13,7 @@ export default async (req, res) => {
     }
 
     if(id === 'favicon.ico' ) {
-      res.json({error:"Page data couldn't loaded"});
-      return;
+      let id = 'home';
     }
 
     // console.log('BODY PASSED  ',  req.body )

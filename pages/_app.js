@@ -7,6 +7,7 @@ import appActions from '../stores/app/actions'
 import pageActions from '../stores/page/actions'
 import withError from '../components-stateful/withErrorWrapper'
 import * as gtag from '../utils/gtag'
+import CookieConsent from 'react-cookie-consent';
 
 
 import '../styles/index.scss';
@@ -15,7 +16,6 @@ const withReduxDebugMode = false // process.env.NODE_ENV === 'development' || fa
 class MyApp extends App {
 
     static async getInitialProps({ ctx, Component }) {
- 
     	if(ctx.isServer) {
           await ctx.store.execSagaTask(appActions.reqStartupAction({ isAuthenticated: false,  query: ctx.query }));
           await ctx.store.execSagaTask(pageActions.reqPageDataAction({ query: ctx.query }));
@@ -44,6 +44,9 @@ class MyApp extends App {
 
         return (         
 			<Provider store={store}>
+                <CookieConsent>
+                    This website uses cookies to enhance the user experience.
+                </CookieConsent>
 				<Component {...pageProps} />     
 			</Provider>
                 

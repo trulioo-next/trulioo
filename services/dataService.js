@@ -20,8 +20,8 @@ export default function DataService(state) {
 		return data;
 	}
 
-	async function getSiteInformation() {
-		let data = await API.post('/api/wp-site-information', {});
+	async function getSiteInformation(payload) {
+		let data = await API.post('/api/wp-site-information', payload);
 	   	return data;
 	}
 	
