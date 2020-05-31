@@ -2,12 +2,14 @@
 * Apppliction reducer
 * We use immutableJS to ensure immutability on the application state level.
 */
- 
+
 import { INITIAL_STATE } from './initialState'
 
 import {
-  ARTICLES__LOADED,
-  ARTICLES__ERROR
+  ARTICLES_LOADED,
+  ARTICLES_ERROR,
+  ARTICLES_FILTER_LOADED,
+  ARTICLES_SEARCH_LOADED
 } from '../types'
 
 
@@ -15,9 +17,10 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-    case ARTICLES__LOADED:
+    case ARTICLES_LOADED:
       return { ...state,
         postList: action.payload.postList,
+        featured:action.payload.featured,
         topics: action.payload.topics,
         types: action.payload.types,
         postDataById: action.payload.postDataById,
@@ -25,7 +28,17 @@ export default (state = INITIAL_STATE, action) => {
         popularArticles: action.payload.popularArticles,
       }
 
-    case ARTICLES__ERROR:
+    case ARTICLES_FILTER_LOADED:
+        return { ...state,
+          postList: action.payload.postList,
+        }
+
+    case ARTICLES_SEARCH_LOADED:
+        return { ...state,
+          postList: action.payload.postList,
+        }
+
+    case ARTICLES_ERROR:
       return { ...state,
         error: action.payload,
         errorSource: RESOURCES_LOAD_ERROR

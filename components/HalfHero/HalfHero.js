@@ -8,21 +8,29 @@ import {
 
  
 export const HalfHero = ({ component }) => {
-  const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
+
+  const [bgLoaded, setBgLoaded] = useState(false);
+  const [ windowWidth, setWindowWidth ] = useState(null);
+
+  if (process.browser && !bgLoaded) {
+    setWindowWidth(window.innerWidth);
+    setBgLoaded(true);
+  }
+
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => { window.removeEventListener('resize', handleResize); };
+    if (process.browser) {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => { window.removeEventListener('resize', handleResize); };
+    }
   });
 
-
-
   const backgroundImage = windowWidth < 768 && component.mobile_background_image ? component.mobile_background_image : component.background_image;
-
+ 
   return (
     <Fragment>
       {component ?

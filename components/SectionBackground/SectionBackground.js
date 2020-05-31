@@ -3,8 +3,16 @@ import PropTypes from 'prop-types';
 import { ParallaxBackground } from '../Parallax';
 
 export const SectionBackground = ({ background }) => {
-    const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
+  
     const breakpoint = 768;
+
+    const [bgLoaded, setBgLoaded] = useState(false);
+    const [ windowWidth, setWindowWidth ] = useState(null);
+  
+    if (process.browser && !bgLoaded) {
+      setWindowWidth(window.innerWidth);
+      setBgLoaded(true);
+    }
 
     useEffect(() => {
       const handleResize = () => {

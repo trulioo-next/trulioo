@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
 import Layout from '../containers/Layout/Layout';
- 
+
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 
@@ -17,20 +17,16 @@ const Home = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
-  
+
   const pageData = props.pageData ? props.pageData : false;
   let data = pageData && pageData.acf_data && pageData.acf_data.content_block_collection ? pageData.acf_data : false;
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
   let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
-    
 
-  const dispatch = useDispatch();
-  dispatch(reqPageBannersAction({ postType:'', tagName:'' }));
-  const bannerData = useSelector(pageDataSelector)
-
-
-  console.log('PAGE DATA SELECTOR ', bannerData )
+ // const dispatch = useDispatch();
+ // dispatch(reqPageBannersAction({ postType:'', tagName:'' }));
+ // const bannerData = useSelector(pageDataSelector)
 
   return (
     <Layout>
@@ -48,7 +44,7 @@ const Home = props => {
             height: 600,
             alt: 'Trulioo',
           },
-           
+
           { url: seoImage },
         ],
         site_name: 'https://trulioo.com',
@@ -60,8 +56,8 @@ const Home = props => {
       }}
 
     />
-       
-  
+
+
       { data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
@@ -76,7 +72,7 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ query, res, store }) => {
-  // TODO: GET STATE DATA HERE 
+  // TODO: GET STATE DATA HERE
   //
   const initalState = store.getState();
   const pageData = initalState.page.data;
@@ -84,4 +80,3 @@ Home.getInitialProps = async ({ query, res, store }) => {
 };
 
 export default Home;
-

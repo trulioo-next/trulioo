@@ -18,16 +18,16 @@ import {
 
 
 const Layout = props => {
-   
+
 
   const close = false;
   let headerData = useSelector(state => selectHeaderData(state));
   const isLoading = useSelector(state => selectIsLoading(state));
-   
+
   return (
     <React.Fragment>
       <div className="Layout">
-       
+
        <Header
           title="Trulioo"
         />

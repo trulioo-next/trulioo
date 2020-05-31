@@ -1,7 +1,7 @@
 import API from '../utils/api'
- 
+
 "use strict";
- 
+
 
 export default function DataService(state) {
 
@@ -12,11 +12,6 @@ export default function DataService(state) {
 
 	async function getPageData(payload) {
 	 	let data = await API.post('/api/wp-page-data', payload);
-		return data;
-	}
-
-	async function getAlertsData(payload) {
-	 	let data = await API.post('/api/wp-alerts-data', payload);
 		return data;
 	}
 
@@ -36,11 +31,9 @@ export default function DataService(state) {
 
    return {
     getGlobalData,
-	getPageData,
-	getAlertsData,
-	getLogo,
-	getBannerData,
-	getSiteInformation
+  	getPageData,
+  	getBannerData,
+  	getSiteInformation
   }
 
 }

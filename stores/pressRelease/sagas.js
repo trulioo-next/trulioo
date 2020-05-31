@@ -6,29 +6,29 @@ import {
   APP_STARTLOADING,
   APP_STARTUP_ERROR,
   PRESS_LOAD_REQUEST,
-  PRESS__LOADED,
-  PRESS__ERROR, 
+  PRESS_LOADED,
+  PRESS_ERROR,
   APP_STOPLOADING
 } from '../types'
 
 
 function* startup(payload) {
 
-   
+
   try {
-    
+
     // yield call(getGeolocation, payload.ip)
     const state = yield select((state) => state)
     const resourcesService = ResourcesService(state)
     const response = yield call(resourcesService.getPressReleaseData, payload)
- 
+
     // console.log('RESONSE ', response)
-    yield put({ type: PRESS__LOADED, payload: response  })
+    yield put({ type: PRESS_LOADED, payload: response  })
 
   } catch(err) {
 
     const errors = err.payload || err
-    yield put({ type: PRESS__ERROR, payload: errors})
+    yield put({ type: PRESS_ERROR, payload: errors})
   }
 }
 
@@ -50,7 +50,7 @@ function* startupFlow() {
     }
 
     yield put({ type: APP_STOPLOADING })
- 
+
     yield action
   }
 }

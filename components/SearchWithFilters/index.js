@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import {  reqFilterArticlesAction, reqSearchArticlesAction } from '@/stores/articles/actions';
+import { articlesTypesSelector, articlesTopicsSelector } from '@/stores/articles/selectors';
+
 import {
   Container,
   Row,
@@ -9,81 +13,60 @@ import {
   DropdownToggle,
   DropdownMenu,
 } from 'reactstrap';
+
 import useScrollDirection from '../../utils/useScrollDirection';
 import { FlipButton } from '../../components/FlipButton';
-
 import FilterIcon from '../../static/assets/filters.svg';
 import ArrowIndicator from '../../static/assets/arrow-down.svg';
 
+export const Search =  (props) => {
 
-export const Search = ({
-  getTopics,
-  getTypes,
-  topics,
-  types,
-  selectedTopics,
-  selectedTypes,
-  search,
-  clear,
-  page,
-  title
-}) => {
+  const dispatch = useDispatch();
   const searchTerm = useRef(undefined);
   const [ searchWithAllTopics, setSearchWithAllTopics ] = useState(false);
   const [ searchWithAllTypes, setSearchWithAllTypes ] = useState(false);
+  const topics_new = useSelector( (state) => articlesTopicsSelector(state) )
+  const types_new = useSelector( (state) => articlesTypesSelector(state) )
+  const [ removeFeatured, setRemoveFeatured ] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState('')
+  const [selectedOption, setSelectedOption] = useState('')
 
-  useEffect(() => {
-    if (topics.length <= 0) getTopics();
-    if (types.length <= 0) getTypes();
-  }, [ getTopics, getTypes, topics.length, types.length ]);
-
-  useEffect(() => {
-    setSearchWithAllTopics(selectedTopics.length <= 0);
-    setSearchWithAllTypes(selectedTypes.length <= 0);
-  }, [ selectedTopics, selectedTypes ]);
 
   const doClear = () => {
     searchTerm.current.value = '';
-    clear();
+    setSearchWithAllTopics(true)
+    setSearchWithAllTypes(true)
+    props.callBack(false);
   };
 
-  const onSearchTermChange = (event) => {
-    const changedSearchTerm = event.target.value;
-    search(selectedTypes, selectedTopics, changedSearchTerm, page);
-  };
-
-  const toggleOption = (selected, id) => {
-    let result = [ ...selected ];
-    if (result.includes(id)) {
-      result = result.filter(filterOptionId => filterOptionId !== id);
-    } else {
-      result.push(id);
-    }
-    return result;
-  };
-
+  // Render a select object with event
+  //
   const renderSelect = (list, selected, label) => {
     const isAllOptionsChecked = label === 'Types' ? searchWithAllTypes :  searchWithAllTopics;
     const allOptionOnChange = event => {
+      console.log('isAllOptionsChecked', isAllOptionsChecked )
       if (!isAllOptionsChecked) {
-        search(
-          label === 'Types' ? null : selectedTypes,
-          label === 'Topics' ? null : selectedTopics,
-          searchTerm.current.value,
-          page
-        );
+        setSearchWithAllTypes(true)
       }
     };
+
+
     const optionOnChange = event => {
-      const newSelected = toggleOption(selected, event.target.value);
-      const newSelectedTypes = label === 'Types' ? newSelected : selectedTypes;
-      const newSelectedTopics = label === 'Topics' ? newSelected : selectedTopics;
-      search(
-        newSelectedTypes,
-        newSelectedTopics,
-        searchTerm.current.value,
-        page
-      );
+
+      console.log('DESLECTED ',  isAllOptionsChecked )
+      props.callBack(true);
+
+      if(label === 'Types') {
+        setSelectedTopic(event.target.value)
+        setSearchWithAllTypes(false)
+        dispatch(reqFilterArticlesAction({ topic_id: selectedOption, type_id: event.target.value , offset:0, posts_per_page: 5 }));
+
+      } else {
+        setSelectedOption(event.target.value)
+        setSearchWithAllTypes(false)
+        dispatch(reqFilterArticlesAction({ topic_id: event.target.value, type_id: selectedTopic, offset:0, posts_per_page: 5 }));
+      }
+
     };
 
     return (
@@ -91,7 +74,7 @@ export const Search = ({
         <DropdownToggle tag="button" className="search-filter-dropdown-toggler">
           <span className="d-inline-flex align-items-center">
             <FilterIcon className="search-filter-dropdown-icon filter-icon" />
-            Filter by {label}
+            Filter by { label }
           </span>
           <ArrowIndicator className="search-filter-dropdown-icon arrow-icon"/>
         </DropdownToggle>
@@ -116,7 +99,7 @@ export const Search = ({
                 <label htmlFor={ '' + option.id } className="m-0">
                   <input
                     id={ '' + option.id }
-                    checked={ selected.includes('' + option.id) }
+
                     className="mr-2"
                     type="checkbox"
                     name={ label.toLowerCase() }
@@ -135,6 +118,8 @@ export const Search = ({
 
   const scrollDirection = useScrollDirection();
   const [ navTop, setNavTop ] = useState(0);
+  const [ typing, setTyping ] = useState(false);
+  const [ typingTimeout, setTypingTimeout ] = useState(0);
   const ref = useRef();
 
   useEffect(() => {
@@ -165,6 +150,25 @@ export const Search = ({
     }
   }, [ ref, scrollDirection, navTop ]);
 
+  const searchPosts = event => {
+
+    setTyping(true)
+    if (typingTimeout > 0) {
+       clearTimeout(typingTimeout);
+    }
+    const TIMER = setTimeout(function () {
+            setTyping(false)
+            props.callBack(true);
+            // TRIGGER SEARCH HERE
+            dispatch(reqSearchArticlesAction({ post_type:'articles', search:searchTerm.current.value, topic_id: '', type_id: '', offset:0, posts_per_page: 5 }));
+    }, 1000)
+
+    setTypingTimeout(TIMER)
+
+    //  reqSearchArticlesAction
+    // dispatch(reqSearchArticlesAction({ topic_id: selectedOption, type_id: event.target.value , offset:0, posts_per_page: 5 }));
+  }
+
   return (
     <div ref={ ref } className="search-filter-bar bg-primary text-white sticky-top"
       onMouseEnter={ () => {
@@ -183,7 +187,7 @@ export const Search = ({
       <Container className="py-4 p-md-4 py-lmd-0">
       <Row className="align-items-center justify-content-between py-md-2 py-lmd-0">
         <Col className="col w-100 col-lmd-4 col-xl-5 py-2 pl-5 pl-md-4 py-md-0">
-          <input className="form-control" ref={ searchTerm } placeholder={ `Search ${ title }` }  onChange={ onSearchTermChange } />
+          <input className="form-control" ref={ searchTerm } placeholder={ `Search` }  onChange={ (e) => searchPosts(e) } />
         </Col>
         <Col xs="auto" className="d-lmd-none pl-0 pr-5">
           <button id="filter-toggler" className="search-filter-collapse-toggler">
@@ -193,8 +197,8 @@ export const Search = ({
         <Col xs="12" className="col-lmd-auto filter-column px-0 px-md-4">
           <UncontrolledCollapse toggler="filter-toggler" className="d-lmd-block">
             <div className="d-md-flex align-items-center align-items-lmd-stretch justify-content-center pt-4 pt-lmd-0">
-              {renderSelect(topics, selectedTopics, 'Topics')}
-              {renderSelect(types, selectedTypes, 'Types')}
+              {topics_new && renderSelect(topics_new, '', 'Topics')}
+              {types_new && renderSelect(types_new, '', 'Types')}
               <FlipButton
                 className="d-block align-self-center clear-filter-button ml-md-4"
                 size="sm"
@@ -208,17 +212,4 @@ export const Search = ({
       </Container>
     </div>
   );
-};
-
-Search.propTypes = {
-  search: PropTypes.func.isRequired,
-  clear: PropTypes.func.isRequired,
-  getTopics: PropTypes.func.isRequired,
-  getTypes: PropTypes.func.isRequired,
-  topics: PropTypes.array.isRequired,
-  types: PropTypes.array.isRequired,
-  selectedTopics: PropTypes.array.isRequired,
-  selectedTypes: PropTypes.array.isRequired,
-  page: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
 };

@@ -1,7 +1,7 @@
-import { Search } from '../../components/SearchWithFilters';
-// import api from '../../../services/api';
+import { Search } from '../../parts/SearchWithFilters';
+import api from '../../../services/api';
 import { connect } from 'react-redux';
-import { parseUrl, urlHasParams, pushUrl } from '../../utils/parseURL';
+import { parseUrl, urlHasParams, pushUrl } from '../../../utilities/parseURL';
 
 const mapStateToProps = state => {
   return {

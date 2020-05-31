@@ -1,7 +1,7 @@
 import API from '../utils/api'
- 
+
 "use strict";
- 
+
 
 export default function ResourcesService(state) {
 
@@ -9,7 +9,7 @@ export default function ResourcesService(state) {
 		let data = await API.post('/api/wp-resources', {payload:page});
 		return data;
 	}
-	
+
 	async function getPressReleaseData(page) {
 		let data = await API.post('/api/wp-press-release', {payload:page});
 		return data;
@@ -20,10 +20,22 @@ export default function ResourcesService(state) {
 		return data;
 	}
 
+  async function filterArticleData(page) {
+		let data = await API.post('/api/wp-filter', {payload:page});
+		return data;
+	}
+
+  async function searchTypeData(page) {
+    let data = await API.post('/api/wp-search', {payload:page});
+    return data;
+  }
+
    return {
    	getResourceData,
     getPressReleaseData,
-    getArticleData
+    getArticleData,
+    filterArticleData,
+    searchTypeData
   }
 
 }

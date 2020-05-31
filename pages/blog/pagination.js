@@ -1,10 +1,10 @@
-import { Pagination } from '../../components/Pagination';
+import { Pagination } from '@/components/Pagination';
 import { connect } from 'react-redux';
-import { pushUrl } from '../../utils/parseURL';
+// import { pushUrl } from '../../../utilities/parseURL';
 
 const mapStateToProps = state => {
   return {
-    activePage: state.api.blogs.page
+    activePage: 7
   };
 };
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'LOAD_BLOGS_PAGINATION', payload: activePage
       });
-      pushUrl({ page: activePage });
+      // pushUrl({ page: activePage });
     }
   };
 };

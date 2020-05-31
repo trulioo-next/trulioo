@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isNil } from 'lodash';
-import SectionMaker from '../../components/SectionMaker';
-import Layout from '../../containers/Layout';
+import SectionMaker from '@/components/SectionMaker';
+import Layout from '@/containers/Layout';
 
-import { pageDataSelector } from '../../stores/page/selectors';
-import { reqPageDataAction } from '../../stores/page/actions';
-import { reqArticlesAction } from '../../stores/articles/actions';
-import { articlesDataSelector  } from '../../stores/articles/selectors';
+import { pageDataSelector } from '@/stores/page/selectors';
+import { reqPageDataAction } from '@/stores/page/actions';
+import { reqFilterArticlesAction } from '@/stores/articles/actions';
 
-import { HalfHero }  from '../../components/HalfHero';
-import { PopularArticles } from '../../components/PopularArticles';
-import { FeaturedBlog } from '../../components/FeaturedBlog';
-import { BlogsPagination } from './pagination';
+import { articlesDataSelector, articlesTypesSelector  } from '@/stores/articles/selectors';
+
+import { HalfHero }  from '@/components/HalfHero';
+import { PopularArticles } from '@/components/PopularArticles';
+import { FeaturedBlog } from '@/components/FeaturedBlog';
+import { BlogsPagination } from '../../pagination';
 import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
 
 import {
   MarketoBlog,
-} from '../../components/Marketo';
+} from '@/components/Marketo';
 
 import { selectGeneralSettings } from '@/stores/app/selectors';
 
+
 import {
   GroupPost
-} from '../../components/Post';
+} from '@/components/Post';
 
 
 import {
@@ -37,14 +39,26 @@ const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
 
+  console.log('PROPS ', props )
+
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
 
-  useEffect(() => {
+  const types = useSelector(articlesTypesSelector);
+  let typeId = '';
+  if(types) {
+      for(var i = 0; i < types.length; i++ ) {
 
+        if(props.query.type === types[i].slug) {
+            typeId = types[i].id;
+        }
+      }
+  }
+  console.log('SELECTED ID ', typeId )
+  useEffect(() => {
       // Dispatch Articles
-      dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
+      dispatch(reqFilterArticlesAction({ topic_id: '', type_id: typeId , offset:0, posts_per_page: 5 }));
       dispatch(reqPageDataAction({ payload:'blog' }));
 
     if (window.location.hash) {
@@ -81,10 +95,11 @@ const Blog = props => {
   const pageData = useSelector(state => pageDataSelector(state));
   const articles = useSelector(articlesDataSelector);
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
-  const [ removeFeatured, setRemoveFeatured ] = useState(false);
-  const featuredPosts = articles.featured;
-  const blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
+
+  let featuredPosts = articles.featured;
+  let blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
   : false;
+
 
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
@@ -96,18 +111,11 @@ const Blog = props => {
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
   let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
 
-  function callBack(value) {
-    console.log('SET REMOVE FEATURED ', value )
-    setRemoveFeatured(value)
-  }
-
   return (
     <Layout>
       { acfData && <HalfHero component={ acfData.hero }/> }
-       <SearchWithFilters callBack={ () => callBack() } />
-       { !removeFeatured &&
-         <FeaturedBlog isSearching={ false } data={ featuredPosts } />
-        }
+       <SearchWithFilters />
+      {/* <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } /> */}
       <section className="blog-posts-section">
         <Container fluid className="py-4 p-md-5 container-md">
           <Row className="py-5 justify-content-between">
