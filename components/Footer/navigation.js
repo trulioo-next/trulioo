@@ -1,59 +1,61 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import classnames from 'classnames';
-import {connect, useDispatch,  useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { selectFooterData } from '@/stores/app/selectors';
+import Link from 'next/link';
 
 export const Navigation = () => {
-	const dispatch = useDispatch();
-	const footerData = useSelector(state => selectFooterData(state));
-	
-  	const buildMenu = () => {
-		if (footerData) {
-			return footerData[0].footer.menu.map((item,index) => {
-				if (item['post_type'] === 'nav_menu_item') {
-					const { title, url, sub_nav } = item;
-					return (
-						<div className="mb-5 mb-md-0 col-6 col-md-2 d-flex flex-column px-3" key={ index }>
-							<h3 className={ classnames('mb-5', item['attr_title'] ) }>
-								{ item['attr_title'] === 'newsletter'
-									? (
-										<div className="d-flex align-items-center">
-											<div className="newsletter-background">
-												<ion-icon name="newspaper-outline"></ion-icon>
-											</div>
-											<a href={ url } title={ title }>
-												{ title }
-											</a>
-										</div>
-									)
-								: title
-								}
-							</h3>
-							{ sub_nav && sub_nav.map((subItem,index) => (
-								<Fragment>
-									{ (subItem.target === "") && 
-										<a className="mb-1" href={ subItem.url } key={ index } title={ subItem.title }>
-											{ subItem.title }
-										</a>
-									}
-									{ (subItem.target === "_blank") && 
-										<a className="mb-1" target="_blank" href={ subItem.url } key={ index } title={ subItem.title }>
-											{ subItem.title }
-										</a>
-									}
-								</Fragment>
-								))
-							}
-					 </div>
-				 );
-			 };
-		 });
-		};
-	};
+  const dispatch = useDispatch();
+  const footerData = useSelector(state => selectFooterData(state));
 
-  return (
-		<div className="row footer__main pb-md-5">
-    	{buildMenu()}
-		</div>
-  );
+  const buildMenu = () => {
+    if (footerData) {
+      return footerData[0].footer.menu.map((item, index) => {
+        if (item['post_type'] === 'nav_menu_item') {
+          const { title, url, sub_nav } = item;
+          return (
+            <div
+              className="mb-5 mb-md-0 col-6 col-md-2 d-flex flex-column px-3"
+              key={index}
+            >
+              <h3 className={classnames('mb-5', item['attr_title'])}>
+                {item['attr_title'] === 'newsletter' ? (
+                  <div className="d-flex align-items-center">
+                    <div className="newsletter-background">
+                      <ion-icon name="newspaper-outline"></ion-icon>
+                    </div>
+                    <a href={url} title={title}>
+                      {title}
+                    </a>
+                  </div>
+                ) : (
+                  title
+                )}
+              </h3>
+              {sub_nav &&
+                sub_nav.map((subItem, index) => (
+                  <Fragment key={index}>
+                    {subItem.target ? (
+                      <a
+                        className="mb-1"
+                        target={subItem.target}
+                        href={subItem.url}
+                      >
+                        {subItem.title}
+                      </a>
+                    ) : (
+                      <Link href={subItem.url}>
+                        <a className="mb-1">{subItem.title}</a>
+                      </Link>
+                    )}
+                  </Fragment>
+                ))}
+            </div>
+          );
+        }
+      });
+    }
+  };
+
+  return <div className="row footer__main pb-md-5">{buildMenu()}</div>;
 };
