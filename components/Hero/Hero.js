@@ -9,7 +9,6 @@ import { FlipButton } from '../FlipButton';
 
 import { convertFullURL } from '../utilities/convertURL';
 
-// import './_hero.scss';
 
 export const Hero = ({ component }) => {
   const heroImage =

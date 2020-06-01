@@ -26,4 +26,5 @@ yarn-error.log*
 
 
 /data
-data/*
+data/*node_modules/
+.next/
