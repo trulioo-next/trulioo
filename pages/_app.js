@@ -10,6 +10,7 @@ import withError from '../components-stateful/withErrorWrapper';
 import * as gtag from '../utils/gtag';
 import { isBrowser } from 'react-device-detect';
 import { CustomCursor } from '@/components/CustomCursor';
+import CookieConsent from 'react-cookie-consent';
 
 import '../styles/index.scss';
 
@@ -68,10 +69,15 @@ class MyApp extends App {
     const { Component, pageProps, store } = this.props;
 
     return (
-      <Provider store={store}>
-        <Component {...pageProps} />
-        {this.state.cursor && <CustomCursor />}
-      </Provider>
+        <Provider store={store}>
+            <CookieConsent 
+            containerClasses={'cookie-consent'}
+            >
+                This website uses cookies to enhance the user experience.
+            </CookieConsent>
+            <Component {...pageProps} />    
+            {this.state.cursor && <CustomCursor />} 
+        </Provider>      
     );
   }
 }
