@@ -58,7 +58,7 @@ const nextConfig = {
   env: {
      ROOT_URL: 'https://trulioo.trulioo.now.sh',
      ENDPOINT_URL: 'https://irtrulioo4.wpengine.com/wp-json',
-     VERSION:'1.0.41',
+     VERSION:'1.0.3',
     // ...dotEnvResult,
   },
 
