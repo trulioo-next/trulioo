@@ -1,5 +1,6 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 import { Container, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
@@ -7,17 +8,27 @@ import { ParallaxContent, ParallaxBackground } from '../Parallax';
 import { motion } from 'framer-motion';
 import { FlipButton } from '../FlipButton';
 
-import { convertFullURL } from '../utilities/convertURL';
-
-
 export const Hero = ({ component }) => {
-  const heroImage =
-    component.hero_images[
-      Math.floor(Math.random() * component.hero_images.length)
-    ];
+  const [loaded, setLoaded] = useState(false);
+
+  const [heroImage, setHeroImage] = useState(null);
+
+  useEffect(() => {
+    if (!component.hero_images) return;
+
+    setHeroImage(
+      component.hero_images[
+        Math.floor(Math.random() * component.hero_images.length)
+      ],
+    );
+  });
 
   return (
-    <section className={classnames('hero-body section py-5')}>
+    <motion.section
+      className={classnames('hero-body section py-5')}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: loaded ? 1 : 0 }}
+    >
       {heroImage && (
         <ParallaxBackground
           background={heroImage.background_image}
@@ -31,6 +42,8 @@ export const Hero = ({ component }) => {
           {...(heroImage.mobile_foreground_image && {
             mobileForeground: heroImage.mobile_foreground_image,
           })}
+          loaded={loaded}
+          setLoaded={setLoaded}
         />
       )}
       <Container>
@@ -49,28 +62,36 @@ export const Hero = ({ component }) => {
                 <p dangerouslySetInnerHTML={{ __html: component.paragraph }} />
               </div>
               {component.link && (
-                <FlipButton
-                  href={component.link.url}
-                  color="primary"
-                  size="lg"
-                  title={component.link.title}
-                  {...(component.link.target
-                    ? {
-                        target: component.link.target,
-                        rel: 'noopener noreferrer',
-                      }
-                    : {
-                        onClick: () => console.log('CLICKED BUTTON '),
-                      })}
-                >
-                  {component.link.title}
-                </FlipButton>
+                <Fragment>
+                  {component.link.target ? (
+                    <FlipButton
+                      href={component.link.url}
+                      color="primary"
+                      size="lg"
+                      title={component.link.title}
+                      target={component.link.target}
+                      rel="noopener noreferrer"
+                    >
+                      {component.link.title}
+                    </FlipButton>
+                  ) : (
+                    <Link href={component.link.url} passHref>
+                      <FlipButton
+                        color="primary"
+                        size="lg"
+                        title={component.link.title}
+                      >
+                        {component.link.title}
+                      </FlipButton>
+                    </Link>
+                  )}
+                </Fragment>
               )}
             </ParallaxContent>
           </Col>
         </Row>
       </Container>
-    </section>
+    </motion.section>
   );
 };
 

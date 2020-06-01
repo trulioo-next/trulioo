@@ -19,6 +19,8 @@ export const ParallaxBackground = ({
   circle,
   foreground,
   mobileForeground,
+  loaded,
+  setLoaded,
 }) => {
   // window states
   const [windowInnerWidth, setWindowInnerWidth] = useState(0);
@@ -156,6 +158,19 @@ export const ParallaxBackground = ({
     backgroundImage = mediaSmDown ? mobileBackground : background;
   }
 
+  const [fgLoaded, setFgLoaded] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!setLoaded) return;
+
+    if (foregroundImage) {
+      setLoaded(fgLoaded && bgLoaded);
+    } else {
+      setLoaded(bgLoaded);
+    }
+  });
+
   return (
     <div ref={setRefs} className="parallax-bg-container">
       <motion.div
@@ -177,6 +192,7 @@ export const ParallaxBackground = ({
               src={foregroundImage.url || foregroundImage}
               width={foregroundImage.width}
               height={foregroundImage.height}
+              onLoad={() => setFgLoaded(true)}
             />
             <motion.div
               className="parallax-bg-circle"
@@ -203,6 +219,7 @@ export const ParallaxBackground = ({
           src={backgroundImage.url || backgroundImage}
           width={backgroundImage.width}
           height={backgroundImage.height}
+          onLoad={() => setBgLoaded(true)}
         />
       </motion.div>
     </div>
