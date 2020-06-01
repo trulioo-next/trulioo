@@ -43,7 +43,7 @@ const Resources = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   const resources = useSelector(resourceDataSelector);
-  
+
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
 
   let featuredPosts = resources.featured;
@@ -57,7 +57,7 @@ const Resources = props => {
     <Layout>
       {acfData.hero && <HalfHero component={acfData.hero} />}
       <SearchWithFilters callBack={ (value) => callBack(value) } type='resources' />
-      {featuredPosts && (
+      { !removeFeatured && (
         <section
           className={classnames(
             'resources-section featured-resources bg-gray,',

@@ -12,7 +12,7 @@ export default async (req, res) => {
 
     //
     const postList = await fetch(
-      ENDPOINT_URL + '/wp/v2/resources/?_embed&per_page=9&page=' + page,
+      ENDPOINT_URL + '/wp/v2/resources/?_embed&per_page=100&page=' + page,
       {
         method: 'GET',
         headers: {

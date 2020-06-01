@@ -158,7 +158,7 @@ export const Search =  (props) => {
     useEffect(() => {
       if(hasSearched) {
         filterDispatchEvent()
-      }
+      } else { return }
     }, [selectedOption,selectedTopic]);
 
     return (

@@ -48,7 +48,7 @@ function* filterResouces(payload) {
     const state = yield select((state) => state)
     const resourcesService = ResourcesService(state)
     const response = yield call(resourcesService.filterResoucesData, payload)
-
+     
     yield put({ type: RESOURCES_FILTER_LOADED, payload: response  })
 
   } catch(err) {

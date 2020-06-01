@@ -10,7 +10,7 @@ export default async (req, res) => {
 		const typeId = body.payload.type_id
     const topicId = body.payload.topic_id
 
-    const postList = await fetch(ENDPOINT_URL+'/wp/v2/posts/?_embed&resouces_types='+typeId+'&resouces_topics='+topicId+'&offset=0&per_page=10&orderby=date&order=desc&search=', {
+    const postList = await fetch(ENDPOINT_URL+'/wp/v2/resources/?_embed&resources_types='+typeId+'&resources_topics='+topicId+'&offset=0&per_page=100&orderby=date&order=desc&search=', {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -20,33 +20,41 @@ export default async (req, res) => {
 
     let posts = {posts:postList}
 
-    const featured = await fetch(ENDPOINT_URL+'/trulioo/press/featured', {
-       method: 'GET',
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-       }
-     })
+    const topics = await fetch(
+      ENDPOINT_URL + '/wp/v2/resources_topics?per_page=100',
+      {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
 
-   const topics = await fetch(ENDPOINT_URL+'/wp/v2/resouces_topics?per_page=100', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    const types = await fetch(
+      ENDPOINT_URL + '/wp/v2/resources_types?per_page=100',
+      {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
 
-   const types = await fetch(ENDPOINT_URL+'/wp/v2/resouces_types?per_page=100', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-
+    const featured = await fetch(
+      ENDPOINT_URL + '/trulioo/resources/featured/3',
+      {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
 
    let data = {
-     postList:posts,
+     postList,
      featured,
      topics,
      types
