@@ -6,8 +6,10 @@
     "dev": "next -p 8000",
     "build": "next build",
     "now-build": "next build",
-    "start": "NODE_ENV=production next start",
-    "storybook": "start-storybook -s ."
+    "build-start": "NODE_ENV=production next start -p PORT",
+    "start": "next start -p $PORT",
+    "storybook": "start-storybook -s .",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
