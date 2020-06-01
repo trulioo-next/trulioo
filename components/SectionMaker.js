@@ -20,6 +20,9 @@ import { Marketo } from '@/components/Marketo';
 import { SectionVideoBg } from '@/components/SectionVideoBg';
 import { OnPageSection } from '@/components/OnPageSection';
 import { SliderSection } from '@/components/Slider';
+import { InstagramSection } from '@/components/InstagramSection';
+import { Faq } from '@/components/Faq';
+
 
 const SectionMaker = ({
   type,
@@ -106,6 +109,18 @@ const SectionMaker = ({
 
     case 'marketo_forms_block':
       return <Marketo sectionIndex={sectionIndex} component={params} />;
+
+    case 'instagram_section_block':
+      return <InstagramSection sectionIndex={sectionIndex} component={params} />;
+
+    case 'faq_block':
+      return <Faq sectionIndex={sectionIndex} component={params}/>;
+      
+    case 'about_management_information_block':
+      return <AboutManagement key={ index } component={ component }/>;
+
+    case 'full_width_image_block':
+      return <FullWidthImage key={ index } component={ component }/>;
 
     default:
       return `<>${type}</>`;
