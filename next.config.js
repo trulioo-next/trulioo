@@ -56,10 +56,10 @@ const nextConfig = {
   //  ...dotEnvResult
 
   env: {
-     ROOT_URL: 'https://trulioo.trulioo.now.sh',
-     ENDPOINT_URL: 'https://irtrulioo4.wpengine.com/wp-json',
-     VERSION:'1.0.3',
-    // ...dotEnvResult,
+     // ROOT_URL: 'https://trulioo.trulioo.now.sh',
+     // ENDPOINT_URL: 'https://irtrulioo4.wpengine.com/wp-json',
+     // VERSION:'1.0.3',
+     ...dotEnvResult,
   },
 
   sassLoaderOptions: {
