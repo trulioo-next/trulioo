@@ -14,6 +14,8 @@ import CookieConsent from 'react-cookie-consent';
 
 import '../styles/index.scss';
 
+import REDIRECTS from "../redirects";
+
 const withReduxDebugMode = false; // process.env.NODE_ENV === 'development' || false;
 class MyApp extends App {
   static async getInitialProps({ ctx, Component }) {
@@ -27,6 +29,16 @@ class MyApp extends App {
       await ctx.store.execSagaTask(
         pageActions.reqPageDataAction({ query: ctx.query }),
       );
+
+      REDIRECTS.map(item => {
+        if(ctx.asPath === item.from) {
+          ctx.res.writeHead(302, {
+            Location: item.to
+          });
+          ctx.res.end();
+          return
+        }
+      });
 
        // if( ctx.query.type ) {
        //  console.log('PAGE TYPE FOUND ! ', ctx.query.type )
@@ -70,14 +82,14 @@ class MyApp extends App {
 
     return (
         <Provider store={store}>
-            <CookieConsent 
+            <CookieConsent
             containerClasses={'cookie-consent'}
             >
                 This website uses cookies to enhance the user experience.
             </CookieConsent>
-            <Component {...pageProps} />    
-            {this.state.cursor && <CustomCursor />} 
-        </Provider>      
+            <Component {...pageProps} />
+            {this.state.cursor && <CustomCursor />}
+        </Provider>
     );
   }
 }
