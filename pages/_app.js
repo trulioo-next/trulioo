@@ -70,7 +70,9 @@ class MyApp extends App {
 
     return (
         <Provider store={store}>
-            <CookieConsent>
+            <CookieConsent 
+            containerClasses={'cookie-consent'}
+            >
                 This website uses cookies to enhance the user experience.
             </CookieConsent>
             <Component {...pageProps} />    
