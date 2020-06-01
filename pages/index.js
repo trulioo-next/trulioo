@@ -28,6 +28,7 @@ const Home = props => {
   let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
 
   const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
+  let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
 
   return (
     <Layout>
@@ -55,7 +56,7 @@ const Home = props => {
         site: '@trullio',
         cardType: 'summary_large_image',
       }}
-      additionalMetaTags={yoastDataSeo[0].yoast_meta}
+      additionalMetaTags={yoastSeo}
 
     />
       { data &&
