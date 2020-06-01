@@ -30,9 +30,18 @@ export const Navigation = () => {
 								}
 							</h3>
 							{ sub_nav && sub_nav.map((subItem,index) => (
-									<a className="mb-1" href={ subItem.url } key={ index } title={ subItem.title }>
-										{ subItem.title }
-									</a>
+								<Fragment>
+									{ (subItem.target === "") && 
+										<a className="mb-1" href={ subItem.url } key={ index } title={ subItem.title }>
+											{ subItem.title }
+										</a>
+									}
+									{ (subItem.target === "_blank") && 
+										<a className="mb-1" target="_blank" href={ subItem.url } key={ index } title={ subItem.title }>
+											{ subItem.title }
+										</a>
+									}
+								</Fragment>
 								))
 							}
 					 </div>

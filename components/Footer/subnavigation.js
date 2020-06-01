@@ -23,7 +23,7 @@ const SubNavigationList = ({ information }) => {
         <ul className="socialIcons">
         { generalSettings.acf.social ?
           generalSettings.acf.social.map((social, index) =>
-          <a className="socialIcon pl-4" href={ social.link } key={ index } title={ social.title }>
+          <a className="socialIcon pl-4" href={ social.link } key={ index } target="_blank" title={ social.title }>
             <ion-icon name={ `logo-${ social.slug }` }></ion-icon>
           </a>
           ) : (

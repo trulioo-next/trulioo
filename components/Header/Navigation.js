@@ -87,7 +87,6 @@ export const Navigation = () => {
 					} else {
             return (
               <NavItem key={ item.ID }>
-                {console.log('dd', item.target)}
                 { (item.target === "") && 
 							  <NavLink href={ item.url }>{ item.title }</NavLink>
                 }
