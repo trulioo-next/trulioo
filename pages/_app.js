@@ -7,14 +7,13 @@ import appActions from '../stores/app/actions';
 import pageActions from '../stores/page/actions';
 import articleActions from '../stores/articles/actions';
 import withError from '../components-stateful/withErrorWrapper';
-import * as gtag from '../utils/gtag';
 import { isBrowser } from 'react-device-detect';
 import { CustomCursor } from '@/components/CustomCursor';
 import CookieConsent from 'react-cookie-consent';
 
 import '../styles/index.scss';
 
-import REDIRECTS from "../redirects";
+import REDIRECTS from '../redirects';
 
 const withReduxDebugMode = false; // process.env.NODE_ENV === 'development' || false;
 class MyApp extends App {
@@ -31,25 +30,24 @@ class MyApp extends App {
       );
 
       REDIRECTS.map(item => {
-        if(ctx.asPath === item.from) {
+        if (ctx.asPath === item.from) {
           ctx.res.writeHead(302, {
-            Location: item.to
+            Location: item.to,
           });
           ctx.res.end();
-          return
+          return;
         }
       });
 
-       // if( ctx.query.type ) {
-       //  console.log('PAGE TYPE FOUND ! ', ctx.query.type )
-       //  await ctx.store.execSagaTask(
-       //    articleActions.reqArticlesTypesAction({ topic_id: '', type_id: '', offset:0, posts_per_page: 5 }),
-       //  );
-       //
-       // }
+      // if( ctx.query.type ) {
+      //  console.log('PAGE TYPE FOUND ! ', ctx.query.type )
+      //  await ctx.store.execSagaTask(
+      //    articleActions.reqArticlesTypesAction({ topic_id: '', type_id: '', offset:0, posts_per_page: 5 }),
+      //  );
+      //
+      // }
 
       // console.log('ctx.query :: >> ', ctx.query )
-
     }
 
     const pageProps = Component.getInitialProps
@@ -61,9 +59,7 @@ class MyApp extends App {
   //
   constructor(props) {
     super(props);
-    Router.events.on('routeChangeComplete', url => {
-      gtag.pageview(url);
-    });
+
     this.state = {
       cursor: false,
     };
@@ -81,15 +77,13 @@ class MyApp extends App {
     const { Component, pageProps, store } = this.props;
 
     return (
-        <Provider store={store}>
-            <CookieConsent
-            containerClasses={'cookie-consent'}
-            >
-                This website uses cookies to enhance the user experience.
-            </CookieConsent>
-            <Component {...pageProps} />
-            {this.state.cursor && <CustomCursor />}
-        </Provider>
+      <Provider store={store}>
+        <CookieConsent containerClasses={'cookie-consent'}>
+          This website uses cookies to enhance the user experience.
+        </CookieConsent>
+        <Component {...pageProps} />
+        {this.state.cursor && <CustomCursor />}
+      </Provider>
     );
   }
 }
