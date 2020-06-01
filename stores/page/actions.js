@@ -1,5 +1,6 @@
 import {
   PAGE_LOAD_REQUEST,
+  PAGE_BANNER_REQUEST,
 } from '../types'
 
 export const reqPageDataAction = (payload ) => ({
@@ -7,6 +8,12 @@ export const reqPageDataAction = (payload ) => ({
   payload: payload
 })
 
+export const reqPageBannersAction = (payload ) => ({
+  type: PAGE_BANNER_REQUEST,
+  payload: payload
+})
+
 export default {
+  reqPageBannersAction,
   reqPageDataAction
 }

@@ -3,12 +3,14 @@ import React, {
   useRef,
   useState,
   useEffect,
+  // useLayoutEffect,
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import classnames from 'classnames';
 import { useInView } from 'react-intersection-observer';
+import { useMediaQuery } from 'react-responsive';
 
 export const ParallaxBackground = ({
   className,
@@ -17,23 +19,16 @@ export const ParallaxBackground = ({
   circle,
   foreground,
   mobileForeground,
-  loaded,
-  setLoaded,
 }) => {
-  const [isWindow, setIsWindow] = useState(false);
+  // window states
   const [windowInnerWidth, setWindowInnerWidth] = useState(0);
   const [windowInnerHeight, setWindowInnerHeight] = useState(0);
-  const [bgLoaded, setBgLoaded] = useState(false);
 
-  if (process.browser && !bgLoaded) {
-    setIsWindow(true);
-    setWindowInnerWidth(window.innerWidth);
-    setWindowInnerHeight(window.innerHeight);
-    setBgLoaded(true);
-  }
+  // breakpoints
+  const mediaLgUp = useMediaQuery({ minWidth: 992 });
+  const mediaSmDown = useMediaQuery({ maxWidth: 767 });
 
-  const [imageLoaded, setImageLoaded] = useState(0);
-  const breakpoint = 992;
+  // refs
   const containerRef = useRef();
   const [inViewRef, inView] = useInView({
     threshold: 0,
@@ -49,12 +44,14 @@ export const ParallaxBackground = ({
     [inViewRef],
   );
 
+  // scroll variables
   const scrollProgress = useMotionValue(-1);
   const outputRange = {
     start: -windowInnerHeight + windowInnerHeight * 0.1,
     end: windowInnerHeight - windowInnerHeight * 0.1,
   };
 
+  // circle variables
   const circleRef = useRef(null);
   const [circleOrigin, setCircleOrigin] = useState({ x: 0, y: 0 });
   const [circleSize, setCircleSize] = useState(windowInnerHeight * 1.1);
@@ -63,51 +60,53 @@ export const ParallaxBackground = ({
   var counter = 0;
   var updateRate = 10;
 
+  // update window dimensions
   useEffect(() => {
-    if (process.browser) {
-      const handleResize = () => {
-        setWindowInnerWidth(windowInnerWidth);
-      };
+    const handleResize = () => {
+      setWindowInnerWidth(window.innerWidth);
+      setWindowInnerHeight(window.innerHeight);
+    };
 
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   });
 
+  // update scroll
   useEffect(() => {
-    if (process.browser) {
-      const cachedContainer = containerRef.current;
+    const cachedContainer = containerRef.current;
 
-      const updateScroll = () => {
-        if (inView && cachedContainer) {
-          const containerBounds = cachedContainer.getBoundingClientRect();
-          const scrollRatio = -containerBounds.y / window.innerHeight;
-          scrollProgress.set(scrollRatio);
-        }
-      };
+    const updateScroll = () => {
+      if (inView && cachedContainer) {
+        const containerBounds = cachedContainer.getBoundingClientRect();
+        const scrollRatio = -containerBounds.y / window.innerHeight;
+        scrollProgress.set(scrollRatio);
+      }
+    };
 
-      updateScroll();
-      window.addEventListener('resize', updateScroll);
-      window.addEventListener('scroll', updateScroll, { passive: true });
+    updateScroll();
+    window.addEventListener('resize', updateScroll);
+    window.addEventListener('scroll', updateScroll, { passive: true });
 
-      return () => {
-        window.removeEventListener('resize', updateScroll);
-        window.removeEventListener('scroll', updateScroll);
-      };
-    }
+    return () => {
+      window.removeEventListener('resize', updateScroll);
+      window.removeEventListener('scroll', updateScroll);
+    };
   }, [containerRef, inView, inViewRef, scrollProgress]);
 
+  // background positions
   const bgTransformY = useTransform(
     scrollProgress,
     [-1, 1],
     [outputRange.start, outputRange.end],
   );
 
-  const initialY = windowInnerWidth > breakpoint ? outputRange.start : 0,
-    backgroundY = windowInnerWidth > breakpoint ? bgTransformY : 0;
+  const initialY = mediaLgUp ? outputRange.start : 0,
+    backgroundY = mediaLgUp ? bgTransformY : 0;
 
+  // circle sizing
   useEffect(() => {
     if (!circleRef.current && circleRef.current === null) return;
 
@@ -125,10 +124,8 @@ export const ParallaxBackground = ({
     };
 
     updateCircle();
-    if (process.browser) {
-      window.addEventListener('resize', updateCircle);
-      return () => window.removeEventListener('resize', updateCircle);
-    }
+    window.addEventListener('resize', updateCircle);
+    return () => window.removeEventListener('resize', updateCircle);
   }, [circleRef]);
 
   const updateRotation = event => {
@@ -147,25 +144,23 @@ export const ParallaxBackground = ({
     });
   };
 
-  const circleRotation =
-    windowInnerWidth > breakpoint ? rotation : { rotateX: 0, rotateY: 0 };
+  const circleRotation = mediaLgUp ? rotation : { rotateX: 0, rotateY: 0 };
 
   let backgroundImage = background;
   let foregroundImage = foreground || false;
 
   if (mobileBackground && mobileForeground) {
-    backgroundImage = windowInnerWidth < 768 ? mobileBackground : background;
-    foregroundImage = windowInnerWidth < 768 ? mobileForeground : foreground;
+    backgroundImage = mediaSmDown ? mobileBackground : background;
+    foregroundImage = mediaSmDown ? mobileForeground : foreground;
   } else if (mobileBackground && !foreground) {
-    backgroundImage = windowInnerWidth < 768 ? mobileBackground : background;
+    backgroundImage = mediaSmDown ? mobileBackground : background;
   }
 
   return (
     <div ref={setRefs} className="parallax-bg-container">
       <motion.div
         className={classnames('parallax-bg', className)}
-        initial={{ opacity: 0, translateY: initialY }}
-        animate={{ opacity: loaded ? 1 : imageLoaded }}
+        initial={{ translateY: initialY }}
         style={{ translateY: backgroundY }}
         onMouseMove={event => {
           counter++;
@@ -208,13 +203,6 @@ export const ParallaxBackground = ({
           src={backgroundImage.url || backgroundImage}
           width={backgroundImage.width}
           height={backgroundImage.height}
-          onLoad={() => {
-            if (setLoaded) {
-              setLoaded(true);
-            } else {
-              setImageLoaded(1);
-            }
-          }}
         />
       </motion.div>
     </div>
@@ -228,6 +216,4 @@ ParallaxBackground.propTypes = {
   circle: PropTypes.string,
   foreground: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   mobileForeground: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  loaded: PropTypes.bool,
-  setLoaded: PropTypes.func,
 };

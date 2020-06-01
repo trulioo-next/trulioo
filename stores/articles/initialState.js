@@ -6,7 +6,8 @@
 export const INITIAL_STATE = {
 	postList:[],
 	topics:[],
-	types:[], 
+	types:[],
+	featured:[],
 	marketoBlog:[],
 	popularArticles: [],
 	postDataById:[],

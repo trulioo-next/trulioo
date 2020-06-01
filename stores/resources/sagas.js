@@ -6,30 +6,30 @@ import {
   APP_STARTLOADING,
   APP_STARTUP_ERROR,
   RESOURCES_LOAD_REQUEST,
-  RESOURCES__LOADED,
-  RESOURCES__ERROR, 
+  RESOURCES_LOADED,
+  RESOURCES_ERROR,
   APP_STOPLOADING
 } from '../types'
 
 
 function* startup(payload) {
 
-   
+
   try {
-    
+
     // yield call(getGeolocation, payload.ip)
 
     const state = yield select((state) => state)
     const resourcesService = ResourcesService(state)
     const response = yield call(resourcesService.getResourceData, payload)
- 
+
     // console.log('RESONSE ', response)
-    yield put({ type: RESOURCES__LOADED, payload: response  })
+    yield put({ type: RESOURCES_LOADED, payload: response  })
 
   } catch(err) {
 
     const errors = err.payload || err
-    yield put({ type: RESOURCES__ERROR, payload: errors})
+    yield put({ type: RESOURCES_ERROR, payload: errors})
   }
 }
 
@@ -51,7 +51,7 @@ function* startupFlow() {
     }
 
     yield put({ type: APP_STOPLOADING })
- 
+
     yield action
   }
 }

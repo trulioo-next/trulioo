@@ -8,11 +8,11 @@ export const APP_PAGE_LOAD_ERROR = 'app-page/error/APP_PAGE_LOAD_ERROR'
 export const APP_STARTLOADING = 'app/loader/STARTLOADING'
 export const APP_STOPLOADING = 'app/loader/STOPLOADING'
 
-// Global Data 
+// Global Data
 export const GLOBAL_DATA_LOADED = 'global/data/GLOBAL_DATA_LOADED'
 export const GLOBAL_DATA_SITE_INFORMATION = 'global/data/GLOBAL_DATA_SITE_INFORMATION'
 
-// Page Level Events 
+// Page Level Events
 export const PAGE_LOAD_REQUEST = 'page/load/PAGE_LOAD_REQUEST'
 export const PAGE_LOADED = 'page/loaded/PAGE_LOAD_REQUEST'
 export const PAGE_LOAD_ERROR = 'page/error/PAGE_LOAD_ERROR'
@@ -27,15 +27,19 @@ export const SEARCHSITE_ERROR = 'searchSite/error/SEARCHSITE_ERROR'
 
 // Resources
 export const RESOURCES_LOAD_REQUEST = 'resources/load/RESOURCES_LOAD_REQUEST'
-export const RESOURCES__LOADED = 'resources/loaded/RESOURCES__LOADED'
-export const RESOURCES__ERROR = 'resources/error/RESOURCES__ERROR'
+export const RESOURCES_LOADED = 'resources/loaded/RESOURCES_LOADED'
+export const RESOURCES_ERROR = 'resources/error/RESOURCES_ERROR'
 
 // Press Release
 export const PRESS_LOAD_REQUEST = 'press/load/PRESS_LOAD_REQUEST'
-export const PRESS__LOADED = 'press/loaded/PRESS__LOADED'
-export const PRESS__ERROR = 'press/error/PRESS__ERROR'
+export const PRESS_LOADED = 'press/loaded/PRESS_LOADED'
+export const PRESS_ERROR = 'press/error/PRESS_ERROR'
 
 // Articles
 export const ARTICLES_LOAD_REQUEST = 'articles/load/ARTICLES_LOAD_REQUEST'
-export const ARTICLES__LOADED = 'articles/loaded/ARTICLES__LOADED'
-export const ARTICLES__ERROR = 'articles/error/ARTICLES__ERROR'
+export const ARTICLES_LOADED = 'articles/loaded/ARTICLES_LOADED'
+export const ARTICLES_ERROR = 'articles/error/ARTICLES_ERROR'
+export const ARTICLES_FILTER_REQUEST = 'articles/load/ARTICLES_FILTER_REQUEST'
+export const ARTICLES_FILTER_LOADED = 'articles/loaded/ARTICLES_FILTER_LOADED'
+export const ARTICLES_SEARCH_REQUEST = 'articles/loaded/ARTICLES_SEARCH_REQUEST'
+export const ARTICLES_SEARCH_LOADED = 'articles/loaded/ARTICLES_SEARCH_LOADED'

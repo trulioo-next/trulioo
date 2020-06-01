@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import fetch from 'isomorphic-unfetch'
+import fetch from 'isomorphic-unfetch';
 import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../components/SectionMaker';
@@ -20,7 +20,7 @@ const Home = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
-  
+
   const pageData = props.pageData ? props.pageData : false;
   let data = pageData && pageData.acf_data && pageData.acf_data.content_block_collection ? pageData.acf_data : false;
   let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
@@ -65,6 +65,7 @@ const Home = props => {
             params={section}
             key={sectionKey}
             sectionIndex={sectionKey}
+            homepage
           />
         ))}
     </Layout>
@@ -72,7 +73,7 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ query, res, store }) => {
-  // TODO: GET STATE DATA HERE 
+  // TODO: GET STATE DATA HERE
   //
   const initalState = store.getState();
   const pageData = initalState.page.data;
@@ -80,4 +81,3 @@ Home.getInitialProps = async ({ query, res, store }) => {
 };
 
 export default Home;
-

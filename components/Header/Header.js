@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigation }  from './navigation';
+import { Navigation }  from './Navigation';
 import {connect, useDispatch,  useSelector } from 'react-redux';
 import { selectSiteInformation, selectGeneralSettings } from '@/stores/app/selectors';
 import { Link, useHistory, useLocation } from 'react-router-dom';

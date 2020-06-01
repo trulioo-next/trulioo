@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../../../components/SectionMaker';
 import Layout from '../../../containers/Layout';
- 
+
 import { pageDataSelector } from '../../../stores/page/selectors';
 import { reqPageDataAction } from '../../../stores/page/actions';
 import { reqArticlesAction } from '../../../stores/articles/actions';
@@ -159,6 +159,19 @@ const SingleBlog = props => {
   const getSlug = props.query.slug;
   const [ value, setValue ] = useState(null);
 
+
+  let getPostId = articles.postDataById && articles.postDataById.content ? articles.postDataById.content.ID
+  : false;
+
+  // if (process.browser) {
+  //   setValue(localStorage.getItem(getPostId) || '');
+  //   if (value === undefined) {
+  //     localStorage.removeItem(getPostId);
+  //   } else {
+  //     localStorage.setItem(getPostId, value);
+  //   }
+  // }
+
   useEffect(() => {
     dispatch(reqArticlesAction({ post_id: getSlug, offset:0, posts_per_page: 1 }));
     dispatch(reqPageDataAction({ payload:'blog' }));
@@ -173,8 +186,8 @@ const SingleBlog = props => {
         localStorage.setItem(getSlug, 'like');
       }
     }
-  
-  }, [getSlug, value]);
+
+  }, []);
 
   let scrollAttempts = 0;
 

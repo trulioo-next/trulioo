@@ -1,5 +1,7 @@
 import {
   ARTICLES_LOAD_REQUEST,
+  ARTICLES_FILTER_REQUEST,
+  ARTICLES_SEARCH_REQUEST,
 } from '../types'
 
 export const reqArticlesAction = (payload ) => (
@@ -8,6 +10,21 @@ export const reqArticlesAction = (payload ) => (
   payload: payload
 })
 
+export const reqFilterArticlesAction = (payload ) => (
+  {
+  type: ARTICLES_FILTER_REQUEST,
+  payload: payload
+})
+
+export const reqSearchArticlesAction = (payload ) => (
+  {
+  type: ARTICLES_SEARCH_REQUEST,
+  payload: payload
+})
+
+
 export default {
-  reqArticlesAction
+  reqArticlesAction,
+  reqFilterArticlesAction,
+  reqSearchArticlesAction
 }

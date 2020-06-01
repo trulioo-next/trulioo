@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout/Layout';
- 
+
 
 import Error from 'next/error';
 
@@ -18,7 +18,7 @@ const Page = props => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: props.query.page+'--'+props.query.slug+'--'+props.query.child }));
-    
+
     console.log('DISPATCH CHILD  : >>> ', props.query )
 
     if (window.location.hash) {
@@ -61,7 +61,7 @@ const Page = props => {
   // }
 
   // console.log('QUERY ', pageData )
-  
+
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data
@@ -69,7 +69,7 @@ const Page = props => {
 
   return (
     <Layout>
-       
+
       {data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker

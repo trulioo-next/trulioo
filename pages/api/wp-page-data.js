@@ -1,10 +1,10 @@
 const fetch = require('../../utils/fetch')
 
 const ENDPOINT_URL = process.env.ENDPOINT_URL
- 
-export default async (req, res) => {  
+
+export default async (req, res) => {
   try {
-    
+
     const body = JSON.parse(req.body)
     let id = 'home';
 
@@ -16,11 +16,7 @@ export default async (req, res) => {
       let id = 'home';
     }
 
-    // console.log('BODY PASSED  ',  req.body )
-
-    // console.log('PAGE ID ', id )
-   
-    // TODO: Normalise page ID : 
+    // TODO: Normalise page ID :
     const response = await fetch(ENDPOINT_URL+'/api/v1/page/'+id,
      {
        method: 'GET',
@@ -29,7 +25,7 @@ export default async (req, res) => {
          'Content-Type': 'application/json'
        }
      })
- 
+
      res.json(response)
      return
   } catch(error) {

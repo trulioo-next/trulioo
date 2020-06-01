@@ -23,7 +23,7 @@ export default (state = INITIAL_STATE, action) => {
     case PAGE_LOAD_ERROR:
       return { ...state,
         error: action.payload,
-        errorSource: APP_STARTUP_ERROR
+        errorSource: PAGE_LOAD_ERROR
       }
 
     default:
