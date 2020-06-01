@@ -10,8 +10,11 @@ import Link from 'next/link';
 
 import Error from 'next/error';
 
-import { reqPageDataAction } from '../stores/page/actions';
+import { reqStartupAction } from '../stores/app/actions';
 import { pageDataSelector } from '../stores/page/selectors';
+
+import { selectYoastSettings } from '../stores/app/selectors';
+
 
 const Home = props => {
   if (props.errorCode) {
@@ -19,49 +22,43 @@ const Home = props => {
   }
 
   const pageData = props.pageData ? props.pageData : false;
-  let data =
-    pageData && pageData.acf_data && pageData.acf_data.content_block_collection
-      ? pageData.acf_data
-      : false;
-  let seoTitle =
-    data && pageData && pageData.seo && pageData.seo.title !== ''
-      ? pageData.seo.title
-      : 'Trulioo';
-  let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : '';
-  let seoImage =
-    data && pageData && pageData.seo ? pageData.seo.facebook_image : '';
+  let data = pageData && pageData.acf_data && pageData.acf_data.content_block_collection ? pageData.acf_data : false;
+  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
+  let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
+  let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
 
-  // console.log('HELLO PAGE ', pageData )
+  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
 
   return (
-    <Layout className="homepage">
-      <NextSeo
-        title={seoTitle}
-        description={seoDesc}
-        openGraph={{
-          url: 'https://trulioo.com/',
-          title: seoTitle,
-          description: seoDesc,
-          images: [
-            {
-              url: seoImage,
-              width: 800,
-              height: 600,
-              alt: 'Trulioo',
-            },
+    <Layout>
+    <NextSeo
+      title={seoTitle}
+      description={seoDesc}
+      openGraph={{
+        url: 'https://trulioo.com/',
+        title: seoTitle,
+        description: seoDesc,
+        images: [
+          {
+            url: seoImage,
+            width: 800,
+            height: 600,
+            alt: 'Trulioo',
+          },
+           
+          { url: seoImage },
+        ],
+        site_name: 'https://trulioo.com',
+      }}
+      twitter={{
+        handle: '@trullio',
+        site: '@trullio',
+        cardType: 'summary_large_image',
+      }}
+      additionalMetaTags={yoastDataSeo[0].yoast_meta}
 
-            { url: seoImage },
-          ],
-          site_name: 'https://trulioo.com',
-        }}
-        twitter={{
-          handle: '@trullio',
-          site: '@trullio',
-          cardType: 'summary_large_image',
-        }}
-      />
-
-      {data &&
+    />
+      { data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
             type={section.acf_fc_layout}

@@ -2,9 +2,9 @@ import {
   APP_STARTUP_REQUEST,
 } from '../types'
 
-export const reqStartupAction = ({ isAuthenticated, ip, query }) => ({
+export const reqStartupAction = ({ isAuthenticated, ip, query, page }) => ({
   type: APP_STARTUP_REQUEST,
-  payload: {isAuthenticated, ip, query }
+  payload: {isAuthenticated, ip, query, page }
 })
 
 export const reqAlertDataAction = ( ) => (

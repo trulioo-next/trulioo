@@ -37,7 +37,8 @@ function* startupSiteInformation(payload) {
 
     const state = yield select((state) => state)
     const dataService = DataService(state)
-    const response = yield call(dataService.getSiteInformation, true)
+    const response = yield call(dataService.getSiteInformation, payload)
+      
     yield put({ type: GLOBAL_DATA_SITE_INFORMATION, payload: response })
 
 

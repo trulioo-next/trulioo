@@ -36,6 +36,10 @@ export const selectGeneralSettings = (state) => {
   return state.app.globalDataSiteInformation['generalSettings']
 }
 
+export const selectYoastSettings = (state) => {
+  return state.app.globalDataSiteInformation['yoastSeo']
+}
+
  export const selectHeaderData = (state) => {
    return state.app.globalData['main']
  }
@@ -65,6 +69,7 @@ export default {
   selectErrorSource,
   selectIsAuthenticated,
   selectSiteInformation,
+  selectYoastSettings,
   selectHeaderData,
   selectFooterData,
   alertDataSelector
