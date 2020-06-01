@@ -20,3 +20,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 export const BlogsPagination = connect(mapStateToProps, mapDispatchToProps)(Pagination);
+export default BlogsPagination

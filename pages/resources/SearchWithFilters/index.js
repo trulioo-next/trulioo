@@ -305,3 +305,5 @@ export const Search =  (props) => {
     </div>
   );
 };
+
+export default Search

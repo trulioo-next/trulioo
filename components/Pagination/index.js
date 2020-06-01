@@ -95,3 +95,5 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   maxPage: {}
 };
+
+export default Pagination
