@@ -10,7 +10,7 @@ export default async (req, res) => {
 		const typeId = body.payload.type_id
     const topicId = body.payload.topic_id
 
-    const postList = await fetch(ENDPOINT_URL+'/wp/v2/posts/?_embed&articles_types='+typeId+'&articles_topics='+topicId+'&offset=0&per_page=10&orderby=date&order=desc&search=', {
+    const postList = await fetch(ENDPOINT_URL+'/wp/v2/posts/?_embed&resouces_types='+typeId+'&resouces_topics='+topicId+'&offset=0&per_page=10&orderby=date&order=desc&search=', {
        method: 'GET',
        headers: {
          'Accept': 'application/json',
@@ -28,7 +28,7 @@ export default async (req, res) => {
        }
      })
 
-   const topics = await fetch(ENDPOINT_URL+'/wp/v2/articles_topics?per_page=100', {
+   const topics = await fetch(ENDPOINT_URL+'/wp/v2/resouces_topics?per_page=100', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -36,39 +36,20 @@ export default async (req, res) => {
       }
     })
 
-   const types = await fetch(ENDPOINT_URL+'/wp/v2/articles_types?per_page=100', {
+   const types = await fetch(ENDPOINT_URL+'/wp/v2/resouces_types?per_page=100', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     })
-
-   const marketoBlog = await fetch(ENDPOINT_URL+'/acf/v3/options/marketo-on-blog-pages', {
-     method: 'GET',
-     headers: {
-       'Accept': 'application/json',
-       'Content-Type': 'application/json'
-     }
-   })
-
-
-   const popularArticles = await fetch(ENDPOINT_URL+'/acf/v3/options/popular-articles-settings', {
-     method: 'GET',
-     headers: {
-       'Accept': 'application/json',
-       'Content-Type': 'application/json'
-     }
-   })
 
 
    let data = {
      postList:posts,
      featured,
      topics,
-     types,
-     marketoBlog,
-     popularArticles
+     types
    }
 
     res.json(data)

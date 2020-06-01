@@ -21,7 +21,7 @@ import { FlipButton } from '../FlipButton';
 
 export const Navigation = () => {
   const headerData = useSelector(state =>  selectHeaderData(state));
-  
+
   const buildMenu = (headerData) => {
     if (headerData) {
 			const navigationMenu = [];

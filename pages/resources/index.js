@@ -15,7 +15,7 @@ import { resourceDataSelector } from '@/stores/resources/selectors';
 import Layout from '@/containers/Layout';
 import SectionMaker from '@/components/SectionMaker';
 import { HalfHero } from '@/components/HalfHero';
-import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
+import { Search as SearchWithFilters } from './SearchWithFilters';
 import { FlipButton } from '@/components/FlipButton';
 import { ResourceCard } from '@/components/ResourceCard';
 import { Container, Row, Col, CardDeck } from 'reactstrap';
@@ -35,6 +35,7 @@ const Resources = props => {
   }, []);
 
   const [isSearching, setIsSearching] = useState(false);
+  const [ removeFeatured, setRemoveFeatured ] = useState(false);
 
   const onMore = () => {
     // TODO: Append next page of items.
@@ -42,19 +43,20 @@ const Resources = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   const resources = useSelector(resourceDataSelector);
-
-  // console.log('Page Data ', pageData);
-  // console.log('Resources ', resources);
-
+  
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
 
   let featuredPosts = resources.featured;
   let postsToRender = resources.postList;
 
+  function callBack(value) {
+    setRemoveFeatured(value)
+  }
+
   return (
     <Layout>
       {acfData.hero && <HalfHero component={acfData.hero} />}
-      {/* <SearchWithFilters /> */}
+      <SearchWithFilters callBack={ (value) => callBack(value) } type='resources' />
       {featuredPosts && (
         <section
           className={classnames(

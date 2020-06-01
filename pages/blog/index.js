@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isNil } from 'lodash';
-import SectionMaker from '../../components/SectionMaker';
-import Layout from '../../containers/Layout';
+import SectionMaker from '@/components/SectionMaker';
+import Layout from '@/containers/Layout';
 
-import { pageDataSelector } from '../../stores/page/selectors';
-import { reqPageDataAction } from '../../stores/page/actions';
-import { reqArticlesAction } from '../../stores/articles/actions';
-import { articlesDataSelector  } from '../../stores/articles/selectors';
+import { pageDataSelector } from '@/stores/page/selectors';
+import { reqPageDataAction } from '@/stores/page/actions';
+import { reqArticlesAction } from '@/stores/articles/actions';
+import { articlesDataSelector  } from '@/stores/articles/selectors';
 
-import { HalfHero }  from '../../components/HalfHero';
-import { PopularArticles } from '../../components/PopularArticles';
-import { FeaturedBlog } from '../../components/FeaturedBlog';
+import { HalfHero }  from '@/components/HalfHero';
+import { PopularArticles } from '@/components/PopularArticles';
+import { FeaturedBlog } from '@/components/FeaturedBlog';
 import { BlogsPagination } from './pagination';
 import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
 
 import {
   MarketoBlog,
-} from '../../components/Marketo';
+} from '@/components/Marketo';
 
 import { selectGeneralSettings } from '@/stores/app/selectors';
 
 import {
   GroupPost
-} from '../../components/Post';
+} from '@/components/Post';
 
 
 import {
@@ -56,7 +56,6 @@ const Blog = props => {
 
   function scrollToAnchor(anchor) {
     if (scrollAttempts > 100) {
-      console.log('Anchor #' + anchor + ' not found in page.');
       return false;
     }
 
@@ -97,14 +96,13 @@ const Blog = props => {
   let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
 
   function callBack(value) {
-    console.log('SET REMOVE FEATURED ', value )
     setRemoveFeatured(value)
   }
 
   return (
     <Layout>
       { acfData && <HalfHero component={ acfData.hero }/> }
-       <SearchWithFilters callBack={ () => callBack() } />
+       <SearchWithFilters callBack={ (value) => callBack(value) } type='articles' />
        { !removeFeatured &&
          <FeaturedBlog isSearching={ false } data={ featuredPosts } />
         }

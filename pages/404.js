@@ -21,11 +21,10 @@ const Page404 = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   let data = pageData && pageData.acf_data && pageData.acf_data.components ? pageData.acf_data : false;
-   console.log('DATA ', pageData)
 
   return (
     <Layout>
-       
+
       { data &&
         data.components.map((section, sectionKey) => (
           <SectionMaker
@@ -39,7 +38,6 @@ const Page404 = props => {
   );
 };
 
- 
+
 
 export default Page404;
-

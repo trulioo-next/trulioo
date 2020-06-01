@@ -30,12 +30,36 @@ export default function ResourcesService(state) {
     return data;
   }
 
+  async function articleTypesData(page) {
+    let data = await API.post('/api/wp-types', {payload:page});
+    return data;
+  }
+
+  async function filterResoucesData(page) {
+		let data = await API.post('/api/wp-resouces-filter', {payload:page});
+		return data;
+	}
+
+  async function searchResoucesData(page) {
+    let data = await API.post('/api/wp-resouces-search', {payload:page});
+    return data;
+  }
+
+  async function resoucesTypesData(page) {
+    let data = await API.post('/api/wp-resouces-types', {payload:page});
+    return data;
+  }
+
    return {
    	getResourceData,
     getPressReleaseData,
     getArticleData,
     filterArticleData,
-    searchTypeData
+    searchTypeData,
+    articleTypesData,
+    filterResoucesData,
+    searchResoucesData,
+    resoucesTypesData,
   }
 
 }

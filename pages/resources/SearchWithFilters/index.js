@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import {  reqFilterArticlesAction, reqSearchArticlesAction } from '@/stores/articles/actions';
-import { articlesTypesSelector, articlesTopicsSelector } from '@/stores/articles/selectors';
+import {  reqFilterResourcesAction, reqSearchResourcesAction } from '@/stores/resources/actions';
+import { resoucesTopicsSelector, resoucesTypesSelector } from '@/stores/resources/selectors';
 
 import {
   Container,
@@ -14,10 +14,10 @@ import {
   DropdownMenu,
 } from 'reactstrap';
 
-import useScrollDirection from '../../utils/useScrollDirection';
-import { FlipButton } from '../../components/FlipButton';
-import FilterIcon from '../../static/assets/filters.svg';
-import ArrowIndicator from '../../static/assets/arrow-down.svg';
+import useScrollDirection from '@/utils/useScrollDirection';
+import { FlipButton } from '@/components/FlipButton';
+import FilterIcon from '@/static/assets/filters.svg';
+import ArrowIndicator from '@/static/assets/arrow-down.svg';
 
 export const Search =  (props) => {
 
@@ -25,14 +25,13 @@ export const Search =  (props) => {
   const searchTerm = useRef(undefined);
   const [ searchWithAllTopics, setSearchWithAllTopics ] = useState(false);
   const [ searchWithAllTypes, setSearchWithAllTypes ] = useState(false);
-  const topics_new = useSelector( (state) => articlesTopicsSelector(state) )
-  const types_new = useSelector( (state) => articlesTypesSelector(state) )
+  const topics_new = useSelector( (state) => resoucesTopicsSelector(state) )
+  const types_new = useSelector( (state) => resoucesTypesSelector(state) )
   const [ removeFeatured, setRemoveFeatured ] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState([])
   const [selectedOption, setSelectedOption] = useState([])
   const [allSelected, setAllSelected] = useState([])
   const [hasSearched, setHasSearched] = useState(false)
-
 
   const doClear = () => {
     searchTerm.current.value = '';
@@ -43,7 +42,7 @@ export const Search =  (props) => {
     setAllSelected([])
     props.callBack(false);
     setHasSearched(true)
-    dispatch(reqFilterArticlesAction({ topic_id: '', type_id: '', offset:0, posts_per_page: 5 }));
+    dispatch(reqFilterResourcesAction({ topic_id: '', type_id: '', offset:0, posts_per_page: 5 }));
   };
 
   // Render a select object with event
@@ -58,7 +57,7 @@ export const Search =  (props) => {
             setSelectedTopic([])
             setHasSearched(true)
             let selectedOptions = selectedOption.length > 0 ? selectedOption.join(",") : '';
-            dispatch(reqFilterArticlesAction({ topic_id: selectedOptions, type_id: '' , offset:0, posts_per_page: 5 }));
+            dispatch(reqFilterResourcesAction({ topic_id: selectedOptions, type_id: '' , offset:0, posts_per_page: 5 }));
         }
         if(label === 'Topics') {
             setSearchWithAllTopics(true)
@@ -66,7 +65,7 @@ export const Search =  (props) => {
             setSelectedOption([])
             setHasSearched(true)
             let selectedTypes = selectedTopic.length > 0 ? selectedTopic.join(",") : '';
-            dispatch(reqFilterArticlesAction({ topic_id: '', type_id: selectedTypes , offset:0, posts_per_page: 5 }));
+            dispatch(reqFilterResourcesAction({ topic_id: '', type_id: selectedTypes , offset:0, posts_per_page: 5 }));
         }
       }
     };
@@ -151,7 +150,9 @@ export const Search =  (props) => {
     const filterDispatchEvent = () => {
       const selectedTypes = selectedTopic.length > 0 ? selectedTopic.join(",") : '';
       const selectedOptions =  selectedOption.length > 0 ? selectedOption.join(",") : '';
-      dispatch(reqFilterArticlesAction({ topic_id: selectedOptions, type_id: selectedTypes, offset:0, posts_per_page: 5 }));
+      console.log('selectedTypes :: >> ', selectedTypes)
+      console.log('selectedOptions :: >> ', selectedOptions)
+      dispatch(reqFilterResourcesAction({ topic_id: selectedOptions, type_id: selectedTypes, offset:0, posts_per_page: 5 }));
     }
 
     useEffect(() => {
@@ -253,7 +254,7 @@ export const Search =  (props) => {
             // TRIGGER SEARCH HERE
             const selectedTypes = selectedTopic.length > 0 ? selectedTopic.join(",") : '';
             const selectedOptions =  selectedOption.length > 0 ? selectedOption.join(",") : '';
-            dispatch(reqSearchArticlesAction({ post_type:'articles', search:searchTerm.current.value, topic_id: selectedOptions, type_id: selectedTypes, offset:0, posts_per_page: 5 }));
+            dispatch(resoucesTypesSelector({ post_type:'resouces', search:searchTerm.current.value, topic_id: selectedOptions, type_id: selectedTypes, offset:0, posts_per_page: 5 }));
     }, 1000)
 
     setTypingTimeout(TIMER)

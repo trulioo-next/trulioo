@@ -6,13 +6,11 @@ import Layout from '@/containers/Layout';
 
 import { pageDataSelector } from '@/stores/page/selectors';
 import { reqPageDataAction } from '@/stores/page/actions';
-import { reqFilterArticlesAction } from '@/stores/articles/actions';
-
-import { articlesDataSelector, articlesTypesSelector  } from '@/stores/articles/selectors';
+import { reqArticlesAction, reqFilterArticlesAction } from '@/stores/articles/actions';
+import { articlesDataSelector  } from '@/stores/articles/selectors';
 
 import { HalfHero }  from '@/components/HalfHero';
 import { PopularArticles } from '@/components/PopularArticles';
-import { FeaturedBlog } from '@/components/FeaturedBlog';
 import { BlogsPagination } from '../../pagination';
 import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
 
@@ -21,7 +19,6 @@ import {
 } from '@/components/Marketo';
 
 import { selectGeneralSettings } from '@/stores/app/selectors';
-
 
 import {
   GroupPost
@@ -39,27 +36,12 @@ const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
 
-  console.log('PROPS ', props )
-
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
 
-  const types = useSelector(articlesTypesSelector);
-  let typeId = '';
-  if(types) {
-      for(var i = 0; i < types.length; i++ ) {
-
-        if(props.query.type === types[i].slug) {
-            typeId = types[i].id;
-        }
-      }
-  }
-  console.log('SELECTED ID ', typeId )
   useEffect(() => {
       // Dispatch Articles
-      dispatch(reqFilterArticlesAction({ topic_id: '', type_id: typeId , offset:0, posts_per_page: 5 }));
-      dispatch(reqPageDataAction({ payload:'blog' }));
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -70,7 +52,6 @@ const Blog = props => {
 
   function scrollToAnchor(anchor) {
     if (scrollAttempts > 100) {
-      console.log('Anchor #' + anchor + ' not found in page.');
       return false;
     }
 
@@ -95,11 +76,8 @@ const Blog = props => {
   const pageData = useSelector(state => pageDataSelector(state));
   const articles = useSelector(articlesDataSelector);
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
-
-  let featuredPosts = articles.featured;
-  let blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
+  const blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
   : false;
-
 
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
@@ -111,11 +89,24 @@ const Blog = props => {
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
   let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
 
+
+  useEffect(() => {
+    // dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
+    dispatch(reqPageDataAction({ payload:'blog' }));
+    dispatch(reqFilterArticlesAction({ topic_id: '', type_id: 4037 , offset:0, posts_per_page: 5 }));
+
+
+  }, []);
+
+  function callBack(value) {
+    //
+  }
+
   return (
     <Layout>
       { acfData && <HalfHero component={ acfData.hero }/> }
-       <SearchWithFilters />
-      {/* <FeaturedBlog isSearching={ isSearching } data={ getFeaturedBlogs } /> */}
+       <SearchWithFilters callBack={ (value) => callBack(value) } />
+
       <section className="blog-posts-section">
         <Container fluid className="py-4 p-md-5 container-md">
           <Row className="py-5 justify-content-between">

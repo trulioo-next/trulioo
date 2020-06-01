@@ -5,6 +5,7 @@ import withRedux from 'next-redux-wrapper';
 import configureStore from '../stores/configureStore';
 import appActions from '../stores/app/actions';
 import pageActions from '../stores/page/actions';
+import articleActions from '../stores/articles/actions';
 import withError from '../components-stateful/withErrorWrapper';
 import * as gtag from '../utils/gtag';
 import { isBrowser } from 'react-device-detect';
@@ -25,6 +26,17 @@ class MyApp extends App {
       await ctx.store.execSagaTask(
         pageActions.reqPageDataAction({ query: ctx.query }),
       );
+
+       // if( ctx.query.type ) {
+       //  console.log('PAGE TYPE FOUND ! ', ctx.query.type )
+       //  await ctx.store.execSagaTask(
+       //    articleActions.reqArticlesTypesAction({ topic_id: '', type_id: '', offset:0, posts_per_page: 5 }),
+       //  );
+       //
+       // }
+
+      // console.log('ctx.query :: >> ', ctx.query )
+
     }
 
     const pageProps = Component.getInitialProps

@@ -13,6 +13,8 @@ import {
   ARTICLES_FILTER_LOADED,
   ARTICLES_SEARCH_REQUEST,
   ARTICLES_SEARCH_LOADED,
+  ARTICLES_TYPES_LOADED,
+  ARTICLES_TYPES_REQUEST
 } from '../types'
 
 
@@ -70,6 +72,25 @@ function* searchArticles(payload) {
   }
 }
 
+// ARTICLE TYPES
+//
+function* articleTypes(payload) {
+
+  try {
+
+    const state = yield select((state) => state)
+    const resourcesService = ResourcesService(state)
+    const response = yield call(resourcesService.articleTypesData, payload)
+    console.log('SAGA TYPES ', response )
+    yield put({ type: ARTICLES_TYPES_LOADED, payload: response  })
+
+  } catch(err) {
+
+    const errors = err.payload || err
+    yield put({ type: ARTICLES_ERROR, payload: errors})
+  }
+}
+
 /*
 * Startup flow to allow concurrent actions to be dispatched
 */
@@ -79,7 +100,8 @@ function* startupFlow() {
     const action = yield take([
       ARTICLES_LOAD_REQUEST,
       ARTICLES_FILTER_REQUEST,
-      ARTICLES_SEARCH_REQUEST
+      ARTICLES_SEARCH_REQUEST,
+      ARTICLES_TYPES_REQUEST
    ])
 
     yield put({ type: APP_STARTLOADING })
@@ -94,6 +116,10 @@ function* startupFlow() {
 
     if (action.type === ARTICLES_SEARCH_REQUEST) {
       yield call(searchArticles, action.payload)
+    }
+
+    if (action.type === ARTICLES_TYPES_REQUEST) {
+      yield call(articleTypes, action.payload)
     }
 
     yield put({ type: APP_STOPLOADING })
