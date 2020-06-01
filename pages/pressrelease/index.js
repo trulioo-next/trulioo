@@ -8,9 +8,9 @@ import fetch from 'isomorphic-unfetch';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { reqPageDataAction } from '@/stores/page/actions';
-import { reqPressReleaseAction } from '@/stores/pressrelease/actions';
+import { reqPressReleaseAction } from '@/stores/pressRelease/actions';
 import { pageDataSelector } from '@/stores/page/selectors';
-import { pressDataSelector } from '@/stores/pressrelease/selectors';
+import { pressDataSelector } from '@/stores/pressRelease/selectors';
 
 import Layout from '@/containers/Layout';
 import SectionMaker from '@/components/SectionMaker';
@@ -42,7 +42,6 @@ const PressReleases = props => {
 
   const pageData = useSelector(state => pageDataSelector(state));
   const pressReleases = useSelector(pressDataSelector);
-
 
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
 

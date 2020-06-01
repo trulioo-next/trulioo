@@ -1,8 +1,8 @@
 import { take, call, put, all, select } from 'redux-saga/effects'
 
 import DataService from '../../services/dataService'
- 
- 
+
+
 import {
   APP_STARTUP_REQUEST,
   APP_STARTLOADING,
@@ -19,17 +19,13 @@ import {
 function* startup(payload) {
 
   try {
- 
+
     const state = yield select((state) => state)
     const dataService = DataService(state)
     const response = yield call(dataService.getGlobalData, true)
-      
     yield put({ type: GLOBAL_DATA_LOADED, payload: response })
 
-     
- 
   } catch(err) {
-
     const errors = err.payload || err
     yield put({ type: APP_STARTUP_ERROR, payload: errors})
   }
@@ -38,16 +34,14 @@ function* startup(payload) {
 function* startupSiteInformation(payload) {
 
   try {
- 
+
     const state = yield select((state) => state)
     const dataService = DataService(state)
     const response = yield call(dataService.getSiteInformation, true)
-      
     yield put({ type: GLOBAL_DATA_SITE_INFORMATION, payload: response })
- 
- 
-  } catch(err) {
 
+
+  } catch(err) {
     const errors = err.payload || err
     yield put({ type: APP_STARTUP_ERROR, payload: errors})
   }
@@ -72,7 +66,7 @@ function* startupFlow() {
 
 
     yield put({ type: APP_STOPLOADING })
- 
+
     yield action
   }
 }

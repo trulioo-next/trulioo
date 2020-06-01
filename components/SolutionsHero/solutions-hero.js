@@ -9,15 +9,10 @@ import { convertFullURL } from '@/utils/convertURL';
 import { FlipButton } from '@/components/FlipButton';
 
 export const SolutionsHero = ({ component }) => {
-  const [loaded, setLoaded] = useState(false);
   const history = useHistory();
 
   return (
-    <motion.section
-      className={classnames('hero-body section py-5')}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: loaded ? 1 : 0 }}
-    >
+    <section className={classnames('hero-body section py-5')}>
       {component && (
         <ParallaxBackground
           background={component.background_image}
@@ -31,8 +26,6 @@ export const SolutionsHero = ({ component }) => {
           {...(component.mobile_foreground_image && {
             mobileForeground: component.mobile_foreground_image,
           })}
-          loaded={loaded}
-          setLoaded={setLoaded}
         />
       )}
       <Container>
@@ -74,7 +67,7 @@ export const SolutionsHero = ({ component }) => {
           </Col>
         </Row>
       </Container>
-    </motion.section>
+    </section>
   );
 };
 

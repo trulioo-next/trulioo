@@ -4,13 +4,22 @@
  */
 
 // Direct selector to the app state domain
- 
+
 
 export const articlesDataSelector = (state) => {
 	return state.articles
 }
 
- 
+export const articlesTypesSelector = (state) => {
+	return state.articles.types
+}
+
+export const articlesTopicsSelector = (state) => {
+	return state.articles.topics
+}
+
 export default {
-  articlesDataSelector
+  articlesDataSelector,
+  articlesTypesSelector,
+  articlesTopicsSelector
 }

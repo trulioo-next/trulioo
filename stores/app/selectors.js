@@ -2,7 +2,7 @@
  * Selectors let us factorize logic that queries the state. Selectors can be used
  * in sagas or components to avoid duplicating that logic.
  */
- 
+
 
 // Direct selector to the app state domain
 export const selectIsLoading = (state) => {
@@ -48,16 +48,16 @@ export const selectGeneralSettings = (state) => {
       { footer:data['footer'] },
       { footerSubMenu:data['footer-sub-menu'] }
     ]
-    
+
    return footerData
  }
 
- // Alert selector 
+ // Alert selector
 export const alertDataSelector = (state) => {
   return state.app.alerts
  }
 
- 
+
 export default {
   selectIsLoading,
   selectIsLoaded,

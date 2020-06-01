@@ -1,7 +1,9 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
+import {connect, useSelector } from 'react-redux';
+
+import { articlesDataSelector } from '../../stores/articles/selectors';
 
 import { SectionBackground } from '../SectionBackground';
 
@@ -11,17 +13,29 @@ import {
   Col
 } from 'reactstrap';
 
-const mapStateToProps = state => {
-  return { component: state.api.marketo };
-};
 
-export const MarketoBlogList = ({ component }) => {
+export const MarketoBlog = ({ component }) => {
+
+  const [ loader, setLoader ] = useState(true);
+  const articles = useSelector(articlesDataSelector);
+
+  let marketoOnBlog =
+  articles && articles.marketoBlog && articles.marketoBlog.acf
+      ? articles.marketoBlog.acf.marketo_on_blog_page
+      : false;
 
   useEffect(() => {
-    if (MktoForms2) {
-      MktoForms2.loadForm('//app-ab31.marketo.com', '392-YOD-077', component.form_id);
+    const isMounted = loader;
+  
+    if (isMounted) {
+      if (MktoForms2) {
+        MktoForms2.loadForm('//app-ab31.marketo.com', '392-YOD-077', marketoOnBlog.form_id);
+      }
     }
-  });
+	  return () => {
+			setLoader(false);
+		};
+  }, [ loader ]); /* eslint-disable-line */
 
   const componentSections = (component) => {
     return (
@@ -62,17 +76,7 @@ export const MarketoBlogList = ({ component }) => {
 
   return (
     <Fragment>
-      {component && componentSections(component)}
+      {marketoOnBlog && componentSections(marketoOnBlog)}
     </Fragment>
   );
 };
-
-MarketoBlogList.propTypes = {
-  component: PropTypes.any.isRequired,
-};
-
-MarketoBlogList.defaultProps = {
-  component: null
-};
-
-export const MarketoBlog = connect(mapStateToProps)(MarketoBlogList);

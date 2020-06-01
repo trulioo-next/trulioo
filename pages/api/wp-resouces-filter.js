@@ -1,26 +1,24 @@
-const fetch = require('../../utils/fetch');
-const ENDPOINT_URL = process.env.ENDPOINT_URL;
+const fetch = require('../../utils/fetch')
+const ENDPOINT_URL = process.env.ENDPOINT_URL
 
 export default async (req, res) => {
   try {
-    const body = JSON.parse(req.body);
+
+    const body = JSON.parse(req.body)
     let page = 1;
 
-    if (body.payload) {
-      page = body.payload.payload;
-    }
+		const typeId = body.payload.type_id
+    const topicId = body.payload.topic_id
 
-    //
-    const postList = await fetch(
-      ENDPOINT_URL + '/wp/v2/resources/?_embed&per_page=100&page=' + page,
-      {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    const postList = await fetch(ENDPOINT_URL+'/wp/v2/resources/?_embed&resources_types='+typeId+'&resources_topics='+topicId+'&offset=0&per_page=100&orderby=date&order=desc&search=', {
+       method: 'GET',
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       }
+     })
+
+    let posts = {posts:postList}
 
     const topics = await fetch(
       ENDPOINT_URL + '/wp/v2/resources_topics?per_page=100',
@@ -55,16 +53,17 @@ export default async (req, res) => {
       },
     );
 
-    let data = {
-      postList,
-      topics,
-      types,
-      featured,
-    };
+   let data = {
+     postList,
+     featured,
+     topics,
+     types
+   }
 
-    res.json(data);
-    return;
-  } catch (error) {
-    res.json({ error: error });
+    res.json(data)
+	 return
+
+  } catch(error) {
+     res.json({ error: error })
   }
 };

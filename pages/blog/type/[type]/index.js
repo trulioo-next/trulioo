@@ -6,13 +6,12 @@ import Layout from '@/containers/Layout';
 
 import { pageDataSelector } from '@/stores/page/selectors';
 import { reqPageDataAction } from '@/stores/page/actions';
-import { reqArticlesAction } from '@/stores/articles/actions';
+import { reqArticlesAction, reqFilterArticlesAction } from '@/stores/articles/actions';
 import { articlesDataSelector  } from '@/stores/articles/selectors';
 
 import { HalfHero }  from '@/components/HalfHero';
 import { PopularArticles } from '@/components/PopularArticles';
-import { FeaturedBlog } from '@/components/FeaturedBlog';
-import { BlogsPagination } from './pagination';
+import { BlogsPagination } from '../../pagination';
 import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
 
 import {
@@ -42,10 +41,7 @@ const Blog = props => {
   }
 
   useEffect(() => {
-
       // Dispatch Articles
-      dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
-      dispatch(reqPageDataAction({ payload:'blog' }));
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -80,8 +76,6 @@ const Blog = props => {
   const pageData = useSelector(state => pageDataSelector(state));
   const articles = useSelector(articlesDataSelector);
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
-  const [ removeFeatured, setRemoveFeatured ] = useState(false);
-  const featuredPosts = articles.featured;
   const blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
   : false;
 
@@ -95,17 +89,24 @@ const Blog = props => {
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
   let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
 
+
+  useEffect(() => {
+    // dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
+    dispatch(reqPageDataAction({ payload:'blog' }));
+    dispatch(reqFilterArticlesAction({ topic_id: '', type_id: 4037 , offset:0, posts_per_page: 5 }));
+
+
+  }, []);
+
   function callBack(value) {
-    setRemoveFeatured(value)
+    //
   }
 
   return (
     <Layout>
       { acfData && <HalfHero component={ acfData.hero }/> }
-       <SearchWithFilters callBack={ (value) => callBack(value) } type='articles' />
-       { !removeFeatured &&
-         <FeaturedBlog isSearching={ false } data={ featuredPosts } />
-        }
+       <SearchWithFilters callBack={ (value) => callBack(value) } />
+
       <section className="blog-posts-section">
         <Container fluid className="py-4 p-md-5 container-md">
           <Row className="py-5 justify-content-between">
