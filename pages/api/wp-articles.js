@@ -59,7 +59,6 @@ export default async (req, res) => {
       }
     })
 
-
     const popularArticles = await fetch(ENDPOINT_URL+'/acf/v3/options/popular-articles-settings', {
       method: 'GET',
       headers: {
@@ -67,7 +66,6 @@ export default async (req, res) => {
         'Content-Type': 'application/json'
       }
     })
-
 
     let data = {
       postList,
