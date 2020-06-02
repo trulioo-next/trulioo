@@ -17,14 +17,14 @@ const REDIRECTS = [
     to:     "/about-us"
   },
 
-  fetchData()
-  .then((data) => {
-    data.acf.redirect_list.forEach((redirect, index) => {
-      if( process.browser ) {
-        buildDynamicRedirect(redirect.link_from.url, redirect.link_to.url);
-      }
-    })
-  })
+  // fetchData()
+  // .then((data) => {
+  //   data.acf.redirect_list.forEach((redirect, index) => {
+  //     if( process.browser ) {
+  //       buildDynamicRedirect(redirect.link_from.url, redirect.link_to.url);
+  //     }
+  //   })
+  // })
 
 ];
 

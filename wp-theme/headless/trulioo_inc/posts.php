@@ -17,7 +17,7 @@ function trulioo_get_posts($data) {
     'orderby' =>  'date',
     'order' => 'desc',
     'paged' => ($paged ? $paged : 1),
-    'offset' => ($offset ? $offset : 1),
+    'offset' => ($offset ? $offset : 0),
     'posts_per_page' => ($posts_per_page ? $posts_per_page : 9),
     'numberposts'       => -1,
   ));
