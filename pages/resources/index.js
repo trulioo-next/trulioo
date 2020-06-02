@@ -11,6 +11,7 @@ import { reqPageDataAction } from '@/stores/page/actions';
 import { reqResourcesAction } from '@/stores/resources/actions';
 import { pageDataSelector } from '@/stores/page/selectors';
 import { resourceDataSelector } from '@/stores/resources/selectors';
+import { selectYoastSettings } from '@/stores/app/selectors';
 
 import Layout from '@/containers/Layout';
 import SectionMaker from '@/components/SectionMaker';
@@ -24,6 +25,10 @@ const Resources = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
+
+  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
+  let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -53,8 +58,44 @@ const Resources = props => {
     setRemoveFeatured(value)
   }
 
+  let data =
+  pageData && pageData.acf_data && pageData.acf_data.content_block_collection
+    ? pageData.acf_data
+    : false;
+
+  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
+  let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
+  let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
+
+
   return (
     <Layout>
+      <NextSeo
+          title={seoTitle}
+          description={seoDesc}
+          openGraph={{
+            url: 'https://trulioo.com/',
+            title: seoTitle,
+            description: seoDesc,
+            images: [
+              {
+                url: seoImage,
+                width: 800,
+                height: 600,
+                alt: 'Trulioo',
+              },
+              
+              { url: seoImage },
+            ],
+            site_name: 'https://trulioo.com',
+          }}
+          twitter={{
+            handle: '@trullio',
+            site: '@trullio',
+            cardType: 'summary_large_image',
+          }}
+          additionalMetaTags={yoastSeo}
+        />
       {acfData.hero && <HalfHero component={acfData.hero} />}
       <SearchWithFilters callBack={ (value) => callBack(value) } type='resources' />
       { !removeFeatured && (

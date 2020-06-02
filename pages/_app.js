@@ -28,16 +28,16 @@ class MyApp extends App {
       await ctx.store.execSagaTask(
         pageActions.reqPageDataAction({ query: ctx.query }),
       );
-
-      REDIRECTS.map(item => {
-        if (ctx.asPath === item.from) {
-          ctx.res.writeHead(302, {
-            Location: item.to,
-          });
-          ctx.res.end();
-          return;
-        }
-      });
+      console.log('REDIRECTS',REDIRECTS);
+      // REDIRECTS.map(item => {
+      //   if (ctx.asPath === item.from) {
+      //     ctx.res.writeHead(302, {
+      //       Location: item.to,
+      //     });
+      //     ctx.res.end();
+      //     return;
+      //   }
+      // });
 
       // if( ctx.query.type ) {
       //  console.log('PAGE TYPE FOUND ! ', ctx.query.type )

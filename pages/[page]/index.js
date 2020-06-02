@@ -3,16 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout/Layout';
+import { NextSeo } from 'next-seo';
 
 import routerPush from '@/helpers/routerPush';
 import Error from 'next/error';
 import { pageDataSelector } from '@/stores/page/selectors';
 import { reqPageDataAction } from '@/stores/page/actions';
+import { selectYoastSettings } from '@/stores/app/selectors';
 
 const Page = props => {
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
+
+  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
+  let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqPageDataAction({ payload: props.query.page }));
@@ -59,8 +65,39 @@ const Page = props => {
       ? pageData.acf_data
       : false;
 
+    let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
+    let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
+    let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
+
+      
   return (
     <Layout>
+      <NextSeo
+          title={seoTitle}
+          description={seoDesc}
+          openGraph={{
+            url: 'https://trulioo.com/',
+            title: seoTitle,
+            description: seoDesc,
+            images: [
+              {
+                url: seoImage,
+                width: 800,
+                height: 600,
+                alt: 'Trulioo',
+              },
+              
+              { url: seoImage },
+            ],
+            site_name: 'https://trulioo.com',
+          }}
+          twitter={{
+            handle: '@trullio',
+            site: '@trullio',
+            cardType: 'summary_large_image',
+          }}
+          additionalMetaTags={yoastSeo}
+        />
       {data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker

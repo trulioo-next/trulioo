@@ -4,6 +4,8 @@ import { isNil } from 'lodash';
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout';
 
+import { NextSeo } from 'next-seo';
+
 import { pageDataSelector } from '@/stores/page/selectors';
 import { reqPageDataAction } from '@/stores/page/actions';
 import { reqArticlesAction } from '@/stores/articles/actions';
@@ -15,11 +17,14 @@ import { FeaturedBlog } from '@/components/FeaturedBlog';
 import { BlogsPagination } from './pagination';
 import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
 
+
 import {
   MarketoBlog,
 } from '@/components/Marketo';
 
 import { selectGeneralSettings } from '@/stores/app/selectors';
+import { selectYoastSettings } from '@/stores/app/selectors';
+
 
 import {
   GroupPost
@@ -36,6 +41,9 @@ import {
 const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
+
+  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
+  let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
 
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
@@ -81,10 +89,12 @@ const Blog = props => {
   const articles = useSelector(articlesDataSelector);
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
   const [ removeFeatured, setRemoveFeatured ] = useState(false);
-  const featuredPosts = articles.featured;
+  const featuredPosts = articles &&  articles.featured && articles.featured.posts ?  articles.featured.posts
+  : false;
   const blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
   : false;
 
+  console.log(featuredPosts);
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data
@@ -99,8 +109,39 @@ const Blog = props => {
     setRemoveFeatured(value)
   }
 
+  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
+  let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
+  let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
+
+
   return (
     <Layout>
+      <NextSeo
+          title={seoTitle}
+          description={seoDesc}
+          openGraph={{
+            url: 'https://trulioo.com/',
+            title: seoTitle,
+            description: seoDesc,
+            images: [
+              {
+                url: seoImage,
+                width: 800,
+                height: 600,
+                alt: 'Trulioo',
+              },
+              
+              { url: seoImage },
+            ],
+            site_name: 'https://trulioo.com',
+          }}
+          twitter={{
+            handle: '@trullio',
+            site: '@trullio',
+            cardType: 'summary_large_image',
+          }}
+          additionalMetaTags={yoastSeo}
+        />
       { acfData && <HalfHero component={ acfData.hero }/> }
        <SearchWithFilters callBack={ (value) => callBack(value) } type='articles' />
        { !removeFeatured &&

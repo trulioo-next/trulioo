@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Container,
@@ -10,16 +10,30 @@ const Instafeed = require('../../static/assets/instafeed.js');
 
 export const InstagramSection = ({ component }) => {
 
+  const [ loader, setLoader ] = useState(true);
+
   const feed = new Instafeed({
     accessToken: component.accessToken,
     template: '<div class="col-4 instagram-image"><a href="{{link}}" target="_blank"><img title="{{caption}}" src="{{image}}" /></a></div>',
     limit: 6,
   });
   
-  if (document.getElementById('instafeed')) {
-    feed.run();
-  } 
-
+  useEffect(() => {
+    const isMounted = loader;
+  
+    if (isMounted) {
+      if( process.browser ) {
+        console.log('check');
+        if (document.getElementById('instafeed')) {
+          feed.run();
+        } 
+      }
+    }
+	  return () => {
+			setLoader(false);
+		};
+  }, [ loader ]); /* eslint-disable-line */
+  
   return (
     <Container className='py-0 pb-5 align-items-center'>
       <h3 className="subtitle mb-4 mt-5 text-center">
