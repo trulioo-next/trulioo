@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { NextSeo } from 'next-seo';
 import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '../../../components/SectionMaker';
@@ -8,6 +9,8 @@ import { pageDataSelector } from '../../../stores/page/selectors';
 import { reqPageDataAction } from '../../../stores/page/actions';
 import { reqArticlesAction } from '../../../stores/articles/actions';
 import { articlesDataSelector } from '../../../stores/articles/selectors';
+import { selectYoastSettings } from '../../../stores/app/selectors';
+
 import moment from 'moment';
 import { HalfHero }  from '../../../components/HalfHero';
 import { PopularArticles } from '../../../components/PopularArticles';
@@ -43,13 +46,13 @@ const PostArticle = ({ post, liked, setLiked }) => {
   : false;
 
   const [ shareUrl, setShareUrl ] = useState(null);
-
   useEffect(() => {
     if (process.browser) {
       setShareUrl(window.location.href);
       console.log(window.location.href);
     }
   }, []);
+
 
   return (
     <section className="blog-post-section">
@@ -163,15 +166,6 @@ const SingleBlog = props => {
   let getPostId = articles.postDataById && articles.postDataById.content ? articles.postDataById.content.ID
   : false;
 
-  // if (process.browser) {
-  //   setValue(localStorage.getItem(getPostId) || '');
-  //   if (value === undefined) {
-  //     localStorage.removeItem(getPostId);
-  //   } else {
-  //     localStorage.setItem(getPostId, value);
-  //   }
-  // }
-
   useEffect(() => {
     dispatch(reqArticlesAction({ post_id: getSlug, offset:0, posts_per_page: 1 }));
     dispatch(reqPageDataAction({ payload:'blog' }));
@@ -222,10 +216,47 @@ const SingleBlog = props => {
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
   let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
 
+  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
+  let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
+  let data =
+  pageData && pageData.acf_data && pageData.acf_data.content_block_collection
+    ? pageData.acf_data
+    : false;
+  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
+  let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
+  let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
+
+
   const onClickLike = () => setValue(value === null ? 'like': null);
 
   return (
     <Layout>
+            <NextSeo
+          title={seoTitle}
+          description={seoDesc}
+          openGraph={{
+            url: 'https://trulioo.com/',
+            title: seoTitle,
+            description: seoDesc,
+            images: [
+              {
+                url: seoImage,
+                width: 800,
+                height: 600,
+                alt: 'Trulioo',
+              },
+              
+              { url: seoImage },
+            ],
+            site_name: 'https://trulioo.com',
+          }}
+          twitter={{
+            handle: '@trullio',
+            site: '@trullio',
+            cardType: 'summary_large_image',
+          }}
+          additionalMetaTags={yoastSeo}
+        />
       { acfData && <HalfHero component={ acfData.hero }/> }
       { getPostArticles && (
         <Fragment>
