@@ -56,10 +56,10 @@ const nextConfig = {
   //  ...dotEnvResult
 
   env: {
-    ROOT_URL: 'https://ir-trulioo-react.herokuapp.com',
-    ENDPOINT_URL: 'https://irtrulioo4.wpengine.com/wp-json',
-    VERSION:'1.0.5',
-     //...dotEnvResult,
+    // ROOT_URL: 'https://ir-trulioo-react.herokuapp.com',
+    // ENDPOINT_URL: 'https://irtrulioo4.wpengine.com/wp-json',
+    // VERSION:'1.0.5',
+     ...dotEnvResult,
   },
 
   sassLoaderOptions: {
