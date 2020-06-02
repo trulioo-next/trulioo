@@ -89,10 +89,12 @@ const Blog = props => {
   const articles = useSelector(articlesDataSelector);
   const generalSettings = useSelector(state =>  selectGeneralSettings(state));
   const [ removeFeatured, setRemoveFeatured ] = useState(false);
-  const featuredPosts = articles.featured;
+  const featuredPosts = articles &&  articles.featured && articles.featured.posts ?  articles.featured.posts
+  : false;
   const blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
   : false;
 
+  console.log(featuredPosts);
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data

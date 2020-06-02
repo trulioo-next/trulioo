@@ -19,7 +19,7 @@ export default async (req, res) => {
        }
      })
 
-     const featured = await fetch(ENDPOINT_URL+'/trulioo/press/featured', {
+     const featured = await fetch(ENDPOINT_URL+'/trulioo/posts/?offset=0&posts_per_page=4', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
