@@ -52,7 +52,7 @@ export default (state = INITIAL_STATE, action) => {
     case ARTICLES_ERROR:
       return { ...state,
         error: action.payload,
-        errorSource: RESOURCES_LOAD_ERROR
+        errorSource: ARTICLES_ERROR
       }
 
     default:

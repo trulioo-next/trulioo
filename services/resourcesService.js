@@ -50,6 +50,22 @@ export default function ResourcesService(state) {
     return data;
   }
 
+
+  async function filterPressData(page) {
+		let data = await API.post('/api/wp-press-filter', {payload:page});
+		return data;
+	}
+
+  async function searchPressData(page) {
+    let data = await API.post('/api/wp-press-search', {payload:page});
+    return data;
+  }
+
+  async function pressTypesData(page) {
+    let data = await API.post('/api/wp-press-types', {payload:page});
+    return data;
+  }
+
    return {
    	getResourceData,
     getPressReleaseData,
@@ -60,6 +76,9 @@ export default function ResourcesService(state) {
     filterResoucesData,
     searchResoucesData,
     resoucesTypesData,
+    filterPressData,
+    searchPressData,
+    pressTypesData,
   }
 
 }

@@ -40,6 +40,12 @@ export const RESOURCES_TYPES_LOADED = 'resources/loaded/RESOURCES_TYPES_LOADED'
 export const PRESS_LOAD_REQUEST = 'press/load/PRESS_LOAD_REQUEST'
 export const PRESS_LOADED = 'press/loaded/PRESS_LOADED'
 export const PRESS_ERROR = 'press/error/PRESS_ERROR'
+export const PRESS_FILTER_REQUEST = 'articles/load/PRESS_FILTER_REQUEST'
+export const PRESS_FILTER_LOADED = 'articles/loaded/PRESS_FILTER_LOADED'
+export const PRESS_SEARCH_REQUEST = 'articles/loaded/PRESS_SEARCH_REQUEST'
+export const PRESS_SEARCH_LOADED = 'articles/loaded/PRESS_SEARCH_LOADED'
+export const PRESS_TYPES_REQUEST = 'articles/load/PRESS_TYPES_REQUEST'
+export const PRESS_TYPES_LOADED = 'articles/loaded/PRESS_TYPES_LOADED'
 
 // Articles
 export const ARTICLES_LOAD_REQUEST = 'articles/load/ARTICLES_LOAD_REQUEST'
