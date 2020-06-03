@@ -109,7 +109,7 @@ const Resources = props => {
             <Row>
               <Col className="px-5 px-md-4">
                 <h2 className="text-center text-sm-left mb-5">
-                  Featured <span className="text-primary">Resources</span>
+                  Featured <span className="text-primary">resources</span>
                 </h2>
               </Col>
             </Row>
@@ -128,7 +128,7 @@ const Resources = props => {
           <Row>
             <Col className="px-5 px-md-4">
               <h2 className="text-center text-sm-left mb-5">
-                All <span className="text-primary">Resources</span>
+                All <span className="text-primary">resources</span>
               </h2>
             </Col>
           </Row>
