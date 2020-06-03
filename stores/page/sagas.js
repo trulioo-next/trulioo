@@ -17,7 +17,7 @@ import {
 
 function* startup(payload) {
   try {
-    
+
     // yield call(getGeolocation, payload.ip)
 
     const state = yield select((state) => state)
@@ -25,14 +25,13 @@ function* startup(payload) {
     const dataService = DataService(state)
     yield put({ type: PAGE_LOADED, payload: { page_data:[], acf_data:[], seo:[], isLoading: true } })
 
-
-    // payload 
+    // payload
     // console.log('PAGE QUERY FROM SAGA  ', payload )
-    
+
     const response = yield call(dataService.getPageData, payload)
 
-    // console.log('DATA RESPONSE', response )
-      
+    // console.log('PAGE LOADED DATA RESPONSE', response )
+
     // console.log('RESONSE ', response)
     yield put({ type: PAGE_LOADED, payload: response  })
 
@@ -46,16 +45,16 @@ function* startup(payload) {
 function* getBanners(payload) {
 
   try {
-    
+
     // yield call(getGeolocation, payload.ip)
 
     const state = yield select((state) => state)
 
     const dataService = DataService(state)
-    
+
     const response = yield call(dataService.getBannerData, payload)
     console.log('DATA RESPONSE', response )
-      
+
     // console.log('RESONSE ', response)
     yield put({ type: PAGE_BANNER_LOADED, payload: response  })
 
@@ -89,7 +88,7 @@ function* startupFlow() {
     }
 
     yield put({ type: APP_STOPLOADING })
- 
+
     yield action
   }
 }

@@ -63,7 +63,7 @@ export const Navigation = () => {
                                 {item.acf.button.title}
                               </FlipButton>
                             ) : (
-                              <Link href={item.acf.button.url} passHref>
+                              <Link href={item.acf.button.url}>
                                 <FlipButton
                                   className="d-block d-md-inline-block"
                                   color="primary"
@@ -91,7 +91,7 @@ export const Navigation = () => {
                                 {menu.title}
                               </NavLink>
                             ) : (
-                              <Link href={menu.url} passHref>
+                              <Link href={menu.url}>
                                 <NavLink className="div-links">
                                   {menu.title}
                                 </NavLink>
@@ -116,7 +116,7 @@ export const Navigation = () => {
                       {item.title}
                     </NavLink>
                   ) : (
-                    <Link href={item.url} passHref>
+                    <Link href={item.url}>
                       <NavLink>{item.title}</NavLink>
                     </Link>
                   )}

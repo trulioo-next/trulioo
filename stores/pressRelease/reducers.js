@@ -21,19 +21,17 @@ export default (state = INITIAL_STATE, action) => {
     case PRESS_LOADED:
       return { ...state,
         postList: action.payload.postList,
-        years: action.payload.topics,
+        years: action.payload.years,
         types: action.payload.types,
-        featured: [],
+        featured: action.payload.featured,
       }
 
    case PRESS_FILTER_LOADED:
           return { ...state,
             postList: action.payload.postList,
-            featured:action.payload.featured,
-            topics: action.payload.topics,
+            years: action.payload.years,
             types: action.payload.types,
-            marketoBlog: action.payload.marketoBlog,
-            popularArticles: action.payload.popularArticles,
+            featured: action.payload.featured,
           }
 
       case PRESS_SEARCH_LOADED:

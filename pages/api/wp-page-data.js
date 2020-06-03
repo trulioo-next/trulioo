@@ -13,8 +13,21 @@ export default async (req, res) => {
     }
 
     if(id === 'favicon.ico' ) {
-      let id = 'home';
+      id = 'home';
     }
+
+    if( body.query  ) {
+       id = body.query;
+    }
+
+    if(body.query === '_next' || !id ) {
+       res.json([])
+       return;
+    }
+
+    // console.log('WP-PAGE-DATA BODY ', body )
+    // console.log('WP-PAGE-DATA ID ', id )
+
 
     // TODO: Normalise page ID :
     const response = await fetch(ENDPOINT_URL+'/api/v1/page/'+id,

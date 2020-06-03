@@ -20,15 +20,11 @@ import {
 
 function* startup(payload) {
 
-
   try {
-
-    // yield call(getGeolocation, payload.ip)
     const state = yield select((state) => state)
     const resourcesService = ResourcesService(state)
     const response = yield call(resourcesService.getPressReleaseData, payload)
-
-    console.log('RESONSE ', response)
+ 
     yield put({ type: PRESS_LOADED, payload: response  })
 
   } catch(err) {

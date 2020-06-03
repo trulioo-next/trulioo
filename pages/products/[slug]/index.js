@@ -17,9 +17,9 @@ const Page = props => {
   }
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(reqPageDataAction({ payload: props.query.page+'--'+props.query.slug+'--'+props.query.child }));
+     dispatch(reqPageDataAction({ payload: 'products--'+props.query.slug }));
 
-    console.log('DISPATCH SLUG / CHILD  : >>> ', props.query )
+    // console.log('DISPATCH SLUG : >>> ', props.query )
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -52,15 +52,11 @@ const Page = props => {
     scrollToAnchor(anchor);
   }
 
-  // const pageData = useSelector(state => pageDataSelector(state));
-
-  const pageData = props.pageData ? props.pageData : false;
-
-  // if(!pageData) {
-  //    routerPush('/404');
+  const pageData =  useSelector(state => pageDataSelector(state));
+  // console.log('SINGLE CHILD PAGE DATA ', pageData )
+  // if(!pageData.acf_data) {
+  //   // routerPush('/404');
   // }
-
-  // console.log('QUERY ', pageData )
 
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
@@ -84,10 +80,10 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res, store }) => {
+Page.getInitialProps = async ({ query, res, req, store  }) => {
   const initalState = store.getState();
   const pageData = initalState.page.data;
-  return { query };
+  return { query, pageData  };
 };
 
 export default Page;

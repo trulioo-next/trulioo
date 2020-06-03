@@ -1,16 +1,16 @@
 const fetch = require('../../utils/fetch')
 const ENDPOINT_URL = process.env.ENDPOINT_URL
- 
-export default async (req, res) => {  
+
+export default async (req, res) => {
   try {
-    
+
     const body = JSON.parse(req.body)
     let page = 1;
 
     if(body.payload) {
 		  page = body.payload.payload
-    } 
-    
+    }
+
     //
     const postList = await fetch(ENDPOINT_URL+'/wp/v2/press_releases/?per_page=9&page='+page, {
        method: 'GET',
@@ -34,7 +34,7 @@ export default async (req, res) => {
          'Accept': 'application/json',
          'Content-Type': 'application/json'
        }
-     }) 
+     })
 
      const featured = await fetch(
       ENDPOINT_URL + '/trulioo/press/featured',
@@ -56,7 +56,7 @@ export default async (req, res) => {
   
     res.json(data)
 	 return
-	 
+
   } catch(error) {
      res.json({ error: error })
   }

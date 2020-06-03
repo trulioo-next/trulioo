@@ -53,12 +53,11 @@ export const ResourceCard = ({ item }) => {
       cardProps.tag = 'article';
       break;
   }
-
   const types = item.resource_types || item.types;
 
   return (
     <Card className="resources-card" {...cardProps}>
-      {types.map((type, index) => {
+      {types && types.map((type, index) => {
         return (
           <span
             className="type-label text-white"

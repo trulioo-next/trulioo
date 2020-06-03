@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout/Layout';
- 
+
 
 import Error from 'next/error';
 
@@ -17,9 +17,9 @@ const Page = props => {
   }
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(reqPageDataAction({ payload: props.query.page+'--'+props.query.slug }));
+     dispatch(reqPageDataAction({ payload: props.query.page+'--'+props.query.slug }));
 
-    console.log('DISPATCH SLUG : >>> ', props.query )
+    // console.log('DISPATCH SLUG : >>> ', props.query )
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -52,12 +52,12 @@ const Page = props => {
     scrollToAnchor(anchor);
   }
 
-  const pageData = useSelector(state => pageDataSelector(state));
+  const pageData =  useSelector(state => pageDataSelector(state));
   // console.log('SINGLE CHILD PAGE DATA ', pageData )
   // if(!pageData.acf_data) {
   //   // routerPush('/404');
   // }
-  
+
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
       ? pageData.acf_data
@@ -65,7 +65,7 @@ const Page = props => {
 
   return (
     <Layout>
-       
+
       {data &&
         data.content_block_collection.map((section, sectionKey) => (
           <SectionMaker
@@ -80,9 +80,10 @@ const Page = props => {
   );
 };
 
-Page.getInitialProps = async ({ query, res }) => {
- 
-  return { query };
+Page.getInitialProps = async ({ query, res, req, store  }) => {
+  const initalState = store.getState();
+  const pageData = initalState.page.data;
+  return { query, pageData  };
 };
 
 export default Page;

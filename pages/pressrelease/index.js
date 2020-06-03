@@ -31,12 +31,16 @@ const PressReleases = props => {
   let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    // Get page data
-    dispatch(reqPageDataAction({ payload: 'pressrelease' }));
 
+      // Dispatch Articles
+      // dispatch(reqPressReleaseAction({ post_id: 1, offset:0, posts_per_page: 5 }));
+      dispatch(reqPageDataAction({ payload:'pressrelease' }));
 
-    dispatch(reqPressReleaseAction({ payload: 1 }));
+    if (window.location.hash) {
+      scrollToAnchor(window.location.hash.replace('#', ''));
+    }
   }, []);
 
   const [isSearching, setIsSearching] = useState(false);
@@ -46,12 +50,11 @@ const PressReleases = props => {
   };
 
   const pageData = useSelector(state => pageDataSelector(state));
-  const pressReleases = useSelector(pressDataSelector);
+  const pressReleases = props.pressData;
 
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
-
-  let featuredPosts = pressReleases.featured;
-  let postsToRender = pressReleases.postList;
+  let featuredPosts = pressReleases && pressReleases.featured || false;
+  let postsToRender = pressReleases && pressReleases.postList || false;
 
   let data =
     pageData && pageData.acf_data && pageData.acf_data.content_block_collection
@@ -78,7 +81,7 @@ const PressReleases = props => {
                 height: 600,
                 alt: 'Trulioo',
               },
-              
+
               { url: seoImage },
             ],
             site_name: 'https://trulioo.com',
@@ -109,7 +112,7 @@ const PressReleases = props => {
             </Row>
             <Row>
               <CardDeck className="px-5 px-md-4">
-                {featuredPosts.map((item, index) => (
+               {featuredPosts.map((item, index) => (
                   <ResourceCard key={index} item={item} />
                 ))}
               </CardDeck>
@@ -128,7 +131,7 @@ const PressReleases = props => {
           </Row>
           <Row>
             <div className="card-grid px-5 px-md-4">
-              {postsToRender &&
+          { postsToRender &&
                 postsToRender.map((post, index) => (
                   <ResourceCard item={post} key={index} />
                 ))}
@@ -167,8 +170,8 @@ PressReleases.getInitialProps = async ({ query, res, store }) => {
   // TODO: GET STATE DATA HERE
   //
   const initalState = store.getState();
-  const pageData = initalState.page.data;
-  return { query, pageData };
+  const pressData = initalState.pressRelease;
+  return { query, pressData };
 };
 
 export default PressReleases;

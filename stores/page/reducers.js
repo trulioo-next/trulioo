@@ -2,7 +2,7 @@
 * Apppliction reducer
 * We use immutableJS to ensure immutability on the application state level.
 */
- 
+
 import { INITIAL_STATE } from './initialState'
 
 import {

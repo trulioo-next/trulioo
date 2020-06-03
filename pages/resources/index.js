@@ -36,7 +36,7 @@ const Resources = props => {
     dispatch(reqPageDataAction({ payload: 'resources' }));
 
     // Dispatch action for resources
-    dispatch(reqResourcesAction({ payload: 1 }));
+    // dispatch(reqResourcesAction({ payload: 1 }));
   }, []);
 
   const [isSearching, setIsSearching] = useState(false);
@@ -46,8 +46,8 @@ const Resources = props => {
     // TODO: Append next page of items.
   };
 
-  const pageData = useSelector(state => pageDataSelector(state));
-  const resources = useSelector(resourceDataSelector);
+  const pageData = useSelector(pageDataSelector);
+  const resources = props.resourcePosts
 
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
 
@@ -84,7 +84,7 @@ const Resources = props => {
                 height: 600,
                 alt: 'Trulioo',
               },
-              
+
               { url: seoImage },
             ],
             site_name: 'https://trulioo.com',
@@ -174,7 +174,8 @@ Resources.getInitialProps = async ({ query, res, store }) => {
   //
   const initalState = store.getState();
   const pageData = initalState.page.data;
-  return { query, pageData };
+  const resourcePosts = initalState.resources;
+  return { query, pageData, resourcePosts };
 };
 
 export default Resources;

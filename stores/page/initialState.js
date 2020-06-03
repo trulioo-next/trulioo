@@ -5,12 +5,12 @@
  */
 export const INITIAL_STATE = {
   data:{
-  	page_date:[], 
+  	page_data:[], 
   	acf_data:[],
   	seo:[],
-  	parent:[], 
+  	parent:[],
   	isLoading: true,
   	banners:false
   }
-  
+
 };

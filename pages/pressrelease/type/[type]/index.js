@@ -4,27 +4,21 @@ import { isNil } from 'lodash';
 import SectionMaker from '@/components/SectionMaker';
 import Layout from '@/containers/Layout';
 
-import { NextSeo } from 'next-seo';
-
 import { pageDataSelector } from '@/stores/page/selectors';
 import { reqPageDataAction } from '@/stores/page/actions';
-import { reqArticlesAction } from '@/stores/articles/actions';
+import { reqArticlesAction, reqFilterArticlesAction } from '@/stores/articles/actions';
 import { articlesDataSelector  } from '@/stores/articles/selectors';
 
 import { HalfHero }  from '@/components/HalfHero';
 import { PopularArticles } from '@/components/PopularArticles';
-import { FeaturedBlog } from '@/components/FeaturedBlog';
-import { BlogsPagination } from './pagination';
+import { BlogsPagination } from '../../pagination';
 import { Search as SearchWithFilters } from '@/components/SearchWithFilters';
-
 
 import {
   MarketoBlog,
 } from '@/components/Marketo';
 
 import { selectGeneralSettings } from '@/stores/app/selectors';
-import { selectYoastSettings } from '@/stores/app/selectors';
-
 
 import {
   GroupPost
@@ -42,18 +36,12 @@ const Blog = props => {
   const isSearching = false;
   const dispatch = useDispatch();
 
-  const yoastDataSeo = useSelector(state =>  selectYoastSettings(state));
-  let yoastSeo = yoastDataSeo && yoastDataSeo[0] && yoastDataSeo[0].yoast_meta ? yoastDataSeo[0].yoast_meta : ''
-
   if (props.errorCode) {
     return <Error statusCode={props.errorCode} />;
   }
 
   useEffect(() => {
-
       // Dispatch Articles
-     // dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
-     dispatch(reqPageDataAction({ payload:'blog' }));
 
     if (window.location.hash) {
       scrollToAnchor(window.location.hash.replace('#', ''));
@@ -85,12 +73,9 @@ const Blog = props => {
     scrollToAnchor(anchor);
   }
 
-  const pageData =  useSelector(pageDataSelector)
-  const articles = props.articles;
-  const generalSettings = props.generalSetting;
-  const [ removeFeatured, setRemoveFeatured ] = useState(false);
-  const featuredPosts = articles &&  articles.featured && articles.featured.posts ?  articles.featured.posts
-  : false;
+  const pageData = useSelector(state => pageDataSelector(state));
+  const articles = useSelector(articlesDataSelector);
+  const generalSettings = useSelector(state =>  selectGeneralSettings(state));
   const blogsList = articles &&  articles.postList && articles.postList.posts ?  articles.postList.posts
   : false;
 
@@ -100,51 +85,28 @@ const Blog = props => {
       : false;
 
   const postsToRender = blogsList || false;
+
   let acfData = pageData && pageData.acf_data ? pageData.acf_data : false;
-  let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf.popular_articles : false;
+  let popularArticles = articles && articles.popularArticles ? articles.popularArticles.acf : false;
+
+
+  useEffect(() => {
+    // dispatch(reqArticlesAction({ post_id: 1, offset:0, posts_per_page: 5 }));
+    dispatch(reqPageDataAction({ payload:'blog' }));
+    dispatch(reqFilterArticlesAction({ topic_id: '', type_id: 4037 , offset:0, posts_per_page: 5 }));
+
+
+  }, []);
 
   function callBack(value) {
-    setRemoveFeatured(value)
+    //
   }
-
-  let seoTitle = data && pageData && pageData.seo && pageData.seo.title !== '' ? pageData.seo.title : 'Trulioo'
-  let seoDesc = data && pageData && pageData.seo ? pageData.seo.desc : ''
-  let seoImage = data && pageData && pageData.seo ? pageData.seo.facebook_image : ''
-
 
   return (
     <Layout>
-      <NextSeo
-          title={seoTitle}
-          description={seoDesc}
-          openGraph={{
-            url: 'https://trulioo.com/',
-            title: seoTitle,
-            description: seoDesc,
-            images: [
-              {
-                url: seoImage,
-                width: 800,
-                height: 600,
-                alt: 'Trulioo',
-              },
-
-              { url: seoImage },
-            ],
-            site_name: 'https://trulioo.com',
-          }}
-          twitter={{
-            handle: '@trullio',
-            site: '@trullio',
-            cardType: 'summary_large_image',
-          }}
-          additionalMetaTags={yoastSeo}
-        />
       { acfData && <HalfHero component={ acfData.hero }/> }
-       <SearchWithFilters callBack={ (value) => callBack(value) } type='articles' />
-       { !removeFeatured &&
-         <FeaturedBlog isSearching={ false } data={ featuredPosts } />
-        }
+       <SearchWithFilters callBack={ (value) => callBack(value) } />
+
       <section className="blog-posts-section">
         <Container fluid className="py-4 p-md-5 container-md">
           <Row className="py-5 justify-content-between">
@@ -181,9 +143,7 @@ const Blog = props => {
 Blog.getInitialProps = async ({ query, res, req, store }) => {
   const initalState = store.getState();
   const pageData = initalState.page.data;
-  const articles = initalState.articles;
-  const generalSetting = initalState.app.globalDataSiteInformation['generalSettings']
-  return { query, pageData, articles, generalSetting };
+  return { query, pageData };
 };
 
 export default Blog;
